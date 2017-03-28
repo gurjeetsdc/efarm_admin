@@ -21,7 +21,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: './dashboard/dashboard.module#DashboardModule'
-      },
+      },     
       {
         path: 'components',
         loadChildren: './components/components.module#ComponentsModule'
@@ -37,6 +37,11 @@ export const routes: Routes = [
       {
         path: 'charts',
         loadChildren: './chartjs/chartjs.module#ChartJSModule'
+      },
+      {
+        path: 'crop',
+        loadChildren: './crop-management/crop-management.module#CropManagementModule'
+        // loadChildren: './chartjs/chartjs.module#ChartJSModule'        
       }
     ]
   },
