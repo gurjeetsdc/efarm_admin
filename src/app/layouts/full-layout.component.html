@@ -18,7 +18,7 @@
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item hidden-md-down">
-      <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
+      <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger"><!-- 5 --></span></a>
     </li>
     <li class="nav-item hidden-md-down">
       <a class="nav-link" href="#"><i class="icon-list"></i></a>
@@ -63,7 +63,7 @@
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-info">NEW</span></a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i> Dashboard</a>
         </li>
         
         <li class="divider"></li>
@@ -71,6 +71,17 @@
           UI Elements
         </li>
         <li class="nav-item nav-dropdown" routerLinkActive="open">
+          <a class="nav-link nav-dropdown-toggle" href="#" ><i class="icon-pie-chart"></i>Crop</a>
+          <ul class="nav-dropdown-items" style="margin-left:10%;">
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/crop/list']"><i class="icon-star"></i> Crop Listing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/crop/add']"><i class="icon-star"></i> Add Crop</a>
+            </li>
+          </ul>
+        </li>
+       <!--  <li class="nav-item nav-dropdown" routerLinkActive="open">
           <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> Components</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
@@ -116,9 +127,6 @@
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/charts']"><i class="icon-pie-chart"></i> Charts</a>
         </li>
-          <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/crop']"><i class="icon-pie-chart"></i>Crop</a>
-        </li>
         <li class="divider"></li>
         <li class="nav-title">
           Extras
@@ -139,7 +147,7 @@
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/500']"><i class="icon-star"></i> Error 500</a>
             </li>
           </ul>
-        </li>
+        </li> -->
         
       </ul>
     </nav>
@@ -424,6 +432,6 @@
 </div>
 
 <footer class="app-footer">
-  <a href="http://coreui.io">CoreUI</a> &copy; 2017 creativeLabs.
-  <span class="float-right">Powered by <a href="http://coreui.io">CoreUI</a></span>
+  <a href="http://www.smartdatainc.com">eFarm</a> &copy; 2017 smartData.
+  <span class="float-right">Powered by <a href="http://www.smartdatainc.com">smartData</a></span>
 </footer>

@@ -1,21 +1,48 @@
 import { NgModule } from '@angular/core';
-import { Routes,
-     RouterModule } from '@angular/router';
-
-import { CropManagementComponent } from './crop-management.component';
+import { Routes, RouterModule } from '@angular/router';
+import { FormsModule }   from '@angular/forms';
+import { Ng2TableModule } from 'ng2-table/ng2-table';
+import { PaginationModule } from 'ng2-bootstrap';
+import { ListCropComponent } from './list-crop.component';
+import { AddCropComponent } from './add-crop.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: CropManagementComponent,
     data: {
-      title: 'crop'
-    }
+      title: 'Crop Management'
+    },
+    children: [
+      {
+        path: 'list',
+        component: ListCropComponent,
+        data: {
+          title: 'List'
+        }
+      },
+      {
+        path: 'add',
+        component: AddCropComponent,
+        data: {
+          title: 'Add'
+        }
+      }
+    ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(routes),
+    FormsModule,
+    Ng2TableModule,
+    PaginationModule
+  ],
+  exports: [
+    RouterModule,
+    FormsModule,
+    Ng2TableModule,
+    PaginationModule
+  ]
 })
 export class CropManagementRoutingModule {}

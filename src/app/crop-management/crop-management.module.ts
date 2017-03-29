@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { CropManagementComponent } from './crop-management.component';
+import { ListCropComponent } from './list-crop.component';
+import { AddCropComponent } from './add-crop.component';
 import { CropManagementRoutingModule } from './crop-management-routing.module';
 
 @NgModule({
   imports: [
-  	CropManagementRoutingModule    
+  	CropManagementRoutingModule,
+  	 CommonModule    
   ],
-  declarations: [CropManagementComponent]
+  declarations: [
+  	ListCropComponent,
+  	AddCropComponent
+  ]
 })
 export class CropManagementModule { }
