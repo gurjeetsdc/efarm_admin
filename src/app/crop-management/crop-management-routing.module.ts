@@ -5,7 +5,7 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
 import { ListCropComponent } from './list-crop.component';
 import { AddCropComponent } from './add-crop.component';
-
+import { HttpModule } from '@angular/http';
 const routes: Routes = [
   {
     path: '',
@@ -36,7 +36,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     Ng2TableModule,
-    PaginationModule
+    PaginationModule,
+    HttpModule
   ],
   exports: [
     RouterModule,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
-
+import {PaginationInstance} from 'ng2-pagination';
 @Component({
   selector: 'app-crop-management',
   templateUrl: './list-crop.component.html',
@@ -340,7 +340,7 @@ export class ListCropComponent implements OnInit {
     if (config.sorting) {
       Object.assign(this.config.sorting, config.sorting);
     }
-
+    
     let filteredData = this.changeFilter(this.data, this.config);
     let sortedData = this.changeSort(filteredData, this.config);
     this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;

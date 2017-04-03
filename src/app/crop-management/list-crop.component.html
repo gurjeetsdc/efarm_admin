@@ -1,5 +1,9 @@
-<div>
+<div> 
     <div class="card">
+        <div class="card-header">
+        <input type="text" name="" placeholder="Search..." [(ngModel)]="search" (ngModelChange)="doSomething($event)">
+        <button type="button" class="btn btn-success pull-right" [routerLink]="['/crop/add']">Add Crop</button>
+        </div>
         <ng-table [config]="config"
                   (tableChanged)="onChangeTable(config)"
                   (cellClicked)="onCellClick($event)"
