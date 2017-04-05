@@ -15,10 +15,12 @@ import { BreadcrumbsComponent } from './shared/breadcrumb.component';
 import { PaginationModule } from 'ng2-bootstrap';
 // Routing Module
 import { AppRoutingModule } from './app.routing';
-
+import { HttpModule } from '@angular/http';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   imports: [
@@ -28,7 +30,8 @@ import { SimpleLayoutComponent } from './layouts/simple-layout.component';
     DropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    HttpModule
   ],
   declarations: [
     AppComponent,
@@ -37,7 +40,9 @@ import { SimpleLayoutComponent } from './layouts/simple-layout.component';
     NAV_DROPDOWN_DIRECTIVES,
     BreadcrumbsComponent,
     SIDEBAR_TOGGLE_DIRECTIVES,
-    AsideToggleDirective,        
+    AsideToggleDirective,
+    LoginComponent,
+    RegisterComponent,        
   ],
   providers: [{
     provide: LocationStrategy,

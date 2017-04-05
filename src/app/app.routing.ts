@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { HttpModule } from '@angular/http';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
   {
@@ -57,11 +59,19 @@ export const routes: Routes = [
         loadChildren: './pages/pages.module#PagesModule',
       }
     ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [ RouterModule.forRoot(routes),HttpModule ],
+  exports: [ RouterModule,HttpModule ]
 })
 export class AppRoutingModule {}
