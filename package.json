@@ -9,7 +9,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -27,6 +27,7 @@
     "@angular/upgrade": "2.4.9",
     "chart.js": "2.5.0",
     "core-js": "2.4.1",
+    "express": "^4.15.2",
     "moment": "2.17.1",
     "ng2-bootstrap": "1.4.0",
     "ng2-charts": "1.5.0",
