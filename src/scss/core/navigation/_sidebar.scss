@@ -1,6 +1,7 @@
 .sidebar {
   padding: $sidebar-padding;
   color: $sidebar-color;
+  transition: transform 0.3s ease-in-out 0s, width 0.3s ease-in-out 0s;
   background: $sidebar-bg;
   @include borders($sidebar-borders);
 
@@ -26,6 +27,7 @@
     position: relative;
     overflow-x: hidden;
     overflow-y: auto;
+	padding-top: 60px;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     @include sidebar-width($sidebar-borders, $sidebar-width);
 
@@ -133,9 +135,9 @@
         }
 
         i {
-          width: 20px;
+          width: 30px;
           margin: 0 ($sidebar-nav-link-padding-x / 2) 0 0;
-          font-size: 14px;
+          font-size: 24px;
           color: $sidebar-nav-link-icon-color;
           text-align: center;
         }
@@ -377,3 +379,5 @@
     }
   }
 }
+
+
