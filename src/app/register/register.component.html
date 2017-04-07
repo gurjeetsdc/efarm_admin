@@ -5,7 +5,7 @@
         <div class="login-logo">
             <img src="assets/img/logo.png" alt="logo">
         </div>
-        <form role="form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <form role="form" (ngSubmit)="onSubmit()" #registerForm="ngForm">
             <div class="form-group has-feedback">
                 <label>Full name</label>
                 <input type="text" name="name" class="form-control" [(ngModel)]="user.name" required>
@@ -25,9 +25,14 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 <input type="password" name="confirmPassword" class="form-control" [(ngModel)]="user.confirmPassword" required>
             </div>
+            <div class="form-group has-feedback">
+                <div class="text-danger">
+                  {{errMessage.err}}
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!loginForm.valid">Register</button>
+                    <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!registerForm.valid">Register</button>
                 </div>
             </div>
             <div class="row">
@@ -40,7 +45,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-6 col-sm-6 text-right">
-                    <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']">I already have member.</a>
+                    <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']">I already have membership.</a>
                 </div>
                 <!-- /.col -->
             </div>

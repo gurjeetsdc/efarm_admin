@@ -19,8 +19,13 @@ export class RegisterComponent implements OnInit {
   onSubmit(){
   	console.log("register",this.user)
     	this.errMessage = {};
-      this.user["username"] = this.user["email"];
-    	this._registerService.register(this.user)
+          this.user["username"] = this.user["email"];
+          if(this.user["password"] !== this.user["confirmPassword"]) {
+            console.log("not matched")
+            this.errMessage["err"] = "Password and confirm Pasword not matched";
+          } else {
+              console.log("send call")
+    	  this._registerService.register(this.user)
                            .subscribe(
                                res => {
                                  console.log("response",res)
@@ -31,6 +36,7 @@ export class RegisterComponent implements OnInit {
                                 	console.log("error",err)
                                     // this.errMessage = JSON.parse(err._body);
                                 });
+        }                           
   	}
 
 }
