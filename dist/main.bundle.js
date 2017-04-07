@@ -158,19 +158,27 @@ var RegisterComponent = (function () {
     }
     RegisterComponent.prototype.ngOnInit = function () {
     };
-    RegisterComponent.prototype.register = function () {
+    RegisterComponent.prototype.onSubmit = function () {
         var _this = this;
         console.log("register", this.user);
         this.errMessage = {};
-        this._registerService.register(this.user)
-            .subscribe(function (res) {
-            console.log("response", res);
-            localStorage.setItem("user", JSON.stringify(res));
-            _this.router.navigate(['/dashboard']);
-        }, function (err) {
-            console.log("---------------");
-            // this.errMessage = JSON.parse(err._body);
-        });
+        this.user["username"] = this.user["email"];
+        if (this.user["password"] !== this.user["confirmPassword"]) {
+            console.log("not matched");
+            this.errMessage["err"] = "Password and confirm Pasword not matched";
+        }
+        else {
+            console.log("send call");
+            this._registerService.register(this.user)
+                .subscribe(function (res) {
+                console.log("response", res);
+                localStorage.setItem("user", JSON.stringify(res));
+                _this.router.navigate(['/dashboard']);
+            }, function (err) {
+                console.log("error", err);
+                // this.errMessage = JSON.parse(err._body);
+            });
+        }
     };
     return RegisterComponent;
 }());
@@ -517,13 +525,29 @@ var http_1 = __webpack_require__(120);
 var RegisterService = (function () {
     function RegisterService(http) {
         this.http = http;
-        this.host = "http://localhost";
-        this.port = 3000;
+        this.host = "https://efarmapi.herokuapp.com";
+        this.port = '';
     }
     RegisterService.prototype.register = function (user) {
-        console.log("register", user);
-        return this.http.post(this.host + ':' + this.port + '/api/register', user)
-            .map(function (res) { return res.json(); });
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        console.log("body---------user--", user);
+        console.log("body---------user--", user.email);
+        // headers.append('origin', this.host);
+        // headers.append('refer', this.host);
+        var username = user.username;
+        var password = user.password;
+        var email = user.email;
+        var urlSearchParams = new URLSearchParams();
+        urlSearchParams.append('username', username);
+        urlSearchParams.append('password', password);
+        urlSearchParams.append('email', email);
+        var body = urlSearchParams.toString();
+        console.log("body---------body--", typeof body);
+        console.log("body---------body--", body);
+        // this.user1 = {username: "test-aa", password: "test-aa", email: "test-aa@gmial.oxm"}
+        console.log('working...');
+        return this.http.post(this.host + ':' + this.port + '/users/register', body, { headers: headers }).map(function (res) { return res.json(); });
     };
     return RegisterService;
 }());
@@ -1126,14 +1150,14 @@ module.exports = "<header class=\"app-header navbar\">\r\n  <button class=\"navb
 /***/ 897:
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"login-page overlay\"></section>\n    <div class=\"login-box\">\n        <!-- /.login-logo -->\n        <div class=\"login-box-body\">\n            <div class=\"login-logo\">\n                <img src=\"assets/img/logo.png\" alt=\"logo\">\n            </div>\n             <form role=\"form\" #loginForm=\"ngForm\"> \n                <div class=\"form-group has-feedback\">\n                    <label>Username</label>\n                    <!-- <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>-->\n                    <input type=\"text\" name=\"username\" class=\"form-control\" [(ngModel)]=\"user.username\">\n                </div>\n                <div class=\"form-group has-feedback\">\n                    <label>Password</label>\n                    <!--<span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>-->\n                    <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\">\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-sm-12 col-12\">\n                        <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" (click)=\"login()\">Sign In</button>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-sm-6 col-6\">\n                        <div class=\"checkbox icheck\">\n                            <label>\n                                <input type=\"checkbox\"> Remember Me\n                            </label>\n                        </div>\n                    </div>\n                    <!-- /.col -->\n                    <div class=\"col-sm-6 col-6\">\n                        <a class=\"forgotlink\" href=\"#\">Forgot password</a>\n                    </div>\n                    <!-- /.col -->\n                </div>\n            </form>\n        </div>\n        <!-- /.login-box-body -->\n    </div>\n\n"
+module.exports = "<section class=\"login-page overlay\"></section>\n    <div class=\"login-box\">\n        <!-- /.login-logo -->\n        <div class=\"login-box-body\">\n            <div class=\"login-logo\">\n                <img src=\"assets/img/logo.png\" alt=\"logo\">\n            </div>\n             <form role=\"form\" #loginForm=\"ngForm\" (ngSubmit)=\"login()\"> \n                <div class=\"form-group has-feedback\">\n                    <label>Username</label>\n                    <!-- <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>-->\n                    <input type=\"text\" name=\"username\" class=\"form-control\" [(ngModel)]=\"user.username\" required>\n                </div>\n                <div class=\"form-group has-feedback\">\n                    <label>Password</label>\n                    <!--<span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>-->\n                    <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\" required>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-sm-12 col-12\">\n                        <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" [disabled]=\"!loginForm.valid\">Sign In</button>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-sm-6 col-6\">\n                        <div class=\"checkbox icheck\">\n                            <label>\n                                <input type=\"checkbox\"> Remember Me\n                            </label>\n                        </div>\n                    </div>\n                    <!-- /.col -->\n                    <div class=\"col-sm-6 col-6\">\n                        <a class=\"forgotlink\" href=\"#\">Forgot password</a>\n                    </div>\n                    <!-- /.col -->\n                </div>\n            </form>\n        </div>\n        <!-- /.login-box-body -->\n    </div>\n\n"
 
 /***/ }),
 
 /***/ 898:
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"login-page overlay\"></section>\n    <div class=\"register-box\">\n        <!-- /.login-logo -->\n        <div class=\"login-box-body\">\n            <div class=\"login-logo\">\n                <img src=\"assets/img/logo.png\" alt=\"logo\">\n            </div>\n            <form role=\"form\" #loginForm=\"ngForm\"> \n                <div class=\"form-group has-feedback\">\n                    <label>Full name</label>\n                    <input type=\"text\" name=\"name\" class=\"form-control\" [(ngModel)]=\"user.name\">\n                </div>\n                <div class=\"form-group has-feedback\">\n                    <label>Email</label>\n                    <!-- <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>-->\n                    <input type=\"email\" name=\"email\" class=\"form-control\" [(ngModel)]=\"user.email\">\n                </div>\n                <div class=\"form-group has-feedback\">\n                    <label>Password</label>\n                    <!--<span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>-->\n                    <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\">\n                </div>\n                <div class=\"form-group has-feedback\">\n                    <label>Retype Password</label>\n                    <span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>\n                    <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.confirmPassword\">\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-12\">\n                        <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" (click)=\"register()\">Register</button>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-6 col-sm-6\">\n                        <div class=\"checkbox icheck\">\n                            <label>\n                                <input type=\"checkbox\"> I agree to the terms\n                            </label>\n                        </div>\n                    </div>\n                    <!-- /.col -->\n                    <div class=\"col-6 col-sm-6 text-right\">\n                        <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/login']\" >I already have member.</a>\n                    </div>\n                    <!-- /.col -->\n                </div>\n            </form>\n        </div>\n        <!-- /.login-box-body -->\n    </div>\n\n<!-- <div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"card mx-2\">\n          <div class=\"card-block p-2\">\n            <h1>Register</h1>\n            <p class=\"text-muted\">Create your account</p>\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\"><i class=\"icon-user\"></i></span>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\">\n            </div>\n\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\">@</span>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Email\">\n            </div>\n\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\"><i class=\"icon-lock\"></i></span>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\">\n            </div>\n\n            <div class=\"input-group mb-2\">\n              <span class=\"input-group-addon\"><i class=\"icon-lock\"></i></span>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Repeat password\">\n            </div>\n\n            <button type=\"button\" class=\"btn btn-block btn-success\">Create Account</button>\n          </div>\n          <div class=\"card-footer p-2\">\n            <div class=\"row\">\n              <div class=\"col-6\">\n                <button class=\"btn btn-block btn-facebook\" type=\"button\"><span>facebook</span></button>\n              </div>\n              <div class=\"col-6\">\n                <button class=\"btn btn-block btn-twitter\" type=\"button\"><span>twitter</span></button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n -->"
+module.exports = "<section class=\"login-page overlay\"></section>\n<div class=\"register-box\">\n    <!-- /.login-logo -->\n    <div class=\"login-box-body\">\n        <div class=\"login-logo\">\n            <img src=\"assets/img/logo.png\" alt=\"logo\">\n        </div>\n        <form role=\"form\" (ngSubmit)=\"onSubmit()\" #registerForm=\"ngForm\">\n            <div class=\"form-group has-feedback\">\n                <label>Full name</label>\n                <input type=\"text\" name=\"name\" class=\"form-control\" [(ngModel)]=\"user.name\" required>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Email</label>\n                 <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>\n                <input type=\"email\" name=\"email\" class=\"form-control\" [(ngModel)]=\"user.email\" required>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Password</label>\n                <!--<span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>-->\n                <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\" required>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Retype Password</label>\n                <span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>\n                <input type=\"password\" name=\"confirmPassword\" class=\"form-control\" [(ngModel)]=\"user.confirmPassword\" required>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <div class=\"text-danger\">\n                  {{errMessage.err}}\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" [disabled]=\"!registerForm.valid\">Register</button>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-6 col-sm-6\">\n                    <div class=\"checkbox icheck\">\n                        <label>\n                            <input type=\"checkbox\"> I agree to the terms\n                        </label>\n                    </div>\n                </div>\n                <!-- /.col -->\n                <div class=\"col-6 col-sm-6 text-right\">\n                    <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/login']\">I already have membership.</a>\n                </div>\n                <!-- /.col -->\n            </div>\n        </form>\n    </div>\n    <!-- /.login-box-body -->\n</div>\n<!-- <div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"card mx-2\">\n          <div class=\"card-block p-2\">\n            <h1>Register</h1>\n            <p class=\"text-muted\">Create your account</p>\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\"><i class=\"icon-user\"></i></span>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\">\n            </div>\n\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\">@</span>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Email\">\n            </div>\n\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\"><i class=\"icon-lock\"></i></span>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\">\n            </div>\n\n            <div class=\"input-group mb-2\">\n              <span class=\"input-group-addon\"><i class=\"icon-lock\"></i></span>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Repeat password\">\n            </div>\n\n            <button type=\"button\" class=\"btn btn-block btn-success\">Create Account</button>\n          </div>\n          <div class=\"card-footer p-2\">\n            <div class=\"row\">\n              <div class=\"col-6\">\n                <button class=\"btn btn-block btn-facebook\" type=\"button\"><span>facebook</span></button>\n              </div>\n              <div class=\"col-6\">\n                <button class=\"btn btn-block btn-twitter\" type=\"button\"><span>twitter</span></button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n -->\n"
 
 /***/ }),
 
