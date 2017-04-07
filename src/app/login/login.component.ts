@@ -8,7 +8,10 @@ import { Router } from '@angular/router';
   providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
-  private user = {};
+  private user = {
+    grant_type:'password',
+    client_id: 'MQD5KWGwDtmglpQmmz1sVw6dWOJ68WD2' // '4eOQDll18Qf0qeutbiSfrHihpVAJE16p' //'5x7EuN09HAeBn2pYJnvvq7szgJaULh14'
+  };
   private errMessage = {};
   constructor(private router : Router,private loginService: LoginService) { }
 
@@ -23,7 +26,7 @@ export class LoginComponent implements OnInit {
                            res => {
                              console.log("response",res)
                              localStorage.setItem("user",JSON.stringify(res));
-                             // this.router.navigate(['/dashboard']);
+                             this.router.navigate(['/dashboard']);
                            },
                             err => {
                             	console.log("error",err);
