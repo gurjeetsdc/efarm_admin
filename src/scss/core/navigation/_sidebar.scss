@@ -1,9 +1,9 @@
 .sidebar {
   padding: $sidebar-padding;
   color: $sidebar-color;
-  transition: transform 0.3s ease-in-out 0s, width 0.3s ease-in-out 0s;
   background: $sidebar-bg;
   @include borders($sidebar-borders);
+	
 
   .sidebar-close {
     position: absolute;
@@ -121,6 +121,7 @@
         &.active {
           color: $sidebar-nav-link-active-color;
           background: $sidebar-nav-link-active-bg;
+			border-left: 2px solid orange;
           @include borders($sidebar-nav-link-active-borders);
 
           i {

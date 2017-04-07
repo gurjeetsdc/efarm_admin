@@ -66,9 +66,15 @@ app-root {
 .sidebar-hidden {
 
   .sidebar {
-   // margin-left: - $sidebar-width-close;//
+  /*margin-left: - $sidebar-width-close;*/
 	  width:  75px;
-	  transform: translate(0px, 0px);
+	  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+
+	 transform: translate(0px, 0px);
 	   transition: transform 0.3s ease-in-out 0s, width 0.3s ease-in-out 0s;
 	  
   }
@@ -79,6 +85,7 @@ app-root {
   .sidebar {
     position: fixed;
     height: 100%;
+transition: transform 0.3s ease-in-out 0s, width 0.3s ease-in-out 0s;
 
     .sidebar-nav {
       height: calc(100vh - #{$navbar-height});
@@ -209,7 +216,8 @@ app-root {
 .sidebar,
 .main,
 .aside-menu {
-  transition-duration: $layout-transition-speed, $layout-transition-speed;
+
+ transition-duration: $layout-transition-speed, $layout-transition-speed;
   transition-property: margin-left, margin-right;
 }
 
