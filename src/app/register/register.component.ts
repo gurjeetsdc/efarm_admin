@@ -16,9 +16,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  register(){
+  onSubmit(){
   	console.log("register",this.user)
     	this.errMessage = {};
+      this.user["username"] = this.user["email"];
     	this._registerService.register(this.user)
                            .subscribe(
                                res => {
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
                                  this.router.navigate(['/dashboard']);
                                },
                                 err => {
-                                	console.log("---------------")
+                                	console.log("error",err)
                                     // this.errMessage = JSON.parse(err._body);
                                 });
   	}
