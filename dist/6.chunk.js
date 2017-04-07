@@ -31,7 +31,7 @@ ChartJSModule = __decorate([
     })
 ], ChartJSModule);
 exports.ChartJSModule = ChartJSModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/chartjs.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/chartjs.module.js.map
 
 /***/ }),
 
@@ -137,7 +137,7 @@ ChartJSComponent = __decorate([
     })
 ], ChartJSComponent);
 exports.ChartJSComponent = ChartJSComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/chartjs.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/chartjs.component.js.map
 
 /***/ }),
 
@@ -177,7 +177,7 @@ ChartJSRoutingModule = __decorate([
     })
 ], ChartJSRoutingModule);
 exports.ChartJSRoutingModule = ChartJSRoutingModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/chartjs-routing.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/chartjs-routing.module.js.map
 
 /***/ }),
 

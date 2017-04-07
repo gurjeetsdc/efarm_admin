@@ -52,7 +52,7 @@ ComponentsModule = __decorate([
     })
 ], ComponentsModule);
 exports.ComponentsModule = ComponentsModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/components.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/components.module.js.map
 
 /***/ }),
 
@@ -84,7 +84,7 @@ ButtonsComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], ButtonsComponent);
 exports.ButtonsComponent = ButtonsComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/buttons.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/buttons.component.js.map
 
 /***/ }),
 
@@ -116,7 +116,7 @@ CardsComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], CardsComponent);
 exports.CardsComponent = CardsComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/cards.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/cards.component.js.map
 
 /***/ }),
 
@@ -148,7 +148,7 @@ FormsComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], FormsComponent);
 exports.FormsComponent = FormsComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/forms.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/forms.component.js.map
 
 /***/ }),
 
@@ -176,7 +176,7 @@ ModalsComponent = __decorate([
     })
 ], ModalsComponent);
 exports.ModalsComponent = ModalsComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/modals.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/modals.component.js.map
 
 /***/ }),
 
@@ -208,7 +208,7 @@ SocialButtonsComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], SocialButtonsComponent);
 exports.SocialButtonsComponent = SocialButtonsComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/social-buttons.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/social-buttons.component.js.map
 
 /***/ }),
 
@@ -240,7 +240,7 @@ SwitchesComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], SwitchesComponent);
 exports.SwitchesComponent = SwitchesComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/switches.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/switches.component.js.map
 
 /***/ }),
 
@@ -272,7 +272,7 @@ TablesComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], TablesComponent);
 exports.TablesComponent = TablesComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/tables.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/tables.component.js.map
 
 /***/ }),
 
@@ -304,7 +304,7 @@ TabsComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], TabsComponent);
 exports.TabsComponent = TabsComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/tabs.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/tabs.component.js.map
 
 /***/ }),
 
@@ -408,7 +408,7 @@ ComponentsRoutingModule = __decorate([
     })
 ], ComponentsRoutingModule);
 exports.ComponentsRoutingModule = ComponentsRoutingModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/components-routing.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/components-routing.module.js.map
 
 /***/ }),
 

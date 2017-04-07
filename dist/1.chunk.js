@@ -35,7 +35,7 @@ CropManagementModule = __decorate([
     })
 ], CropManagementModule);
 exports.CropManagementModule = CropManagementModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/crop-management.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/crop-management.module.js.map
 
 /***/ }),
 
@@ -345,7 +345,7 @@ AddCropComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], AddCropComponent);
 exports.AddCropComponent = AddCropComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/add-crop.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/add-crop.component.js.map
 
 /***/ }),
 
@@ -703,7 +703,7 @@ ListCropComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], ListCropComponent);
 exports.ListCropComponent = ListCropComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/list-crop.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/list-crop.component.js.map
 
 /***/ }),
 
@@ -774,7 +774,7 @@ CropManagementRoutingModule = __decorate([
     })
 ], CropManagementRoutingModule);
 exports.CropManagementRoutingModule = CropManagementRoutingModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/crop-management-routing.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/crop-management-routing.module.js.map
 
 /***/ }),
 

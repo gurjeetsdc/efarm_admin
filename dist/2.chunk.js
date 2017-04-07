@@ -35,7 +35,7 @@ PagesModule = __decorate([
     })
 ], PagesModule);
 exports.PagesModule = PagesModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/pages.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/pages.module.js.map
 
 /***/ }),
 
@@ -67,7 +67,7 @@ P404Component = __decorate([
     __metadata("design:paramtypes", [])
 ], P404Component);
 exports.P404Component = P404Component;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/404.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/404.component.js.map
 
 /***/ }),
 
@@ -99,7 +99,7 @@ P500Component = __decorate([
     __metadata("design:paramtypes", [])
 ], P500Component);
 exports.P500Component = P500Component;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/500.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/500.component.js.map
 
 /***/ }),
 
@@ -131,7 +131,7 @@ LoginComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/login.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/login.component.js.map
 
 /***/ }),
 
@@ -163,7 +163,7 @@ RegisterComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/register.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/register.component.js.map
 
 /***/ }),
 
@@ -235,7 +235,7 @@ PagesRoutingModule = __decorate([
     })
 ], PagesRoutingModule);
 exports.PagesRoutingModule = PagesRoutingModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/pages-routing.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/pages-routing.module.js.map
 
 /***/ }),
 

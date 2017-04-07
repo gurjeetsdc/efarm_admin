@@ -31,7 +31,7 @@ IconsModule = __decorate([
     })
 ], IconsModule);
 exports.IconsModule = IconsModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/icons.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/icons.module.js.map
 
 /***/ }),
 
@@ -63,7 +63,7 @@ FontAwesomeComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], FontAwesomeComponent);
 exports.FontAwesomeComponent = FontAwesomeComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/font-awesome.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/font-awesome.component.js.map
 
 /***/ }),
 
@@ -95,7 +95,7 @@ SimpleLineIconsComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], SimpleLineIconsComponent);
 exports.SimpleLineIconsComponent = SimpleLineIconsComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/simple-line-icons.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/simple-line-icons.component.js.map
 
 /***/ }),
 
@@ -151,7 +151,7 @@ IconsRoutingModule = __decorate([
     })
 ], IconsRoutingModule);
 exports.IconsRoutingModule = IconsRoutingModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/icons-routing.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/icons-routing.module.js.map
 
 /***/ }),
 

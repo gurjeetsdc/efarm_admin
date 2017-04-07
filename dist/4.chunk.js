@@ -31,7 +31,7 @@ WidgetsModule = __decorate([
     })
 ], WidgetsModule);
 exports.WidgetsModule = WidgetsModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/widgets.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/widgets.module.js.map
 
 /***/ }),
 
@@ -420,7 +420,7 @@ WidgetsComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], WidgetsComponent);
 exports.WidgetsComponent = WidgetsComponent;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/widgets.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/widgets.component.js.map
 
 /***/ }),
 
@@ -460,7 +460,7 @@ WidgetsRoutingModule = __decorate([
     })
 ], WidgetsRoutingModule);
 exports.WidgetsRoutingModule = WidgetsRoutingModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarmx-backend/src/widgets-routing.module.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/widgets-routing.module.js.map
 
 /***/ }),
 
