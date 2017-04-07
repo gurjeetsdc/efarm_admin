@@ -1,54 +1,58 @@
 <section class="login-page overlay"></section>
-    <div class="register-box">
-        <!-- /.login-logo -->
-        <div class="login-box-body">
-            <div class="login-logo">
-                <img src="assets/img/logo.png" alt="logo">
-            </div>
-            <form role="form" #loginForm="ngForm"> 
-                <div class="form-group has-feedback">
-                    <label>Full name</label>
-                    <input type="text" name="name" class="form-control" [(ngModel)]="user.name">
-                </div>
-                <div class="form-group has-feedback">
-                    <label>Email</label>
-                    <!-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
-                    <input type="email" name="email" class="form-control" [(ngModel)]="user.email">
-                </div>
-                <div class="form-group has-feedback">
-                    <label>Password</label>
-                    <!--<span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
-                    <input type="password" name="password" class="form-control" [(ngModel)]="user.password">
-                </div>
-                <div class="form-group has-feedback">
-                    <label>Retype Password</label>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    <input type="password" name="password" class="form-control" [(ngModel)]="user.confirmPassword">
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-success btn-block btn-flat" (click)="register()">Register</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-sm-6">
-                        <div class="checkbox icheck">
-                            <label>
-                                <input type="checkbox"> I agree to the terms
-                            </label>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-6 col-sm-6 text-right">
-                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']" >I already have member.</a>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            </form>
+<div class="register-box">
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <div class="login-logo">
+            <img src="assets/img/logo.png" alt="logo">
         </div>
-        <!-- /.login-box-body -->
+        <form role="form" (ngSubmit)="onSubmit()" #registerForm="ngForm">
+            <div class="form-group has-feedback">
+                <label>Full name</label>
+                <input type="text" name="name" class="form-control" [(ngModel)]="user.name" required>
+            </div>
+            <div class="form-group has-feedback">
+                <label>Email</label>
+                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <input type="email" name="email" class="form-control" [(ngModel)]="user.email" required>
+            </div>
+            <div class="form-group has-feedback">
+                <label>Password</label>
+                <!--<span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
+                <input type="password" name="password" class="form-control" [(ngModel)]="user.password" required>
+            </div>
+            <div class="form-group has-feedback">
+                <label>Retype Password</label>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <input type="password" name="confirmPassword" class="form-control" [(ngModel)]="user.confirmPassword" required>
+            </div>
+            <div class="form-group has-feedback">
+                <div class="text-danger">
+                  {{errMessage.err}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!registerForm.valid">Register</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 col-sm-6">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox"> I agree to the terms
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-6 col-sm-6 text-right">
+                    <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']">I already have membership.</a>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
     </div>
-
+    <!-- /.login-box-body -->
+</div>
 <!-- <div class="app flex-row align-items-center">
   <div class="container">
     <div class="row justify-content-center">
