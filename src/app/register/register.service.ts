@@ -9,11 +9,14 @@ export class RegisterService {
 
   	register(user){
   		let headers = new Headers();		
-		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		
 		console.log("body---------user--",user);
 		console.log("body---------user--",user.email)
-		// headers.append('origin', this.host);
-		// headers.append('refer', this.host);
+		
+		headers.append("Access-Control-Allow-Origin", "*");
+        headers.append("Access-Control-Allow-Credentials", "true");         
+        headers.append("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS, POST, PUT, DELETE");
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
 
 		let username:string =  user.username;
 		let password:string =  user.password;

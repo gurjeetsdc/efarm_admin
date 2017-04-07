@@ -530,11 +530,12 @@ var RegisterService = (function () {
     }
     RegisterService.prototype.register = function (user) {
         var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
         console.log("body---------user--", user);
         console.log("body---------user--", user.email);
-        // headers.append('origin', this.host);
-        // headers.append('refer', this.host);
+        headers.append("Access-Control-Allow-Origin", "*");
+        headers.append("Access-Control-Allow-Credentials", "true");
+        headers.append("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS, POST, PUT, DELETE");
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
         var username = user.username;
         var password = user.password;
         var email = user.email;
