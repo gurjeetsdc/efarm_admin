@@ -8,6 +8,10 @@ export class FullLayoutComponent implements OnInit {
 
   public disabled: boolean = false;
   public status: {isopen: boolean} = {isopen: false};
+  public user:Object = {};
+  constructor( ) { 
+    this.user = JSON.parse(localStorage.getItem("user"));
+  }
 
   public toggled(open: boolean): void {
     console.log('Dropdown is now: ', open);

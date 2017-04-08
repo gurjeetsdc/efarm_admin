@@ -6,7 +6,8 @@ import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { ActiveRouteGuard } from './activate-route-guard';
+import { DeactiveRouteGuard } from './deactivate-route-guard';
 export const routes: Routes = [
   {
     path: '',
@@ -19,6 +20,7 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
+    canActivate: [DeactiveRouteGuard],
     children: [
       {
         path: 'dashboard',
@@ -62,11 +64,13 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [ActiveRouteGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [ActiveRouteGuard]
   }
 ];
 

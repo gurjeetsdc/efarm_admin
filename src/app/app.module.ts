@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { DropdownModule } from 'ng2-bootstrap/dropdown';
 import { TabsModule } from 'ng2-bootstrap/tabs';
 import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
+import { ActiveRouteGuard } from './activate-route-guard';
+import { DeactiveRouteGuard } from './deactivate-route-guard';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
@@ -44,10 +46,16 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     RegisterComponent,        
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
-  bootstrap: [ AppComponent ]
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
+    ActiveRouteGuard,
+    DeactiveRouteGuard
+  ],
+  bootstrap: [ 
+    AppComponent
+  ]
 })
 export class AppModule { }
