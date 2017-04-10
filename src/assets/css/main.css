@@ -73,9 +73,26 @@ body {
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
+	margin-top: 4px;
+	transition: .2s;
+}
+
+.custome-check.loginpage input[type="checkbox"]+label:before, .custome-check.loginpage input[type="checkbox"]:not(.filled-in)+label:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 15px;
+	height: 15px;
+	z-index: 0;
+	border: 1px solid #4dbd74;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
 	margin-top: 2px;
 	transition: .2s;
 }
+
 .custome-check.extra input[type="checkbox"]+label:before, .custome-check.extra input[type="checkbox"]:not(.filled-in)+label:after {
 	content: '';
 	position: absolute;
@@ -122,6 +139,24 @@ body {
 	-webkit-transform-origin: 100% 100%;
 	transform-origin: 100% 100%;
 }
+
+.custome-check.loginpage input[type="checkbox"]:checked+label:before {
+	top: -4px;
+	left: -5px;
+	width: 12px;
+	height: 22px;
+	border-top: 2px solid transparent;
+	border-left: 2px solid transparent;
+	border-right: 2px solid #4dbd74;
+	border-bottom: 2px solid #4dbd74;
+	-webkit-transform: rotate(40deg);
+	transform: rotate(40deg);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transform-origin: 100% 100%;
+	transform-origin: 100% 100%;
+}
+
 .custome-check input[type="checkbox"]:not(.filled-in)+label:after {
 	border: 0;
 	-webkit-transform: scale(0);
@@ -2675,14 +2710,30 @@ table.text-center, table.text-center td, table.text-center th {
 	border-top: 0;
 	color: #666;
 }
+
+
+.login-box-body .form-group{ position: relative; }
+
+.login-box-body .form-group > li{position: absolute;
+    top: 72px;
+    left: 0;
+    background: #fff;
+    list-style-type: none;
+    border: 1px solid #eee;
+    padding: 4px;
+    z-index: 999;}
+
 .login-box-body .form-control-feedback, .register-box-body .form-control-feedback {
 	color: #777;
 }
 .forgotlink {
 	float: right;
-	margin-top: 10px;
 	color: #444;
 }
+
+.login-box-body a{ color:#4dbd74 !important;}
+.forgotlink:hover{ color:#4dbd74 !important;}
+
 .login-box-msg, .register-box-msg {
 	margin: 0;
 	text-align: center;
@@ -4045,14 +4096,16 @@ table.text-center, table.text-center td, table.text-center th {
 .chart svg, .chart canvas {
 	width: 100% !important;
 }
-.alerts .custome-check label, .alerts .radio label {
+.custome-check label, .radio label {
 	cursor: pointer;
 	font-weight: 400;
-	margin-bottom: 21px;
+	margin-bottom: 9px;
 	min-height: 20px;
 	padding-left: 25px;
 	color: #cb2424;
 }
+
+.custome-check.loginpage label{ color: #444;}
 /* new */
 
 .sidebar-collapse li.treeview {
@@ -4530,10 +4583,19 @@ span.red {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-.box-body .btnadd {
-	display: table-cell;
+.btnadd {
+	display: table-cell !important;
+	 position: relative;
+    top: 5px;
 }
-.box-body .icns {
+
+button.orangeclr{background-color: #ff8c15; border: 1px solid #ff8c15;}
+button.orangeclr:hover{background-color: #f18413; border: 1px solid #ff8c15;}
+
+.pagination{float: right;
+    padding-right: 16px;}
+
+.icns {
 	float: right;
 	padding-left: 15px;
 }
@@ -4564,13 +4626,25 @@ span.red {
 	z-index: 810;
 }
 
+.sidebar-hidden .sidebar .nav .nav-item:hover > a > span{
+	background: #3fa14c ;
+    display: inline-block;
+    left: 74px;
+    padding: 12px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 150px;
+	text-align: center;
+    z-index: 1;} 
+
 .sidebar-hidden .sidebar {
      z-index: 850;
 	-webkit-transition: width .1s ease-in-out;
 	-o-transition: width .1s ease-in-out;
 	transition: width .1s ease-in-out;
 }
-
+.card-footer button [type="submit"]{ background-color: #ff8c15 !important;}
 .sidebar-nav{	-webkit-transition: width .1s ease-in-out;
 	-o-transition: width .1s ease-in-out;
 	transition: width .1s ease-in-out;}
@@ -4580,8 +4654,8 @@ span.red {
 #example1 tr th:first-child, #example1 tr td:first-child{text-align:center;}
 .whitebg.nopadding{ padding: 0;}
 .mainarea{padding:15px;}
-.sidebar-hidden .sidebar .nav .nav-item .nav-link span{ display:none;}
-.sidebar .sidebar-nav {width: auto !important;}
+.sidebar-hidden .sidebar .nav .nav-item .nav-link span, .sidebar-hidden .sidebar .nav .nav-item .nav-link small{ display:none;}
+.sidebar-hidden .sidebar .sidebar-nav li {width: 75px !important;}
 .sidebar .nav .nav-item .nav-link span{ display: inline-block;}
 .sidebar-hidden header.navbar .navbar-brand{ width:75px;}
 .sidebar .nav .nav-item .nav-link.active, .sidebar .nav .nav-item .navbar .active.dropdown-toggle, .sidebar .nav .nav-item > .nav-link{font-size: 17px !important;}

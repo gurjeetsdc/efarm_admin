@@ -7,16 +7,12 @@ import { Router } from '@angular/router';
 export class DeactiveRouteGuard implements CanActivate {
 
   constructor(private router : Router) {
-    console.log("In deactive-route-guard file");
   }
 
   canActivate() {
-  	console.log('AuthGuard#canActivate called');
     if(localStorage.getItem("user")) {
-      console.log("user exists")
       return true;
     } else {
-      console.log("user not  exists ")
       this.router.navigate(['/login']);
     }
   }

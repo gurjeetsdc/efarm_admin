@@ -10,30 +10,29 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   private user = {};
-  private errMessage = {};
+  public valid_email = true;
+  public term = false;
   constructor(private router : Router, private _registerService: RegisterService) { }
 
   ngOnInit() {
   }
 
+  checkemail(email) {
+       let regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       this.valid_email=regex.test(email);
+  } 
+
   onSubmit(){
-    	this.errMessage = {};
-          this.user["username"] = this.user["email"];
-          if(this.user["password"] !== this.user["confirmPassword"]) {
-            this.errMessage["err"] = "Password and confirm Pasword not matched";
-          } else {
-    	    this._registerService.register(this.user)
-                           .subscribe(
-                               res => {
-                                 console.log("response",res)
-                                 localStorage.setItem("user",JSON.stringify(res));
-                                 this.router.navigate(['/login']);
-                               },
-                                err => {
-                                	console.log("error",err)
-                                    // this.errMessage = JSON.parse(err._body);
-                                });
-        }                           
+        this.user["username"] = this.user["email"];
+	    this._registerService.register(this.user)
+                       .subscribe(
+                           res => {
+                             console.log("response",res)
+                             this.router.navigate(['/login']);
+                           },
+                            err => {
+                            	console.log("error",err);
+                            });
   	}
 
 }

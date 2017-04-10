@@ -8,44 +8,60 @@
         <form role="form" (ngSubmit)="onSubmit()" #registerForm="ngForm">
             <div class="form-group has-feedback">
                 <label>Full name</label>
-                <input type="text" name="name" class="form-control" [(ngModel)]="user.name" required>
+                <input type="text" name="name" class="form-control" [(ngModel)]="user.name" #name="ngModel" required>
+                <li *ngIf="name.errors && name.touched">
+                    <span class="text-danger" [hidden]="!name.errors.required">Full Name is required</span>
+                </li>
             </div>
             <div class="form-group has-feedback">
                 <label>Email</label>
-                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                <input type="email" name="email" class="form-control" [(ngModel)]="user.email" required>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <input type="email" name="email" class="form-control" [(ngModel)]="user.email" (ngModelChange)="checkemail(user.email)" #email="ngModel" required>
+                <li *ngIf="email.errors && email.touched && valid_email">
+                    <span class="text-danger" [hidden]="!email.errors.required">Email is required</span>
+                </li>
+                <li *ngIf="!valid_email">
+                    <span class="text-danger">Email id is not valid</span>
+                </li>
             </div>
             <div class="form-group has-feedback">
                 <label>Password</label>
-                <!--<span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
-                <input type="password" name="password" class="form-control" [(ngModel)]="user.password" required>
+                <input type="password" name="password" class="form-control" [(ngModel)]="user.password" #password="ngModel" minlength="8" required>
+                <li *ngIf="password.errors && password.touched">
+                    <span class="text-danger" [hidden]="!password.errors.required">Password is required</span>
+                    <span class="text-danger" [hidden]="!password.errors.minlength">Minimum 8 character is Required</span>
+                </li>
             </div>
             <div class="form-group has-feedback">
-                <label>Retype Password</label>
+                <label>Confirm Password</label>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                <input type="password" name="confirmPassword" class="form-control" [(ngModel)]="user.confirmPassword" required>
-            </div>
-            <div class="form-group has-feedback">
-                <div class="text-danger">
-                  {{errMessage.err}}
-                </div>
+                <input type="password" name="confirmPassword" class="form-control" [(ngModel)]="user.confirmPassword" minlength="8" #confirmPassword="ngModel" required>
+                <li *ngIf="confirmPassword.errors && confirmPassword.touched">
+                    <span class="text-danger" [hidden]="!confirmPassword.errors.required">Confirm Password is required</span>
+                    <span class="text-danger" [hidden]="!confirmPassword.errors.minlength">Minimum 8 character Required</span>
+                </li>
+                <li *ngIf="confirmPassword.touched && user.confirmPassword != user.password" [hidden]="confirmPassword.errors && confirmPassword.errors.required">
+                    <span class="text-danger">Password and confirm password not matched..</span>
+                </li>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!registerForm.valid">Register</button>
+                    <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!registerForm.valid || (user.confirmPassword != user.password)">Register</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6 col-sm-6">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> I agree to the terms
-                        </label>
+                    <div class="custome-check loginpage">
+                        <input id="option5" name="terms" type="checkbox" #terms="ngModel" [(ngModel)]="term" required>
+                        <label for="option5">I agree to the terms.</label>
+                        <li *ngIf="term.errors && term.touched">
+                            <span class="text-danger" [hidden]="!term.errors.required">Plese Select term and conditions</span>
+                        </li>
                     </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-6 col-sm-6 text-right">
-                    <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']">I already have membership.</a>
+                    <a class="forgotlink" routerLinkActive="active" [routerLink]="['/login']">I already have membership.</a>
                 </div>
                 <!-- /.col -->
             </div>
@@ -53,6 +69,8 @@
     </div>
     <!-- /.login-box-body -->
 </div>
+
+
 <!-- <div class="app flex-row align-items-center">
   <div class="container">
     <div class="row justify-content-center">
