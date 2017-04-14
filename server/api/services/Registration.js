@@ -1,17 +1,27 @@
 var Promise = require('bluebird'),
     promisify = Promise.promisify,
-    mailer = require('nodemailer'),
+    nodemailer = require('nodemailer'),
+    smtpTransport = require('nodemailer-smtp-transport'),
     emailGeneratedCode,
-    transporter;
+    transport;
+                    
+    transport = nodemailer.createTransport(smtpTransport({
+        host: sails.config.appSMTP.host,
+        port: sails.config.appSMTP.port,
+        debug: sails.config.appSMTP.debug,
+        auth: {
+            user: sails.config.appSMTP.auth.user,
+            pass: sails.config.appSMTP.auth.pass
+        }
+    }));
 
-
-transporter = mailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: sails.config.security.admin.email.address,
-        pass: sails.config.security.admin.email.password
-    }
-});
+// transporter = mailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: sails.config.security.admin.email.address,
+//         pass: sails.config.security.admin.email.password
+//     }
+// });
 
 emailGeneratedCode = function (options) {
     var url = options.verifyURL,
@@ -29,13 +39,13 @@ emailGeneratedCode = function (options) {
     message += '">Verification Link</a>';
     message += '<br/>';
 
-    transporter.sendMail({
-        from: sails.config.security.admin.email.address,
+    transport.sendMail({
+        from: sails.config.appSMTP.auth.user,
         to: email,
-        subject: 'Canadian Tire App Account Registration',
+        subject: 'eFarm App Account Registration',
         html: message
     }, function (err, info) {
-        console.log("Email Response:", info);
+        console.log("Email Response:", info,err);
     });
 
     return {
