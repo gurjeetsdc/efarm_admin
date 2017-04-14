@@ -1,0 +1,25 @@
+{
+  "name": "efarmx-Api",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Efarmx Api",
+  "keywords": [],
+  "lite": "lite-server --c bs-config.json",
+  "dependencies": {
+    "rc": "1.0.1",
+    "sails": "~0.12.13",
+    "sails-disk": "~0.10.9",
+    "sails-mongo": "^0.12.2"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "gurjeets",
+  "license": ""
+}
