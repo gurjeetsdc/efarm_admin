@@ -25,6 +25,11 @@
                     <span class="text-danger" [hidden]="!password.errors.required">Password is required</span>
                 </li>
             </div>
+            <div class="row" *ngIf="error">
+                <div class="col-sm-12 col-12 text-danger">
+                    {{error.error_description}}
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12 col-12">
                     <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!loginForm.valid">Sign In</button>

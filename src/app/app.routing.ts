@@ -46,6 +46,11 @@ export const routes: Routes = [
         path: 'crop',
         loadChildren: './crop-management/crop-management.module#CropManagementModule'
         // loadChildren: './chartjs/chartjs.module#ChartJSModule'        
+      },
+      {
+        path: 'input',
+        loadChildren: './input-management/input-management.module#InputManagementModule'
+        // loadChildren: './chartjs/chartjs.module#ChartJSModule'        
       }
     ]
   },

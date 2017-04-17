@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     grant_type:'password',
     client_id: '7yQai9ykLRpuYreXCZCABBohUInoKo81', //'MQD5KWGwDtmglpQmmz1sVw6dWOJ68WD2' // '4eOQDll18Qf0qeutbiSfrHihpVAJE16p' //'5x7EuN09HAeBn2pYJnvvq7szgJaULh14'
   };
-  private errMessage = {};
+  private error = {};
   public valid_email = true;
   constructor(private router : Router,private loginService: LoginService) { }
 
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   
   	login(){
   		console.log("login",this.user)
-		this.errMessage = {};
+		this.error = {};
 		this.loginService.login(this.user)
                        .subscribe(
                            res => {
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
                            },
                             err => {
                             	console.log("error",err);
-                                // this.errMessage = JSON.parse(err._body);
+                                this.error = JSON.parse(err._body);
                             });
 	}
 }

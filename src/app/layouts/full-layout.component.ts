@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,7 @@ export class FullLayoutComponent implements OnInit {
   public disabled: boolean = false;
   public status: {isopen: boolean} = {isopen: false};
   public user:Object = {};
-  constructor( ) { 
+  constructor(private router : Router) { 
     this.user = JSON.parse(localStorage.getItem("user"));
   }
 
@@ -24,4 +25,10 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  logout() {
+    console.log("yesssssssss")
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+  }
 }

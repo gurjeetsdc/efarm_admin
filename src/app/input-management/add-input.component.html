@@ -1,0 +1,83 @@
+<div>
+    <div class="card">
+        <div class="card-header">
+            <strong>Add Input</strong>
+        </div>
+        <div class="card-block">
+            <form role="form" (ngSubmit)="addInput()" #dailyExpenseForm="ngForm">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-name">Input Name</label>
+                            <input type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="input.name" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-password">Company/Manufacturer</label>
+                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="input.company" required="">
+                                <option value="0">Please select</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Variety</label>
+                            <select id="select1" name="select1" class="form-control" [(ngModel)]="input.variety" size="1">
+                                <option value="0">Please select</option>
+                                <option value="1">Variety 1</option>
+                                <option value="2">Variety 2</option>
+                                <option value="3">Variety 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-quantity">Quantity</label>
+                            <input type="text" id="nf-quantity" name="nf-quantity" class="form-control" [(ngModel)]="input.quantity" placeholder="Enter Color" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-unit">Unit</label>
+                            <input type="text" id="nf-unit" name="nf-unit" class="form-control" [(ngModel)]="input.unit" placeholder="Enter Grade">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                    <div class="form-group">
+                            <label for="nf-price">Price</label>
+                            <input type="text" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="input.price" placeholder="Enter Price">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-termsConditions">Terms & Conditions</label>
+                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="input.termsConditions" placeholder="Enter Terms & Conditions" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-image">Image</label>
+                            <input type="file" name="" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="reset" class="btn btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                    <button type="submit" class="pull-right btn btn-primary"><i class="fa fa-dot-circle-o"></i> Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
