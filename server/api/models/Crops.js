@@ -99,8 +99,15 @@ module.exports = {
         lng: {
             type: 'string'
         },
-        createdAt: { type: 'Date', default: Date.now},
-		modifiedAt: { type: 'Date', default: Date.now},
+        status: {
+			type: 'string',
+			enum: ['Active', 'Deactive']
+		},
+		isDeleted: {
+			type: 'boolean'
+		},
+        createdAt: { type: 'Date', default: Date.now,autoCreatedAt: true},
+		modifiedAt: { type: 'Date', default: Date.now, autoUpdatedAt: true},
 
 
   // 	 	name: { type: String, required: true},
@@ -134,6 +141,7 @@ module.exports = {
 		// modified: { type: Date, default: Date.now},
 		// modified_by: { type: String},   
   //  	userId: { type: String,required: true },
+
   }
 };
 

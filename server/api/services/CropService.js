@@ -12,17 +12,139 @@ var Promise = require('bluebird'),
 module.exports = {
 
     saveCrop: function (data, context) {
-        console.log(data);
-        /*var date = new Date();
-        return API.Model(Users).create({
-            name: data.name,
-            description: data.description,
-            user_id: data.user_id,
-            quantity: data.quantity
-        });*/
+        var date = new Date();
+        return API.Model(Crops).create(data)
+        .then(function (crop) {
+            var Report;
+            if(crop){
+                Report = {"sucess": {
+                            "Code": 200,
+                            "Message": "OK"
+                            }}
+            }else{
+                Report = {"error": {
+                            "Code": 301,
+                            "Message": "Faild"
+                            }}
+            }
 
+            return {
+                    "Status": true,
+                    "Data": crop,
+                     Report
+                };
+
+        });
     },
+    listCrops: function (data, context) {
+        
+        return Crops.find({"isDeleted":false})
+        .then(function (crops) {
+            var Report;
+                Report = {"sucess": {
+                            "Code": 200,
+                            "Message": "OK"
+                            }}
+            return {
+                    "Status": true,
+                    "Data": crops,
+                     Report
+                };
 
+        });
+    },
+    updateCrop: function (data, context) {
+       
+//console.log(data);
+        return API.Model(Crops).update(data.id,data)
+        .then(function (crop) {
+            var Report;
+            if(crop){
+                Report = {"sucess": {
+                            "Code": 200,
+                            "Message": "OK"
+                            }}
+            }else{
+                Report = {"error": {
+                            "Code": 301,
+                            "Message": "Faild"
+                            }}
+            }
+            return {
+                    "Status": true,
+                    "Data": crop,
+                     Report
+                };
+        });
+    },
+    deleteCrop: function (data, context) {
+       
+     return API.Model(Crops).update(data.id,data)
+        .then(function (crop) {
+            var Report;
+            if(crop){
+                Report = {"sucess": {
+                            "Code": 200,
+                            "Message": "Deleted"
+                            }}
+            }else{
+                Report = {"error": {
+                            "Code": 301,
+                            "Message": "Faild"
+                            }}
+            }
+            return {
+                    "Status": true,
+                     Report
+                };
+        });
+    },
+    changeStatusCrop: function (data, context) {
+       
+     return API.Model(Crops).update(data.id,data)
+        .then(function (crop) {
+            var Report;
+            if(crop){
+                Report = {"sucess": {
+                            "Code": 200,
+                            "Message": "StatusUpdated"
+                            }}
+            }else{
+                Report = {"error": {
+                            "Code": 301,
+                            "Message": "Faild"
+                            }}
+            }
+            return {
+                    "Status": true,
+                     Report
+                };
+        });
+    },
+    getCrop: function (data, context) {
+
+        return API.Model(Crops).findOne(data.id)
+        .then(function (crop) {
+            var Report;
+            
+            if(crop){
+                Report = {"sucess": {
+                            "Code": 200,
+                            "Message": "OK"
+                            }}
+            }else{
+                Report = {"error": {
+                            "Code": 301,
+                            "Message": "Faild"
+                            }}
+            }
+            return {
+                    "Status": true,
+                    "Data": crop,
+                     Report
+                };
+        });
+    },
   
 
 

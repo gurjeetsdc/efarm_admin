@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
+import { CropService } from './crop.service';
 @Component({
   selector: 'app-crop-management',
   templateUrl: './list-crop.component.html',
-  styleUrls: ['./list-crop.component.scss']
+  styleUrls: ['./list-crop.component.scss'],
+  providers: [CropService]
 })
 export class ListCropComponent implements OnInit {
 
@@ -250,8 +252,20 @@ export class ListCropComponent implements OnInit {
 
   private data:Array<any> = this.TableData;
 
-  public constructor() {
+  public constructor(private _cropService: CropService) {
     this.length = this.data.length;
+
+    this._cropService.croplisting()
+                       .subscribe(
+                           res => {
+                             console.log("response------------",res)
+                             
+                           },
+                            err => {
+                              console.log("error--------------",err);
+                            });
+
+
   }
 
   public ngOnInit():void {

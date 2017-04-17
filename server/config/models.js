@@ -19,8 +19,8 @@ module.exports.models = {
   ***************************************************************************/
   // connection: 'localDiskDb',
   connection: 'mlabMongoServer',
-  autoCreatedAt: false,
-  autoUpdatedAt: false
+  autoCreatedAt: true,
+  autoUpdatedAt: true
 
   /***************************************************************************
   *                                                                          *

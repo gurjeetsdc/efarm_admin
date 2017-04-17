@@ -7,11 +7,28 @@
 module.exports = {
 
 	add: function(req,res){
-      var params = req.body;
-      console.log(params);
-       // API(CropService.saveCrop,req,res);
-
+      
+      API(CropService.saveCrop,req,res);
     },
+    listing: function(req,res){
+      
+      API(CropService.listCrops,req,res);
+    },
+    update: function(req,res){
+      //console.log(allParams);
+      //console.log(req.query.id);
+      //console.log(req.params.id);
+      API(CropService.updateCrop,req,res);
+    },
+    show: function(req,res){
+      API(CropService.getCrop,req,res);
+    },
+    delete: function(req,res){
+	  API(CropService.deleteCrop,req,res);
+    },
+    changestatus: function(req,res){
+	  API(CropService.changeStatusCrop,req,res);
+    },
+
 	
 };
-
