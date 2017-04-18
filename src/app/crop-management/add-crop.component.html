@@ -1,4 +1,89 @@
 <div>
+  
+  
+   
+   <div class="row">
+        <div class="col-lg-2 col-6"> 
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="icon"> 
+              <!--<i class="ion ion-bag"></i>--> 
+              <i class="icon-Shape-13"></i> </div>
+            <div class="inner">
+              <p>Crops</p>
+            </div>
+          </div>
+        </div>
+        <!-- col -->
+        <div class="col-lg-2 col-6"> 
+          <!-- small box -->
+          <div class="small-box bg-aqua" [routerLink]="['/input/list']">
+            <div class="inner">
+              <p>Inputs</p>
+            </div>
+            <div class="icon"> <i class="icon-Shape-18"></i> </div>
+          </div>
+        </div>
+        <!-- col -->
+        <div class="col-lg-2 col-6"> 
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <p>Equipments</p>
+            </div>
+            <div class="icon"> <i class="icon-Shape-19"> </i> </div>
+          </div>
+        </div>
+        <!-- col -->
+        <div class="col-lg-2 col-6"> 
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <p>Lands</p>
+            </div>
+            <div class="icon"> <i class="icon-Shape-21"> </i> </div>
+          </div>
+        </div>
+        <!-- col --> 
+        
+        <!-- col -->
+        <div class="col-lg-2 col-6"> 
+          <!-- small box -->
+          <div class="small-box bg-purple">
+            <div class="inner">
+              <p>Services</p>
+            </div>
+            <div class="icon"> <i class="icon-Shape-22"> </i> </div>
+          </div>
+        </div>
+        <!-- col --> 
+        
+        <!-- col -->
+        <div class="col-lg-2 col-6">
+          <div class="small-box bg-teal" [routerLink]="['/user/list']">
+            <div class="inner">
+              <p>Users</p>
+            </div>
+            <div class="icon"> <i class="fa fa-user"></i> </div>
+          </div>
+        </div>
+        <!-- col --> 
+        
+      </div>
+      
+      <div class="row">
+      <div class="col-12 col-lg-12">
+      <div class="content-header">
+         <ol class="breadcrumb">
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Crop Management</a></li>
+          <li class="active"><a href="#">Add new</a></li>
+        </ol>
+      </div>
+		  </div>
+	</div>
+      
+      
     <div class="card">
         <div class="card-header">
             <strong>Add Crop</strong>
@@ -7,15 +92,15 @@
             <form role="form" (ngSubmit)="addCrop()" #dailyExpenseForm="ngForm">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-name">Crop Name*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-name">Crop Name</label>
                             <input type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="crop.name" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-password">Category*</label>
-                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="crop.category" required="">
+                        <div class="form-group has-required">
+                            <label for="nf-password">Category</label>
+                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="crop.category" required>
                                 <option value="0">Please select</option>
                                 <option value="1">Option #1</option>
                                 <option value="2">Option #2</option>
@@ -47,20 +132,37 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-grade">Grade</label>
-                            <input type="text" id="nf-grade" name="nf-grade" class="form-control" [(ngModel)]="crop.grade" placeholder="Enter Grade">
+                            
+						<form class="grade">
+							<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-default">
+							<input name="year" value="A+" type="radio">A+
+							</label>
+							<label class="btn btn-default">
+							<input name="year" value="A" type="radio">A
+							</label>
+							<label class="btn btn-default">
+							<input name="year" value="B" class="active" type="radio">B
+							</label>
+							<label class="btn btn-default">
+							<input name="year" value="C" class="active" type="radio">C
+							</label>
+							</div>
+						</form>
+                       
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-color">Color*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-color">Color</label>
                             <input type="text" id="nf-color" name="nf-color" class="form-control" [(ngModel)]="crop.color" placeholder="Enter Color" required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-size">Size/Weight*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-size">Size/Weight</label>
                             <input type="text" id="nf-size" name="nf-size" class="form-control" [(ngModel)]="crop.size" placeholder="Enter Size" required>
                         </div>
                     </div>
@@ -73,14 +175,14 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-availibility">Availibility Peroid*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-availibility">Availibility Peroid</label>
                             <input type="text" id="nf-availibility" name="nf-availibility" class="form-control" [(ngModel)]="crop.availibility" placeholder="Enter Size" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-packaging">Packaging*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-packaging">Packaging</label>
                             <select id="select2" name="select2" class="form-control" size="1" [(ngModel)]="crop.packaging" required>
                                 <option value="0">Please select</option>
                                 <option value="1">Option #1</option>
@@ -92,13 +194,13 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-supplyAblity">Supply Ablity*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-supplyAblity">Supply Ablity</label>
                             <input type="text" id="nf-supplyAblity" name="nf-supplyAblity" class="form-control" [(ngModel)]="crop.supplyAblity" placeholder="Enter Supply Ablity" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group has-required">
                             <label for="nf-destinationForShipping">Destination for Shipping*</label>
                             <select id="select3" name="select3" class="form-control" size="1" [(ngModel)]="crop.destinationForShipping" required>
                                 <option value="0">Please select</option>
@@ -111,55 +213,84 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-packSize">Pack Size*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-packSize">Pack Size</label>
                             <input type="text" id="nf-packSize" name="nf-packSize" class="form-control" [(ngModel)]="crop.packSize" placeholder="Enter Pack Size" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-qty">Quantity Per Pack*</label>
-                            <input type="text" id="nf-qty" name="nf-qty" class="form-control" [(ngModel)]="crop.qty" placeholder="Enter Quantity Per Pack" required>
+                       
+                       
+                       
+                        <div class="form-group has-required">
+                            <label for="nf-qty">Quantity Per Pack</label>
+                           
+							
+							<div class="input-group">
+      <input type="text" class="form-control" aria-label="Text input with dropdown button">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Kg
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div role="separator" class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </div>
+    </div>
+							
+                       
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-label">Label/Making on Pack*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-label">Label/Making on Pack</label>
                             <input type="text" id="nf-label" name="nf-label" class="form-control" [(ngModel)]="crop.label" placeholder="Enter Label" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-paymentTerms">Payment Terms*</label>
-                            <select id="select4" name="select4" class="form-control" size="1" [(ngModel)]="crop.paymentTerms" required>
-                                <option value="0">Please select</option>
-                                <option value="1">COD</option>
-                                <option value="2">Cheque</option>
-                                <option value="3">Net Banking</option>
-                            </select>
+                        <div class="form-group has-required">
+                            <label for="nf-paymentTerms">Payment Terms</label>
+                           <form class="grade">
+							<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-default">
+							<input name="year" value="COD" type="radio">COD
+							</label>
+							<label class="btn btn-default">
+							<input name="year" value="Cheque" type="radio">Cheque
+							</label>
+							<label class="btn btn-default">
+							<input name="year" value="Net Banking" class="active" type="radio">Net Banking
+							</label>
+							
+							</div>
+						</form>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-moq">MOQ*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-moq">MOQ</label>
                             <input type="text" id="nf-moq" name="nf-moq" class="form-control" [(ngModel)]="crop.moq" placeholder="Enter MOQ" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-averageLeadTime">Average Lead Time*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-averageLeadTime">Average Lead Time</label>
                             <input type="text" id="nf-averageLeadTime" name="nf-averageLeadTime" class="form-control" [(ngModel)]="crop.averageLeadTime" placeholder="Enter Average Lead Time" required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-additionalInformation">Additional Information*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-additionalInformation">Additional Information</label>
                             <textarea type="text" id="nf-additionalInformation" name="nf-additionalInformation" class="form-control" [(ngModel)]="crop.additionalInformation" placeholder="Enter Additional Information" rows="4" required ></textarea>
                         </div>
                     </div>
@@ -178,10 +309,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button type="reset" class="btn btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                    <button type="submit" class="pull-right btn btn-primary"><i class="fa fa-dot-circle-o"></i> Save</button>
-                </div>
+                    <button type="reset" class="btn btn-secondary"> Cancel</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr">Save</button>
+             
             </form>
         </div>
     </div>

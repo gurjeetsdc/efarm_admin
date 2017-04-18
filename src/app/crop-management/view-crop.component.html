@@ -1,0 +1,238 @@
+<div>
+    <div class="row">
+        <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="icon">
+                    <!--<i class="ion ion-bag"></i>-->
+                    <i class="icon-Shape-13"></i> </div>
+                <div class="inner">
+                    <p>Crops</p>
+                </div>
+            </div>
+        </div>
+        <!-- col -->
+        <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua" [routerLink]="['/input/list']">
+                <div class="inner">
+                    <p>Inputs</p>
+                </div>
+                <div class="icon"> <i class="icon-Shape-18"></i> </div>
+            </div>
+        </div>
+        <!-- col -->
+        <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <p>Equipments</p>
+                </div>
+                <div class="icon"> <i class="icon-Shape-19"> </i> </div>
+            </div>
+        </div>
+        <!-- col -->
+        <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <p>Lands</p>
+                </div>
+                <div class="icon"> <i class="icon-Shape-21"> </i> </div>
+            </div>
+        </div>
+        <!-- col -->
+        <!-- col -->
+        <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-purple">
+                <div class="inner">
+                    <p>Services</p>
+                </div>
+                <div class="icon"> <i class="icon-Shape-22"> </i> </div>
+            </div>
+        </div>
+        <!-- col -->
+        <!-- col -->
+        <div class="col-lg-2 col-6">
+            <div class="small-box bg-teal" [routerLink]="['/user/list']">
+                <div class="inner">
+                    <p>Users</p>
+                </div>
+                <div class="icon"> <i class="fa fa-user"></i> </div>
+            </div>
+        </div>
+        <!-- col -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="content-header">
+                <ol class="breadcrumb">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Crop Management</a></li>
+                    <li class="active"><a href="#">View</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <strong>View Crop</strong>
+			<button class="btn btn-secondary pull-right"><i class="fa fa-pencil"></i> Edit</button>
+        </div>
+        <div class="card-block viewmode">
+            <form role="form" (ngSubmit)="addCrop()" #dailyExpenseForm="ngForm">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-name">Crop Name*</label>
+							<p>Potatoes</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-password">Category*</label>
+							<p>Crop</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Variety</label>
+							<p>Yellow</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-price">Price</label>
+							<p><i class="fa fa-rupee"></i>1200</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-grade">Grade</label>
+							<p>A+</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-color">Color*</label>
+							<p>Yellow</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-size">Size/Weight*</label>
+							<p>Average</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-otherSpeciality">Other Speciality</label>
+							<p>Clean</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-availibility">Availibility Peroid*</label>
+							<p>2-3 Months</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-packaging">Packaging*</label>
+							<p>Yes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-supplyAblity">Supply Ablity*</label>
+							<p>Available</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-destinationForShipping">Destination for Shipping*</label>
+							<p>Mohali</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-packSize">Pack Size*</label>
+							<p>100</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-qty">Quantity Per Pack*</label>
+							<p>10</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-label">Label/Making on Pack*</label>
+							<p>No</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-paymentTerms">Payment Terms*</label>
+							<p>Cheque</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-moq">MOQ*</label>
+							<p>test</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-averageLeadTime">Average Lead Time*</label>
+							<p>12 days</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-additionalInformation">Additional Information*</label>
+							<p>This is information to confirm you about pototoes</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-termsConditions">Terms & Conditions</label>
+							<p>Lorum ipsum text here for testing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-image">Image</label>
+							<p><i class="fa fa-file-image-o"></i> Pototoes.jpg</p>
+                        </div>
+                    </div>
+                </div>
+                    <button type="reset" class="btn btn-secondary"> Cancel</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
