@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
+import { InputService } from './input.service';
 @Component({
   selector: 'app-input-management',
   templateUrl: './list-input.component.html',
-  styleUrls: ['./list-input.component.scss']
+  styleUrls: ['./list-input.component.scss'],
+  providers: [InputService]
 })
 export class ListInputComponent implements OnInit {
 
@@ -126,19 +128,19 @@ export class ListInputComponent implements OnInit {
 
   public rows:Array<any> = [];
   public columns:Array<any> = [
-    {title: 'Farm Input', name: 'name'},
+    
     {
-      title: 'Farm Input',
+      title: 'Name',
       name: 'name',
       sort: false
       // filtering: {filterString: '', placeholder: 'Filter by position'}
     },
-    {title: 'Distributor', name: 'distributor'},
-    {title: 'Company', name: 'company'},
+    {title: 'Description', name: 'description'},
+    /*{title: 'Company', name: 'company'},
     {title: 'District', name: 'district'},
     {title: 'Variety', name: 'variety'},
     {title: 'Qty.', name: 'qty'},
-    {title: 'Price', name: 'price'}
+    {title: 'Price', name: 'price'},*/
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
@@ -153,10 +155,21 @@ export class ListInputComponent implements OnInit {
     className: ['table-striped', 'table-bordered']
   };
 
-  private data:Array<any> = this.TableData;
+  private data = [];
 
-  public constructor() {
+  public constructor(private _inputService: InputService) {
     this.length = this.data.length;
+     this._inputService.inputlist()
+                       .subscribe(
+                           res => {
+                             this.data = res;
+                             console.log("response---data---------",res)
+                             this.onChangeTable(this.config);
+                             
+                           },
+                            err => {
+                              console.log("error--------------",err);
+                            });
   }
 
   public ngOnInit():void {
@@ -254,7 +267,8 @@ export class ListInputComponent implements OnInit {
 
   public onCellClick(data: any): any {
     console.log(data);
-  }	
+  }
+
 
   // constructor() { }
 
