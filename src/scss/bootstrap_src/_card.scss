@@ -75,6 +75,7 @@
   padding: $card-spacer-y $card-spacer-x;
   background-color: $card-cap-bg;
   border-top: $card-border-width solid $card-border-color;
+  margin-top: 20px;
 
   &:last-child {
     @include border-radius(0 0 $card-border-radius-inner $card-border-radius-inner);

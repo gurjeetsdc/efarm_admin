@@ -51,6 +51,11 @@ export const routes: Routes = [
         path: 'input',
         loadChildren: './input-management/input-management.module#InputManagementModule'
         // loadChildren: './chartjs/chartjs.module#ChartJSModule'        
+      },
+      {
+        path: 'user',
+        loadChildren: './user-management/user-management.module#UserManagementModule'
+        // loadChildren: './chartjs/chartjs.module#ChartJSModule'        
       }
     ]
   },

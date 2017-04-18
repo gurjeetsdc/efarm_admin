@@ -3,36 +3,28 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
-import { ListCropComponent } from './list-crop.component';
-import { AddCropComponent } from './add-crop.component';
-import { ViewCropComponent } from './view-crop.component';
+import { ListUserComponent } from './list-user.component';
+import { AddUserComponent } from './add-user.component';
 import { HttpModule } from '@angular/http';
 const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Crop Management'
+      title: 'User Management'
     },
     children: [
       {
         path: 'list',
-        component: ListCropComponent,
+        component: ListUserComponent,
         data: {
           title: 'List'
         }
       },
       {
         path: 'add',
-        component: AddCropComponent,
+        component: AddUserComponent,
         data: {
           title: 'Add'
-        }
-      },
-      {
-        path: 'list/:id',
-        component: ViewCropComponent,
-        data: {
-          title: 'List'
         }
       }
     ]
@@ -54,4 +46,4 @@ const routes: Routes = [
     PaginationModule
   ]
 })
-export class CropManagementRoutingModule {}
+export class UserManagementRoutingModule {}

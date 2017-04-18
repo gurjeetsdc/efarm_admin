@@ -90,6 +90,17 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item nav-dropdown" routerLinkActive="open">
+      <a class="nav-link nav-dropdown-toggle" href="#" ><i class="fa fa-user"></i><span>Users</span></a>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/list']"><i class="fa fa-th-list"></i><span> User Listing</span></a>
+            </li>
+            <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/add']"><i class="fa fa-plus"></i> <span>Add User</span></a>
+            </li>
+          </ul>
+        </li>
        <!--  <li class="nav-item nav-dropdown" routerLinkActive="open">
           <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> Components</a>
           <ul class="nav-dropdown-items">

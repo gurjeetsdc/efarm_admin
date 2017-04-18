@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ListCropComponent } from './list-crop.component';
 import { AddCropComponent } from './add-crop.component';
+import { ViewCropComponent } from './view-crop.component';
 import { CropManagementRoutingModule } from './crop-management-routing.module';
 
 @NgModule({
@@ -12,7 +13,8 @@ import { CropManagementRoutingModule } from './crop-management-routing.module';
   ],
   declarations: [
   	ListCropComponent,
-  	AddCropComponent
+  	AddCropComponent,
+  	ViewCropComponent
   ]
 })
 export class CropManagementModule { }

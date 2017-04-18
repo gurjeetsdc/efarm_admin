@@ -50,9 +50,6 @@
     }
   }
 
-  .btn {
-    margin-top: - $btn-padding-y;
-  }
   .btn-sm {
     margin-top: - $btn-padding-y-sm;
   }
@@ -62,6 +59,7 @@
 }
 //
 .card-footer {
+	
 
   ul {
     display: table;
@@ -89,10 +87,10 @@
 //
 
 @mixin card-variant($color) {
-  background-color: $color;
+  background-color: #fff;
 
   .card-header {
-    border-color: darken($color,5%);
+    border-color: darken($color,5%); background-color: #fff;
   }
 
   .card-header, .card-footer {
