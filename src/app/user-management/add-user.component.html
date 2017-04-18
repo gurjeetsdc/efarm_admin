@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-2 col-6">
             <!-- small box -->
-            <div class="small-box bg-green">
+            <div class="small-box bg-green" [routerLink]="['/crop/list']">
                 <div class="icon">
                     <!--<i class="ion ion-bag"></i>-->
                     <i class="icon-Shape-13"></i> </div>
@@ -14,7 +14,7 @@
         <!-- col -->
         <div class="col-lg-2 col-6">
             <!-- small box -->
-            <div class="small-box bg-aqua">
+            <div class="small-box bg-aqua" [routerLink]="['/input/list']">
                 <div class="inner">
                     <p>Inputs</p>
                 </div>
@@ -83,56 +83,56 @@
             <form role="form" (ngSubmit)="addUser()" #dailyExpenseForm="ngForm">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-name">First Name*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-name">First Name</label>
                             <input type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="user.first_name" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-password">Last Name*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-password">Last Name</label>
                             <input type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="user.last_name" required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-password">Phone*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-password">Phone</label>
                             <input type="text" id="nf-phone" name="nf-phone" class="form-control" placeholder="Enter Phone" [(ngModel)]="user.phone" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-email">Email*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-email">Email</label>
                             <input type="text" id="nf-email" name="nf-email" class="form-control" [(ngModel)]="user.email" placeholder="Enter Color" required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-city">City/Village*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-city">City/Village</label>
                             <input type="text" id="nf-city" name="nf-city" class="form-control" [(ngModel)]="user.city" placeholder="Enter Grade" required="">
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-pincode">Pincode*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-pincode">Pincode</label>
                             <input type="text" id="nf-pincode" name="nf-pincode" class="form-control" [(ngModel)]="user.pincode" placeholder="Enter Pincode">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-stage">State*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-stage">State</label>
                             <input type="text" id="nf-stage" name="nf-stage" class="form-control" [(ngModel)]="user.stage" placeholder="Enter Stage" required="">
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-district">Disrict*</label>
+                        <div class="form-group has-required">
+                            <label for="nf-district">Disrict</label>
                             <input type="text" id="nf-district" name="nf-district" class="form-control" [(ngModel)]="user.district" placeholder="Enter Pincode">
                         </div>
                     </div>
@@ -145,10 +145,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button type="reset" class="btn btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                    <button type="submit" class="pull-right btn btn-primary"><i class="fa fa-dot-circle-o"></i> Save</button>
-                </div>
+                <button type="reset" class="btn btn-secondary"> Cancel</button>
+                <button type="submit" class="pull-right btn btn-primary orangeclr">Save</button>
             </form>
         </div>
     </div>

@@ -171,7 +171,6 @@
 
       &.nav-dropdown {
         &.open {
-          background: $sidebar-nav-dropdown-bg;
           @include borders($sidebar-nav-dropdown-borders);
           @if $enable-sidebar-nav-rounded {
             border-radius: $border-radius;
