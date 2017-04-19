@@ -15,7 +15,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-password">Company/Manufacturer</label>
-                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="input.company" required="">
+                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="input.manufacturer_id" required="">
                                 <option value="0">Please select</option>
                                 <option value="1">Option #1</option>
                                 <option value="2">Option #2</option>
@@ -61,7 +61,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-termsConditions">Terms & Conditions</label>
-                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="input.termsConditions" placeholder="Enter Terms & Conditions" rows="4"></textarea>
+                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="input.tearm_and_conditions" placeholder="Enter Terms & Conditions" rows="4"></textarea>
                         </div>
                     </div>
                 </div>

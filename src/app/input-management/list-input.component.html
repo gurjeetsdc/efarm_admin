@@ -9,6 +9,7 @@
                   (cellClicked)="onCellClick($event)"
                   [rows]="rows" [columns]="columns">
         </ng-table>
+        <div *ngIf='data.length == 0' style="text-align: center;"><p>No Record Found</p></div>
         <pagination *ngIf="config.paging"
                     class="pagination-sm"
                     [(ngModel)]="page"
