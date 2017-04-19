@@ -101,10 +101,10 @@
                         <div class="form-group has-required">
                             <label for="nf-password">Category</label>
                             <select id="select" name="select" class="form-control" size="1" [(ngModel)]="crop.category" required>
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
+                                <option >Please select</option>
+                                <option value="Category 1">Category 1</option>
+                                <option value="Category 2">Category 2</option>
+                                <option value="Category 3">Category 3</option>
                             </select>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-price">Price</label>
-                            <input type="text" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="crop.price" placeholder="Enter Price">
+                            <input type="number" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="crop.price" placeholder="Enter Price">
                         </div>
                     </div>
                 </div>
@@ -136,16 +136,16 @@
 						<form class="grade">
 							<div class="btn-group" data-toggle="buttons">
 							<label class="btn btn-default">
-							<input name="year" value="A+" type="radio">A+
+							<input name="grade" value="A+" type="radio" [(ngModel)]="crop.grade" >A+
 							</label>
 							<label class="btn btn-default">
-							<input name="year" value="A" type="radio">A
+							<input name="grade" value="A" type="radio" [(ngModel)]="crop.grade">A
 							</label>
 							<label class="btn btn-default">
-							<input name="year" value="B" class="active" type="radio">B
+							<input name="grade" value="B" class="active" type="radio" [(ngModel)]="crop.grade">B
 							</label>
 							<label class="btn btn-default">
-							<input name="year" value="C" class="active" type="radio">C
+							<input name="grade" value="C" type="radio" [(ngModel)]="crop.grade">C
 							</label>
 							</div>
 						</form>
@@ -168,8 +168,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-otherSpeciality">Other Speciality</label>
-                            <input type="text" id="nf-otherSpeciality" name="nf-otherSpeciality" class="form-control" [(ngModel)]="crop.otherSpeciality" placeholder="Enter Color">
+                            <label for="nf-other_speciality">Other Speciality</label>
+                            <input type="text" id="nf-other_speciality" name="nf-other_speciality" class="form-control" [(ngModel)]="crop.other_speciality" placeholder="Enter other speciality">
                         </div>
                     </div>
                 </div>
@@ -184,10 +184,10 @@
                         <div class="form-group has-required">
                             <label for="nf-packaging">Packaging</label>
                             <select id="select2" name="select2" class="form-control" size="1" [(ngModel)]="crop.packaging" required>
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
+                                <option >Please select</option>
+                                <option value="Pack 1">Pack 1</option>
+                                <option value="Pack 2">Pack 2</option>
+                                <option value="Pack 3">Pack 3</option>
                             </select>
                         </div>
                     </div>
@@ -195,18 +195,18 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-supplyAblity">Supply Ablity</label>
-                            <input type="text" id="nf-supplyAblity" name="nf-supplyAblity" class="form-control" [(ngModel)]="crop.supplyAblity" placeholder="Enter Supply Ablity" required>
+                            <label for="nf-supply_ablity">Supply Ablity</label>
+                            <input type="text" id="nf-supply_ablity" name="nf-supply_ablity" class="form-control" [(ngModel)]="crop.supply_ablity" placeholder="Enter Supply Ablity" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-destinationForShipping">Destination for Shipping*</label>
-                            <select id="select3" name="select3" class="form-control" size="1" [(ngModel)]="crop.destinationForShipping" required>
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
+                            <label for="nf-destination_shipping">Destination for Shipping*</label>
+                            <select id="select3" name="select3" class="form-control" size="1" [(ngModel)]="crop.destination_shipping" required>
+                                <option >Please select</option>
+                                <option value="Shipping 1">Shipping 1</option>
+                                <option value="Shipping 2">Shipping 2</option>
+                                <option value="Shipping 3">Shipping 3</option>
                             </select>
                         </div>
                     </div>
@@ -214,35 +214,28 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-packSize">Pack Size</label>
-                            <input type="text" id="nf-packSize" name="nf-packSize" class="form-control" [(ngModel)]="crop.packSize" placeholder="Enter Pack Size" required>
+                            <label for="nf-pack_size">Pack Size</label>
+                            <input type="text" id="nf-pack_size" name="nf-pack_size" class="form-control" [(ngModel)]="crop.pack_size" placeholder="Enter Pack Size" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                       
-                       
-                       
                         <div class="form-group has-required">
-                            <label for="nf-qty">Quantity Per Pack</label>
-                           
-							
+                            <label for="nf-qty">Quantity Per Pack</label>				
 							<div class="input-group">
-      <input type="text" class="form-control" aria-label="Text input with dropdown button">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Kg
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-          <div role="separator" class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-      </div>
-    </div>
-							
-                       
+                              <input type="text" id="nf-quantity_per_pack" name="quantity_per_pack" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="crop.quantity_per_pack" placeholder="Enter Pack Size" required>
+                              <div class="input-group-btn">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Kg
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                  <a class="dropdown-item" href="#">Action</a>
+                                  <a class="dropdown-item" href="#">Another action</a>
+                                  <a class="dropdown-item" href="#">Something else here</a>
+                                  <div role="separator" class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                              </div>
+                            </div>                       
                         </div>
                     </div>
                 </div>
@@ -259,13 +252,13 @@
                            <form class="grade">
 							<div class="btn-group" data-toggle="buttons">
 							<label class="btn btn-default">
-							<input name="year" value="COD" type="radio">COD
+							<input name="payment_mode" value="COD" type="radio" [(ngModel)]="crop.payment_method">COD
 							</label>
 							<label class="btn btn-default">
-							<input name="year" value="Cheque" type="radio">Cheque
+							<input name="payment_mode" value="Cheque" type="radio" [(ngModel)]="crop.payment_method">Cheque
 							</label>
 							<label class="btn btn-default">
-							<input name="year" value="Net Banking" class="active" type="radio">Net Banking
+							<input name="payment_mode" value="Net Banking" class="active" type="radio" [(ngModel)]="crop.payment_method">Net Banking
 							</label>
 							
 							</div>
@@ -282,22 +275,22 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-averageLeadTime">Average Lead Time</label>
-                            <input type="text" id="nf-averageLeadTime" name="nf-averageLeadTime" class="form-control" [(ngModel)]="crop.averageLeadTime" placeholder="Enter Average Lead Time" required>
+                            <label for="nf-average_lead_time">Average Lead Time</label>
+                            <input type="text" id="nf-average_lead_time" name="nf-average_lead_time" class="form-control" [(ngModel)]="crop.average_lead_time" placeholder="Enter Average Lead Time" required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-additionalInformation">Additional Information</label>
-                            <textarea type="text" id="nf-additionalInformation" name="nf-additionalInformation" class="form-control" [(ngModel)]="crop.additionalInformation" placeholder="Enter Additional Information" rows="4" required ></textarea>
+                            <label for="nf-additional_info">Additional Information</label>
+                            <textarea type="text" id="nf-additional_info" name="nf-additional_info" class="form-control" [(ngModel)]="crop.additional_info" placeholder="Enter Additional Information" rows="4" required ></textarea>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-termsConditions">Terms & Conditions</label>
-                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="crop.termsConditions" placeholder="Enter Terms & Conditions" rows="4"></textarea>
+                            <label for="nf-terms">Terms & Conditions</label>
+                            <textarea type="text" id="nf-terms" name="nf-terms" class="form-control" [(ngModel)]="crop.terms" placeholder="Enter Terms & Conditions" rows="4"></textarea>
                         </div>
                     </div>
                 </div>

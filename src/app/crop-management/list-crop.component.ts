@@ -1,241 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-// import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
 import { CropService } from './crop.service';
+
 @Component({
   selector: 'app-crop-management',
   templateUrl: './list-crop.component.html',
-  styleUrls: ['./list-crop.component.scss'],
-  providers: [CropService]
+  styleUrls: ['./list-crop.component.scss']
+  // providers: []
 })
+
 export class ListCropComponent implements OnInit {
 
   test: any = [];
 
-  private TableData = [{
-  	name:"Mangoes",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Carrot",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Hardeep Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Peas",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Summit",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Gudev",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Deep Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Mangoes",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Mangoes",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Preet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Mangoes",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Ginger",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Mangoes",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Mangoes",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:2,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:9,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:1,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Mangoes",
-  	price:"1160",
-  	qty:1,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:1,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:1,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"Potato",
-  	price:"1160",
-  	qty:1,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  },{
-  	name:"xyz",
-  	price:"1160",
-  	qty:22,
-  	highestBid:"1160",
-  	totalBid:"5",
-  	by:"Manpreet Singh",
-  	endDate:"1d 2h 20m"
-  }]; 
-
   public rows:Array<any> = [];
   public columns:Array<any> = [
     {title: 'Crop', name: 'name'},
-    {
-      title: 'Offer Price',
-      name: 'price',
-      sort: false
-      // filtering: {filterString: '', placeholder: 'Filter by position'}
-    },
-    {title: 'Qty', className: ['office-header', 'text-success'], name: 'qty', sort: 'asc'},
-    {title: 'Highest Bid', name: 'highestBid', sort: ''},
-    {title: '# of Bid', name: 'totalBid'},
-    {title: 'Farmer', className: 'text-warning', name: 'by'},
-    {title: 'Ends in', name: 'endDate'}
+    {title: 'Offer Price', name: 'price'},
+    {title: 'Qty', name: 'quantity_per_pack'},
+    {title: 'Category', name: 'category'},
+    {title: 'Grade', name: 'grade'},
+    {title: 'Color', name: 'color'}
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
@@ -250,20 +35,19 @@ export class ListCropComponent implements OnInit {
     className: ['table-striped', 'table-bordered']
   };
 
-  private data:Array<any> = this.TableData;
+  private data = [];
 
   public constructor(private _cropService: CropService) {
     this.length = this.data.length;
-
     this._cropService.croplisting()
                        .subscribe(
                            res => {
-                             console.log("response------------",res)
-                             
+                             this.data = res["Data"];
+                             this.onChangeTable(this.config);
                            },
-                            err => {
-                              console.log("error--------------",err);
-                            });
+                           err => {
+
+                           });
 
 
   }
@@ -365,8 +149,4 @@ export class ListCropComponent implements OnInit {
     console.log(data);
   }	
 
-  // constructor() { }
-
-  // ngOnInit() {
-  // }
 }

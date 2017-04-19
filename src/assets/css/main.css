@@ -2763,7 +2763,7 @@ table.text-center, table.text-center td, table.text-center th {
 .login-box {
 	bottom: 0;
 	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	height: 387px;
+	height: 362px;
 	left: 0;
 	margin: auto;
 	position: absolute;
@@ -4788,6 +4788,14 @@ header.navbar .nav-item {
    content:"*";
    color:red;
 }
+.login-box-body .form-group{ position: relative; }
+.login-box-body .form-group > li{position: absolute;
+    right: 0;
+    list-style-type: none;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 3px;
+    top: 0;}
 
 /* media queries */
 
