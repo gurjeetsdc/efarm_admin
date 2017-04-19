@@ -13,9 +13,8 @@ export class EquipmentService {
   		let headers         = new Headers();
   		let urlSearchParams = new URLSearchParams();
 
-        headers.append('Authorization', 'Bearer QCbOcPDSqWFge1WUgqPssNHThrc6KUUT' );
+        headers.append('Authorization', 'Bearer Q18bYGvKYBXGGSmJ4REV3DBXPFJIvBzF' );
         
-        //let body = urlSearchParams.toString()
 		return this._http.get(this.host +'/equipment', { headers: headers }).map((res:Response) => res.json());
   	}
 
@@ -23,7 +22,7 @@ export class EquipmentService {
 
       	let headers         = new Headers();
       	let urlSearchParams = new URLSearchParams();
-        headers.append('Authorization', 'Bearer QCbOcPDSqWFge1WUgqPssNHThrc6KUUT');
+        headers.append('Authorization', 'Bearer Q18bYGvKYBXGGSmJ4REV3DBXPFJIvBzF');
         
         //let body = urlSearchParams.toString()
     	return this._http.post(this.host +'/equipment', inputs, { headers: headers }).map((res:Response) => res.json());

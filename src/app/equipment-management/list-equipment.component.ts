@@ -3,6 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import {PaginationInstance} from 'ng2-pagination';
 import { EquipmentService } from './equipment.service';
 
+import { Router, ActivatedRoute } from '@angular/router';
+
+
+
+
+
 @Component({
     selector: 'app-equipment-management',
     templateUrl: './list-equipment.component.html',
@@ -10,51 +16,68 @@ import { EquipmentService } from './equipment.service';
 })
 export class ListEquipmentComponent implements OnInit {
 
-      public rows:Array<any> = [];
-      public columns:Array<any> = [
+    private isLoading:boolean = true;
+    private id;
+    private sub;
+
+    private  isNewAdded:any = false;
+
+
+    public rows:Array<any> = [];
+    public columns:Array<any> = [
         // { title: 'Image', name: 'image'},        
         { title: 'Farm Equipment', name: 'name'},
-        { title: 'description', name: 'description'}        
+        { title: 'description', name: 'description'},        
         // { title: 'District', name: 'district'},
         // { title: 'Type', name: 'type'},
-        // { title: 'Model Year.', name: 'modelyear'},
+        { title: 'Model Year.', name: 'modelyear'},
         // { title: 'Qty', name: 'qty'},
         // { title: 'Price', name: 'price'}
-  ];
-  public page:number         = 1;
-  public itemsPerPage:number = 10;
-  public maxSize:number      = 5;
-  public numPages:number     = 1;
-  public length:number       = 0;
+    ];
+    public page:number         = 1;
+    public itemsPerPage:number = 10;
+    public maxSize:number      = 5;
+    public numPages:number     = 1;
+    public length:number       = 0;
 
-  public config:any = {
+    public config:any = {
     paging: true,
     sorting: {columns: this.columns},
     filtering: {filterString: ''},
     className: ['table-striped', 'table-bordered']
-  };
+    };
 
     // private data:Array<any> = this.TableData;
     private data = [];
 
-    public constructor(private _equipmentService: EquipmentService) { 
-        
+    public constructor(private router : ActivatedRoute, private _equipmentService: EquipmentService) { 
+
         this.length = this.data.length;
 
         this._equipmentService.getAllEquipments().subscribe(allEquipments => {
             this.data = allEquipments;
             this.onChangeTable(this.config);
-            console.log(allEquipments);
+            this.isLoading = false;
+            console.log("allEquipments loaded");
         }); 
     }
 
-  public ngOnInit():void {
-    // this.onChangeTable(this.config);
-  }
+    public ngOnInit():void {
+        // this.onChangeTable(this.config);
+        this.sub = this.router.params.subscribe(params => {
+            this.id = +params['data']; // (+) converts string 'id' to a number
+            console.log(params);
+            this.isNewAdded = params.data; 
+        });
+    }
+
+    closeMessage()  {
+        this.isNewAdded = false;
+    }
 
   public changePage(page:any, data:Array<any> = this.data):Array<any> {
     let start = (page.page - 1) * page.itemsPerPage;
-    let end = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
+    let end   = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
     // create service here to fetch data from server;
     return data.slice(start, end);
   }

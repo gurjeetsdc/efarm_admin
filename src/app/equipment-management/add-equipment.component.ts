@@ -14,27 +14,22 @@ export class AddEquipmentComponent {
 
     private response:any;
     
-    private showMessgae:boolean = true;
+    private showMessage:boolean = false;
 
-    constructor(private router : Router, private _equipmentService: EquipmentService) { 
-        
-        this._equipmentService.getAllEquipments().subscribe(allEquipments => {
-            this.allEquipments = allEquipments;
-            console.log(allEquipments);
-        }); 
-    }
+    constructor(private router : Router, private _equipmentService: EquipmentService) { }
 
     addEquipment() {
         console.log('Posting Equipment...');
 
     	this._equipmentService.postEquipment(this.equipment).subscribe(res => {
             this.response    = res;
-            this.showMessgae = true;
+            this.showMessage = true;
             this.equipment   = {};
+            this.router.navigate(['/equipment/list', {data: "success"} ]);
         }); 
     }
 
     closeMessage() {
-        this.showMessgae = false;
+        this.showMessage = false;
     } 
 }
