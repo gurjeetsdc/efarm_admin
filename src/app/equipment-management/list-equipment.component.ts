@@ -1,150 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
+import { EquipmentService } from './equipment.service';
+
 @Component({
-  selector: 'app-equipment-management',
-  templateUrl: './list-equipment.component.html',
-  styleUrls: ['./list-equipment.component.scss']
+    selector: 'app-equipment-management',
+    templateUrl: './list-equipment.component.html',
+    styleUrls: ['./list-equipment.component.scss']
 })
 export class ListEquipmentComponent implements OnInit {
 
-  test: any = [];
-
-  private TableData = [{
-  	name:"Urea",
-  	distributor:"Harmind Singh",
-  	company:"The Garderner",
-  	district:"Ludhyana",
-  	variety:"Seeds",
-  	qty:15,
-  	price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  }]; 
-
-  public rows:Array<any> = [];
-  public columns:Array<any> = [
-    {title: 'Farm Input', name: 'name'},
-    {
-      title: 'Farm Input',
-      name: 'name',
-      sort: false
-      // filtering: {filterString: '', placeholder: 'Filter by position'}
-    },
-    {title: 'Distributor', name: 'distributor'},
-    {title: 'Company', name: 'company'},
-    {title: 'District', name: 'district'},
-    {title: 'Variety', name: 'variety'},
-    {title: 'Qty.', name: 'qty'},
-    {title: 'Price', name: 'price'}
+      public rows:Array<any> = [];
+      public columns:Array<any> = [
+        // { title: 'Image', name: 'image'},        
+        { title: 'Farm Equipment', name: 'name'},
+        { title: 'description', name: 'description'}        
+        // { title: 'District', name: 'district'},
+        // { title: 'Type', name: 'type'},
+        // { title: 'Model Year.', name: 'modelyear'},
+        // { title: 'Qty', name: 'qty'},
+        // { title: 'Price', name: 'price'}
   ];
-  public page:number = 1;
+  public page:number         = 1;
   public itemsPerPage:number = 10;
-  public maxSize:number = 5;
-  public numPages:number = 1;
-  public length:number = 0;
+  public maxSize:number      = 5;
+  public numPages:number     = 1;
+  public length:number       = 0;
 
   public config:any = {
     paging: true,
@@ -153,14 +34,22 @@ export class ListEquipmentComponent implements OnInit {
     className: ['table-striped', 'table-bordered']
   };
 
-  private data:Array<any> = this.TableData;
+    // private data:Array<any> = this.TableData;
+    private data = [];
 
-  public constructor() {
-    this.length = this.data.length;
-  }
+    public constructor(private _equipmentService: EquipmentService) { 
+        
+        this.length = this.data.length;
+
+        this._equipmentService.getAllEquipments().subscribe(allEquipments => {
+            this.data = allEquipments;
+            this.onChangeTable(this.config);
+            console.log(allEquipments);
+        }); 
+    }
 
   public ngOnInit():void {
-    this.onChangeTable(this.config);
+    // this.onChangeTable(this.config);
   }
 
   public changePage(page:any, data:Array<any> = this.data):Array<any> {

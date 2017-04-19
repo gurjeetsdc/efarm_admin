@@ -6,6 +6,10 @@ import { PaginationModule } from 'ng2-bootstrap';
 import { ListEquipmentComponent } from './list-equipment.component';
 import { AddEquipmentComponent } from './add-equipment.component';
 import { HttpModule } from '@angular/http';
+
+import { EquipmentService } from './equipment.service';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -38,6 +42,9 @@ const routes: Routes = [
     Ng2TableModule,
     PaginationModule,
     HttpModule
+  ],
+  providers: [
+    EquipmentService
   ],
   exports: [
     RouterModule,
