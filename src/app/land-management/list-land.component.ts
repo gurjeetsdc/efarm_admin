@@ -1,26 +1,144 @@
 import { Component, OnInit } from '@angular/core';
+// import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
-import { CropService } from './crop.service';
-
 @Component({
-  selector: 'app-crop-management',
-  templateUrl: './list-crop.component.html',
-  styleUrls: ['./list-crop.component.scss']
-  // providers: []
+  selector: 'app-land-management',
+  templateUrl: './list-land.component.html',
+  styleUrls: ['./list-land.component.scss']
 })
-
-export class ListCropComponent implements OnInit {
+export class ListLandComponent implements OnInit {
 
   test: any = [];
 
+  private TableData = [{
+  	name:"Urea",
+  	distributor:"Harmind Singh",
+  	company:"The Garderner",
+  	district:"Ludhyana",
+  	variety:"Seeds",
+  	qty:15,
+  	price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  },{
+    name:"Urea",
+    distributor:"Harmind Singh",
+    company:"The Garderner",
+    district:"Ludhyana",
+    variety:"Seeds",
+    qty:15,
+    price:1200
+  }]; 
+
   public rows:Array<any> = [];
   public columns:Array<any> = [
-    {title: 'Crop', name: 'name'},
-    {title: 'Offer Price', name: 'price'},
-    {title: 'Qty', name: 'quantity_per_pack'},
-    {title: 'Category', name: 'category'},
-    {title: 'Grade', name: 'grade'},
-    {title: 'Color', name: 'color'}
+    {title: 'Farm Input', name: 'name'},
+    {
+      title: 'Farm Input',
+      name: 'name',
+      sort: false
+      // filtering: {filterString: '', placeholder: 'Filter by position'}
+    },
+    {title: 'Distributor', name: 'distributor'},
+    {title: 'Company', name: 'company'},
+    {title: 'District', name: 'district'},
+    {title: 'Variety', name: 'variety'},
+    {title: 'Qty.', name: 'qty'},
+    {title: 'Price', name: 'price'}
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
@@ -35,21 +153,10 @@ export class ListCropComponent implements OnInit {
     className: ['table-striped', 'table-bordered']
   };
 
-  private data = [];
+  private data:Array<any> = this.TableData;
 
-  public constructor(private _cropService: CropService) {
+  public constructor() {
     this.length = this.data.length;
-    this._cropService.croplisting()
-                       .subscribe(
-                           res => {
-                             this.data = res["Data"];
-                             this.onChangeTable(this.config);
-                           },
-                           err => {
-
-                           });
-
-
   }
 
   public ngOnInit():void {
@@ -149,4 +256,8 @@ export class ListCropComponent implements OnInit {
     console.log(data);
   }	
 
+  // constructor() { }
+
+  // ngOnInit() {
+  // }
 }

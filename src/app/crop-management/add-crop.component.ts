@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
+import { CropService } from './crop.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: 'add-crop.component.html'
 })
 export class AddCropComponent {
 	private crop = {};
-  constructor() { }
+  constructor(private router : Router, private _cropService: CropService) { }
 
   addCrop() {
-  	console.log("inside addCrop",this.crop)
+  	this._cropService.addCrop(this.crop)
+                       .subscribe(
+                           res => {
+                             this.router.navigate(['/crop/list']);
+                           },
+                           err => {
+
+                           });
   }
 }

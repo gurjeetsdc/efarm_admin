@@ -78,7 +78,9 @@
     <div class="card">
         <div class="card-header">
             <strong>View Crop</strong>
-			<button class="btn btn-secondary pull-right"><i class="fa fa-pencil"></i> Edit</button>
+			<!-- <button class="btn btn-secondary pull-right"><i class="fa fa-pencil"></i> Edit</button>
+            <button class="btn btn-secondary pull-right">Cancel</button>
+            <button class="btn btn-success pull-right">Save</button> -->
         </div>
         <div class="card-block viewmode">
             <form role="form" (ngSubmit)="addCrop()" #dailyExpenseForm="ngForm">
@@ -86,13 +88,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-name">Crop Name*</label>
-							<p>Potatoes</p>
+							<p>{{crop.name}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-password">Category*</label>
-							<p>Crop</p>
+							<p>{{crop.category}}</p>
                         </div>
                     </div>
                 </div>
@@ -100,13 +102,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-variety">Variety</label>
-							<p>Yellow</p>
+							<p>{{crop.variety}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-price">Price</label>
-							<p><i class="fa fa-rupee"></i>1200</p>
+							<p><i class="fa fa-rupee"></i>{{crop.price}}</p>
                         </div>
                     </div>
                 </div>
@@ -114,13 +116,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-grade">Grade</label>
-							<p>A+</p>
+							<p>{{crop.grade}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-color">Color*</label>
-							<p>Yellow</p>
+							<p>{{crop.color}}</p>
                         </div>
                     </div>
                 </div>
@@ -128,13 +130,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-size">Size/Weight*</label>
-							<p>Average</p>
+							<p>{{crop.size}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-otherSpeciality">Other Speciality</label>
-							<p>Clean</p>
+							<p>{{crop.other_speciality}}</p>
                         </div>
                     </div>
                 </div>
@@ -142,13 +144,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-availibility">Availibility Peroid*</label>
-							<p>2-3 Months</p>
+							<p>{{crop.availibility}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-packaging">Packaging*</label>
-							<p>Yes</p>
+							<p>{{crop.packaging}}</p>
                         </div>
                     </div>
                 </div>
@@ -156,13 +158,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-supplyAblity">Supply Ablity*</label>
-							<p>Available</p>
+							<p>{{crop.supply_ablity}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-destinationForShipping">Destination for Shipping*</label>
-							<p>Mohali</p>
+							<p>{{crop.destination_shipping}}</p>
                         </div>
                     </div>
                 </div>
@@ -170,13 +172,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-packSize">Pack Size*</label>
-							<p>100</p>
+							<p>{{crop.pack_size}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-qty">Quantity Per Pack*</label>
-							<p>10</p>
+							<p>{{crop.quantity_per_pack}}</p>
                         </div>
                     </div>
                 </div>
@@ -184,13 +186,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-label">Label/Making on Pack*</label>
-							<p>No</p>
+							<p>{{crop.label}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-paymentTerms">Payment Terms*</label>
-							<p>Cheque</p>
+							<p>{{crop.payment_method}}</p>
                         </div>
                     </div>
                 </div>
@@ -198,13 +200,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-moq">MOQ*</label>
-							<p>test</p>
+							<p>{{crop.maq}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-averageLeadTime">Average Lead Time*</label>
-							<p>12 days</p>
+							<p>{{crop.average_lead_time}}</p>
                         </div>
                     </div>
                 </div>
@@ -212,13 +214,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-additionalInformation">Additional Information*</label>
-							<p>This is information to confirm you about pototoes</p>
+							<p>{{crop.additional_info}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-termsConditions">Terms & Conditions</label>
-							<p>Lorum ipsum text here for testing.</p>
+							<p>{{crop.terms}}</p>
                         </div>
                     </div>
                 </div>
@@ -226,12 +228,10 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-image">Image</label>
-							<p><i class="fa fa-file-image-o"></i> Pototoes.jpg</p>
+							<p><i class="fa fa-file-image-o"></i> {{crop.image}}</p>
                         </div>
                     </div>
                 </div>
-                    <button type="reset" class="btn btn-secondary"> Cancel</button>
-                    <button type="submit" class="pull-right btn btn-primary orangeclr">Save</button>
             </form>
         </div>
     </div>

@@ -56,6 +56,14 @@ export const routes: Routes = [
         path: 'user',
         loadChildren: './user-management/user-management.module#UserManagementModule'
         // loadChildren: './chartjs/chartjs.module#ChartJSModule'        
+      },
+      {
+        path: 'equipment',
+        loadChildren: './equipment-management/equipment-management.module#EquipmentManagementModule'
+      },
+      {
+        path: 'land',
+        loadChildren: './land-management/land-management.module#LandManagementModule'
       }
     ]
   },

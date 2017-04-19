@@ -1,32 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+// import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
-import { CropService } from './crop.service';
+import { EquipmentService } from './equipment.service';
 
 @Component({
-  selector: 'app-crop-management',
-  templateUrl: './list-crop.component.html',
-  styleUrls: ['./list-crop.component.scss']
-  // providers: []
+    selector: 'app-equipment-management',
+    templateUrl: './list-equipment.component.html',
+    styleUrls: ['./list-equipment.component.scss']
 })
+export class ListEquipmentComponent implements OnInit {
 
-export class ListCropComponent implements OnInit {
-
-  test: any = [];
-
-  public rows:Array<any> = [];
-  public columns:Array<any> = [
-    {title: 'Crop', name: 'name'},
-    {title: 'Offer Price', name: 'price'},
-    {title: 'Qty', name: 'quantity_per_pack'},
-    {title: 'Category', name: 'category'},
-    {title: 'Grade', name: 'grade'},
-    {title: 'Color', name: 'color'}
+      public rows:Array<any> = [];
+      public columns:Array<any> = [
+        // { title: 'Image', name: 'image'},        
+        { title: 'Farm Equipment', name: 'name'},
+        { title: 'description', name: 'description'}        
+        // { title: 'District', name: 'district'},
+        // { title: 'Type', name: 'type'},
+        // { title: 'Model Year.', name: 'modelyear'},
+        // { title: 'Qty', name: 'qty'},
+        // { title: 'Price', name: 'price'}
   ];
-  public page:number = 1;
+  public page:number         = 1;
   public itemsPerPage:number = 10;
-  public maxSize:number = 5;
-  public numPages:number = 1;
-  public length:number = 0;
+  public maxSize:number      = 5;
+  public numPages:number     = 1;
+  public length:number       = 0;
 
   public config:any = {
     paging: true,
@@ -35,25 +34,22 @@ export class ListCropComponent implements OnInit {
     className: ['table-striped', 'table-bordered']
   };
 
-  private data = [];
+    // private data:Array<any> = this.TableData;
+    private data = [];
 
-  public constructor(private _cropService: CropService) {
-    this.length = this.data.length;
-    this._cropService.croplisting()
-                       .subscribe(
-                           res => {
-                             this.data = res["Data"];
-                             this.onChangeTable(this.config);
-                           },
-                           err => {
+    public constructor(private _equipmentService: EquipmentService) { 
+        
+        this.length = this.data.length;
 
-                           });
-
-
-  }
+        this._equipmentService.getAllEquipments().subscribe(allEquipments => {
+            this.data = allEquipments;
+            this.onChangeTable(this.config);
+            console.log(allEquipments);
+        }); 
+    }
 
   public ngOnInit():void {
-    this.onChangeTable(this.config);
+    // this.onChangeTable(this.config);
   }
 
   public changePage(page:any, data:Array<any> = this.data):Array<any> {
@@ -149,4 +145,8 @@ export class ListCropComponent implements OnInit {
     console.log(data);
   }	
 
+  // constructor() { }
+
+  // ngOnInit() {
+  // }
 }
