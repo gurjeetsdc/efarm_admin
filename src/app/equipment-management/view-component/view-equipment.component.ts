@@ -16,8 +16,10 @@ export class ViewEquipmentComponent {
 
     constructor(private _router: Router, private _activatedRouter: ActivatedRoute, private _equipmentService: EquipmentService) {     	
         
-        this.equipmentID = _activatedRouter.snapshot.params['id'];    	
-        this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { this.equipment = res; console.log(res) }, err => {});
+        this.equipmentID = _activatedRouter.snapshot.params['id'];
+        if( this.equipmentID ) {
+            this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { this.equipment = res; console.log(res) }, err => {});
+        }    
     }
 
     updateEquipment( equipmentID ) {        

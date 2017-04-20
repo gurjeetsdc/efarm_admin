@@ -8,7 +8,7 @@ import { HttpModule } from '@angular/http';
 import { ListEquipmentComponent } from './list-component/list-equipment.component';
 import { ViewEquipmentComponent } from './view-component/view-equipment.component';
 
-import { AddEquipmentComponent } from './add-component/add-equipment.component';
+import { AddUpdateEquipmentComponent } from './addupdate-component/addupdate-equipment.component';
 import { UpdateEquipmentComponent } from './update-component/update-equipment.component';
 
 
@@ -31,7 +31,7 @@ const routes: Routes = [
       },
       {
         path: 'add',
-        component: AddEquipmentComponent,
+        component: AddUpdateEquipmentComponent,
         data: {
           title: 'Add'
         }
@@ -45,7 +45,7 @@ const routes: Routes = [
       },
       {
         path: 'update/:id',
-        component: AddEquipmentComponent,
+        component: AddUpdateEquipmentComponent,
         data: {
           title: 'Update Equipment'
         }
