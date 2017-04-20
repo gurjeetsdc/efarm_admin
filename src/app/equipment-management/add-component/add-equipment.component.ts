@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 // import { FormGroup, FormBuilder ,Validators } from '@angular/forms';
 
-import { EquipmentService } from './equipment.service';
+import { EquipmentService } from '../services/equipment.service';
 
 @Component({
     templateUrl: 'add-equipment.component.html'
@@ -16,7 +16,7 @@ export class AddEquipmentComponent {
     
     private showMessage:boolean = false;
 
-    constructor(private router : Router, private _equipmentService: EquipmentService) { }
+    constructor(private _router : Router, private _equipmentService: EquipmentService) { }
 
     addEquipment() {
         console.log('Posting Equipment...');
@@ -25,7 +25,8 @@ export class AddEquipmentComponent {
             this.response    = res;
             this.showMessage = true;
             this.equipment   = {};
-            this.router.navigate(['/equipment/list', {data: "success"} ]);
+            this._router.navigate(['/equipment/list', {data: "success"} ]);
+            console.log(this.response)
         }); 
     }
 

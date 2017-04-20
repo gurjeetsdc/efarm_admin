@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
-import {PaginationInstance} from 'ng2-pagination';
-import { EquipmentService } from './equipment.service';
-
 import { Router, ActivatedRoute } from '@angular/router';
 
-
+import {PaginationInstance} from 'ng2-pagination';
+import { EquipmentService } from '../services/equipment.service';
 
 
 
@@ -16,11 +14,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ListEquipmentComponent implements OnInit {
 
-    private isLoading:boolean = true;
     private id;
     private sub;
+    
 
-    private  isNewAdded:any = false;
+    private isLoading:boolean     = true;
+    private isPageLoading:boolean = true;
+    private  isNewAdded:any       = false;
 
 
     public rows:Array<any> = [];
@@ -50,7 +50,7 @@ export class ListEquipmentComponent implements OnInit {
     // private data:Array<any> = this.TableData;
     private data = [];
 
-    public constructor(private router : ActivatedRoute, private _equipmentService: EquipmentService) { 
+    public constructor(private activatedRouter : ActivatedRoute,private router : Router, private _equipmentService: EquipmentService) { 
 
         this.length = this.data.length;
 
@@ -64,7 +64,7 @@ export class ListEquipmentComponent implements OnInit {
 
     public ngOnInit():void {
         // this.onChangeTable(this.config);
-        this.sub = this.router.params.subscribe(params => {
+        this.sub = this.activatedRouter.params.subscribe(params => {
             this.id = +params['data']; // (+) converts string 'id' to a number
             console.log(params);
             this.isNewAdded = params.data; 
@@ -164,9 +164,10 @@ export class ListEquipmentComponent implements OnInit {
     this.length = sortedData.length;
   }
 
-  public onCellClick(data: any): any {
-    console.log(data);
-  }	
+    public onCellClick(data: any): any {   
+        console.log("testing...")
+        this.router.navigate(['/equipment/list/' + data["row"]["id"]]);  
+    }	
 
   // constructor() { }
 
