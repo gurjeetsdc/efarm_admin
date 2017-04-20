@@ -29,12 +29,18 @@
                 <li *ngIf="password.errors && password.touched">
                     <span class="text-danger" [hidden]="!password.errors.required">Password is required</span>
                 </li>
-            </div>
-            <div class="row" *ngIf="err_message">
-                <div class="col-sm-12 text-danger">
+
+
+                 <li *ngIf="err_message">
+                <span class="text-danger">
                     {{err_message}}
-                </div>
+                </span>
+            </li>
+
+
+
             </div>
+           
             <div class="row">
                 <div class="col-sm-12 col-12">
                     <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!loginForm.valid || !valid_email">Login</button>
