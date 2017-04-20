@@ -11,9 +11,7 @@ import { Router } from '@angular/router';
 })
 
 export class ListCropComponent implements OnInit {
-
-  test: any = [];
-
+  private isLoading:boolean = true;
   public rows:Array<any> = [];
   public columns:Array<any> = [
     {title: 'Crop', name: 'name'},
@@ -44,6 +42,7 @@ export class ListCropComponent implements OnInit {
                        .subscribe(
                            res => {
                              this.data = res["Data"];
+                             this.isLoading = false;
                              this.onChangeTable(this.config);
                            },
                            err => {
