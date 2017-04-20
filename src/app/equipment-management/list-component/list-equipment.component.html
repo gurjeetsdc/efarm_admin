@@ -1,3 +1,8 @@
+<!-- 
+<div class="overlayloader">     
+     <div class="loader"></div>
+</div>  -->
+
 <div class="equipment-wrapper">      
     <div class="row">
         <div class="col-12 col-lg-12">
@@ -31,7 +36,7 @@
         </ng-table>
 
         <!-- loader -->
-        <div *ngIf="isLoading" class="is-loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
+        <div *ngIf="isLoading" class="is-loading"><i class="page-loader"></i></div>
 
         <pagination *ngIf="config.paging"
                     class="pagination-sm"

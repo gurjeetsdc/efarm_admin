@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 // import { FormGroup, FormBuilder ,Validators } from '@angular/forms';
 
-import { EquipmentService } from './equipment.service';
+import { EquipmentService } from '../services/equipment.service';
 
 @Component({
     templateUrl: 'add-equipment.component.html'
@@ -26,6 +26,7 @@ export class AddEquipmentComponent {
             this.showMessage = true;
             this.equipment   = {};
             this._router.navigate(['/equipment/list', {data: "success"} ]);
+            console.log(this.response)
         }); 
     }
 
