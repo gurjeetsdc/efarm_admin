@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// import { cropTable } from './crop-seed'
+import { Router } from '@angular/router';
 import {PaginationInstance} from 'ng2-pagination';
+import { UserService } from './user.service';
+
 @Component({
   selector: 'app-user-management',
   templateUrl: './list-user.component.html',
@@ -8,83 +10,14 @@ import {PaginationInstance} from 'ng2-pagination';
 })
 export class ListUserComponent implements OnInit {
 
-  test: any = [];
-
-  private TableData = [{
-  	first_name:"Manpreet",
-  	phone:"phone no",
-  	district:"Bathinda",
-  	email:"manpreet@gmail.com",
-  	created_on:"12/12/2016"
-  },{
-    first_name:"Manpreet",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  },{
-    first_name:"Manpreet",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  },{
-    first_name:"Manpreet",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  },{
-    first_name:"Manpreet",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  },{
-    first_name:"Manpreet",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  },{
-    first_name:"Manpreet",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  },{
-    first_name:"Manpreet",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  },{
-    first_name:"Manpreet",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  },{
-    first_name:"Manpreet",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  },{
-    first_name:"Singh",
-    phone:"phone no",
-    district:"Bathinda",
-    email:"manpreet@gmail.com",
-    created_on:"12/12/2016"
-  }]; 
-
+  private isLoading:boolean = true;
   public rows:Array<any> = [];
   public columns:Array<any> = [
     {title: 'Name', name: 'first_name'},
     {title: 'Phone', name: 'phone'},
     {title: 'District', name: 'district'},
     {title: 'Email', name: 'email'},
-    {title: 'Created On', name: 'created_on'}
+    {title: 'Created On', name: 'createdAt'}
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
@@ -99,10 +32,19 @@ export class ListUserComponent implements OnInit {
     className: ['table-striped', 'table-bordered']
   };
 
-  private data:Array<any> = this.TableData;
-
-  public constructor() {
+  private data = [];
+  public constructor(private router : Router, private _userService: UserService) {
     this.length = this.data.length;
+    this._userService.userListing()
+                       .subscribe(
+                           res => {
+                             this.data = res;
+                             this.isLoading = false;
+                             this.onChangeTable(this.config);
+                           },
+                           err => {
+
+                           });
   }
 
   public ngOnInit():void {
@@ -112,7 +54,6 @@ export class ListUserComponent implements OnInit {
   public changePage(page:any, data:Array<any> = this.data):Array<any> {
     let start = (page.page - 1) * page.itemsPerPage;
     let end = page.itemsPerPage > -1 ? (start + page.itemsPerPage) : data.length;
-    // create service here to fetch data from server;
     return data.slice(start, end);
   }
 

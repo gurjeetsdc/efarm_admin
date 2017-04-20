@@ -6,6 +6,8 @@ import { PaginationModule } from 'ng2-bootstrap';
 import { ListUserComponent } from './list-user.component';
 import { AddUserComponent } from './add-user.component';
 import { HttpModule } from '@angular/http';
+import { UserService } from './user.service';
+
 const routes: Routes = [
   {
     path: '',
@@ -38,6 +40,9 @@ const routes: Routes = [
     Ng2TableModule,
     PaginationModule,
     HttpModule
+  ],
+  providers: [
+       UserService
   ],
   exports: [
     RouterModule,
