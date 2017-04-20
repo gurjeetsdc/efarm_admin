@@ -1,14 +1,13 @@
-<div>      
-      <div class="row">
-      <div class="col-12 col-lg-12">
-      <div class="content-header">
-         <ol class="breadcrumb">
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Equipment Management</a></li>
-          <li class="active"><a href="#">Add new</a></li>
-        </ol>
-      </div>
-          </div>
+<div class="equipment-wrapper">      
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="content-header">
+                <ol class="breadcrumb">
+                    <li><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="active"><a href="javascript:void(0)">Equipment Management</a></li>      
+                </ol>
+            </div>
+        </div>
     </div>
 
     <div *ngIf="isNewAdded" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -19,10 +18,10 @@
     </div>
 
     <div class="card">      
+        
         <div class="card-header">
           <input type="text" name="" placeholder="Search..." [(ngModel)]="search" (ngModelChange)="doSomething($event)">
-          <button type="button" class="btn btn-success pull-right" [routerLink]="['/equipment/add']">Add Equipment</button>
-          <!-- <p><i class="fa fa-circle-o-notch fa-spin"></i></p> -->
+          <button type="button" class="btn btn-success pull-right" [routerLink]="['/equipment/add']">Add Equipment</button>          
         </div>
 
         <ng-table [config]="config"
@@ -34,6 +33,7 @@
         <!-- loader -->
         <div *ngIf="isLoading" style="text-align: center; font-size: 40px!important"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
 
+        
         <pagination *ngIf="config.paging"
                     class="pagination-sm"
                     [(ngModel)]="page"
@@ -45,6 +45,7 @@
                     (pageChanged)="onChangeTable(config, $event)"
                     (numPages)="numPages = $event">
         </pagination>
-        <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
+        <p *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</p>
+        
     </div>
 </div>
