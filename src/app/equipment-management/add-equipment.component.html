@@ -25,7 +25,7 @@
         <!-- col -->
         <div class="col-lg-2 col-6"> 
           <!-- small box -->
-          <div class="small-box bg-red">
+          <div class="small-box bg-red" [routerLink]="['/equipments/list']">
             <div class="inner">
               <p>Equipments</p>
             </div>
@@ -73,9 +73,8 @@
       <div class="col-12 col-lg-12">
       <div class="content-header">
          <ol class="breadcrumb">
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Equipment Management</a></li>
-          <li class="active"><a href="#">Add new</a></li>
+          <li><a href="javascript:void(0);">Dashboard</a></li>
+          <li class="active"><a href="javascript:void(0);" >Equipment Management</a></li>          
         </ol>
       </div>
           </div>
@@ -88,7 +87,7 @@
             <form role="form" (ngSubmit)="addEquipment()" #addEquipmentForm="ngForm">
                 
                <div *ngIf="showMessage" class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" (onclick)="closeMessage()" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="alert"  (click)="closeMessage()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <strong>Success</strong> Equipment Added Successfully.
