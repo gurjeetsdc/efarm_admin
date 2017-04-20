@@ -45,7 +45,7 @@ const routes: Routes = [
       },
       {
         path: 'update/:id',
-        component: UpdateEquipmentComponent,
+        component: AddEquipmentComponent,
         data: {
           title: 'Update Equipment'
         }
