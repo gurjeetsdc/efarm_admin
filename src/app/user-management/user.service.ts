@@ -25,4 +25,23 @@ export class UserService {
         headers.append('Authorization', this.token);
     return this.http.post(this.host +'/enduser', user, { headers: headers }).map((res:Response) => res.json())
     }
+
+    getUser(userid) {
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        let headers = new Headers();
+        let body = {};        
+        let urlSearchParams = new URLSearchParams();
+        headers.append('Authorization', this.token);
+        return this.http.get(this.host +'/enduser/'+ userid, { headers: headers }).map((res:Response) => res.json())
+    }
+
+    updateUser(user) {
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        let headers = new Headers();    
+        let urlSearchParams = new URLSearchParams();
+        headers.append('Authorization', this.token);
+        return this.http.put(this.host +'/enduser/'+ user.id, user, { headers: headers }).map((res:Response) => res.json())
+    }
 }

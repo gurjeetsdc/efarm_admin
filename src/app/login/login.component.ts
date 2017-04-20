@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   private user = {
     grant_type:'password',
-    client_id: '7yQai9ykLRpuYreXCZCABBohUInoKo81' // '4eOQDll18Qf0qeutbiSfrHihpVAJE16p' //'5x7EuN09HAeBn2pYJnvvq7szgJaULh14'
+    client_id: '5x7EuN09HAeBn2pYJnvvq7szgJaULh14'
   };
-  private errMessage = {};
+  private err_message = '';
   public valid_email = true;
   constructor(private router : Router,private loginService: LoginService) { }
 
@@ -25,18 +25,15 @@ export class LoginComponent implements OnInit {
     }
   
   	login(){
-  		console.log("login",this.user)
-		this.errMessage = {};
+		this.err_message = '';
 		this.loginService.login(this.user)
                        .subscribe(
                            res => {
-                             console.log("response",res)
                              localStorage.setItem("user",JSON.stringify(res));
                              this.router.navigate(['/dashboard']);
                            },
                             err => {
-                            	console.log("error",err);
-                                // this.errMessage = JSON.parse(err._body);
+                              this.err_message = "Email id or password not correct";
                             });
 	}
 }
