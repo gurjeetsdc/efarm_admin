@@ -9,7 +9,8 @@
                   (cellClicked)="onCellClick($event)"
                   [rows]="rows" [columns]="columns">
         </ng-table>
-        <div *ngIf='data.length == 0' style="text-align: center;"><p>No Record Found</p></div>
+        <div *ngIf='data.length == 0' style="text-align: center;">
+        <p>No Record Found</p>
         <pagination *ngIf="config.paging"
                     class="pagination-sm"
                     [(ngModel)]="page"
@@ -22,5 +23,6 @@
                     (numPages)="numPages = $event">
         </pagination>
         <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
+        </div>
     </div>
 </div>
