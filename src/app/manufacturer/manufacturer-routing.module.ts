@@ -3,38 +3,38 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
-import { ListCategoryComponent } from './list-category.component';
-import { AddCategoryComponent } from './add-category.component';
-import { ViewCategoryComponent } from './view-category.component';
+import { ListManufacturerComponent } from './list-manufacturer.component';
+import { AddManufacturerComponent } from './add-manufacturer.component';
+import { ViewManufacturerComponent } from './view-manufacturer.component';
 import { HttpModule } from '@angular/http';
 
-import { CategoryService } from './category.service';
+import { ManufacturerService } from './manufacturer.service';
 
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Category Management'
+      title: 'Manufacturer Management'
     },
     children: [
       {
         path: 'list',
-        component: ListCategoryComponent,
+        component: ListManufacturerComponent,
         data: {
           title: 'List'
         }
       },
       {
         path: 'add',
-        component: AddCategoryComponent,
+        component: AddManufacturerComponent,
         data: {
           title: 'Add'
         }
       },
       {
         path: 'list/:id',
-        component: ViewCategoryComponent,
+        component: ViewManufacturerComponent,
         data: {
           title: 'View'
         }
@@ -52,7 +52,7 @@ const routes: Routes = [
     HttpModule
   ],
   providers: [
-    CategoryService
+    ManufacturerService
   ],
   exports: [
     RouterModule,
@@ -61,4 +61,4 @@ const routes: Routes = [
     PaginationModule
   ]
 })
-export class CategoryRoutingModule {}
+export class ManufacturerRoutingModule {}

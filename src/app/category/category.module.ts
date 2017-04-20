@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ListCategoryComponent } from './list-category.component';
 import { AddCategoryComponent } from './add-category.component';
+import { ViewCategoryComponent } from './view-category.component';
 import { CategoryRoutingModule } from './category-routing.module';
 
 @NgModule({
@@ -12,7 +13,8 @@ import { CategoryRoutingModule } from './category-routing.module';
   ],
   declarations: [
   	ListCategoryComponent,
-  	AddCategoryComponent
+  	AddCategoryComponent,
+  	ViewCategoryComponent
   ]
 })
 export class CategoryModule { }

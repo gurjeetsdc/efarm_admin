@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 import {PaginationInstance} from 'ng2-pagination';
-import { CategoryService } from './category.service';
+import { ManufacturerService } from './manufacturer.service';
 
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-category',
-    templateUrl: './list-category.component.html',
+    selector: 'app-manufacturer',
+    templateUrl: './list-manufacturer.component.html',
 })
 
-export class ListCategoryComponent implements OnInit {
+export class ListManufacturerComponent implements OnInit {
 
     private isLoading:boolean = true;
     private id;
@@ -22,8 +22,9 @@ export class ListCategoryComponent implements OnInit {
     public rows:Array<any> = [];
     public columns:Array<any> = [
    
-        { title: 'Category', name: 'name'},
-        { title: 'description', name: 'description'}        
+        { title: 'Manufacturer', name: 'name'},
+        { title: 'description', name: 'description'},
+        {title: 'Edit', name: 'actionEdit'}        
     ];
     public page:number         = 1;
     public itemsPerPage:number = 10;
@@ -41,15 +42,15 @@ export class ListCategoryComponent implements OnInit {
     // private data:Array<any> = this.TableData;
     private data = [];
 
-    public constructor(private _router : Router, private _categoryService: CategoryService) { 
+    public constructor(private _router : Router, private _manufacturerService: ManufacturerService) { 
 
         this.length = this.data.length;
 
-        this._categoryService.getAllCategories().subscribe(allCategories => {
-            this.data = allCategories;
+        this._manufacturerService.getAllmanufacturer().subscribe(allManufacturer => {
+            this.data = allManufacturer;
             this.onChangeTable(this.config);
             this.isLoading = false;
-            console.log("allcategory loaded");
+            console.log("allmanufacturer loaded");
         }); 
     }
 
@@ -157,7 +158,7 @@ export class ListCategoryComponent implements OnInit {
 
   public onCellClick(data: any): any {
   	console.log("test", data["row"]["id"]);
-    this._router.navigate(['/category/list/' + data["row"]["id"]]);
+    this._router.navigate(['/manufacturer/list/' + data["row"]["id"]]);
   }		
 
 }

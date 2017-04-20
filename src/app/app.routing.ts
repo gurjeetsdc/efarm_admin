@@ -68,6 +68,10 @@ export const routes: Routes = [
       {
         path: 'category',
         loadChildren: './category/category.module#CategoryModule'
+      },
+      {
+        path: 'manufacturer',
+        loadChildren: './manufacturer/manufacturer.module#ManufacturerModule'
       }
     ]
   },
