@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
-import {PaginationInstance} from 'ng2-pagination';
-import { EquipmentService } from './equipment.service';
-
 import { Router, ActivatedRoute } from '@angular/router';
+
+import {PaginationInstance} from 'ng2-pagination';
+import { EquipmentService } from '../services/equipment.service';
+
 
 
 @Component({
@@ -13,11 +14,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ListEquipmentComponent implements OnInit {
 
-    private isLoading:boolean = true;
     private id;
     private sub;
+    
 
-    private  isNewAdded:any = false;
+    private isLoading:boolean     = true;
+    private isPageLoading:boolean = true;
+    private  isNewAdded:any       = false;
 
 
     public rows:Array<any> = [];
