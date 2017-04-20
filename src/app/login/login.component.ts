@@ -12,7 +12,8 @@ export class LoginComponent implements OnInit {
     grant_type:'password',
     client_id: '5x7EuN09HAeBn2pYJnvvq7szgJaULh14'
   };
-  private err_message = '';
+  private err_message = '';  
+  private isPageLoading:boolean = false;
   public valid_email = true;
   constructor(private router : Router,private loginService: LoginService) { }
 
@@ -24,16 +25,22 @@ export class LoginComponent implements OnInit {
        this.valid_email=regex.test(email);
     }
   
-  	login(){
+  	login() {
+        /* start loader */
+        this.isPageLoading = true;
 		this.err_message = '';
 		this.loginService.login(this.user)
                        .subscribe(
                            res => {
-                             localStorage.setItem("user",JSON.stringify(res));
-                             this.router.navigate(['/dashboard']);
+                                /* end loader */
+                                this.isPageLoading = false;
+                                localStorage.setItem("user",JSON.stringify(res));
+                                this.router.navigate(['/dashboard']);
                            },
                             err => {
-                              this.err_message = "Email id or password not correct";
+                                /* end loader */
+                                this.isPageLoading = false;
+                                this.err_message = "Email id or password not correct";
                             });
 	}
 }
