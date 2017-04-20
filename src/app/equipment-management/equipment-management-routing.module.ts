@@ -9,8 +9,6 @@ import { ListEquipmentComponent } from './list-component/list-equipment.componen
 import { ViewEquipmentComponent } from './view-component/view-equipment.component';
 
 import { AddUpdateEquipmentComponent } from './addupdate-component/addupdate-equipment.component';
-import { UpdateEquipmentComponent } from './update-component/update-equipment.component';
-
 
 import { EquipmentService } from './services/equipment.service';
 
