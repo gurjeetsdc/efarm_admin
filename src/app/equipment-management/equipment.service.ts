@@ -4,17 +4,21 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 @Injectable()
 export class EquipmentService {
 	
-	private host = "http://localhost:1337";
+    private host         = "http://localhost:1337";
+    private access_token = {};
+    private token        = '';
 
   	constructor(private _http: Http) { }
   	
   	getAllEquipments() {
   		
-  		let headers         = new Headers();
-  		let urlSearchParams = new URLSearchParams();
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
 
-        headers.append('Authorization', 'Bearer Q18bYGvKYBXGGSmJ4REV3DBXPFJIvBzF' );
-        
+        this.access_token   = JSON.parse(localStorage.getItem("user"));
+        this.token          = 'Bearer ' + this.access_token["access_token"];
+
+        headers.append('Authorization', this.token );
 		return this._http.get(this.host +'/equipment', { headers: headers }).map((res:Response) => res.json());
   	}
 
@@ -22,11 +26,11 @@ export class EquipmentService {
 
       	let headers         = new Headers();
       	let urlSearchParams = new URLSearchParams();
-        headers.append('Authorization', 'Bearer Q18bYGvKYBXGGSmJ4REV3DBXPFJIvBzF');
+
+        this.access_token   = JSON.parse(localStorage.getItem("user"));
+        this.token          = 'Bearer ' + this.access_token["access_token"];
         
-        //let body = urlSearchParams.toString()
+        headers.append('Authorization', this.token );
     	return this._http.post(this.host +'/equipment', inputs, { headers: headers }).map((res:Response) => res.json());
     }
-
-
 }

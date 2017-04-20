@@ -25,7 +25,6 @@ export class CropService {
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
         headers.append('Authorization', this.token);
-        console.log("addCrop----------------",crop);
     return this.http.post(this.host +'/crops/add', crop, { headers: headers }).map((res:Response) => res.json())
     }
 
@@ -36,8 +35,17 @@ export class CropService {
         let body = {};        
         let urlSearchParams = new URLSearchParams();
         headers.append('Authorization', this.token);
-        console.log("addCrop----------------",crop);
     return this.http.post(this.host +'/crops/'+ crop, body, { headers: headers }).map((res:Response) => res.json())
+    }
+
+    updateCrop(crop) {
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        let headers = new Headers();
+        let body = {};        
+        let urlSearchParams = new URLSearchParams();
+        headers.append('Authorization', this.token);
+    return this.http.post(this.host +'/crops/'+ crop.id, crop, { headers: headers }).map((res:Response) => res.json())
     }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PaginationInstance} from 'ng2-pagination';
 import { CropService } from './crop.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crop-management',
@@ -10,9 +11,7 @@ import { CropService } from './crop.service';
 })
 
 export class ListCropComponent implements OnInit {
-
-  test: any = [];
-
+  private isLoading:boolean = true;
   public rows:Array<any> = [];
   public columns:Array<any> = [
     {title: 'Crop', name: 'name'},
@@ -37,12 +36,13 @@ export class ListCropComponent implements OnInit {
 
   private data = [];
 
-  public constructor(private _cropService: CropService) {
+  public constructor(private router : Router, private _cropService: CropService) {
     this.length = this.data.length;
     this._cropService.croplisting()
                        .subscribe(
                            res => {
                              this.data = res["Data"];
+                             this.isLoading = false;
                              this.onChangeTable(this.config);
                            },
                            err => {
@@ -146,7 +146,7 @@ export class ListCropComponent implements OnInit {
   }
 
   public onCellClick(data: any): any {
-    console.log(data);
+    this.router.navigate(['/crop/list/' + data["row"]["id"]]);
   }	
 
 }
