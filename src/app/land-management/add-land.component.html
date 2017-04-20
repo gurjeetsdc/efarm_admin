@@ -1,72 +1,5 @@
 <div>
-<div class="row">
-        <div class="col-lg-2 col-6"> 
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="icon"> 
-              <!--<i class="ion ion-bag"></i>--> 
-              <i class="icon-Shape-13"></i> </div>
-            <div class="inner">
-              <p>Crops</p>
-            </div>
-          </div>
-        </div>
-        <!-- col -->
-        <div class="col-lg-2 col-6"> 
-          <!-- small box -->
-          <div class="small-box bg-aqua" [routerLink]="['/input/list']">
-            <div class="inner">
-              <p>Inputs</p>
-            </div>
-            <div class="icon"> <i class="icon-Shape-18"></i> </div>
-          </div>
-        </div>
-        <!-- col -->
-        <div class="col-lg-2 col-6"> 
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <p>Equipments</p>
-            </div>
-            <div class="icon"> <i class="icon-Shape-19"> </i> </div>
-          </div>
-        </div>
-        <!-- col -->
-        <div class="col-lg-2 col-6"> 
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <p>Lands</p>
-            </div>
-            <div class="icon"> <i class="icon-Shape-21"> </i> </div>
-          </div>
-        </div>
-        <!-- col --> 
-        
-        <!-- col -->
-        <div class="col-lg-2 col-6"> 
-          <!-- small box -->
-          <div class="small-box bg-purple">
-            <div class="inner">
-              <p>Services</p>
-            </div>
-            <div class="icon"> <i class="icon-Shape-22"> </i> </div>
-          </div>
-        </div>
-        <!-- col --> 
-        
-        <!-- col -->
-        <div class="col-lg-2 col-6">
-          <div class="small-box bg-teal" [routerLink]="['/land/list']">
-            <div class="inner">
-              <p>Users</p>
-            </div>
-            <div class="icon"> <i class="fa fa-user"></i> </div>
-          </div>
-        </div>
-        <!-- col --> 
-        
-      </div>
+
       
       <div class="row">
       <div class="col-12 col-lg-12">
@@ -92,23 +25,23 @@
                             <input type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="land.name" required>
                         </div>
                     </div>
-                    <!-- <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-password">Category*</label>
-                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="land.category" required="">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select>
-                        </div>
-                    </div> -->
+                     <div class="col-sm-6">
+                     <label>&nbsp;</label>
+                        <div class="form-group radiobuttons">
+                            <input type="radio"  name="rentSell" class="" value="rent"  [(ngModel)]="land.rentSell" checked required>
+                            <label for="nf-rentslell">Rent</label>
+                            &nbsp;&nbsp;                            
+                            <input type="radio" name="rentSell" class="" value="sell"  [(ngModel)]="land.rentSell" required>
+                            <label for="rentSell">sell</label>
+                        </div>                      
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-variety">Location</label>
-                            <select id="select1" name="select1" class="form-control" [(ngModel)]="land.company/manufacturer" size="1">
+                            <label for="nf-location">Location</label>
+                            <select id="location" name="location" class="form-control" [(ngModel)]="land.location" size="1">
                                 <option value="0">Please select</option>
                                 <option value="1">Variety 1</option>
                                 <option value="2">Variety 2</option>
@@ -118,77 +51,43 @@
                     </div>
                       <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-password">Area</label>
-                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="land.model" required="">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select>
+                            <label for="nf-area">Area</label>
+                            <div class="input-group">
+                              <input type="text" id="nf-area" name="area" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area" placeholder="Enter Bigha" required>
+                              <div class="input-group-btn">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Bigha
+                                </button>
+                              </div>
+                            </div>
                         </div>
-                    </div>
+                       </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-password">Model year</label>
-                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="land.modelyear" required="">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select>
+                            <label for="khasrano">Khasra no</label>
+                            <input type="khasrano" id="nf-khasrano" name="nf-khasrano" class="form-control" [(ngModel)]="land.khasrano" placeholder="Khasra no">
                         </div>
                     </div>
                 
                     <div class="col-sm-6">
-                    <div class="form-group">
-                            <label for="nf-price">Engine power</label>
-                            <input type="text" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="land.enginepower" placeholder="Enter Price">
-                        </div>
-                    </div>
-                </div>
-                 <div class="row">
-                    <div class="col-sm-6">
-                        <!-- <div class="form-group">
-                            <label for="nf-rent">Rent</label>
-                            <input type="radio"  name="nf-rent" class="form-control" value="rent"  [(ngModel)]="land.rent" required>
-                        </div>
-                         <div class="form-group">
-                            <label for="nf-sell">sell</label>
-                            <input type="radio" id="nf-sell" name="nf-sell" class="form-control" value="sell"  [(ngModel)]="land.sell" required>
-                        </div> -->
-                    </div>
-
-                    <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-password"></label>
-                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="land.category" required="">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select>
+                            <label for="expectedprice">Expected price</label>
+                            <input type="expectedprice" id="nf-expectedprice" name="nf-expectedprice" class="form-control" [(ngModel)]="land.expectedprice" placeholder="Expected price">
                         </div>
                     </div>
                 </div>
+                
                   <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-termsConditions">Description</label>
-                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="land.description" placeholder="Enter Terms & Conditions" rows="4"></textarea>
+                            <label for="nf-description">Description</label>
+                            <textarea type="text" id="nf-description" name="nf-description" class="form-control" [(ngModel)]="land.description" placeholder="Enter Description" rows="4"></textarea>
                         </div>
                     </div>
                 
                 
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-termsConditions">usage</label>
-                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="land.usage" placeholder="Enter Terms & Conditions" rows="4"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-termsConditions">Terms & Conditions</label>
@@ -196,6 +95,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
