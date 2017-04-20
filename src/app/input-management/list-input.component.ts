@@ -20,127 +20,24 @@ export class ListInputComponent implements OnInit {
   	variety:"Seeds",
   	qty:15,
   	price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
   }]; 
+  public documents = [];
+  public selectedDocument = [];
 
   public rows:Array<any> = [];
   public columns:Array<any> = [
-    
     {
       title: 'Name',
       name: 'name',
       sort: false
       // filtering: {filterString: '', placeholder: 'Filter by position'}
     },
-    {title: 'Description', name: 'description'},
-    /*{title: 'Company', name: 'company'},
-    {title: 'District', name: 'district'},
+    {title: 'Units', name: 'unit'},
+    {title: 'Price', name: 'price'},
     {title: 'Variety', name: 'variety'},
-    {title: 'Qty.', name: 'qty'},
-    {title: 'Price', name: 'price'},*/
+    {title: 'Qty.', name: 'quantity'},
+    {title: 'status', name: 'status'},
+    //{title: '', name: 'selectbutton'},
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
@@ -268,6 +165,83 @@ export class ListInputComponent implements OnInit {
   public onCellClick(data: any): any {
     console.log(data);
   }
+/*  public onCellClick(data: any): any {
+this.selectedDocument = data.row;
+
+    // If Button View
+    if (data.column == "viewbutton") {
+      this.router.navigate(['/view', this.selectedDocument.doknr]);
+    }
+
+    // If Button Select
+    if (data.column == "selectbutton") {
+      // If not selected - add to selection
+      if (data.row.selection == false) {
+        this.selectedDocuments.push(data.row);
+      }
+      // If already selected, delete from selection
+      else {
+        for (let j = 0; j < this.selectedDocuments.length; j++)
+          if (this.selectedDocuments[j].doknr === data.row.doknr) {
+            this.selectedDocuments.splice(j, 1);
+            break;
+          }
+      }
+      // Refresh Table
+      this.ngOnChanges();
+    }
+  }*/
+
+ // Button
+  private viewButton(viewbutton: string) {
+    viewbutton = "<span class='glyphicon glyphicon-search' style='pointer-events: none;'></span>";
+    return viewbutton;
+  }
+
+// Button
+  private selectButton(selectbutton: string) {
+    selectbutton = "<span class='glyphicon glyphicon-plus' style='pointer-events: none;'></span>";
+    return selectbutton;
+  }
+
+// button
+  private unselectButton(selectbutton: string) {
+    selectbutton = "<span class='glyphicon glyphicon-minus' style='pointer-events: none;'></span>";
+    return selectbutton;
+  }
+
+  private extendData() {
+    // For every resulttable entry
+    /*for (let i = 0; i < this.data.length; i++) {
+
+      // Add View Button
+     // this.data[i].viewbutton = this.viewButton(this.data[i].viewbutton);
+
+      // Add Select Button
+      this.data[i].selectbutton = this.selectButton(this.data[i].selectbutton);
+      this.data[i].selection = false;
+      // Check if entry was already selected
+      for (let j = 0; j < this.selectedDocuments.length; j++) {
+        if (this.selectedDocuments[j].doknr === this.data[i].doknr) {
+          this.data[i].selectbutton = this.unselectButton(this.data[i].selectbutton);
+          this.data[i].selection = true;
+          break;
+        }
+      }
+    }*/
+  }
+
+  // notification from ng-table to delete a row
+onDeleteRowRequest() {
+  console.log("dele row request");
+   /* this.deleteSub = this.tableEventService.deleteRow$
+      .subscribe((row:any) => {
+        console.log('[deleteRow$] event in licence-event.service ');
+
+        // do delete
+      });*/
+  }
+
 
 
   // constructor() { }
