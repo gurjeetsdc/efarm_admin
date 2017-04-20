@@ -35,6 +35,7 @@ export class InputService {
     }
 
     getInput(input) {
+      console.log(input);
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         let headers = new Headers();
@@ -42,7 +43,17 @@ export class InputService {
         let urlSearchParams = new URLSearchParams();
         headers.append('Authorization', this.token);
         console.log("addCrop----------------",input);
-    return this.http.post(this.host +'/inputs/'+ input, body, { headers: headers }).map((res:Response) => res.json())
+    return this.http.get(this.host +'/inputs/'+ input, { headers: headers }).map((res:Response) => res.json())
+    }
+
+    updateInput(input) {
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        let headers = new Headers();
+        let body = {};        
+        let urlSearchParams = new URLSearchParams();
+        headers.append('Authorization', this.token);
+    return this.http.post(this.host +'/inputs/'+ input.id, input, { headers: headers }).map((res:Response) => res.json())
     }
 
 }

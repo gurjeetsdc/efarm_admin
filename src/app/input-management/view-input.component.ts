@@ -8,28 +8,43 @@ import { InputService } from './input.service';
 export class ViewInputComponent {
 	private Id = '';
 	private input = {};
-  private copy_crop = {};
-  // private edit = false;
+  private copy_input = {};
+  private edit = false;
   constructor(route: ActivatedRoute,private _inputService: InputService) { 
   	this.Id = route.snapshot.params['id'];
   	this._inputService.getInput(this.Id)
                        .subscribe(
                            res => {
-                             this.input = res["Data"][0];
-                             console.log("sfsdfdfdfd",this.input)
+                             //console.log(res);
+                             this.input = res;
+                             //console.log("sfsdfdfdfd",this.input)
                            },
                            err => {
 
                            });
   }
 
-  // edit() {
-  //   this.edit = !this.edit;
-  //   this.copy_crop = this.crop;
-  // }
+  editInput() {
+    this.edit = !this.edit;
+    this.copy_input = JSON.parse(JSON.stringify(this.input));
+  }
 
-  // cancel() {
-  //   this.edit = !this.edit;
-  //   this.crop = this.copy_crop;
-  // }
+  cancel() {
+    this.edit = !this.edit;
+    this.input = JSON.parse(JSON.stringify(this.copy_input));
+  }
+
+  save() {
+    this._inputService.updateInput(this.input)
+                       .subscribe(
+                           res => {
+                             this.edit = !this.edit;
+                             this.copy_input = JSON.parse(JSON.stringify(this.input));
+                           },
+                           err => {
+
+                           });
+  }
+
+ 
 }

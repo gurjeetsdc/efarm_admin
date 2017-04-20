@@ -1,75 +1,10 @@
 <div>
     <div class="row">
-        <div class="col-lg-2 col-6">
-            <!-- small box -->
-            <div class="small-box bg-green">
-                <div class="icon">
-                    <!--<i class="ion ion-bag"></i>-->
-                    <i class="icon-Shape-13"></i> </div>
-                <div class="inner">
-                    <p>Crops</p>
-                </div>
-            </div>
-        </div>
-        <!-- col -->
-        <div class="col-lg-2 col-6">
-            <!-- small box -->
-            <div class="small-box bg-aqua" [routerLink]="['/input/list']">
-                <div class="inner">
-                    <p>Inputs</p>
-                </div>
-                <div class="icon"> <i class="icon-Shape-18"></i> </div>
-            </div>
-        </div>
-        <!-- col -->
-        <div class="col-lg-2 col-6">
-            <!-- small box -->
-            <div class="small-box bg-red">
-                <div class="inner">
-                    <p>Equipments</p>
-                </div>
-                <div class="icon"> <i class="icon-Shape-19"> </i> </div>
-            </div>
-        </div>
-        <!-- col -->
-        <div class="col-lg-2 col-6">
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <p>Lands</p>
-                </div>
-                <div class="icon"> <i class="icon-Shape-21"> </i> </div>
-            </div>
-        </div>
-        <!-- col -->
-        <!-- col -->
-        <div class="col-lg-2 col-6">
-            <!-- small box -->
-            <div class="small-box bg-purple">
-                <div class="inner">
-                    <p>Services</p>
-                </div>
-                <div class="icon"> <i class="icon-Shape-22"> </i> </div>
-            </div>
-        </div>
-        <!-- col -->
-        <!-- col -->
-        <div class="col-lg-2 col-6">
-            <div class="small-box bg-teal" [routerLink]="['/user/list']">
-                <div class="inner">
-                    <p>Users</p>
-                </div>
-                <div class="icon"> <i class="fa fa-user"></i> </div>
-            </div>
-        </div>
-        <!-- col -->
-    </div>
-    <div class="row">
         <div class="col-12 col-lg-12">
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Crop Management</a></li>
+                    <li><a href="#">Input Management</a></li>
                     <li class="active"><a href="#">View</a></li>
                 </ol>
             </div>
@@ -78,26 +13,27 @@
     <div class="card">
         <div class="card-header">
             <strong>View Crop</strong>
-			<!-- <button class="btn btn-secondary pull-right"><i class="fa fa-pencil"></i> Edit</button>
-            <button class="btn btn-secondary pull-right">Cancel</button>
-            <button class="btn btn-success pull-right">Save</button> -->
+			<button class="btn btn-secondary pull-right" *ngIf="!edit" (click)="editInput()"><i class="fa fa-pencil"></i> Edit</button>
+            <button class="btn btn-secondary pull-right" *ngIf="edit" (click)="cancel()">Cancel</button>
+            <button class="btn btn-success pull-right" *ngIf="edit" (click)="save()">Save</button>
         </div>
-        <div class="card-block viewmode">
+        <div class="card-block viewmode" *ngIf="!edit">
             <form role="form" (ngSubmit)="addInput()" #dailyExpenseForm="ngForm">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-name">Crop Name*</label>
+                            <label for="nf-name">Input Name*</label>
 							<p>{{input.name}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-password">Category*</label>
-							<p>{{input.category}}</p>
+                            <label >Manufacturer</label>
+                            <p>{{input.manufacturer_id}}</p>
                         </div>
                     </div>
-                </div>
+                    
+                 </div>   
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -115,124 +51,90 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-grade">Grade</label>
-							<p>{{input.grade}}</p>
+                            <label for="nf-grade">Quantity</label>
+							<p>{{input.quantity}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-color">Color*</label>
-							<p>{{input.color}}</p>
+                            <label for="nf-color">unit</label>
+							<p>{{input.unit}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-size">Size/Weight*</label>
-							<p>{{input.size}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-otherSpeciality">Other Speciality</label>
-							<p>{{input.other_speciality}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-availibility">Availibility Peroid*</label>
-							<p>{{crop.availibility}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-packaging">Packaging*</label>
-							<p>{{crop.packaging}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-supplyAblity">Supply Ablity*</label>
-							<p>{{crop.supply_ablity}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-destinationForShipping">Destination for Shipping*</label>
-							<p>{{crop.destination_shipping}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-packSize">Pack Size*</label>
-							<p>{{crop.pack_size}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-qty">Quantity Per Pack*</label>
-							<p>{{crop.quantity_per_pack}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-label">Label/Making on Pack*</label>
-							<p>{{crop.label}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-paymentTerms">Payment Terms*</label>
-							<p>{{crop.payment_method}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-moq">MOQ*</label>
-							<p>{{crop.maq}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-averageLeadTime">Average Lead Time*</label>
-							<p>{{crop.average_lead_time}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-additionalInformation">Additional Information*</label>
-							<p>{{crop.additional_info}}</p>
-                        </div>
-                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-termsConditions">Terms & Conditions</label>
-							<p>{{crop.terms}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-image">Image</label>
-							<p><i class="fa fa-file-image-o"></i> {{crop.image}}</p>
+							<p>{{input.tearm_and_conditions}}</p>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
+ <div class="card-block" *ngIf="edit">
+            <form role="form" (ngSubmit)="addInput()" #dailyExpenseForm="ngForm">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Input Name</label>
+                            <input type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="input.name" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-password">Manufacturer</label>
+                            <p>{{input.manufacturer_id}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Variety</label>
+                            <select id="select1" name="select1" class="form-control" [(ngModel)]="input.variety" size="1">
+                                <option value="0">Please select</option>
+                                <option value="1">Variety 1</option>
+                                <option value="2">Variety 2</option>
+                                <option value="3">Variety 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-price">Price</label>
+                            <input type="number" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="input.price" placeholder="Enter Price">
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-size">Quantity</label>
+                            <input type="text" id="nf-size" name="nf-size" class="form-control" [(ngModel)]="input.quantity" placeholder="Enter quantity" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-other_speciality">Unit</label>
+                            <input type="text" id="nf-other_speciality" name="nf-other_speciality" class="form-control" [(ngModel)]="input.unit" placeholder="Enter unit">
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-terms">Terms & Conditions</label>
+                            <textarea type="text" id="nf-terms" name="nf-terms" class="form-control" [(ngModel)]="input.tearm_and_conditions" placeholder="Enter Terms & Conditions" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
     </div>
 </div>

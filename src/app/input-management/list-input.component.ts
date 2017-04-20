@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
 import { InputService } from './input.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-input-management',
   templateUrl: './list-input.component.html',
@@ -54,7 +55,7 @@ export class ListInputComponent implements OnInit {
 
   private data = [];
 
-  public constructor(private _inputService: InputService) {
+  public constructor(private router : Router,private _inputService: InputService) {
     this.length = this.data.length;
      this._inputService.inputlist()
                        .subscribe(
@@ -163,7 +164,8 @@ export class ListInputComponent implements OnInit {
   }
 
   public onCellClick(data: any): any {
-    console.log(data);
+    //console.log(data);
+    this.router.navigate(['/input/list/' + data["row"]["id"]]);
   }
 /*  public onCellClick(data: any): any {
 this.selectedDocument = data.row;
