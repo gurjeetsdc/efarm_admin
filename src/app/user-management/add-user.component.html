@@ -34,7 +34,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-password">Phone</label>
-                            <input type="text" id="nf-phone" name="nf-phone" class="form-control" placeholder="Enter Phone" [(ngModel)]="user.phone" required>
+                            <input type="number" id="nf-phone" name="nf-phone" class="form-control" placeholder="Enter Phone" [(ngModel)]="user.phone" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -54,20 +54,20 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-pincode">Pincode</label>
-                            <input type="text" id="nf-pincode" name="nf-pincode" class="form-control" [(ngModel)]="user.pincode" placeholder="Enter Pincode">
+                            <input type="number" id="nf-pincode" name="nf-pincode" class="form-control" [(ngModel)]="user.pincode" placeholder="Enter Pincode">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-stage">State</label>
-                            <input type="text" id="nf-stage" name="nf-stage" class="form-control" [(ngModel)]="user.stage" placeholder="Enter Stage" required="">
+                            <label for="nf-state">State</label>
+                            <input type="text" id="nf-state" name="nf-state" class="form-control" [(ngModel)]="user.state" placeholder="Enter Stage" required="">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-district">Disrict</label>
+                            <label for="nf-district">District</label>
                             <input type="text" id="nf-district" name="nf-district" class="form-control" [(ngModel)]="user.district" placeholder="Enter Pincode">
                         </div>
                     </div>
