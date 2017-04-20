@@ -23,7 +23,7 @@ import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { CategoryComponent } from './category/add-category.component';
+
 
 @NgModule({
   imports: [
@@ -45,8 +45,8 @@ import { CategoryComponent } from './category/add-category.component';
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
     LoginComponent,
-    RegisterComponent,
-    CategoryComponent,        
+    RegisterComponent
+       
   ],
   providers: [
     {

@@ -7,7 +7,7 @@ import { ListCategoryComponent } from './list-category.component';
 import { AddCategoryComponent } from './add-category.component';
 import { HttpModule } from '@angular/http';
 
-//import { CategoryService } from './category.service';
+import { CategoryService } from './category.service';
 
 
 const routes: Routes = [
@@ -43,9 +43,9 @@ const routes: Routes = [
     PaginationModule,
     HttpModule
   ],
- /* providers: [
+  providers: [
     CategoryService
-  ],*/
+  ],
   exports: [
     RouterModule,
     FormsModule,

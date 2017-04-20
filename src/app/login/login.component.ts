@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   private user = {
     grant_type:'password',
-    client_id: '5x7EuN09HAeBn2pYJnvvq7szgJaULh14' /*'MQD5KWGwDtmglpQmmz1sVw6dWOJ68WD2'*/ // '4eOQDll18Qf0qeutbiSfrHihpVAJE16p' 
+    client_id: '5x7EuN09HAeBn2pYJnvvq7szgJaULh14';   /*'MQD5KWGwDtmglpQmmz1sVw6dWOJ68WD2'*/ // '4eOQDll18Qf0qeutbiSfrHihpVAJE16p' 
   };
   private errMessage = {};
   public valid_email = true;
