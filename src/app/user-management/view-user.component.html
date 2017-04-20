@@ -4,6 +4,275 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Crops</a></li>
+                    <li class="active"><a href="#">View</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9">
+            <div class="card">
+                <div class="card-block userdetail">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <span>{{user.first_name + ' ' + user.last_name}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <span>{{user.email}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Address:</label>
+                                <span>{{user.city}} {{user.district}} {{user.state}} {{user.pincode}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <span>{{user.phone}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Registered on</label>
+                                <span>{{user.createdAt | date}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Modified on</label>
+                                <span>{{user.updatedAt | date}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header p-b10">
+                    <div class="row">
+                        <div class="col-9">
+                            <h3>Orders (Items Purchased)</h3>
+                        </div>
+                        <div class="col-3">
+                            <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
+                                <div class="input-group">
+                                    <input class="form-control" name="q" placeholder="Search..." type="text">
+                                    <span class="input-group-btn">
+        <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+        </span> </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- table-->
+                <table class="table dataTable table-striped table-bordered" role="grid" style="width: 100%;" ng-reflect-klass="table dataTable" ng-reflect-ng-class="table-striped table-bordered">
+                    <thead>
+                        <tr role="row">
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Crop
+                            </th>
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Offer Price
+                            </th>
+                            <th ng-reflect-ng-class="office-header text-success" class="office-header text-success" ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Qty
+                                <i class="pull-right fa fa-chevron-up" ng-reflect-klass="pull-right fa" ng-reflect-ng-class="[object Object]"></i>
+                            </th>
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Highest Bid
+                            </th>
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                # of Bid
+                            </th>
+                            <th ng-reflect-ng-class="text-warning" class="text-warning" ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Farmer
+                            </th>
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Ends in
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Mangoes">Mangoes</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Manpreet Singh">Manpreet Singh</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Carrot">Carrot</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Hardeep Singh">Hardeep Singh</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Peas">Peas</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Summit">Summit</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Potato">Potato</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Manpreet Singh">Manpreet Singh</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Potato">Potato</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Gudev">Gudev</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Potato">Potato</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Deep Singh">Deep Singh</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- table-->
+            </div>
+            <div class="card">
+                <div class="card-header p-b10">
+                    <div class="row">
+                        <div class="col-9">
+                            <h3>Items for Sell</h3>
+                        </div>
+                        <div class="col-3">
+                            <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
+                                <div class="input-group">
+                                    <input class="form-control" name="q" placeholder="Search..." type="text">
+                                    <span class="input-group-btn">
+        <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+        </span> </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- table-->
+                <table class="table dataTable table-striped table-bordered" role="grid" style="width: 100%;" ng-reflect-klass="table dataTable" ng-reflect-ng-class="table-striped table-bordered">
+                    <thead>
+                        <tr role="row">
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Crop
+                            </th>
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Offer Price
+                            </th>
+                            <th ng-reflect-ng-class="office-header text-success" class="office-header text-success" ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Qty
+                                <i class="pull-right fa fa-chevron-up" ng-reflect-klass="pull-right fa" ng-reflect-ng-class="[object Object]"></i>
+                            </th>
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Highest Bid
+                            </th>
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                # of Bid
+                            </th>
+                            <th ng-reflect-ng-class="text-warning" class="text-warning" ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Farmer
+                            </th>
+                            <th ng-reflect-ng-table-sorting="[object Object]" ng-reflect-column="[object Object]">
+                                Ends in
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Mangoes">Mangoes</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Manpreet Singh">Manpreet Singh</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Carrot">Carrot</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Hardeep Singh">Hardeep Singh</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Peas">Peas</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Summit">Summit</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Potato">Potato</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Manpreet Singh">Manpreet Singh</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Potato">Potato</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Gudev">Gudev</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                        <tr>
+                            <td ng-reflect-inner-h-t-m-l="Potato">Potato</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="2">2</td>
+                            <td ng-reflect-inner-h-t-m-l="1160">1160</td>
+                            <td ng-reflect-inner-h-t-m-l="5">5</td>
+                            <td ng-reflect-inner-h-t-m-l="Deep Singh">Deep Singh</td>
+                            <td ng-reflect-inner-h-t-m-l="1d 2h 20m">1d 2h 20m</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- table-->
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card actions">
+                <h2>Actions</h2>
+                <ul>
+                    <li><span>Login as User</span></li>
+                    <li><span>View Account</span></li>
+                    <li><span>Modufy User</span></li>
+                    <li><span>Reset Password</span></li>
+                    <li><span>Delete User</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div>
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="content-header">
+                <ol class="breadcrumb">
+                    <li><a href="#">Dashboard</a></li>
                     <li><a href="#">User Management</a></li>
                     <li class="active"><a href="#">View</a></li>
                 </ol>
@@ -78,3 +347,4 @@
         </div>
     </div>
 </div>
+ -->
