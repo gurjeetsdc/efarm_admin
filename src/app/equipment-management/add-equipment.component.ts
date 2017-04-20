@@ -16,7 +16,7 @@ export class AddEquipmentComponent {
     
     private showMessage:boolean = false;
 
-    constructor(private router : Router, private _equipmentService: EquipmentService) { }
+    constructor(private _router : Router, private _equipmentService: EquipmentService) { }
 
     addEquipment() {
         console.log('Posting Equipment...');
@@ -25,7 +25,7 @@ export class AddEquipmentComponent {
             this.response    = res;
             this.showMessage = true;
             this.equipment   = {};
-            this.router.navigate(['/equipment/list', {data: "success"} ]);
+            this._router.navigate(['/equipment/list', {data: "success"} ]);
         }); 
     }
 
