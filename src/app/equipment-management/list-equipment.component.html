@@ -31,9 +31,8 @@
         </ng-table>
 
         <!-- loader -->
-        <div *ngIf="isLoading" style="text-align: center; font-size: 40px!important"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
+        <div *ngIf="isLoading" class="is-loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
 
-        
         <pagination *ngIf="config.paging"
                     class="pagination-sm"
                     [(ngModel)]="page"

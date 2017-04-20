@@ -1,17 +1,15 @@
-<div>
-
-
-      
-      <div class="row">
-      <div class="col-12 col-lg-12">
-      <div class="content-header">
-         <ol class="breadcrumb">
-          <li><a href="javascript:void(0);">Dashboard</a></li>
-          <li class="active"><a href="javascript:void(0);" >Equipment Management</a></li>          
-        </ol>
+<div class="equipment-wrapper">
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="content-header">
+                <ol class="breadcrumb">
+                    <li><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="active"><a href="javascript:void(0)">Equipment Management</a></li>      
+                </ol>
+            </div>
         </div>
-          </div>
     </div>
+
     <div class="card">
         <div class="card-header">
             <strong>Add Equipment</strong>
@@ -107,13 +105,7 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="rate"></label>
-                          <!--   <select id="rate" name="rate" class="form-control" size="1" [(ngModel)]="equipment.rate">
-                                <option value="">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select> -->
+                            <label for="rate"></label>                         
                             <input type="text" id="rate" name="rate" class="form-control" [(ngModel)]="equipment.rate" placeholder="Enter Rate/hr">
                         </div>
                     </div>
@@ -155,5 +147,5 @@
                 </div>
             </form>
         </div>
-    </div>
-</div>
+    </div> <!-- .card -->
+</div> <!-- .equipment-wrapper -->

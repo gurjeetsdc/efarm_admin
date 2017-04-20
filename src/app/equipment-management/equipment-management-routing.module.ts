@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
+import { HttpModule } from '@angular/http';
+
 import { ListEquipmentComponent } from './list-equipment.component';
 import { AddEquipmentComponent } from './add-equipment.component';
-import { HttpModule } from '@angular/http';
+import { ViewEquipmentComponent } from './view-equipment.component';
 
 import { EquipmentService } from './equipment.service';
 
@@ -29,6 +31,13 @@ const routes: Routes = [
         component: AddEquipmentComponent,
         data: {
           title: 'Add'
+        }
+      },
+      {
+        path: 'list/:id',
+        component: ViewEquipmentComponent,
+        data: {
+          title: 'View Equipment'
         }
       }
     ]
