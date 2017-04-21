@@ -13,13 +13,13 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group  has-required">
                             <label for="nf-password">Company/Manufacturer</label>
                             <select id="select" name="select" class="form-control" size="1" [(ngModel)]="input.manufacturer_id" required="">
                                 <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
+                                <option value="1">catg1</option>
+                                <option value="2">catg2</option>
+                                <option value="3">catg3</option>
                             </select>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-variety">Variety</label>
-                            <select id="select1" name="select1" class="form-control" [(ngModel)]="input.variety" size="1">
+                            <select id="select1" name="select1" class="form-control" [(ngModel)]="input.variety" size="1" required>
                                 <option value="0">Please select</option>
                                 <option value="1">Variety 1</option>
                                 <option value="2">Variety 2</option>
@@ -47,13 +47,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-unit">Unit</label>
-                            <input type="text" id="nf-unit" name="nf-unit" class="form-control" [(ngModel)]="input.unit" placeholder="Enter Grade">
+                            <input type="text" id="nf-unit" name="nf-unit" class="form-control" [(ngModel)]="input.unit" placeholder="Enter Grade" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
                     <div class="form-group  has-required">
                             <label for="nf-price">Price</label>
-                            <input type="text" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="input.price" placeholder="Enter Price">
+                            <input type="text" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="input.price" placeholder="Enter Price" required>
                         </div>
                     </div>
                 </div>
@@ -65,17 +65,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+               <!--  <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-image">Image</label>
                             <input type="file" name="" class="form-control">
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="card-footer">
-                    <button type="reset" class="btn btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                    <button type="submit" class="pull-right btn btn-primary"><i class="fa fa-dot-circle-o"></i> Save</button>
+                    <button class="btn btn-secondary" [routerLink]="['/input/list']"> Cancel</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr">Save</button>
                 </div>
             </form>
         </div>
