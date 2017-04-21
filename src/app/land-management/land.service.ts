@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 @Injectable()
-export class InputService {
+export class LandService {
 
   private host = "https://efarmapi.herokuapp.com";
   //private host = "http://localhost:1337";
@@ -10,8 +10,8 @@ export class InputService {
   
   constructor(private http: Http) { }
 
-  	inputlist() {
-  		console.log("inside inputlisting")
+  	landlist() {
+  		console.log("inside land")
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         let headers = new Headers();        
@@ -19,42 +19,42 @@ export class InputService {
         headers.append('Authorization', this.token);
         
         //let body = urlSearchParams.toString()
-		return this.http.get(this.host +'/inputs', { headers: headers }).map((res:Response) => res.json())
+		return this.http.get(this.host +'/land', { headers: headers }).map((res:Response) => res.json())
     }
 
 
-    inputadd(inputs) {
+    landadd(land) {
       console.log("inside input add");
 
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
-        let headers = new Headers();        
+        let headers = new Headers();
         let urlSearchParams = new URLSearchParams();
         headers.append('Authorization', this.token);
         
-    return this.http.post(this.host +'/inputs', inputs, { headers: headers }).map((res:Response) => res.json())
+    return this.http.post(this.host +'/land', land, { headers: headers }).map((res:Response) => res.json())
     }
 
-    getInput(input) {
-      console.log(input);
+    getLand(land) {
+      console.log(land);
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         let headers = new Headers();
         let body = {};
         let urlSearchParams = new URLSearchParams();
         headers.append('Authorization', this.token);
-        console.log("addCrop----------------",input);
-    return this.http.get(this.host +'/inputs/'+ input, { headers: headers }).map((res:Response) => res.json())
+        console.log("addCrop----------------",land);
+    return this.http.get(this.host +'/land/'+ land, { headers: headers }).map((res:Response) => res.json())
     }
 
-    updateInput(input) {
+    updateLand(land) {
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         let headers = new Headers();
         let body = {};        
         let urlSearchParams = new URLSearchParams();
         headers.append('Authorization', this.token);
-    return this.http.post(this.host +'/inputs/'+ input.id, input, { headers: headers }).map((res:Response) => res.json())
+    return this.http.post(this.host +'/land/'+ land.id, land, { headers: headers }).map((res:Response) => res.json())
     }
 
 }

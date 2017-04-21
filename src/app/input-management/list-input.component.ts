@@ -30,22 +30,21 @@ export class ListInputComponent implements OnInit {
     {
       title: 'Name',
       name: 'name',
-      sort: false
       // filtering: {filterString: '', placeholder: 'Filter by position'}
     },
     {title: 'Units', name: 'unit'},
     {title: 'Price', name: 'price'},
-    {title: 'Variety', name: 'variety'},
-    {title: 'Qty.', name: 'quantity'},
-    {title: 'status', name: 'status'},
-    {title: 'Action', name: 'button'},
+    {title: 'Variety', name: 'variety',sort: false},
+    {title: 'Qty.', name: 'quantity',sort: false},
+    {title: 'status', name: 'status',sort: false},
+    //{title: 'Action', name: 'button'},
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
   public maxSize:number = 5;
   public numPages:number = 1;
   public length:number = 0;
-
+  public isShowNORcd = false;
   public config:any = {
     paging: true,
     sorting: {columns: this.columns},
@@ -59,18 +58,22 @@ export class ListInputComponent implements OnInit {
     this.length = this.data.length;
      this._inputService.inputlist()
                        .subscribe(
-                           res => {
-                             let mainData = this.addDeleteButton(res)
-                             console.log(mainData);
-                             this.data = mainData;
-
+                          res => {
+                             //let mainData = this.addDeleteButton(res)
+                             //let mainData = this.addDeleteButton(res)
+                             //console.log(mainData);
+                             this.data = res;
+                             if(this.data.length == 0){
+                               this.isShowNORcd = true;
+                             }
+                             
                              //console.log("response---data---------",res)
                              this.onChangeTable(this.config);
                              
                            },
                             err => {
                               console.log("error--------------",err);
-                            });
+                          });
   }
 
   private addDeleteButton (data){
@@ -182,7 +185,7 @@ export class ListInputComponent implements OnInit {
 
   public onCellClick(data: any): any {
     //console.log(data);
-    //this.router.navigate(['/input/list/' + data["row"]["id"]]);
+    this.router.navigate(['/input/list/' + data["row"]["id"]]);
   }
 
   public viewInput(data: any): any {

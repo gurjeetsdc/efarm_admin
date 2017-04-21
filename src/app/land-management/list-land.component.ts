@@ -1,24 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
+import { LandService } from './land.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-land-management',
   templateUrl: './list-land.component.html',
-  styleUrls: ['./list-land.component.scss']
+  styleUrls: ['./list-land.component.scss'],
+  providers: [LandService]
 })
 export class ListLandComponent implements OnInit {
 
-  test: any = [];
+   test: any = [];
 
   private TableData = [{
-  	name:"Urea",
-  	distributor:"Harmind Singh",
-  	company:"The Garderner",
-  	district:"Ludhyana",
-  	variety:"Seeds",
-  	qty:15,
-  	price:1200
-  },{
     name:"Urea",
     distributor:"Harmind Singh",
     company:"The Garderner",
@@ -26,126 +21,29 @@ export class ListLandComponent implements OnInit {
     variety:"Seeds",
     qty:15,
     price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  },{
-    name:"Urea",
-    distributor:"Harmind Singh",
-    company:"The Garderner",
-    district:"Ludhyana",
-    variety:"Seeds",
-    qty:15,
-    price:1200
-  }]; 
+  }];
+  public documents = [];
+  public selectedDocument = [];
 
   public rows:Array<any> = [];
   public columns:Array<any> = [
-    {title: 'Farm Input', name: 'name'},
     {
-      title: 'Farm Input',
+      title: 'Name',
       name: 'name',
-      sort: false
       // filtering: {filterString: '', placeholder: 'Filter by position'}
     },
-    {title: 'Distributor', name: 'distributor'},
-    {title: 'Company', name: 'company'},
-    {title: 'District', name: 'district'},
-    {title: 'Variety', name: 'variety'},
-    {title: 'Qty.', name: 'qty'},
-    {title: 'Price', name: 'price'}
+    {title: 'location', name: 'location',sort: false},
+    {title: 'area', name: 'area',sort: false},
+    {title: 'khasra_no', name: 'khasra_no',sort: false},
+    {title: 'expected_price.', name: 'expected_price',sort: false}
+    //{title: 'Action', name: 'button'},
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
   public maxSize:number = 5;
   public numPages:number = 1;
   public length:number = 0;
-
+  public isShowNORcd = false;
   public config:any = {
     paging: true,
     sorting: {columns: this.columns},
@@ -153,10 +51,37 @@ export class ListLandComponent implements OnInit {
     className: ['table-striped', 'table-bordered']
   };
 
-  private data:Array<any> = this.TableData;
+  private data = [];
 
-  public constructor() {
+  public constructor(private router : Router,private _landService: LandService) {
     this.length = this.data.length;
+     this._landService.landlist()
+                       .subscribe(
+                          res => {
+                             this.data = res;
+                             /*if(this.data.length == 0){
+                               this.isShowNORcd = true;
+                             }*/
+                             console.log("response---data---------",res)
+                             this.onChangeTable(this.config);
+                           },
+                            err => {
+                              console.log("error--------------",err);
+                          });
+  }
+
+  private addDeleteButton (data){
+
+    let keyArr = data;
+    let newData = [];
+    let delButton = "";
+     keyArr.forEach(function(element,key) {
+         delButton = '<button type="button" (click)="this.deleteInput()" class="btn btn-danger">Delete</button>';
+          element.button = delButton;
+          newData.push(element);      
+      });
+    // console.log(newData);
+    return newData;
   }
 
   public ngOnInit():void {
@@ -253,11 +178,10 @@ export class ListLandComponent implements OnInit {
   }
 
   public onCellClick(data: any): any {
-    console.log(data);
-  }	
+    //console.log(data);
+    this.router.navigate(['/land/list/' + data["row"]["id"]]);
+  }
 
-  // constructor() { }
 
-  // ngOnInit() {
-  // }
+
 }

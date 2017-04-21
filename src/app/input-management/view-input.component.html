@@ -4,7 +4,7 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Input Management</a></li>
+                    <li><a href="#">Input</a></li>
                     <li class="active"><a href="#">View</a></li>
                 </ol>
             </div>
@@ -12,7 +12,7 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <strong>View Crop</strong>
+            <strong>{{!edit ? 'View' : 'Edit'}} Input</strong>
 			<button class="btn btn-secondary pull-right" *ngIf="!edit" (click)="editInput()"><i class="fa fa-pencil"></i> Edit</button>
             <button class="btn btn-secondary pull-right" *ngIf="edit" (click)="cancel()">Cancel</button>
             <button class="btn btn-success pull-right" *ngIf="edit" (click)="save()">Save</button>
