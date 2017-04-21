@@ -3831,7 +3831,7 @@ table.text-center, table.text-center td, table.text-center th {
 	background-color: #0073b7 !important;
 }
 .bg-light-blue, .label-primary, .modal-primary .modal-body {
-	background-color: #3c8dbc !important;
+	background-color: #f5be25 !important;
 }
 .bg-green, .callout.callout-success, .alert-success, .label-success, .modal-success .modal-body {
 	background-color: #80c649 !important;
@@ -5126,7 +5126,16 @@ ul.navbar-nav.width{width:60%}
 
 .card-header > button.orangeclr {
     margin-right: 10px;
+     font-size: 15px;
+    padding: 0.5rem 1rem;
 }
+
+.card-header > button.whiteclr {
+    font-size: 15px;
+    padding: 0.5rem 1rem;
+    color: #939393;
+}
+
 /* media queries */
 
 @media (min-width:1300px) {
