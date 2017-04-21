@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {PaginationInstance} from 'ng2-pagination';
 import { CategoryService } from './category.service';
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-category',
@@ -41,7 +41,7 @@ export class ListCategoryComponent implements OnInit {
     // private data:Array<any> = this.TableData;
     private data = [];
 
-    public constructor(private _router : Router, private _categoryService: CategoryService) { 
+    public constructor(private _router : Router, private _categoryService: CategoryService, private _activatedRoute:ActivatedRoute) { 
 
         this.length = this.data.length;
 
@@ -49,17 +49,17 @@ export class ListCategoryComponent implements OnInit {
             this.data = allCategories;
             this.onChangeTable(this.config);
             this.isLoading = false;
-            console.log("allcategory loaded");
+            //console.log("allcategory loaded");
         }); 
     }
 
     public ngOnInit():void {
-        this.onChangeTable(this.config);
-        /*this.sub = this._router.params.subscribe(params => {
+        //this.onChangeTable(this.config);
+        this.sub = this._activatedRoute.params.subscribe(params => {
             this.id = +params['data']; // (+) converts string 'id' to a number
             console.log(params);
             this.isNewAdded = params.data; 
-        });*/
+        });
     }
 
     closeMessage()  {

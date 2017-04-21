@@ -6,12 +6,12 @@ import { PaginationModule } from 'ng2-bootstrap';
 import { HttpModule } from '@angular/http';
 
 
-import { ListEquipmentComponent } from './list-component/list-equipment.component';
-import { ViewEquipmentComponent } from './view-component/view-equipment.component';
+import { ListManufacturerComponent } from './list-component/list-manufacturer.component';
+import { ViewManufacturerComponent } from './view-component/view-manufacturer.component';
 
-import { AddUpdateEquipmentComponent } from './addupdate-component/addupdate-equipment.component';
+import { AddUpdateManufacturerComponent } from './addupdate-component/addupdate-manufacturer.component';
 
-import { EquipmentService } from './services/equipment.service';
+import { ManufacturerService } from './services/manufacturer.service';
 
 
 const routes: Routes = [
@@ -23,28 +23,28 @@ const routes: Routes = [
     children: [
       {
         path: 'list',
-        component: ListEquipmentComponent,
+        component: ListManufacturerComponent,
         data: {
           title: 'List'
         }
       },
       {
         path: 'add',
-        component: AddUpdateEquipmentComponent,
+        component: AddUpdateManufacturerComponent,
         data: {
           title: 'Add'
         }
       },
       {
             path: 'list/:id',
-            component: ViewEquipmentComponent,
+            component: ViewManufacturerComponent,
             data: {
               title: 'View Equipment'
             }
       },
       {
         path: 'update/:id',
-        component: AddUpdateEquipmentComponent,
+        component: AddUpdateManufacturerComponent,
         data: {
           title: 'Update Equipment'
         }
@@ -62,7 +62,7 @@ const routes: Routes = [
     HttpModule   
   ],
   providers: [
-    EquipmentService
+    ManufacturerService
   ],
   exports: [
     RouterModule,
@@ -71,4 +71,4 @@ const routes: Routes = [
     PaginationModule    
   ]
 })
-export class EquipmentManagementRoutingModule {}
+export class ManufacturerManagementRoutingModule {}

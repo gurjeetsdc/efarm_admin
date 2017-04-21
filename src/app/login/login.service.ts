@@ -4,7 +4,7 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 @Injectable()
 export class LoginService {
     private host = "https://efarmapi.herokuapp.com";
-    // private host = "http://localhost:1337";
+    //private host = "http://localhost:1337";
   	private port = 3000;
   	
   	constructor(private http: Http) { }

@@ -10,11 +10,20 @@
             </div>
         </div>
     </div>
+    
+    <div *ngIf="isNewAdded" class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert"  (click)="closeMessage()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Success</strong> Equipment Added Successfully.
+    </div>
+
     <div class="card">
         <div class="card-header">
             <input type="text" name="" placeholder="Search..." [(ngModel)]="search" (ngModelChange)="doSomething($event)">
             <button type="button" class="btn btn-success pull-right" [routerLink]="['/category/add']">Add Category</button>
         </div>
+
         <ng-table [config]="config" (tableChanged)="onChangeTable(config)" (cellClicked)="onCellClick($event)" [rows]="rows" [columns]="columns">
         <button class="destroy" (click)="destroyTodo(todo)"></button>
         </ng-table>

@@ -1,0 +1,110 @@
+<div class="equipment-wrapper">    
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="content-header">
+                <ol class="breadcrumb">
+                    <li><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="active"><a href="javascript:void(0)">Equipment Management</a></li>      
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <strong>View Equipment</strong>
+            <button type="button" class="btn btn-success pull-right" (click)="updateEquipment(equipment.id)">Edit Equipment</button>              
+        </div>
+        <div class="card-block">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Equipment Name</label>
+                        <p>{{equipment.name}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <p>{{equipment.category}}</p>                            
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="companyManufacturer">Company/Manufacturer</label>
+                        <p>{{equipment.companyManufacturer}}</p>                           
+                    </div>
+                </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="model">Model</label>
+                        <p>{{equipment.model}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="modelyear">Model year</label>
+                        <p>{{equipment.modelyear}}</p>
+                    </div>
+                </div>
+            
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label for="enginePower">Engine power</label>
+                        <p>{{equipment.enginepower}}</p>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-rentslell">Rent/sell</label>
+                        <p>{{equipment.rentSell}}</p>                        
+                    </div>                      
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="rate">Price</label>                         
+                        <p>{{equipment.rate}}</p>
+                    </div>
+                </div>
+            </div>
+              <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="usage">Usage</label>
+                        <p>{{equipment.usage}}</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <p>{{equipment.description}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="termsConditions">Terms & Conditions</label>
+                        <p>{{equipment.termsConditiop}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <p>Not Available</p>
+                    </div>
+                </div>
+            </div>                           
+        </div>
+    </div> <!-- .card -->
+</div> <!-- .equipment-wrapper -->
