@@ -24,7 +24,7 @@ export class ListInputComponent implements OnInit {
   }];
   public documents = [];
   public selectedDocument = [];
-
+  public err_message = '';
   public rows:Array<any> = [];
   public columns:Array<any> = [
     {
@@ -73,6 +73,7 @@ export class ListInputComponent implements OnInit {
                            },
                             err => {
                               console.log("error--------------",err);
+                              this.err_message = "No record to display";
                           });
   }
 
@@ -169,6 +170,7 @@ export class ListInputComponent implements OnInit {
   }
 
   public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
+    this.err_message ='';
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering);
     }

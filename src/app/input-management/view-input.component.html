@@ -5,7 +5,7 @@
                 <ol class="breadcrumb">
                     <li><a href="#">Dashboard</a></li>
                     <li><a href="#">Input</a></li>
-                    <li class="active"><a href="#">View</a></li>
+                    <li class="active"><a href="#">{{!edit ? 'View' : 'Edit'}}</a></li>
                 </ol>
             </div>
         </div>
@@ -14,8 +14,8 @@
         <div class="card-header">
             <strong>{{!edit ? 'View' : 'Edit'}} Input</strong>
 			<button class="btn btn-secondary pull-right" *ngIf="!edit" (click)="editInput()"><i class="fa fa-pencil"></i> Edit</button>
-            <button class="btn btn-secondary pull-right" *ngIf="edit" (click)="cancel()">Cancel</button>
-            <button class="btn btn-success pull-right" *ngIf="edit" (click)="save()">Save</button>
+            <button class="btn btn-secondary pull-right whiteclr" *ngIf="edit" (click)="cancel()">Cancel</button>
+            <button class="btn btn-success pull-right orangeclr" *ngIf="edit" (click)="save()">Save</button>
         </div>
         <div class="card-block viewmode" *ngIf="!edit">
             <form role="form" (ngSubmit)="addInput()" #dailyExpenseForm="ngForm">
