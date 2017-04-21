@@ -3,8 +3,8 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 @Injectable()
 export class CropService {
 
-  private host = "http://localhost:1337";
-  // private host = "https://efarmapi.herokuapp.com";
+  // private host = "http://localhost:1337";
+  private host = "https://efarmapi.herokuapp.com";
   private access_token = {};
   private token = '';
   constructor(private http: Http) { }
