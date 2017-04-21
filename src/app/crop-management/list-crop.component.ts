@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 export class ListCropComponent implements OnInit {
   private isLoading:boolean = true;
+  public err_message = '';
   public rows:Array<any> = [];
   public columns:Array<any> = [
     {title: 'Crop', name: 'name'},
@@ -46,7 +47,8 @@ export class ListCropComponent implements OnInit {
                              this.onChangeTable(this.config);
                            },
                            err => {
-
+                             this.isLoading = false;
+                             this.err_message = "No record to display";
                            });
 
 
@@ -131,6 +133,7 @@ export class ListCropComponent implements OnInit {
   }
 
   public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
+    this.err_message ='';
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering);
     }

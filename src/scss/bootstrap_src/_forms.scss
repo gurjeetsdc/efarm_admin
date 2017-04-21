@@ -42,9 +42,14 @@
 
   // Placeholder
   &::placeholder {
-    color: $input-color-placeholder;
-    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+   
+	color: #c6c6c6;
+    font-family: "Roboto",sans-serif !important;
+    font-size: 18px;
+    font-weight: 300;
     opacity: 1;
+	  
+	  
   }
 
   // Disabled and read-only inputs

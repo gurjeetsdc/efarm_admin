@@ -244,10 +244,10 @@ $grid-gutter-widths: (
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
-$font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
-$font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
-$font-family-base:       $font-family-sans-serif !default;
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$font-family-serif:     'Open Sans', sans-serif;
+$font-family-monospace:  'Open Sans', sans-serif;
+$font-family-base:      'Open Sans', sans-serif;
 
 $font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
 $font-size-lg:   1.25rem !default;
@@ -344,7 +344,7 @@ $table-bg:                      transparent !default;
 $table-inverse-bg:              $gray-dark !default;
 $table-inverse-color:           $body-bg !default;
 
-$table-bg-accent:               rgba($black,.05) !default;
+$table-bg-accent:               #f5f5f5;
 $table-bg-hover:                rgba($black,.075) !default;
 $table-bg-active:               $table-bg-hover !default;
 

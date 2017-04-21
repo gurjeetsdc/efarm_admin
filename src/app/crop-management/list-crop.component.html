@@ -3,9 +3,9 @@
     <div class="col-12 col-lg-12">
         <div class="content-header">
             <ol class="breadcrumb">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Crop Management</a></li>
-                <li class="active"><a href="#">List</a></li>
+                <li><a>Dashboard</a></li>
+                <li><a>Crops</a></li>
+                <li class="active"><a>List</a></li>
             </ol>
         </div>
     </div>
@@ -19,7 +19,7 @@
         
         <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
         <div class="input-group">
-          <input class="form-control" name="q" placeholder="Search..." type="text">
+          <input class="form-control" name="q" placeholder="Search" type="text">
           <span class="input-group-btn">
           <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
           </span> </div>
@@ -29,8 +29,8 @@
        <div class="col-9 text-right">
         <button type="button" class="btn btn-success btnadd" [routerLink]="['/crop/add']">Add Crop</button>
         <div class="icns">
-                     <a href="#"><img src="assets/img/pdf.png" alt="pdf"></a>
-                     <a href="#"><img src="assets/img/xls.png" alt="pdf"></a>
+                     <a><img src="assets/img/pdf.png" alt="pdf"></a>
+                     <a><img src="assets/img/xls.png" alt="pdf"></a>
               </div>
             </div>
             </div>
@@ -41,9 +41,15 @@
                   [rows]="rows" [columns]="columns">
         </ng-table>
 
-        <!-- loader -->
-        <div *ngIf="isLoading" style="text-align: center; font-size: 40px!important"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
+        <div *ngIf="isLoading" class="is-loading"><i class="page-loader"></i></div>
+        <div *ngIf="err_message" class="text-center text-danger">{{err_message}}</div>
         
+        <div class="row"> 
+        <div class="col-6">       
+        <pre *ngIf="config.paging" class="pagenumber">Page: {{page}} / {{numPages}}</pre>
+        </div>
+
+        <div class="col-6">        
         <pagination *ngIf="config.paging"
                     class="pagination-sm"
                     [(ngModel)]="page"
@@ -55,7 +61,9 @@
                     (pageChanged)="onChangeTable(config, $event)"
                     (numPages)="numPages = $event">
         </pagination>
-        <!--<pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>-->
+        </div>
+        </div>
+
     </div>
 </div>
 

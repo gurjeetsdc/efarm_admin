@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
   templateUrl: 'add-crop.component.html'
 })
 export class AddCropComponent {
-	private crop = {};
+	private crop = {
+    terms:"Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum"
+  };
   constructor(private router : Router, private _cropService: CropService) { }
 
   addCrop() {

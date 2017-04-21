@@ -1,9 +1,8 @@
 <!-- Loader div -->
-<div *ngIf="isPageLoading" class="overlayloader">     
-     <div class="loader"></div>
-</div> 
-
-<section class="login-page overlay"></section>
+<div *ngIf="isPageLoading" class="overlayloader">
+    <div class="loader"></div>
+</div>
+<section class="login-page"></section>
 <div class="login-box">
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -11,10 +10,14 @@
             <img src="assets/img/logo.png" alt="logo">
         </div>
         <form role="form" #loginForm="ngForm" (ngSubmit)="login()">
+            <div class="text-center" *ngIf="err_message">
+                <span class="text-danger">
+                    {{err_message}}
+                </span>
+            </div>
             <div class="form-group has-feedback">
                 <label>Email</label>
-                <!-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
-                <input type="text" name="username" class="form-control" [(ngModel)]="user.username" (ngModelChange)="checkemail(user.username)" #username="ngModel" autofocus required>
+                <input type="text" name="username" class="form-control" [(ngModel)]="user.username" (ngModelChange)="checkemail(user.username);err_message=''" #username="ngModel" autofocus required>
                 <li *ngIf="username.errors && username.touched">
                     <span class="text-danger" [hidden]="!username.errors.required">Email is required</span>
                 </li>
@@ -24,42 +27,30 @@
             </div>
             <div class="form-group has-feedback">
                 <label>Password</label>
-                <!--<span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
-                <input type="password" name="password" class="form-control" [(ngModel)]="user.password" #password="ngModel" required>
+                <input type="password" name="password" class="form-control" [(ngModel)]="user.password" #password="ngModel" (ngModelChange)="err_message=''" required>
                 <li *ngIf="password.errors && password.touched">
                     <span class="text-danger" [hidden]="!password.errors.required">Password is required</span>
                 </li>
-
-
-                 <li *ngIf="err_message">
-                <span class="text-danger">
-                    {{err_message}}
-                </span>
-            </li>
-
-
-
             </div>
-           
             <div class="row">
                 <div class="col-sm-12 col-12">
                     <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!loginForm.valid || !valid_email">Login</button>
                 </div>
             </div>
-            <!-- <div class="row">
+            <div class="row">
                 <div class="col-sm-6 col-6">
                     <div class="custome-check loginpage">
                         <input id="option5" name="status" type="checkbox">
                         <label for="option5">Remember me</label>
                     </div>
                 </div>
-                <div class="col-sm-6 col-6">
+                <!--  <div class="col-sm-6 col-6">
                     <a class="forgotlink" href="#">Forgot password</a>
                 </div>
-                <div class="col-sm-12 col-12 text-center">
+              <div class="col-sm-12 col-12 text-center">
                     Don't have an account. <a class="" routerLinkActive="active" [routerLink]="['/register']">Click here</a>
-                </div>
-            </div> -->
+                </div> -->
+            </div> 
         </form>
     </div>
     <!-- /.login-box-body -->
