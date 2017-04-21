@@ -41,10 +41,10 @@ export class ListEquipmentComponent implements OnInit {
     public length:number       = 0;
 
     public config:any = {
-    paging: true,
-    sorting: {columns: this.columns},
-    filtering: {filterString: ''},
-    className: ['table-striped', 'table-bordered']
+        paging: true,
+        sorting: {columns: this.columns},
+        filtering: {filterString: ''},
+        className: ['table-striped', 'table-bordered']
     };
 
     // private data:Array<any> = this.TableData;
@@ -159,9 +159,9 @@ export class ListEquipmentComponent implements OnInit {
     }
     
     let filteredData = this.changeFilter(this.data, this.config);
-    let sortedData = this.changeSort(filteredData, this.config);
-    this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
-    this.length = sortedData.length;
+    let sortedData   = this.changeSort(filteredData, this.config);
+    this.rows        = page && config.paging ? this.changePage(page, sortedData) : sortedData;
+    this.length      = sortedData.length;
   }
 
     public onCellClick(data: any): any {   

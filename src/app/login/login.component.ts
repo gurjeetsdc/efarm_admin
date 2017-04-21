@@ -9,14 +9,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   private user = {
-      grant_type:'password',
-      client_id: '5x7EuN09HAeBn2pYJnvvq7szgJaULh14' // '4eOQDll18Qf0qeutbiSfrHihpVAJE16p' //'5x7EuN09HAeBn2pYJnvvq7szgJaULh14'
-
+    grant_type:'password',
+    client_id: '5x7EuN09HAeBn2pYJnvvq7szgJaULh14'
   };
-  
+  private err_message = '';  
   private isPageLoading:boolean = false;
-
-  private errMessage = {};
   public valid_email = true;
   constructor(private router : Router,private loginService: LoginService) { }
 
@@ -28,28 +25,22 @@ export class LoginComponent implements OnInit {
        this.valid_email=regex.test(email);
     }
   
-  	login() {
-  		
+    login() {
         /* start loader */
         this.isPageLoading = true;
-          
-        console.log("login",this.user)
-		this.errMessage = {};
-		this.loginService.login(this.user)
+    this.err_message = '';
+    this.loginService.login(this.user)
                        .subscribe(
                            res => {
                                 /* end loader */
                                 this.isPageLoading = false;
-                                
-                                console.log("response",res)
                                 localStorage.setItem("user",JSON.stringify(res));
                                 this.router.navigate(['/dashboard']);
                            },
                             err => {
                                 /* end loader */
                                 this.isPageLoading = false;
-                            	console.log("error",err);
-                                // this.errMessage = JSON.parse(err._body);
+                                this.err_message = "Email id or password not correct";
                             });
-	}
+  }
 }

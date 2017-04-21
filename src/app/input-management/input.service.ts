@@ -4,14 +4,18 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 export class InputService {
 
   private host = "http://localhost:1337";
+  private access_token = {};
+  private token = '';
   
   constructor(private http: Http) { }
 
   	inputlist() {
   		console.log("inside inputlisting")
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
-        headers.append('Authorization', 'Bearer FtvuJVQmkTaTVq4gDaL6h1y5tfZvGnQa');
+        headers.append('Authorization', this.token);
         
         //let body = urlSearchParams.toString()
 		return this.http.get(this.host +'/inputs', { headers: headers }).map((res:Response) => res.json())
@@ -21,12 +25,35 @@ export class InputService {
     inputadd(inputs) {
       console.log("inside input add");
 
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
-        headers.append('Authorization', 'Bearer FtvuJVQmkTaTVq4gDaL6h1y5tfZvGnQa');
+        headers.append('Authorization', this.token);
         
-        //let body = urlSearchParams.toString()
     return this.http.post(this.host +'/inputs', inputs, { headers: headers }).map((res:Response) => res.json())
+    }
+
+    getInput(input) {
+      console.log(input);
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        let headers = new Headers();
+        let body = {};
+        let urlSearchParams = new URLSearchParams();
+        headers.append('Authorization', this.token);
+        console.log("addCrop----------------",input);
+    return this.http.get(this.host +'/inputs/'+ input, { headers: headers }).map((res:Response) => res.json())
+    }
+
+    updateInput(input) {
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        let headers = new Headers();
+        let body = {};        
+        let urlSearchParams = new URLSearchParams();
+        headers.append('Authorization', this.token);
+    return this.http.post(this.host +'/inputs/'+ input.id, input, { headers: headers }).map((res:Response) => res.json())
     }
 
 }

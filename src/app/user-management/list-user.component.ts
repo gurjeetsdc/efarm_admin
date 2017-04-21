@@ -140,11 +140,7 @@ export class ListUserComponent implements OnInit {
   }
 
   public onCellClick(data: any): any {
-    console.log(data);
+    this.router.navigate(['/user/list/' + data["row"]["id"]]);
   }	
 
-  // constructor() { }
-
-  // ngOnInit() {
-  // }
 }

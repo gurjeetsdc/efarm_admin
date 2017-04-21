@@ -12,10 +12,10 @@
 
     <div class="card">
         <div class="card-header">
-            <strong>Add Equipment</strong>
+            <strong>{{action}} Equipment</strong>
         </div>
         <div class="card-block">
-            <form role="form" (ngSubmit)="addEquipment()" #addEquipmentForm="ngForm">
+            <form role="form" (ngSubmit)="submitEquipment()" #addEquipmentForm="ngForm">
                 
                <div *ngIf="showMessage" class="alert alert-success alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert"  (click)="closeMessage()" aria-label="Close">

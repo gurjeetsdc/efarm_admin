@@ -14,11 +14,11 @@
             <div class="form-group has-feedback">
                 <label>Email</label>
                 <!-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
-                <input type="text" name="username" class="form-control" [(ngModel)]="user.username" (ngModelChange)="checkemail(user.username)" #username="ngModel" required>
+                <input type="text" name="username" class="form-control" [(ngModel)]="user.username" (ngModelChange)="checkemail(user.username)" #username="ngModel" autofocus required>
                 <li *ngIf="username.errors && username.touched">
                     <span class="text-danger" [hidden]="!username.errors.required">Email is required</span>
                 </li>
-                <li *ngIf="!valid_email">
+                <li *ngIf="!username.errors && !valid_email">
                     <span class="text-danger">Email id is not valid</span>
                 </li>
             </div>
@@ -29,10 +29,21 @@
                 <li *ngIf="password.errors && password.touched">
                     <span class="text-danger" [hidden]="!password.errors.required">Password is required</span>
                 </li>
+
+
+                 <li *ngIf="err_message">
+                <span class="text-danger">
+                    {{err_message}}
+                </span>
+            </li>
+
+
+
             </div>
+           
             <div class="row">
                 <div class="col-sm-12 col-12">
-                    <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!loginForm.valid">Sign In</button>
+                    <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!loginForm.valid || !valid_email">Login</button>
                 </div>
             </div>
             <!-- <div class="row">

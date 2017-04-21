@@ -11,7 +11,6 @@ export class ActiveRouteGuard implements CanActivate {
 
   canActivate() {
     if(!localStorage.getItem("user")) {
-      console.log("user not exists")
       return true;
     } else {
       this.router.navigate(['/dashboard']);

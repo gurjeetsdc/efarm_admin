@@ -5,6 +5,8 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
 import { ListInputComponent } from './list-input.component';
 import { AddInputComponent } from './add-input.component';
+import { ViewInputComponent } from './view-input.component';
+
 import { HttpModule } from '@angular/http';
 const routes: Routes = [
   {
@@ -25,6 +27,13 @@ const routes: Routes = [
         component: AddInputComponent,
         data: {
           title: 'Add'
+        }
+      },
+      {
+        path: 'list/:id',
+        component: ViewInputComponent,
+        data: {
+          title: 'List'
         }
       }
     ]

@@ -24,7 +24,7 @@ export class ListManufacturerComponent implements OnInit {
    
         { title: 'Manufacturer', name: 'name'},
         { title: 'description', name: 'description'},
-        {title: 'Edit', name: 'actionEdit'}        
+        //{title: 'Edit', name: 'actionEdit'}        
     ];
     public page:number         = 1;
     public itemsPerPage:number = 10;

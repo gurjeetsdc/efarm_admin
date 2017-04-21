@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ListEquipmentComponent } from './list-component/list-equipment.component';
 import { ViewEquipmentComponent } from './view-component/view-equipment.component';
 
-import { AddEquipmentComponent } from './add-component/add-equipment.component';
-import { UpdateEquipmentComponent } from './update-component/update-equipment.component';
+import { AddUpdateEquipmentComponent } from './addupdate-component/addupdate-equipment.component';
+
 
 import { EquipmentManagementRoutingModule } from './equipment-management-routing.module';
 
@@ -16,9 +16,8 @@ import { EquipmentManagementRoutingModule } from './equipment-management-routing
     ],
     declarations: [
         ListEquipmentComponent,
-        AddEquipmentComponent,
-        ViewEquipmentComponent,
-        UpdateEquipmentComponent
+        AddUpdateEquipmentComponent,
+        ViewEquipmentComponent        
     ]
 })
 export class EquipmentManagementModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
 import { InputService } from './input.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-input-management',
   templateUrl: './list-input.component.html',
@@ -54,7 +55,7 @@ export class ListInputComponent implements OnInit {
 
   private data = [];
 
-  public constructor(private _inputService: InputService) {
+  public constructor(private router : Router,private _inputService: InputService) {
     this.length = this.data.length;
      this._inputService.inputlist()
                        .subscribe(
@@ -163,14 +164,15 @@ export class ListInputComponent implements OnInit {
   }
 
   public onCellClick(data: any): any {
-    console.log(data);
+    //console.log(data);
+    this.router.navigate(['/input/list/' + data["row"]["id"]]);
   }
 /*  public onCellClick(data: any): any {
 this.selectedDocument = data.row;
 
     // If Button View
     if (data.column == "viewbutton") {
-      this.router.navigate(['/view', this.selectedDocument.doknr]);
+      this.router.navigate(['/list', this.selectedDocument.doknr]);
     }
 
     // If Button Select
@@ -190,7 +192,16 @@ this.selectedDocument = data.row;
       // Refresh Table
       this.ngOnChanges();
     }
-  }*/
+  }
+
+  ngOnChanges() {
+    // Just if search result exist
+    if (this.documents != null) {
+      this.extendData();
+      // set Table data by search result
+      this.data = this.documents;
+    }
+  }
 
  // Button
   private viewButton(viewbutton: string) {
@@ -212,7 +223,7 @@ this.selectedDocument = data.row;
 
   private extendData() {
     // For every resulttable entry
-    /*for (let i = 0; i < this.data.length; i++) {
+    for (let i = 0; i < this.data.length; i++) {
 
       // Add View Button
      // this.data[i].viewbutton = this.viewButton(this.data[i].viewbutton);
@@ -228,19 +239,10 @@ this.selectedDocument = data.row;
           break;
         }
       }
-    }*/
-  }
+    }
+  }*/
 
   // notification from ng-table to delete a row
-onDeleteRowRequest() {
-  console.log("dele row request");
-   /* this.deleteSub = this.tableEventService.deleteRow$
-      .subscribe((row:any) => {
-        console.log('[deleteRow$] event in licence-event.service ');
-
-        // do delete
-      });*/
-  }
 
 
 

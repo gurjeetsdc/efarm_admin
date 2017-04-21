@@ -16,11 +16,14 @@
             <button type="button" class="btn btn-success pull-right" [routerLink]="['/category/add']">Add Category</button>
         </div>
         <ng-table [config]="config" (tableChanged)="onChangeTable(config)" (cellClicked)="onCellClick($event)" [rows]="rows" [columns]="columns">
+        <button class="destroy" (click)="destroyTodo(todo)"></button>
         </ng-table>
         <!-- loader -->
         <div *ngIf="isLoading" style="text-align: center; font-size: 40px!important"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
+
         <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false" (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
         </pagination>
+
         <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
     </div>
 </div>
