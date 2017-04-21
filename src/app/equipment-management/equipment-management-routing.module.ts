@@ -5,6 +5,7 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
 import { HttpModule } from '@angular/http';
 
+
 import { ListEquipmentComponent } from './list-component/list-equipment.component';
 import { ViewEquipmentComponent } from './view-component/view-equipment.component';
 
@@ -58,7 +59,7 @@ const routes: Routes = [
     FormsModule,
     Ng2TableModule,
     PaginationModule,
-    HttpModule
+    HttpModule   
   ],
   providers: [
     EquipmentService
@@ -67,7 +68,7 @@ const routes: Routes = [
     RouterModule,
     FormsModule,
     Ng2TableModule,
-    PaginationModule
+    PaginationModule    
   ]
 })
 export class EquipmentManagementRoutingModule {}
