@@ -21,7 +21,7 @@ export class ListInputComponent implements OnInit {
   	variety:"Seeds",
   	qty:15,
   	price:1200
-  }]; 
+  }];
   public documents = [];
   public selectedDocument = [];
 
@@ -38,7 +38,7 @@ export class ListInputComponent implements OnInit {
     {title: 'Variety', name: 'variety'},
     {title: 'Qty.', name: 'quantity'},
     {title: 'status', name: 'status'},
-    //{title: '', name: 'selectbutton'},
+    {title: 'Action', name: 'button'},
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
@@ -60,14 +60,31 @@ export class ListInputComponent implements OnInit {
      this._inputService.inputlist()
                        .subscribe(
                            res => {
-                             this.data = res;
-                             console.log("response---data---------",res)
+                             let mainData = this.addDeleteButton(res)
+                             console.log(mainData);
+                             this.data = mainData;
+
+                             //console.log("response---data---------",res)
                              this.onChangeTable(this.config);
                              
                            },
                             err => {
                               console.log("error--------------",err);
                             });
+  }
+
+  private addDeleteButton (data){
+
+    let keyArr = data;
+    let newData = [];
+    let delButton = "";
+     keyArr.forEach(function(element,key) {
+         delButton = '<button type="button" (click)="this.deleteInput()" class="btn btn-danger">Delete</button>';
+          element.button = delButton;
+          newData.push(element);      
+      });
+    // console.log(newData);
+    return newData;
   }
 
   public ngOnInit():void {
@@ -165,8 +182,17 @@ export class ListInputComponent implements OnInit {
 
   public onCellClick(data: any): any {
     //console.log(data);
-    this.router.navigate(['/input/list/' + data["row"]["id"]]);
+    //this.router.navigate(['/input/list/' + data["row"]["id"]]);
   }
+
+  public viewInput(data: any): any {
+    console.log(data);
+    //this.router.navigate(['/input/list/' + data["row"]["id"]]);
+  }
+  public deleteInput(): any {
+    console.log("gfhjgfhjfhjgfjhf");
+  }
+
 /*  public onCellClick(data: any): any {
 this.selectedDocument = data.row;
 
