@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ListUserComponent } from './list-user.component';
-import { AddUserComponent } from './add-user.component';
-import { ViewUserComponent } from './view-user.component';
+import { ListUserComponent } from './list-component/list-user.component';
+import { AddUserComponent } from './addupdate-component/add-user.component';
+import { ViewUserComponent } from './view-component/view-user.component';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 
 @NgModule({

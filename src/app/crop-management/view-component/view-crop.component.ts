@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import { CropService } from './crop.service';
+import { CropService } from '../services/crop.service';
 @Component({
   templateUrl: 'view-crop.component.html'
 })

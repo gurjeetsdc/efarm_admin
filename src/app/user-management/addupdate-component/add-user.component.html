@@ -4,8 +4,8 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">User Management</a></li>
-                    <li class="active"><a href="#">Add new</a></li>
+                    <li><a href="#">Users</a></li>
+                    <li class="active"><a href="#">Add User</a></li>
                 </ol>
             </div>
         </div>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="reset" class="btn btn-secondary"> Cancel</button>
+                <button type="reset" class="btn btn-secondary" [routerLink]="['/user/list']"> Cancel</button>
                 <button type="submit" class="pull-right btn btn-primary orangeclr">Save</button>
             </form>
         </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CropService } from './crop.service';
+import { CropService } from '../services/crop.service';
 import { Router } from '@angular/router';
 
 @Component({

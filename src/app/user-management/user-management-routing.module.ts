@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
-import { ListUserComponent } from './list-user.component';
-import { AddUserComponent } from './add-user.component';
-import { ViewUserComponent } from './view-user.component';
+import { ListUserComponent } from './list-component/list-user.component';
+import { AddUserComponent } from './addupdate-component/add-user.component';
+import { ViewUserComponent } from './view-component/view-user.component';
 import { HttpModule } from '@angular/http';
-import { UserService } from './user.service';
+import { UserService } from './services/user.service';
 
 const routes: Routes = [
   {

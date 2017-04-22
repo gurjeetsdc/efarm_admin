@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import { UserService } from './user.service';
+import { UserService } from '../services/user.service';
 
 @Component({
     templateUrl: 'view-user.component.html'

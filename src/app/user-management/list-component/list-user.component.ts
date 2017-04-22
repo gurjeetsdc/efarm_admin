@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {PaginationInstance} from 'ng2-pagination';
-import { UserService } from './user.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-user-management',

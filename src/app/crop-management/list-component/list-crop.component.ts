@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PaginationInstance} from 'ng2-pagination';
-import { CropService } from './crop.service';
+import { CropService } from '../services/crop.service';
 import { Router } from '@angular/router';
 
 @Component({
