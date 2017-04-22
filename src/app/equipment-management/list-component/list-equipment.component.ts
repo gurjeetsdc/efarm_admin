@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 // import {PaginationInstance} from 'ng2-pagination';
 import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
@@ -27,11 +27,18 @@ export class ListEquipmentComponent implements OnInit {
     public isLoading:boolean = true;
 
    
-    public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _equipmentService: EquipmentService) { 
+    public constructor( private activatedRouter: ActivatedRoute, private _router: Router, private _equipmentService: EquipmentService) { 
         
     }
 
     ngOnInit(): void {
+        
+        this._router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
 
         this._equipmentService.getAllEquipments().subscribe(allEquipments => {
             this.data = allEquipments;            
@@ -62,16 +69,29 @@ export class ListEquipmentComponent implements OnInit {
 
      
     removeEquipment( equipmentID ) {
-        if(confirm("Are you sure to delete Equipment")) {
-            console.log("Implement delete functionality here");
+        if(confirm("Are you sure to delete equipment?")) {
             this.isLoading = true;
             this._equipmentService.deleteEquipment(equipmentID).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
 
-                /* reload list */
-                this._router.navigate(['/equipment/list/']);      
+                // this.data = [];
+                this.removeByAttr(this.data, 'id', equipmentID);   
             });  
         }
+    }
+
+    removeByAttr(arr, attr, value){
+        let i = arr.length;
+        while(i--){
+           if( arr[i] 
+               && arr[i].hasOwnProperty(attr) 
+               && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+               arr.splice(i,1);
+
+           }
+        }
+        return arr;
     } 
 }

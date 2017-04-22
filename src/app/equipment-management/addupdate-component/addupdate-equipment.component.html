@@ -4,7 +4,8 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active"><a href="javascript:void(0)">Equipment Management</a></li>      
+                    <li><a href="javascript:void(0)">Equipments</a></li>      
+                    <li class="active"><a href="javascript:void(0)">Add New</a></li>      
                 </ol>
             </div>
         </div>
@@ -21,34 +22,32 @@
                     <button type="button" class="close" data-dismiss="alert"  (click)="closeMessage()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <strong>Success</strong> Equipment Added Successfully.
+                    <strong>Success</strong> Equipment added successfully.
                 </div>
                 
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-name">Equipment Name*</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" [(ngModel)]="equipment.name" required>
+                        <div class="form-group has-required">
+                            <label for="nf-name">Equipment Name</label>
+                            <input type="text" id="name" name="name" class="form-control" [(ngModel)]="equipment.name" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="category">Category*</label>
+                        <div class="form-group has-required">
+                            <label for="category">Category</label>
                             <select id="category" name="category" class="form-control" size="1" [(ngModel)]="equipment.category" required>
                                 <option value="">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
+                                <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="companyManufacturer">Company/Manufacturer*</label>
+                        <div class="form-group has-required">
+                            <label for="companyManufacturer">Company/Manufacturer</label>
                             <select id="companyManufacturer" name="companyManufacturer" class="form-control" [(ngModel)]="equipment.companyManufacturer" size="1" required>
-                                <option value="0">Please select</option>
+                                <option value="">Please select</option>
                                 <option value="1">Variety 1</option>
                                 <option value="2">Variety 2</option>
                                 <option value="3">Variety 3</option>
@@ -56,10 +55,10 @@
                         </div>
                     </div>
                       <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="model">Model*</label>
+                        <div class="form-group has-required">
+                            <label for="model">Model</label>
                             <select id="model" name="model" class="form-control" size="1" [(ngModel)]="equipment.model" required>
-                                <option value="0">Please select</option>
+                                <option value="">Please select</option>
                                 <option value="1">Option #1</option>
                                 <option value="2">Option #2</option>
                                 <option value="3">Option #3</option>
@@ -73,28 +72,21 @@
                             <label for="modelyear">Model year</label>
                             <select id="modelyear" name="modelyear" class="form-control" size="1" [(ngModel)]="equipment.modelyear">
                                 <option value="">Please select</option>
-                                <option value="2010">2010</option>                                
-                                <option value="2011">2011</option>                                
-                                <option value="2012">2012</option>                                
-                                <option value="2013">2013</option>                                
-                                <option value="2014">2014</option>                                
-                                <option value="2015">2015</option>                                
-                                <option value="2016">2016</option>                                
-                                <option value="2017">2017</option>                                                                
+                                <option *ngFor="let year of years" value="{{year}}">{{year}}</option>                                                                
                             </select>
                         </div>
                     </div>
                 
                     <div class="col-sm-6">
-                    <div class="form-group">
+                        <div class="form-group">
                             <label for="enginePower">Engine power</label>
-                            <input type="text" id="enginePower" name="enginePower" class="form-control" [(ngModel)]="equipment.enginepower" placeholder="Enter Engine Power">
+                            <input type="text" id="enginePower" name="enginePower" class="form-control" [(ngModel)]="equipment.enginepower" placeholder="" />
                         </div>
                     </div>
                 </div>
                  <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group ">
                             <input type="radio"  name="rentSell" class="" value="rent"  [(ngModel)]="equipment.rentSell" checked required>
                             <label for="nf-rentslell">Rent</label>
                             &nbsp;&nbsp;                            
@@ -112,15 +104,15 @@
                 </div>
                   <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="usage">Usage*</label>
+                        <div class="form-group has-required">
+                            <label for="usage">Usage</label>
                             <textarea type="text" id="usage" name="usage" class="form-control" [(ngModel)]="equipment.usage" placeholder="" rows="4" required></textarea>
                         </div>
                     </div>
 
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="description">Description*</label>
+                        <div class="form-group has-required">
+                            <label for="description">Description</label>
                             <textarea type="text" id="description" name="description" class="form-control" [(ngModel)]="equipment.description" placeholder="" rows="4" required></textarea>
                         </div>
                     </div>
@@ -129,7 +121,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="termsConditions">Terms & Conditions</label>
-                            <textarea type="text" id="termsConditions" name="termsConditions" class="form-control" [(ngModel)]="equipment.termsConditions" placeholder="" rows="4"></textarea>
+                            <textarea type="text" id="termsConditions" name="termsConditions" class="form-control" [(ngModel)]="equipment.termsConditions" placeholder="" rows="4" [disabled]="true"></textarea>
                         </div>
                     </div>
                 </div>
@@ -137,14 +129,15 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-image">Image</label>
-                            <input type="file" name="" class="form-control">
+                            <input type="file" name="file-7[]" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple />
+                            <label for="file-7"><span></span> <strong><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> Upload image</strong></label>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="reset" class="btn btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                    <button type="submit" class="pull-right btn btn-primary" [disabled]="!addEquipmentForm.valid"><i class="fa fa-dot-circle-o"></i> Save</button>
-                </div>
+                    <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/equipment/list']"> Cancel</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addEquipmentForm.valid">Save</button>
+                </div>          
             </form>
         </div>
     </div> <!-- .card -->

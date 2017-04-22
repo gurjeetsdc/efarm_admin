@@ -11,6 +11,7 @@ export class AddUpdateEquipmentComponent {
     
     private equipment     = {};
     private allEquipments = [];
+    private category      = [];
 
     private equipmentID: any;
     private response:any;
@@ -19,18 +20,46 @@ export class AddUpdateEquipmentComponent {
 
     private action:string = 'Add';
 
+    private currentYear = new Date().getFullYear();
+    private years = [];
+    
     constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _equipmentService: EquipmentService) {
         this.equipmentID = _activateRouter.snapshot.params['id'];        
+        
         if( this.equipmentID ) {
-            this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { this.equipment = res; this.action = 'Update' }, err => {});
-        }        
+            this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { this.equipment = res; this.action = 'Edit' }, err => {});
+        }
+        
+        this._equipmentService.getAllCategories().subscribe( res => { this.category = res; console.log(this.category) }, err => {});
+        
+
+        let equipmentDefaultvalues = {
+                                        name: '',
+                                        category: '',
+                                        companyManufacturer: '',
+                                        model: '',
+                                        modelyear: '',
+                                        enginepower: '',
+                                        rentSell: 'rent',
+                                        rate: '',
+                                        usage: '',
+                                        description: '',
+                                        termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'
+                                    };
+        this.equipment = equipmentDefaultvalues;
+
+        /*create years array. */
+        this.years.push(this.currentYear);
+        for (var i = 1; i <= 50; i++) {
+            this.years.push(this.currentYear - i);
+        }
     }
 
     submitEquipment() {
         console.log('submitting Equipment...');
 
-        if( this.action == 'Update' ) {
-            this.updateEquipment();            
+        if( this.action == 'Edit' ) {
+            this.editEquipment();            
         }else {
            this.addEquipment();
         }
@@ -50,7 +79,7 @@ export class AddUpdateEquipmentComponent {
     }
 
 
-    updateEquipment() {
+    editEquipment() {
         console.log('Udpating Equipment...');
         
         this._equipmentService.putEquipment(this.equipment).subscribe(res => {
