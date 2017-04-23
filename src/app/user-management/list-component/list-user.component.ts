@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {PaginationInstance} from 'ng2-pagination';
+import { Router, NavigationEnd } from '@angular/router';
+// import {PaginationInstance} from 'ng2-pagination';
 import { UserService } from '../services/user.service';
-import {DataTableModule} from "angular2-datatable";
+// import {DataTableModule} from "angular2-datatable";
 
 @Component({
   selector: 'app-user-management',
@@ -24,6 +24,14 @@ export class ListUserComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+        this._router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
+
         this._userService.userListing().subscribe(res => {
             this.data = res;
             this.isLoading = false;
@@ -47,7 +55,7 @@ export class ListUserComponent implements OnInit {
     }
 
     sendUpdateUser(userID) {     
-        let route = '/user/list/'+ userID;
+        let route = '/user/update/'+ userID;
         this._router.navigate([route]);       
     } 
 

@@ -8,8 +8,6 @@ import { UserService } from '../services/user.service';
 export class ViewUserComponent {
 	private userID = '';
 	private user = {};
-    private copy_user = {};
-    private edit = false;
     private isLoading = false;
 
     constructor(route: ActivatedRoute, private _router : Router,private _userService: UserService) { 
@@ -21,37 +19,19 @@ export class ViewUserComponent {
         });
     }
 
-    editUser() {
-        this.edit = !this.edit;
-        this.copy_user = JSON.parse(JSON.stringify(this.user));
-    }
-
-    cancel() {
-        this.edit = !this.edit;
-        this.user = JSON.parse(JSON.stringify(this.copy_user));
-    }
-
-    save() {
-        this._userService.updateUser(this.user)
-                       .subscribe(
-                           res => {
-                             this.edit = !this.edit;
-                             this.copy_user = JSON.parse(JSON.stringify(this.user));
-                           },
-                           err => {
-
-                           });
+    updateUser(userid) {        
+        let route = '/user/update/'+ userid;
+        this._router.navigate([route]);       
     }
 
     modify() {
       this._router.navigate(['/user/update/' + this.user["id"]]);
     }
 
-    removeUser() {
+    removeUser(userid) {
         if(confirm("Are you sure to delete User")) {
             this.isLoading = true;
-            this.user["isDeleted"] = true;
-            this._userService.updateUser(this.user).subscribe(res => {
+            this._userService.deleteUser(userid).subscribe(res => {
                 this.isLoading = false;
                 this._router.navigate(['/user/list/']);      
             },err => {

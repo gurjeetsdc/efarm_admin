@@ -3,15 +3,21 @@ import { CropService } from '../services/crop.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  templateUrl: 'add-crop.component.html'
+  templateUrl: 'addupdate-crop.component.html'
 })
 export class AddUpdateCropComponent {
 	private crop = {
-        terms:"Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum"
+        terms:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod",
+        category:'',
+        variety:'',
+        packaging:'',
+        destination_shipping:''
     };
+    private category = [];
     private cropID:any;
     constructor(private router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService) { 
-       this.cropID = _activateRouter.snapshot.params['id'];        
+        this._cropService.getAllCategories().subscribe( res => { this.category = res; }, err => {});
+        this.cropID = _activateRouter.snapshot.params['id'];        
         if( this.cropID ) {
             this._cropService.getCrop(this.cropID).subscribe(res => {
                 this.crop = res["Data"][0];
@@ -19,6 +25,7 @@ export class AddUpdateCropComponent {
 
             });
         }
+
     }
 
     save() {

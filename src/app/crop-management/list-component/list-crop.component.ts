@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PaginationInstance} from 'ng2-pagination';
+// import {PaginationInstance} from 'ng2-pagination';
 import { CropService } from '../services/crop.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-crop-management',
@@ -25,6 +25,14 @@ export class ListCropComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        
+        this._router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
+
         this._cropService.croplisting().subscribe(res => {
             this.data = res["Data"];
             this.isLoading = false;
@@ -53,14 +61,14 @@ export class ListCropComponent implements OnInit {
     }
 
      
-    removeCrop(crop,index) {
+    removeCrop(crop) {
         if(confirm("Are you sure to delete Crop")) {
             this.isLoading = true;
             crop["isDeleted"] = true;
             this._cropService.updateCrop(crop).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
-                this.data.splice(index,1);
+                this.removeByAttr(this.data, 'id', crop["id"]);
                 this._router.navigate(['/crop/list/']);      
             },err => {
                 this.isLoading = false;
@@ -68,4 +76,17 @@ export class ListCropComponent implements OnInit {
         }
     } 
   
+    removeByAttr(arr, attr, value){
+        let i = arr.length;
+        while(i--){
+           if( arr[i] 
+               && arr[i].hasOwnProperty(attr) 
+               && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+               arr.splice(i,1);
+
+           }
+        }
+        return arr;
+    } 
 }

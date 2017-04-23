@@ -27,11 +27,9 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-password">Category</label>
-                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="crop.category" required>
-                                <option >Please select</option>
-                                <option value="Category 1">Category 1</option>
-                                <option value="Category 2">Category 2</option>
-                                <option value="Category 3">Category 3</option>
+                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="crop.category" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -41,7 +39,7 @@
                         <div class="form-group">
                             <label for="nf-variety">Variety</label>
                             <select id="select1" name="select1" class="form-control" [(ngModel)]="crop.variety" size="1">
-                                <option>Please select</option>
+                                <option value="">Please select</option>
                                 <option value="Variety 1">Variety 1</option>
                                 <option value="Variety 2">Variety 2</option>
                                 <option value="Variety 3">Variety 3</option>
@@ -51,7 +49,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-price">Offer Price <i class="fa fa-rupee"></i></label>
-                            <input type="number" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="crop.price" placeholder="" required="" min="1">
+                            <input type="number" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="crop.price" placeholder="" required="" min="1" max="9999999999999998">
                         </div>
                     </div>
                 </div>
@@ -111,7 +109,7 @@
                         <div class="form-group has-required">
                             <label for="nf-packaging">Packaging</label>
                             <select id="select2" name="select2" class="form-control" size="1" [(ngModel)]="crop.packaging" required>
-                                <option >Please select</option>
+                                <option value="">Please select</option>
                                 <option value="Pack 1">Pack 1</option>
                                 <option value="Pack 2">Pack 2</option>
                                 <option value="Pack 3">Pack 3</option>
@@ -130,7 +128,7 @@
                         <div class="form-group has-required">
                             <label for="nf-destination_shipping">Destination for Shipping*</label>
                             <select id="select3" name="select3" class="form-control" size="1" [(ngModel)]="crop.destination_shipping" required>
-                                <option >Please select</option>
+                                <option value="">Please select</option>
                                 <option value="Shipping 1">Shipping 1</option>
                                 <option value="Shipping 2">Shipping 2</option>
                                 <option value="Shipping 3">Shipping 3</option>

@@ -5,7 +5,8 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active"><a href="javascript:void(0)">Users</a></li>      
+                    <li><a href="javascript:void(0)">Users</a></li>
+                    <li class="active"><a>List</a></li>
                 </ol>
             </div>
         </div>
@@ -14,40 +15,96 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    Users
-                    <button type="button" class="btn btn-success pull-right" [routerLink]="['/user/add']">Add User</button>
-                </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
+                            <div class="input-group">
+                                <input class="form-control" name="q" placeholder="Search" type="text">
+                                <span class="input-group-btn">
+                                <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                </span>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="col-9 text-right">
+                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/user/add']">Add User</button>
+                            <div class="icns">
+                                <a><img src="assets/img/pdf.png" alt="pdf"></a>
+                                <a><img src="assets/img/xls.png" alt="pdf"></a>
+                            </div>
+                        </div>
+                    </div> <!-- .row -->
+                </div><!-- .card-header -->
                 
                 <div class="card-block">                                        
                     <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                         <thead>
                             <tr>
-                                <th width="15%"><mfDefaultSorter by="first_name">Name</mfDefaultSorter></th>
-                                <th width="20%"><mfDefaultSorter by="phone">Phone</mfDefaultSorter></th>
-                                <th width="20%"><mfDefaultSorter by="district">District</mfDefaultSorter></th>                            
-                                <th width="25%"><mfDefaultSorter by="email">Email</mfDefaultSorter></th>                        
-                                <th width="30%"><mfDefaultSorter by="createdAt">Created On</mfDefaultSorter></th>                            
+
+                                <th width="25%">
+                                    <mfDefaultSorter by="first_name">Name 
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="10%">
+                                    <mfDefaultSorter by="phone">Phone
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="10%">
+                                    <mfDefaultSorter by="district">District 
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="15%">Email</th>
+                                <th width="10%">Created On</th>
+                                <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
                             <tr *ngIf="isLoading">
-                                <td colspan="3">
+                                <td colspan="8">
                                     <div class="is-loading"><i class="page-loader"></i></div>
                                 </td>
                             </tr>
-                            <tr *ngFor="let user of mf.data;let i = index">                        
+                            <tr *ngFor="let user of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.first_name}} {{user.last_name}}</a></td>
                                 <td>{{user.phone}}</td>
                                 <td>{{user.district}}</td>
                                 <td>{{user.email}}</td>
                                 <td>{{user.createdAt | date}}</td>
+                                <td>                                    
+                                    <button (click)="sendUpdateUser(user.id)" class="btn btn-info" title="Edit" style="padding:1px 6px"><i class="fa fa-pencil"></i></button>
+                                    <!-- <button  (click)="removeUser(user)" class="btn btn-danger" title="Delete" style="padding: 1px 6px"><i class="fa fa-trash"></i></button>                                     -->
+                                </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="7">
-                                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                                <td colspan="8">
+                                    <div class="pagination-section">
+                                        <div class="row-on-page">
+                                            <label class="label-control">Show</label>
+                                            &nbsp;
+                                            <select class="input-sm" [(ngModel)]="rowsOnPage">
+                                                <option [ngValue]="5">5</option>
+                                                <option [ngValue]="10">10</option>
+                                                <option [ngValue]="15">25</option>
+                                                <option [ngValue]="15">50</option>
+                                                <option [ngValue]="15">100</option>
+                                            </select>
+                                            &nbsp;
+                                           <label class="label-control">entires</label>
+                                        </div>
+                                        <div class="text-right">                                    
+                                            <mfBootstrapPaginator></mfBootstrapPaginator>
+                                        </div>
+                                        <div style="clear: both;"></div>
+                                    </div>    
                                 </td>    
                             </tr>                            
                         </tfoot>
@@ -57,3 +114,4 @@
         </div>
     </div>
 </div>
+
