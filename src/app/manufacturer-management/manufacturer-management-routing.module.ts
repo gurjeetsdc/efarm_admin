@@ -6,47 +6,47 @@ import { PaginationModule } from 'ng2-bootstrap';
 import { HttpModule } from '@angular/http';
 
 
-import { ListUserComponent } from './list-component/list-user.component';
-import { ViewUserComponent } from './view-component/view-user.component';
+import { ListManufacturerComponent } from './list-component/list-manufacturer.component';
+import { ViewManufacturerComponent } from './view-component/view-manufacturer.component';
 
-import { AddUpdateUserComponent } from './addupdate-component/addupdate-user.component';
+import { AddUpdateManufacturerComponent } from './addupdate-component/addupdate-manufacturer.component';
 
-import { UserService } from './services/user.service';
+import { ManufacturerService } from './services/manufacturer.service';
 
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'User Management'
+      title: 'Manufacturer Management'
     },
     children: [
       {
         path: 'list',
-        component: ListUserComponent,
+        component: ListManufacturerComponent,
         data: {
           title: 'List'
         }
       },
       {
         path: 'add',
-        component: AddUpdateUserComponent,
+        component: AddUpdateManufacturerComponent,
         data: {
           title: 'Add'
         }
       },
       {
             path: 'list/:id',
-            component: ViewUserComponent,
+            component: ViewManufacturerComponent,
             data: {
-              title: 'View User'
+              title: 'View Manufacturer'
             }
       },
       {
         path: 'update/:id',
-        component: AddUpdateUserComponent,
+        component: AddUpdateManufacturerComponent,
         data: {
-          title: 'Update User'
+          title: 'Update Manufacturer'
         }
       }
     ]
@@ -62,7 +62,7 @@ const routes: Routes = [
     HttpModule   
   ],
   providers: [
-    UserService
+    ManufacturerService
   ],
   exports: [
     RouterModule,
@@ -71,4 +71,4 @@ const routes: Routes = [
     PaginationModule    
   ]
 })
-export class UserManagementRoutingModule {}
+export class ManufacturerManagementRoutingModule {}

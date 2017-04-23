@@ -6,18 +6,18 @@ import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
 
 
-import { SweetAlertService } from 'ng2-sweetalert2';
+//import { SweetAlertService } from 'ng2-sweetalert2';
 
-import { EquipmentService } from '../services/equipment.service';
+import { UserService } from '../services/user.service';
 
 
 @Component({
-    selector: 'app-equipment-management',
-    templateUrl: './list-equipment.component.html',
+    selector: 'app-user-management',
+    templateUrl: './list-user.component.html',
      // providers: [SweetAlertService],
-    styleUrls: ['./list-equipment.component.scss']
+    styleUrls: ['./list-user.component.scss']
 })
-export class ListEquipmentComponent implements OnInit {
+export class ListUserComponent implements OnInit {
 
     public data;
     public filterQuery = "";
@@ -30,17 +30,17 @@ export class ListEquipmentComponent implements OnInit {
     public isLoading:boolean = true;
 
    
-    public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _equipmentService: EquipmentService) { 
+    public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _userService: UserService) { 
         
     }
 
     ngOnInit(): void {
 
-        this._equipmentService.getAllEquipments().subscribe(allEquipments => {
-            this.data = allEquipments;            
+        this._userService.getAllUser().subscribe(allUsers => {
+            this.data = allUsers;            
             this.isLoading = false;
-            console.log(allEquipments);
-            console.log("allEquipments loaded");
+            console.log(allUsers);
+            console.log("allUsers loaded");
         });             
     }
 
@@ -52,28 +52,28 @@ export class ListEquipmentComponent implements OnInit {
         return a.city.length;
     }
 
-    viewEquipment (equipmentID) {
-        let route = '/equipment/list/'+equipmentID;
+    viewUser(userID) {
+        let route = '/user/list/'+userID;
         this._router.navigate([route]);       
     }
 
-    sendUpdateEquipment( equipmentID ) {     
-        console.log(equipmentID);   
-        let route = '/equipment/update/'+equipmentID;
+    sendUpdateUser( userID ) {     
+        console.log(userID);   
+        let route = '/user/update/'+userID;
         this._router.navigate([route]);       
     }
 
      
-    removeEquipment( equipmentID ) {
-        if(confirm("Are you sure to delete Equipment")) {
+    removeUser( userID ) {
+        if(confirm("Are you sure to delete user")) {
             console.log("Implement delete functionality here");
             this.isLoading = true;
-            this._equipmentService.deleteEquipment(equipmentID).subscribe(res => {
+            this._userService.deleteUser(userID).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
 
                 /* reload list */
-                this._router.navigate(['/equipment/list/']);      
+                this._router.navigate(['/user/list/']);      
             });  
         }
     } 

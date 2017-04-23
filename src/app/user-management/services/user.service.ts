@@ -3,14 +3,14 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import tsConstants = require('./../../tsconstant');
 
 @Injectable()
-export class ManufacturerService {
+export class UserService {
 	   
     private access_token = {};
     private token        = '';
 
   	constructor(private _http: Http) { }
   	
-  	getAllManufacturer() {
+  	getAllUser() {
   		
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
@@ -19,10 +19,10 @@ export class ManufacturerService {
         this.token          = 'Bearer ' + this.access_token["access_token"];
 
         headers.append('Authorization', this.token );
-		return this._http.get(tsConstants.HOST +'/manufacturer', { headers: headers }).map((res:Response) => res.json());
+		return this._http.get(tsConstants.HOST +'/user', { headers: headers }).map((res:Response) => res.json());
   	}
 
-  	postManufacturer( manufacturer ) {
+  	postUser( user ) {
 
       	let headers         = new Headers();
       	let urlSearchParams = new URLSearchParams();
@@ -31,11 +31,11 @@ export class ManufacturerService {
         this.token          = 'Bearer ' + this.access_token["access_token"];
         
         headers.append('Authorization', this.token );
-    	return this._http.post(tsConstants.HOST +'/manufacturer', manufacturer, { headers: headers }).map((res:Response) => res.json());
+    	return this._http.post(tsConstants.HOST +'/user', user, { headers: headers }).map((res:Response) => res.json());
     }
 
-    /** get a single Manufacturer by ID **/
-    getManufacturer( manufacturerID ) {
+    /** get a single User by ID **/
+    getUser( userID ) {
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
         let body            = {};
@@ -44,11 +44,11 @@ export class ManufacturerService {
         this.token          = 'Bearer ' + this.access_token["access_token"];
         
         headers.append('Authorization', this.token );
-        return this._http.get( tsConstants.HOST +'/manufacturer/' + manufacturerID, { headers: headers }).map((res:Response) => res.json());
+        return this._http.get( tsConstants.HOST +'/user/' + userID, { headers: headers }).map((res:Response) => res.json());
     }
 
-    /** update manufacturer **/
-    putManufacturer(manufacturer) {
+    /** update user **/
+    putUser(user) {
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
         
@@ -56,11 +56,11 @@ export class ManufacturerService {
         this.token          = 'Bearer ' + this.access_token["access_token"];
     
         headers.append('Authorization', this.token );
-        return this._http.put(tsConstants.HOST +'/manufacturer/'+ manufacturer.id, manufacturer, { headers: headers }).map((res:Response) => res.json());
+        return this._http.put(tsConstants.HOST +'/user/'+ user.id, user, { headers: headers }).map((res:Response) => res.json());
     }
 
-    /** DeleteID manufacturer by ID **/
-    deleteManufacturer( manufacturerID ) {
+    /** DeleteID user by ID **/
+    deleteUser( userID ) {
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
         
@@ -68,6 +68,6 @@ export class ManufacturerService {
         this.token          = 'Bearer ' + this.access_token["access_token"];
         
         headers.append('Authorization', this.token );
-        return this._http.delete(tsConstants.HOST +'/manufacturer/'+ manufacturerID,  { headers: headers }).map((res:Response) => res.json());
+        return this._http.delete(tsConstants.HOST +'/user/'+ userID,  { headers: headers }).map((res:Response) => res.json());
     }        
 }

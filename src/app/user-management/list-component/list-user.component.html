@@ -1,11 +1,11 @@
-<!-- <div class="equipment-wrapper animated fadeIn">       -->
-<div class="equipment-wrapper">      
+<!-- <div class="user-wrapper animated fadeIn">       -->
+<div class="user-wrapper">      
     <div class="row">
         <div class="col-12 col-lg-12">
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active"><a href="javascript:void(0)">Equipment Management</a></li>      
+                    <li class="active"><a href="javascript:void(0)">User Management</a></li>      
                 </ol>
             </div>
         </div>
@@ -14,8 +14,8 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Equipments
-                    <button type="button" class="btn btn-success pull-right" [routerLink]="['/equipment/add']">Add Equipment</button>
+                    <i class="fa fa-align-justify"></i> Users
+                    <button type="button" class="btn btn-success pull-right" [routerLink]="['/user/add']">Add User</button>
                 </div>
                 
                 <div class="card-block">                                        
@@ -23,9 +23,12 @@
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                         <thead>
                             <tr>
-                                <th width="25%"><mfDefaultSorter by="name">Name</mfDefaultSorter></th>
-                                <th width="50%"><mfDefaultSorter by="description">Description</mfDefaultSorter></th>                            
-                                <th width="25%">Actions</th>
+                                <th width="15%"><mfDefaultSorter by="name">First Name</mfDefaultSorter></th>
+                                <th width="15%"><mfDefaultSorter by="description">Phone</mfDefaultSorter></th>
+                                <th width="20%"><mfDefaultSorter by="description">Address</mfDefaultSorter></th>
+                                <th width="20%"><mfDefaultSorter by="description">Email</mfDefaultSorter></th>
+                                <th width="15%"><mfDefaultSorter by="description">Member Since</mfDefaultSorter></th>                            
+                                <th width="15%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
@@ -34,12 +37,15 @@
                                     <div class="is-loading"><i class="page-loader"></i></div>
                                 </td>
                             </tr>
-                            <tr *ngFor="let equipment of mf.data">                        
-                                <td><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
-                                <td>{{equipment.description}}</td>
+                            <tr *ngFor="let user of mf.data">                        
+                                <td><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.firstname}}</a></td>
+                                <td>{{user.phone}}</td>
+                                <td>{{user.district}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.createdAt}}</td>
                                 <td>                                    
-                                    <button (click)="sendUpdateEquipment(equipment.id)" class="btn btn-info" title="Edit" style="padding:1px 6px"><i class="fa fa-pencil"></i></button>
-                                    <button  (click)="removeEquipment(equipment.id)" class="btn btn-danger" title="Delete" style="padding: 1px 6px"><i class="fa fa-trash"></i></button>                                    
+                                    <button (click)="sendUpdateUser(user.id)" class="btn btn-info" title="Edit" style="padding:1px 6px"><i class="fa fa-pencil"></i></button>
+                                    <button  (click)="removeUser(user.id)" class="btn btn-danger" title="Delete" style="padding: 1px 6px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
                             </tr>
                         </tbody>

@@ -1,10 +1,10 @@
-<div class="manufacturer-wrapper">
+<div class="category-wrapper">
     <div class="row">
         <div class="col-12 col-lg-12">
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active"><a href="javascript:void(0)">Manufacturer Management</a></li>      
+                    <li class="active"><a href="javascript:void(0)">Category Management</a></li>      
                 </ol>
             </div>
         </div>
@@ -12,38 +12,38 @@
 
     <div class="card">
         <div class="card-header">
-            <strong>{{action}} Manufacturer</strong>
+            <strong>{{action}} Category</strong>
         </div>
         <div class="card-block">
-            <form role="form" (ngSubmit)="submitManufacturer()" #addManufacturerForm="ngForm">
+            <form role="form" (ngSubmit)="submitCategory()" #addCategoryForm="ngForm">
                 
                <div *ngIf="showMessage" class="alert alert-success alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert"  (click)="closeMessage()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <strong>Success</strong> Manufacturer Added Successfully.
+                    <strong>Success</strong> Category Added Successfully.
                 </div>
                 
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-name">Manufacturer Name*</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" [(ngModel)]="manufacturer.name" required>
+                            <label for="nf-name">Category Name*</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" [(ngModel)]="category.name" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="description">Description*</label>
-                            <textarea type="text" id="description" name="description" class="form-control" [(ngModel)]="manufacturer.description" placeholder="" rows="4" required></textarea>
+                            <textarea type="text" id="description" name="description" class="form-control" [(ngModel)]="category.description" placeholder="" rows="4" required></textarea>
                         </div>
                     </div>
                 </div>
           
                 <div class="card-footer">
                     <button type="reset" class="btn btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                    <button type="submit" class="pull-right btn btn-primary" [disabled]="!addManufacturerForm.valid"><i class="fa fa-dot-circle-o"></i> Save</button>
+                    <button type="submit" class="pull-right btn btn-primary" [disabled]="!addCategoryForm.valid"><i class="fa fa-dot-circle-o"></i> Save</button>
                 </div>
             </form>
         </div>
     </div> <!-- .card -->
-</div> <!-- .manufacturer-wrapper -->
+</div> <!-- .category-wrapper -->

@@ -9,12 +9,10 @@ import { ManufacturerService } from '../services/manufacturer.service';
 })
 export class AddUpdateManufacturerComponent {
     
-    private manufacturer     = {};
+    private manufacturer    = {};
     private allManufacturer = [];
-
     private manufacturerID: any;
     private response:any;
-    
     private showMessage:boolean = false;
 
     private action:string = 'Add';
@@ -48,7 +46,6 @@ export class AddUpdateManufacturerComponent {
         });      
     	
     }
-
 
     updateManufacturer() {
         console.log('Udpating Manufacturer...');
