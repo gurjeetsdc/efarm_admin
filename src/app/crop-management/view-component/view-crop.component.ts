@@ -1,45 +1,26 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { CropService } from '../services/crop.service';
 @Component({
   templateUrl: 'view-crop.component.html'
 })
 export class ViewCropComponent {
-	private cropID = '';
-	private crop = {};
-  private copy_crop = {};
-  private edit = false;
-  constructor(route: ActivatedRoute,private _cropService: CropService) { 
-  	this.cropID = route.snapshot.params['id'];
-  	this._cropService.getCrop(this.cropID)
-                       .subscribe(
-                           res => {
-                             this.crop = res["Data"][0];
-                           },
-                           err => {
 
-                           });
-  }
+	private cropID      = '';
+	private crop        = {};
 
-  editCrop() {
-    this.edit = !this.edit;
-    this.copy_crop = JSON.parse(JSON.stringify(this.crop));
-  }
+    constructor(private _router: Router, route: ActivatedRoute,private _cropService: CropService) { 
+      	this.cropID = route.snapshot.params['id'];
+  	    this._cropService.getCrop(this.cropID).subscribe(res => {
+            this.crop = res["Data"][0];
+        },err => {
 
-  cancel() {
-    this.edit = !this.edit;
-    this.crop = JSON.parse(JSON.stringify(this.copy_crop));
-  }
+        });
+    }
 
-  save() {
-    this._cropService.updateCrop(this.crop)
-                       .subscribe(
-                           res => {
-                             this.edit = !this.edit;
-                             this.copy_crop = JSON.parse(JSON.stringify(this.crop));
-                           },
-                           err => {
+    updateCrop(cropid) {        
+        let route = '/crop/update/'+ cropid;
+        this._router.navigate([route]);       
+    }
 
-                           });
-  }
 }

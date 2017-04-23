@@ -1,24 +1,59 @@
-<div>
+<!-- <div class="user-wrapper animated fadeIn">       -->
+<div class="user-wrapper">      
     <div class="row">
         <div class="col-12 col-lg-12">
             <div class="content-header">
                 <ol class="breadcrumb">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Users</a></li>
-                    <li class="active"><a href="#">List</a></li>
+                    <li><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="active"><a href="javascript:void(0)">Users</a></li>      
                 </ol>
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header">
-            <input type="text" name="" placeholder="Search..." [(ngModel)]="search">
-            <button type="button" class="btn btn-success pull-right" [routerLink]="['/user/add']">Add User</button>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    Users
+                    <button type="button" class="btn btn-success pull-right" [routerLink]="['/user/add']">Add User</button>
+                </div>
+                
+                <div class="card-block">                                        
+                    <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
+                               [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                        <thead>
+                            <tr>
+                                <th width="15%"><mfDefaultSorter by="first_name">Name</mfDefaultSorter></th>
+                                <th width="20%"><mfDefaultSorter by="phone">Phone</mfDefaultSorter></th>
+                                <th width="20%"><mfDefaultSorter by="district">District</mfDefaultSorter></th>                            
+                                <th width="25%"><mfDefaultSorter by="email">Email</mfDefaultSorter></th>                        
+                                <th width="30%"><mfDefaultSorter by="createdAt">Created On</mfDefaultSorter></th>                            
+                            </tr>
+                        </thead>                        
+                        <tbody>
+                            <tr *ngIf="isLoading">
+                                <td colspan="3">
+                                    <div class="is-loading"><i class="page-loader"></i></div>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let user of mf.data;let i = index">                        
+                                <td><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.first_name}} {{user.last_name}}</a></td>
+                                <td>{{user.phone}}</td>
+                                <td>{{user.district}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.createdAt | date}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="7">
+                                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                                </td>    
+                            </tr>                            
+                        </tfoot>
+                    </table>                             
+                </div>
+            </div>
         </div>
-        <ng-table [config]="config" (tableChanged)="onChangeTable(config)" (cellClicked)="onCellClick($event)" [rows]="rows" [columns]="columns">
-        </ng-table>
-        <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false" (pageChanged)="onChangeTable(config, $event)" (numPages)="numPages = $event">
-        </pagination>
-        <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
     </div>
 </div>

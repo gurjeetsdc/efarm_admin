@@ -5,16 +5,16 @@
                 <ol class="breadcrumb">
                     <li><a href="JavaScript:Void(0);">Dashboard</a></li>
                     <li><a href="JavaScript:Void(0);">Crops</a></li>
-                    <li class="active"><a href="JavaScript:Void(0);">Add Crop</a></li>
+                    <li class="active"><a href="JavaScript:Void(0);">{{cropID ? 'Update' : 'Add'}} Crop</a></li>
                 </ol>
             </div>
         </div>
     </div>
     <div class="card">
         <div class="card-header">
-            <strong>Add Crop</strong>
+            <strong>{{cropID ? 'Update' : 'Add'}} Crop</strong>
         </div>
-         <form role="form" (ngSubmit)="addCrop()" #dailyExpenseForm="ngForm">
+         <form role="form" (ngSubmit)="save()" #dailyExpenseForm="ngForm">
         <div class="card-block">
            
                 <div class="row">
@@ -154,10 +154,9 @@
                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Kg
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-right">
+                                <!--<div class="dropdown-menu dropdown-menu-right">
                                   <a class="dropdown-item" href="JavaScript:void(0)">Miles</a>
-                                 
-                                </div>
+                                </div>-->
                               </div>
                             </div>                       
                         </div>

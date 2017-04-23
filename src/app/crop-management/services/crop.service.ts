@@ -7,46 +7,55 @@ export class CropService {
   private host = "https://efarmapi.herokuapp.com";
   private access_token = {};
   private token = '';
-  constructor(private http: Http) { }
+  constructor(private _http: Http) { }
 
   	croplisting() {
-        this.access_token = JSON.parse(localStorage.getItem("user"));
-        this.token = 'Bearer ' + this.access_token["access_token"];
+
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
-        headers.append('Authorization', this.token);
+
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
         
-        //let body = urlSearchParams.toString()
-		return this.http.get(this.host +'/crops/listing', { headers: headers }).map((res:Response) => res.json())
+        headers.append('Authorization', this.token);
+		return this._http.get(this.host +'/crops/listing', { headers: headers }).map((res:Response) => res.json())
     }
 
     addCrop(crop) {
-        this.access_token = JSON.parse(localStorage.getItem("user"));
-        this.token = 'Bearer ' + this.access_token["access_token"];
+
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
+        
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        
         headers.append('Authorization', this.token);
-    return this.http.post(this.host +'/crops/add', crop, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this.host +'/crops/add', crop, { headers: headers }).map((res:Response) => res.json())
     }
 
     getCrop(crop) {
+        
+        let headers = new Headers();
+        let urlSearchParams = new URLSearchParams();
+        let body = {};        
+    
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
-        let headers = new Headers();
-        let body = {};        
-        let urlSearchParams = new URLSearchParams();
+    
         headers.append('Authorization', this.token);
-    return this.http.post(this.host +'/crops/'+ crop, body, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this.host +'/crops/'+ crop, body, { headers: headers }).map((res:Response) => res.json())
     }
 
     updateCrop(crop) {
+
+        let headers = new Headers();
+        let urlSearchParams = new URLSearchParams();
+        
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
-        let headers = new Headers();
-        let body = {};        
-        let urlSearchParams = new URLSearchParams();
+
         headers.append('Authorization', this.token);
-    return this.http.post(this.host +'/crops/'+ crop.id, crop, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this.host +'/crops/'+ crop.id, crop, { headers: headers }).map((res:Response) => res.json())
     }
 
 }

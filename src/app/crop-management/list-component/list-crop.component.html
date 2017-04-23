@@ -1,94 +1,65 @@
-<div> 
-  <div class="row">
-    <div class="col-12 col-lg-12">
-        <div class="content-header">
-            <ol class="breadcrumb">
-                <li><a>Dashboard</a></li>
-                <li><a>Crops</a></li>
-                <li class="active"><a>List</a></li>
-            </ol>
+<!-- <div class="crop-wrapper animated fadeIn">       -->
+<div class="crop-wrapper">      
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="content-header">
+                <ol class="breadcrumb">
+                    <li><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="active"><a href="javascript:void(0)">Crops</a></li>      
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    Crops
+                    <button type="button" class="btn btn-success pull-right" [routerLink]="['/crop/add']">Add Crop</button>
+                </div>
+                
+                <div class="card-block">                                        
+                    <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
+                               [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                        <thead>
+                            <tr>
+                                <th width="25%"><mfDefaultSorter by="name">Name</mfDefaultSorter></th>
+                                <th width="25%"><mfDefaultSorter by="price">Offer Price</mfDefaultSorter></th>
+                                <th width="25%"><mfDefaultSorter by="quantity_per_pack">Qty.</mfDefaultSorter></th>                            
+                                <th width="25%"><mfDefaultSorter by="category">Category</mfDefaultSorter></th>                        
+                                <th width="25%"><mfDefaultSorter by="color">Color</mfDefaultSorter></th>                            
+                                <th width="30%">Actions</th>
+                            </tr>
+                        </thead>                        
+                        <tbody>
+                            <tr *ngIf="isLoading">
+                                <td colspan="3">
+                                    <div class="is-loading"><i class="page-loader"></i></div>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let crop of mf.data;let i = index">                        
+                                <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
+                                <td>{{crop.price}}</td>
+                                <td>{{crop.quantity_per_pack}}</td>
+                                <td>{{crop.category}}</td>
+                                <td>{{crop.color}}</td>
+                                <td>                                    
+                                    <button (click)="sendUpdateCrop(crop.id)" class="btn btn-info" title="Edit" style="padding:1px 6px"><i class="fa fa-pencil"></i></button>
+                                    <button  (click)="removeCrop(crop,i)" class="btn btn-danger" title="Delete" style="padding: 1px 6px"><i class="fa fa-trash"></i></button>                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="7">
+                                    <div *ngIf="err_message" class="text-center text-danger">{{err_message}}</div>                          
+                                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                                </td>    
+                            </tr>                            
+                        </tfoot>
+                    </table>  
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-    <div class="card">
-        <div class="card-header">
-        <div class="row">
-        <div class="col-3">
-      <!--  <input type="text" name="" placeholder="Search..." [(ngModel)]="search" (ngModelChange)="doSomething($event)">-->
-        
-        <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
-        <div class="input-group">
-          <input class="form-control" name="q" placeholder="Search" type="text">
-          <span class="input-group-btn">
-          <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
-          </span> </div>
-      </form>
-      
-            </div>
-       <div class="col-9 text-right">
-        <button type="button" class="btn btn-success btnadd" [routerLink]="['/crop/add']">Add Crop</button>
-        <div class="icns">
-                     <a><img src="assets/img/pdf.png" alt="pdf"></a>
-                     <a><img src="assets/img/xls.png" alt="pdf"></a>
-              </div>
-            </div>
-            </div>
-        </div>
-        <ng-table [config]="config"
-                  (tableChanged)="onChangeTable(config)"
-                  (cellClicked)="onCellClick($event)"
-                  [rows]="rows" [columns]="columns">
-        </ng-table>
-
-        <div *ngIf="isLoading" class="is-loading"><i class="page-loader"></i></div>
-        <div *ngIf="err_message" class="text-center text-danger">{{err_message}}</div>
-        
-        <div class="row"> 
-        <div class="col-6">       
-        <pre *ngIf="config.paging" class="pagenumber">Page: {{page}} / {{numPages}}</pre>
-        </div>
-
-        <div class="col-6">        
-        <pagination *ngIf="config.paging"
-                    class="pagination-sm"
-                    [(ngModel)]="page"
-                    [totalItems]="length"
-                    [itemsPerPage]="itemsPerPage"
-                    [maxSize]="maxSize"
-                    [boundaryLinks]="true"
-                    [rotate]="false"
-                    (pageChanged)="onChangeTable(config, $event)"
-                    (numPages)="numPages = $event">
-        </pagination>
-        </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- <div> 
-    <div class="card">
-        <div class="card-header">
-        <input type="text" name="" placeholder="Search..." [(ngModel)]="search" (ngModelChange)="doSomething($event)">
-        <button type="button" class="btn btn-success pull-right" [routerLink]="['/crop/add']">Add Crop</button>
-        </div>
-        <ng-table [config]="config"
-                  (tableChanged)="onChangeTable(config)"
-                  (cellClicked)="onCellClick($event)"
-                  [rows]="rows" [columns]="columns">
-        </ng-table>
-        <pagination *ngIf="config.paging"
-                    class="pagination-sm"
-                    [(ngModel)]="page"
-                    [totalItems]="length"
-                    [itemsPerPage]="itemsPerPage"
-                    [maxSize]="maxSize"
-                    [boundaryLinks]="true"
-                    [rotate]="false"
-                    (pageChanged)="onChangeTable(config, $event)"
-                    (numPages)="numPages = $event">
-        </pagination>
-        <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
-    </div>
-</div> -->

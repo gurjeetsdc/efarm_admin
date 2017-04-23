@@ -10,16 +10,15 @@ export class ViewUserComponent {
 	private user = {};
     private copy_user = {};
     private edit = false;
-    constructor(route: ActivatedRoute, private router : Router,private _userService: UserService) { 
-        this.userID = route.snapshot.params['id'];
-  	    this._userService.getUser(this.userID)
-                       .subscribe(
-                           res => {
-                             this.user = res;
-                           },
-                           err => {
+    private isLoading = false;
 
-                           });
+    constructor(route: ActivatedRoute, private _router : Router,private _userService: UserService) { 
+        this.userID = route.snapshot.params['id'];
+  	    this._userService.getUser(this.userID).subscribe(res => {
+           this.user = res;
+        },
+           err => {
+        });
     }
 
     editUser() {
@@ -45,6 +44,19 @@ export class ViewUserComponent {
     }
 
     modify() {
-      this.router.navigate(['/user/update/' + this.user["id"]]);
+      this._router.navigate(['/user/update/' + this.user["id"]]);
+    }
+
+    removeUser() {
+        if(confirm("Are you sure to delete User")) {
+            this.isLoading = true;
+            this.user["isDeleted"] = true;
+            this._userService.updateUser(this.user).subscribe(res => {
+                this.isLoading = false;
+                this._router.navigate(['/user/list/']);      
+            },err => {
+                this.isLoading = false;
+            });             
+        }
     }
 }

@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
 import { ListCropComponent } from './list-component/list-crop.component';
-import { AddCropComponent } from './addupdate-component/add-crop.component';
+import { AddUpdateCropComponent } from './addupdate-component/add-crop.component';
 import { ViewCropComponent } from './view-component/view-crop.component';
 import { HttpModule } from '@angular/http';
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'add',
-        component: AddCropComponent,
+        component: AddUpdateCropComponent,
         data: {
           title: 'Add'
         }
@@ -33,6 +33,13 @@ const routes: Routes = [
         component: ViewCropComponent,
         data: {
           title: 'List'
+        }
+      },
+      {
+        path: 'update/:id',
+        component: AddUpdateCropComponent,
+        data: {
+          title: 'Update'
         }
       }
     ]
