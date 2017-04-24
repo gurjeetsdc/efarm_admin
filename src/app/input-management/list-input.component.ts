@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 //import {PaginationInstance} from 'ng2-pagination';
 import { InputService } from './input.service';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
 
@@ -35,6 +35,13 @@ export class ListInputComponent implements OnInit {
         
     }
     ngOnInit(): void {
+
+      this._router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
 
         this._inputService.inputlist().subscribe(resInputs => {
             this.data = resInputs;            

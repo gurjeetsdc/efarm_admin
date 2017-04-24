@@ -5,7 +5,8 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active"><a href="javascript:void(0)">Inputs</a></li>      
+                    <li><a href="javascript:void(0)">Input</a></li>
+                    <li class="active"><a>List</a></li>    
                 </ol>
             </div>
         </div>
@@ -69,8 +70,26 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="3">
-                                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                                <td colspan="8">
+                                    <div class="pagination-section">
+                                        <div class="row-on-page">
+                                            <label class="label-control">Show</label>
+                                            &nbsp;
+                                            <select class="input-sm" [(ngModel)]="rowsOnPage">
+                                                <option [ngValue]="5">5</option>
+                                                <option [ngValue]="10">10</option>
+                                                <option [ngValue]="15">25</option>
+                                                <option [ngValue]="15">50</option>
+                                                <option [ngValue]="15">100</option>
+                                            </select>
+                                            &nbsp;
+                                           <label class="label-control">entires</label>
+                                        </div>
+                                        <div class="text-right">                                    
+                                            <mfBootstrapPaginator></mfBootstrapPaginator>
+                                        </div>
+                                        <div style="clear: both;"></div>
+                                    </div>    
                                 </td>    
                             </tr>                            
                         </tfoot>
