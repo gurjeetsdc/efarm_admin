@@ -8,14 +8,18 @@ import { Router,ActivatedRoute } from '@angular/router';
 export class AddUpdateUserComponent {
 	private user = {};
     private userID:any;
+    public isLoading =  true;
     constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService) { 
         this.userID = _activateRouter.snapshot.params['id'];        
         if( this.userID ) {
             this._userService.getUser(this.userID).subscribe(res => {
                 this.user = res;
+                this.isLoading = false;
             },err => {
-
+                this.isLoading = false;
             });
+        } else {
+            this.isLoading = false;
         }
     } 
 
