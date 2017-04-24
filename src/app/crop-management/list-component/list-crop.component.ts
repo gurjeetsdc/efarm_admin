@@ -64,7 +64,7 @@ export class ListCropComponent implements OnInit {
 
      
     removeCrop(crop) {
-        if(confirm("Are you sure to delete Crop")) {
+        if(confirm("Do you want to delete?")) {
             this.isLoading = true;
             crop["isDeleted"] = true;
             this._cropService.updateCrop(crop).subscribe(res => {

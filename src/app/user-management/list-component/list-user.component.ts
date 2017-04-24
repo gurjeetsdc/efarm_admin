@@ -57,7 +57,7 @@ export class ListUserComponent implements OnInit {
     }
 
     sendUpdateUser(userID) {     
-        let route = '/user/update/'+ userID;
+        let route = '/user/edit/'+ userID;
         this._router.navigate([route]);       
     } 
 

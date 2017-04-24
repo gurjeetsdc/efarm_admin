@@ -21,16 +21,12 @@ export class ViewUserComponent {
     }
 
     updateUser(userid) {        
-        let route = '/user/update/'+ userid;
+        let route = '/user/edit/'+ userid;
         this._router.navigate([route]);       
     }
 
-    modify() {
-      this._router.navigate(['/user/update/' + this.user["id"]]);
-    }
-
     removeUser(userid) {
-        if(confirm("Are you sure to delete User")) {
+        if(confirm("Do you want to delete?")) {
             this.isLoading = true;
             this._userService.deleteUser(userid).subscribe(res => {
                 this.isLoading = false;
