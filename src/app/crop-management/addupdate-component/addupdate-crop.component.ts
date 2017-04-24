@@ -11,7 +11,8 @@ export class AddUpdateCropComponent {
         category:'',
         variety:'',
         packaging:'',
-        destination_shipping:''
+        destination_shipping:'',
+        payment_method:'COD'
     };
     private category = [];
     private cropID:any;

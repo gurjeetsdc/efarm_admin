@@ -59,7 +59,7 @@
                             <label for="nf-grade">Grade</label>
                             
 						<form class="grade">
-							<div class="btn-group" data-toggle="buttons">
+							<div class="btn-group" data-toggle="">
 							<label class="btn btn-default">
 							<input name="grade" value="A+" type="radio" [(ngModel)]="crop.grade" >A+
 							</label>
@@ -147,7 +147,7 @@
                         <div class="form-group has-required">
                             <label for="nf-qty">Quantity Per Pack</label>				
 							<div class="input-group">
-                              <input type="text" id="nf-quantity_per_pack" name="quantity_per_pack" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="crop.quantity_per_pack" placeholder="" required>
+                              <input type="number" id="nf-quantity_per_pack" name="quantity_per_pack" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="crop.quantity_per_pack" min="1" max="999999999999999" placeholder="" required>
                               <div class="input-group-btn">
                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Kg
@@ -171,7 +171,7 @@
                         <div class="form-group has-required">
                             <label for="nf-paymentTerms">Payment Terms</label>
                            <form class="grade">
-							<div class="btn-group" data-toggle="buttons">
+							<div class="btn-group">
 							<label class="btn btn-default">
 							<input name="payment_mode" value="COD" type="radio" [(ngModel)]="crop.payment_method">COD
 							</label>
@@ -199,7 +199,7 @@
                             <label for="nf-average_lead_time">Average Lead Time</label>
                             
                             <div class="input-group">
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                        <input type="text" id="average_lead_time" name="average_lead_time" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="crop.average_lead_time" required>
                         <span class="input-group-addon width">Days</span>
                         </div>
 
