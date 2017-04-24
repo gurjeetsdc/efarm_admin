@@ -83,6 +83,20 @@ export class EquipmentService {
 
         headers.append('Authorization', this.token );
         return this._http.get(this.host +'/category', { headers: headers }).map((res:Response) => res.json());
-      }
+    }
+
+    getCurrentUser() {
+          
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
+
+        this.access_token   = JSON.parse(localStorage.getItem("user"));
+        this.token          = 'Bearer ' + this.access_token["access_token"];
+
+        headers.append('Authorization', this.token );
+        return this._http.get(this.host +'/users/current', { headers: headers }).map((res:Response) => res.json());
+    }
+
+
 
 }

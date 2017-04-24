@@ -43,8 +43,8 @@
                             <label for="category">Category</label>
                             <select id="category" name="category" class="form-control" size="1" [(ngModel)]="equipment.category" required>
                                 <option value="">Please select</option>
-                                <option *ngFor="let cat of category" [ngValue]="cat.id" [selected]="equipment.category.id == cat.id ? true : null">
-                                    {{cat.name}}<span *ngIf="equipment.category.id == cat.id"> - Selected</span>
+                                <option *ngFor="let cat of category" [ngValue]="cat.id" [selected]="equipment.category.id == cat.id">
+                                    {{cat.name}}
                                 </option>
                             </select>
                         </div>
@@ -166,6 +166,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    <input type="hidden" name="user_id" [(ngModel)]="equipment.user_id" />
                     <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/equipment/list']"> Cancel</button>
                     <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addEquipmentForm.valid">Save</button>
                 </div>          
