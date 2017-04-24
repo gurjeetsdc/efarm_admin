@@ -201,8 +201,12 @@ var LoginComponent = (function () {
         this.err_message = '';
         this.isPageLoading = false;
         this.valid_email = true;
+        this.remember_me = true;
     }
     LoginComponent.prototype.ngOnInit = function () {
+        if (localStorage.getItem("remember")) {
+            this.user["username"] = localStorage.getItem("remember");
+        }
     };
     LoginComponent.prototype.checkemail = function (email) {
         var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -213,16 +217,21 @@ var LoginComponent = (function () {
         /* start loader */
         this.isPageLoading = true;
         this.err_message = '';
-        this.loginService.login(this.user)
-            .subscribe(function (res) {
+        this.loginService.login(this.user).subscribe(function (res) {
             /* end loader */
             _this.isPageLoading = false;
             localStorage.setItem("user", JSON.stringify(res));
+            if (_this.remember_me) {
+                localStorage.setItem("remember", _this.user["username"]);
+            }
+            else {
+                localStorage.removeItem('remember');
+            }
             _this.router.navigate(['/dashboard']);
         }, function (err) {
             /* end loader */
             _this.isPageLoading = false;
-            _this.err_message = "Email id or password not correct";
+            _this.err_message = "Email or Password is not correct.";
         });
     };
     return LoginComponent;
@@ -312,11 +321,11 @@ var map = {
 	],
 	"./components/components.module": [
 		936,
-		3
+		4
 	],
 	"./crop-management/crop-management.module": [
 		937,
-		2
+		3
 	],
 	"./dashboard/dashboard.module": [
 		938,
@@ -324,7 +333,7 @@ var map = {
 	],
 	"./equipment-management/equipment-management.module": [
 		939,
-		1
+		2
 	],
 	"./icons/icons.module": [
 		940,
@@ -332,11 +341,11 @@ var map = {
 	],
 	"./input-management/input-management.module": [
 		941,
-		5
+		1
 	],
 	"./land-management/land-management.module": [
 		942,
-		4
+		5
 	],
 	"./pages/pages.module": [
 		943,
@@ -437,7 +446,7 @@ var tabs_1 = __webpack_require__(293);
 var nav_dropdown_directive_1 = __webpack_require__(737);
 var activate_route_guard_1 = __webpack_require__(379);
 var deactivate_route_guard_1 = __webpack_require__(380);
-var ng2_charts_1 = __webpack_require__(604);
+var ng2_charts_1 = __webpack_require__(615);
 var sidebar_directive_1 = __webpack_require__(738);
 var aside_directive_1 = __webpack_require__(735);
 var breadcrumb_component_1 = __webpack_require__(736);
@@ -1305,7 +1314,7 @@ module.exports = "<header class=\"app-header navbar\">\r\n  <button class=\"navb
 /***/ 918:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Loader div -->\n<div *ngIf=\"isPageLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div>\n</div>\n<section class=\"login-page\"></section>\n<div class=\"login-box\">\n    <!-- /.login-logo -->\n    <div class=\"login-box-body\">\n        <div class=\"login-logo\">\n            <img src=\"assets/img/logo.png\" alt=\"logo\">\n        </div>\n        <form role=\"form\" #loginForm=\"ngForm\" (ngSubmit)=\"login()\">\n            <div class=\"text-center\" *ngIf=\"err_message\">\n                <span class=\"text-danger\">\n                    {{err_message}}\n                </span>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Email</label>\n                <input type=\"text\" name=\"username\" class=\"form-control\" [(ngModel)]=\"user.username\" (ngModelChange)=\"checkemail(user.username);err_message=''\" #username=\"ngModel\" autofocus required>\n                <li *ngIf=\"username.errors && username.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!username.errors.required\">Email is required</span>\n                </li>\n                <li *ngIf=\"!username.errors && !valid_email\">\n                    <span class=\"text-danger\">Email id is not valid</span>\n                </li>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Password</label>\n                <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\" #password=\"ngModel\" (ngModelChange)=\"err_message=''\" required>\n                <li *ngIf=\"password.errors && password.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!password.errors.required\">Password is required</span>\n                </li>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-12 col-12\">\n                    <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" [disabled]=\"!loginForm.valid || !valid_email\">Login</button>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-6 col-6\">\n                    <div class=\"custome-check loginpage\">\n                        <input id=\"option5\" name=\"status\" type=\"checkbox\">\n                        <label for=\"option5\">Remember me</label>\n                    </div>\n                </div>\n                <!--  <div class=\"col-sm-6 col-6\">\n                    <a class=\"forgotlink\" href=\"#\">Forgot password</a>\n                </div>\n              <div class=\"col-sm-12 col-12 text-center\">\n                    Don't have an account. <a class=\"\" routerLinkActive=\"active\" [routerLink]=\"['/register']\">Click here</a>\n                </div> -->\n            </div> \n        </form>\n    </div>\n    <!-- /.login-box-body -->\n</div>\n"
+module.exports = "<!-- Loader div -->\n<div *ngIf=\"isPageLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div>\n</div>\n<section class=\"login-page\"></section>\n<div class=\"login-box\">\n    <!-- /.login-logo -->\n    <div class=\"login-box-body\">\n        <div class=\"login-logo\">\n            <img src=\"assets/img/logo.png\" alt=\"logo\">\n        </div>\n        <form role=\"form\" #loginForm=\"ngForm\" (ngSubmit)=\"login()\">\n            <div class=\"text-center\" *ngIf=\"err_message\">\n                <span class=\"text-danger\">\n                    {{err_message}}\n                </span>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Email</label>\n                <input type=\"text\" name=\"username\" class=\"form-control\" [(ngModel)]=\"user.username\" (ngModelChange)=\"checkemail(user.username);err_message=''\" #username=\"ngModel\" autofocus required>\n                <li *ngIf=\"username.errors && username.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!username.errors.required\">Email is required</span>\n                </li>\n                <li *ngIf=\"!username.errors && !valid_email\">\n                    <span class=\"text-danger\">Email id is not valid</span>\n                </li>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Password</label>\n                <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\" #password=\"ngModel\" (ngModelChange)=\"err_message=''\" required>\n                <li *ngIf=\"password.errors && password.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!password.errors.required\">Password is required</span>\n                </li>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-12 col-12\">\n                    <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" [disabled]=\"!loginForm.valid || !valid_email\">Login</button>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-6 col-6\">\n                    <div class=\"custome-check loginpage\">\n                        <input id=\"option5\" name=\"status\" type=\"checkbox\" [(ngModel)]=\"remember_me\">\n                        <label for=\"option5\">Remember me</label>\n                    </div>\n                </div>\n                <!--  <div class=\"col-sm-6 col-6\">\n                    <a class=\"forgotlink\" href=\"#\">Forgot password</a>\n                </div>\n              <div class=\"col-sm-12 col-12 text-center\">\n                    Don't have an account. <a class=\"\" routerLinkActive=\"active\" [routerLink]=\"['/register']\">Click here</a>\n                </div> -->\n            </div> \n        </form>\n    </div>\n    <!-- /.login-box-body -->\n</div>\n"
 
 /***/ }),
 

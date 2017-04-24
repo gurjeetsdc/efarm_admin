@@ -1,5 +1,5 @@
-webpackJsonp([2,16],Array(937).concat([
-/* 937 */
+webpackJsonp([2,16],Array(939).concat([
+/* 939 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13,40 +13,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var common_1 = __webpack_require__(17);
+/*For list table.*/
 var angular2_datatable_1 = __webpack_require__(985);
-var list_crop_component_1 = __webpack_require__(1253);
-var addupdate_crop_component_1 = __webpack_require__(1252);
-var view_crop_component_1 = __webpack_require__(1254);
-var crop_management_routing_module_1 = __webpack_require__(1277);
-var crop_service_1 = __webpack_require__(1238);
-var CropManagementModule = (function () {
-    function CropManagementModule() {
+var list_equipment_component_1 = __webpack_require__(1257);
+var view_equipment_component_1 = __webpack_require__(1258);
+var addupdate_equipment_component_1 = __webpack_require__(1256);
+var equipment_management_routing_module_1 = __webpack_require__(1279);
+var EquipmentManagementModule = (function () {
+    function EquipmentManagementModule() {
     }
-    return CropManagementModule;
+    return EquipmentManagementModule;
 }());
-CropManagementModule = __decorate([
+EquipmentManagementModule = __decorate([
     core_1.NgModule({
         imports: [
-            crop_management_routing_module_1.CropManagementRoutingModule,
+            equipment_management_routing_module_1.EquipmentManagementRoutingModule,
             common_1.CommonModule,
             angular2_datatable_1.DataTableModule
         ],
-        providers: [
-            crop_service_1.CropService
-        ],
         declarations: [
-            list_crop_component_1.ListCropComponent,
-            addupdate_crop_component_1.AddUpdateCropComponent,
-            view_crop_component_1.ViewCropComponent
+            list_equipment_component_1.ListEquipmentComponent,
+            addupdate_equipment_component_1.AddUpdateEquipmentComponent,
+            view_equipment_component_1.ViewEquipmentComponent
         ]
     })
-], CropManagementModule);
-exports.CropManagementModule = CropManagementModule;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/crop-management.module.js.map
+], EquipmentManagementModule);
+exports.EquipmentManagementModule = EquipmentManagementModule;
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/equipment-management.module.js.map
 
 /***/ }),
-/* 938 */,
-/* 939 */,
 /* 940 */,
 /* 941 */,
 /* 942 */,
@@ -54,6 +49,69 @@ exports.CropManagementModule = CropManagementModule;
 /* 944 */,
 /* 945 */,
 /* 946 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ConnectableObservable_1 = __webpack_require__(964);
+/* tslint:enable:max-line-length */
+/**
+ * Returns an Observable that emits the results of invoking a specified selector on items
+ * emitted by a ConnectableObservable that shares a single subscription to the underlying stream.
+ *
+ * <img src="./img/multicast.png" width="100%">
+ *
+ * @param {Function|Subject} subjectOrSubjectFactory - Factory function to create an intermediate subject through
+ * which the source sequence's elements will be multicast to the selector function
+ * or Subject to push source elements into.
+ * @param {Function} [selector] - Optional selector function that can use the multicasted source stream
+ * as many times as needed, without causing multiple subscriptions to the source stream.
+ * Subscribers to the given source will receive all notifications of the source from the
+ * time of the subscription forward.
+ * @return {Observable} An Observable that emits the results of invoking the selector
+ * on the items emitted by a `ConnectableObservable` that shares a single subscription to
+ * the underlying stream.
+ * @method multicast
+ * @owner Observable
+ */
+function multicast(subjectOrSubjectFactory, selector) {
+    var subjectFactory;
+    if (typeof subjectOrSubjectFactory === 'function') {
+        subjectFactory = subjectOrSubjectFactory;
+    }
+    else {
+        subjectFactory = function subjectFactory() {
+            return subjectOrSubjectFactory;
+        };
+    }
+    if (typeof selector === 'function') {
+        return this.lift(new MulticastOperator(subjectFactory, selector));
+    }
+    var connectable = Object.create(this, ConnectableObservable_1.connectableObservableDescriptor);
+    connectable.source = this;
+    connectable.subjectFactory = subjectFactory;
+    return connectable;
+}
+exports.multicast = multicast;
+var MulticastOperator = (function () {
+    function MulticastOperator(subjectFactory, selector) {
+        this.subjectFactory = subjectFactory;
+        this.selector = selector;
+    }
+    MulticastOperator.prototype.call = function (subscriber, source) {
+        var selector = this.selector;
+        var subject = this.subjectFactory();
+        var subscription = selector(subject).subscribe(subscriber);
+        subscription.add(source.subscribe(subject));
+        return subscription;
+    };
+    return MulticastOperator;
+}());
+exports.MulticastOperator = MulticastOperator;
+//# sourceMappingURL=multicast.js.map
+
+/***/ }),
+/* 947 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -109,7 +167,7 @@ exports.NgTableFilteringDirective = NgTableFilteringDirective;
 
 
 /***/ }),
-/* 947 */
+/* 948 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -153,7 +211,7 @@ exports.NgTablePagingDirective = NgTablePagingDirective;
 
 
 /***/ }),
-/* 948 */
+/* 949 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -210,7 +268,7 @@ exports.NgTableSortingDirective = NgTableSortingDirective;
 
 
 /***/ }),
-/* 949 */
+/* 950 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -323,69 +381,6 @@ exports.NgTableComponent = NgTableComponent;
 
 
 /***/ }),
-/* 950 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var ConnectableObservable_1 = __webpack_require__(967);
-/* tslint:enable:max-line-length */
-/**
- * Returns an Observable that emits the results of invoking a specified selector on items
- * emitted by a ConnectableObservable that shares a single subscription to the underlying stream.
- *
- * <img src="./img/multicast.png" width="100%">
- *
- * @param {Function|Subject} subjectOrSubjectFactory - Factory function to create an intermediate subject through
- * which the source sequence's elements will be multicast to the selector function
- * or Subject to push source elements into.
- * @param {Function} [selector] - Optional selector function that can use the multicasted source stream
- * as many times as needed, without causing multiple subscriptions to the source stream.
- * Subscribers to the given source will receive all notifications of the source from the
- * time of the subscription forward.
- * @return {Observable} An Observable that emits the results of invoking the selector
- * on the items emitted by a `ConnectableObservable` that shares a single subscription to
- * the underlying stream.
- * @method multicast
- * @owner Observable
- */
-function multicast(subjectOrSubjectFactory, selector) {
-    var subjectFactory;
-    if (typeof subjectOrSubjectFactory === 'function') {
-        subjectFactory = subjectOrSubjectFactory;
-    }
-    else {
-        subjectFactory = function subjectFactory() {
-            return subjectOrSubjectFactory;
-        };
-    }
-    if (typeof selector === 'function') {
-        return this.lift(new MulticastOperator(subjectFactory, selector));
-    }
-    var connectable = Object.create(this, ConnectableObservable_1.connectableObservableDescriptor);
-    connectable.source = this;
-    connectable.subjectFactory = subjectFactory;
-    return connectable;
-}
-exports.multicast = multicast;
-var MulticastOperator = (function () {
-    function MulticastOperator(subjectFactory, selector) {
-        this.subjectFactory = subjectFactory;
-        this.selector = selector;
-    }
-    MulticastOperator.prototype.call = function (subscriber, source) {
-        var selector = this.selector;
-        var subject = this.subjectFactory();
-        var subscription = selector(subject).subscribe(subscriber);
-        subscription.add(source.subscribe(subject));
-        return subscription;
-    };
-    return MulticastOperator;
-}());
-exports.MulticastOperator = MulticastOperator;
-//# sourceMappingURL=multicast.js.map
-
-/***/ }),
 /* 951 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -401,7 +396,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var _ = __webpack_require__(966);
+var _ = __webpack_require__(963);
 var Rx_1 = __webpack_require__(987);
 var DataTable = (function () {
     function DataTable(differs) {
@@ -699,11 +694,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subject_1 = __webpack_require__(63);
-var queue_1 = __webpack_require__(979);
+var queue_1 = __webpack_require__(976);
 var Subscription_1 = __webpack_require__(120);
 var observeOn_1 = __webpack_require__(602);
 var ObjectUnsubscribedError_1 = __webpack_require__(283);
-var SubjectSubscription_1 = __webpack_require__(605);
+var SubjectSubscription_1 = __webpack_require__(604);
 /**
  * @class ReplaySubject<T>
  */
@@ -1420,79 +1415,6 @@ var ZipBufferIterator = (function (_super) {
 
 "use strict";
 
-var ng_table_component_1 = __webpack_require__(949);
-var ng_table_filtering_directive_1 = __webpack_require__(946);
-var ng_table_paging_directive_1 = __webpack_require__(947);
-var ng_table_sorting_directive_1 = __webpack_require__(948);
-exports.NG_TABLE_DIRECTIVES = [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective];
-
-
-/***/ }),
-/* 961 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-var common_1 = __webpack_require__(17);
-var ng_table_component_1 = __webpack_require__(949);
-var ng_table_filtering_directive_1 = __webpack_require__(946);
-var ng_table_paging_directive_1 = __webpack_require__(947);
-var ng_table_sorting_directive_1 = __webpack_require__(948);
-var Ng2TableModule = (function () {
-    function Ng2TableModule() {
-    }
-    Ng2TableModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    imports: [common_1.CommonModule],
-                    declarations: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective],
-                    exports: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective]
-                },] },
-    ];
-    /** @nocollapse */
-    Ng2TableModule.ctorParameters = [];
-    return Ng2TableModule;
-}());
-exports.Ng2TableModule = Ng2TableModule;
-
-
-/***/ }),
-/* 962 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-var ng_table_component_1 = __webpack_require__(949);
-var ng_table_filtering_directive_1 = __webpack_require__(946);
-var ng_table_paging_directive_1 = __webpack_require__(947);
-var ng_table_sorting_directive_1 = __webpack_require__(948);
-__export(__webpack_require__(949));
-__export(__webpack_require__(946));
-__export(__webpack_require__(947));
-__export(__webpack_require__(948));
-__export(__webpack_require__(960));
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
-    directives: [
-        ng_table_component_1.NgTableComponent,
-        ng_table_filtering_directive_1.NgTableFilteringDirective,
-        ng_table_sorting_directive_1.NgTableSortingDirective,
-        ng_table_paging_directive_1.NgTablePagingDirective
-    ]
-};
-var ng_table_module_1 = __webpack_require__(961);
-exports.Ng2TableModule = ng_table_module_1.Ng2TableModule;
-
-
-/***/ }),
-/* 963 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1504,7 +1426,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var DataTable_1 = __webpack_require__(951);
-var _ = __webpack_require__(966);
+var _ = __webpack_require__(963);
 var BootstrapPaginator = (function () {
     function BootstrapPaginator() {
         this.rowsOnPageSet = [];
@@ -1535,7 +1457,7 @@ exports.BootstrapPaginator = BootstrapPaginator;
 //# sourceMappingURL=BootstrapPaginator.js.map
 
 /***/ }),
-/* 964 */
+/* 961 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1589,7 +1511,7 @@ exports.DefaultSorter = DefaultSorter;
 //# sourceMappingURL=DefaultSorter.js.map
 
 /***/ }),
-/* 965 */
+/* 962 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1649,7 +1571,7 @@ exports.Paginator = Paginator;
 //# sourceMappingURL=Paginator.js.map
 
 /***/ }),
-/* 966 */
+/* 963 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -18738,10 +18660,10 @@ exports.Paginator = Paginator;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22), __webpack_require__(615)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22), __webpack_require__(614)(module)))
 
 /***/ }),
-/* 967 */
+/* 964 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18909,7 +18831,7 @@ var RefCountSubscriber = (function (_super) {
 //# sourceMappingURL=ConnectableObservable.js.map
 
 /***/ }),
-/* 968 */
+/* 965 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19328,7 +19250,7 @@ exports.AjaxTimeoutError = AjaxTimeoutError;
 //# sourceMappingURL=AjaxObservable.js.map
 
 /***/ }),
-/* 969 */
+/* 966 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19442,7 +19364,7 @@ var DistinctUntilChangedSubscriber = (function (_super) {
 //# sourceMappingURL=distinctUntilChanged.js.map
 
 /***/ }),
-/* 970 */
+/* 967 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19549,7 +19471,7 @@ exports.FindValueSubscriber = FindValueSubscriber;
 //# sourceMappingURL=find.js.map
 
 /***/ }),
-/* 971 */
+/* 968 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19700,7 +19622,7 @@ exports.mergeStatic = mergeStatic;
 //# sourceMappingURL=merge.js.map
 
 /***/ }),
-/* 972 */
+/* 969 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19861,7 +19783,7 @@ exports.MergeMapToSubscriber = MergeMapToSubscriber;
 //# sourceMappingURL=mergeMapTo.js.map
 
 /***/ }),
-/* 973 */
+/* 970 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19871,7 +19793,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var FromObservable_1 = __webpack_require__(611);
+var FromObservable_1 = __webpack_require__(610);
 var isArray_1 = __webpack_require__(281);
 var OuterSubscriber_1 = __webpack_require__(178);
 var subscribeToResult_1 = __webpack_require__(179);
@@ -19943,7 +19865,7 @@ var OnErrorResumeNextSubscriber = (function (_super) {
 //# sourceMappingURL=onErrorResumeNext.js.map
 
 /***/ }),
-/* 974 */
+/* 971 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20060,7 +19982,7 @@ exports.RaceSubscriber = RaceSubscriber;
 //# sourceMappingURL=race.js.map
 
 /***/ }),
-/* 975 */
+/* 972 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20125,7 +20047,7 @@ var TimeIntervalSubscriber = (function (_super) {
 //# sourceMappingURL=timeInterval.js.map
 
 /***/ }),
-/* 976 */
+/* 973 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20181,7 +20103,7 @@ var TimestampSubscriber = (function (_super) {
 //# sourceMappingURL=timestamp.js.map
 
 /***/ }),
-/* 977 */
+/* 974 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20293,7 +20215,7 @@ exports.VirtualAction = VirtualAction;
 //# sourceMappingURL=VirtualTimeScheduler.js.map
 
 /***/ }),
-/* 978 */
+/* 975 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20338,7 +20260,7 @@ exports.asap = new AsapScheduler_1.AsapScheduler(AsapAction_1.AsapAction);
 //# sourceMappingURL=asap.js.map
 
 /***/ }),
-/* 979 */
+/* 976 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20410,7 +20332,7 @@ exports.queue = new QueueScheduler_1.QueueScheduler(QueueAction_1.QueueAction);
 //# sourceMappingURL=queue.js.map
 
 /***/ }),
-/* 980 */
+/* 977 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20427,12 +20349,12 @@ exports.SubscriptionLog = SubscriptionLog;
 //# sourceMappingURL=SubscriptionLog.js.map
 
 /***/ }),
-/* 981 */
+/* 978 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var SubscriptionLog_1 = __webpack_require__(980);
+var SubscriptionLog_1 = __webpack_require__(977);
 var SubscriptionLoggable = (function () {
     function SubscriptionLoggable() {
         this.subscriptions = [];
@@ -20452,7 +20374,7 @@ exports.SubscriptionLoggable = SubscriptionLoggable;
 //# sourceMappingURL=SubscriptionLoggable.js.map
 
 /***/ }),
-/* 982 */
+/* 979 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20483,7 +20405,7 @@ exports.TimeoutError = TimeoutError;
 //# sourceMappingURL=TimeoutError.js.map
 
 /***/ }),
-/* 983 */
+/* 980 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20502,7 +20424,7 @@ exports.applyMixins = applyMixins;
 //# sourceMappingURL=applyMixins.js.map
 
 /***/ }),
-/* 984 */
+/* 981 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20513,13 +20435,86 @@ exports.noop = noop;
 //# sourceMappingURL=noop.js.map
 
 /***/ }),
+/* 982 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ng_table_component_1 = __webpack_require__(950);
+var ng_table_filtering_directive_1 = __webpack_require__(947);
+var ng_table_paging_directive_1 = __webpack_require__(948);
+var ng_table_sorting_directive_1 = __webpack_require__(949);
+exports.NG_TABLE_DIRECTIVES = [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective];
+
+
+/***/ }),
+/* 983 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(17);
+var ng_table_component_1 = __webpack_require__(950);
+var ng_table_filtering_directive_1 = __webpack_require__(947);
+var ng_table_paging_directive_1 = __webpack_require__(948);
+var ng_table_sorting_directive_1 = __webpack_require__(949);
+var Ng2TableModule = (function () {
+    function Ng2TableModule() {
+    }
+    Ng2TableModule.decorators = [
+        { type: core_1.NgModule, args: [{
+                    imports: [common_1.CommonModule],
+                    declarations: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective],
+                    exports: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective]
+                },] },
+    ];
+    /** @nocollapse */
+    Ng2TableModule.ctorParameters = [];
+    return Ng2TableModule;
+}());
+exports.Ng2TableModule = Ng2TableModule;
+
+
+/***/ }),
+/* 984 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+var ng_table_component_1 = __webpack_require__(950);
+var ng_table_filtering_directive_1 = __webpack_require__(947);
+var ng_table_paging_directive_1 = __webpack_require__(948);
+var ng_table_sorting_directive_1 = __webpack_require__(949);
+__export(__webpack_require__(950));
+__export(__webpack_require__(947));
+__export(__webpack_require__(948));
+__export(__webpack_require__(949));
+__export(__webpack_require__(982));
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    directives: [
+        ng_table_component_1.NgTableComponent,
+        ng_table_filtering_directive_1.NgTableFilteringDirective,
+        ng_table_sorting_directive_1.NgTableSortingDirective,
+        ng_table_paging_directive_1.NgTablePagingDirective
+    ]
+};
+var ng_table_module_1 = __webpack_require__(983);
+exports.Ng2TableModule = ng_table_module_1.Ng2TableModule;
+
+
+/***/ }),
 /* 985 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dataTable_directive = __webpack_require__(951);
-var defaultSorter_directive = __webpack_require__(964);
-var paginator_component = __webpack_require__(965);
-var bootstrapPaginator_component = __webpack_require__(963);
+var defaultSorter_directive = __webpack_require__(961);
+var paginator_component = __webpack_require__(962);
+var bootstrapPaginator_component = __webpack_require__(960);
 var dataTable_module = __webpack_require__(986);
 
 exports.DataTable = dataTable_directive.DataTable;
@@ -20547,9 +20542,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = __webpack_require__(0);
 var common_1 = __webpack_require__(17);
 var DataTable_1 = __webpack_require__(951);
-var DefaultSorter_1 = __webpack_require__(964);
-var Paginator_1 = __webpack_require__(965);
-var BootstrapPaginator_1 = __webpack_require__(963);
+var DefaultSorter_1 = __webpack_require__(961);
+var Paginator_1 = __webpack_require__(962);
+var BootstrapPaginator_1 = __webpack_require__(960);
 var DataTableModule = (function () {
     function DataTableModule() {
     }
@@ -20602,7 +20597,7 @@ __webpack_require__(991);
 __webpack_require__(992);
 __webpack_require__(995);
 __webpack_require__(996);
-__webpack_require__(606);
+__webpack_require__(605);
 __webpack_require__(997);
 __webpack_require__(998);
 __webpack_require__(999);
@@ -20639,7 +20634,7 @@ __webpack_require__(1027);
 __webpack_require__(1028);
 __webpack_require__(1033);
 __webpack_require__(1029);
-__webpack_require__(607);
+__webpack_require__(606);
 __webpack_require__(1030);
 __webpack_require__(1031);
 __webpack_require__(1032);
@@ -20664,13 +20659,13 @@ __webpack_require__(1015);
 __webpack_require__(1050);
 __webpack_require__(1051);
 __webpack_require__(1039);
-__webpack_require__(608);
+__webpack_require__(607);
 __webpack_require__(1052);
 __webpack_require__(1053);
 __webpack_require__(1054);
 __webpack_require__(1055);
 __webpack_require__(1056);
-__webpack_require__(609);
+__webpack_require__(608);
 __webpack_require__(1057);
 __webpack_require__(1058);
 __webpack_require__(1059);
@@ -20714,7 +20709,7 @@ __webpack_require__(1096);
 __webpack_require__(1097);
 __webpack_require__(1098);
 __webpack_require__(1099);
-__webpack_require__(610);
+__webpack_require__(609);
 __webpack_require__(1100);
 __webpack_require__(1101);
 __webpack_require__(1102);
@@ -20735,7 +20730,7 @@ var ReplaySubject_1 = __webpack_require__(956);
 exports.ReplaySubject = ReplaySubject_1.ReplaySubject;
 var BehaviorSubject_1 = __webpack_require__(181);
 exports.BehaviorSubject = BehaviorSubject_1.BehaviorSubject;
-var ConnectableObservable_1 = __webpack_require__(967);
+var ConnectableObservable_1 = __webpack_require__(964);
 exports.ConnectableObservable = ConnectableObservable_1.ConnectableObservable;
 var Notification_1 = __webpack_require__(598);
 exports.Notification = Notification_1.Notification;
@@ -20745,25 +20740,25 @@ var ArgumentOutOfRangeError_1 = __webpack_require__(953);
 exports.ArgumentOutOfRangeError = ArgumentOutOfRangeError_1.ArgumentOutOfRangeError;
 var ObjectUnsubscribedError_1 = __webpack_require__(283);
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError_1.ObjectUnsubscribedError;
-var TimeoutError_1 = __webpack_require__(982);
+var TimeoutError_1 = __webpack_require__(979);
 exports.TimeoutError = TimeoutError_1.TimeoutError;
-var UnsubscriptionError_1 = __webpack_require__(614);
+var UnsubscriptionError_1 = __webpack_require__(613);
 exports.UnsubscriptionError = UnsubscriptionError_1.UnsubscriptionError;
-var timeInterval_1 = __webpack_require__(975);
+var timeInterval_1 = __webpack_require__(972);
 exports.TimeInterval = timeInterval_1.TimeInterval;
-var timestamp_1 = __webpack_require__(976);
+var timestamp_1 = __webpack_require__(973);
 exports.Timestamp = timestamp_1.Timestamp;
 var TestScheduler_1 = __webpack_require__(1229);
 exports.TestScheduler = TestScheduler_1.TestScheduler;
-var VirtualTimeScheduler_1 = __webpack_require__(977);
+var VirtualTimeScheduler_1 = __webpack_require__(974);
 exports.VirtualTimeScheduler = VirtualTimeScheduler_1.VirtualTimeScheduler;
-var AjaxObservable_1 = __webpack_require__(968);
+var AjaxObservable_1 = __webpack_require__(965);
 exports.AjaxResponse = AjaxObservable_1.AjaxResponse;
 exports.AjaxError = AjaxObservable_1.AjaxError;
 exports.AjaxTimeoutError = AjaxObservable_1.AjaxTimeoutError;
-var asap_1 = __webpack_require__(978);
+var asap_1 = __webpack_require__(975);
 var async_1 = __webpack_require__(596);
-var queue_1 = __webpack_require__(979);
+var queue_1 = __webpack_require__(976);
 var animationFrame_1 = __webpack_require__(1226);
 var rxSubscriber_1 = __webpack_require__(185);
 var iterator_1 = __webpack_require__(182);
@@ -21015,7 +21010,7 @@ Observable_1.Observable.of = of_1.of;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var onErrorResumeNext_1 = __webpack_require__(973);
+var onErrorResumeNext_1 = __webpack_require__(970);
 Observable_1.Observable.onErrorResumeNext = onErrorResumeNext_1.onErrorResumeNextStatic;
 //# sourceMappingURL=onErrorResumeNext.js.map
 
@@ -21037,7 +21032,7 @@ Observable_1.Observable.pairs = pairs_1.pairs;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var race_1 = __webpack_require__(974);
+var race_1 = __webpack_require__(971);
 Observable_1.Observable.race = race_1.raceStatic;
 //# sourceMappingURL=race.js.map
 
@@ -21335,7 +21330,7 @@ Observable_1.Observable.prototype.distinct = distinct_1.distinct;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var distinctUntilChanged_1 = __webpack_require__(969);
+var distinctUntilChanged_1 = __webpack_require__(966);
 Observable_1.Observable.prototype.distinctUntilChanged = distinctUntilChanged_1.distinctUntilChanged;
 //# sourceMappingURL=distinctUntilChanged.js.map
 
@@ -21436,7 +21431,7 @@ Observable_1.Observable.prototype._finally = finally_1._finally;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var find_1 = __webpack_require__(970);
+var find_1 = __webpack_require__(967);
 Observable_1.Observable.prototype.find = find_1.find;
 //# sourceMappingURL=find.js.map
 
@@ -21502,7 +21497,7 @@ Observable_1.Observable.prototype.isEmpty = isEmpty_1.isEmpty;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var last_1 = __webpack_require__(612);
+var last_1 = __webpack_require__(611);
 Observable_1.Observable.prototype.last = last_1.last;
 //# sourceMappingURL=last.js.map
 
@@ -21558,7 +21553,7 @@ Observable_1.Observable.prototype.max = max_1.max;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var merge_1 = __webpack_require__(971);
+var merge_1 = __webpack_require__(968);
 Observable_1.Observable.prototype.merge = merge_1.merge;
 //# sourceMappingURL=merge.js.map
 
@@ -21580,7 +21575,7 @@ Observable_1.Observable.prototype.mergeAll = mergeAll_1.mergeAll;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var mergeMapTo_1 = __webpack_require__(972);
+var mergeMapTo_1 = __webpack_require__(969);
 Observable_1.Observable.prototype.flatMapTo = mergeMapTo_1.mergeMapTo;
 Observable_1.Observable.prototype.mergeMapTo = mergeMapTo_1.mergeMapTo;
 //# sourceMappingURL=mergeMapTo.js.map
@@ -21614,7 +21609,7 @@ Observable_1.Observable.prototype.min = min_1.min;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var multicast_1 = __webpack_require__(950);
+var multicast_1 = __webpack_require__(946);
 Observable_1.Observable.prototype.multicast = multicast_1.multicast;
 //# sourceMappingURL=multicast.js.map
 
@@ -21636,7 +21631,7 @@ Observable_1.Observable.prototype.observeOn = observeOn_1.observeOn;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var onErrorResumeNext_1 = __webpack_require__(973);
+var onErrorResumeNext_1 = __webpack_require__(970);
 Observable_1.Observable.prototype.onErrorResumeNext = onErrorResumeNext_1.onErrorResumeNext;
 //# sourceMappingURL=onErrorResumeNext.js.map
 
@@ -21724,7 +21719,7 @@ Observable_1.Observable.prototype.publishReplay = publishReplay_1.publishReplay;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var race_1 = __webpack_require__(974);
+var race_1 = __webpack_require__(971);
 Observable_1.Observable.prototype.race = race_1.race;
 //# sourceMappingURL=race.js.map
 
@@ -22011,7 +22006,7 @@ Observable_1.Observable.prototype.throttleTime = throttleTime_1.throttleTime;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var timeInterval_1 = __webpack_require__(975);
+var timeInterval_1 = __webpack_require__(972);
 Observable_1.Observable.prototype.timeInterval = timeInterval_1.timeInterval;
 //# sourceMappingURL=timeInterval.js.map
 
@@ -22044,7 +22039,7 @@ Observable_1.Observable.prototype.timeoutWith = timeoutWith_1.timeoutWith;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var timestamp_1 = __webpack_require__(976);
+var timestamp_1 = __webpack_require__(973);
 Observable_1.Observable.prototype.timestamp = timestamp_1.timestamp;
 //# sourceMappingURL=timestamp.js.map
 
@@ -22055,7 +22050,7 @@ Observable_1.Observable.prototype.timestamp = timestamp_1.timestamp;
 "use strict";
 
 var Observable_1 = __webpack_require__(8);
-var toPromise_1 = __webpack_require__(613);
+var toPromise_1 = __webpack_require__(612);
 Observable_1.Observable.prototype.toPromise = toPromise_1.toPromise;
 //# sourceMappingURL=toPromise.js.map
 
@@ -23580,7 +23575,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Observable_1 = __webpack_require__(8);
-var noop_1 = __webpack_require__(984);
+var noop_1 = __webpack_require__(981);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @extends {Ignored}
@@ -23838,7 +23833,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Observable_1 = __webpack_require__(8);
-var asap_1 = __webpack_require__(978);
+var asap_1 = __webpack_require__(975);
 var isNumeric_1 = __webpack_require__(955);
 /**
  * We need this JSDoc comment for affecting ESDoc.
@@ -24505,7 +24500,7 @@ exports.WebSocketSubject = WebSocketSubject;
 
 "use strict";
 
-var AjaxObservable_1 = __webpack_require__(968);
+var AjaxObservable_1 = __webpack_require__(965);
 exports.ajax = AjaxObservable_1.AjaxObservable.create;
 //# sourceMappingURL=ajax.js.map
 
@@ -24585,7 +24580,7 @@ exports.interval = IntervalObservable_1.IntervalObservable.create;
 
 "use strict";
 
-var merge_1 = __webpack_require__(971);
+var merge_1 = __webpack_require__(968);
 exports.merge = merge_1.mergeStatic;
 //# sourceMappingURL=merge.js.map
 
@@ -25630,7 +25625,7 @@ exports.combineAll = combineAll;
 
 "use strict";
 
-var mergeMapTo_1 = __webpack_require__(972);
+var mergeMapTo_1 = __webpack_require__(969);
 /* tslint:enable:max-line-length */
 /**
  * Projects each source value to the same Observable which is merged multiple
@@ -26577,7 +26572,7 @@ exports.DistinctSubscriber = DistinctSubscriber;
 
 "use strict";
 
-var distinctUntilChanged_1 = __webpack_require__(969);
+var distinctUntilChanged_1 = __webpack_require__(966);
 /* tslint:enable:max-line-length */
 /**
  * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item,
@@ -27323,7 +27318,7 @@ var FinallySubscriber = (function (_super) {
 
 "use strict";
 
-var find_1 = __webpack_require__(970);
+var find_1 = __webpack_require__(967);
 /**
  * Emits only the index of the first value emitted by the source Observable that
  * meets some condition.
@@ -27617,7 +27612,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__(21);
-var noop_1 = __webpack_require__(984);
+var noop_1 = __webpack_require__(981);
 /**
  * Ignores all items emitted by the source Observable and only passes calls of `complete` or `error`.
  *
@@ -28339,7 +28334,7 @@ function plucker(props, length) {
 "use strict";
 
 var Subject_1 = __webpack_require__(63);
-var multicast_1 = __webpack_require__(950);
+var multicast_1 = __webpack_require__(946);
 /* tslint:enable:max-line-length */
 /**
  * Returns a ConnectableObservable, which is a variety of Observable that waits until its connect method is called
@@ -28368,7 +28363,7 @@ exports.publish = publish;
 "use strict";
 
 var BehaviorSubject_1 = __webpack_require__(181);
-var multicast_1 = __webpack_require__(950);
+var multicast_1 = __webpack_require__(946);
 /**
  * @param value
  * @return {ConnectableObservable<T>}
@@ -28388,7 +28383,7 @@ exports.publishBehavior = publishBehavior;
 "use strict";
 
 var AsyncSubject_1 = __webpack_require__(952);
-var multicast_1 = __webpack_require__(950);
+var multicast_1 = __webpack_require__(946);
 /**
  * @return {ConnectableObservable<T>}
  * @method publishLast
@@ -28407,7 +28402,7 @@ exports.publishLast = publishLast;
 "use strict";
 
 var ReplaySubject_1 = __webpack_require__(956);
-var multicast_1 = __webpack_require__(950);
+var multicast_1 = __webpack_require__(946);
 /**
  * @param bufferSize
  * @param windowTime
@@ -29284,7 +29279,7 @@ var SequenceEqualCompareToSubscriber = (function (_super) {
 
 "use strict";
 
-var multicast_1 = __webpack_require__(950);
+var multicast_1 = __webpack_require__(946);
 var Subject_1 = __webpack_require__(63);
 function shareSubjectFactory() {
     return new Subject_1.Subject();
@@ -30707,7 +30702,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var async_1 = __webpack_require__(596);
 var isDate_1 = __webpack_require__(954);
 var Subscriber_1 = __webpack_require__(21);
-var TimeoutError_1 = __webpack_require__(982);
+var TimeoutError_1 = __webpack_require__(979);
 /**
  * @param {number} due
  * @param {Scheduler} [scheduler]
@@ -32150,8 +32145,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Observable_1 = __webpack_require__(8);
 var Subscription_1 = __webpack_require__(120);
-var SubscriptionLoggable_1 = __webpack_require__(981);
-var applyMixins_1 = __webpack_require__(983);
+var SubscriptionLoggable_1 = __webpack_require__(978);
+var applyMixins_1 = __webpack_require__(980);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @ignore
@@ -32202,8 +32197,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Subject_1 = __webpack_require__(63);
 var Subscription_1 = __webpack_require__(120);
-var SubscriptionLoggable_1 = __webpack_require__(981);
-var applyMixins_1 = __webpack_require__(983);
+var SubscriptionLoggable_1 = __webpack_require__(978);
+var applyMixins_1 = __webpack_require__(980);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @ignore
@@ -32258,8 +32253,8 @@ var Observable_1 = __webpack_require__(8);
 var Notification_1 = __webpack_require__(598);
 var ColdObservable_1 = __webpack_require__(1227);
 var HotObservable_1 = __webpack_require__(1228);
-var SubscriptionLog_1 = __webpack_require__(980);
-var VirtualTimeScheduler_1 = __webpack_require__(977);
+var SubscriptionLog_1 = __webpack_require__(977);
+var VirtualTimeScheduler_1 = __webpack_require__(974);
 var defaultMaxFrame = 750;
 var TestScheduler = (function (_super) {
     __extends(TestScheduler, _super);
@@ -32917,7 +32912,8 @@ exports.not = not;
 //# sourceMappingURL=not.js.map
 
 /***/ }),
-/* 1238 */
+/* 1238 */,
+/* 1239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32934,48 +32930,58 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var http_1 = __webpack_require__(121);
-var CropService = (function () {
-    function CropService(_http) {
+var EquipmentService = (function () {
+    function EquipmentService(_http) {
         this._http = _http;
-        // private host = "http://localhost:1337";
         this.host = "https://efarmapi.herokuapp.com";
         this.access_token = {};
         this.token = '';
     }
-    CropService.prototype.croplisting = function () {
+    EquipmentService.prototype.getAllEquipments = function () {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         headers.append('Authorization', this.token);
-        return this._http.get(this.host + '/crops/listing', { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this.host + '/equipment', { headers: headers }).map(function (res) { return res.json(); });
     };
-    CropService.prototype.addCrop = function (crop) {
+    EquipmentService.prototype.postEquipment = function (equipment) {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         headers.append('Authorization', this.token);
-        return this._http.post(this.host + '/crops/add', crop, { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.post(this.host + '/equipment', equipment, { headers: headers }).map(function (res) { return res.json(); });
     };
-    CropService.prototype.getCrop = function (crop) {
+    /** get a single Equipment by ID **/
+    EquipmentService.prototype.getEquipment = function (equipmentID) {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         var body = {};
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         headers.append('Authorization', this.token);
-        return this._http.post(this.host + '/crops/' + crop, body, { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this.host + '/equipment/' + equipmentID, { headers: headers }).map(function (res) { return res.json(); });
     };
-    CropService.prototype.updateCrop = function (crop) {
+    /** update equipment **/
+    EquipmentService.prototype.putEquipment = function (equipment) {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         headers.append('Authorization', this.token);
-        return this._http.post(this.host + '/crops/' + crop.id, crop, { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.put(this.host + '/equipment/' + equipment.id, equipment, { headers: headers }).map(function (res) { return res.json(); });
     };
-    CropService.prototype.getAllCategories = function () {
+    /** DeleteID equipment by ID **/
+    EquipmentService.prototype.deleteEquipment = function (equipmentID) {
+        var headers = new http_1.Headers();
+        var urlSearchParams = new http_1.URLSearchParams();
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        headers.append('Authorization', this.token);
+        return this._http.delete(this.host + '/equipment/' + equipmentID, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    EquipmentService.prototype.getAllCategories = function () {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         this.access_token = JSON.parse(localStorage.getItem("user"));
@@ -32983,18 +32989,17 @@ var CropService = (function () {
         headers.append('Authorization', this.token);
         return this._http.get(this.host + '/category', { headers: headers }).map(function (res) { return res.json(); });
     };
-    return CropService;
+    return EquipmentService;
 }());
-CropService = __decorate([
+EquipmentService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [typeof (_a = typeof http_1.Http !== "undefined" && http_1.Http) === "function" && _a || Object])
-], CropService);
-exports.CropService = CropService;
+], EquipmentService);
+exports.EquipmentService = EquipmentService;
 var _a;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/crop.service.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/equipment.service.js.map
 
 /***/ }),
-/* 1239 */,
 /* 1240 */,
 /* 1241 */,
 /* 1242 */,
@@ -33007,7 +33012,11 @@ var _a;
 /* 1249 */,
 /* 1250 */,
 /* 1251 */,
-/* 1252 */
+/* 1252 */,
+/* 1253 */,
+/* 1254 */,
+/* 1255 */,
+/* 1256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33023,61 +33032,94 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var crop_service_1 = __webpack_require__(1238);
 var router_1 = __webpack_require__(64);
-var AddUpdateCropComponent = (function () {
-    function AddUpdateCropComponent(router, _activateRouter, _cropService) {
+// import { FormGroup, FormBuilder ,Validators } from '@angular/forms';
+var equipment_service_1 = __webpack_require__(1239);
+var AddUpdateEquipmentComponent = (function () {
+    function AddUpdateEquipmentComponent(_router, _activateRouter, _equipmentService) {
         var _this = this;
-        this.router = router;
+        this._router = _router;
         this._activateRouter = _activateRouter;
-        this._cropService = _cropService;
-        this.crop = {
-            terms: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod",
-            category: '',
-            variety: '',
-            packaging: '',
-            destination_shipping: '',
-            payment_method: 'COD'
-        };
+        this._equipmentService = _equipmentService;
+        this.equipment = {};
+        this.allEquipments = [];
         this.category = [];
-        this._cropService.getAllCategories().subscribe(function (res) { _this.category = res; }, function (err) { });
-        this.cropID = _activateRouter.snapshot.params['id'];
-        if (this.cropID) {
-            this._cropService.getCrop(this.cropID).subscribe(function (res) {
-                _this.crop = res["Data"][0];
-            }, function (err) {
-            });
+        this.showMessage = false;
+        this.action = 'Add';
+        this.currentYear = new Date().getFullYear();
+        this.years = [];
+        this.equipmentID = _activateRouter.snapshot.params['id'];
+        if (this.equipmentID) {
+            this._equipmentService.getEquipment(this.equipmentID).subscribe(function (res) { _this.equipment = res; _this.action = 'Edit'; }, function (err) { });
+        }
+        this._equipmentService.getAllCategories().subscribe(function (res) { _this.category = res; console.log(_this.category); }, function (err) { });
+        var equipmentDefaultvalues = {
+            name: '',
+            category: '',
+            companyManufacturer: '',
+            model: '',
+            modelyear: '',
+            enginepower: '',
+            rentSell: 'rent',
+            rate: '',
+            usage: '',
+            description: '',
+            termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'
+        };
+        this.equipment = equipmentDefaultvalues;
+        /*create years array. */
+        this.years.push(this.currentYear);
+        for (var i = 1; i <= 50; i++) {
+            this.years.push(this.currentYear - i);
         }
     }
-    AddUpdateCropComponent.prototype.save = function () {
-        var _this = this;
-        if (this.cropID) {
-            this._cropService.updateCrop(this.crop).subscribe(function (res) {
-                _this.router.navigate(['/crop/list']);
-            }, function (err) {
-            });
+    AddUpdateEquipmentComponent.prototype.submitEquipment = function () {
+        console.log('submitting Equipment...');
+        if (this.action == 'Edit') {
+            this.editEquipment();
         }
         else {
-            this._cropService.addCrop(this.crop).subscribe(function (res) {
-                _this.router.navigate(['/crop/list']);
-            }, function (err) {
-            });
+            this.addEquipment();
         }
     };
-    return AddUpdateCropComponent;
+    AddUpdateEquipmentComponent.prototype.addEquipment = function () {
+        var _this = this;
+        console.log('Posting Equipment...');
+        this._equipmentService.postEquipment(this.equipment).subscribe(function (res) {
+            _this.response = res;
+            _this.showMessage = true;
+            _this.equipment = {};
+            _this._router.navigate(['/equipment/list', { data: "success" }]);
+            console.log(_this.response);
+        });
+    };
+    AddUpdateEquipmentComponent.prototype.editEquipment = function () {
+        var _this = this;
+        console.log('Udpating Equipment...');
+        this._equipmentService.putEquipment(this.equipment).subscribe(function (res) {
+            _this.response = res;
+            _this.showMessage = true;
+            _this.equipment = {};
+            _this._router.navigate(['/equipment/list', { data: "success" }]);
+        });
+    };
+    AddUpdateEquipmentComponent.prototype.closeMessage = function () {
+        this.showMessage = false;
+    };
+    return AddUpdateEquipmentComponent;
 }());
-AddUpdateCropComponent = __decorate([
+AddUpdateEquipmentComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1300)
+        template: __webpack_require__(1304)
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _c || Object])
-], AddUpdateCropComponent);
-exports.AddUpdateCropComponent = AddUpdateCropComponent;
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof equipment_service_1.EquipmentService !== "undefined" && equipment_service_1.EquipmentService) === "function" && _c || Object])
+], AddUpdateEquipmentComponent);
+exports.AddUpdateEquipmentComponent = AddUpdateEquipmentComponent;
 var _a, _b, _c;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/addupdate-crop.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/addupdate-equipment.component.js.map
 
 /***/ }),
-/* 1253 */
+/* 1257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33093,24 +33135,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-// import {PaginationInstance} from 'ng2-pagination';
-var crop_service_1 = __webpack_require__(1238);
+// import { cropTable } from './crop-seed'
 var router_1 = __webpack_require__(64);
-var ListCropComponent = (function () {
-    function ListCropComponent(_router, _cropService) {
+var equipment_service_1 = __webpack_require__(1239);
+var ListEquipmentComponent = (function () {
+    function ListEquipmentComponent(activatedRouter, _router, _equipmentService) {
+        this.activatedRouter = activatedRouter;
         this._router = _router;
-        this._cropService = _cropService;
+        this._equipmentService = _equipmentService;
         this.filterQuery = "";
         this.rowsOnPage = 10;
         this.sortBy = "name";
         this.sortOrder = "asc";
-        this.err_message = "";
         this.isLoading = true;
         this.sortByWordLength = function (a) {
             return a.city.length;
         };
     }
-    ListCropComponent.prototype.ngOnInit = function () {
+    ListEquipmentComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._router.events.subscribe(function (evt) {
             if (!(evt instanceof router_1.NavigationEnd)) {
@@ -33118,41 +33160,38 @@ var ListCropComponent = (function () {
             }
             window.scrollTo(0, 0);
         });
-        this._cropService.croplisting().subscribe(function (res) {
-            _this.data = res["Data"];
+        this._equipmentService.getAllEquipments().subscribe(function (allEquipments) {
+            _this.data = allEquipments;
             _this.isLoading = false;
-        }, function (err) {
-            _this.isLoading = false;
-            _this.err_message = "No record to display";
+            console.log(allEquipments);
+            console.log("allEquipments loaded");
         });
     };
-    ListCropComponent.prototype.toInt = function (num) {
+    ListEquipmentComponent.prototype.toInt = function (num) {
         return +num;
     };
-    ListCropComponent.prototype.viewCrop = function (cropID) {
-        var route = '/crop/list/' + cropID;
+    ListEquipmentComponent.prototype.viewEquipment = function (equipmentID) {
+        var route = '/equipment/list/' + equipmentID;
         this._router.navigate([route]);
     };
-    ListCropComponent.prototype.sendUpdateCrop = function (cropID) {
-        var route = '/crop/update/' + cropID;
+    ListEquipmentComponent.prototype.sendUpdateEquipment = function (equipmentID) {
+        console.log(equipmentID);
+        var route = '/equipment/update/' + equipmentID;
         this._router.navigate([route]);
     };
-    ListCropComponent.prototype.removeCrop = function (crop) {
+    ListEquipmentComponent.prototype.removeEquipment = function (equipmentID) {
         var _this = this;
-        if (confirm("Are you sure to delete Crop")) {
+        if (confirm("Are you sure to delete equipment?")) {
             this.isLoading = true;
-            crop["isDeleted"] = true;
-            this._cropService.updateCrop(crop).subscribe(function (res) {
+            this._equipmentService.deleteEquipment(equipmentID).subscribe(function (res) {
                 _this.response = res;
                 _this.isLoading = false;
-                _this.removeByAttr(_this.data, 'id', crop["id"]);
-                _this._router.navigate(['/crop/list/']);
-            }, function (err) {
-                _this.isLoading = false;
+                // this.data = [];
+                _this.removeByAttr(_this.data, 'id', equipmentID);
             });
         }
     };
-    ListCropComponent.prototype.removeByAttr = function (arr, attr, value) {
+    ListEquipmentComponent.prototype.removeByAttr = function (arr, attr, value) {
         var i = arr.length;
         while (i--) {
             if (arr[i]
@@ -33163,22 +33202,23 @@ var ListCropComponent = (function () {
         }
         return arr;
     };
-    return ListCropComponent;
+    return ListEquipmentComponent;
 }());
-ListCropComponent = __decorate([
+ListEquipmentComponent = __decorate([
     core_1.Component({
-        selector: 'app-crop-management',
-        template: __webpack_require__(1301),
-        styles: [__webpack_require__(1286)]
+        selector: 'app-equipment-management',
+        template: __webpack_require__(1305),
+        // providers: [SweetAlertService],
+        styles: [__webpack_require__(1287)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _b || Object])
-], ListCropComponent);
-exports.ListCropComponent = ListCropComponent;
-var _a, _b;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/list-crop.component.js.map
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object, typeof (_c = typeof equipment_service_1.EquipmentService !== "undefined" && equipment_service_1.EquipmentService) === "function" && _c || Object])
+], ListEquipmentComponent);
+exports.ListEquipmentComponent = ListEquipmentComponent;
+var _a, _b, _c;
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/list-equipment.component.js.map
 
 /***/ }),
-/* 1254 */
+/* 1258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33195,41 +33235,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(64);
-var crop_service_1 = __webpack_require__(1238);
-var ViewCropComponent = (function () {
-    function ViewCropComponent(_router, route, _cropService) {
+var equipment_service_1 = __webpack_require__(1239);
+var ViewEquipmentComponent = (function () {
+    function ViewEquipmentComponent(_router, _activatedRouter, _equipmentService) {
         var _this = this;
         this._router = _router;
-        this._cropService = _cropService;
-        this.cropID = '';
-        this.crop = {};
-        this.cropID = route.snapshot.params['id'];
-        this._cropService.getCrop(this.cropID).subscribe(function (res) {
-            _this.crop = res["Data"][0];
-        }, function (err) {
-        });
+        this._activatedRouter = _activatedRouter;
+        this._equipmentService = _equipmentService;
+        this.equipmentID = '';
+        this.equipment = {};
+        this.copy_equipment = {};
+        this.edit = false;
+        this.equipmentID = _activatedRouter.snapshot.params['id'];
+        if (this.equipmentID) {
+            this._equipmentService.getEquipment(this.equipmentID).subscribe(function (res) { _this.equipment = res; console.log(res); }, function (err) { });
+        }
     }
-    ViewCropComponent.prototype.updateCrop = function (cropid) {
-        var route = '/crop/update/' + cropid;
+    ViewEquipmentComponent.prototype.updateEquipment = function (equipmentID) {
+        var route = '/equipment/update/' + equipmentID;
         this._router.navigate([route]);
     };
-    return ViewCropComponent;
+    return ViewEquipmentComponent;
 }());
-ViewCropComponent = __decorate([
+ViewEquipmentComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1302)
+        template: __webpack_require__(1306)
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _c || Object])
-], ViewCropComponent);
-exports.ViewCropComponent = ViewCropComponent;
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof equipment_service_1.EquipmentService !== "undefined" && equipment_service_1.EquipmentService) === "function" && _c || Object])
+], ViewEquipmentComponent);
+exports.ViewEquipmentComponent = ViewEquipmentComponent;
 var _a, _b, _c;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/view-crop.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/view-equipment.component.js.map
 
 /***/ }),
-/* 1255 */,
-/* 1256 */,
-/* 1257 */,
-/* 1258 */,
 /* 1259 */,
 /* 1260 */,
 /* 1261 */,
@@ -33248,7 +33286,9 @@ var _a, _b, _c;
 /* 1274 */,
 /* 1275 */,
 /* 1276 */,
-/* 1277 */
+/* 1277 */,
+/* 1278 */,
+/* 1279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33263,56 +33303,57 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(64);
 var forms_1 = __webpack_require__(27);
-var ng2_table_1 = __webpack_require__(962);
+var ng2_table_1 = __webpack_require__(984);
 var ng2_bootstrap_1 = __webpack_require__(603);
-var list_crop_component_1 = __webpack_require__(1253);
-var addupdate_crop_component_1 = __webpack_require__(1252);
-var view_crop_component_1 = __webpack_require__(1254);
 var http_1 = __webpack_require__(121);
+var list_equipment_component_1 = __webpack_require__(1257);
+var view_equipment_component_1 = __webpack_require__(1258);
+var addupdate_equipment_component_1 = __webpack_require__(1256);
+var equipment_service_1 = __webpack_require__(1239);
 var routes = [
     {
         path: '',
         data: {
-            title: 'Crop Management'
+            title: 'equipment Management'
         },
         children: [
             {
                 path: 'list',
-                component: list_crop_component_1.ListCropComponent,
+                component: list_equipment_component_1.ListEquipmentComponent,
                 data: {
                     title: 'List'
                 }
             },
             {
                 path: 'add',
-                component: addupdate_crop_component_1.AddUpdateCropComponent,
+                component: addupdate_equipment_component_1.AddUpdateEquipmentComponent,
                 data: {
                     title: 'Add'
                 }
             },
             {
                 path: 'list/:id',
-                component: view_crop_component_1.ViewCropComponent,
+                component: view_equipment_component_1.ViewEquipmentComponent,
                 data: {
-                    title: 'List'
+                    title: 'View Equipment'
                 }
             },
             {
                 path: 'update/:id',
-                component: addupdate_crop_component_1.AddUpdateCropComponent,
+                component: addupdate_equipment_component_1.AddUpdateEquipmentComponent,
                 data: {
-                    title: 'Update'
+                    title: 'Update Equipment'
                 }
             }
         ]
     }
 ];
-var CropManagementRoutingModule = (function () {
-    function CropManagementRoutingModule() {
+var EquipmentManagementRoutingModule = (function () {
+    function EquipmentManagementRoutingModule() {
     }
-    return CropManagementRoutingModule;
+    return EquipmentManagementRoutingModule;
 }());
-CropManagementRoutingModule = __decorate([
+EquipmentManagementRoutingModule = __decorate([
     core_1.NgModule({
         imports: [
             router_1.RouterModule.forChild(routes),
@@ -33321,6 +33362,9 @@ CropManagementRoutingModule = __decorate([
             ng2_bootstrap_1.PaginationModule,
             http_1.HttpModule
         ],
+        providers: [
+            equipment_service_1.EquipmentService
+        ],
         exports: [
             router_1.RouterModule,
             forms_1.FormsModule,
@@ -33328,20 +33372,19 @@ CropManagementRoutingModule = __decorate([
             ng2_bootstrap_1.PaginationModule
         ]
     })
-], CropManagementRoutingModule);
-exports.CropManagementRoutingModule = CropManagementRoutingModule;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/crop-management-routing.module.js.map
+], EquipmentManagementRoutingModule);
+exports.EquipmentManagementRoutingModule = EquipmentManagementRoutingModule;
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/equipment-management-routing.module.js.map
 
 /***/ }),
-/* 1278 */,
-/* 1279 */,
 /* 1280 */,
 /* 1281 */,
 /* 1282 */,
 /* 1283 */,
 /* 1284 */,
 /* 1285 */,
-/* 1286 */
+/* 1286 */,
+/* 1287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(123)();
@@ -33349,7 +33392,7 @@ exports = module.exports = __webpack_require__(123)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".row-on-page {\n  float: left !important; }\n", ""]);
 
 // exports
 
@@ -33358,7 +33401,6 @@ exports.push([module.i, "", ""]);
 module.exports = module.exports.toString();
 
 /***/ }),
-/* 1287 */,
 /* 1288 */,
 /* 1289 */,
 /* 1290 */,
@@ -33371,22 +33413,26 @@ module.exports = module.exports.toString();
 /* 1297 */,
 /* 1298 */,
 /* 1299 */,
-/* 1300 */
+/* 1300 */,
+/* 1301 */,
+/* 1302 */,
+/* 1303 */,
+/* 1304 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <div class=\"row\">\r\n        <div class=\"col-12 col-lg-12\">\r\n            <div class=\"content-header\">\r\n                <ol class=\"breadcrumb\">\r\n                    <li><a href=\"JavaScript:Void(0);\">Dashboard</a></li>\r\n                    <li><a href=\"JavaScript:Void(0);\">Crops</a></li>\r\n                    <li class=\"active\"><a href=\"JavaScript:Void(0);\">{{cropID ? 'Update' : 'Add'}} Crop</a></li>\r\n                </ol>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"card\">\r\n        <div class=\"card-header\">\r\n            <strong>{{cropID ? 'Update' : 'Add'}} Crop</strong>\r\n        </div>\r\n         <form role=\"form\" (ngSubmit)=\"save()\" #dailyExpenseForm=\"ngForm\">\r\n        <div class=\"card-block\">\r\n           \r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-name\">Crop Name</label>\r\n                            <input autofocus type=\"text\" id=\"nf-name\" name=\"nf-name\" class=\"form-control\" placeholder=\"\" [(ngModel)]=\"crop.name\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-password\">Category</label>\r\n                            <select id=\"category\" name=\"category\" class=\"form-control\" size=\"1\" [(ngModel)]=\"crop.category\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option *ngFor=\"let cat of category\" value=\"{{cat.id}}\">{{cat.name}}</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">Variety</label>\r\n                            <select id=\"select1\" name=\"select1\" class=\"form-control\" [(ngModel)]=\"crop.variety\" size=\"1\">\r\n                                <option value=\"\">Please select</option>\r\n                                <option value=\"Variety 1\">Variety 1</option>\r\n                                <option value=\"Variety 2\">Variety 2</option>\r\n                                <option value=\"Variety 3\">Variety 3</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-price\">Offer Price <i class=\"fa fa-rupee\"></i></label>\r\n                            <input type=\"number\" id=\"nf-price\" name=\"nf-price\" class=\"form-control\" [(ngModel)]=\"crop.price\" placeholder=\"\" required=\"\" min=\"1\" max=\"9999999999999998\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-grade\">Grade</label>\r\n                            \r\n\t\t\t\t\t\t<form class=\"grade\">\r\n\t\t\t\t\t\t\t<div class=\"btn-group\" data-toggle=\"\">\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"grade\" value=\"A+\" type=\"radio\" [(ngModel)]=\"crop.grade\" >A+\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"grade\" value=\"A\" type=\"radio\" [(ngModel)]=\"crop.grade\">A\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"grade\" value=\"B\" class=\"active\" type=\"radio\" [(ngModel)]=\"crop.grade\">B\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"grade\" value=\"C\" type=\"radio\" [(ngModel)]=\"crop.grade\">C\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n                       \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-color\">Color</label>\r\n                            <input type=\"text\" id=\"nf-color\" name=\"nf-color\" class=\"form-control\" [(ngModel)]=\"crop.color\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-size\">Size/Weight</label>\r\n                            <input type=\"text\" id=\"nf-size\" name=\"nf-size\" class=\"form-control\" [(ngModel)]=\"crop.size\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-other_speciality\">Other Speciality</label>\r\n                            <input type=\"text\" id=\"nf-other_speciality\" name=\"nf-other_speciality\" class=\"form-control\" [(ngModel)]=\"crop.other_speciality\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-availibility\">Availibility Peroid</label>\r\n                            <input type=\"text\" id=\"nf-availibility\" name=\"nf-availibility\" class=\"form-control\" [(ngModel)]=\"crop.availibility\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-packaging\">Packaging</label>\r\n                            <select id=\"select2\" name=\"select2\" class=\"form-control\" size=\"1\" [(ngModel)]=\"crop.packaging\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option value=\"Pack 1\">Pack 1</option>\r\n                                <option value=\"Pack 2\">Pack 2</option>\r\n                                <option value=\"Pack 3\">Pack 3</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-supply_ablity\">Supply Ability</label>\r\n                            <input type=\"text\" id=\"nf-supply_ablity\" name=\"nf-supply_ablity\" class=\"form-control\" [(ngModel)]=\"crop.supply_ablity\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-destination_shipping\">Destination for Shipping*</label>\r\n                            <select id=\"select3\" name=\"select3\" class=\"form-control\" size=\"1\" [(ngModel)]=\"crop.destination_shipping\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option value=\"Shipping 1\">Shipping 1</option>\r\n                                <option value=\"Shipping 2\">Shipping 2</option>\r\n                                <option value=\"Shipping 3\">Shipping 3</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-pack_size\">Pack Size</label>\r\n                            <input type=\"text\" id=\"nf-pack_size\" name=\"nf-pack_size\" class=\"form-control\" [(ngModel)]=\"crop.pack_size\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-qty\">Quantity Per Pack</label>\t\t\t\t\r\n\t\t\t\t\t\t\t<div class=\"input-group\">\r\n                              <input type=\"number\" id=\"nf-quantity_per_pack\" name=\"quantity_per_pack\" class=\"form-control\" aria-label=\"Text input with dropdown button\" [(ngModel)]=\"crop.quantity_per_pack\" min=\"1\" max=\"999999999999999\" placeholder=\"\" required>\r\n                              <div class=\"input-group-btn\">\r\n                                <button type=\"button\" class=\"btn btn-secondary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                                  Kg\r\n                                </button>\r\n                                <!--<div class=\"dropdown-menu dropdown-menu-right\">\r\n                                  <a class=\"dropdown-item\" href=\"JavaScript:void(0)\">Miles</a>\r\n                                </div>-->\r\n                              </div>\r\n                            </div>                       \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-label\">Label/Making on Pack</label>\r\n                            <input type=\"text\" id=\"nf-label\" name=\"nf-label\" class=\"form-control\" [(ngModel)]=\"crop.label\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-paymentTerms\">Payment Terms</label>\r\n                           <form class=\"grade\">\r\n\t\t\t\t\t\t\t<div class=\"btn-group\">\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"payment_mode\" value=\"COD\" type=\"radio\" [(ngModel)]=\"crop.payment_method\">COD\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"payment_mode\" value=\"Cheque\" type=\"radio\" [(ngModel)]=\"crop.payment_method\">Cheque\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"payment_mode\" value=\"Net Banking\" class=\"active\" type=\"radio\" [(ngModel)]=\"crop.payment_method\">Net Banking\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-moq\">MOQ</label>\r\n                            <input type=\"text\" id=\"nf-moq\" name=\"nf-moq\" class=\"form-control\" [(ngModel)]=\"crop.moq\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-average_lead_time\">Average Lead Time</label>\r\n                            \r\n                            <div class=\"input-group\">\r\n                        <input type=\"text\" id=\"average_lead_time\" name=\"average_lead_time\" class=\"form-control\" aria-label=\"Amount (to the nearest dollar)\" [(ngModel)]=\"crop.average_lead_time\" required>\r\n                        <span class=\"input-group-addon width\">Days</span>\r\n                        </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-additional_info\">Additional Information</label>\r\n                            <textarea type=\"text\" id=\"nf-additional_info\" name=\"nf-additional_info\" class=\"form-control\" [(ngModel)]=\"crop.additional_info\" placeholder=\"\" rows=\"4\" required ></textarea>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-terms\">Terms & Conditions</label>\r\n                            <textarea type=\"text\" id=\"nf-terms\" name=\"nf-terms\" class=\"form-control\" [(ngModel)]=\"crop.terms\" placeholder=\"\" rows=\"4\" [disabled]=\"true\"></textarea>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-image\">Image</label>\r\n                             <input type=\"file\" name=\"file-7[]\" id=\"file-7\" class=\"inputfile inputfile-6\" data-multiple-caption=\"{count} files selected\" multiple />\r\n                    <label for=\"file-7\"><span></span> <strong><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"17\" viewBox=\"0 0 20 17\"><path d=\"M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z\"/></svg> Upload image</strong></label>\r\n                    \r\n\r\n\r\n                         \r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n        </div>\r\n\r\n        <div class=\"card-footer\">\r\n                    <button type=\"reset\" class=\"btn btn-secondary whiteclr\" [routerLink]=\"['/crop/list']\"> Cancel</button>\r\n                    <button type=\"submit\" class=\"pull-right btn btn-primary orangeclr\">Save</button>\r\n                </div>\r\n          </form>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"equipment-wrapper\">\n    <div class=\"row\">\n        <div class=\"col-12 col-lg-12\">\n            <div class=\"content-header\">\n                <ol class=\"breadcrumb\">\n                    <li><a href=\"javascript:void(0)\">Dashboard</a></li>\n                    <li><a href=\"javascript:void(0)\">Equipments</a></li>      \n                    <li class=\"active\"><a href=\"javascript:void(0)\">Add New</a></li>      \n                </ol>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"card\">\n        <div class=\"card-header\">\n            <strong>{{action}} Equipment</strong>\n        </div>\n        <div class=\"card-block\">\n            <form role=\"form\" (ngSubmit)=\"submitEquipment()\" #addEquipmentForm=\"ngForm\">\n                \n               <div *ngIf=\"showMessage\" class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\"  (click)=\"closeMessage()\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                    <strong>Success</strong> Equipment added successfully.\n                </div>\n                \n                <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"nf-name\">Equipment Name</label>\n                            <input type=\"text\" id=\"name\" name=\"name\" class=\"form-control\" [(ngModel)]=\"equipment.name\" required>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"category\">Category</label>\n                            <select id=\"category\" name=\"category\" class=\"form-control\" size=\"1\" [(ngModel)]=\"equipment.category\" required>\n                                <option value=\"\">Please select</option>\n                                <option *ngFor=\"let cat of category\" value=\"{{cat.id}}\">{{cat.name}}</option>\n                            </select>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"companyManufacturer\">Company/Manufacturer</label>\n                            <select id=\"companyManufacturer\" name=\"companyManufacturer\" class=\"form-control\" [(ngModel)]=\"equipment.companyManufacturer\" size=\"1\" required>\n                                <option value=\"\">Please select</option>\n                                <option value=\"1\">Variety 1</option>\n                                <option value=\"2\">Variety 2</option>\n                                <option value=\"3\">Variety 3</option>\n                            </select>\n                        </div>\n                    </div>\n                      <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"model\">Model</label>\n                            <select id=\"model\" name=\"model\" class=\"form-control\" size=\"1\" [(ngModel)]=\"equipment.model\" required>\n                                <option value=\"\">Please select</option>\n                                <option value=\"1\">Option #1</option>\n                                <option value=\"2\">Option #2</option>\n                                <option value=\"3\">Option #3</option>\n                            </select>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"modelyear\">Model year</label>\n                            <select id=\"modelyear\" name=\"modelyear\" class=\"form-control\" size=\"1\" [(ngModel)]=\"equipment.modelyear\">\n                                <option value=\"\">Please select</option>\n                                <option *ngFor=\"let year of years\" value=\"{{year}}\">{{year}}</option>                                                                \n                            </select>\n                        </div>\n                    </div>\n                \n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"enginePower\">Engine power</label>\n                            <input type=\"text\" id=\"enginePower\" name=\"enginePower\" class=\"form-control\" [(ngModel)]=\"equipment.enginepower\" placeholder=\"\" />\n                        </div>\n                    </div>\n                </div>\n                 <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group \">\n                            <input type=\"radio\"  name=\"rentSell\" class=\"\" value=\"rent\"  [(ngModel)]=\"equipment.rentSell\" checked required>\n                            <label for=\"nf-rentslell\">Rent</label>\n                            &nbsp;&nbsp;                            \n                            <input type=\"radio\" name=\"rentSell\" class=\"\" value=\"sell\"  [(ngModel)]=\"equipment.rentSell\" required>\n                            <label for=\"rentSell\">sell</label>\n                        </div>                      \n                    </div>\n\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"rate\"></label>                         \n                            <input type=\"text\" id=\"rate\" name=\"rate\" class=\"form-control\" [(ngModel)]=\"equipment.rate\" placeholder=\"Enter Rate/hr\">\n                        </div>\n                    </div>\n                </div>\n                  <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"usage\">Usage</label>\n                            <textarea type=\"text\" id=\"usage\" name=\"usage\" class=\"form-control\" [(ngModel)]=\"equipment.usage\" placeholder=\"\" rows=\"4\" required></textarea>\n                        </div>\n                    </div>\n\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"description\">Description</label>\n                            <textarea type=\"text\" id=\"description\" name=\"description\" class=\"form-control\" [(ngModel)]=\"equipment.description\" placeholder=\"\" rows=\"4\" required></textarea>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"termsConditions\">Terms & Conditions</label>\n                            <textarea type=\"text\" id=\"termsConditions\" name=\"termsConditions\" class=\"form-control\" [(ngModel)]=\"equipment.termsConditions\" placeholder=\"\" rows=\"4\" [disabled]=\"true\"></textarea>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"nf-image\">Image</label>\n                            <input type=\"file\" name=\"file-7[]\" id=\"file-7\" class=\"inputfile inputfile-6\" data-multiple-caption=\"{count} files selected\" multiple />\n                            <label for=\"file-7\"><span></span> <strong><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"17\" viewBox=\"0 0 20 17\"><path d=\"M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z\"/></svg> Upload image</strong></label>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer\">\n                    <button type=\"reset\" class=\"btn btn-secondary whiteclr\" [routerLink]=\"['/equipment/list']\"> Cancel</button>\n                    <button type=\"submit\" class=\"pull-right btn btn-primary orangeclr\" [disabled]=\"!addEquipmentForm.valid\">Save</button>\n                </div>          \n            </form>\n        </div>\n    </div> <!-- .card -->\n</div> <!-- .equipment-wrapper -->"
 
 /***/ }),
-/* 1301 */
+/* 1305 */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"crop-wrapper animated fadeIn\">       -->\n<div class=\"crop-wrapper\">      \n    <div class=\"row\">\n        <div class=\"col-12 col-lg-12\">\n            <div class=\"content-header\">\n                <ol class=\"breadcrumb\">\n                    <li><a href=\"javascript:void(0)\">Dashboard</a></li>\n                    <li><a href=\"javascript:void(0)\">Crops</a></li>\n                    <li class=\"active\"><a>List</a></li>\n                </ol>\n            </div>\n        </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n            <div class=\"card\">\n                <div class=\"card-header\">\n                    <div class=\"row\">\n                        <div class=\"col-3\">\n                            <form action=\"#\" class=\"pull-left ng-untouched ng-pristine ng-valid\" method=\"get\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" name=\"q\" placeholder=\"Search\" type=\"text\">\n                                <span class=\"input-group-btn\">\n                                <button class=\"btn btn-flat\" id=\"search-btn\" name=\"search\" type=\"submit\"><i class=\"fa fa-search\"></i> </button>\n                                </span>\n                            </div>\n                            </form>\n                        </div>\n                        <div class=\"col-9 text-right\">\n                            <button type=\"button\" class=\"btn btn-success btnadd\" [routerLink]=\"['/crop/add']\">Add Crop</button>\n                            <div class=\"icns\">\n                                <a><img src=\"assets/img/pdf.png\" alt=\"pdf\"></a>\n                                <a><img src=\"assets/img/xls.png\" alt=\"pdf\"></a>\n                            </div>\n                        </div>\n                    </div> <!-- .row -->\n                </div><!-- .card-header -->\n                \n                <div class=\"card-block\">                                        \n                    <table class=\"table table-bordered table-striped table-condensed\" [mfData]=\"data\" #mf=\"mfDataTable\"\n                               [mfRowsOnPage]=\"rowsOnPage\" [(mfSortBy)]=\"sortBy\" [(mfSortOrder)]=\"sortOrder\">\n                        <thead>\n                            <tr>\n\n                                <th width=\"25%\">\n                                    <mfDefaultSorter by=\"name\">Name \n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"price\">Offer Price\n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"quantity_per_pack\">Qty. \n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <!-- <th width=\"15%\">Category</th> -->\n                                <th width=\"10%\">Color</th>\n                                <th width=\"10%\">Actions</th>\n                            </tr>\n                        </thead>                        \n                        <tbody>\n                            <tr *ngIf=\"isLoading\">\n                                <td colspan=\"8\">\n                                    <div class=\"is-loading\"><i class=\"page-loader\"></i></div>\n                                </td>\n                            </tr>\n                            <tr *ngFor=\"let crop of mf.data\">                        \n                                <td><a href=\"javascript:void(0);\" (click)=\"viewCrop(crop.id)\">{{crop.name}}</a></td>\n                                <td>{{crop.price}}</td>\n                                <td>{{crop.quantity_per_pack}}</td>\n                                <!-- <td>{{crop.category}}</td> -->\n                                <td>{{crop.color}}</td>\n                                <td>                                    \n                                    <button (click)=\"sendUpdateCrop(crop.id)\" class=\"btn btn-info\" title=\"Edit\" style=\"padding:1px 6px\"><i class=\"fa fa-pencil\"></i></button>\n                                    <button  (click)=\"removeCrop(crop)\" class=\"btn btn-danger\" title=\"Delete\" style=\"padding: 1px 6px\"><i class=\"fa fa-trash\"></i></button>                                    \n                                </td>\n                            </tr>\n                        </tbody>\n                        <tfoot>\n                            <tr>\n                                <td colspan=\"8\">\n                                    <div class=\"pagination-section\">\n                                        <div class=\"row-on-page\">\n                                            <label class=\"label-control\">Show</label>\n                                            &nbsp;\n                                            <select class=\"input-sm\" [(ngModel)]=\"rowsOnPage\">\n                                                <option [ngValue]=\"5\">5</option>\n                                                <option [ngValue]=\"10\">10</option>\n                                                <option [ngValue]=\"15\">25</option>\n                                                <option [ngValue]=\"15\">50</option>\n                                                <option [ngValue]=\"15\">100</option>\n                                            </select>\n                                            &nbsp;\n                                           <label class=\"label-control\">entires</label>\n                                        </div>\n                                        <div class=\"text-right\">                                    \n                                            <mfBootstrapPaginator></mfBootstrapPaginator>\n                                        </div>\n                                        <div style=\"clear: both;\"></div>\n                                    </div>    \n                                </td>    \n                            </tr>                            \n                        </tfoot>\n                    </table>                             \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+module.exports = "<!-- <div class=\"equipment-wrapper animated fadeIn\">       -->\n<div class=\"equipment-wrapper\">      \n    <div class=\"row\">\n        <div class=\"col-12 col-lg-12\">\n            <div class=\"content-header\">\n                <ol class=\"breadcrumb\">\n                    <li><a href=\"javascript:void(0)\">Dashboard</a></li>\n                    <li><a href=\"javascript:void(0)\">Equipments</a></li>\n                    <li class=\"active\"><a>List</a></li>\n                </ol>\n            </div>\n        </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n            <div class=\"card\">\n                <div class=\"card-header\">\n                    <div class=\"row\">\n                        <div class=\"col-3\">\n                            <form action=\"#\" class=\"pull-left ng-untouched ng-pristine ng-valid\" method=\"get\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" name=\"q\" placeholder=\"Search\" type=\"text\">\n                                <span class=\"input-group-btn\">\n                                <button class=\"btn btn-flat\" id=\"search-btn\" name=\"search\" type=\"submit\"><i class=\"fa fa-search\"></i> </button>\n                                </span>\n                            </div>\n                            </form>\n                        </div>\n                        <div class=\"col-9 text-right\">\n                            <button type=\"button\" class=\"btn btn-success btnadd\" [routerLink]=\"['/equipment/add']\">Add Equipment</button>\n                            <div class=\"icns\">\n                                <a><img src=\"assets/img/pdf.png\" alt=\"pdf\"></a>\n                                <a><img src=\"assets/img/xls.png\" alt=\"pdf\"></a>\n                            </div>\n                        </div>\n                    </div> <!-- .row -->\n                </div><!-- .card-header -->\n                \n                <div class=\"card-block\">                                        \n                    <table class=\"table table-bordered table-striped table-condensed\" [mfData]=\"data\" #mf=\"mfDataTable\"\n                               [mfRowsOnPage]=\"rowsOnPage\" [(mfSortBy)]=\"sortBy\" [(mfSortOrder)]=\"sortOrder\">\n                        <thead>\n                            <tr>\n\n                                <th width=\"25%\">\n                                    <mfDefaultSorter by=\"name\">Name \n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"15%\">Supplier</th>\n                                <th width=\"10%\">District</th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"rentSell\">Type\n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"modelyear\">Model Year \n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">Qty</th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"rate\">price\n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">Actions</th>\n                            </tr>\n                        </thead>                        \n                        <tbody>\n                            <tr *ngIf=\"isLoading\">\n                                <td colspan=\"8\">\n                                    <div class=\"is-loading\"><i class=\"page-loader\"></i></div>\n                                </td>\n                            </tr>\n                            <tr *ngFor=\"let equipment of mf.data\">                        \n                                <td><a href=\"javascript:void(0);\" (click)=\"viewEquipment(equipment.id)\">{{equipment.name}}</a></td>\n                                <td>Gurjeet</td>\n                                <td>Mohali</td>\n                                <td>{{equipment.rentSell}}</td>\n                                <td>{{equipment.modelyear}}</td>\n                                <td>1</td>\n                                <td>{{equipment.rate}}</td>\n                                <td>                                    \n                                    <button (click)=\"sendUpdateEquipment(equipment.id)\" class=\"btn btn-info\" title=\"Edit\" style=\"padding:1px 6px\"><i class=\"fa fa-pencil\"></i></button>\n                                    <button  (click)=\"removeEquipment(equipment.id)\" class=\"btn btn-danger\" title=\"Delete\" style=\"padding: 1px 6px\"><i class=\"fa fa-trash\"></i></button>                                    \n                                </td>\n                            </tr>\n                        </tbody>\n                        <tfoot>\n                            <tr>\n                                <td colspan=\"8\">\n                                    <div class=\"pagination-section\">\n                                        <div class=\"row-on-page\">\n                                            <label class=\"label-control\">Show</label>\n                                            &nbsp;\n                                            <select class=\"input-sm\" [(ngModel)]=\"rowsOnPage\">\n                                                <option [ngValue]=\"5\">5</option>\n                                                <option [ngValue]=\"10\">10</option>\n                                                <option [ngValue]=\"15\">25</option>\n                                                <option [ngValue]=\"15\">50</option>\n                                                <option [ngValue]=\"15\">100</option>\n                                            </select>\n                                            &nbsp;\n                                           <label class=\"label-control\">entires</label>\n                                        </div>\n                                        <div class=\"text-right\">                                    \n                                            <mfBootstrapPaginator></mfBootstrapPaginator>\n                                        </div>\n                                        <div style=\"clear: both;\"></div>\n                                    </div>    \n                                </td>    \n                            </tr>                            \n                        </tfoot>\n                    </table>                             \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
 
 /***/ }),
-/* 1302 */
+/* 1306 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-lg-12\">\r\n            <div class=\"content-header\">\r\n                <ol class=\"breadcrumb\">\r\n                    <li><a href=\"#\">Dashboard</a></li>\r\n                    <li><a href=\"#\">Crops</a></li>\r\n                    <li class=\"active\"><a href=\"#\">View</a></li>\r\n                </ol>\r\n            </div>\r\n        </div>\r\n    </div>\r\n<form role=\"form\" (ngSubmit)=\"save()\" #dailyExpenseForm=\"ngForm\">\r\n    <div class=\"card\">\r\n        <div class=\"card-header\">\r\n            <strong>View Crop</strong>\r\n            <button type=\"button\" class=\"btn btn-secondary pull-right\" (click)=\"updateCrop(crop.id)\"><i class=\"fa fa-pencil\"></i> Edit Crop</button>\r\n        </div>\r\n        <div class=\"card-block viewmode\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-name\">Crop Name*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.name}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-password\">Category*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.category}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">Variety</label>\r\n\t\t\t\t\t\t\t<p>{{crop.variety}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-price\">Offer Price <i class=\"fa fa-rupee\"></i> *</label>\r\n\t\t\t\t\t\t\t<p><i class=\"fa fa-rupee\"></i>{{crop.price}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-grade\">Grade</label>\r\n\t\t\t\t\t\t\t<p>{{crop.grade}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-color\">Color*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.color}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-size\">Size/Weight*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.size}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-otherSpeciality\">Other Speciality</label>\r\n\t\t\t\t\t\t\t<p>{{crop.other_speciality}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-availibility\">Availibility Period*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.availibility}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-packaging\">Packaging*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.packaging}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-supplyAblity\">Supply Ability*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.supply_ablity}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-destinationForShipping\">Destination for Shipping*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.destination_shipping}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-packSize\">Pack Size*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.pack_size}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-qty\">Quantity Per Pack*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.quantity_per_pack}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-label\">Label/Making on Pack*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.label}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-paymentTerms\">Payment Terms*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.payment_method}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-moq\">MOQ*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.moq}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-averageLeadTime\">Average Lead Time*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.average_lead_time}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-additionalInformation\">Additional Information*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.additional_info}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-termsConditions\">Terms & Conditions</label>\r\n\t\t\t\t\t\t\t<p>{{crop.terms}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-image\">Image</label>\r\n\t\t\t\t\t\t\t<p><i class=\"fa fa-file-image-o\"></i> {{crop.image}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n        </div>\r\n    </div>\r\n</form>    \r\n</div>\r\n"
+module.exports = "<div class=\"equipment-wrapper\">    \r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-lg-12\">\r\n            <div class=\"content-header\">\r\n                <ol class=\"breadcrumb\">\r\n                    <li><a href=\"javascript:void(0)\">Dashboard</a></li>\r\n                    <li class=\"active\"><a href=\"javascript:void(0)\">Equipment Management</a></li>      \r\n                </ol>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"card\">\r\n        <div class=\"card-header\">\r\n            <strong>View Equipment</strong>\r\n            <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"updateEquipment(equipment.id)\">Edit Equipment</button>              \r\n        </div>\r\n        <div class=\"card-block\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"nf-name\">Equipment Name</label>\r\n                        <p>{{equipment.name}}</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"category\">Category</label>\r\n                        <p>{{equipment.category}}</p>                            \r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"companyManufacturer\">Company/Manufacturer</label>\r\n                        <p>{{equipment.companyManufacturer}}</p>                           \r\n                    </div>\r\n                </div>\r\n                  <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"model\">Model</label>\r\n                        <p>{{equipment.model}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"modelyear\">Model year</label>\r\n                        <p>{{equipment.modelyear}}</p>\r\n                    </div>\r\n                </div>\r\n            \r\n                <div class=\"col-sm-6\">\r\n                <div class=\"form-group\">\r\n                        <label for=\"enginePower\">Engine power</label>\r\n                        <p>{{equipment.enginepower}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n             <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"nf-rentslell\">Rent/sell</label>\r\n                        <p>{{equipment.rentSell}}</p>                        \r\n                    </div>                      \r\n                </div>\r\n\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"rate\">Price</label>                         \r\n                        <p>{{equipment.rate}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"usage\">Usage</label>\r\n                        <p>{{equipment.usage}}</p>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"description\">Description</label>\r\n                        <p>{{equipment.description}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"termsConditions\">Terms & Conditions</label>\r\n                        <p>{{equipment.termsConditiop}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"image\">Image</label>\r\n                        <p>Not Available</p>\r\n                    </div>\r\n                </div>\r\n            </div>                           \r\n        </div>\r\n    </div> <!-- .card -->\r\n</div> <!-- .equipment-wrapper -->"
 
 /***/ })
 ]));

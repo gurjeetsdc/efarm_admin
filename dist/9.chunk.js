@@ -522,7 +522,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var ng2_charts_1 = __webpack_require__(604);
+var ng2_charts_1 = __webpack_require__(615);
 // import { DropdownModule } from 'ng2-bootstrap/dropdown';
 var dashboard_component_1 = __webpack_require__(1255);
 var dashboard_routing_module_1 = __webpack_require__(1278);

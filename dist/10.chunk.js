@@ -166,7 +166,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var ng2_charts_1 = __webpack_require__(604);
+var ng2_charts_1 = __webpack_require__(615);
 var chartjs_component_1 = __webpack_require__(1243);
 var chartjs_routing_module_1 = __webpack_require__(1275);
 var ChartJSModule = (function () {
