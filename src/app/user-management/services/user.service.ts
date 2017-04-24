@@ -28,7 +28,7 @@ export class UserService {
         this.token = 'Bearer ' + this.access_token["access_token"];
         
         headers.append('Authorization', this.token);
-        return this._http.post(this.host +'/enduser', user, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this.host +'/enduser/add', user, { headers: headers }).map((res:Response) => res.json())
     }
 
     getUser(userid) {
