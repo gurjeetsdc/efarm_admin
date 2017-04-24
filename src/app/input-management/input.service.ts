@@ -81,8 +81,8 @@ export class InputService {
     }
 
 
-     /** DeleteID input by ID **/
-    deleteInput( input ) {
+     /** Delete input by ID **/
+    deleteInput( inputId ) {
         
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
@@ -91,7 +91,7 @@ export class InputService {
         this.token          = 'Bearer ' + this.access_token["access_token"];
         
         headers.append('Authorization', this.token );
-        return this.http.delete(this.host +'/input/'+ input,  { headers: headers }).map((res:Response) => res.json());
+        return this.http.delete(this.host +'/inputs/'+ inputId,  { headers: headers }).map((res:Response) => res.json());
     }   
 
 }
