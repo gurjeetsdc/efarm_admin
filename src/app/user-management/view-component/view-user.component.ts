@@ -8,14 +8,15 @@ import { UserService } from '../services/user.service';
 export class ViewUserComponent {
 	private userID = '';
 	private user = {};
-    private isLoading = false;
+    private isLoading = true;
 
     constructor(route: ActivatedRoute, private _router : Router,private _userService: UserService) { 
         this.userID = route.snapshot.params['id'];
   	    this._userService.getUser(this.userID).subscribe(res => {
            this.user = res;
-        },
-           err => {
+           this.isLoading = false;
+        },err => {
+           this.isLoading = false 
         });
     }
 

@@ -10,7 +10,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- loading section -->
+    <div *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+    <div class="row" *ngIf="!isLoading">
         <div class="col-9">
             <div class="card">
                 <div class="card-block userdetail">
