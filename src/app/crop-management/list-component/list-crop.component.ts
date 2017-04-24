@@ -12,6 +12,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class ListCropComponent implements OnInit {
 
     public data;
+    public totalRecords        = 0;
     public filterQuery         = "";
     public rowsOnPage          = 10;
     public sortBy              = "name";
@@ -35,6 +36,7 @@ export class ListCropComponent implements OnInit {
 
         this._cropService.croplisting().subscribe(res => {
             this.data = res["Data"];
+            this.totalRecords = this.data.length;
             this.isLoading = false;
         },err => {
             this.isLoading = false;
@@ -56,7 +58,7 @@ export class ListCropComponent implements OnInit {
     }
 
     sendUpdateCrop(cropID) {     
-        let route = '/crop/update/'+cropID;
+        let route = '/crop/edit/'+cropID;
         this._router.navigate([route]);       
     }
 

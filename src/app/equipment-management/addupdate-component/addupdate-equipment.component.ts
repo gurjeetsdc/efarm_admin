@@ -12,11 +12,11 @@ export class AddUpdateEquipmentComponent {
     private equipment     = {};
     private allEquipments = [];
     private category      = [];
-
     private equipmentID: any;
     private response:any;
     
     private showMessage:boolean = false;
+    private isLoading:boolean   = true;
 
     private action:string = 'Add';
 
@@ -27,7 +27,9 @@ export class AddUpdateEquipmentComponent {
         this.equipmentID = _activateRouter.snapshot.params['id'];        
         
         if( this.equipmentID ) {
-            this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { this.equipment = res; this.action = 'Edit' }, err => {});
+            this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { this.equipment = res; this.action = 'Edit'; this.isLoading = false;}, err => {});
+        }else{
+            this.isLoading = false;
         }
         
         this._equipmentService.getAllCategories().subscribe( res => { this.category = res; console.log(this.category) }, err => {});
@@ -44,7 +46,8 @@ export class AddUpdateEquipmentComponent {
                                         rate: '',
                                         usage: '',
                                         description: '',
-                                        termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'
+                                        termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod',
+                                        quantity: ''
                                     };
         this.equipment = equipmentDefaultvalues;
 

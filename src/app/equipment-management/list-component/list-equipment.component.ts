@@ -17,10 +17,11 @@ import { EquipmentService } from '../services/equipment.service';
 export class ListEquipmentComponent implements OnInit {
 
     public data;
+    public totalRecords;
     public filterQuery = "";
     public rowsOnPage  = 10;
-    public sortBy      = "name";
-    public sortOrder   = "asc";
+    public sortBy      = "createdAt";
+    public sortOrder   = "desc";
 
 
     public response:any;
@@ -41,9 +42,10 @@ export class ListEquipmentComponent implements OnInit {
         });
 
         this._equipmentService.getAllEquipments().subscribe(allEquipments => {
-            this.data = allEquipments;            
-            this.isLoading = false;
-            console.log(allEquipments);
+            this.data         = allEquipments;
+            this.totalRecords = this.data.length;
+            this.isLoading    = false;
+            // console.log(allEquipments);
             console.log("allEquipments loaded");
         });             
     }
@@ -63,7 +65,7 @@ export class ListEquipmentComponent implements OnInit {
 
     sendUpdateEquipment( equipmentID ) {     
         console.log(equipmentID);   
-        let route = '/equipment/update/'+equipmentID;
+        let route = '/equipment/edit/'+equipmentID;
         this._router.navigate([route]);       
     }
 

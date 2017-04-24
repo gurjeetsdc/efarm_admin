@@ -43,10 +43,10 @@ const routes: Routes = [
             }
       },
       {
-        path: 'update/:id',
+        path: 'edit/:id',
         component: AddUpdateEquipmentComponent,
         data: {
-          title: 'Update Equipment'
+          title: 'Edit Equipment'
         }
       }
     ]

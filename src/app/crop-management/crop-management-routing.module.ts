@@ -36,10 +36,10 @@ const routes: Routes = [
         }
       },
       {
-        path: 'update/:id',
+        path: 'edit/:id',
         component: AddUpdateCropComponent,
         data: {
-          title: 'Update'
+          title: 'Edit'
         }
       }
     ]

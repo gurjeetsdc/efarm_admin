@@ -10,7 +10,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- loading section -->
+    <div *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+    <div class="row" *ngIf="!isLoading">
         <div class="col-9">
             <div class="card">
                 <div class="card-block userdetail">
@@ -40,24 +45,6 @@
                                 <label>Modified on</label>
                                 <span>{{user.updatedAt | date}}</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header p-b10">
-                    <div class="row">
-                        <div class="col-9">
-                            <h3>Orders (Items Purchased)</h3>
-                        </div>
-                        <div class="col-3">
-                            <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
-                                <div class="input-group">
-                                    <input class="form-control" name="q" placeholder="Search..." type="text">
-                                    <span class="input-group-btn">
-        <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
-        </span> </div>
-                            </form>
                         </div>
                     </div>
                 </div>
