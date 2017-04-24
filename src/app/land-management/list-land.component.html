@@ -6,7 +6,7 @@
         <div class="content-header">
           <ol class="breadcrumb">
             <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Land</a></li>
+            <li><a href="#">Lands</a></li>
             <li class="active"><a href="#">Add new</a></li>
           </ol>
         </div>
@@ -30,7 +30,7 @@
       
             </div>
        <div class="col-9 text-right">
-        <button type="button" class="btn btn-success btnadd" [routerLink]="['/land/add']">Add Crop</button>
+        <button type="button" class="btn btn-success btnadd" [routerLink]="['/land/add']">Add land</button>
         <div class="icns">
                      <a><img src="assets/img/pdf.png" alt="pdf"></a>
                      <a><img src="assets/img/xls.png" alt="pdf"></a>
@@ -39,13 +39,12 @@
             </div>
         </div>
 
-
         <ng-table [config]="config"
                   (tableChanged)="onChangeTable(config)"
                   (cellClicked)="onCellClick($event)"
                   [rows]="rows" [columns]="columns">
         </ng-table>
-
+        <div *ngIf="isLoading" class="is-loading"><i class="page-loader"></i></div>
         <div *ngIf="err_message" class="text-center text-danger">{{err_message}}</div>
         
         <div class="row"> 

@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
-import {PaginationInstance} from 'ng2-pagination';
+//import {PaginationInstance} from 'ng2-pagination';
 import { InputService } from './input.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
+import {Http} from "@angular/http";
+import {DataTableModule} from "angular2-datatable";
+
+
+
 @Component({
   selector: 'app-input-management',
   templateUrl: './list-input.component.html',
@@ -13,65 +18,87 @@ export class ListInputComponent implements OnInit {
 
   test: any = [];
 
-  private TableData = [{
-  	name:"Urea",
-  	distributor:"Harmind Singh",
-  	company:"The Garderner",
-  	district:"Ludhyana",
-  	variety:"Seeds",
-  	qty:15,
-  	price:1200
-  }];
-  public documents = [];
-  public selectedDocument = [];
-  public err_message = '';
-  public rows:Array<any> = [];
-  public columns:Array<any> = [
-    {
-      title: 'Name',
-      name: 'name',
-      // filtering: {filterString: '', placeholder: 'Filter by position'}
-    },
-    {title: 'Units', name: 'unit'},
-    {title: 'Price', name: 'price'},
-    {title: 'Variety', name: 'variety',sort: false},
-    {title: 'Qty.', name: 'quantity',sort: false},
-    {title: 'status', name: 'status',sort: false},
-    //{title: 'Action', name: 'button'},
-  ];
-  public page:number = 1;
-  public itemsPerPage:number = 10;
-  public maxSize:number = 5;
-  public numPages:number = 1;
-  public length:number = 0;
-  public isShowNORcd = false;
-  public config:any = {
-    paging: true,
-    sorting: {columns: this.columns},
-    filtering: {filterString: ''},
-    className: ['table-striped', 'table-bordered']
-  };
+    public data;
+    public filterQuery = "";
+    public rowsOnPage  = 10;
+    public sortBy      = "name";
+    public sortOrder   = "asc";
+    public response:any;
 
-  private data = [];
+    private isLoading:boolean = true;
 
+    public documents = [];
+    public selectedDocument = [];
+    public err_message = '';
+
+    public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _inputService: InputService) { 
+        
+    }
+    ngOnInit(): void {
+
+        this._inputService.inputlist().subscribe(resInputs => {
+            this.data = resInputs;            
+            this.isLoading = false;
+            console.log(resInputs);
+            console.log("resInputs loaded");
+        });             
+    }
+
+    public toInt(num: string) {
+        return +num;
+    }
+
+    public sortByWordLength = (a: any) => {
+        return a.city.length;
+    }
+
+    viewInput (inputID) {
+      console.log(inputID);
+      
+       let route = '/input/list/'+inputID;
+       this._router.navigate([route]);       
+    }
+
+    sendUpdateinput( inputID ) {     
+        console.log(inputID);
+      
+       let route = '/input/update/'+inputID;
+        this._router.navigate([route]);       
+    }
+
+     
+    removeInput( inputID ) {
+
+      console.log(inputID);
+      
+        if(confirm("Are you sure to delete Input")) {
+            console.log("Implement delete functionality here");
+            this.isLoading = true;
+            this._inputService.deleteInput(inputID).subscribe(res => {
+                this.response  = res;
+                this.isLoading = false;
+
+                this._router.navigate(['/input/list/']);      
+            });  
+        }
+    } 
+
+/*************************************************************/
+/*
   public constructor(private router : Router,private _inputService: InputService) {
     this.length = this.data.length;
      this._inputService.inputlist()
                        .subscribe(
                           res => {
-                             //let mainData = this.addDeleteButton(res)
-                             //let mainData = this.addDeleteButton(res)
-                             //console.log(mainData);
                              this.data = res;
-                             if(this.data.length == 0){
-                               this.isShowNORcd = true;
-                             }
+                             this.isLoading = false;
                              
                              //console.log("response---data---------",res)
                              this.onChangeTable(this.config);
                              
                            },
                             err => {
+                              this.isLoading = false;
                               console.log("error--------------",err);
                               this.err_message = "No record to display";
                           });
@@ -197,7 +224,7 @@ export class ListInputComponent implements OnInit {
   public deleteInput(): any {
     console.log("gfhjgfhjfhjgfjhf");
   }
-
+*/
 /*  public onCellClick(data: any): any {
 this.selectedDocument = data.row;
 

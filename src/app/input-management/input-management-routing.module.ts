@@ -35,6 +35,13 @@ const routes: Routes = [
         data: {
           title: 'List'
         }
+      },
+      {
+        path: 'update/:id',
+        component: AddInputComponent,
+        data: {
+          title: 'Update Input'
+        }
       }
     ]
   }

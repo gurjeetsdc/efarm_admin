@@ -1,30 +1,69 @@
 import { Component } from '@angular/core';
 import { InputService } from './input.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: 'add-input.component.html',
   providers: [InputService]
 })
 export class AddInputComponent {
-	private input = {};
-  constructor(private router : Router, private _inputService: InputService) { }
+    private input     = {};
+    
+    private Id: any;
+    private response:any;
+    
+    private showMessage:boolean = false;
 
-  ngOnInit() { }
+    private action:string = 'Add';
 
-  addInput() {
+    constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _inputService: InputService) {
+        this.Id = _activateRouter.snapshot.params['id'];        
+        if( this.Id ) {
+            this._inputService.getInput(this.Id).subscribe( res => { this.input = res; this.action = 'Update' }, err => {});
+        }        
+    }
 
-  	console.log("inside addInput",this.input);
+    submitInput() {
+        console.log('submitting Input...');
 
-  	    this._inputService.inputadd(this.input)
-                       .subscribe(
-                           res => {
-                             console.log("response",res)
-                             this.router.navigate(['/input/list']);
-                           },
-                            err => {
-                            	console.log("error",err);
-                            });
-	}
+        if( this.action == 'Update' ) {
+            this.updateInput();            
+        }else {
+           this.addInput();
+        }
+    }
+
+    addInput() {
+        console.log('Posting Input...');
+
+        this._inputService.inputadd(this.input).subscribe(res => {
+            this.response    = res;
+            this.showMessage = true;
+            this.input   = {};
+            this._router.navigate(['/input/list', {data: "success"} ]);
+            console.log(this.response)
+        });      
+      
+    }
+
+
+    updateInput() {
+        console.log('Udpating Input...');
+        
+        this._inputService.updateInput(this.input).subscribe(res => {
+            this.response    = res;
+            this.showMessage = true;
+            this.input   = {};
+            this._router.navigate(['/input/list', {data: "success"} ]);
+        }); 
+    }
+
+    closeMessage() {
+        this.showMessage = false;
+    } 
+
+
+
+
   
 }

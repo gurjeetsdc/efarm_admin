@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ListLandComponent implements OnInit {
 
    test: any = [];
-
+   private isLoading:boolean = true;
   private TableData = [{
     name:"Urea",
     distributor:"Harmind Singh",
@@ -60,14 +60,13 @@ export class ListLandComponent implements OnInit {
                        .subscribe(
                           res => {
                              this.data = res;
-                             /*if(this.data.length == 0){
-                               this.isShowNORcd = true;
-                             }*/
+                             this.isLoading = false;                             
                              console.log("response---data---------",res)
                              this.onChangeTable(this.config);
                            },
                             err => {
                               console.log("error--------------",err);
+                              this.isLoading = false;
                               this.err_message = "No record to display";
                           });
   }
