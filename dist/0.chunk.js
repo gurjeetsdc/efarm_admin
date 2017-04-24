@@ -32947,7 +32947,7 @@ var UserService = (function () {
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         headers.append('Authorization', this.token);
-        return this._http.post(this.host + '/enduser', user, { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.post(this.host + '/enduser/add', user, { headers: headers }).map(function (res) { return res.json(); });
     };
     UserService.prototype.getUser = function (userid) {
         var headers = new http_1.Headers();
