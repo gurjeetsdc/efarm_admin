@@ -30,7 +30,6 @@ body {
 .wrapper:after {
 	clear: both;
 }
-
 /*login page*/
 
 .login-logo, .register-logo {
@@ -793,7 +792,6 @@ a:hover, a:active, a:focus {
 .control-sidebar-dark, .control-sidebar-dark+.control-sidebar-bg {
 	background: #222d32;
 }
-
 .control-sidebar-dark .nav-tabs.control-sidebar-tabs {
 	border-bottom: #1c2529;
 }
@@ -1166,8 +1164,8 @@ header.navbar .navbar-nav.ml-auto {
 	height: 34px;
 }
 .form-control:focus {
-	border-color: #3c8dbc;
-	box-shadow: none;
+    border-color: #3c8dbc !important;
+    box-shadow: none;
 }
 .form-control::-moz-placeholder, .form-control:-ms-input-placeholder, .form-control::-webkit-input-placeholder {
  color: #bbb;
@@ -4443,15 +4441,14 @@ table.text-center, table.text-center td, table.text-center th {
  font-family: 'Open Sans', sans-serif !important;
  color: #666;
 }
-
-.mainarea .card-block .form-group .form-control{
+.mainarea .card-block .form-group .form-control {
 	color: #c6c6c6;
-    font-family: "Roboto",sans-serif !important;
-    font-size: 18px;
-    font-weight: 300;
+	font-family: "Roboto", sans-serif !important;
+	font-size: 18px;
+	font-weight: 300;
 }
-.linehght{
-	 line-height: 21px;
+.linehght {
+	line-height: 21px;
 }
 .card-header .input-group #search-btn {
 	border-left: 0
@@ -4952,7 +4949,7 @@ button.orangeclr:hover {
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 165px;
+	width: 190px;
 	text-align: left;
 	z-index: 1;
 }
@@ -5008,6 +5005,10 @@ header.navbar .nav-item {
 }
 .sidebar .nav .nav-item .nav-link span {
 	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 138px;
 }
 .sidebar-hidden header.navbar .navbar-brand {
 	width: 75px;
@@ -5037,7 +5038,7 @@ ul.navbar-nav.width {
 	transition: width .1s ease-in-out;*/
 }
 .btn:focus, .btn.focus {
-	box-shadow: none !important;
+    border-color: #5cb3fd ;
 }
 .custome-check.loginpage {
 	padding-top: 3px;
@@ -5064,6 +5065,7 @@ ul.navbar-nav.width {
 .form-group.has-required > label:after {
 	content: "*";
 	color: red;
+	padding-left: 5px;
 }
 .inputfile {
 	width: 0.1px;
@@ -5313,7 +5315,7 @@ i.addimage {
 	color: #939393;
 }
 .pagination-section > .row-on-page {
-	float:left;
+	float: left;
 }
 
 /* media queries */
@@ -5601,8 +5603,6 @@ h2.search_it {
 }
 
 @media (max-width:767px) {
-	
-	
 .register-box {
 	width: 95%;
 }
@@ -5689,17 +5689,12 @@ h2.search_it {
 .register-box {
 	margin-top: 20px;
 }
-	
 }
 
 @media (max-width:580px) {
-	
-	
-	.linehght {
-padding-top: 12px;
-	}
-	
-	
+.linehght {
+	padding-top: 12px;
+}
 .register-box {
 	position: relative;
 	height: 100%;
@@ -5720,8 +5715,6 @@ padding-top: 12px;
 .content-wrapper header.main-header form.sidebar-form {
 	width: 80%;
 }
-	
-	
 header.main-header.header_main div.navbar-custom-menu {
 	width: 170px;
 	margin: 0px auto;
