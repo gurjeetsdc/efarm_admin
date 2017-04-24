@@ -10,7 +10,12 @@
             </div>
         </div>
     </div>
-    <div class="card">
+     <!-- loading section -->
+    <div *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+    <div class="card" *ngIf="!isLoading" >
         <div class="card-header">
             <strong>{{cropID ? 'Update' : 'Add'}} Crop</strong>
         </div>

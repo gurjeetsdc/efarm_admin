@@ -14,6 +14,7 @@ export class AddUpdateCropComponent {
         destination_shipping:'',
         payment_method:'COD'
     };
+    public isLoading = true;
     private category = [];
     private cropID:any;
     constructor(private router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService) { 
@@ -22,9 +23,12 @@ export class AddUpdateCropComponent {
         if( this.cropID ) {
             this._cropService.getCrop(this.cropID).subscribe(res => {
                 this.crop = res["Data"][0];
+                this.isLoading = false;
             },err => {
-
+                this.isLoading = false;
             });
+        } else {
+            this.isLoading = false;
         }
 
     }

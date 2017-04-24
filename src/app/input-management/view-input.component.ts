@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { InputService } from './input.service';
 @Component({
   templateUrl: 'view-input.component.html',
@@ -10,41 +10,19 @@ export class ViewInputComponent {
 	private input = {};
   private copy_input = {};
   private edit = false;
-  constructor(route: ActivatedRoute,private _inputService: InputService) { 
-  	this.Id = route.snapshot.params['id'];
-  	this._inputService.getInput(this.Id)
-                       .subscribe(
-                           res => {
-                             //console.log(res);
-                             this.input = res;
-                             //console.log("sfsdfdfdfd",this.input)
-                           },
-                           err => {
+  constructor(private _router: Router, private _activatedRouter: ActivatedRoute,  private _inputService: InputService) { 
+  	this.Id =  _activatedRouter.snapshot.params['id'];
+  	
+        if( this.Id ) {
+            this._inputService.getInput(this.Id).subscribe( res => { this.input = res; console.log(res) }, err => {});
+        }  
 
-                           });
   }
 
-  editInput() {
-    this.edit = !this.edit;
-    this.copy_input = JSON.parse(JSON.stringify(this.input));
-  }
-
-  cancel() {
-    this.edit = !this.edit;
-    this.input = JSON.parse(JSON.stringify(this.copy_input));
-  }
-
-  save() {
-    this._inputService.updateInput(this.input)
-                       .subscribe(
-                           res => {
-                             this.edit = !this.edit;
-                             this.copy_input = JSON.parse(JSON.stringify(this.input));
-                           },
-                           err => {
-
-                           });
-  }
+   updateInput( ID ) {        
+        let route = '/input/update/'+ID;
+        this._router.navigate([route]);       
+    }   
 
  
 }
