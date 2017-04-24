@@ -19,7 +19,7 @@ export class ViewCropComponent {
     }
 
     updateCrop(cropid) {        
-        let route = '/crop/update/'+ cropid;
+        let route = '/crop/edit/'+ cropid;
         this._router.navigate([route]);       
     }
 

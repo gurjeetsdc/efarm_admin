@@ -793,6 +793,7 @@ a:hover, a:active, a:focus {
 .control-sidebar-dark, .control-sidebar-dark+.control-sidebar-bg {
 	background: #222d32;
 }
+
 .control-sidebar-dark .nav-tabs.control-sidebar-tabs {
 	border-bottom: #1c2529;
 }
@@ -4442,6 +4443,16 @@ table.text-center, table.text-center td, table.text-center th {
  font-family: 'Open Sans', sans-serif !important;
  color: #666;
 }
+
+.mainarea .card-block .form-group .form-control{
+	color: #c6c6c6;
+    font-family: "Roboto",sans-serif !important;
+    font-size: 18px;
+    font-weight: 300;
+}
+.linehght{
+	 line-height: 21px;
+}
 .card-header .input-group #search-btn {
 	border-left: 0
 }
@@ -4874,7 +4885,7 @@ span.red {
 	padding: 1.55rem 1.25rem !important;
 }
 .card-block {
-	padding: 1.25rem 1.25rem 0 !important;
+	padding: 1rem 1.25rem 0 !important;
 }
 button.orangeclr {
 	background-color: #f47100;
@@ -5301,6 +5312,9 @@ i.addimage {
 	padding: 0.5rem 1rem;
 	color: #939393;
 }
+.pagination-section > .row-on-page {
+	float:left;
+}
 
 /* media queries */
 
@@ -5587,6 +5601,8 @@ h2.search_it {
 }
 
 @media (max-width:767px) {
+	
+	
 .register-box {
 	width: 95%;
 }
@@ -5673,9 +5689,17 @@ h2.search_it {
 .register-box {
 	margin-top: 20px;
 }
+	
 }
 
 @media (max-width:580px) {
+	
+	
+	.linehght {
+padding-top: 12px;
+	}
+	
+	
 .register-box {
 	position: relative;
 	height: 100%;
@@ -5696,6 +5720,8 @@ h2.search_it {
 .content-wrapper header.main-header form.sidebar-form {
 	width: 80%;
 }
+	
+	
 header.main-header.header_main div.navbar-custom-menu {
 	width: 170px;
 	margin: 0px auto;

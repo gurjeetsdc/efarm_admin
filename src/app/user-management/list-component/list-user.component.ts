@@ -11,6 +11,7 @@ import { UserService } from '../services/user.service';
 })
 export class ListUserComponent implements OnInit {
     public data;
+    public totalRecords        = 0;
     public filterQuery         = "";
     public rowsOnPage          = 10;
     public sortBy              = "name";
@@ -34,6 +35,7 @@ export class ListUserComponent implements OnInit {
 
         this._userService.userListing().subscribe(res => {
             this.data = res;
+            this.totalRecords = this.data.length;
             this.isLoading = false;
         },err => {
             this.isLoading = false;

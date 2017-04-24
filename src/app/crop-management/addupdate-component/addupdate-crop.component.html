@@ -5,7 +5,7 @@
                 <ol class="breadcrumb">
                     <li><a href="JavaScript:Void(0);">Dashboard</a></li>
                     <li><a href="JavaScript:Void(0);">Crops</a></li>
-                    <li class="active"><a href="JavaScript:Void(0);">{{cropID ? 'Update' : 'Add'}} Crop</a></li>
+                    <li class="active"><a href="JavaScript:Void(0);">{{cropID ? 'Edit' : 'Add'}} Crop</a></li>
                 </ol>
             </div>
         </div>
@@ -17,7 +17,7 @@
     <!-- section ends  -->
     <div class="card" *ngIf="!isLoading" >
         <div class="card-header">
-            <strong>{{cropID ? 'Update' : 'Add'}} Crop</strong>
+            <strong>{{cropID ? 'Edit' : 'Add'}} Crop</strong>
         </div>
          <form role="form" (ngSubmit)="save()" #dailyExpenseForm="ngForm">
         <div class="card-block">
