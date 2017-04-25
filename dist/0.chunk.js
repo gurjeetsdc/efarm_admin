@@ -13,7 +13,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var common_1 = __webpack_require__(17);
-var angular2_datatable_1 = __webpack_require__(985);
+var angular2_datatable_1 = __webpack_require__(982);
 var list_user_component_1 = __webpack_require__(1272);
 var addupdate_user_component_1 = __webpack_require__(1271);
 var view_user_component_1 = __webpack_require__(1273);
@@ -106,276 +106,6 @@ exports.MulticastOperator = MulticastOperator;
 
 /***/ }),
 /* 947 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-// import {setProperty} from 'angular2/ts/src/core/forms/directives/shared';
-function setProperty(renderer, elementRef, propName, propValue) {
-    renderer.setElementProperty(elementRef, propName, propValue);
-}
-var NgTableFilteringDirective = (function () {
-    function NgTableFilteringDirective(element, renderer) {
-        this.ngTableFiltering = {
-            filterString: '',
-            columnName: 'name'
-        };
-        this.tableChanged = new core_1.EventEmitter();
-        this.element = element;
-        this.renderer = renderer;
-        // Set default value for filter
-        setProperty(this.renderer, this.element, 'value', this.ngTableFiltering.filterString);
-    }
-    Object.defineProperty(NgTableFilteringDirective.prototype, "config", {
-        get: function () {
-            return this.ngTableFiltering;
-        },
-        set: function (value) {
-            this.ngTableFiltering = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTableFilteringDirective.prototype.onChangeFilter = function (event) {
-        this.ngTableFiltering.filterString = event;
-        this.tableChanged.emit({ filtering: this.ngTableFiltering });
-    };
-    NgTableFilteringDirective.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngTableFiltering]' },] },
-    ];
-    /** @nocollapse */
-    NgTableFilteringDirective.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-    ];
-    NgTableFilteringDirective.propDecorators = {
-        'ngTableFiltering': [{ type: core_1.Input },],
-        'tableChanged': [{ type: core_1.Output },],
-        'config': [{ type: core_1.Input },],
-        'onChangeFilter': [{ type: core_1.HostListener, args: ['input', ['$event.target.value'],] },],
-    };
-    return NgTableFilteringDirective;
-}());
-exports.NgTableFilteringDirective = NgTableFilteringDirective;
-
-
-/***/ }),
-/* 948 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-var NgTablePagingDirective = (function () {
-    function NgTablePagingDirective() {
-        this.ngTablePaging = true;
-        this.tableChanged = new core_1.EventEmitter();
-    }
-    Object.defineProperty(NgTablePagingDirective.prototype, "config", {
-        get: function () {
-            return this.ngTablePaging;
-        },
-        set: function (value) {
-            this.ngTablePaging = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTablePagingDirective.prototype.onChangePage = function (event) {
-        // Object.assign(this.config, event);
-        if (this.ngTablePaging) {
-            this.tableChanged.emit({ paging: event });
-        }
-    };
-    NgTablePagingDirective.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngTablePaging]' },] },
-    ];
-    /** @nocollapse */
-    NgTablePagingDirective.ctorParameters = [];
-    NgTablePagingDirective.propDecorators = {
-        'ngTablePaging': [{ type: core_1.Input },],
-        'tableChanged': [{ type: core_1.Output },],
-        'config': [{ type: core_1.Input },],
-        'onChangePage': [{ type: core_1.HostListener, args: ['pagechanged', ['$event'],] },],
-    };
-    return NgTablePagingDirective;
-}());
-exports.NgTablePagingDirective = NgTablePagingDirective;
-
-
-/***/ }),
-/* 949 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-var NgTableSortingDirective = (function () {
-    function NgTableSortingDirective() {
-        this.sortChanged = new core_1.EventEmitter();
-    }
-    Object.defineProperty(NgTableSortingDirective.prototype, "config", {
-        get: function () {
-            return this.ngTableSorting;
-        },
-        set: function (value) {
-            this.ngTableSorting = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTableSortingDirective.prototype.onToggleSort = function (event) {
-        if (event) {
-            event.preventDefault();
-        }
-        if (this.ngTableSorting && this.column && this.column.sort !== false) {
-            switch (this.column.sort) {
-                case 'asc':
-                    this.column.sort = 'desc';
-                    break;
-                case 'desc':
-                    this.column.sort = '';
-                    break;
-                default:
-                    this.column.sort = 'asc';
-                    break;
-            }
-            this.sortChanged.emit(this.column);
-        }
-    };
-    NgTableSortingDirective.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngTableSorting]' },] },
-    ];
-    /** @nocollapse */
-    NgTableSortingDirective.ctorParameters = [];
-    NgTableSortingDirective.propDecorators = {
-        'ngTableSorting': [{ type: core_1.Input },],
-        'column': [{ type: core_1.Input },],
-        'sortChanged': [{ type: core_1.Output },],
-        'config': [{ type: core_1.Input },],
-        'onToggleSort': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
-    };
-    return NgTableSortingDirective;
-}());
-exports.NgTableSortingDirective = NgTableSortingDirective;
-
-
-/***/ }),
-/* 950 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-var platform_browser_1 = __webpack_require__(122);
-var NgTableComponent = (function () {
-    function NgTableComponent(sanitizer) {
-        this.sanitizer = sanitizer;
-        // Table values
-        this.rows = [];
-        // Outputs (Events)
-        this.tableChanged = new core_1.EventEmitter();
-        this.cellClicked = new core_1.EventEmitter();
-        this.showFilterRow = false;
-        this._columns = [];
-        this._config = {};
-    }
-    Object.defineProperty(NgTableComponent.prototype, "config", {
-        get: function () {
-            return this._config;
-        },
-        set: function (conf) {
-            if (!conf.className) {
-                conf.className = 'table-striped table-bordered';
-            }
-            if (conf.className instanceof Array) {
-                conf.className = conf.className.join(' ');
-            }
-            this._config = conf;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgTableComponent.prototype, "columns", {
-        get: function () {
-            return this._columns;
-        },
-        set: function (values) {
-            var _this = this;
-            values.forEach(function (value) {
-                if (value.filtering) {
-                    _this.showFilterRow = true;
-                }
-                if (value.className && value.className instanceof Array) {
-                    value.className = value.className.join(' ');
-                }
-                var column = _this._columns.find(function (col) { return col.name === value.name; });
-                if (column) {
-                    Object.assign(column, value);
-                }
-                if (!column) {
-                    _this._columns.push(value);
-                }
-            });
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTableComponent.prototype.sanitize = function (html) {
-        return this.sanitizer.bypassSecurityTrustHtml(html);
-    };
-    Object.defineProperty(NgTableComponent.prototype, "configColumns", {
-        get: function () {
-            var sortColumns = [];
-            this.columns.forEach(function (column) {
-                if (column.sort) {
-                    sortColumns.push(column);
-                }
-            });
-            return { columns: sortColumns };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTableComponent.prototype.onChangeTable = function (column) {
-        this._columns.forEach(function (col) {
-            if (col.name !== column.name && col.sort !== false) {
-                col.sort = '';
-            }
-        });
-        this.tableChanged.emit({ sorting: this.configColumns });
-    };
-    NgTableComponent.prototype.getData = function (row, propertyName) {
-        return propertyName.split('.').reduce(function (prev, curr) { return prev[curr]; }, row);
-    };
-    NgTableComponent.prototype.cellClick = function (row, column) {
-        this.cellClicked.emit({ row: row, column: column });
-    };
-    NgTableComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ng-table',
-                    template: "\n    <table class=\"table dataTable\" ngClass=\"{{config.className || ''}}\"\n           role=\"grid\" style=\"width: 100%;\">\n      <thead>\n        <tr role=\"row\">\n          <th *ngFor=\"let column of columns\" [ngTableSorting]=\"config\" [column]=\"column\" \n              (sortChanged)=\"onChangeTable($event)\" ngClass=\"{{column.className || ''}}\">\n            {{column.title}}\n            <i *ngIf=\"config && column.sort\" class=\"pull-right fa\"\n              [ngClass]=\"{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}\"></i>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n      <tr *ngIf=\"showFilterRow\">\n        <td *ngFor=\"let column of columns\">\n          <input *ngIf=\"column.filtering\" placeholder=\"{{column.filtering.placeholder}}\"\n                 [ngTableFiltering]=\"column.filtering\"\n                 class=\"form-control\"\n                 style=\"width: auto;\"\n                 (tableChanged)=\"onChangeTable(config)\"/>\n        </td>\n      </tr>\n        <tr *ngFor=\"let row of rows\">\n          <td (click)=\"cellClick(row, column.name)\" *ngFor=\"let column of columns\" [innerHtml]=\"sanitize(getData(row, column.name))\"></td>\n        </tr>\n      </tbody>\n    </table>\n  "
-                },] },
-    ];
-    /** @nocollapse */
-    NgTableComponent.ctorParameters = [
-        { type: platform_browser_1.DomSanitizer, },
-    ];
-    NgTableComponent.propDecorators = {
-        'rows': [{ type: core_1.Input },],
-        'config': [{ type: core_1.Input },],
-        'tableChanged': [{ type: core_1.Output },],
-        'cellClicked': [{ type: core_1.Output },],
-        'columns': [{ type: core_1.Input },],
-    };
-    return NgTableComponent;
-}());
-exports.NgTableComponent = NgTableComponent;
-
-
-/***/ }),
-/* 951 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -552,6 +282,276 @@ DataTable = __decorate([
 ], DataTable);
 exports.DataTable = DataTable;
 //# sourceMappingURL=DataTable.js.map
+
+/***/ }),
+/* 948 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+// import {setProperty} from 'angular2/ts/src/core/forms/directives/shared';
+function setProperty(renderer, elementRef, propName, propValue) {
+    renderer.setElementProperty(elementRef, propName, propValue);
+}
+var NgTableFilteringDirective = (function () {
+    function NgTableFilteringDirective(element, renderer) {
+        this.ngTableFiltering = {
+            filterString: '',
+            columnName: 'name'
+        };
+        this.tableChanged = new core_1.EventEmitter();
+        this.element = element;
+        this.renderer = renderer;
+        // Set default value for filter
+        setProperty(this.renderer, this.element, 'value', this.ngTableFiltering.filterString);
+    }
+    Object.defineProperty(NgTableFilteringDirective.prototype, "config", {
+        get: function () {
+            return this.ngTableFiltering;
+        },
+        set: function (value) {
+            this.ngTableFiltering = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTableFilteringDirective.prototype.onChangeFilter = function (event) {
+        this.ngTableFiltering.filterString = event;
+        this.tableChanged.emit({ filtering: this.ngTableFiltering });
+    };
+    NgTableFilteringDirective.decorators = [
+        { type: core_1.Directive, args: [{ selector: '[ngTableFiltering]' },] },
+    ];
+    /** @nocollapse */
+    NgTableFilteringDirective.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ];
+    NgTableFilteringDirective.propDecorators = {
+        'ngTableFiltering': [{ type: core_1.Input },],
+        'tableChanged': [{ type: core_1.Output },],
+        'config': [{ type: core_1.Input },],
+        'onChangeFilter': [{ type: core_1.HostListener, args: ['input', ['$event.target.value'],] },],
+    };
+    return NgTableFilteringDirective;
+}());
+exports.NgTableFilteringDirective = NgTableFilteringDirective;
+
+
+/***/ }),
+/* 949 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+var NgTablePagingDirective = (function () {
+    function NgTablePagingDirective() {
+        this.ngTablePaging = true;
+        this.tableChanged = new core_1.EventEmitter();
+    }
+    Object.defineProperty(NgTablePagingDirective.prototype, "config", {
+        get: function () {
+            return this.ngTablePaging;
+        },
+        set: function (value) {
+            this.ngTablePaging = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTablePagingDirective.prototype.onChangePage = function (event) {
+        // Object.assign(this.config, event);
+        if (this.ngTablePaging) {
+            this.tableChanged.emit({ paging: event });
+        }
+    };
+    NgTablePagingDirective.decorators = [
+        { type: core_1.Directive, args: [{ selector: '[ngTablePaging]' },] },
+    ];
+    /** @nocollapse */
+    NgTablePagingDirective.ctorParameters = [];
+    NgTablePagingDirective.propDecorators = {
+        'ngTablePaging': [{ type: core_1.Input },],
+        'tableChanged': [{ type: core_1.Output },],
+        'config': [{ type: core_1.Input },],
+        'onChangePage': [{ type: core_1.HostListener, args: ['pagechanged', ['$event'],] },],
+    };
+    return NgTablePagingDirective;
+}());
+exports.NgTablePagingDirective = NgTablePagingDirective;
+
+
+/***/ }),
+/* 950 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+var NgTableSortingDirective = (function () {
+    function NgTableSortingDirective() {
+        this.sortChanged = new core_1.EventEmitter();
+    }
+    Object.defineProperty(NgTableSortingDirective.prototype, "config", {
+        get: function () {
+            return this.ngTableSorting;
+        },
+        set: function (value) {
+            this.ngTableSorting = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTableSortingDirective.prototype.onToggleSort = function (event) {
+        if (event) {
+            event.preventDefault();
+        }
+        if (this.ngTableSorting && this.column && this.column.sort !== false) {
+            switch (this.column.sort) {
+                case 'asc':
+                    this.column.sort = 'desc';
+                    break;
+                case 'desc':
+                    this.column.sort = '';
+                    break;
+                default:
+                    this.column.sort = 'asc';
+                    break;
+            }
+            this.sortChanged.emit(this.column);
+        }
+    };
+    NgTableSortingDirective.decorators = [
+        { type: core_1.Directive, args: [{ selector: '[ngTableSorting]' },] },
+    ];
+    /** @nocollapse */
+    NgTableSortingDirective.ctorParameters = [];
+    NgTableSortingDirective.propDecorators = {
+        'ngTableSorting': [{ type: core_1.Input },],
+        'column': [{ type: core_1.Input },],
+        'sortChanged': [{ type: core_1.Output },],
+        'config': [{ type: core_1.Input },],
+        'onToggleSort': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
+    };
+    return NgTableSortingDirective;
+}());
+exports.NgTableSortingDirective = NgTableSortingDirective;
+
+
+/***/ }),
+/* 951 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+var platform_browser_1 = __webpack_require__(122);
+var NgTableComponent = (function () {
+    function NgTableComponent(sanitizer) {
+        this.sanitizer = sanitizer;
+        // Table values
+        this.rows = [];
+        // Outputs (Events)
+        this.tableChanged = new core_1.EventEmitter();
+        this.cellClicked = new core_1.EventEmitter();
+        this.showFilterRow = false;
+        this._columns = [];
+        this._config = {};
+    }
+    Object.defineProperty(NgTableComponent.prototype, "config", {
+        get: function () {
+            return this._config;
+        },
+        set: function (conf) {
+            if (!conf.className) {
+                conf.className = 'table-striped table-bordered';
+            }
+            if (conf.className instanceof Array) {
+                conf.className = conf.className.join(' ');
+            }
+            this._config = conf;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgTableComponent.prototype, "columns", {
+        get: function () {
+            return this._columns;
+        },
+        set: function (values) {
+            var _this = this;
+            values.forEach(function (value) {
+                if (value.filtering) {
+                    _this.showFilterRow = true;
+                }
+                if (value.className && value.className instanceof Array) {
+                    value.className = value.className.join(' ');
+                }
+                var column = _this._columns.find(function (col) { return col.name === value.name; });
+                if (column) {
+                    Object.assign(column, value);
+                }
+                if (!column) {
+                    _this._columns.push(value);
+                }
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTableComponent.prototype.sanitize = function (html) {
+        return this.sanitizer.bypassSecurityTrustHtml(html);
+    };
+    Object.defineProperty(NgTableComponent.prototype, "configColumns", {
+        get: function () {
+            var sortColumns = [];
+            this.columns.forEach(function (column) {
+                if (column.sort) {
+                    sortColumns.push(column);
+                }
+            });
+            return { columns: sortColumns };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTableComponent.prototype.onChangeTable = function (column) {
+        this._columns.forEach(function (col) {
+            if (col.name !== column.name && col.sort !== false) {
+                col.sort = '';
+            }
+        });
+        this.tableChanged.emit({ sorting: this.configColumns });
+    };
+    NgTableComponent.prototype.getData = function (row, propertyName) {
+        return propertyName.split('.').reduce(function (prev, curr) { return prev[curr]; }, row);
+    };
+    NgTableComponent.prototype.cellClick = function (row, column) {
+        this.cellClicked.emit({ row: row, column: column });
+    };
+    NgTableComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ng-table',
+                    template: "\n    <table class=\"table dataTable\" ngClass=\"{{config.className || ''}}\"\n           role=\"grid\" style=\"width: 100%;\">\n      <thead>\n        <tr role=\"row\">\n          <th *ngFor=\"let column of columns\" [ngTableSorting]=\"config\" [column]=\"column\" \n              (sortChanged)=\"onChangeTable($event)\" ngClass=\"{{column.className || ''}}\">\n            {{column.title}}\n            <i *ngIf=\"config && column.sort\" class=\"pull-right fa\"\n              [ngClass]=\"{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}\"></i>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n      <tr *ngIf=\"showFilterRow\">\n        <td *ngFor=\"let column of columns\">\n          <input *ngIf=\"column.filtering\" placeholder=\"{{column.filtering.placeholder}}\"\n                 [ngTableFiltering]=\"column.filtering\"\n                 class=\"form-control\"\n                 style=\"width: auto;\"\n                 (tableChanged)=\"onChangeTable(config)\"/>\n        </td>\n      </tr>\n        <tr *ngFor=\"let row of rows\">\n          <td (click)=\"cellClick(row, column.name)\" *ngFor=\"let column of columns\" [innerHtml]=\"sanitize(getData(row, column.name))\"></td>\n        </tr>\n      </tbody>\n    </table>\n  "
+                },] },
+    ];
+    /** @nocollapse */
+    NgTableComponent.ctorParameters = [
+        { type: platform_browser_1.DomSanitizer, },
+    ];
+    NgTableComponent.propDecorators = {
+        'rows': [{ type: core_1.Input },],
+        'config': [{ type: core_1.Input },],
+        'tableChanged': [{ type: core_1.Output },],
+        'cellClicked': [{ type: core_1.Output },],
+        'columns': [{ type: core_1.Input },],
+    };
+    return NgTableComponent;
+}());
+exports.NgTableComponent = NgTableComponent;
+
 
 /***/ }),
 /* 952 */
@@ -1419,7 +1419,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var DataTable_1 = __webpack_require__(951);
+var DataTable_1 = __webpack_require__(947);
 var _ = __webpack_require__(963);
 var BootstrapPaginator = (function () {
     function BootstrapPaginator() {
@@ -1466,7 +1466,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var DataTable_1 = __webpack_require__(951);
+var DataTable_1 = __webpack_require__(947);
 var DefaultSorter = (function () {
     function DefaultSorter(mfTable) {
         this.mfTable = mfTable;
@@ -1523,7 +1523,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = __webpack_require__(0);
-var DataTable_1 = __webpack_require__(951);
+var DataTable_1 = __webpack_require__(947);
 var Paginator = (function () {
     function Paginator(injectMfTable) {
         var _this = this;
@@ -20432,84 +20432,11 @@ exports.noop = noop;
 /* 982 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-var ng_table_component_1 = __webpack_require__(950);
-var ng_table_filtering_directive_1 = __webpack_require__(947);
-var ng_table_paging_directive_1 = __webpack_require__(948);
-var ng_table_sorting_directive_1 = __webpack_require__(949);
-exports.NG_TABLE_DIRECTIVES = [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective];
-
-
-/***/ }),
-/* 983 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-var common_1 = __webpack_require__(17);
-var ng_table_component_1 = __webpack_require__(950);
-var ng_table_filtering_directive_1 = __webpack_require__(947);
-var ng_table_paging_directive_1 = __webpack_require__(948);
-var ng_table_sorting_directive_1 = __webpack_require__(949);
-var Ng2TableModule = (function () {
-    function Ng2TableModule() {
-    }
-    Ng2TableModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    imports: [common_1.CommonModule],
-                    declarations: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective],
-                    exports: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective]
-                },] },
-    ];
-    /** @nocollapse */
-    Ng2TableModule.ctorParameters = [];
-    return Ng2TableModule;
-}());
-exports.Ng2TableModule = Ng2TableModule;
-
-
-/***/ }),
-/* 984 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-var ng_table_component_1 = __webpack_require__(950);
-var ng_table_filtering_directive_1 = __webpack_require__(947);
-var ng_table_paging_directive_1 = __webpack_require__(948);
-var ng_table_sorting_directive_1 = __webpack_require__(949);
-__export(__webpack_require__(950));
-__export(__webpack_require__(947));
-__export(__webpack_require__(948));
-__export(__webpack_require__(949));
-__export(__webpack_require__(982));
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
-    directives: [
-        ng_table_component_1.NgTableComponent,
-        ng_table_filtering_directive_1.NgTableFilteringDirective,
-        ng_table_sorting_directive_1.NgTableSortingDirective,
-        ng_table_paging_directive_1.NgTablePagingDirective
-    ]
-};
-var ng_table_module_1 = __webpack_require__(983);
-exports.Ng2TableModule = ng_table_module_1.Ng2TableModule;
-
-
-/***/ }),
-/* 985 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dataTable_directive = __webpack_require__(951);
+var dataTable_directive = __webpack_require__(947);
 var defaultSorter_directive = __webpack_require__(961);
 var paginator_component = __webpack_require__(962);
 var bootstrapPaginator_component = __webpack_require__(960);
-var dataTable_module = __webpack_require__(986);
+var dataTable_module = __webpack_require__(983);
 
 exports.DataTable = dataTable_directive.DataTable;
 exports.DataEvent = dataTable_directive.DataEvent;
@@ -20522,7 +20449,7 @@ exports.DataTableModule = dataTable_module.DataTableModule;
 
 
 /***/ }),
-/* 986 */
+/* 983 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20535,7 +20462,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = __webpack_require__(0);
 var common_1 = __webpack_require__(17);
-var DataTable_1 = __webpack_require__(951);
+var DataTable_1 = __webpack_require__(947);
 var DefaultSorter_1 = __webpack_require__(961);
 var Paginator_1 = __webpack_require__(962);
 var BootstrapPaginator_1 = __webpack_require__(960);
@@ -20565,6 +20492,79 @@ DataTableModule = __decorate([
 ], DataTableModule);
 exports.DataTableModule = DataTableModule;
 //# sourceMappingURL=DataTableModule.js.map
+
+/***/ }),
+/* 984 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ng_table_component_1 = __webpack_require__(951);
+var ng_table_filtering_directive_1 = __webpack_require__(948);
+var ng_table_paging_directive_1 = __webpack_require__(949);
+var ng_table_sorting_directive_1 = __webpack_require__(950);
+exports.NG_TABLE_DIRECTIVES = [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective];
+
+
+/***/ }),
+/* 985 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(17);
+var ng_table_component_1 = __webpack_require__(951);
+var ng_table_filtering_directive_1 = __webpack_require__(948);
+var ng_table_paging_directive_1 = __webpack_require__(949);
+var ng_table_sorting_directive_1 = __webpack_require__(950);
+var Ng2TableModule = (function () {
+    function Ng2TableModule() {
+    }
+    Ng2TableModule.decorators = [
+        { type: core_1.NgModule, args: [{
+                    imports: [common_1.CommonModule],
+                    declarations: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective],
+                    exports: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective]
+                },] },
+    ];
+    /** @nocollapse */
+    Ng2TableModule.ctorParameters = [];
+    return Ng2TableModule;
+}());
+exports.Ng2TableModule = Ng2TableModule;
+
+
+/***/ }),
+/* 986 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+var ng_table_component_1 = __webpack_require__(951);
+var ng_table_filtering_directive_1 = __webpack_require__(948);
+var ng_table_paging_directive_1 = __webpack_require__(949);
+var ng_table_sorting_directive_1 = __webpack_require__(950);
+__export(__webpack_require__(951));
+__export(__webpack_require__(948));
+__export(__webpack_require__(949));
+__export(__webpack_require__(950));
+__export(__webpack_require__(984));
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    directives: [
+        ng_table_component_1.NgTableComponent,
+        ng_table_filtering_directive_1.NgTableFilteringDirective,
+        ng_table_sorting_directive_1.NgTableSortingDirective,
+        ng_table_paging_directive_1.NgTablePagingDirective
+    ]
+};
+var ng_table_module_1 = __webpack_require__(985);
+exports.Ng2TableModule = ng_table_module_1.Ng2TableModule;
+
 
 /***/ }),
 /* 987 */
@@ -33280,7 +33280,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(64);
 var forms_1 = __webpack_require__(27);
-var ng2_table_1 = __webpack_require__(984);
+var ng2_table_1 = __webpack_require__(986);
 var ng2_bootstrap_1 = __webpack_require__(603);
 var list_user_component_1 = __webpack_require__(1272);
 var addupdate_user_component_1 = __webpack_require__(1271);

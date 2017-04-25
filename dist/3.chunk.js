@@ -1,5 +1,5 @@
-webpackJsonp([3,16],Array(937).concat([
-/* 937 */
+webpackJsonp([3,16],Array(939).concat([
+/* 939 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13,40 +13,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var common_1 = __webpack_require__(17);
-var angular2_datatable_1 = __webpack_require__(985);
-var list_crop_component_1 = __webpack_require__(1253);
-var addupdate_crop_component_1 = __webpack_require__(1252);
-var view_crop_component_1 = __webpack_require__(1254);
-var crop_management_routing_module_1 = __webpack_require__(1277);
-var crop_service_1 = __webpack_require__(1238);
-var CropManagementModule = (function () {
-    function CropManagementModule() {
+/*For list table.*/
+var angular2_datatable_1 = __webpack_require__(982);
+var list_equipment_component_1 = __webpack_require__(1257);
+var view_equipment_component_1 = __webpack_require__(1258);
+var addupdate_equipment_component_1 = __webpack_require__(1256);
+var equipment_management_routing_module_1 = __webpack_require__(1279);
+var EquipmentManagementModule = (function () {
+    function EquipmentManagementModule() {
     }
-    return CropManagementModule;
+    return EquipmentManagementModule;
 }());
-CropManagementModule = __decorate([
+EquipmentManagementModule = __decorate([
     core_1.NgModule({
         imports: [
-            crop_management_routing_module_1.CropManagementRoutingModule,
+            equipment_management_routing_module_1.EquipmentManagementRoutingModule,
             common_1.CommonModule,
             angular2_datatable_1.DataTableModule
         ],
-        providers: [
-            crop_service_1.CropService
-        ],
         declarations: [
-            list_crop_component_1.ListCropComponent,
-            addupdate_crop_component_1.AddUpdateCropComponent,
-            view_crop_component_1.ViewCropComponent
+            list_equipment_component_1.ListEquipmentComponent,
+            addupdate_equipment_component_1.AddUpdateEquipmentComponent,
+            view_equipment_component_1.ViewEquipmentComponent
         ]
     })
-], CropManagementModule);
-exports.CropManagementModule = CropManagementModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/crop-management.module.js.map
+], EquipmentManagementModule);
+exports.EquipmentManagementModule = EquipmentManagementModule;
+//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/equipment-management.module.js.map
 
 /***/ }),
-/* 938 */,
-/* 939 */,
 /* 940 */,
 /* 941 */,
 /* 942 */,
@@ -117,276 +112,6 @@ exports.MulticastOperator = MulticastOperator;
 
 /***/ }),
 /* 947 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-// import {setProperty} from 'angular2/ts/src/core/forms/directives/shared';
-function setProperty(renderer, elementRef, propName, propValue) {
-    renderer.setElementProperty(elementRef, propName, propValue);
-}
-var NgTableFilteringDirective = (function () {
-    function NgTableFilteringDirective(element, renderer) {
-        this.ngTableFiltering = {
-            filterString: '',
-            columnName: 'name'
-        };
-        this.tableChanged = new core_1.EventEmitter();
-        this.element = element;
-        this.renderer = renderer;
-        // Set default value for filter
-        setProperty(this.renderer, this.element, 'value', this.ngTableFiltering.filterString);
-    }
-    Object.defineProperty(NgTableFilteringDirective.prototype, "config", {
-        get: function () {
-            return this.ngTableFiltering;
-        },
-        set: function (value) {
-            this.ngTableFiltering = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTableFilteringDirective.prototype.onChangeFilter = function (event) {
-        this.ngTableFiltering.filterString = event;
-        this.tableChanged.emit({ filtering: this.ngTableFiltering });
-    };
-    NgTableFilteringDirective.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngTableFiltering]' },] },
-    ];
-    /** @nocollapse */
-    NgTableFilteringDirective.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-    ];
-    NgTableFilteringDirective.propDecorators = {
-        'ngTableFiltering': [{ type: core_1.Input },],
-        'tableChanged': [{ type: core_1.Output },],
-        'config': [{ type: core_1.Input },],
-        'onChangeFilter': [{ type: core_1.HostListener, args: ['input', ['$event.target.value'],] },],
-    };
-    return NgTableFilteringDirective;
-}());
-exports.NgTableFilteringDirective = NgTableFilteringDirective;
-
-
-/***/ }),
-/* 948 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-var NgTablePagingDirective = (function () {
-    function NgTablePagingDirective() {
-        this.ngTablePaging = true;
-        this.tableChanged = new core_1.EventEmitter();
-    }
-    Object.defineProperty(NgTablePagingDirective.prototype, "config", {
-        get: function () {
-            return this.ngTablePaging;
-        },
-        set: function (value) {
-            this.ngTablePaging = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTablePagingDirective.prototype.onChangePage = function (event) {
-        // Object.assign(this.config, event);
-        if (this.ngTablePaging) {
-            this.tableChanged.emit({ paging: event });
-        }
-    };
-    NgTablePagingDirective.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngTablePaging]' },] },
-    ];
-    /** @nocollapse */
-    NgTablePagingDirective.ctorParameters = [];
-    NgTablePagingDirective.propDecorators = {
-        'ngTablePaging': [{ type: core_1.Input },],
-        'tableChanged': [{ type: core_1.Output },],
-        'config': [{ type: core_1.Input },],
-        'onChangePage': [{ type: core_1.HostListener, args: ['pagechanged', ['$event'],] },],
-    };
-    return NgTablePagingDirective;
-}());
-exports.NgTablePagingDirective = NgTablePagingDirective;
-
-
-/***/ }),
-/* 949 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-var NgTableSortingDirective = (function () {
-    function NgTableSortingDirective() {
-        this.sortChanged = new core_1.EventEmitter();
-    }
-    Object.defineProperty(NgTableSortingDirective.prototype, "config", {
-        get: function () {
-            return this.ngTableSorting;
-        },
-        set: function (value) {
-            this.ngTableSorting = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTableSortingDirective.prototype.onToggleSort = function (event) {
-        if (event) {
-            event.preventDefault();
-        }
-        if (this.ngTableSorting && this.column && this.column.sort !== false) {
-            switch (this.column.sort) {
-                case 'asc':
-                    this.column.sort = 'desc';
-                    break;
-                case 'desc':
-                    this.column.sort = '';
-                    break;
-                default:
-                    this.column.sort = 'asc';
-                    break;
-            }
-            this.sortChanged.emit(this.column);
-        }
-    };
-    NgTableSortingDirective.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngTableSorting]' },] },
-    ];
-    /** @nocollapse */
-    NgTableSortingDirective.ctorParameters = [];
-    NgTableSortingDirective.propDecorators = {
-        'ngTableSorting': [{ type: core_1.Input },],
-        'column': [{ type: core_1.Input },],
-        'sortChanged': [{ type: core_1.Output },],
-        'config': [{ type: core_1.Input },],
-        'onToggleSort': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
-    };
-    return NgTableSortingDirective;
-}());
-exports.NgTableSortingDirective = NgTableSortingDirective;
-
-
-/***/ }),
-/* 950 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-var platform_browser_1 = __webpack_require__(122);
-var NgTableComponent = (function () {
-    function NgTableComponent(sanitizer) {
-        this.sanitizer = sanitizer;
-        // Table values
-        this.rows = [];
-        // Outputs (Events)
-        this.tableChanged = new core_1.EventEmitter();
-        this.cellClicked = new core_1.EventEmitter();
-        this.showFilterRow = false;
-        this._columns = [];
-        this._config = {};
-    }
-    Object.defineProperty(NgTableComponent.prototype, "config", {
-        get: function () {
-            return this._config;
-        },
-        set: function (conf) {
-            if (!conf.className) {
-                conf.className = 'table-striped table-bordered';
-            }
-            if (conf.className instanceof Array) {
-                conf.className = conf.className.join(' ');
-            }
-            this._config = conf;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgTableComponent.prototype, "columns", {
-        get: function () {
-            return this._columns;
-        },
-        set: function (values) {
-            var _this = this;
-            values.forEach(function (value) {
-                if (value.filtering) {
-                    _this.showFilterRow = true;
-                }
-                if (value.className && value.className instanceof Array) {
-                    value.className = value.className.join(' ');
-                }
-                var column = _this._columns.find(function (col) { return col.name === value.name; });
-                if (column) {
-                    Object.assign(column, value);
-                }
-                if (!column) {
-                    _this._columns.push(value);
-                }
-            });
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTableComponent.prototype.sanitize = function (html) {
-        return this.sanitizer.bypassSecurityTrustHtml(html);
-    };
-    Object.defineProperty(NgTableComponent.prototype, "configColumns", {
-        get: function () {
-            var sortColumns = [];
-            this.columns.forEach(function (column) {
-                if (column.sort) {
-                    sortColumns.push(column);
-                }
-            });
-            return { columns: sortColumns };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    NgTableComponent.prototype.onChangeTable = function (column) {
-        this._columns.forEach(function (col) {
-            if (col.name !== column.name && col.sort !== false) {
-                col.sort = '';
-            }
-        });
-        this.tableChanged.emit({ sorting: this.configColumns });
-    };
-    NgTableComponent.prototype.getData = function (row, propertyName) {
-        return propertyName.split('.').reduce(function (prev, curr) { return prev[curr]; }, row);
-    };
-    NgTableComponent.prototype.cellClick = function (row, column) {
-        this.cellClicked.emit({ row: row, column: column });
-    };
-    NgTableComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ng-table',
-                    template: "\n    <table class=\"table dataTable\" ngClass=\"{{config.className || ''}}\"\n           role=\"grid\" style=\"width: 100%;\">\n      <thead>\n        <tr role=\"row\">\n          <th *ngFor=\"let column of columns\" [ngTableSorting]=\"config\" [column]=\"column\" \n              (sortChanged)=\"onChangeTable($event)\" ngClass=\"{{column.className || ''}}\">\n            {{column.title}}\n            <i *ngIf=\"config && column.sort\" class=\"pull-right fa\"\n              [ngClass]=\"{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}\"></i>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n      <tr *ngIf=\"showFilterRow\">\n        <td *ngFor=\"let column of columns\">\n          <input *ngIf=\"column.filtering\" placeholder=\"{{column.filtering.placeholder}}\"\n                 [ngTableFiltering]=\"column.filtering\"\n                 class=\"form-control\"\n                 style=\"width: auto;\"\n                 (tableChanged)=\"onChangeTable(config)\"/>\n        </td>\n      </tr>\n        <tr *ngFor=\"let row of rows\">\n          <td (click)=\"cellClick(row, column.name)\" *ngFor=\"let column of columns\" [innerHtml]=\"sanitize(getData(row, column.name))\"></td>\n        </tr>\n      </tbody>\n    </table>\n  "
-                },] },
-    ];
-    /** @nocollapse */
-    NgTableComponent.ctorParameters = [
-        { type: platform_browser_1.DomSanitizer, },
-    ];
-    NgTableComponent.propDecorators = {
-        'rows': [{ type: core_1.Input },],
-        'config': [{ type: core_1.Input },],
-        'tableChanged': [{ type: core_1.Output },],
-        'cellClicked': [{ type: core_1.Output },],
-        'columns': [{ type: core_1.Input },],
-    };
-    return NgTableComponent;
-}());
-exports.NgTableComponent = NgTableComponent;
-
-
-/***/ }),
-/* 951 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -563,6 +288,276 @@ DataTable = __decorate([
 ], DataTable);
 exports.DataTable = DataTable;
 //# sourceMappingURL=DataTable.js.map
+
+/***/ }),
+/* 948 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+// import {setProperty} from 'angular2/ts/src/core/forms/directives/shared';
+function setProperty(renderer, elementRef, propName, propValue) {
+    renderer.setElementProperty(elementRef, propName, propValue);
+}
+var NgTableFilteringDirective = (function () {
+    function NgTableFilteringDirective(element, renderer) {
+        this.ngTableFiltering = {
+            filterString: '',
+            columnName: 'name'
+        };
+        this.tableChanged = new core_1.EventEmitter();
+        this.element = element;
+        this.renderer = renderer;
+        // Set default value for filter
+        setProperty(this.renderer, this.element, 'value', this.ngTableFiltering.filterString);
+    }
+    Object.defineProperty(NgTableFilteringDirective.prototype, "config", {
+        get: function () {
+            return this.ngTableFiltering;
+        },
+        set: function (value) {
+            this.ngTableFiltering = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTableFilteringDirective.prototype.onChangeFilter = function (event) {
+        this.ngTableFiltering.filterString = event;
+        this.tableChanged.emit({ filtering: this.ngTableFiltering });
+    };
+    NgTableFilteringDirective.decorators = [
+        { type: core_1.Directive, args: [{ selector: '[ngTableFiltering]' },] },
+    ];
+    /** @nocollapse */
+    NgTableFilteringDirective.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ];
+    NgTableFilteringDirective.propDecorators = {
+        'ngTableFiltering': [{ type: core_1.Input },],
+        'tableChanged': [{ type: core_1.Output },],
+        'config': [{ type: core_1.Input },],
+        'onChangeFilter': [{ type: core_1.HostListener, args: ['input', ['$event.target.value'],] },],
+    };
+    return NgTableFilteringDirective;
+}());
+exports.NgTableFilteringDirective = NgTableFilteringDirective;
+
+
+/***/ }),
+/* 949 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+var NgTablePagingDirective = (function () {
+    function NgTablePagingDirective() {
+        this.ngTablePaging = true;
+        this.tableChanged = new core_1.EventEmitter();
+    }
+    Object.defineProperty(NgTablePagingDirective.prototype, "config", {
+        get: function () {
+            return this.ngTablePaging;
+        },
+        set: function (value) {
+            this.ngTablePaging = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTablePagingDirective.prototype.onChangePage = function (event) {
+        // Object.assign(this.config, event);
+        if (this.ngTablePaging) {
+            this.tableChanged.emit({ paging: event });
+        }
+    };
+    NgTablePagingDirective.decorators = [
+        { type: core_1.Directive, args: [{ selector: '[ngTablePaging]' },] },
+    ];
+    /** @nocollapse */
+    NgTablePagingDirective.ctorParameters = [];
+    NgTablePagingDirective.propDecorators = {
+        'ngTablePaging': [{ type: core_1.Input },],
+        'tableChanged': [{ type: core_1.Output },],
+        'config': [{ type: core_1.Input },],
+        'onChangePage': [{ type: core_1.HostListener, args: ['pagechanged', ['$event'],] },],
+    };
+    return NgTablePagingDirective;
+}());
+exports.NgTablePagingDirective = NgTablePagingDirective;
+
+
+/***/ }),
+/* 950 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+var NgTableSortingDirective = (function () {
+    function NgTableSortingDirective() {
+        this.sortChanged = new core_1.EventEmitter();
+    }
+    Object.defineProperty(NgTableSortingDirective.prototype, "config", {
+        get: function () {
+            return this.ngTableSorting;
+        },
+        set: function (value) {
+            this.ngTableSorting = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTableSortingDirective.prototype.onToggleSort = function (event) {
+        if (event) {
+            event.preventDefault();
+        }
+        if (this.ngTableSorting && this.column && this.column.sort !== false) {
+            switch (this.column.sort) {
+                case 'asc':
+                    this.column.sort = 'desc';
+                    break;
+                case 'desc':
+                    this.column.sort = '';
+                    break;
+                default:
+                    this.column.sort = 'asc';
+                    break;
+            }
+            this.sortChanged.emit(this.column);
+        }
+    };
+    NgTableSortingDirective.decorators = [
+        { type: core_1.Directive, args: [{ selector: '[ngTableSorting]' },] },
+    ];
+    /** @nocollapse */
+    NgTableSortingDirective.ctorParameters = [];
+    NgTableSortingDirective.propDecorators = {
+        'ngTableSorting': [{ type: core_1.Input },],
+        'column': [{ type: core_1.Input },],
+        'sortChanged': [{ type: core_1.Output },],
+        'config': [{ type: core_1.Input },],
+        'onToggleSort': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
+    };
+    return NgTableSortingDirective;
+}());
+exports.NgTableSortingDirective = NgTableSortingDirective;
+
+
+/***/ }),
+/* 951 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+var platform_browser_1 = __webpack_require__(122);
+var NgTableComponent = (function () {
+    function NgTableComponent(sanitizer) {
+        this.sanitizer = sanitizer;
+        // Table values
+        this.rows = [];
+        // Outputs (Events)
+        this.tableChanged = new core_1.EventEmitter();
+        this.cellClicked = new core_1.EventEmitter();
+        this.showFilterRow = false;
+        this._columns = [];
+        this._config = {};
+    }
+    Object.defineProperty(NgTableComponent.prototype, "config", {
+        get: function () {
+            return this._config;
+        },
+        set: function (conf) {
+            if (!conf.className) {
+                conf.className = 'table-striped table-bordered';
+            }
+            if (conf.className instanceof Array) {
+                conf.className = conf.className.join(' ');
+            }
+            this._config = conf;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgTableComponent.prototype, "columns", {
+        get: function () {
+            return this._columns;
+        },
+        set: function (values) {
+            var _this = this;
+            values.forEach(function (value) {
+                if (value.filtering) {
+                    _this.showFilterRow = true;
+                }
+                if (value.className && value.className instanceof Array) {
+                    value.className = value.className.join(' ');
+                }
+                var column = _this._columns.find(function (col) { return col.name === value.name; });
+                if (column) {
+                    Object.assign(column, value);
+                }
+                if (!column) {
+                    _this._columns.push(value);
+                }
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTableComponent.prototype.sanitize = function (html) {
+        return this.sanitizer.bypassSecurityTrustHtml(html);
+    };
+    Object.defineProperty(NgTableComponent.prototype, "configColumns", {
+        get: function () {
+            var sortColumns = [];
+            this.columns.forEach(function (column) {
+                if (column.sort) {
+                    sortColumns.push(column);
+                }
+            });
+            return { columns: sortColumns };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NgTableComponent.prototype.onChangeTable = function (column) {
+        this._columns.forEach(function (col) {
+            if (col.name !== column.name && col.sort !== false) {
+                col.sort = '';
+            }
+        });
+        this.tableChanged.emit({ sorting: this.configColumns });
+    };
+    NgTableComponent.prototype.getData = function (row, propertyName) {
+        return propertyName.split('.').reduce(function (prev, curr) { return prev[curr]; }, row);
+    };
+    NgTableComponent.prototype.cellClick = function (row, column) {
+        this.cellClicked.emit({ row: row, column: column });
+    };
+    NgTableComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ng-table',
+                    template: "\n    <table class=\"table dataTable\" ngClass=\"{{config.className || ''}}\"\n           role=\"grid\" style=\"width: 100%;\">\n      <thead>\n        <tr role=\"row\">\n          <th *ngFor=\"let column of columns\" [ngTableSorting]=\"config\" [column]=\"column\" \n              (sortChanged)=\"onChangeTable($event)\" ngClass=\"{{column.className || ''}}\">\n            {{column.title}}\n            <i *ngIf=\"config && column.sort\" class=\"pull-right fa\"\n              [ngClass]=\"{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}\"></i>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n      <tr *ngIf=\"showFilterRow\">\n        <td *ngFor=\"let column of columns\">\n          <input *ngIf=\"column.filtering\" placeholder=\"{{column.filtering.placeholder}}\"\n                 [ngTableFiltering]=\"column.filtering\"\n                 class=\"form-control\"\n                 style=\"width: auto;\"\n                 (tableChanged)=\"onChangeTable(config)\"/>\n        </td>\n      </tr>\n        <tr *ngFor=\"let row of rows\">\n          <td (click)=\"cellClick(row, column.name)\" *ngFor=\"let column of columns\" [innerHtml]=\"sanitize(getData(row, column.name))\"></td>\n        </tr>\n      </tbody>\n    </table>\n  "
+                },] },
+    ];
+    /** @nocollapse */
+    NgTableComponent.ctorParameters = [
+        { type: platform_browser_1.DomSanitizer, },
+    ];
+    NgTableComponent.propDecorators = {
+        'rows': [{ type: core_1.Input },],
+        'config': [{ type: core_1.Input },],
+        'tableChanged': [{ type: core_1.Output },],
+        'cellClicked': [{ type: core_1.Output },],
+        'columns': [{ type: core_1.Input },],
+    };
+    return NgTableComponent;
+}());
+exports.NgTableComponent = NgTableComponent;
+
 
 /***/ }),
 /* 952 */
@@ -1430,7 +1425,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var DataTable_1 = __webpack_require__(951);
+var DataTable_1 = __webpack_require__(947);
 var _ = __webpack_require__(963);
 var BootstrapPaginator = (function () {
     function BootstrapPaginator() {
@@ -1477,7 +1472,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var DataTable_1 = __webpack_require__(951);
+var DataTable_1 = __webpack_require__(947);
 var DefaultSorter = (function () {
     function DefaultSorter(mfTable) {
         this.mfTable = mfTable;
@@ -1534,7 +1529,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = __webpack_require__(0);
-var DataTable_1 = __webpack_require__(951);
+var DataTable_1 = __webpack_require__(947);
 var Paginator = (function () {
     function Paginator(injectMfTable) {
         var _this = this;
@@ -20443,84 +20438,11 @@ exports.noop = noop;
 /* 982 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-var ng_table_component_1 = __webpack_require__(950);
-var ng_table_filtering_directive_1 = __webpack_require__(947);
-var ng_table_paging_directive_1 = __webpack_require__(948);
-var ng_table_sorting_directive_1 = __webpack_require__(949);
-exports.NG_TABLE_DIRECTIVES = [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective];
-
-
-/***/ }),
-/* 983 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var core_1 = __webpack_require__(0);
-var common_1 = __webpack_require__(17);
-var ng_table_component_1 = __webpack_require__(950);
-var ng_table_filtering_directive_1 = __webpack_require__(947);
-var ng_table_paging_directive_1 = __webpack_require__(948);
-var ng_table_sorting_directive_1 = __webpack_require__(949);
-var Ng2TableModule = (function () {
-    function Ng2TableModule() {
-    }
-    Ng2TableModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    imports: [common_1.CommonModule],
-                    declarations: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective],
-                    exports: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective]
-                },] },
-    ];
-    /** @nocollapse */
-    Ng2TableModule.ctorParameters = [];
-    return Ng2TableModule;
-}());
-exports.Ng2TableModule = Ng2TableModule;
-
-
-/***/ }),
-/* 984 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-var ng_table_component_1 = __webpack_require__(950);
-var ng_table_filtering_directive_1 = __webpack_require__(947);
-var ng_table_paging_directive_1 = __webpack_require__(948);
-var ng_table_sorting_directive_1 = __webpack_require__(949);
-__export(__webpack_require__(950));
-__export(__webpack_require__(947));
-__export(__webpack_require__(948));
-__export(__webpack_require__(949));
-__export(__webpack_require__(982));
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
-    directives: [
-        ng_table_component_1.NgTableComponent,
-        ng_table_filtering_directive_1.NgTableFilteringDirective,
-        ng_table_sorting_directive_1.NgTableSortingDirective,
-        ng_table_paging_directive_1.NgTablePagingDirective
-    ]
-};
-var ng_table_module_1 = __webpack_require__(983);
-exports.Ng2TableModule = ng_table_module_1.Ng2TableModule;
-
-
-/***/ }),
-/* 985 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dataTable_directive = __webpack_require__(951);
+var dataTable_directive = __webpack_require__(947);
 var defaultSorter_directive = __webpack_require__(961);
 var paginator_component = __webpack_require__(962);
 var bootstrapPaginator_component = __webpack_require__(960);
-var dataTable_module = __webpack_require__(986);
+var dataTable_module = __webpack_require__(983);
 
 exports.DataTable = dataTable_directive.DataTable;
 exports.DataEvent = dataTable_directive.DataEvent;
@@ -20533,7 +20455,7 @@ exports.DataTableModule = dataTable_module.DataTableModule;
 
 
 /***/ }),
-/* 986 */
+/* 983 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20546,7 +20468,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = __webpack_require__(0);
 var common_1 = __webpack_require__(17);
-var DataTable_1 = __webpack_require__(951);
+var DataTable_1 = __webpack_require__(947);
 var DefaultSorter_1 = __webpack_require__(961);
 var Paginator_1 = __webpack_require__(962);
 var BootstrapPaginator_1 = __webpack_require__(960);
@@ -20576,6 +20498,79 @@ DataTableModule = __decorate([
 ], DataTableModule);
 exports.DataTableModule = DataTableModule;
 //# sourceMappingURL=DataTableModule.js.map
+
+/***/ }),
+/* 984 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ng_table_component_1 = __webpack_require__(951);
+var ng_table_filtering_directive_1 = __webpack_require__(948);
+var ng_table_paging_directive_1 = __webpack_require__(949);
+var ng_table_sorting_directive_1 = __webpack_require__(950);
+exports.NG_TABLE_DIRECTIVES = [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective];
+
+
+/***/ }),
+/* 985 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(17);
+var ng_table_component_1 = __webpack_require__(951);
+var ng_table_filtering_directive_1 = __webpack_require__(948);
+var ng_table_paging_directive_1 = __webpack_require__(949);
+var ng_table_sorting_directive_1 = __webpack_require__(950);
+var Ng2TableModule = (function () {
+    function Ng2TableModule() {
+    }
+    Ng2TableModule.decorators = [
+        { type: core_1.NgModule, args: [{
+                    imports: [common_1.CommonModule],
+                    declarations: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective],
+                    exports: [ng_table_component_1.NgTableComponent, ng_table_filtering_directive_1.NgTableFilteringDirective, ng_table_paging_directive_1.NgTablePagingDirective, ng_table_sorting_directive_1.NgTableSortingDirective]
+                },] },
+    ];
+    /** @nocollapse */
+    Ng2TableModule.ctorParameters = [];
+    return Ng2TableModule;
+}());
+exports.Ng2TableModule = Ng2TableModule;
+
+
+/***/ }),
+/* 986 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+var ng_table_component_1 = __webpack_require__(951);
+var ng_table_filtering_directive_1 = __webpack_require__(948);
+var ng_table_paging_directive_1 = __webpack_require__(949);
+var ng_table_sorting_directive_1 = __webpack_require__(950);
+__export(__webpack_require__(951));
+__export(__webpack_require__(948));
+__export(__webpack_require__(949));
+__export(__webpack_require__(950));
+__export(__webpack_require__(984));
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    directives: [
+        ng_table_component_1.NgTableComponent,
+        ng_table_filtering_directive_1.NgTableFilteringDirective,
+        ng_table_sorting_directive_1.NgTableSortingDirective,
+        ng_table_paging_directive_1.NgTablePagingDirective
+    ]
+};
+var ng_table_module_1 = __webpack_require__(985);
+exports.Ng2TableModule = ng_table_module_1.Ng2TableModule;
+
 
 /***/ }),
 /* 987 */
@@ -32917,7 +32912,8 @@ exports.not = not;
 //# sourceMappingURL=not.js.map
 
 /***/ }),
-/* 1238 */
+/* 1238 */,
+/* 1239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32934,48 +32930,58 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var http_1 = __webpack_require__(121);
-var CropService = (function () {
-    function CropService(_http) {
+var EquipmentService = (function () {
+    function EquipmentService(_http) {
         this._http = _http;
-        // private host = "http://localhost:1337";
         this.host = "https://efarmapi.herokuapp.com";
         this.access_token = {};
         this.token = '';
     }
-    CropService.prototype.croplisting = function () {
+    EquipmentService.prototype.getAllEquipments = function () {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         headers.append('Authorization', this.token);
-        return this._http.get(this.host + '/crops/listing', { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this.host + '/equipment', { headers: headers }).map(function (res) { return res.json(); });
     };
-    CropService.prototype.addCrop = function (crop) {
+    EquipmentService.prototype.postEquipment = function (equipment) {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         headers.append('Authorization', this.token);
-        return this._http.post(this.host + '/crops/add', crop, { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.post(this.host + '/equipment', equipment, { headers: headers }).map(function (res) { return res.json(); });
     };
-    CropService.prototype.getCrop = function (crop) {
+    /** get a single Equipment by ID **/
+    EquipmentService.prototype.getEquipment = function (equipmentID) {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         var body = {};
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         headers.append('Authorization', this.token);
-        return this._http.post(this.host + '/crops/' + crop, body, { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this.host + '/equipment/' + equipmentID, { headers: headers }).map(function (res) { return res.json(); });
     };
-    CropService.prototype.updateCrop = function (crop) {
+    /** update equipment **/
+    EquipmentService.prototype.putEquipment = function (equipment) {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         headers.append('Authorization', this.token);
-        return this._http.post(this.host + '/crops/' + crop.id, crop, { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.put(this.host + '/equipment/' + equipment.id, equipment, { headers: headers }).map(function (res) { return res.json(); });
     };
-    CropService.prototype.getAllCategories = function () {
+    /** DeleteID equipment by ID **/
+    EquipmentService.prototype.deleteEquipment = function (equipmentID) {
+        var headers = new http_1.Headers();
+        var urlSearchParams = new http_1.URLSearchParams();
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        headers.append('Authorization', this.token);
+        return this._http.delete(this.host + '/equipment/' + equipmentID, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    EquipmentService.prototype.getAllCategories = function () {
         var headers = new http_1.Headers();
         var urlSearchParams = new http_1.URLSearchParams();
         this.access_token = JSON.parse(localStorage.getItem("user"));
@@ -32983,18 +32989,25 @@ var CropService = (function () {
         headers.append('Authorization', this.token);
         return this._http.get(this.host + '/category', { headers: headers }).map(function (res) { return res.json(); });
     };
-    return CropService;
+    EquipmentService.prototype.getUsers = function () {
+        var headers = new http_1.Headers();
+        var urlSearchParams = new http_1.URLSearchParams();
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        headers.append('Authorization', this.token);
+        return this._http.get(this.host + '/users', { headers: headers }).map(function (res) { return res.json(); });
+    };
+    return EquipmentService;
 }());
-CropService = __decorate([
+EquipmentService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [typeof (_a = typeof http_1.Http !== "undefined" && http_1.Http) === "function" && _a || Object])
-], CropService);
-exports.CropService = CropService;
+], EquipmentService);
+exports.EquipmentService = EquipmentService;
 var _a;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/crop.service.js.map
+//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/equipment.service.js.map
 
 /***/ }),
-/* 1239 */,
 /* 1240 */,
 /* 1241 */,
 /* 1242 */,
@@ -33007,7 +33020,11 @@ var _a;
 /* 1249 */,
 /* 1250 */,
 /* 1251 */,
-/* 1252 */
+/* 1252 */,
+/* 1253 */,
+/* 1254 */,
+/* 1255 */,
+/* 1256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33023,72 +33040,126 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var crop_service_1 = __webpack_require__(1238);
 var router_1 = __webpack_require__(64);
-var AddUpdateCropComponent = (function () {
-    function AddUpdateCropComponent(router, _activateRouter, _cropService) {
+// import { FormGroup, FormBuilder ,Validators } from '@angular/forms';
+var equipment_service_1 = __webpack_require__(1239);
+var AddUpdateEquipmentComponent = (function () {
+    function AddUpdateEquipmentComponent(_router, _activateRouter, _equipmentService) {
         var _this = this;
-        this.router = router;
+        this._router = _router;
         this._activateRouter = _activateRouter;
-        this._cropService = _cropService;
-        this.crop = {
-            terms: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod",
+        this._equipmentService = _equipmentService;
+        this.equipment = {
+            name: '',
+            category_id: '',
             category: '',
-            variety: '',
-            packaging: '',
-            destination_shipping: '',
-            payment_method: 'COD'
+            companyManufacturer: '',
+            model: '',
+            modelyear: '',
+            enginepower: '',
+            rentSell: 'rent',
+            rate: '',
+            usage: '',
+            description: '',
+            termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod',
+            quantity: '',
+            user: '',
+            user_id: ''
         };
-        this.isLoading = true;
+        this.allEquipments = [];
         this.category = [];
-        this._cropService.getAllCategories().subscribe(function (res) { _this.category = res; }, function (err) { });
-        this.cropID = _activateRouter.snapshot.params['id'];
-        if (this.cropID) {
-            this._cropService.getCrop(this.cropID).subscribe(function (res) {
-                _this.crop = res["Data"][0];
-                _this.isLoading = false;
-            }, function (err) {
-                _this.isLoading = false;
-            });
+        this.users = [];
+        this.showMessage = false;
+        this.isLoading = true;
+        this.action = 'Add';
+        this.currentYear = new Date().getFullYear();
+        this.years = [];
+        this.equipmentID = _activateRouter.snapshot.params['id'];
+        if (this.equipmentID) {
+            this._equipmentService.getEquipment(this.equipmentID).subscribe(function (res) { _this.equipment = res; _this.action = 'Edit'; _this.isLoading = false; }, function (err) { });
         }
         else {
             this.isLoading = false;
         }
+        this._equipmentService.getAllCategories().subscribe(function (res) { _this.category = res; console.log(_this.category); }, function (err) { });
+        this._equipmentService.getUsers().subscribe(function (res) { _this.users = res; }, function (err) { });
+        /*create years array. */
+        this.years.push(this.currentYear);
+        for (var i = 1; i <= 50; i++) {
+            this.years.push(this.currentYear - i);
+        }
     }
-    AddUpdateCropComponent.prototype.save = function () {
-        var _this = this;
-        this.isLoading = true;
-        if (this.cropID) {
-            this._cropService.updateCrop(this.crop).subscribe(function (res) {
-                _this.isLoading = false;
-                _this.router.navigate(['/crop/list']);
-            }, function (err) {
-                _this.isLoading = false;
-            });
+    AddUpdateEquipmentComponent.prototype.submitEquipment = function () {
+        console.log('submitting Equipment...');
+        if (this.action == 'Edit') {
+            this.editEquipment();
         }
         else {
-            this._cropService.addCrop(this.crop).subscribe(function (res) {
-                _this.isLoading = false;
-                _this.router.navigate(['/crop/list']);
-            }, function (err) {
-                _this.isLoading = false;
-            });
+            this.addEquipment();
         }
     };
-    return AddUpdateCropComponent;
+    AddUpdateEquipmentComponent.prototype.clearEquipment = function () {
+        this.equipment = {
+            name: '',
+            category_id: '',
+            category: '',
+            companyManufacturer: '',
+            model: '',
+            modelyear: '',
+            enginepower: '',
+            rentSell: 'rent',
+            rate: '',
+            usage: '',
+            description: '',
+            termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod',
+            quantity: '',
+            user: '',
+            user_id: ''
+        };
+    };
+    AddUpdateEquipmentComponent.prototype.addEquipment = function () {
+        var _this = this;
+        console.log('Posting Equipment...');
+        this.equipment.category = this.equipment.category_id;
+        this.equipment.user = this.equipment.user_id;
+        this._equipmentService.postEquipment(this.equipment).subscribe(function (res) {
+            _this.response = res;
+            _this.showMessage = true;
+            // this.equipment   = {};
+            _this.clearEquipment();
+            _this._router.navigate(['/equipment/list', { data: "success" }]);
+            console.log(_this.response);
+        });
+    };
+    AddUpdateEquipmentComponent.prototype.editEquipment = function () {
+        var _this = this;
+        console.log('Udpating Equipment...');
+        this.equipment.category = this.equipment.category_id;
+        this.equipment.user = this.equipment.user_id;
+        this._equipmentService.putEquipment(this.equipment).subscribe(function (res) {
+            _this.response = res;
+            _this.showMessage = true;
+            _this.clearEquipment();
+            _this._router.navigate(['/equipment/list', { data: "success" }]);
+        });
+    };
+    AddUpdateEquipmentComponent.prototype.closeMessage = function () {
+        this.showMessage = false;
+    };
+    return AddUpdateEquipmentComponent;
 }());
-AddUpdateCropComponent = __decorate([
+AddUpdateEquipmentComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1300)
+        template: __webpack_require__(1304)
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _c || Object])
-], AddUpdateCropComponent);
-exports.AddUpdateCropComponent = AddUpdateCropComponent;
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof equipment_service_1.EquipmentService !== "undefined" && equipment_service_1.EquipmentService) === "function" && _c || Object])
+], AddUpdateEquipmentComponent);
+exports.AddUpdateEquipmentComponent = AddUpdateEquipmentComponent;
 var _a, _b, _c;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/addupdate-crop.component.js.map
+//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/addupdate-equipment.component.js.map
 
 /***/ }),
-/* 1253 */
+/* 1257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33104,26 +33175,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-// import {PaginationInstance} from 'ng2-pagination';
-var crop_service_1 = __webpack_require__(1238);
+// import { cropTable } from './crop-seed'
 var router_1 = __webpack_require__(64);
-var ListCropComponent = (function () {
-    function ListCropComponent(_router, _cropService) {
+var equipment_service_1 = __webpack_require__(1239);
+var ListEquipmentComponent = (function () {
+    function ListEquipmentComponent(activatedRouter, _router, _equipmentService) {
+        this.activatedRouter = activatedRouter;
         this._router = _router;
-        this._cropService = _cropService;
-        this.data = [];
-        this.totalRecords = 0;
+        this._equipmentService = _equipmentService;
         this.filterQuery = "";
         this.rowsOnPage = 10;
         this.sortBy = "createdAt";
         this.sortOrder = "desc";
-        this.err_message = "";
         this.isLoading = true;
         this.sortByWordLength = function (a) {
             return a.city.length;
         };
     }
-    ListCropComponent.prototype.ngOnInit = function () {
+    ListEquipmentComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._router.events.subscribe(function (evt) {
             if (!(evt instanceof router_1.NavigationEnd)) {
@@ -33131,44 +33200,40 @@ var ListCropComponent = (function () {
             }
             window.scrollTo(0, 0);
         });
-        this._cropService.croplisting().subscribe(function (res) {
-            _this.data = res["Data"];
+        this._equipmentService.getAllEquipments().subscribe(function (allEquipments) {
+            _this.data = allEquipments;
             _this.totalRecords = _this.data.length;
-            if (_this.data.length == 0)
-                _this.err_message = "No record to display";
             _this.isLoading = false;
-        }, function (err) {
-            _this.isLoading = false;
-            _this.err_message = "No record to display";
+            // console.log(allEquipments);
+            console.log("allEquipments loaded");
         });
     };
-    ListCropComponent.prototype.toInt = function (num) {
+    ListEquipmentComponent.prototype.toInt = function (num) {
         return +num;
     };
-    ListCropComponent.prototype.viewCrop = function (cropID) {
-        var route = '/crop/list/' + cropID;
+    ListEquipmentComponent.prototype.viewEquipment = function (equipmentID) {
+        var route = '/equipment/list/' + equipmentID;
         this._router.navigate([route]);
     };
-    ListCropComponent.prototype.sendUpdateCrop = function (cropID) {
-        var route = '/crop/edit/' + cropID;
+    ListEquipmentComponent.prototype.sendUpdateEquipment = function (equipmentID) {
+        console.log(equipmentID);
+        var route = '/equipment/edit/' + equipmentID;
         this._router.navigate([route]);
     };
-    ListCropComponent.prototype.removeCrop = function (crop) {
+    ListEquipmentComponent.prototype.removeEquipment = function (equipmentID) {
         var _this = this;
-        if (confirm("Do you want to delete?")) {
+        if (confirm("Are you sure to delete equipment?")) {
             this.isLoading = true;
-            crop["isDeleted"] = true;
-            this._cropService.updateCrop(crop).subscribe(function (res) {
+            this._equipmentService.deleteEquipment(equipmentID).subscribe(function (res) {
                 _this.response = res;
                 _this.isLoading = false;
-                _this.removeByAttr(_this.data, 'id', crop["id"]);
-                _this._router.navigate(['/crop/list/']);
-            }, function (err) {
-                _this.isLoading = false;
+                _this.totalRecords = _this.data.length;
+                // this.data = [];
+                _this.removeByAttr(_this.data, 'id', equipmentID);
             });
         }
     };
-    ListCropComponent.prototype.removeByAttr = function (arr, attr, value) {
+    ListEquipmentComponent.prototype.removeByAttr = function (arr, attr, value) {
         var i = arr.length;
         while (i--) {
             if (arr[i]
@@ -33179,22 +33244,23 @@ var ListCropComponent = (function () {
         }
         return arr;
     };
-    return ListCropComponent;
+    return ListEquipmentComponent;
 }());
-ListCropComponent = __decorate([
+ListEquipmentComponent = __decorate([
     core_1.Component({
-        selector: 'app-crop-management',
-        template: __webpack_require__(1301),
-        styles: [__webpack_require__(1286)]
+        selector: 'app-equipment-management',
+        template: __webpack_require__(1305),
+        // providers: [SweetAlertService],
+        styles: [__webpack_require__(1287)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _b || Object])
-], ListCropComponent);
-exports.ListCropComponent = ListCropComponent;
-var _a, _b;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/list-crop.component.js.map
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object, typeof (_c = typeof equipment_service_1.EquipmentService !== "undefined" && equipment_service_1.EquipmentService) === "function" && _c || Object])
+], ListEquipmentComponent);
+exports.ListEquipmentComponent = ListEquipmentComponent;
+var _a, _b, _c;
+//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/list-equipment.component.js.map
 
 /***/ }),
-/* 1254 */
+/* 1258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33211,41 +33277,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(64);
-var crop_service_1 = __webpack_require__(1238);
-var ViewCropComponent = (function () {
-    function ViewCropComponent(_router, route, _cropService) {
+var equipment_service_1 = __webpack_require__(1239);
+var ViewEquipmentComponent = (function () {
+    function ViewEquipmentComponent(_router, _activatedRouter, _equipmentService) {
         var _this = this;
         this._router = _router;
-        this._cropService = _cropService;
-        this.cropID = '';
-        this.crop = {};
-        this.cropID = route.snapshot.params['id'];
-        this._cropService.getCrop(this.cropID).subscribe(function (res) {
-            _this.crop = res["Data"][0];
-        }, function (err) {
-        });
+        this._activatedRouter = _activatedRouter;
+        this._equipmentService = _equipmentService;
+        this.equipmentID = '';
+        this.equipment = {};
+        this.copy_equipment = {};
+        this.edit = false;
+        this.isLoading = true;
+        this.equipmentID = _activatedRouter.snapshot.params['id'];
+        if (this.equipmentID) {
+            this._equipmentService.getEquipment(this.equipmentID).subscribe(function (res) { _this.equipment = res; _this.isLoading = false; }, function (err) { });
+        }
     }
-    ViewCropComponent.prototype.updateCrop = function (cropid) {
-        var route = '/crop/edit/' + cropid;
+    ViewEquipmentComponent.prototype.editEquipment = function (equipmentID) {
+        var route = '/equipment/edit/' + equipmentID;
         this._router.navigate([route]);
     };
-    return ViewCropComponent;
+    return ViewEquipmentComponent;
 }());
-ViewCropComponent = __decorate([
+ViewEquipmentComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1302)
+        template: __webpack_require__(1306)
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _c || Object])
-], ViewCropComponent);
-exports.ViewCropComponent = ViewCropComponent;
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof equipment_service_1.EquipmentService !== "undefined" && equipment_service_1.EquipmentService) === "function" && _c || Object])
+], ViewEquipmentComponent);
+exports.ViewEquipmentComponent = ViewEquipmentComponent;
 var _a, _b, _c;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/view-crop.component.js.map
+//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/view-equipment.component.js.map
 
 /***/ }),
-/* 1255 */,
-/* 1256 */,
-/* 1257 */,
-/* 1258 */,
 /* 1259 */,
 /* 1260 */,
 /* 1261 */,
@@ -33264,7 +33329,9 @@ var _a, _b, _c;
 /* 1274 */,
 /* 1275 */,
 /* 1276 */,
-/* 1277 */
+/* 1277 */,
+/* 1278 */,
+/* 1279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33279,56 +33346,57 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(64);
 var forms_1 = __webpack_require__(27);
-var ng2_table_1 = __webpack_require__(984);
+var ng2_table_1 = __webpack_require__(986);
 var ng2_bootstrap_1 = __webpack_require__(603);
-var list_crop_component_1 = __webpack_require__(1253);
-var addupdate_crop_component_1 = __webpack_require__(1252);
-var view_crop_component_1 = __webpack_require__(1254);
 var http_1 = __webpack_require__(121);
+var list_equipment_component_1 = __webpack_require__(1257);
+var view_equipment_component_1 = __webpack_require__(1258);
+var addupdate_equipment_component_1 = __webpack_require__(1256);
+var equipment_service_1 = __webpack_require__(1239);
 var routes = [
     {
         path: '',
         data: {
-            title: 'Crop Management'
+            title: 'equipment Management'
         },
         children: [
             {
                 path: 'list',
-                component: list_crop_component_1.ListCropComponent,
+                component: list_equipment_component_1.ListEquipmentComponent,
                 data: {
                     title: 'List'
                 }
             },
             {
                 path: 'add',
-                component: addupdate_crop_component_1.AddUpdateCropComponent,
+                component: addupdate_equipment_component_1.AddUpdateEquipmentComponent,
                 data: {
                     title: 'Add'
                 }
             },
             {
                 path: 'list/:id',
-                component: view_crop_component_1.ViewCropComponent,
+                component: view_equipment_component_1.ViewEquipmentComponent,
                 data: {
-                    title: 'List'
+                    title: 'View Equipment'
                 }
             },
             {
                 path: 'edit/:id',
-                component: addupdate_crop_component_1.AddUpdateCropComponent,
+                component: addupdate_equipment_component_1.AddUpdateEquipmentComponent,
                 data: {
-                    title: 'Edit'
+                    title: 'Edit Equipment'
                 }
             }
         ]
     }
 ];
-var CropManagementRoutingModule = (function () {
-    function CropManagementRoutingModule() {
+var EquipmentManagementRoutingModule = (function () {
+    function EquipmentManagementRoutingModule() {
     }
-    return CropManagementRoutingModule;
+    return EquipmentManagementRoutingModule;
 }());
-CropManagementRoutingModule = __decorate([
+EquipmentManagementRoutingModule = __decorate([
     core_1.NgModule({
         imports: [
             router_1.RouterModule.forChild(routes),
@@ -33337,6 +33405,9 @@ CropManagementRoutingModule = __decorate([
             ng2_bootstrap_1.PaginationModule,
             http_1.HttpModule
         ],
+        providers: [
+            equipment_service_1.EquipmentService
+        ],
         exports: [
             router_1.RouterModule,
             forms_1.FormsModule,
@@ -33344,20 +33415,19 @@ CropManagementRoutingModule = __decorate([
             ng2_bootstrap_1.PaginationModule
         ]
     })
-], CropManagementRoutingModule);
-exports.CropManagementRoutingModule = CropManagementRoutingModule;
-//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/crop-management-routing.module.js.map
+], EquipmentManagementRoutingModule);
+exports.EquipmentManagementRoutingModule = EquipmentManagementRoutingModule;
+//# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/equipment-management-routing.module.js.map
 
 /***/ }),
-/* 1278 */,
-/* 1279 */,
 /* 1280 */,
 /* 1281 */,
 /* 1282 */,
 /* 1283 */,
 /* 1284 */,
 /* 1285 */,
-/* 1286 */
+/* 1286 */,
+/* 1287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(123)();
@@ -33365,7 +33435,7 @@ exports = module.exports = __webpack_require__(123)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".row-on-page {\n  float: left !important; }\n", ""]);
 
 // exports
 
@@ -33374,7 +33444,6 @@ exports.push([module.i, "", ""]);
 module.exports = module.exports.toString();
 
 /***/ }),
-/* 1287 */,
 /* 1288 */,
 /* 1289 */,
 /* 1290 */,
@@ -33387,22 +33456,26 @@ module.exports = module.exports.toString();
 /* 1297 */,
 /* 1298 */,
 /* 1299 */,
-/* 1300 */
+/* 1300 */,
+/* 1301 */,
+/* 1302 */,
+/* 1303 */,
+/* 1304 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <div class=\"row\">\r\n        <div class=\"col-12 col-lg-12\">\r\n            <div class=\"content-header\">\r\n                <ol class=\"breadcrumb\">\r\n                    <li><a href=\"JavaScript:Void(0);\">Dashboard</a></li>\r\n                    <li><a href=\"JavaScript:Void(0);\">Crops</a></li>\r\n                    <li class=\"active\"><a href=\"JavaScript:Void(0);\">{{cropID ? 'Edit' : 'Add'}} Crop</a></li>\r\n                </ol>\r\n            </div>\r\n        </div>\r\n    </div>\r\n     <!-- loading section -->\r\n    <div class=\"aligncenter_loader\" *ngIf=\"isLoading\">\r\n        <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \r\n    </div>\r\n    <!-- section ends  -->\r\n    <div class=\"card\" *ngIf=\"!isLoading\" >\r\n        <div class=\"card-header\">\r\n            <strong>{{cropID ? 'Edit' : 'Add'}} Crop</strong>\r\n        </div>\r\n         <form role=\"form\" (ngSubmit)=\"save()\" #dailyExpenseForm=\"ngForm\">\r\n        <div class=\"card-block\">\r\n           \r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-name\">Crop Name</label>\r\n                            <input autofocus type=\"text\" id=\"nf-name\" name=\"nf-name\" class=\"form-control\" placeholder=\"\" [(ngModel)]=\"crop.name\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-password\">Category</label>\r\n                            <select id=\"category\" name=\"category\" class=\"form-control\" size=\"1\" [(ngModel)]=\"crop.category\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option *ngFor=\"let cat of category\" value=\"{{cat.id}}\">{{cat.name}}</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">Variety</label>\r\n                            <select id=\"select1\" name=\"select1\" class=\"form-control\" [(ngModel)]=\"crop.variety\" size=\"1\">\r\n                                <option value=\"\">Please select</option>\r\n                                <option value=\"Variety 1\">Variety 1</option>\r\n                                <option value=\"Variety 2\">Variety 2</option>\r\n                                <option value=\"Variety 3\">Variety 3</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-price\">Offer Price <i class=\"fa fa-rupee\"></i></label>\r\n                            <input type=\"number\" id=\"nf-price\" name=\"nf-price\" class=\"form-control\" [(ngModel)]=\"crop.price\" placeholder=\"\" required=\"\" min=\"1\" max=\"9999999999999998\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-grade\">Grade</label>\r\n                            \r\n\t\t\t\t\t\t<form class=\"grade\">\r\n\t\t\t\t\t\t\t<div class=\"btn-group\" data-toggle=\"\">\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"grade\" value=\"A+\" type=\"radio\" [(ngModel)]=\"crop.grade\" >A+\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"grade\" value=\"A\" type=\"radio\" [(ngModel)]=\"crop.grade\">A\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"grade\" value=\"B\" class=\"active\" type=\"radio\" [(ngModel)]=\"crop.grade\">B\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"grade\" value=\"C\" type=\"radio\" [(ngModel)]=\"crop.grade\">C\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n                       \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-color\">Color</label>\r\n                            <input type=\"text\" id=\"nf-color\" name=\"nf-color\" class=\"form-control\" [(ngModel)]=\"crop.color\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-size\">Size/Weight</label>\r\n                            <input type=\"text\" id=\"nf-size\" name=\"nf-size\" class=\"form-control\" [(ngModel)]=\"crop.size\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-other_speciality\">Other Speciality</label>\r\n                            <input type=\"text\" id=\"nf-other_speciality\" name=\"nf-other_speciality\" class=\"form-control\" [(ngModel)]=\"crop.other_speciality\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-availibility\">Availibility Peroid</label>\r\n                            <input type=\"text\" id=\"nf-availibility\" name=\"nf-availibility\" class=\"form-control\" [(ngModel)]=\"crop.availibility\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-packaging\">Packaging</label>\r\n                            <select id=\"select2\" name=\"select2\" class=\"form-control\" size=\"1\" [(ngModel)]=\"crop.packaging\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option value=\"Pack 1\">Pack 1</option>\r\n                                <option value=\"Pack 2\">Pack 2</option>\r\n                                <option value=\"Pack 3\">Pack 3</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-supply_ablity\">Supply Ability</label>\r\n                            <input type=\"text\" id=\"nf-supply_ablity\" name=\"nf-supply_ablity\" class=\"form-control\" [(ngModel)]=\"crop.supply_ablity\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-destination_shipping\">Destination for Shipping*</label>\r\n                            <select id=\"select3\" name=\"select3\" class=\"form-control\" size=\"1\" [(ngModel)]=\"crop.destination_shipping\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option value=\"Shipping 1\">Shipping 1</option>\r\n                                <option value=\"Shipping 2\">Shipping 2</option>\r\n                                <option value=\"Shipping 3\">Shipping 3</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-pack_size\">Pack Size</label>\r\n                            <input type=\"text\" id=\"nf-pack_size\" name=\"nf-pack_size\" class=\"form-control\" [(ngModel)]=\"crop.pack_size\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-qty\">Quantity Per Pack</label>\t\t\t\t\r\n\t\t\t\t\t\t\t<div class=\"input-group\">\r\n                              <input type=\"number\" id=\"nf-quantity_per_pack\" name=\"quantity_per_pack\" class=\"form-control\" aria-label=\"Text input with dropdown button\" [(ngModel)]=\"crop.quantity_per_pack\" min=\"1\" max=\"999999999999999\" placeholder=\"\" required>\r\n                              <div class=\"input-group-btn\">\r\n                                <button type=\"button\" class=\"btn btn-secondary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                                  Kg\r\n                                </button>\r\n                                <!--<div class=\"dropdown-menu dropdown-menu-right\">\r\n                                  <a class=\"dropdown-item\" href=\"JavaScript:void(0)\">Miles</a>\r\n                                </div>-->\r\n                              </div>\r\n                            </div>                       \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-label\">Label/Making on Pack</label>\r\n                            <input type=\"text\" id=\"nf-label\" name=\"nf-label\" class=\"form-control\" [(ngModel)]=\"crop.label\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-paymentTerms\">Payment Terms</label>\r\n                           <form class=\"grade\">\r\n\t\t\t\t\t\t\t<div class=\"btn-group\">\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"payment_mode\" value=\"COD\" type=\"radio\" [(ngModel)]=\"crop.payment_method\">COD\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"payment_mode\" value=\"Cheque\" type=\"radio\" [(ngModel)]=\"crop.payment_method\">Cheque\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t<label class=\"btn btn-default\">\r\n\t\t\t\t\t\t\t<input name=\"payment_mode\" value=\"Net Banking\" class=\"active\" type=\"radio\" [(ngModel)]=\"crop.payment_method\">Net Banking\r\n\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-moq\">MOQ</label>\r\n                            <input type=\"text\" id=\"nf-moq\" name=\"nf-moq\" class=\"form-control\" [(ngModel)]=\"crop.moq\" placeholder=\"\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-average_lead_time\">Average Lead Time</label>\r\n                            \r\n                            <div class=\"input-group\">\r\n                        <input type=\"text\" id=\"average_lead_time\" name=\"average_lead_time\" class=\"form-control\" aria-label=\"Amount (to the nearest dollar)\" [(ngModel)]=\"crop.average_lead_time\" required>\r\n                        <span class=\"input-group-addon width\">Days</span>\r\n                        </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-additional_info\">Additional Information</label>\r\n                            <textarea type=\"text\" id=\"nf-additional_info\" name=\"nf-additional_info\" class=\"form-control\" [(ngModel)]=\"crop.additional_info\" placeholder=\"\" rows=\"4\" required ></textarea>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-terms\">Terms & Conditions</label>\r\n                            <textarea type=\"text\" id=\"nf-terms\" name=\"nf-terms\" class=\"form-control\" [(ngModel)]=\"crop.terms\" placeholder=\"\" rows=\"4\" [disabled]=\"true\"></textarea>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-image\">Image</label>\r\n                            <input type=\"file\" name=\"file-7[]\" id=\"file-7\" class=\"inputfile inputfile-6\" data-multiple-caption=\"{count} files selected\" multiple />\r\n                            <label for=\"file-7\"><span></span> <strong><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"17\" viewBox=\"0 0 20 17\"><path d=\"M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z\"/></svg> Upload image</strong></label>\r\n                            <i class=\"fa fa-plus addimage\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"card-footer\">\r\n                    <button type=\"reset\" class=\"btn btn-secondary whiteclr\" [routerLink]=\"['/crop/list']\"> Cancel</button>\r\n                    <button type=\"submit\" class=\"pull-right btn btn-primary orangeclr\">{{cropID ? 'Update' : 'Save'}}</button>\r\n                </div>\r\n          </form>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"equipment-wrapper\">\n    <div class=\"row\">\n        <div class=\"col-12 col-lg-12\">\n            <div class=\"content-header\">\n                <ol class=\"breadcrumb\">\n                    <li><a href=\"javascript:void(0)\">Dashboard</a></li>\n                    <li><a href=\"javascript:void(0)\">Equipments</a></li>      \n                    <li *ngIf=\"!isLoading\" class=\"active\"><a href=\"javascript:void(0)\">{{action == 'Add' ? 'Add New' : 'Edit'}}</a></li>      \n                </ol>\n            </div>\n        </div>\n    </div>\n\n    <!-- loading section -->\n    <div class=\"aligncenter_loader\" *ngIf=\"isLoading\">\n        <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \n    </div>\n    <!-- section ends  -->\n\n    <div class=\"card\" *ngIf=\"!isLoading\">\n        <div class=\"card-header\">\n            <strong>{{action}} Equipment</strong>\n        </div>\n        <div class=\"card-block\">\n            <form role=\"form\" (ngSubmit)=\"submitEquipment()\" #addEquipmentForm=\"ngForm\">\n                \n               <div *ngIf=\"showMessage\" class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\"  (click)=\"closeMessage()\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                    <strong>Success</strong> Equipment added successfully.\n                </div>\n                \n                <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"nf-name\">Equipment Name</label>\n                            <input type=\"text\" autofocus id=\"name\" name=\"name\" class=\"form-control\" [(ngModel)]=\"equipment.name\" required>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"category\">Category</label>                            \n                            <select id=\"category\" name=\"category\"  class=\"form-control\" size=\"1\" [(ngModel)]=\"equipment.category_id\" required>\n                                <option value=\"\">Please select</option>                                \n                                <option *ngFor=\"let cat of category\" [value]=\"cat.id\">\n                                    {{cat.name}}\n                                </option>       \n                            </select>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"companyManufacturer\">Company/Manufacturer</label>\n                            <select id=\"companyManufacturer\" name=\"companyManufacturer\" class=\"form-control\" [(ngModel)]=\"equipment.companyManufacturer\" size=\"1\" required>\n                                <option value=\"\">Please select</option>\n                                <option value=\"1\">Variety 1</option>\n                                <option value=\"2\">Variety 2</option>\n                                <option value=\"3\">Variety 3</option>\n                            </select>\n                        </div>\n                    </div>\n                      <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"model\">Model</label>\n                            <select id=\"model\" name=\"model\" class=\"form-control\" size=\"1\" [(ngModel)]=\"equipment.model\" required>\n                                <option value=\"\">Please select</option>\n                                <option value=\"1\">Option #1</option>\n                                <option value=\"2\">Option #2</option>\n                                <option value=\"3\">Option #3</option>\n                            </select>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"modelyear\">Model year</label>\n                            <select id=\"modelyear\" name=\"modelyear\" class=\"form-control\" size=\"1\" [(ngModel)]=\"equipment.modelyear\">\n                                <option value=\"\">Please select</option>\n                                <option *ngFor=\"let year of years\" value=\"{{year}}\">{{year}}</option>                                                                \n                            </select>\n                        </div>\n                    </div>\n                \n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"enginePower\">Engine Power</label>\n                            <input type=\"text\" id=\"enginePower\" name=\"enginePower\" class=\"form-control\" [(ngModel)]=\"equipment.enginepower\" placeholder=\"\" />\n                        </div>\n                    </div>\n                </div>\n                 <div class=\"row p10\">\n                    <div class=\"col-sm-6\">\n                       <div class=\"form-group radiobuttons_top\">\n                            <div class=\"form-group pull-left\">\n                                <div class=\"radio_button\">\n                                    <input type=\"radio\"  name=\"rentSell\" class=\"\" id=\"nf-rentslell\" value=\"rent\"  [(ngModel)]=\"equipment.rentSell\" checked required>\n                                    <label for=\"nf-rentslell\">Rent</label>\n                                </div>\n                            </div>\n                           \n                            <div class=\"form-group pull-left\">\n                                <div class=\"radio_button\">                     \n                                    <input type=\"radio\" name=\"rentSell\" class=\"\" id=\"rentSell\" value=\"sell\"  [(ngModel)]=\"equipment.rentSell\" required>\n                                    <label for=\"rentSell\">Sell</label>\n                                </div>\n                            </div>\n                        </div>                    \n                    </div>\n\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <div class=\"input-group\">\n                                <div class=\"icnposition\"><i class=\"fa fa-rupee\"></i></div>\n                                <input type=\"text\" id=\"nf-quantity_per_pack\" name=\"quantity_per_pack\" class=\"form-control pleft25\" aria-label=\"Text input with dropdown button\" [(ngModel)]=\"equipment.rate\" placeholder=\"Enter Rate\">                                \n                                <div class=\"input-group-btn\">\n                                    <button type=\"button\" class=\"btn btn-secondary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n                                    hr\n                                    </button>\n                                </div>\n                            </div>                       \n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">                   \n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"termsConditions\">Quantity</label>\n                            <input type=\"number\" min=\"1\" id=\"quantity\" name=\"quantity\" class=\"form-control\" [(ngModel)]=\"equipment.quantity\" placeholder=\"\" />\n                        </div>\n                    </div>\n                     <div class=\"col-sm-6\">\n                        <div class=\"form-group  has-required\">\n                            <label for=\"user\">User</label>\n                            <select id=\"user\" name=\"user\" class=\"form-control\" size=\"1\" [(ngModel)]=\"equipment.user_id\" required>\n                                <option value=\"\">Please select</option>                                \n                                <option *ngFor=\"let user of users\" [value]=\"user.id\">\n                                    {{user.username}}\n                                </option>       \n                            </select>\n                        </div>\n                    </div>\n                </div>                \n                <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"usage\">Usage</label>\n                            <textarea type=\"text\" id=\"usage\" name=\"usage\" class=\"form-control\" [(ngModel)]=\"equipment.usage\" placeholder=\"\" rows=\"4\" required></textarea>\n                        </div>\n                    </div>\n\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"description\">Description</label>\n                            <textarea type=\"text\" id=\"description\" name=\"description\" class=\"form-control\" [(ngModel)]=\"equipment.description\" placeholder=\"\" rows=\"4\" required></textarea>\n                        </div>\n                    </div>\n                </div>                \n                <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"nf-image\">Image</label>\n                            <input type=\"file\" name=\"file-7[]\" id=\"file-7\" class=\"inputfile inputfile-6\" data-multiple-caption=\"{count} files selected\" multiple />\n                            <label for=\"file-7\"><span></span> <strong><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"17\" viewBox=\"0 0 20 17\"><path d=\"M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z\"/></svg> Upload image</strong></label>\n                            <i class=\"fa fa-plus addimage\"></i>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"termsConditions\">Terms & Conditions</label>\n                            <textarea type=\"text\" id=\"termsConditions\" name=\"termsConditions\" class=\"form-control\" [(ngModel)]=\"equipment.termsConditions\" placeholder=\"\" rows=\"4\" [disabled]=\"true\"></textarea>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer\">                       \n                    <button type=\"reset\" class=\"btn btn-secondary whiteclr\" [routerLink]=\"['/equipment/list']\"> Cancel</button>\n                    <button type=\"submit\" class=\"pull-right btn btn-primary orangeclr\" [disabled]=\"!addEquipmentForm.valid\"  [class.disabled]=\"isClickedOnce\"  (click)=\"isClickedOnce = true\">{{action == 'Add' ? 'Save' : 'Update'}}</button>\n                </div>               \n            </form>\n        </div>\n    </div> <!-- .card -->\n</div> <!-- .equipment-wrapper -->"
 
 /***/ }),
-/* 1301 */
+/* 1305 */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"crop-wrapper animated fadeIn\">       -->\n<div class=\"crop-wrapper\">      \n    <div class=\"row\">\n        <div class=\"col-12 col-lg-12\">\n            <div class=\"content-header\">\n                <ol class=\"breadcrumb\">\n                    <li><a href=\"javascript:void(0)\">Dashboard</a></li>\n                    <li><a href=\"javascript:void(0)\">Crops</a></li>\n                    <li class=\"active\"><a>List</a></li>\n                </ol>\n            </div>\n        </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n            <div class=\"card\">\n                <div class=\"card-header\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-3 col-12\">\n                            <form action=\"#\" class=\"ng-untouched ng-pristine ng-valid\" method=\"get\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" name=\"q\" placeholder=\"Search\" type=\"text\">\n                                <span class=\"input-group-btn\">\n                                <button class=\"btn btn-flat\" id=\"search-btn\" name=\"search\" type=\"submit\"><i class=\"fa fa-search\"></i> </button>\n                                </span>\n                            </div>\n                            </form>\n                        </div>\n                        <div class=\"col-sm-9 col-12 text-right linehght\"> \n                            <button type=\"button\" class=\"btn btn-success btnadd\" [routerLink]=\"['/crop/add']\">Add Crop</button>\n                            <div class=\"icns\">\n                                <a><img src=\"assets/img/pdf.png\" alt=\"pdf\"></a>\n                                <a><img src=\"assets/img/xls.png\" alt=\"pdf\"></a>\n                            </div>\n                        </div>\n                    </div> <!-- .row -->\n                </div><!-- .card-header -->\n                \n                <div class=\"card-block\">    \n                    <div class=\"table-responsive\">                                    \n                    <table class=\"table table-bordered table-striped table-condensed\" [mfData]=\"data\" #mf=\"mfDataTable\"\n                               [mfRowsOnPage]=\"rowsOnPage\" [(mfSortBy)]=\"sortBy\" [(mfSortOrder)]=\"sortOrder\">\n                        <thead>\n                            <tr>\n\n                                <th width=\"25%\">\n                                    <mfDefaultSorter by=\"name\">Crop \n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"price\">Offer Price\n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"quantity_per_pack\">Qty. \n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <!-- <th width=\"15%\">Category</th> -->\n                                <th width=\"10%\">Color</th>\n                                <th width=\"10%\">Actions</th>\n                            </tr>\n                        </thead>                        \n                        <tbody>\n                            <tr *ngIf=\"isLoading\">\n                                <td colspan=\"8\">\n                                    <div class=\"is-loading\"><i class=\"page-loader\"></i></div>\n                                </td>\n                            </tr>\n                            <tr *ngFor=\"let crop of mf.data\">                        \n                                <td><a href=\"javascript:void(0);\" (click)=\"viewCrop(crop.id)\">{{crop.name}}</a></td>\n                                <td>{{crop.price}}</td>\n                                <td>{{crop.quantity_per_pack}}</td>\n                                <!-- <td>{{crop.category}}</td> -->\n                                <td>{{crop.color}}</td>\n                                <td>                                    \n                                    <button (click)=\"sendUpdateCrop(crop.id)\" class=\"btn btn-success\" title=\"Edit\" style=\"padding:1px 4px\"><i class=\"fa fa-pencil\"></i></button>\n                                    <button  (click)=\"removeCrop(crop)\" class=\"btn btn-danger orange\" title=\"Delete\" style=\"padding: 1px 4px\"><i class=\"fa fa-trash\"></i></button>                                    \n                                </td>\n                            </tr>\n                        </tbody>\n                        <tfoot>\n                            <tr>\n                                <td colspan=\"5\">\n                                    <div class=\"pagination-section\">\n                                        <div class=\"text-danger\" *ngIf='err_message'>{{err_message}}</div>\n                                        <div class=\"row-on-page\" *ngIf='data.length > 0'>\n                                            <label class=\"label-control\">Show</label>\n                                            &nbsp;\n                                            <select class=\"input-sm\" [(ngModel)]=\"rowsOnPage\">\n                                                <option [ngValue]=\"5\">5</option>\n                                                <option [ngValue]=\"10\">10</option>\n                                                <option [ngValue]=\"15\">25</option>\n                                                <option [ngValue]=\"15\">50</option>\n                                                <option [ngValue]=\"15\">100</option>\n                                            </select>\n                                            &nbsp;\n                                           <label class=\"label-control\">entries</label>\n\n                                           &nbsp;\n                                           &nbsp;\n                                           <span>Showing {{rowsOnPage < totalRecords? rowsOnPage:totalRecords }} of {{totalRecords}} entries</span>\n                                        </div>\n                                        <div class=\"text-right\">                                    \n                                            <mfBootstrapPaginator></mfBootstrapPaginator>\n                                        </div>\n                                        <div style=\"clear: both;\"></div>\n                                    </div>    \n                                </td>    \n                            </tr>                            \n                        </tfoot>\n                    </table> \n                    </div>                            \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+module.exports = "<!-- <div class=\"equipment-wrapper animated fadeIn\">       -->\n<div class=\"equipment-wrapper\">      \n    <div class=\"row\">\n        <div class=\"col-12 col-lg-12\">\n            <div class=\"content-header\">\n                <ol class=\"breadcrumb\">\n                    <li><a href=\"javascript:void(0)\">Dashboard</a></li>\n                    <li><a href=\"javascript:void(0)\">Equipments</a></li>\n                    <li class=\"active\"><a>List</a></li>\n                </ol>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n            \n            <!-- loading section -->\n            <div class=\"aligncenter_loader\" *ngIf=\"isLoading\">\n                <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \n            </div>\n            <!-- section ends  -->\n\n            <div class=\"card\" *ngIf=\"!isLoading\">\n                <div class=\"card-header\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-3 col-12\">\n                            <form action=\"#\" class=\"pull-left ng-untouched ng-pristine ng-valid\" method=\"get\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" name=\"q\" placeholder=\"Search\" type=\"text\">\n                                <span class=\"input-group-btn\">\n                                <button class=\"btn btn-flat\" id=\"search-btn\" name=\"search\" type=\"submit\"><i class=\"fa fa-search\"></i> </button>\n                                </span>\n                            </div>\n                            </form>\n                        </div>\n                        <div class=\"col-sm-9 col-12 text-right linehght\">\n                            <button type=\"button\" class=\"btn btn-success btnadd\" [routerLink]=\"['/equipment/add']\">Add Equipment</button>\n                            <div class=\"icns\">\n                                <a><img src=\"assets/img/pdf.png\" alt=\"pdf\"></a>\n                                <a><img src=\"assets/img/xls.png\" alt=\"pdf\"></a>\n                            </div>\n                        </div>\n                    </div> <!-- .row -->\n                </div><!-- .card-header -->\n                \n                <div class=\"card-block\">    \n                <div class=\"table-responsive\">                                    \n                    <table class=\"table table-bordered table-striped table-condensed\" [mfData]=\"data\" #mf=\"mfDataTable\"\n                               [mfRowsOnPage]=\"rowsOnPage\" [(mfSortBy)]=\"sortBy\" [(mfSortOrder)]=\"sortOrder\">\n                        <thead>\n                            <tr>\n                                <th width=\"25%\">\n                                    <mfDefaultSorter by=\"name\">Name \n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"20%\">Supplier</th>                                \n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"rentSell\">Type\n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"modelyear\">Model Year \n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">\n                                     <mfDefaultSorter by=\"quantity\">Qty\n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"rate\">Price\n                                        <i *ngIf=\"sortOrder == 'asc'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">Actions</th>\n                            </tr>\n                        </thead>                        \n                        <tbody>                          \n                            <tr *ngFor=\"let equipment of mf.data\">                        \n                                <td><a href=\"javascript:void(0);\" (click)=\"viewEquipment(equipment.id)\">{{equipment.name}}</a></td>\n                                <td>{{equipment.user?.username}}</td>                                \n                                <td>{{equipment.rentSell}}</td>\n                                <td>{{equipment.modelyear}}</td>\n                                <td>{{equipment.quantity}}</td>\n                                <td>{{equipment.rate}}</td>\n                                <td>                                    \n                                    <button (click)=\"sendUpdateEquipment(equipment.id)\" class=\"btn btn-success\" title=\"Edit\" style=\"padding:1px 4px\"><i class=\"fa fa-pencil\"></i></button>\n                                    <button  (click)=\"removeEquipment(equipment.id)\" class=\"btn btn-danger orange\" title=\"Delete\" style=\"padding:1px 4px\"><i class=\"fa fa-trash\"></i></button>                                    \n                                </td>\n                            </tr>\n                        </tbody>\n                        <tfoot>\n                            <tr>\n                                <!-- no records found -->\n                                <td colspan=\"7\"  *ngIf=\"totalRecords == 0\">\n                                    <div class=\"text-center\">\n                                        <p class=\"text-center\">No record to display</p>                                                               \n                                    </div>  \n                                </td>\n\n                                <td colspan=\"7\">\n                                    <div class=\"pagination-section\" *ngIf=\"totalRecords > 0\">\n                                        <div class=\"row-on-page\">\n                                            <label class=\"label-control\">Show</label>\n                                            &nbsp;\n                                            <select class=\"input-sm\" [(ngModel)]=\"rowsOnPage\">\n                                                <option [ngValue]=\"5\">5</option>\n                                                <option [ngValue]=\"10\">10</option>\n                                                <option [ngValue]=\"15\">25</option>\n                                                <option [ngValue]=\"15\">50</option>\n                                                <option [ngValue]=\"15\">100</option>\n                                            </select>\n                                            &nbsp;\n                                           <label class=\"label-control\">entires</label>\n\n                                            &nbsp;\n                                           &nbsp;\n                                           <span>Showing {{rowsOnPage < totalRecords? rowsOnPage:totalRecords }} of {{totalRecords}} entries</span>\n                                        </div>\n                                        <div class=\"text-right\">                                    \n                                            <mfBootstrapPaginator></mfBootstrapPaginator>\n                                        </div>\n                                        <div style=\"clear: both;\"></div>\n                                    </div>  \n                                </td>    \n                            </tr>                            \n                        </tfoot>\n                    </table>    \n                    </div>                                            \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
 
 /***/ }),
-/* 1302 */
+/* 1306 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-lg-12\">\r\n            <div class=\"content-header\">\r\n                <ol class=\"breadcrumb\">\r\n                    <li><a href=\"#\">Dashboard</a></li>\r\n                    <li><a href=\"#\">Crops</a></li>\r\n                    <li class=\"active\"><a href=\"#\">View</a></li>\r\n                </ol>\r\n            </div>\r\n        </div>\r\n    </div>\r\n<form role=\"form\" (ngSubmit)=\"save()\" #dailyExpenseForm=\"ngForm\">\r\n    <div class=\"card\">\r\n        <div class=\"card-header\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-3 col-12\">\r\n                   <strong>View Crop</strong>           \r\n                </div>\r\n                <div class=\"col-sm-9 col-12 text-right linehght\">\r\n                   <button type=\"button\" class=\"btn btn-secondary\" [routerLink]=\"['/crop/list']\">Back</button>  \r\n\r\n                    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"updateCrop(crop.id)\">Edit Crop</button> \r\n                                             &nbsp;\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"card-block viewmode\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-name\">Crop Name*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.name}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-password\">Category*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.category}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">Variety</label>\r\n\t\t\t\t\t\t\t<p>{{crop.variety}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-price\">Offer Price <i class=\"fa fa-rupee\"></i> *</label>\r\n\t\t\t\t\t\t\t<p><i class=\"fa fa-rupee\"></i>{{crop.price}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-grade\">Grade</label>\r\n\t\t\t\t\t\t\t<p>{{crop.grade}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-color\">Color*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.color}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-size\">Size/Weight*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.size}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-otherSpeciality\">Other Speciality</label>\r\n\t\t\t\t\t\t\t<p>{{crop.other_speciality}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-availibility\">Availibility Period*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.availibility}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-packaging\">Packaging*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.packaging}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-supplyAblity\">Supply Ability*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.supply_ablity}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-destinationForShipping\">Destination for Shipping*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.destination_shipping}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-packSize\">Pack Size*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.pack_size}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-qty\">Quantity Per Pack*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.quantity_per_pack}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-label\">Label/Making on Pack*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.label}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-paymentTerms\">Payment Terms*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.payment_method}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-moq\">MOQ*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.moq}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-averageLeadTime\">Average Lead Time*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.average_lead_time}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-additionalInformation\">Additional Information*</label>\r\n\t\t\t\t\t\t\t<p>{{crop.additional_info}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-termsConditions\">Terms & Conditions</label>\r\n\t\t\t\t\t\t\t<p>{{crop.terms}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-image\">Image</label>\r\n\t\t\t\t\t\t\t<p><i class=\"fa fa-file-image-o\"></i> {{crop.image}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n        </div>\r\n    </div>\r\n</form>    \r\n</div>\r\n"
+module.exports = "<div class=\"equipment-wrapper\">    \r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-lg-12\">\r\n            <div class=\"content-header\">\r\n                <ol class=\"breadcrumb\">\r\n                    <li><a href=\"javascript:void(0)\">Dashboard</a></li>\r\n                    <li><a href=\"javascript:void(0)\">Equipments</a></li>      \r\n                    <li class=\"active\"><a href=\"javascript:void(0)\">View</a></li>      \r\n                </ol>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- loading section -->\r\n    <div class=\"aligncenter_loader\" *ngIf=\"isLoading\">\r\n        <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \r\n    </div>\r\n    <!-- section ends  -->\r\n\r\n    <div class=\"card\" *ngIf=\"!isLoading\">\r\n        <div class=\"card-header\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-3 col-12\">\r\n                   <strong>View Equipment</strong>           \r\n                </div>\r\n                <div class=\"col-sm-9 col-12 text-right linehght\">\r\n                   \r\n                   <button type=\"button\" class=\"btn btn-secondary\" [routerLink]=\"['/equipment/list']\">Back</button>     \r\n                    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"editEquipment(equipment.id)\">Edit Equipment</button> \r\n                    &nbsp;    \r\n                                          \r\n                </div>\r\n            </div> <!-- .row -->\r\n        </div>\r\n        <div class=\"card-block viewmode\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"nf-name\">Equipment Name</label>\r\n                        <p>{{equipment.name}}</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"category\">Category</label>\r\n                        <p>{{equipment.category?.name}}</p>                            \r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"companyManufacturer\">Company/Manufacturer</label>\r\n                        <p>{{equipment.companyManufacturer}}</p>                           \r\n                    </div>\r\n                </div>\r\n                  <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"model\">Model</label>\r\n                        <p>{{equipment.model}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"modelyear\">Model year</label>\r\n                        <p>{{equipment.modelyear}}</p>\r\n                    </div>\r\n                </div>\r\n            \r\n                <div class=\"col-sm-6\">\r\n                <div class=\"form-group\">\r\n                        <label for=\"enginePower\">Engine power</label>\r\n                        <p>{{equipment.enginepower}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n             <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"nf-rentslell\">Rent/sell</label>\r\n                        <p>{{equipment.rentSell}}</p>                        \r\n                    </div>                      \r\n                </div>\r\n\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"rate\">Price</label>                         \r\n                        <p>{{equipment.rate}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"usage\">Usage</label>\r\n                        <p>{{equipment.usage}}</p>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"description\">Description</label>\r\n                        <p>{{equipment.description}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"termsConditions\">Terms & Conditions</label>\r\n                        <p>{{equipment.termsConditions}}</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"quantity\">Qty</label>\r\n                        <p>{{equipment.quantity}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"image\">Image</label>\r\n                        <p>Not Available</p>\r\n                    </div>\r\n                </div>\r\n                 <div class=\"col-sm-6\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"image\">User</label>\r\n                        <p>{{equipment.user?.username}}</p>                        \r\n                    </div>\r\n                </div>\r\n            </div>                           \r\n        </div>\r\n    </div> <!-- .card -->\r\n</div> <!-- .equipment-wrapper -->"
 
 /***/ })
 ]));

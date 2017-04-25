@@ -321,11 +321,11 @@ var map = {
 	],
 	"./components/components.module": [
 		936,
-		4
+		5
 	],
 	"./crop-management/crop-management.module": [
 		937,
-		3
+		4
 	],
 	"./dashboard/dashboard.module": [
 		938,
@@ -333,7 +333,7 @@ var map = {
 	],
 	"./equipment-management/equipment-management.module": [
 		939,
-		2
+		3
 	],
 	"./icons/icons.module": [
 		940,
@@ -341,11 +341,11 @@ var map = {
 	],
 	"./input-management/input-management.module": [
 		941,
-		1
+		2
 	],
 	"./land-management/land-management.module": [
 		942,
-		5
+		1
 	],
 	"./pages/pages.module": [
 		943,
