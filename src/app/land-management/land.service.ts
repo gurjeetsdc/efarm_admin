@@ -16,7 +16,7 @@ export class LandService {
     *@return: Multiple json array
     *@Author: Rohitk.kumar
     */
-    inputLand() {
+    landlist() {
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         let headers = new Headers();        
@@ -52,24 +52,24 @@ export class LandService {
     *@Author: Rohitk.kumar
     */
     getLand(land) {
-      console.log(input);
+      console.log(land);
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         let headers = new Headers();
         let body = {};
         let urlSearchParams = new URLSearchParams();
         headers.append('Authorization', this.token);
-        console.log("addCrop----------------",input);
+        console.log("addCrop----------------",land);
     return this.http.get(this.host +'/land/'+ land, { headers: headers }).map((res:Response) => res.json())
     }
 
     /*
     *@Description: update land info method
-    *@Param: land id param and input data
+    *@Param: land id param and land data
     *@return: update success/fail 
     *@Author: Rohitk.kumar
     */
-    updateInput(land) {
+    updateLand(land) {
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
         let headers = new Headers();
@@ -82,11 +82,11 @@ export class LandService {
 
     /*
     *@Description: update land info method
-    *@Param: land id param and input data
+    *@Param: land id param and Land( data
     *@return: update success/fail 
     *@Author: Rohitk.kumar
     */
-    deleteInput( landId ) {
+    deleteLand( landId ) {
         
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();

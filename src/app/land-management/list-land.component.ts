@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
+import { LandService } from './land.service';
 import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
@@ -8,8 +9,7 @@ import {DataTableModule} from "angular2-datatable";
 @Component({
   selector: 'app-land-management',
   templateUrl: './list-land.component.html',
-  styleUrls: ['./list-land.component.scss'],
-  providers: [LandService]
+  styleUrls: ['./list-land.component.scss']
 })
 export class ListLandComponent implements OnInit {
 
