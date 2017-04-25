@@ -81,7 +81,12 @@ export class InputService {
     }
 
 
-     /** Delete input by ID **/
+    /*
+    *@Description: update Input info method
+    *@Param: input id param and input data
+    *@return: update success/fail 
+    *@Author: Rohitk.kumar
+    */
     deleteInput( inputId ) {
         
         let headers         = new Headers();

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
-import { LandService } from './land.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
+import {Http} from "@angular/http";
+import {DataTableModule} from "angular2-datatable";
+
 @Component({
   selector: 'app-land-management',
   templateUrl: './list-land.component.html',

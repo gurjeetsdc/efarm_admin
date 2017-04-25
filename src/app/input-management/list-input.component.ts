@@ -78,7 +78,7 @@ export class ListInputComponent implements OnInit {
 
       console.log(inputID);
       
-        if(confirm("Are you sure to delete Input")) {
+        if(confirm("Do you want to delete?")) {
             console.log("Implement delete functionality here");
             this.isLoading = true;
             this._inputService.deleteInput(inputID).subscribe(res => {
