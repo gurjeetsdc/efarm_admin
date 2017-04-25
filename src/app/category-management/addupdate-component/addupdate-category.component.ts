@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 // import { FormGroup, FormBuilder ,Validators } from '@angular/forms';
 
@@ -11,6 +11,7 @@ export class AddUpdateCategoryComponent {
     
     private category    = {};
     private allCategory = [];
+    private isPageLoading:boolean   = false;
     private categoryID: any;
     private response:any;
     private showMessage:boolean = false;
@@ -36,12 +37,14 @@ export class AddUpdateCategoryComponent {
 
     addCategory() {
         console.log('Posting Category...');
-
+             this.isPageLoading = true;
         this._categoryService.postCategory(this.category).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
             this.category   = {};
+            this.isPageLoading = false;
             this._router.navigate(['/category/list', {data: "success"} ]);
+
             console.log(this.response)
         });      
     	
@@ -49,12 +52,13 @@ export class AddUpdateCategoryComponent {
 
     updateCategory() {
         console.log('Udpating Category...');
-        
+            this.isPageLoading = true;
         this._categoryService.putCategory(this.category).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
             this.category   = {};
             this._router.navigate(['/category/list', {data: "success"} ]);
+            this.isPageLoading = true;
         }); 
     }
 

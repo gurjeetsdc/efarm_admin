@@ -54,7 +54,8 @@ export class ListCategoryComponent implements OnInit {
 
     viewCategory(categoryID) {
         let route = '/category/list/'+categoryID;
-        this._router.navigate([route]);       
+        this._router.navigate([route]);
+        //viewCategory.sort ({ createdAt: 'desc' });       
     }
 
     sendUpdateCategory( categoryID ) {     
@@ -73,8 +74,23 @@ export class ListCategoryComponent implements OnInit {
                 this.isLoading = false;
 
                 /* reload list */
+                this.removeByAttr(this.data, 'id', categoryID);
                 this._router.navigate(['/category/list/']);      
             });  
         }
-    } 
+    }
+
+    removeByAttr(arr, attr, value){
+        let i = arr.length;
+        while(i--){
+           if( arr[i] 
+               && arr[i].hasOwnProperty(attr) 
+               && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+               arr.splice(i,1);
+
+           }
+        }
+        return arr;
+    }  
 }

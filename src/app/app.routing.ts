@@ -67,11 +67,11 @@ export const routes: Routes = [
       },
       {
         path: 'category',
-        loadChildren: './category/category.module#CategoryModule'
+        loadChildren: './category-management/category-management.module#CategoryManagementModule'
       },
       {
         path: 'manufacturer',
-        loadChildren: './manufacturer/manufacturer.module#ManufacturerModule'
+        loadChildren: './manufacturer-management/manufacturer-management.module#ManufacturerManagementModule'
       }
     ]
   },
