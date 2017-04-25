@@ -2,41 +2,32 @@
   <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">&#9776;</button>
   <a class="navbar-brand hidden-md-down" href="#"></a>
  
-  <ul class="nav navbar-nav hidden-md-down">
+  <ul class="nav navbar-nav hidden-md-down width">
     <li class="nav-item">
       <a class="nav-link navbar-toggler sidebar-toggler" href="#">&#9776;</a>
     </li>
-    <!--<li class="nav-item px-1">
-      <a class="nav-link" href="#">Dashboard</a>
-    </li>
-    <li class="nav-item px-1">
-      <a class="nav-link" href="#">Users</a>
-    </li>
-    <li class="nav-item px-1">
-      <a class="nav-link" href="#">Settings</a>
-    </li>-->
-	  <li>
-	  	
-	  	<form action="#" method="get" class="topsearch-form pull-left">
+    <li class="search">
+      
+      <form action="#" method="get" class="topsearch-form pull-left">
         <div class="input-group">
-          <input name="q" class="form-control" placeholder="Search..." type="text">
+          <input name="q" class="form-control" placeholder="Search here" type="text">
           <span class="input-group-btn">
           <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i> </button>
           </span> </div>
       </form>
       
-	  </li>
+    </li>
   </ul>
   <ul class="nav navbar-nav ml-auto">
    
-	 <li class="nav-item dropdown" dropdown (onToggle)="toggled($event)">
+   <li class="nav-item dropdown" dropdown (onToggle)="toggled($event)">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
           All Market
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="JavaScript:Void(0);">Action</a>
+          <a class="dropdown-item" href="JavaScript:Void(0);">Another action</a>
+          <a class="dropdown-item" href="JavaScript:Void(0);">Something else here</a>
         </div>
       </li>
    
@@ -44,196 +35,48 @@
    
    
     <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fa fa-bell"></i>
+      <a class="nav-link" href="JavaScript:Void(0);"><i class="fa fa-bell"></i>
       <span class="badge badge-pill badge-danger"><!-- 5 --></span></a>
     </li>
    
     <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fa fa-envelope"></i>
-		  <span class="badge badge-pill badge-danger"><!-- 11 --></span>
+      <a class="nav-link" href="JavaScript:Void(0);"><i class="fa fa-envelope"></i>
+      <span class="badge badge-pill badge-danger"><!-- 11 --></span>
        </a>
     </li>
     <li class="nav-item dropdown removedropdwn" dropdown (onToggle)="toggled($event)">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
           <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-		  <i class="fa fa-ellipsis-v"></i> 
+      <i class="fa fa-ellipsis-v"></i> 
       </a>
       <div class="dropdown-menu dropdown-menu-right">
-
-        <!-- <div class="dropdown-header text-center"><strong>Account</strong></div>
-        <a class="dropdown-item" href="#">
-        <i class="fa fa-envelope-o"></i> Messages
-        <span class="badge badge-success">42</span>
-        </a>
-        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a> -->
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
+        <a class="dropdown-item" href="JavaScript:Void(0);"><i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item" href="JavaScript:Void(0);"><i class="fa fa-wrench"></i> Setting</a>
         <div class="divider"></div>
         <a class="dropdown-item" (click)="logout()" href="#"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
-   <!-- <li class="nav-item hidden-md-down">
-      <a class="nav-link navbar-toggler aside-menu-toggler" href="#">&#9776;</a>
-    </li>-->
   </ul>
 </header>
 
 <div class="app-body">
   <div class="sidebar">
     <nav class="sidebar-nav">
-      <ul class="nav">
-        <li class="nav-item">
-			<a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-dashboard"></i><span> Dashboard</span></a>
-        </li>
-        
-       
-        <li class="nav-item nav-dropdown" routerLinkActive="open">
-			<a class="nav-link nav-dropdown-toggle" href="#" ><i class="icon-Shape-13"></i><span>Crop</span></a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-				<a class="nav-link" routerLinkActive="active" [routerLink]="['/crop/list']"><i class="fa fa-th-list"></i><small> Crop Listing</small></a>
-            </li>
-            <li class="nav-item">
-				<a class="nav-link" routerLinkActive="active" [routerLink]="['/crop/add']"><i class="fa fa-plus"></i> <small>Add Crop</small></a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item nav-dropdown" routerLinkActive="open">
-      <a class="nav-link nav-dropdown-toggle" href="#" ><i class="icon-Shape-18"></i><span>Inputs</span></a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/input/list']"><i class="fa fa-th-list"></i><span> Input Listing</span></a>
-            </li>
-            <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/input/add']"><i class="fa fa-plus"></i> <span>Add input</span></a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item nav-dropdown" routerLinkActive="open">
-      <a class="nav-link nav-dropdown-toggle" href="#" ><i class="icon-Shape-19"></i><span>Equipment</span></a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/equipment/list']"><i class="fa fa-th-list"></i><span> Equipment Listing</span></a>
-            </li>
-            <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/equipment/add']"><i class="fa fa-plus"></i> <span>Add Equipment</span></a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item nav-dropdown" routerLinkActive="open">
-      <a class="nav-link nav-dropdown-toggle" href="#" ><i class="icon-Shape-21"></i><span>Lands</span></a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/land/list']"><i class="fa fa-th-list"></i><span> Lands Listing</span></a>
-            </li>
-            <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/land/add']"><i class="fa fa-plus"></i> <span>Add Lands</span></a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item nav-dropdown" routerLinkActive="open">
-      <a class="nav-link nav-dropdown-toggle" href="#" ><i class="fa fa-user"></i><span>Users</span></a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/list']"><i class="fa fa-th-list"></i><span> User Listing</span></a>
-            </li>
-            <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/add']"><i class="fa fa-plus"></i> <span>Add User</span></a>
-            </li>
-          </ul>
-        </li>
-
-      <li class="nav-item nav-dropdown" routerLinkActive="open">
-        <a class="nav-link nav-dropdown-toggle" href="#" ><i class="fa fa-user"></i><span>Category</span></a>
-        <ul class="nav-dropdown-items">
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/category/list']"><i class="fa fa-th-list"></i><span> Category</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/category/add']"><i class="fa fa-plus"></i> <span>Add Category</span></a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item nav-dropdown" routerLinkActive="open">
-        <a class="nav-link nav-dropdown-toggle" href="#" ><i class="fa fa-user"></i><span>Manufacturer</span></a>
-        <ul class="nav-dropdown-items">
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/manufacturer/list']"><i class="fa fa-th-list"></i><span> Manufacturer</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/manufacturer/add']"><i class="fa fa-plus"></i> <span>Add Manufacturer</span></a>
-          </li>
-        </ul>
-      </li>
-
-       <!--  <li class="nav-item nav-dropdown" routerLinkActive="open">
-          <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> Components</a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/buttons']"><i class="icon-puzzle"></i> Buttons</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/social-buttons']"><i class="icon-puzzle"></i> Social Buttons</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/cards']"><i class="icon-puzzle"></i> Cards</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/forms']"><i class="icon-puzzle"></i> Forms</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/modals']"><i class="icon-puzzle"></i> Modals</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/switches']"><i class="icon-puzzle"></i> Switches</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/tables']"><i class="icon-puzzle"></i> Tables</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/tabs']"><i class="icon-puzzle"></i> Tabs</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item nav-dropdown" routerLinkActive="open">
-          <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Icons</a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/icons/font-awesome']"><i class="icon-star"></i> Font Awesome</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/icons/simple-line-icons']"><i class="icon-star"></i> Simple Line Icons</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/widgets']"><i class="icon-calculator"></i> Widgets <span class="badge badge-info">NEW</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/charts']"><i class="icon-pie-chart"></i> Charts</a>
-        </li>
-        <li class="divider"></li>
-        <li class="nav-title">
-          Extras
-        </li>
-        <li class="nav-item nav-dropdown">
-          <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Pages</a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/login']"><i class="icon-star"></i> Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/register']"><i class="icon-star"></i> Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/404']"><i class="icon-star"></i> Error 404</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/500']"><i class="icon-star"></i> Error 500</a>
-            </li>
-          </ul>
-        </li> -->
-        
+      <ul class="nav panel-body">
+        <li class="nav-item"> <a class="nav-link" title="Dashboard" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-dashboard"></i><span> Dashboard</span></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Logistic Partners"> <i class="icon-logistic-partner"></i> <span>Logistic Partners</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Channel Partners"> <i class="icon-channel-partner"></i> <span>Channel Partners</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Orders"> <i class="icon-order"></i> <span>Orders</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Category Admin"> <i class="fa fa-list-alt"></i> <span>Category Admin</span></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Manufacturer Admin"> <i class="fa fa-cogs"></i> <span>Manufacturer Admin</span></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Settings"> <i class="icon-settings"></i> <span>Settings</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Wishlist"> <i class="fa fa-heart-o"></i> <span>Wishlist</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="SMS"> <i class="icon-sms"></i> <span>SMS</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Email"> <i class="fa fa-envelope-o"></i> <span>Email</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Cart"> <i class="icon-cart"></i> <span>Cart</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Admin Roles"> <i class="icon-user"></i> <span>Admin Roles</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Blog"> <i class="icon-post"></i> <span>Blog</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" href="javascript:void(0)" title="Reports"> <i class="icon-Shape-1194"></i> <span>Reports</span></a> </li>
       </ul>
     </nav>
   </div>
@@ -266,7 +109,7 @@
                         <div class="icon">                           
                             <i class="icon-Shape-13"></i>
                         </div>
-                        <div class="inner">
+                        <div class="inner" title="Crops">
                           <p>Crops</p>
                         </div>
                     </div>
@@ -275,7 +118,7 @@
                 <div class="col-lg-2 col-6"> 
                     <!-- small box -->
                     <div class="small-box bg-aqua" [routerLink]="['/input/list']">
-                        <div class="inner">
+                        <div class="inner" title="Inputs">
                             <p>Inputs</p>
                         </div>
                         <div class="icon">
@@ -287,7 +130,7 @@
                 <div class="col-lg-2 col-6"> 
                     <!-- small box -->
                     <div class="small-box bg-red" [routerLink]="['/equipment/list']">
-                        <div class="inner">
+                        <div class="inner" title="Equipments">
                             <p>Equipments</p>
                         </div>
                         <div class="icon">
@@ -299,7 +142,7 @@
                 <div class="col-lg-2 col-6"> 
                     <!-- small box -->
                     <div class="small-box bg-yellow" [routerLink]="['/land/list']">
-                        <div class="inner">
+                        <div class="inner" title="Lands">
                           <p>Lands</p>
                         </div>
                         <div class="icon">
@@ -313,7 +156,7 @@
                 <div class="col-lg-2 col-6"> 
                     <!-- small box -->
                     <div class="small-box bg-purple">
-                        <div class="inner">
+                        <div class="inner" title="Services">
                           <p>Services</p>
                         </div>
                         <div class="icon">
@@ -326,7 +169,7 @@
                 <!-- col -->
                 <div class="col-lg-2 col-6">
                     <div class="small-box bg-teal" [routerLink]="['/user/list']">
-                        <div class="inner">
+                        <div class="inner" title="Users">
                             <p>Users</p>
                         </div>
                         <div class="icon">
@@ -598,7 +441,5 @@
   </aside>
 </div>
 
-<footer class="app-footer">
-  <a href="http://www.smartdatainc.com">eFarm</a> &copy; 2017 smartData.
-  <span class="float-right">Powered by <a href="http://www.smartdatainc.com">smartData</a></span>
-</footer>
+<!-- <footer class="app-footer">
+</footer> -->

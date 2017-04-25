@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 // import {PaginationInstance} from 'ng2-pagination';
 import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
-
-
-import { SweetAlertService } from 'ng2-sweetalert2';
 
 import { EquipmentService } from '../services/equipment.service';
 
@@ -20,26 +17,35 @@ import { EquipmentService } from '../services/equipment.service';
 export class ListEquipmentComponent implements OnInit {
 
     public data;
+    public totalRecords;
     public filterQuery = "";
     public rowsOnPage  = 10;
-    public sortBy      = "name";
-    public sortOrder   = "asc";
+    public sortBy      = "createdAt";
+    public sortOrder   = "desc";
 
 
     public response:any;
     public isLoading:boolean = true;
 
    
-    public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _equipmentService: EquipmentService) { 
+    public constructor( private activatedRouter: ActivatedRoute, private _router: Router, private _equipmentService: EquipmentService) { 
         
     }
 
     ngOnInit(): void {
+        
+        this._router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
 
         this._equipmentService.getAllEquipments().subscribe(allEquipments => {
-            this.data = allEquipments;            
-            this.isLoading = false;
-            console.log(allEquipments);
+            this.data         = allEquipments;
+            this.totalRecords = this.data.length;
+            this.isLoading    = false;
+            // console.log(allEquipments);
             console.log("allEquipments loaded");
         });             
     }
@@ -59,22 +65,35 @@ export class ListEquipmentComponent implements OnInit {
 
     sendUpdateEquipment( equipmentID ) {     
         console.log(equipmentID);   
-        let route = '/equipment/update/'+equipmentID;
+        let route = '/equipment/edit/'+equipmentID;
         this._router.navigate([route]);       
     }
 
      
     removeEquipment( equipmentID ) {
-        if(confirm("Are you sure to delete Equipment")) {
-            console.log("Implement delete functionality here");
+        if(confirm("Are you sure to delete equipment?")) {
             this.isLoading = true;
             this._equipmentService.deleteEquipment(equipmentID).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
 
-                /* reload list */
-                this._router.navigate(['/equipment/list/']);      
+                // this.data = [];
+                this.removeByAttr(this.data, 'id', equipmentID);   
             });  
         }
+    }
+
+    removeByAttr(arr, attr, value){
+        let i = arr.length;
+        while(i--){
+           if( arr[i] 
+               && arr[i].hasOwnProperty(attr) 
+               && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+               arr.splice(i,1);
+
+           }
+        }
+        return arr;
     } 
 }

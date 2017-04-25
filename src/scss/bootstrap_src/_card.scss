@@ -61,10 +61,17 @@
 //
 
 .card-header {
-  padding: $card-spacer-y $card-spacer-x;
-  margin-bottom: 0; // Removes the default margin-bottom of <hN>
-  background-color: $card-cap-bg;
-  border-bottom: $card-border-width solid $card-border-color;
+  
+	
+	background-color: #eceff1;
+    border-bottom: medium none;
+    color: #5e5e5e;
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 0;
+    padding: 1.15rem 1.25rem 0;
+    text-transform: uppercase;
+	
 
   &:first-child {
     @include border-radius($card-border-radius-inner $card-border-radius-inner 0 0);
@@ -73,7 +80,7 @@
 
 .card-footer {
   padding: $card-spacer-y $card-spacer-x;
-  background-color: $card-cap-bg;
+  background-color: transparent;
   border-top: $card-border-width solid $card-border-color;
   margin-top: 20px;
 

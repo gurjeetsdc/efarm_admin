@@ -4,18 +4,33 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active"><a href="javascript:void(0)">Equipment Management</a></li>      
+                    <li><a href="javascript:void(0)">Equipments</a></li>      
+                    <li class="active"><a href="javascript:void(0)">View</a></li>      
                 </ol>
             </div>
         </div>
     </div>
 
-    <div class="card">
+    <!-- loading section -->
+    <div *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+
+    <div class="card" *ngIf="!isLoading">
         <div class="card-header">
-            <strong>View Equipment</strong>
-            <button type="button" class="btn btn-success pull-right" (click)="updateEquipment(equipment.id)">Edit Equipment</button>              
+            <div class="row">
+                <div class="col-3">
+                   <strong>View Equipment</strong>           
+                </div>
+                <div class="col-9 text-right">
+                    <button type="button" class="btn btn-success" (click)="editEquipment(equipment.id)">Edit Equipment</button> 
+                    &nbsp;    
+                    <button type="button" class="btn btn-secondary pull-right" [routerLink]="['/equipment/list']">Back</button>                           
+                </div>
+            </div> <!-- .row -->
         </div>
-        <div class="card-block">
+        <div class="card-block viewmode">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -26,7 +41,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <p>{{equipment.category}}</p>                            
+                        <p>{{equipment.category?.name}}</p>                            
                     </div>
                 </div>
             </div>
@@ -93,7 +108,13 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="termsConditions">Terms & Conditions</label>
-                        <p>{{equipment.termsConditiop}}</p>
+                        <p>{{equipment.termsConditions}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="quantity">Qty</label>
+                        <p>{{equipment.quantity}}</p>
                     </div>
                 </div>
             </div>

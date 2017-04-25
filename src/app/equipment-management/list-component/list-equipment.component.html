@@ -5,52 +5,130 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active"><a href="javascript:void(0)">Equipment Management</a></li>      
+                    <li><a href="javascript:void(0)">Equipments</a></li>
+                    <li class="active"><a>List</a></li>
                 </ol>
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Equipments
-                    <button type="button" class="btn btn-success pull-right" [routerLink]="['/equipment/add']">Add Equipment</button>
-                </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
+                            <div class="input-group">
+                                <input class="form-control" name="q" placeholder="Search" type="text">
+                                <span class="input-group-btn">
+                                <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                </span>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="col-9 text-right">
+                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/equipment/add']">Add Equipment</button>
+                            <div class="icns">
+                                <a><img src="assets/img/pdf.png" alt="pdf"></a>
+                                <a><img src="assets/img/xls.png" alt="pdf"></a>
+                            </div>
+                        </div>
+                    </div> <!-- .row -->
+                </div><!-- .card-header -->
                 
                 <div class="card-block">                                        
                     <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                         <thead>
                             <tr>
-                                <th width="25%"><mfDefaultSorter by="name">Name</mfDefaultSorter></th>
-                                <th width="50%"><mfDefaultSorter by="description">Description</mfDefaultSorter></th>                            
-                                <th width="25%">Actions</th>
+
+                                <th width="25%">
+                                    <mfDefaultSorter by="name">Name 
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="20%">Supplier</th>                                
+                                <th width="10%">
+                                    <mfDefaultSorter by="rentSell">Type
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="10%">
+                                    <mfDefaultSorter by="modelyear">Model Year 
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="10%">
+                                     <mfDefaultSorter by="quantity">Qty
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="10%">
+                                    <mfDefaultSorter by="rate">price
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
                             <tr *ngIf="isLoading">
-                                <td colspan="3">
+                                <td colspan="8">
                                     <div class="is-loading"><i class="page-loader"></i></div>
                                 </td>
                             </tr>
                             <tr *ngFor="let equipment of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
-                                <td>{{equipment.description}}</td>
+                                <td>{{equipment.user_id?.username}}</td>                                
+                                <td>{{equipment.rentSell}}</td>
+                                <td>{{equipment.modelyear}}</td>
+                                <td>{{equipment.quantity}}</td>
+                                <td>{{equipment.rate}}</td>
                                 <td>                                    
-                                    <button (click)="sendUpdateEquipment(equipment.id)" class="btn btn-info" title="Edit" style="padding:1px 6px"><i class="fa fa-pencil"></i></button>
-                                    <button  (click)="removeEquipment(equipment.id)" class="btn btn-danger" title="Delete" style="padding: 1px 6px"><i class="fa fa-trash"></i></button>                                    
+                                    <button (click)="sendUpdateEquipment(equipment.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                    <button  (click)="removeEquipment(equipment.id)" class="btn btn-danger orange" title="Delete" style="padding:1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="3">
-                                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                                <!-- no records found -->
+                                <td colspan="7"  *ngIf="totalRecords == 0">
+                                    <div class="text-center">
+                                        <p class="text-center">No record to display</p>                                                               
+                                    </div>  
+                                </td>
+
+                                <td colspan="7">
+                                    <div class="pagination-section" *ngIf="totalRecords > 0">
+                                        <div class="row-on-page">
+                                            <label class="label-control">Show</label>
+                                            &nbsp;
+                                            <select class="input-sm" [(ngModel)]="rowsOnPage">
+                                                <option [ngValue]="5">5</option>
+                                                <option [ngValue]="10">10</option>
+                                                <option [ngValue]="15">25</option>
+                                                <option [ngValue]="15">50</option>
+                                                <option [ngValue]="15">100</option>
+                                            </select>
+                                            &nbsp;
+                                           <label class="label-control">entires</label>
+                                        </div>
+                                        <div class="text-right">                                    
+                                            <mfBootstrapPaginator></mfBootstrapPaginator>
+                                        </div>
+                                        <div style="clear: both;"></div>
+                                    </div>  
                                 </td>    
                             </tr>                            
                         </tfoot>
-                    </table>                             
+                    </table>                                                
                 </div>
             </div>
         </div>

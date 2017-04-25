@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
-import { ListUserComponent } from './list-user.component';
-import { AddUserComponent } from './add-user.component';
-import { ViewUserComponent } from './view-user.component';
+import { ListUserComponent } from './list-component/list-user.component';
+import { AddUpdateUserComponent } from './addupdate-component/addupdate-user.component';
+import { ViewUserComponent } from './view-component/view-user.component';
 import { HttpModule } from '@angular/http';
-import { UserService } from './user.service';
+import { UserService } from './services/user.service';
 
 const routes: Routes = [
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'add',
-        component: AddUserComponent,
+        component: AddUpdateUserComponent,
         data: {
           title: 'Add'
         }
@@ -35,6 +35,13 @@ const routes: Routes = [
         component: ViewUserComponent,
         data: {
           title: 'List'
+        }
+      },
+      {
+        path: 'edit/:id',
+        component: AddUpdateUserComponent,
+        data: {
+          title: 'Edit'
         }
       }
     ]
