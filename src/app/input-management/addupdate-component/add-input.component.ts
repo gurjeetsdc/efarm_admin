@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { InputService } from './input.service';
+import { InputService } from '../services/input.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -7,24 +7,32 @@ import { Router, ActivatedRoute } from '@angular/router';
   providers: [InputService]
 })
 export class AddInputComponent {
-    private input     = {};
+    private input     = {
+        manufacturer_id:'',
+        tearm_and_conditions:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
+    };
     
     private Id: any;
     private response:any;
-    
     private showMessage:boolean = false;
-
     private action:string = 'Add';
+    private manuf = [];
 
     constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _inputService: InputService) {
         this.Id = _activateRouter.snapshot.params['id'];        
         if( this.Id ) {
-            this._inputService.getInput(this.Id).subscribe( res => { this.input = res; this.action = 'Update' }, err => {});
+            this._inputService.getInput(this.Id).subscribe( res => {
+
+                 this.input = res;
+                 this.input.manufacturer_id = res.manufacturer.id;
+                 this.action = 'Update'
+            }, err => {});
         }        
+
+        this._inputService.getManuf().subscribe( res => { this.manuf = res; }, err => {});
     }
 
     submitInput() {
-        console.log('submitting Input...');
 
         if( this.action == 'Update' ) {
             this.updateInput();            
@@ -34,12 +42,10 @@ export class AddInputComponent {
     }
 
     addInput() {
-        console.log('Posting Input...');
-
+        this.input["manufacturer"] = this.input["manufacturer_id"];
         this._inputService.inputadd(this.input).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
-            this.input   = {};
             this._router.navigate(['/input/list', {data: "success"} ]);
             console.log(this.response)
         });      
@@ -48,12 +54,10 @@ export class AddInputComponent {
 
 
     updateInput() {
-        console.log('Udpating Input...');
-        
+        this.input["manufacturer"] = this.input["manufacturer_id"];
         this._inputService.updateInput(this.input).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
-            this.input   = {};
             this._router.navigate(['/input/list', {data: "success"} ]);
         }); 
     }

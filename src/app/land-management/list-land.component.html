@@ -15,10 +15,10 @@
         <div class="col-lg-12">
             <div class="card">
 
-                <div class="card-header">
+                 <div class="card-header">
                     <div class="row">
-                        <div class="col-3">
-                            <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
+                        <div class="col-sm-3 col-12">
+                            <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                             <div class="input-group">
                                 <input class="form-control" name="q" placeholder="Search" type="text">
                                 <span class="input-group-btn">
@@ -27,8 +27,8 @@
                             </div>
                             </form>
                         </div>
-                        <div class="col-9 text-right">
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/land/add']">Add Input</button>
+                        <div class="col-sm-9 col-12 text-right linehght">
+                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/land/add']">Add Land</button>
                             <div class="icns">
                                 <a><img src="assets/img/pdf.png" alt="pdf"></a>
                                 <a><img src="assets/img/xls.png" alt="pdf"></a>
@@ -38,15 +38,27 @@
                 </div><!-- .card-header -->
 
                
-                <div class="card-block">                                        
+                <div class="card-block">
+                <div class="table-responsive">
                     <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                         <thead>
                             <tr>
-                                <th width="30%"><mfDefaultSorter by="name">Name</mfDefaultSorter></th>
-                                <th width="20%"><mfDefaultSorter by="location">location</mfDefaultSorter></th>
-                                <th width="20%"><mfDefaultSorter by="area">area</mfDefaultSorter></th>
-                                <th width="10%"><mfDefaultSorter by="expected_price">Expected price</mfDefaultSorter></th>
+                                <th width="30%"><mfDefaultSorter by="name">Name
+                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                </mfDefaultSorter></th>
+                                <th width="20%"><mfDefaultSorter by="location">location
+                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                </mfDefaultSorter></th>
+                                <th width="20%"><mfDefaultSorter by="area">area
+                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                </mfDefaultSorter></th>
+                                <th width="10%"><mfDefaultSorter by="expected_price">Expected price<i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                </mfDefaultSorter></th>
                                 <th width="20%">Actions</th>
                             </tr>
                         </thead>                        
@@ -57,14 +69,14 @@
                                 </td>
                             </tr>
                             <tr *ngFor="let land of mf.data">                        
-                                <td><a href="javascript:void(0);" (click)="viewLand(land.id)">{{input.name}}</a></td>
-                                <td>{{input.location}}</td>
-                                <td>{{input.area}}</td>
-                                <td>{{input.expected_price}}</td>
+                                <td><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.name}}</a></td>
+                                <td>{{land.location}}</td>
+                                <td>{{land.area}}</td>
+                                <td>{{land.expected_price}}</td>
 
                                 <td>                                    
-                                    <button (click)="sendUpdateinput(land.id)" class="btn btn-info" title="Edit" style="padding:1px 6px"><i class="fa fa-pencil"></i></button>
-                                    <button  (click)="removeInput(land.id)" class="btn btn-danger" title="Delete" style="padding: 1px 6px"><i class="fa fa-trash"></i></button>                                    
+                                    <button (click)="sendUpdateLand(land.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                    <button  (click)="removeLand(land.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
                             </tr>
                         </tbody>
@@ -75,15 +87,19 @@
                                         <div class="row-on-page">
                                             <label class="label-control">Show</label>
                                             &nbsp;
-                                            <select class="input-sm" [(ngModel)]="rowsOnPage">
+                                            <select class="land-sm" [(ngModel)]="rowsOnPage">
                                                 <option [ngValue]="5">5</option>
                                                 <option [ngValue]="10">10</option>
                                                 <option [ngValue]="15">25</option>
                                                 <option [ngValue]="15">50</option>
                                                 <option [ngValue]="15">100</option>
                                             </select>
-                                            &nbsp;
-                                           <label class="label-control">entires</label>
+                                             &nbsp;
+                                           <label class="label-control">entries</label>
+
+                                           &nbsp;
+                                           &nbsp;
+                                           <span>Showing {{rowsOnPage < totalRecords? rowsOnPage:totalRecords }} of {{totalRecords}} entries</span>
                                         </div>
                                         <div class="text-right">                                    
                                             <mfBootstrapPaginator></mfBootstrapPaginator>
@@ -93,7 +109,8 @@
                                 </td>    
                             </tr>                            
                         </tfoot>
-                    </table>                             
+                    </table>  
+                    </div>                           
                 </div>
             </div>
         </div>

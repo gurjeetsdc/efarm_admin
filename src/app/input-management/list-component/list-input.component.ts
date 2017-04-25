@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 //import {PaginationInstance} from 'ng2-pagination';
-import { InputService } from './input.service';
+import { InputService } from '../services/input.service';
 import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
@@ -19,14 +19,15 @@ export class ListInputComponent implements OnInit {
   test: any = [];
 
     public data;
-    public filterQuery = "";
-    public rowsOnPage  = 10;
+
+    public totalRecords        = 0;
+    public filterQuery         = "";
+    public rowsOnPage          = 10;
     public sortBy      = "name";
     public sortOrder   = "asc";
     public response:any;
 
     private isLoading:boolean = true;
-
     public documents = [];
     public selectedDocument = [];
     public err_message = '';
@@ -46,8 +47,10 @@ export class ListInputComponent implements OnInit {
         this._inputService.inputlist().subscribe(resInputs => {
             this.data = resInputs;            
             this.isLoading = false;
-            console.log(resInputs);
-            console.log("resInputs loaded");
+            this.totalRecords = this.data.length;
+            this.isLoading = false;
+            //console.log(resInputs);
+            //console.log("resInputs loaded");
         });             
     }
 
@@ -60,14 +63,14 @@ export class ListInputComponent implements OnInit {
     }
 
     viewInput (inputID) {
-      console.log(inputID);
+      //console.log(inputID);
       
        let route = '/input/list/'+inputID;
        this._router.navigate([route]);       
     }
 
     sendUpdateinput( inputID ) {     
-        console.log(inputID);
+        //console.log(inputID);
       
        let route = '/input/update/'+inputID;
         this._router.navigate([route]);       
@@ -76,7 +79,7 @@ export class ListInputComponent implements OnInit {
      
     removeInput( inputID ) {
 
-      console.log(inputID);
+      //console.log(inputID);
       
         if(confirm("Do you want to delete?")) {
             console.log("Implement delete functionality here");
