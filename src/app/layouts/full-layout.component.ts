@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {SlimScroll} from 'angular2-slimscroll';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './full-layout.component.html'
+/*  template: '<div class="my-div" slimscroll background="#333" opacity="0.6" position="right" width="7px"></div>'
+ ,
+  directives: [SlimScroll]
+})
+ 
+class App {
+   
+}*/
 })
 export class FullLayoutComponent implements OnInit {
 
