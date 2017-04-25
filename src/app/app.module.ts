@@ -4,7 +4,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { DropdownModule } from 'ng2-bootstrap/dropdown';
+// import { DropdownModule } from 'ng2-bootstrap/dropdown';
 import { TabsModule } from 'ng2-bootstrap/tabs';
 import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
 import { ActiveRouteGuard } from './activate-route-guard';
@@ -24,12 +24,13 @@ import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    DropdownModule.forRoot(),
+    // DropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
     PaginationModule.forRoot(),
@@ -44,7 +45,8 @@ import { RegisterComponent } from './register/register.component';
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
     LoginComponent,
-    RegisterComponent,        
+    RegisterComponent
+       
   ],
   providers: [
     {

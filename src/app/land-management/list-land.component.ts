@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 // import { cropTable } from './crop-seed'
 import {PaginationInstance} from 'ng2-pagination';
 import { LandService } from './land.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
+import {Http} from "@angular/http";
+import {DataTableModule} from "angular2-datatable";
+
 @Component({
   selector: 'app-land-management',
   templateUrl: './list-land.component.html',
-  styleUrls: ['./list-land.component.scss'],
-  providers: [LandService]
+  styleUrls: ['./list-land.component.scss']
 })
 export class ListLandComponent implements OnInit {
 
    test: any = [];
-
+   private isLoading:boolean = true;
   private TableData = [{
     name:"Urea",
     distributor:"Harmind Singh",
@@ -24,6 +26,7 @@ export class ListLandComponent implements OnInit {
   }];
   public documents = [];
   public selectedDocument = [];
+  public err_message = '';
 
   public rows:Array<any> = [];
   public columns:Array<any> = [
@@ -59,14 +62,14 @@ export class ListLandComponent implements OnInit {
                        .subscribe(
                           res => {
                              this.data = res;
-                             /*if(this.data.length == 0){
-                               this.isShowNORcd = true;
-                             }*/
+                             this.isLoading = false;                             
                              console.log("response---data---------",res)
                              this.onChangeTable(this.config);
                            },
                             err => {
                               console.log("error--------------",err);
+                              this.isLoading = false;
+                              this.err_message = "No record to display";
                           });
   }
 
@@ -163,6 +166,7 @@ export class ListLandComponent implements OnInit {
   }
 
   public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
+    this.err_message ='';
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering);
     }

@@ -1,0 +1,251 @@
+<div>
+  <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="content-header">
+                <ol class="breadcrumb">
+                    <li><a href="JavaScript:Void(0);">Dashboard</a></li>
+                    <li><a href="JavaScript:Void(0);">Crops</a></li>
+                    <li class="active"><a href="JavaScript:Void(0);">{{cropID ? 'Edit' : 'Add'}} Crop</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+     <!-- loading section -->
+    <div *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+    <div class="card" *ngIf="!isLoading" >
+        <div class="card-header">
+            <strong>{{cropID ? 'Edit' : 'Add'}} Crop</strong>
+        </div>
+         <form role="form" (ngSubmit)="save()" #dailyExpenseForm="ngForm">
+        <div class="card-block">
+           
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Crop Name</label>
+                            <input autofocus type="text" id="nf-name" name="nf-name" class="form-control" placeholder="" [(ngModel)]="crop.name" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-password">Category</label>
+                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="crop.category" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Variety</label>
+                            <select id="select1" name="select1" class="form-control" [(ngModel)]="crop.variety" size="1">
+                                <option value="">Please select</option>
+                                <option value="Variety 1">Variety 1</option>
+                                <option value="Variety 2">Variety 2</option>
+                                <option value="Variety 3">Variety 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-price">Offer Price <i class="fa fa-rupee"></i></label>
+                            <input type="number" id="nf-price" name="nf-price" class="form-control" [(ngModel)]="crop.price" placeholder="" required="" min="1" max="9999999999999998">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-grade">Grade</label>
+                            
+						<form class="grade">
+							<div class="btn-group" data-toggle="">
+							<label class="btn btn-default">
+							<input name="grade" value="A+" type="radio" [(ngModel)]="crop.grade" >A+
+							</label>
+							<label class="btn btn-default">
+							<input name="grade" value="A" type="radio" [(ngModel)]="crop.grade">A
+							</label>
+							<label class="btn btn-default">
+							<input name="grade" value="B" class="active" type="radio" [(ngModel)]="crop.grade">B
+							</label>
+							<label class="btn btn-default">
+							<input name="grade" value="C" type="radio" [(ngModel)]="crop.grade">C
+							</label>
+							</div>
+						</form>
+                       
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-color">Color</label>
+                            <input type="text" id="nf-color" name="nf-color" class="form-control" [(ngModel)]="crop.color" placeholder="" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-size">Size/Weight</label>
+                            <input type="text" id="nf-size" name="nf-size" class="form-control" [(ngModel)]="crop.size" placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-other_speciality">Other Speciality</label>
+                            <input type="text" id="nf-other_speciality" name="nf-other_speciality" class="form-control" [(ngModel)]="crop.other_speciality" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-availibility">Availibility Peroid</label>
+                            <input type="text" id="nf-availibility" name="nf-availibility" class="form-control" [(ngModel)]="crop.availibility" placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-packaging">Packaging</label>
+                            <select id="select2" name="select2" class="form-control" size="1" [(ngModel)]="crop.packaging" required>
+                                <option value="">Please select</option>
+                                <option value="Pack 1">Pack 1</option>
+                                <option value="Pack 2">Pack 2</option>
+                                <option value="Pack 3">Pack 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-supply_ablity">Supply Ability</label>
+                            <input type="text" id="nf-supply_ablity" name="nf-supply_ablity" class="form-control" [(ngModel)]="crop.supply_ablity" placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-destination_shipping">Destination for Shipping*</label>
+                            <select id="select3" name="select3" class="form-control" size="1" [(ngModel)]="crop.destination_shipping" required>
+                                <option value="">Please select</option>
+                                <option value="Shipping 1">Shipping 1</option>
+                                <option value="Shipping 2">Shipping 2</option>
+                                <option value="Shipping 3">Shipping 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-pack_size">Pack Size</label>
+                            <input type="text" id="nf-pack_size" name="nf-pack_size" class="form-control" [(ngModel)]="crop.pack_size" placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-qty">Quantity Per Pack</label>				
+							<div class="input-group">
+                              <input type="number" id="nf-quantity_per_pack" name="quantity_per_pack" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="crop.quantity_per_pack" min="1" max="999999999999999" placeholder="" required>
+                              <div class="input-group-btn">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Kg
+                                </button>
+                                <!--<div class="dropdown-menu dropdown-menu-right">
+                                  <a class="dropdown-item" href="JavaScript:void(0)">Miles</a>
+                                </div>-->
+                              </div>
+                            </div>                       
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-label">Label/Making on Pack</label>
+                            <input type="text" id="nf-label" name="nf-label" class="form-control" [(ngModel)]="crop.label" placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-paymentTerms">Payment Terms</label>
+                           <form class="grade">
+							<div class="btn-group">
+							<label class="btn btn-default">
+							<input name="payment_mode" value="COD" type="radio" [(ngModel)]="crop.payment_method">COD
+							</label>
+							<label class="btn btn-default">
+							<input name="payment_mode" value="Cheque" type="radio" [(ngModel)]="crop.payment_method">Cheque
+							</label>
+							<label class="btn btn-default">
+							<input name="payment_mode" value="Net Banking" class="active" type="radio" [(ngModel)]="crop.payment_method">Net Banking
+							</label>
+							
+							</div>
+						</form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-moq">MOQ</label>
+                            <input type="text" id="nf-moq" name="nf-moq" class="form-control" [(ngModel)]="crop.moq" placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-average_lead_time">Average Lead Time</label>
+                            
+                            <div class="input-group">
+                        <input type="text" id="average_lead_time" name="average_lead_time" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="crop.average_lead_time" required>
+                        <span class="input-group-addon width">Days</span>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-additional_info">Additional Information</label>
+                            <textarea type="text" id="nf-additional_info" name="nf-additional_info" class="form-control" [(ngModel)]="crop.additional_info" placeholder="" rows="4" required ></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-terms">Terms & Conditions</label>
+                            <textarea type="text" id="nf-terms" name="nf-terms" class="form-control" [(ngModel)]="crop.terms" placeholder="" rows="4" [disabled]="true"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-image">Image</label>
+                             <input type="file" name="file-7[]" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple />
+                    <label for="file-7"><span></span> <strong><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> Upload image</strong></label>
+                    
+
+
+                         
+
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+        <div class="card-footer">
+                    <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/crop/list']"> Cancel</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr">Save</button>
+                </div>
+          </form>
+    </div>
+</div>

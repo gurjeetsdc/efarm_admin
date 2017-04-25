@@ -64,6 +64,14 @@ export const routes: Routes = [
       {
         path: 'land',
         loadChildren: './land-management/land-management.module#LandManagementModule'
+      },
+      {
+        path: 'category',
+        loadChildren: './category/category.module#CategoryModule'
+      },
+      {
+        path: 'manufacturer',
+        loadChildren: './manufacturer/manufacturer.module#ManufacturerModule'
       }
     ]
   },
