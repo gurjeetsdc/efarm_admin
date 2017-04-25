@@ -4,18 +4,34 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                      <li><a [routerLink]="['/dashboard']"  >Dashboard</a></li>
-                    <li><a [routerLink]="['/input/list']" >Input</a></li>
+                    <li><a [routerLink]="['/input/list']" >Inputs</a></li>
                     <li class="active"><a href="javascript:void(0)">View</a></li>
                 </ol>
             </div>
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            <strong>View input</strong>
-            <button type="button" class="btn btn-success pull-right" (click)="updateInput(input.id)">Edit Input</button>              
+<!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+
+    <div class="card" *ngIf="!isLoading">
+    <div class="card-header">
+            <div class="row">
+                <div class="col-sm-3 col-12">
+                   <strong>View Input</strong>           
+                </div>
+                <div class="col-sm-9 col-12 text-right linehght">
+                   <button type="button" class="btn btn-secondary" [routerLink]="['/input/list']">Back</button>  
+
+                    <button type="button" class="btn btn-success pull-right" (click)="updateInput(input.id)">Edit Input</button>              
+                                             &nbsp;
+                </div>
+            </div>
         </div>
+
         <div class="card-block">
             <div class="row">
                     <div class="col-sm-6">
@@ -27,7 +43,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label >Manufacturer</label>
-                            <p>{{input.manufacturer_id}}</p>
+                            <p>{{input.manufacturer?.name}}</p>
                         </div>
                     </div>
                     

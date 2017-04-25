@@ -1,42 +1,54 @@
-<div>
-
-      
-      <div class="row">
-      <div class="col-12 col-lg-12">
-      <div class="content-header">
-         <ol class="breadcrumb">
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Lands</a></li>
-          <li class="active"><a href="#">Add new</a></li>
-        </ol>
-      </div>
-          </div>
+<div class="land-wrapper">
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="content-header">
+                <ol class="breadcrumb">
+                      <li><a [routerLink]="['/dashboard']" >Dashboard</a></li>
+                    <li><a [routerLink]="['/land/list']" >Lands</a></li>
+                    <li class="active"><a href="JavaScript:Void(0);">{{Id ? 'Update' : 'Add'}} land</a></li>
+                </ol>
+            </div>
+        </div>
     </div>
-<form role="form" (ngSubmit)="addLand()" #dailyExpenseForm="ngForm">
     <div class="card">
         <div class="card-header">
-            <strong>Add Land</strong>
+            <strong>{{action}} Land</strong>
         </div>
-        <div class="card-block">
+                    <form role="form" (ngSubmit)="submitLand()" #addlandForm="ngForm">
 
+        <div class="card-block">
+                
+               <div *ngIf="showMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"  (click)="closeMessage()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Success</strong> Land Added Successfully.
+                </div>
+                
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-name">Owner Name</label>
-                            <input type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="land.name" required>
+                            <input autofocus=""  type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="land.name" required>
                         </div>
                     </div>
-                    <!-- <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-password">Category*</label>
-                            <select id="select" name="select" class="form-control" size="1" [(ngModel)]="land.category" required="">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select>
-                        </div>
-                    </div> -->
+                    <div class="col-sm-6">
+                       <div class="form-group radiobuttons_top44">
+                            <div class="form-group pull-left">
+                                <div class="radio_button">
+                                    <input type="radio"  name="rentSell" class="" id="nf-rentslell" value="rent"  [(ngModel)]="land.rentSell" checked required>
+                                    <label for="nf-rentslell">Rent</label>
+                                </div>
+                            </div>
+                           
+                            <div class="form-group pull-left">
+                                <div class="radio_button">                     
+                                    <input type="radio" name="rentSell" class="" id="rentSell" value="sell"  [(ngModel)]="land.rentSell" required>
+                                    <label for="rentSell">Sell</label>
+                                </div>
+                            </div>
+                        </div>                    
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
@@ -84,8 +96,8 @@
                   <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-termsConditions">Description</label>
-                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="land.description" placeholder="Enter Terms & Conditions" rows="4"></textarea>
+                            <label for="nf-description">Description</label>
+                            <textarea type="text" id="nf-description" name="nf-description" class="form-control" [(ngModel)]="land.description" placeholder="Enter Description" rows="4"></textarea>
                         </div>
                     </div>
                 
@@ -93,28 +105,19 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-termsConditions">Terms & Conditions</label>
-                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="land.term_condition" placeholder="Enter Terms & Conditions" rows="4"></textarea>
+                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="land.term_condition" placeholder="Enter Terms & Conditions" rows="4" [disabled]="true"></textarea>
                         </div>
                     </div>
                 </div>
                 
-                <!-- <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-image">Image</label>
-                            <input type="file" name="" class="form-control">
-                        </div>
-                    </div>
-                </div> -->
-
-               
-
+          
         </div>
-         <div class="card-footer">
-                    <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/land/list']"> Cancel</button>
-                    <button type="submit" class="pull-right btn btn-primary orangeclr">Save</button>
-                </div>
-    </div>
-</form>
 
-</div>
+        <div class="card-footer">
+                    <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/land/list']"> Cancel</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addlandForm.valid">{{Id ? 'Update' : 'Save'}}</button>
+                    
+                </div>
+                </form>  
+    </div> <!-- .card -->
+</div> <!-- .inputs-wrapper -->
