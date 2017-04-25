@@ -11,7 +11,7 @@
         </div>
     </div>
      <!-- loading section -->
-    <div *ngIf="isLoading">
+    <div class="aligncenter_loader" *ngIf="isLoading">
         <div class="is-loading"><i class="page-loader"></i></div>        
     </div>
     <!-- section ends  -->
@@ -239,7 +239,7 @@
 
         <div class="card-footer">
                     <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/crop/list']"> Cancel</button>
-                    <button type="submit" class="pull-right btn btn-primary orangeclr">Save</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr">{{cropID ? 'Update' : 'Save'}}</button>
                 </div>
           </form>
     </div>

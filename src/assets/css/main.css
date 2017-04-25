@@ -208,8 +208,14 @@ button, input, optgroup, select, textarea {
 }
 .is-loading {
 	position: relative;
+	margin: 0 auto;
 }
-@keyframes spin {
+.aligncenter_loader {
+	align-items: center;
+	display: flex;
+	min-height: 330px;
+}
+ @keyframes spin {
  0% {
 transform: rotate(0deg);
 }
@@ -1163,9 +1169,9 @@ header.navbar .navbar-nav.ml-auto {
 .box-footer .form-control {
 	height: 34px;
 }
-.form-control:focus {
-    border-color: #3c8dbc !important;
-    box-shadow: none;
+.mainarea .card-block .form-control:focus {
+	border-color: #3c8dbc !important;
+	box-shadow: none;
 }
 .form-control::-moz-placeholder, .form-control:-ms-input-placeholder, .form-control::-webkit-input-placeholder {
  color: #bbb;
@@ -4441,8 +4447,11 @@ table.text-center, table.text-center td, table.text-center th {
  font-family: 'Open Sans', sans-serif !important;
  color: #666;
 }
+.card-header .form-control:focus {
+	border-color: #c6c6c6 !important;
+}
 .mainarea .card-block .form-group .form-control {
-	color: #c6c6c6;
+	color: #666666;
 	font-family: "Roboto", sans-serif !important;
 	font-size: 18px;
 	font-weight: 300;
@@ -4458,6 +4467,14 @@ table.text-center, table.text-center td, table.text-center th {
 	-moz-appearance: none;
 	appearance: none;
 	background: url("../img/drop_down.png") no-repeat right 10px center;
+}
+.sidebar .nav .nav-item > .nav-link i {
+	bottom: 4px;
+	position: relative;
+}
+.sidebar-hidden .sidebar .nav .nav-item > .nav-link i {
+    bottom: 0px;
+    position: relative;
 }
 .grade label {
 	background: transparent;
@@ -5038,7 +5055,7 @@ ul.navbar-nav.width {
 	transition: width .1s ease-in-out;*/
 }
 .btn:focus, .btn.focus {
-    border-color: #5cb3fd ;
+	border-color: #5cb3fd;
 }
 .custome-check.loginpage {
 	padding-top: 3px;
@@ -5289,7 +5306,7 @@ i.addimage {
 	border: 1px solid #c2c2c2;
 }
 .mainarea .card-block .form-group select, .mainarea .card-block .form-group input {
-	color: #c6c6c6 !important;
+	color: #666666 !important;
 	font-family: "Roboto", sans-serif !important;
 	font-size: 18px !important;
 	font-weight: 300;
@@ -5316,6 +5333,7 @@ i.addimage {
 }
 .pagination-section > .row-on-page {
 	float: left;
+	padding-top: 6px;
 }
 
 /* media queries */
@@ -5726,6 +5744,12 @@ header.main-header.header_main div.navbar-custom-menu {
 }
 
 @media (max-width:420px) {
+button.orangeclr {
+	padding: 0.5rem;
+}
+button.whiteclr {
+	padding: 0.5rem;
+}
 .login-box {
 	-moz-box-align: center;
 	align-items: center;

@@ -11,12 +11,12 @@ import { Router, NavigationEnd } from '@angular/router';
 
 export class ListCropComponent implements OnInit {
 
-    public data;
+    public data                = [];
     public totalRecords        = 0;
     public filterQuery         = "";
     public rowsOnPage          = 10;
-    public sortBy              = "name";
-    public sortOrder           = "asc";
+    public sortBy              = "createdAt";
+    public sortOrder           = "desc";
     public err_message         = "";
     public isLoading:boolean   = true;
     public response:any;
@@ -37,6 +37,7 @@ export class ListCropComponent implements OnInit {
         this._cropService.croplisting().subscribe(res => {
             this.data = res["Data"];
             this.totalRecords = this.data.length;
+            if(this.data.length == 0) this.err_message = "No record to display";
             this.isLoading = false;
         },err => {
             this.isLoading = false;
