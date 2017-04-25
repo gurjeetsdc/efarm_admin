@@ -61,7 +61,12 @@
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="15%">Email</th>
-                                <th width="10%">Created On</th>
+                                <th width="10%">
+                                    <mfDefaultSorter by="createdAt">Created On 
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
