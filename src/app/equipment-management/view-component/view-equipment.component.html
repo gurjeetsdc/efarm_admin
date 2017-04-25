@@ -12,7 +12,7 @@
     </div>
 
     <!-- loading section -->
-    <div *ngIf="isLoading">
+    <div class="aligncenter_loader" *ngIf="isLoading">
         <div class="is-loading"><i class="page-loader"></i></div>        
     </div>
     <!-- section ends  -->
@@ -20,13 +20,15 @@
     <div class="card" *ngIf="!isLoading">
         <div class="card-header">
             <div class="row">
-                <div class="col-3">
+                <div class="col-sm-3 col-12">
                    <strong>View Equipment</strong>           
                 </div>
-                <div class="col-9 text-right">
-                    <button type="button" class="btn btn-success" (click)="editEquipment(equipment.id)">Edit Equipment</button> 
+                <div class="col-sm-9 col-12 text-right linehght">
+                   
+                   <button type="button" class="btn btn-secondary" [routerLink]="['/equipment/list']">Back</button>     
+                    <button type="button" class="btn btn-success pull-right" (click)="editEquipment(equipment.id)">Edit Equipment</button> 
                     &nbsp;    
-                    <button type="button" class="btn btn-secondary pull-right" [routerLink]="['/equipment/list']">Back</button>                           
+                                          
                 </div>
             </div> <!-- .row -->
         </div>
@@ -123,6 +125,12 @@
                     <div class="form-group">
                         <label for="image">Image</label>
                         <p>Not Available</p>
+                    </div>
+                </div>
+                 <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="image">User</label>
+                        <p>{{equipment.user?.username}}</p>                        
                     </div>
                 </div>
             </div>                           

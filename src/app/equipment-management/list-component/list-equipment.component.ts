@@ -74,9 +74,9 @@ export class ListEquipmentComponent implements OnInit {
         if(confirm("Are you sure to delete equipment?")) {
             this.isLoading = true;
             this._equipmentService.deleteEquipment(equipmentID).subscribe(res => {
-                this.response  = res;
-                this.isLoading = false;
-
+                this.response     = res;
+                this.isLoading    = false;
+                this.totalRecords = this.data.length;
                 // this.data = [];
                 this.removeByAttr(this.data, 'id', equipmentID);   
             });  

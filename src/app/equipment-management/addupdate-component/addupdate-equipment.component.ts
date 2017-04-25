@@ -9,12 +9,31 @@ import { EquipmentService } from '../services/equipment.service';
 })
 export class AddUpdateEquipmentComponent {
     
-    private equipment     = {};
+    private equipment   = {
+                            name: '',
+                            category_id: '',
+                            category: '',
+                            companyManufacturer: '',
+                            model: '',
+                            modelyear: '',
+                            enginepower: '',
+                            rentSell: 'rent',
+                            rate: '',
+                            usage: '',
+                            description: '',
+                            termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod',
+                            quantity: '',
+                            user:'',
+                            user_id:''
+                        };
+
+
     private allEquipments = [];
     private category      = [];
+    private users:any     = [];
+
     private equipmentID: any;
     private response:any;
-    private user:any;
     
     private showMessage:boolean = false;
     private isLoading:boolean   = true;
@@ -32,28 +51,9 @@ export class AddUpdateEquipmentComponent {
         }else{
             this.isLoading = false;
         }
-        
-       let equipmentDefaultvalues = {
-                                    name: '',
-                                    category: '',
-                                    companyManufacturer: '',
-                                    model: '',
-                                    modelyear: '',
-                                    enginepower: '',
-                                    rentSell: 'rent',
-                                    rate: '',
-                                    usage: '',
-                                    description: '',
-                                    termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod',
-                                    quantity: '',
-                                    user_id:'58f5e8e37329488e3095ba93'
-                                };
-        
-        this.equipment = equipmentDefaultvalues;
-        
 
         this._equipmentService.getAllCategories().subscribe( res => { this.category = res; console.log(this.category) }, err => {});
-        // this._equipmentService.getCurrentUser().subscribe( res => { this.equipment.user_id = res; }, err => {});
+        this._equipmentService.getUsers().subscribe( res => { this.users = res; }, err => {});
         
          
         /*create years array. */
@@ -73,13 +73,37 @@ export class AddUpdateEquipmentComponent {
         }
     }
 
+    clearEquipment() {
+        this.equipment   = {
+                            name: '',
+                            category_id: '',
+                            category: '',
+                            companyManufacturer: '',
+                            model: '',
+                            modelyear: '',
+                            enginepower: '',
+                            rentSell: 'rent',
+                            rate: '',
+                            usage: '',
+                            description: '',
+                            termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod',
+                            quantity: '',
+                            user:'',
+                            user_id:''
+                        };
+    }
+
     addEquipment() {
         console.log('Posting Equipment...');
+        this.equipment.category = this.equipment.category_id;
+        this.equipment.user     = this.equipment.user_id;
+
 
         this._equipmentService.postEquipment(this.equipment).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
-            this.equipment   = {};
+            // this.equipment   = {};
+            this.clearEquipment();
             this._router.navigate(['/equipment/list', {data: "success"} ]);
             console.log(this.response)
         });      
@@ -90,13 +114,19 @@ export class AddUpdateEquipmentComponent {
     editEquipment() {
         console.log('Udpating Equipment...');
         
+        this.equipment.category = this.equipment.category_id;
+        this.equipment.user     = this.equipment.user_id;
+
         this._equipmentService.putEquipment(this.equipment).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
-            this.equipment   = {};
+            
+
+            this.clearEquipment();
+            
             this._router.navigate(['/equipment/list', {data: "success"} ]);
         }); 
-    }
+    }   
 
     closeMessage() {
         this.showMessage = false;

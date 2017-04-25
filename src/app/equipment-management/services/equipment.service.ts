@@ -4,7 +4,8 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 @Injectable()
 export class EquipmentService {
 	
-    private host         = "https://efarmapi.herokuapp.com";
+    private host         = "https://efarmapi.herokuapp.com";    
+
     private access_token = {};
     private token        = '';
 
@@ -85,7 +86,7 @@ export class EquipmentService {
         return this._http.get(this.host +'/category', { headers: headers }).map((res:Response) => res.json());
     }
 
-    getCurrentUser() {
+    getUsers() {
           
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
@@ -94,7 +95,7 @@ export class EquipmentService {
         this.token          = 'Bearer ' + this.access_token["access_token"];
 
         headers.append('Authorization', this.token );
-        return this._http.get(this.host +'/users/current', { headers: headers }).map((res:Response) => res.json());
+        return this._http.get(this.host +'/users', { headers: headers }).map((res:Response) => res.json());
     }
 
 
