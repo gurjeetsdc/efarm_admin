@@ -25,4 +25,4 @@ import { ManufacturerManagementRoutingModule } from './manufacturer-management-r
         ViewManufacturerComponent        
     ]
 })
-export class EquipmentManagementModule { }
+export class ManufacturerManagementModule { }

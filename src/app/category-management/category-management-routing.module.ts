@@ -6,47 +6,47 @@ import { PaginationModule } from 'ng2-bootstrap';
 import { HttpModule } from '@angular/http';
 
 
-import { ListManufacturerComponent } from './list-component/list-manufacturer.component';
-import { ViewManufacturerComponent } from './view-component/view-manufacturer.component';
+import { ListCategoryComponent } from './list-component/list-category.component';
+import { ViewCategoryComponent } from './view-component/view-category.component';
 
-import { AddUpdateManufacturerComponent } from './addupdate-component/addupdate-manufacturer.component';
+import { AddUpdateCategoryComponent } from './addupdate-component/addupdate-category.component';
 
-import { ManufacturerService } from './services/manufacturer.service';
+import { CategoryService } from './services/category.service';
 
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'equipment Management'
+      title: 'Category Management'
     },
     children: [
       {
         path: 'list',
-        component: ListManufacturerComponent,
+        component: ListCategoryComponent,
         data: {
           title: 'List'
         }
       },
       {
         path: 'add',
-        component: AddUpdateManufacturerComponent,
+        component: AddUpdateCategoryComponent,
         data: {
           title: 'Add'
         }
       },
       {
             path: 'list/:id',
-            component: ViewManufacturerComponent,
+            component: ViewCategoryComponent,
             data: {
-              title: 'View Equipment'
+              title: 'View Category'
             }
       },
       {
         path: 'update/:id',
-        component: AddUpdateManufacturerComponent,
+        component: AddUpdateCategoryComponent,
         data: {
-          title: 'Update Equipment'
+          title: 'Update Category'
         }
       }
     ]
@@ -62,7 +62,7 @@ const routes: Routes = [
     HttpModule   
   ],
   providers: [
-    ManufacturerService
+    CategoryService
   ],
   exports: [
     RouterModule,
@@ -71,4 +71,4 @@ const routes: Routes = [
     PaginationModule    
   ]
 })
-export class ManufacturerManagementRoutingModule {}
+export class CategoryManagementRoutingModule {}
