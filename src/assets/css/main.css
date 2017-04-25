@@ -2077,7 +2077,7 @@ header.navbar .navbar-nav.ml-auto {
 	height: 38px;
 }
 .btn {
-	cursor: pointer !important;
+	cursor: pointer;
 }
 .topsearch-form .btn {
 	border-radius: 0 4px 4px 0 !important;
@@ -4473,8 +4473,8 @@ table.text-center, table.text-center td, table.text-center th {
 	position: relative;
 }
 .sidebar-hidden .sidebar .nav .nav-item > .nav-link i {
-    bottom: 0px;
-    position: relative;
+	bottom: 0px;
+	position: relative;
 }
 .grade label {
 	background: transparent;
@@ -5236,11 +5236,18 @@ i.addimage {
 	padding: 1.25rem !important;
 	font-family: 'Open Sans', sans-serif;
 }
-.card-block.userdetail .form-group label {
+.card-block.userdetail table td {
+	border: 0;
+}
+.card-block.userdetail table th {
 	color: #1e1e1e;
 	font-size: 16px !important;
 	font-weight: 600;
-	width: 40%;
+	border: 0;
+}
+.card-block.userdetail .table td, .card-block.userdetail .table th {
+	padding: 6px;
+	font-size: 16px;
 }
 .card-block.userdetail .form-group {
 	margin-bottom: 0;
