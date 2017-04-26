@@ -34,7 +34,7 @@ export class ListCropComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
-        this._cropService.croplisting().subscribe(res => {
+        this._cropService.getAllCrops().subscribe(res => {
             this.data = res["Data"];
             this.totalRecords = this.data.length;
             if(this.data.length == 0) this.err_message = "No record to display";
@@ -68,7 +68,7 @@ export class ListCropComponent implements OnInit {
         if(confirm("Do you want to delete?")) {
             this.isLoading = true;
             crop["isDeleted"] = true;
-            this._cropService.updateCrop(crop).subscribe(res => {
+            this._cropService.update(crop).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
                 this.removeByAttr(this.data, 'id', crop["id"]);

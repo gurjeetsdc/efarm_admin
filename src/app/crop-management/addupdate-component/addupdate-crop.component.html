@@ -19,7 +19,7 @@
         <div class="card-header">
             <strong>{{cropID ? 'Edit' : 'Add'}} Crop</strong>
         </div>
-         <form role="form" (ngSubmit)="save()" #dailyExpenseForm="ngForm">
+         <form role="form" (ngSubmit)="save()" #addCropForm="ngForm">
         <div class="card-block">
            
                 <div class="row">
@@ -31,8 +31,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-password">Category</label>
-                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="crop.category" required>
+                            <label for="nf-category">Category</label>
+                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="crop.category_id" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
@@ -204,7 +204,7 @@
                             <label for="nf-average_lead_time">Average Lead Time</label>
                             
                             <div class="input-group">
-                        <input type="text" id="average_lead_time" name="average_lead_time" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="crop.average_lead_time" required>
+                        <input type="number" id="average_lead_time" name="average_lead_time" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="crop.average_lead_time" min="1" max="365" required>
                         <span class="input-group-addon width">Days</span>
                         </div>
 
@@ -234,12 +234,23 @@
                             <i class="fa fa-plus addimage"></i>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group  has-required">
+                            <label for="users">User</label>
+                            <select id="users" name="users" class="form-control" size="1" [(ngModel)]="crop.user_id" required>
+                                <option value="">Please select</option>                                
+                                <option *ngFor="let usr of users" value="{{usr.id}}">
+                                    {{usr.username}}
+                                </option>       
+                            </select>
+                        </div>
+                    </div>
                 </div>
         </div>
 
         <div class="card-footer">
                     <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/crop/list']"> Cancel</button>
-                    <button type="submit" class="pull-right btn btn-primary orangeclr">{{cropID ? 'Update' : 'Save'}}</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addCropForm.valid"  [class.disabled]="isClickedOnce"  (click)="isClickedOnce = true">{{cropID ? 'Update' : 'Save'}}</button>
                 </div>
           </form>
     </div>

@@ -12,17 +12,23 @@ export class AddUpdateCropComponent {
         variety:'',
         packaging:'',
         destination_shipping:'',
-        payment_method:'COD'
+        payment_method:'COD',
+        category_id:'',
+        user_id:''
     };
     public isLoading = true;
     private category = [];
+    private users = [];
     private cropID:any;
     constructor(private router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService) { 
         this._cropService.getAllCategories().subscribe( res => { this.category = res; }, err => {});
+        this._cropService.getAllUsers().subscribe( res => { this.users = res; }, err => {});
         this.cropID = _activateRouter.snapshot.params['id'];        
         if( this.cropID ) {
-            this._cropService.getCrop(this.cropID).subscribe(res => {
-                this.crop = res["Data"][0];
+            this._cropService.get(this.cropID).subscribe(res => {
+                this.crop = res;
+                this.crop.category_id = res.category.id;
+                this.crop.user_id = res.user.id;
                 this.isLoading = false;
             },err => {
                 this.isLoading = false;
@@ -36,14 +42,18 @@ export class AddUpdateCropComponent {
     save() {
         this.isLoading = true;
         if(this.cropID) {
-            this._cropService.updateCrop(this.crop).subscribe(res => {
+            this.crop["category"] = this.crop["category_id"];
+            this.crop["user"] = this.crop["user_id"];
+            this._cropService.update(this.crop).subscribe(res => {
                 this.isLoading = false;
                 this.router.navigate(['/crop/list']);
             },err => {
                 this.isLoading = false;
             })
         } else {
-      	    this._cropService.addCrop(this.crop).subscribe(res => {
+            this.crop["category"] = this.crop["category_id"];
+            this.crop["user"] = this.crop["user_id"];
+      	    this._cropService.add(this.crop).subscribe(res => {
                 this.isLoading = false;
                 this.router.navigate(['/crop/list']);
             },err => {

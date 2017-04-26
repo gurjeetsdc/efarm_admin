@@ -9,7 +9,7 @@ export class CropService {
   private token = '';
   constructor(private _http: Http) { }
 
-  	croplisting() {
+  	getAllCrops() {
 
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
@@ -21,7 +21,7 @@ export class CropService {
 		return this._http.get(this.host +'/crops/listing', { headers: headers }).map((res:Response) => res.json())
     }
 
-    addCrop(crop) {
+    add(crop) {
 
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
@@ -33,20 +33,19 @@ export class CropService {
         return this._http.post(this.host +'/crops/add', crop, { headers: headers }).map((res:Response) => res.json())
     }
 
-    getCrop(crop) {
+    get(crop) {
         
         let headers = new Headers();
         let urlSearchParams = new URLSearchParams();
-        let body = {};        
     
         this.access_token = JSON.parse(localStorage.getItem("user"));
         this.token = 'Bearer ' + this.access_token["access_token"];
     
         headers.append('Authorization', this.token);
-        return this._http.post(this.host +'/crops/'+ crop, body, { headers: headers }).map((res:Response) => res.json())
+        return this._http.get(this.host +'/crops/'+ crop, { headers: headers }).map((res:Response) => res.json())
     }
 
-    updateCrop(crop) {
+    update(crop) {
 
         let headers = new Headers();
         let urlSearchParams = new URLSearchParams();
@@ -68,6 +67,18 @@ export class CropService {
 
         headers.append('Authorization', this.token );
         return this._http.get(this.host +'/category', { headers: headers }).map((res:Response) => res.json());
-      }
+    }
+
+    getAllUsers() {
+          
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
+
+        this.access_token   = JSON.parse(localStorage.getItem("user"));
+        this.token          = 'Bearer ' + this.access_token["access_token"];
+
+        headers.append('Authorization', this.token );
+        return this._http.get(this.host +'/users', { headers: headers }).map((res:Response) => res.json());
+    }
 
 }

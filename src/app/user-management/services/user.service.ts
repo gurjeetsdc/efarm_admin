@@ -9,7 +9,7 @@ export class UserService {
   private token = '';
   constructor(private _http: Http) { }
 
-   userListing() {
+   getAllUsers() {
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
         
@@ -20,7 +20,7 @@ export class UserService {
         return this._http.get(this.host +'/enduser', { headers: headers }).map((res:Response) => res.json())
     }
      
-   addUser(user) {
+   add(user) {
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
         
@@ -31,7 +31,7 @@ export class UserService {
         return this._http.post(this.host +'/enduser/add', user, { headers: headers }).map((res:Response) => res.json())
     }
 
-    getUser(userid) {
+    get(userid) {
         let headers = new Headers();
         let urlSearchParams = new URLSearchParams();
       
@@ -42,7 +42,7 @@ export class UserService {
         return this._http.get(this.host +'/enduser/'+ userid, { headers: headers }).map((res:Response) => res.json())
     }
 
-    updateUser(user) {
+    update(user) {
         let headers = new Headers();    
         let urlSearchParams = new URLSearchParams();
         
@@ -54,7 +54,7 @@ export class UserService {
     }
 
     /** Delete user by ID **/
-    deleteUser( userID ) {
+    delete( userID ) {
         
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();

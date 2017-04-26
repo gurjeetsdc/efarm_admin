@@ -61,8 +61,24 @@
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <!-- <th width="15%">Category</th> -->
-                                <th width="10%">Color</th>
+                                <th width="15%">
+                                    <mfDefaultSorter by="category?.name">Category
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="15%">
+                                    <mfDefaultSorter by="user?.username">Farmer. 
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="10%">
+                                <mfDefaultSorter by="color">Color
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
@@ -76,7 +92,8 @@
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
                                 <td>{{crop.price}}</td>
                                 <td>{{crop.quantity_per_pack}}</td>
-                                <!-- <td>{{crop.category}}</td> -->
+                                <td>{{crop.category?.name}}</td>
+                                <td>{{crop.user?.first_name ? crop.user?.first_name + ' ' + crop.user?.last_name : crop.user?.username}}</td>
                                 <td>{{crop.color}}</td>
                                 <td>                                    
                                     <button (click)="sendUpdateCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
