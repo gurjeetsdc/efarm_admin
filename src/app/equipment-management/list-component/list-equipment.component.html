@@ -14,10 +14,17 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            
+            <!-- loading section -->
+            <div class="aligncenter_loader" *ngIf="isLoading">
+                <div class="is-loading"><i class="page-loader"></i></div>        
+            </div>
+            <!-- section ends  -->
+
+            <div class="card" *ngIf="!isLoading">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-sm-3 col-12">
                             <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
                             <div class="input-group">
                                 <input class="form-control" name="q" placeholder="Search" type="text">
@@ -27,7 +34,7 @@
                             </div>
                             </form>
                         </div>
-                        <div class="col-9 text-right">
+                        <div class="col-sm-9 col-12 text-right linehght">
                             <button type="button" class="btn btn-success btnadd" [routerLink]="['/equipment/add']">Add Equipment</button>
                             <div class="icns">
                                 <a><img src="assets/img/pdf.png" alt="pdf"></a>
@@ -37,12 +44,12 @@
                     </div> <!-- .row -->
                 </div><!-- .card-header -->
                 
-                <div class="card-block">                                        
+                <div class="card-block">    
+                <div class="table-responsive">                                    
                     <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                         <thead>
                             <tr>
-
                                 <th width="25%">
                                     <mfDefaultSorter by="name">Name 
                                         <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -69,7 +76,7 @@
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="10%">
-                                    <mfDefaultSorter by="rate">price
+                                    <mfDefaultSorter by="rate">Price
                                         <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
@@ -77,15 +84,10 @@
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
-                        <tbody>
-                            <tr *ngIf="isLoading">
-                                <td colspan="8">
-                                    <div class="is-loading"><i class="page-loader"></i></div>
-                                </td>
-                            </tr>
+                        <tbody>                          
                             <tr *ngFor="let equipment of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
-                                <td>{{equipment.user_id?.username}}</td>                                
+                                <td>{{equipment.user?.username}}</td>                                
                                 <td>{{equipment.rentSell}}</td>
                                 <td>{{equipment.modelyear}}</td>
                                 <td>{{equipment.quantity}}</td>
@@ -119,6 +121,10 @@
                                             </select>
                                             &nbsp;
                                            <label class="label-control">entires</label>
+
+                                            &nbsp;
+                                           &nbsp;
+                                           <span>Showing {{rowsOnPage < totalRecords? rowsOnPage:totalRecords }} of {{totalRecords}} entries</span>
                                         </div>
                                         <div class="text-right">                                    
                                             <mfBootstrapPaginator></mfBootstrapPaginator>
@@ -128,7 +134,8 @@
                                 </td>    
                             </tr>                            
                         </tfoot>
-                    </table>                                                
+                    </table>    
+                    </div>                                            
                 </div>
             </div>
         </div>

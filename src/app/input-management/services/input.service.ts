@@ -28,6 +28,25 @@ export class InputService {
 		return this.http.get(this.host +'/inputs', { headers: headers }).map((res:Response) => res.json())
     }
 
+
+    /*
+    *@Description: Get Manufacturer list for dropdown in input section
+    *@Param: no parameter pass
+    *@return: Multiple json array
+    *@Author: Rohitk.kumar
+    */
+      getManuf() {
+          
+        this.access_token = JSON.parse(localStorage.getItem("user"));
+        this.token = 'Bearer ' + this.access_token["access_token"];
+        let headers = new Headers();        
+        let urlSearchParams = new URLSearchParams();
+        headers.append('Authorization', this.token);
+        
+        //let body = urlSearchParams.toString()
+        return this.http.get(this.host +'/manufacturer', { headers: headers }).map((res:Response) => res.json())
+    }
+
     /*
     *@Description: Input save data method
     *@Param: Input form unicode data post

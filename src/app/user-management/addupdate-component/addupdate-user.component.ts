@@ -24,17 +24,20 @@ export class AddUpdateUserComponent {
     } 
 
     save() {
+        this.isLoading = true;
         if(this.userID) {
             this._userService.updateUser(this.user).subscribe(res => {
-                this._router.navigate(['/user/list/' + this.user["id"]]);
+                this.isLoading = false;
+                this._router.navigate(['/user/list']);
             },err => {
-
+                this.isLoading = false;
             })
         } else {
             this._userService.addUser(this.user).subscribe(res => {
+                this.isLoading = false;
                 this._router.navigate(['/user/list']);
             },err => {
-
+                this.isLoading = false;
             });
         }
     }

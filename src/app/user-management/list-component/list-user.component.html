@@ -35,9 +35,9 @@
                         </div>
                     </div> <!-- .row -->
                 </div><!-- .card-header -->
-                
-                <div class="card-block">                                        
-                    <table class="table table-responsive table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
+                <div class="card-block">
+                    <div class="table-responsive">                                        
+                    <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                         <thead>
                             <tr>
@@ -60,14 +60,19 @@
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="15%">Email</th>
+                                <th width="10%">
+                                    <mfDefaultSorter by="email">Email
+                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
                                 <th width="10%">
                                     <mfDefaultSorter by="createdAt">Created On 
                                         <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="10%">Actions</th>
+                                <th width="15%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
@@ -81,18 +86,19 @@
                                 <td>{{user.phone}}</td>
                                 <td>{{user.district}}</td>
                                 <td>{{user.email}}</td>
-                                <td>{{user.createdAt | date}}</td>
+                                <td>{{user.createdAt | date: 'dd/MM/yyyy'}}</td>
                                 <td>                                    
                                     <button (click)="sendUpdateUser(user.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
-                                    <!-- <button  (click)="removeUser(user)" class="btn btn-danger" title="Delete" style="padding: 1px 6px"><i class="fa fa-trash"></i></button>                                     -->
+                                    <button  (click)="removeUser(user.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="8">
+                                <td colspan="6">
                                     <div class="pagination-section">
-                                        <div class="row-on-page">
+                                        <div class="text-danger" *ngIf='err_message'>{{err_message}}</div>
+                                        <div class="row-on-page" *ngIf='data.length > 0'>
                                             <label class="label-control">Show</label>
                                             &nbsp;
                                             <select class="input-sm" [(ngModel)]="rowsOnPage">
@@ -104,6 +110,7 @@
                                             </select>
                                             &nbsp;
                                            <label class="label-control">entries</label>
+
                                            &nbsp;
                                            &nbsp;
                                            <span>Showing {{rowsOnPage < totalRecords? rowsOnPage:totalRecords }} of {{totalRecords}} entries</span>
@@ -116,7 +123,8 @@
                                 </td>    
                             </tr>                            
                         </tfoot>
-                    </table>                             
+                    </table> 
+                    </div>                            
                 </div>
             </div>
         </div>

@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
-import { ListInputComponent } from './list-input.component';
-import { AddInputComponent } from './add-input.component';
-import { ViewInputComponent } from './view-input.component';
+import { ListInputComponent } from './list-component/list-input.component';
+import { AddInputComponent } from './addupdate-component/add-input.component';
+import { ViewInputComponent } from './view-component/view-input.component';
 
 import { HttpModule } from '@angular/http';
 const routes: Routes = [

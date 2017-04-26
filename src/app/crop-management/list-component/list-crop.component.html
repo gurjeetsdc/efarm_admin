@@ -36,8 +36,9 @@
                     </div> <!-- .row -->
                 </div><!-- .card-header -->
                 
-                <div class="card-block">                                        
-                    <table class="table table-responsive table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
+                <div class="card-block">    
+                    <div class="table-responsive">                                    
+                    <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                         <thead>
                             <tr>
@@ -87,7 +88,8 @@
                             <tr>
                                 <td colspan="5">
                                     <div class="pagination-section">
-                                        <div class="row-on-page">
+                                        <div class="text-danger" *ngIf='err_message'>{{err_message}}</div>
+                                        <div class="row-on-page" *ngIf='data.length > 0'>
                                             <label class="label-control">Show</label>
                                             &nbsp;
                                             <select class="input-sm" [(ngModel)]="rowsOnPage">
@@ -112,7 +114,8 @@
                                 </td>    
                             </tr>                            
                         </tfoot>
-                    </table>                             
+                    </table> 
+                    </div>                            
                 </div>
             </div>
         </div>

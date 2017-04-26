@@ -34,17 +34,20 @@ export class AddUpdateCropComponent {
     }
 
     save() {
+        this.isLoading = true;
         if(this.cropID) {
             this._cropService.updateCrop(this.crop).subscribe(res => {
+                this.isLoading = false;
                 this.router.navigate(['/crop/list']);
             },err => {
-
+                this.isLoading = false;
             })
         } else {
       	    this._cropService.addCrop(this.crop).subscribe(res => {
+                this.isLoading = false;
                 this.router.navigate(['/crop/list']);
             },err => {
-
+                this.isLoading = false;
             });
         }
     }

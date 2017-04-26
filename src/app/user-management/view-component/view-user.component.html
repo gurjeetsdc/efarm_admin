@@ -11,42 +11,56 @@
         </div>
     </div>
     <!-- loading section -->
-    <div *ngIf="isLoading">
+    <div class="aligncenter_loader" *ngIf="isLoading">
         <div class="is-loading"><i class="page-loader"></i></div>        
     </div>
     <!-- section ends  -->
     <div class="row" *ngIf="!isLoading">
         <div class="col-sm-9 col-12">
-            <div class="card">
-                <div class="card-block userdetail">
+                <div class="card">
+                    <div class="card-header">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label>Name:</label>
-                                <span>{{user.first_name}} {{user.last_name}}</span>
-                            </div>
-                            <div class="form-group">
-                                <label>Email:</label>
-                                <span>{{user.email}}</span>
-                            </div>
-                            <div class="form-group">
-                                <label>Address:</label>
-                                <span>{{user.city}} {{user.district}} {{user.state}} {{user.pincode}}</span>
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <span>{{user.phone}}</span>
-                            </div>
-                            <div class="form-group">
-                                <label>Registered on</label>
-                                <span>{{user.createdAt | date}}</span>
-                            </div>
-                            <div class="form-group">
-                                <label>Modified on</label>
-                                <span>{{user.updatedAt | date}}</span>
-                            </div>
+                        <div class="col-sm-3 col-12">
+                           <strong>View User</strong>           
                         </div>
-                    </div>
+                        <div class="col-sm-9 col-12 text-right linehght">
+                            <button class="btn btn-secondary pull-right" type="button" [routerLink]="['/user/list']">Back</button>                           
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="card-block userdetail">
+                    <table class="table">
+                    
+                    <tbody>
+                      <tr>
+                         <th width="20%">Name</th>
+                        <td>{{user.first_name}} {{user.last_name}}</td>
+                      </tr>
+                      <tr>
+                          <th width="20%">Email</th>
+                        <td>{{user.email}}</td>
+                       
+                      </tr>
+                      <tr>
+                        <th width="20%">Address</th>
+                        <td>{{user.city}} {{user.district}} {{user.state}} {{user.pincode}}</td>
+                      </tr>
+                      <tr>
+                          <th width="20%">Phone</th>
+                        <td>{{user.phone}}</td>
+                      </tr>
+                      <tr>
+                          <th width="20%">Registered on</th>
+                        <td>{{user.createdAt | date:'dd/MM/yyyy'}}</td>
+                      </tr>
+                      
+                      <tr>
+                          <th width="20%">Modified on</th>
+                        <td>{{user.updatedAt | date:'dd/MM/yyyy'}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
             </div>
         </div>
@@ -54,10 +68,7 @@
             <div class="card actions">
                 <h2>Actions</h2>
                 <ul>
-                    <li><span>Login as User</span></li>
-                    <li><span>View Account</span></li>
-                    <li style="cursor:pointer;" (click)="updateUser(user.id)"><span>Modify User</span></li>
-                    <li><span>Reset Password</span></li>
+                    <li style="cursor:pointer;" (click)="updateUser(user.id)"><span>Edit User</span></li>
                     <li style="cursor:pointer;" (click)="removeUser(user.id)"><span>Delete User</span></li>
                 </ul>
             </div>
