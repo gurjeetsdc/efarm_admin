@@ -350,7 +350,7 @@ header.navbar .navbar-nav li.search {
 }
 .card-block.viewmode .form-group p {
 	margin-bottom: 7px;
-	color: #c6c6c6;
+	color: #7c7c7c;
 }
 .card-block .form-group button.dropdown-toggle {
 	border: 1px solid rgba(0, 0, 0, 0.15)
@@ -515,7 +515,7 @@ a:hover, a:active, a:focus {
 	padding-left: 4px;
 	font-weight: 300;
 }
-.content-header>.breadcrumb {
+.content-header .breadcrumb {
 	background: transparent none repeat scroll 0 0;
 	border-radius: 2px;
 	font-size: 15px;
@@ -526,18 +526,24 @@ a:hover, a:active, a:focus {
 	right: 10px;
 	top: 0;
 }
-.content-header>.breadcrumb>li>a {
+.content-header .breadcrumb li a {
 	color: #444;
 	text-decoration: none;
 	display: inline-block;
 }
-.content-header>.breadcrumb>li.active>a {
+
+.breadcrumb-item + .breadcrumb-item::before {
+	color:#444 !important;
+	padding-right: 0 !important;
+}
+
+.content-header .breadcrumb li.active  {
 	color: #b76501;
 }
-.content-header>.breadcrumb>li>a>.fa, .content-header>.breadcrumb>li>a>.glyphicon, .content-header>.breadcrumb>li>a>.ion {
+.content-header .breadcrumb li a .fa, .content-header .breadcrumb li a .glyphicon, .content-header .breadcrumb li a .ion {
 	margin-right: 5px;
 }
-.content-header>.breadcrumb>li+li:before {
+.content-header .breadcrumb li+li:before {
 	content: '>\00a0'
 }
 .navbar-toggle {
@@ -2045,11 +2051,11 @@ header.navbar .navbar-nav.ml-auto {
 	position: relative;
 	padding-bottom: 18px;
 }
-.breadcrumb > li {
+.breadcrumb li {
 	display: inline-block;
 	font-weight: 600;
 }
-.content-header > .breadcrumb {
+.content-header .breadcrumb {
 	background: transparent none repeat scroll 0 0;
 	border-radius: 2px;
 	font-size: 15px;
