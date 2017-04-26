@@ -319,6 +319,12 @@ transform: rotate(360deg);
 	padding: 0.5rem 0.75rem;
 	border-radius: 4px;
 }
+.card-block .form-group p {
+    color: #7f7f7f ;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 7px;
+}
 .layout-top-nav .content-wrapper, .layout-top-nav .right-side, .layout-top-nav .main-footer {
 	margin-left: 0;
 }
@@ -4486,7 +4492,11 @@ table.text-center, table.text-center td, table.text-center th {
 	font-size: 18px;
 	font-weight: 300;
 	margin-right: 8px;
-	padding: 13px 37px;
+	padding: 13px 42px;
+}
+.grade label input[type="radio"]{
+opacity: 0;
+margin-right: -12px;	
 }
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
 	border-radius: 3px !important;

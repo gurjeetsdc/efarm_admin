@@ -65,16 +65,16 @@
                             
 						<form class="grade">
 							<div class="btn-group" data-toggle="">
-							<label class="btn btn-default">
+							<label class="btn btn-default" [ngClass]="{'active': crop.grade == 'A+'}">
 							<input name="grade" value="A+" type="radio" [(ngModel)]="crop.grade" >A+
 							</label>
-							<label class="btn btn-default">
+							<label class="btn btn-default" [ngClass]="{'active': crop.grade == 'A'}">
 							<input name="grade" value="A" type="radio" [(ngModel)]="crop.grade">A
 							</label>
-							<label class="btn btn-default">
-							<input name="grade" value="B" class="active" type="radio" [(ngModel)]="crop.grade">B
+							<label class="btn btn-default" [ngClass]="{'active': crop.grade == 'B'}">
+							<input name="grade" value="B" type="radio" [(ngModel)]="crop.grade">B
 							</label>
-							<label class="btn btn-default">
+							<label class="btn btn-default" [ngClass]="{'active': crop.grade == 'C'}">
 							<input name="grade" value="C" type="radio" [(ngModel)]="crop.grade">C
 							</label>
 							</div>
@@ -177,14 +177,14 @@
                             <label for="nf-paymentTerms">Payment Terms</label>
                            <form class="grade">
 							<div class="btn-group">
-							<label class="btn btn-default">
+							<label class="btn btn-default" [ngClass]="{'active': crop.payment_method == 'COD'}">
 							<input name="payment_mode" value="COD" type="radio" [(ngModel)]="crop.payment_method">COD
 							</label>
-							<label class="btn btn-default">
+							<label class="btn btn-default" [ngClass]="{'active': crop.payment_method == 'Cheque'}">
 							<input name="payment_mode" value="Cheque" type="radio" [(ngModel)]="crop.payment_method">Cheque
 							</label>
-							<label class="btn btn-default">
-							<input name="payment_mode" value="Net Banking" class="active" type="radio" [(ngModel)]="crop.payment_method">Net Banking
+							<label class="btn btn-default" [ngClass]="{'active': crop.payment_method == 'Net Banking'}">
+							<input name="payment_mode" value="Net Banking" type="radio" [(ngModel)]="crop.payment_method">Net Banking
 							</label>
 							
 							</div>
