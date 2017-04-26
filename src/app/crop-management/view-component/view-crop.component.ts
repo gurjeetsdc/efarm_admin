@@ -11,8 +11,8 @@ export class ViewCropComponent {
 
     constructor(private _router: Router, route: ActivatedRoute,private _cropService: CropService) { 
       	this.cropID = route.snapshot.params['id'];
-  	    this._cropService.getCrop(this.cropID).subscribe(res => {
-            this.crop = res["Data"][0];
+  	    this._cropService.get(this.cropID).subscribe(res => {
+            this.crop = res;
         },err => {
 
         });

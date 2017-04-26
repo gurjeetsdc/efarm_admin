@@ -33,7 +33,7 @@ export class ListUserComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
-        this._userService.userListing().subscribe(res => {
+        this._userService.getAllUsers().subscribe(res => {
             this.data = res;
             this.totalRecords = this.data.length;
             if(this.data.length == 0) this.err_message = "No record to display";
@@ -60,7 +60,7 @@ export class ListUserComponent implements OnInit {
     removeUser(userid) {
         if(confirm("Do you want to delete?")) {
             this.isLoading = true;
-            this._userService.deleteUser(userid).subscribe(res => {
+            this._userService.delete(userid).subscribe(res => {
                 this.isLoading = false;
                 this.removeByAttr(this.data, 'id', userid);
                 this._router.navigate(['/user/list/']);      
