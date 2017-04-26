@@ -131,6 +131,11 @@ body {
 	-khtml-user-select: none;
 	-ms-user-select: none;
 }
+
+.mainarea .card-block .form-group textarea#nf-terms, .mainarea .card-block .form-group textarea#nf-termsConditions, .mainarea .card-block .form-group textarea#termsConditions {
+color:#3b3b3b !important;
+}
+
 .card {
 	font-family: 'Roboto', sans-serif !important;
 	border-radius: 5px !important;
