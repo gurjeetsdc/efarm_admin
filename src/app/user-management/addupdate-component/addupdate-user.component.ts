@@ -12,7 +12,7 @@ export class AddUpdateUserComponent {
     constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService) { 
         this.userID = _activateRouter.snapshot.params['id'];        
         if( this.userID ) {
-            this._userService.getUser(this.userID).subscribe(res => {
+            this._userService.get(this.userID).subscribe(res => {
                 this.user = res;
                 this.isLoading = false;
             },err => {
@@ -26,14 +26,14 @@ export class AddUpdateUserComponent {
     save() {
         this.isLoading = true;
         if(this.userID) {
-            this._userService.updateUser(this.user).subscribe(res => {
+            this._userService.update(this.user).subscribe(res => {
                 this.isLoading = false;
                 this._router.navigate(['/user/list']);
             },err => {
                 this.isLoading = false;
             })
         } else {
-            this._userService.addUser(this.user).subscribe(res => {
+            this._userService.add(this.user).subscribe(res => {
                 this.isLoading = false;
                 this._router.navigate(['/user/list']);
             },err => {

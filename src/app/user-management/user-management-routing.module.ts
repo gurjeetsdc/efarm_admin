@@ -13,9 +13,16 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'User Management'
+      title: 'Users'
     },
     children: [
+      {
+        path: '',
+        component: ListUserComponent,
+        data: {
+          title: 'List'
+        }
+      },
       {
         path: 'list',
         component: ListUserComponent,
@@ -27,21 +34,21 @@ const routes: Routes = [
         path: 'add',
         component: AddUpdateUserComponent,
         data: {
-          title: 'Add'
+          title: 'Add User'
         }
       },
       {
         path: 'list/:id',
         component: ViewUserComponent,
         data: {
-          title: 'List'
+          title: 'View'
         }
       },
       {
         path: 'edit/:id',
         component: AddUpdateUserComponent,
         data: {
-          title: 'Edit'
+          title: 'Edit User'
         }
       }
     ]

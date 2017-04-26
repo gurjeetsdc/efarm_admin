@@ -11,9 +11,16 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Crop Management'
+      title: 'Crops'
     },
     children: [
+      {
+        path: '',
+        component: ListCropComponent,
+        data: {
+          title: 'List'
+        }
+      },
       {
         path: 'list',
         component: ListCropComponent,
@@ -25,21 +32,21 @@ const routes: Routes = [
         path: 'add',
         component: AddUpdateCropComponent,
         data: {
-          title: 'Add'
+          title: 'Add Crop'
         }
       },
       {
         path: 'list/:id',
         component: ViewCropComponent,
         data: {
-          title: 'List'
+          title: 'View'
         }
       },
       {
         path: 'edit/:id',
         component: AddUpdateCropComponent,
         data: {
-          title: 'Edit'
+          title: 'Edit Crop'
         }
       }
     ]

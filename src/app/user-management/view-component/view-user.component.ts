@@ -12,7 +12,7 @@ export class ViewUserComponent {
 
     constructor(route: ActivatedRoute, private _router : Router,private _userService: UserService) { 
         this.userID = route.snapshot.params['id'];
-  	    this._userService.getUser(this.userID).subscribe(res => {
+  	    this._userService.get(this.userID).subscribe(res => {
            this.user = res;
            this.isLoading = false;
         },err => {
@@ -28,7 +28,7 @@ export class ViewUserComponent {
     removeUser(userid) {
         if(confirm("Do you want to delete?")) {
             this.isLoading = true;
-            this._userService.deleteUser(userid).subscribe(res => {
+            this._userService.delete(userid).subscribe(res => {
                 this.isLoading = false;
                 this._router.navigate(['/user/list/']);      
             },err => {
