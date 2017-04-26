@@ -64,14 +64,14 @@ export class ListCropComponent implements OnInit {
     }
 
      
-    removeCrop(crop) {
+    removeCrop(cropid) {
         if(confirm("Do you want to delete?")) {
             this.isLoading = true;
-            crop["isDeleted"] = true;
-            this._cropService.update(crop).subscribe(res => {
+            // crop["isDeleted"] = true;
+            this._cropService.delete(cropid).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
-                this.removeByAttr(this.data, 'id', crop["id"]);
+                this.removeByAttr(this.data, 'id', cropid);
                 this._router.navigate(['/crop/list/']);      
             },err => {
                 this.isLoading = false;
