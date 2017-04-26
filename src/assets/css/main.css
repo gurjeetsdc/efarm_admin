@@ -5736,14 +5736,7 @@ h2.search_it {
 .linehght {
 	padding-top: 12px;
 }
-.register-box {
-	position: relative;
-	height: 100%;
-}
-.login-page {
-	height: auto;
-	margin-top: 20px;
-}
+ 
 }
 
 @media (min-width:570px) and (max-width:1020px) {
@@ -5779,7 +5772,6 @@ button.whiteclr {
 	border-radius: 3px;
 	box-shadow: none;
 	display: flex;
-	height: auto;
 	width: 100%;
 }
 .login-box-body {
@@ -5791,16 +5783,7 @@ button.whiteclr {
 	padding: 20px;
 	width: 90%;
 }
-.register-box {
-	width: 95%;
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-.skin-green .sidebar-form {
-	border-radius: 3px;
-	margin-top: 8px;
-	width: 77%;
-}
+
 .main-header .navbar-custom-menu {
 	display: inline-block;
 	float: none;
