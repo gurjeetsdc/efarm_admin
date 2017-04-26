@@ -40,8 +40,9 @@
                 </div>
           
                 <div class="card-footer">
-                    <button type="reset" class="btn btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                    <button type="submit" class="pull-right btn btn-primary" [disabled]="!addManufacturerForm.valid"><i class="fa fa-dot-circle-o"></i> Save</button>
+                    <button type="reset" class="btn btn-secondary whiteclr"><i class="fa fa-ban"></i> Reset</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addManufacturerForm.valid" [class.disabled]="isClickedOnce"
+                    (click)="isClickedOnce = true"><i class="fa fa-dot-circle-o"></i> Save</button>
                 </div>
             </form>
         </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import {DataTableModule} from "angular2-datatable";
 // import { FormGroup, FormBuilder ,Validators } from '@angular/forms';
 
 import { ManufacturerService } from '../services/manufacturer.service';

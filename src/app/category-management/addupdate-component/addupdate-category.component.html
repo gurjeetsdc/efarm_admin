@@ -1,3 +1,6 @@
+<div *ngIf="isPageLoading" class="overlayloader">
+    <div class="loader"></div>
+</div>
 <div class="category-wrapper">
     <div class="row">
         <div class="col-12 col-lg-12">
@@ -30,7 +33,18 @@
                             <label for="nf-name">Category Name*</label>
                             <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" [(ngModel)]="category.name" required>
                         </div>
+                        <div class="form-group">
+                            <label for="categorytype">Category Type*</label>
+                            <select id="categorytype" name="categorytype" class="form-control" [(ngModel)]="category.categorytype" size="1" required>
+                                <option value="">Please select</option>
+                                <option value="1">Crops</option>
+                                <option value="2">Inputs</option>
+                                <option value="3">Equipments</option>
+                                <option value="3">lands</option>
+                            </select>
+                        </div>
                     </div>
+
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="description">Description*</label>
@@ -38,10 +52,11 @@
                         </div>
                     </div>
                 </div>
-          
+                 
                 <div class="card-footer">
-                    <button type="reset" class="btn btn-danger"><i class="fa fa-ban"></i> Reset</button>
-                    <button type="submit" class="pull-right btn btn-primary" [disabled]="!addCategoryForm.valid"><i class="fa fa-dot-circle-o"></i> Save</button>
+                    <button type="reset" class="btn btn-secondary whiteclr"><i class="fa fa-ban"></i> Reset</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addCategoryForm.valid"  [class.disabled]="isClickedOnce"
+                    (click)="isClickedOnce = true"><i class="fa fa-dot-circle-o"></i> Save</button>
                 </div>
             </form>
         </div>
