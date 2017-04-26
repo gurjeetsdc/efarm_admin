@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'land Management'
+      title: 'Land'
     },
     children: [
       {
