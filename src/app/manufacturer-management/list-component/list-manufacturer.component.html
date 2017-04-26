@@ -5,19 +5,39 @@
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active"><a href="javascript:void(0)">Manufacturer Management</a></li>      
+                    <li><a href="javascript:void(0)">Manufacturer</a></li>  
+                    <li class="active"><a>List</a></li>    
                 </ol>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <!-- loading section -->
+            <div class="aligncenter_loader" *ngIf="isLoading">
+                <div class="is-loading"><i class="page-loader"></i></div>        
+            </div>
+            <!-- section ends  -->
+
+            <div class="card" *ngIf="!isLoading">
                 <div class="card-header">
-                    <i class="fa fa-align"></i> Manufacturer
-                    <button type="button" class="btn btn-success pull-right" [routerLink]="['/manufacturer/add']">Add Manufacturer</button>
-                </div>
-                
+                    <div class="row">
+                        <div class="col-sm-3 col-12">
+                            <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
+                            <div class="input-group">
+                                <input class="form-control" name="q" placeholder="Search" type="text">
+                                <span class="input-group-btn">
+                                <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                </span>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-9 col-12 text-right linehght">
+                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/manufacturer/add']">Add Manufacturer</button>
+                        </div>
+                    </div> <!-- .row -->
+                </div><!-- .card-header -->
+
                 <div class="card-block">                                        
                     <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
@@ -29,11 +49,6 @@
                             </tr>
                         </thead>                        
                         <tbody>
-                            <tr *ngIf="isLoading">
-                                <td colspan="3">
-                                    <div class="is-loading"><i class="page-loader"></i></div>
-                                </td>
-                            </tr>
                             <tr *ngFor="let manufacturer of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewManufacturer(manufacturer.id)">{{manufacturer.name}}</a></td>
                                 <td>{{manufacturer.description}}</td>
@@ -44,6 +59,14 @@
                             </tr>
                         </tbody>
                         <tfoot>
+                            <tr>
+                                <!-- no records found -->
+                                <td colspan="3"  *ngIf="totalRecords == 0">
+                                    <div class="text-center">
+                                        <p class="text-center">No record to display</p>                                                               
+                                    </div>  
+                                </td>
+                            </tr>
                             <tr>
                                 <td colspan="3">
                                     <mfBootstrapPaginator></mfBootstrapPaginator>

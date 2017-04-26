@@ -20,6 +20,7 @@ import { CategoryService } from '../services/category.service';
 export class ListCategoryComponent implements OnInit {
 
     public data;
+    public totalRecords;
     public filterQuery = "";
     public rowsOnPage  = 10;
     public sortBy      = "name";
@@ -35,8 +36,10 @@ export class ListCategoryComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
         this._categoryService.getAllCategory().subscribe(allCategory => {
             this.data = allCategory;            
+            this.totalRecords = this.data.length;
             this.isLoading = false;
             console.log(allCategory);
             console.log("allCategory loaded");
@@ -65,13 +68,13 @@ export class ListCategoryComponent implements OnInit {
 
      
     removeCategory( categoryID ) {
-        if(confirm("Are you sure to delete category")) {
+        if(confirm("Do you want to delete")) {
             console.log("Implement delete functionality here");
             this.isLoading = true;
             this._categoryService.deleteCategory(categoryID).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
-
+                this.totalRecords = this.data.length;
                 /* reload list */
                 this.removeByAttr(this.data, 'id', categoryID);
                 this._router.navigate(['/category/list/']);      

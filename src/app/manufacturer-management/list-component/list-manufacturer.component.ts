@@ -20,6 +20,7 @@ import { ManufacturerService } from '../services/manufacturer.service';
 export class ListManufacturerComponent implements OnInit {
 
     public data;
+    public totalRecords; 
     public filterQuery = "";
     public rowsOnPage  = 10;
     public sortBy      = "name";
@@ -37,7 +38,8 @@ export class ListManufacturerComponent implements OnInit {
     ngOnInit(): void {
 
         this._manufacturerService.getAllManufacturer().subscribe(allManufacturers => {
-            this.data = allManufacturers;            
+            this.data = allManufacturers; 
+            this.totalRecords = this.data.length;           
             this.isLoading = false;
             console.log(allManufacturers);
             console.log("allManufacturers loaded");
@@ -65,13 +67,13 @@ export class ListManufacturerComponent implements OnInit {
 
      
     removeManufacturer( manufacturerID ) {
-        if(confirm("Are you sure to delete manufacturer")) {
+        if(confirm("Do you want to delete")) {
             console.log("Implement delete functionality here");
             this.isLoading = true;
             this._manufacturerService.deleteManufacturer(manufacturerID).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
-
+                this.totalRecords = this.data.length;
                 /* reload list */
                 this._router.navigate(['/manufacturer/list/']);      
             });  

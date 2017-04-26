@@ -15,14 +15,17 @@ export class AddUpdateManufacturerComponent {
     private manufacturerID: any;
     private response:any;
     private showMessage:boolean = false;
+    private isLoading:boolean   = true;
 
     private action:string = 'Add';
 
     constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _manufacturerService: ManufacturerService) {
         this.manufacturerID = _activateRouter.snapshot.params['id'];        
         if( this.manufacturerID ) {
-            this._manufacturerService.getManufacturer(this.manufacturerID).subscribe( res => { this.manufacturer = res; this.action = 'Update' }, err => {});
-        }        
+            this._manufacturerService.getManufacturer(this.manufacturerID).subscribe( res => { this.manufacturer = res; this.action = 'Update'; this.isLoading = false;}, err => {});
+        } else{
+            this.isLoading = false;
+        } 
     }
 
     submitManufacturer() {
@@ -49,7 +52,6 @@ export class AddUpdateManufacturerComponent {
     }
 
     updateManufacturer() {
-        console.log('Udpating Manufacturer...');
         
         this._manufacturerService.putManufacturer(this.manufacturer).subscribe(res => {
             this.response    = res;
