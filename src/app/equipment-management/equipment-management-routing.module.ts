@@ -18,9 +18,16 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'equipment Management'
+      title: 'Equipments'
     },
     children: [
+      {
+        path: '',
+        component: ListEquipmentComponent,
+        data: {
+          title: 'List'
+        }
+      },
       {
         path: 'list',
         component: ListEquipmentComponent,
@@ -32,14 +39,14 @@ const routes: Routes = [
         path: 'add',
         component: AddUpdateEquipmentComponent,
         data: {
-          title: 'Add'
+          title: 'Add Equipment'
         }
       },
       {
             path: 'list/:id',
             component: ViewEquipmentComponent,
             data: {
-              title: 'View Equipment'
+              title: 'View'
             }
       },
       {
