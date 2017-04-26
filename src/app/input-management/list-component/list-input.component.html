@@ -1,16 +1,6 @@
 <!-- <div class="input-wrapper animated fadeIn">       -->
 <div class="input-wrapper">      
-    <div class="row">
-        <div class="col-12 col-lg-12">
-            <div class="content-header">
-                <ol class="breadcrumb">
-                    <li><a [routerLink]="['/dashboard']"  >Dashboard</a></li>
-                    <li><a [routerLink]="['/input/list']" >Inputs</a></li>
-                    <li class="active"><a>List</a></li>    
-                </ol>
-            </div>
-        </div>
-    </div>
+   
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -18,7 +8,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-3 col-12">
-                            <form action="#" class="pull-left ng-untouched ng-pristine ng-valid" method="get">
+                            <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                             <div class="input-group">
                                 <input class="form-control" name="q" placeholder="Search" type="text">
                                 <span class="input-group-btn">
@@ -60,12 +50,12 @@
                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
-                                <th width="20%">Actions</th>
+                                <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
                             <tr *ngIf="isLoading">
-                                <td colspan="3">
+                                <td colspan="5">
                                     <div class="is-loading"><i class="page-loader"></i></div>
                                 </td>
                             </tr>
@@ -85,7 +75,8 @@
                             <tr>
                                 <td colspan="8">
                                     <div class="pagination-section">
-                                        <div class="row-on-page">
+                                        <div class="text-danger" *ngIf='err_message'>{{err_message}}</div>
+                                        <div class="row-on-page" *ngIf='data.length > 0'>
                                             <label class="label-control">Show</label>
                                             &nbsp;
                                             <select class="input-sm" [(ngModel)]="rowsOnPage">

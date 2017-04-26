@@ -18,15 +18,13 @@ export class ListInputComponent implements OnInit {
 
   test: any = [];
 
-    public data;
-
+    public data                = [];
     public totalRecords        = 0;
     public filterQuery         = "";
     public rowsOnPage          = 10;
-    public sortBy      = "name";
-    public sortOrder   = "asc";
+    public sortBy              = "createdAt";
+    public sortOrder           = "desc";
     public response:any;
-
     private isLoading:boolean = true;
     public documents = [];
     public selectedDocument = [];
@@ -45,13 +43,15 @@ export class ListInputComponent implements OnInit {
         });
 
         this._inputService.inputlist().subscribe(resInputs => {
+                
             this.data = resInputs;            
-            this.isLoading = false;
             this.totalRecords = this.data.length;
+           if(this.data.length == 0) this.err_message = "No record to display";
             this.isLoading = false;
-            //console.log(resInputs);
-            //console.log("resInputs loaded");
-        });             
+        },err => {
+            this.isLoading = false;
+            this.err_message = "No record to display";
+       });        
     }
 
     public toInt(num: string) {

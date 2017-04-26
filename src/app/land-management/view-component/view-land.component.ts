@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LandService } from './land.service';
+import { LandService } from '../services/land.service';
 import {Router, ActivatedRoute} from '@angular/router';
 @Component({
   templateUrl: 'view-land.component.html',

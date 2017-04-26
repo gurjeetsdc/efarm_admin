@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
-import { ListLandComponent } from './list-land.component';
-import { AddLandComponent } from './add-land.component';
+import { ListLandComponent } from './list-component/list-land.component';
+import { AddLandComponent } from './addupdate-component/add-land.component';
 
-import { ViewLandComponent } from './view-land.component';
+import { ViewLandComponent } from './view-component/view-land.component';
 import { HttpModule } from '@angular/http';
 const routes: Routes = [
   {
@@ -15,6 +15,13 @@ const routes: Routes = [
       title: 'land Management'
     },
     children: [
+      {
+        path: '',
+        component: ListLandComponent,
+        data: {
+          title: 'List'
+        }
+      },
       {
         path: 'list',
         component: ListLandComponent,
@@ -26,21 +33,21 @@ const routes: Routes = [
         path: 'add',
         component: AddLandComponent,
         data: {
-          title: 'Add'
+          title: 'Add Land'
         }
       },
       {
         path: 'list/:id',
         component: ViewLandComponent,
         data: {
-          title: 'List'
+          title: 'View'
         }
       },
       {
         path: 'update/:id',
         component: AddLandComponent,
         data: {
-          title: 'Update land'
+          title: 'Edit Land'
         }
       }
     ]

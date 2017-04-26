@@ -5,6 +5,7 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
 import { ListInputComponent } from './list-component/list-input.component';
 import { AddInputComponent } from './addupdate-component/add-input.component';
+
 import { ViewInputComponent } from './view-component/view-input.component';
 
 import { HttpModule } from '@angular/http';
@@ -15,6 +16,13 @@ const routes: Routes = [
       title: 'Input Management'
     },
     children: [
+     {
+        path: '',
+        component: ListInputComponent,
+        data: {
+          title: 'List'
+        }
+      },
       {
         path: 'list',
         component: ListInputComponent,
@@ -26,21 +34,21 @@ const routes: Routes = [
         path: 'add',
         component: AddInputComponent,
         data: {
-          title: 'Add'
+          title: 'Add Input'
         }
       },
       {
         path: 'list/:id',
         component: ViewInputComponent,
         data: {
-          title: 'List'
+          title: 'View'
         }
       },
       {
         path: 'update/:id',
         component: AddInputComponent,
         data: {
-          title: 'Update Input'
+          title: 'Edit Input'
         }
       }
     ]

@@ -1,15 +1,5 @@
 <div class="input-wrapper">
-    <div class="row">
-        <div class="col-12 col-lg-12">
-            <div class="content-header">
-                <ol class="breadcrumb">
-                      <li><a [routerLink]="['/dashboard']" >Dashboard</a></li>
-                    <li><a [routerLink]="['/input/list']" >Inputs</a></li>
-                    <li class="active"><a href="JavaScript:Void(0);">{{Id ? 'Update' : 'Add'}} Input</a></li>
-                </ol>
-            </div>
-        </div>
-    </div>
+   
     <div class="card">
         <div class="card-header">
             <strong>{{action}} Input</strong>
@@ -28,7 +18,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
-                            <label for="nf-name">Input Name</label>
+                            <label for="nf-name">Name</label>
                             <input autofocus="" type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="input.name" required>
                         </div>
                     </div>

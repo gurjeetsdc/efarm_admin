@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {PaginationInstance} from 'ng2-pagination';
-import { LandService } from './land.service';
+import { LandService } from '../services/land.service';
 import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
@@ -15,13 +15,13 @@ export class ListLandComponent implements OnInit {
 
   test: any = [];
 
-    public data;
+    public data                = [];
     public totalRecords        = 0;
     public filterQuery         = "";
     public rowsOnPage          = 10;
 
-    public sortBy      = "name";
-    public sortOrder   = "asc";
+    public sortBy              = "createdAt";
+    public sortOrder           = "desc";
     public response:any;
 
     private isLoading:boolean = true;
@@ -46,8 +46,12 @@ export class ListLandComponent implements OnInit {
             this.data = resdata;            
             this.isLoading = false;
             this.totalRecords = this.data.length;
+            if(this.data.length == 0) this.err_message = "No record to display";
             this.isLoading = false;
-        });             
+        },err => {
+            this.isLoading = false;
+            this.err_message = "No record to display";
+       });         
     }
 
     public toInt(num: string) {
