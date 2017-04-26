@@ -25,6 +25,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -35,6 +36,7 @@ import { RegisterComponent } from './register/register.component';
     ChartsModule,
     PaginationModule.forRoot(),
     HttpModule
+    
   ],
   declarations: [
     AppComponent,

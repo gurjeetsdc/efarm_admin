@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import tsConstants = require('./../tsconstant');
 
 @Injectable()
 export class LoginService {
-    private host = "https://efarmapi.herokuapp.com";
-    //private host = "http://localhost:1337";
-  	private port = 3000;
   	
   	constructor(private http: Http) { }
 
@@ -23,6 +21,6 @@ export class LoginService {
         urlSearchParams.append('grant_type', grant_type);
         urlSearchParams.append('client_id', client_id);
         let body = urlSearchParams.toString()
-		return this.http.post(this.host +'/oauth/token', body, { headers: headers }).map((res:Response) => res.json())
+		return this.http.post(tsConstants.HOST +'/oauth/token', body, { headers: headers }).map((res:Response) => res.json())
     }
 }

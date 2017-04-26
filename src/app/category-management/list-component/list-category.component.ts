@@ -35,7 +35,6 @@ export class ListCategoryComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
         this._categoryService.getAllCategory().subscribe(allCategory => {
             this.data = allCategory;            
             this.isLoading = false;
