@@ -1,8 +1,13 @@
-<!-- <div class="crop-wrapper animated fadeIn">       -->
+     <!-- <div class="crop-wrapper animated fadeIn">       -->
 <div class="crop-wrapper">      
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <!-- loading section -->
+            <div class="aligncenter_loader" *ngIf="isLoading">
+                <div class="is-loading"><i class="page-loader"></i></div>        
+            </div>
+            <!-- section ends  -->
+            <div class="card" *ngIf="!isLoading">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-3 col-12">
@@ -50,17 +55,17 @@
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="15%">
-                                    <mfDefaultSorter by="category?.name">Category
+                                <th width="15%">Category
+                                    <!-- <mfDefaultSorter by="category?.name">Category
                                         <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter>
+                                    </mfDefaultSorter> -->
                                 </th>
-                                <th width="15%">
-                                    <mfDefaultSorter by="user?.username">Farmer. 
+                                <th width="15%">Farmer
+                                    <!-- <mfDefaultSorter by="user?.username">Farmer 
                                         <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter>
+                                    </mfDefaultSorter> -->
                                 </th>
                                 <th width="10%">
                                 <mfDefaultSorter by="color">Color
@@ -72,11 +77,11 @@
                             </tr>
                         </thead>                        
                         <tbody>
-                            <tr *ngIf="isLoading">
+                            <!-- <tr *ngIf="isLoading">
                                 <td colspan="8">
                                     <div class="is-loading"><i class="page-loader"></i></div>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <tr *ngFor="let crop of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
                                 <td>{{crop.price}}</td>
@@ -86,7 +91,7 @@
                                 <td>{{crop.color}}</td>
                                 <td>                                    
                                     <button (click)="sendUpdateCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
-                                    <button  (click)="removeCrop(crop)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
+                                    <button  (click)="removeCrop(crop.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
                             </tr>
                         </tbody>

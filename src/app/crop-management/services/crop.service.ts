@@ -57,6 +57,19 @@ export class CropService {
         return this._http.post(this.host +'/crops/'+ crop.id, crop, { headers: headers }).map((res:Response) => res.json())
     }
 
+    /** Delete crop by ID **/
+    delete( cropID ) {
+        
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
+
+        this.access_token   = JSON.parse(localStorage.getItem("user"));
+        this.token          = 'Bearer ' + this.access_token["access_token"];
+        
+        headers.append('Authorization', this.token );
+        return this._http.delete(this.host +'/crops/'+ cropID,  { headers: headers }).map((res:Response) => res.json());
+    }
+
     getAllCategories() {
           
         let headers         = new Headers();

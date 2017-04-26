@@ -54,12 +54,15 @@
                       <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="model">Model</label>
-                            <select id="model" name="model" class="form-control" size="1" [(ngModel)]="equipment.model" required>
+                           <!--  <select id="model" name="model" class="form-control" size="1" [(ngModel)]="equipment.model" required>
                                 <option value="">Please select</option>
                                 <option value="1">Option #1</option>
                                 <option value="2">Option #2</option>
                                 <option value="3">Option #3</option>
-                            </select>
+                            </select> -->
+                            
+                            <input type="text" id="model" name="model" class="form-control" [(ngModel)]="equipment.model" placeholder="" />
+
                         </div>
                     </div>
                 </div>

@@ -64,6 +64,7 @@ export class AddUpdateEquipmentComponent {
     }
 
     submitEquipment() {
+        this.isLoading = true;
         console.log('submitting Equipment...');
 
         if( this.action == 'Edit' ) {

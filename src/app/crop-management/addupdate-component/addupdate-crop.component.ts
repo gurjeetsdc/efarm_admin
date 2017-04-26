@@ -11,10 +11,11 @@ export class AddUpdateCropComponent {
         category:'',
         variety:'',
         packaging:'',
-        destination_shipping:'',
+        destination_shipping:'Shipping 1',
         payment_method:'COD',
         category_id:'',
-        user_id:''
+        user_id:'',
+        moq:'moq'
     };
     public isLoading = true;
     private category = [];

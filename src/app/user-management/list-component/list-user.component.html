@@ -2,7 +2,12 @@
 <div class="user-wrapper">      
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <!-- loading section -->
+            <div class="aligncenter_loader" *ngIf="isLoading">
+                <div class="is-loading"><i class="page-loader"></i></div>        
+            </div>
+            <!-- section ends  -->
+            <div class="card" *ngIf="!isLoading">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-3 col-12">
@@ -37,25 +42,25 @@
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="10%">
+                                <th width="15%">
                                     <mfDefaultSorter by="phone">Phone
                                         <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="10%">
+                                <th width="15%">
                                     <mfDefaultSorter by="district">District 
                                         <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="10%">
+                                <th width="15%">
                                     <mfDefaultSorter by="email">Email
                                         <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="10%">
+                                <th width="15%">
                                     <mfDefaultSorter by="createdAt">Created On 
                                         <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
@@ -65,11 +70,11 @@
                             </tr>
                         </thead>                        
                         <tbody>
-                            <tr *ngIf="isLoading">
+                            <!-- <tr *ngIf="isLoading">
                                 <td colspan="8">
                                     <div class="is-loading"><i class="page-loader"></i></div>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <tr *ngFor="let user of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.first_name}} {{user.last_name}}</a></td>
                                 <td>{{user.phone}}</td>
