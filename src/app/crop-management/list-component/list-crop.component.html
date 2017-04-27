@@ -39,56 +39,36 @@
 
                                 <th width="25%">
                                     <mfDefaultSorter by="name">Crop 
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'asc' && sortBy == 'name'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'name'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="10%">
                                     <mfDefaultSorter by="price">Offer Price
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'asc' && sortBy == 'price'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'price'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="10%">
                                     <mfDefaultSorter by="quantity_per_pack">Qty. 
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'asc' && sortBy == 'quantity_per_pack'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'quantity_per_pack'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="15%">Category
-                                    <!-- <mfDefaultSorter by="category?.name">Category
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter> -->
                                 </th>
-                                <th width="15%">Farmer
-                                    <!-- <mfDefaultSorter by="user?.username">Farmer 
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter> -->
-                                </th>
-                                <th width="10%">
-                                <mfDefaultSorter by="color">Color
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter>
+                                <th width="15%">seller
                                 </th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
-                            <!-- <tr *ngIf="isLoading">
-                                <td colspan="8">
-                                    <div class="is-loading"><i class="page-loader"></i></div>
-                                </td>
-                            </tr> -->
                             <tr *ngFor="let crop of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
                                 <td>{{crop.price}}</td>
                                 <td>{{crop.quantity_per_pack}}</td>
                                 <td>{{crop.category?.name}}</td>
-                                <td>{{crop.user?.first_name ? crop.user?.first_name + ' ' + crop.user?.last_name : crop.user?.username}}</td>
-                                <td>{{crop.color}}</td>
+                                <td>{{crop.seller ? crop.seller?.first_name ? crop.seller?.first_name + ' ' + crop.seller?.last_name : crop.seller?.username : ''}}</td>
                                 <td>                                    
                                     <button (click)="sendUpdateCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeCrop(crop.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
