@@ -10,7 +10,7 @@
         <div class="card-header">
             <strong>{{userID ? 'Edit' : 'Add'}} User</strong>
         </div>
-         <form role="form" (ngSubmit)="save()" #dailyExpenseForm="ngForm">
+         <form role="form" (ngSubmit)="save()" #addUserForm="ngForm">
         <div class="card-block">
            
                 <div class="row">
@@ -82,7 +82,7 @@
         </div>
         <div class="card-footer">
                     <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/user/list']"> Cancel</button>
-                    <button type="submit" class="pull-right btn btn-primary orangeclr">{{userID ? 'Update' : 'Save'}}</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr"  [disabled]="!addUserForm.valid"  [class.disabled]="isClickedOnce" >{{userID ? 'Update' : 'Save'}}</button>
                 </div>
           </form>
     </div>

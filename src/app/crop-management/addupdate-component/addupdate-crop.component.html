@@ -115,7 +115,11 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-supply_ablity">Supply Ability</label>
-                            <input type="text" id="nf-supply_ablity" name="nf-supply_ablity" class="form-control" [(ngModel)]="crop.supply_ablity" placeholder="" required>
+                            <select id="select3" name="select3" class="form-control" size="1" [(ngModel)]="crop.supply_ablity" required>
+                                <option value="">Please select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -129,17 +133,6 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <div class="col-sm-6">
-                        <div class="form-group has-required">
-                            <label for="nf-destination_shipping">Destination for Shipping*</label>
-                            <select id="select3" name="select3" class="form-control" size="1" [(ngModel)]="crop.destination_shipping" required>
-                                <option value="">Please select</option>
-                                <option value="Shipping 1">Shipping 1</option>
-                                <option value="Shipping 2">Shipping 2</option>
-                                <option value="Shipping 3">Shipping 3</option>
-                            </select>
-                        </div>
-                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
@@ -193,12 +186,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <!-- <div class="col-sm-6">
-                        <div class="form-group has-required">
-                            <label for="nf-moq">MOQ</label>
-                            <input type="text" id="nf-moq" name="nf-moq" class="form-control" [(ngModel)]="crop.moq" placeholder="" required>
-                        </div>
-                    </div> -->
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-average_lead_time">Average Lead Time</label>

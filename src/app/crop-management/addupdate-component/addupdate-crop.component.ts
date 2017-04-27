@@ -15,7 +15,8 @@ export class AddUpdateCropComponent {
         payment_method:'COD',
         category_id:'',
         user_id:'',
-        moq:'moq'
+        moq:'moq',
+        supply_ablity:''
     };
     public isLoading = true;
     private category = [];
