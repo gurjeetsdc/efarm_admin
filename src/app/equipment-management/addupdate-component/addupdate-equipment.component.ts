@@ -24,7 +24,9 @@ export class AddUpdateEquipmentComponent {
                             termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod',
                             quantity: '',
                             user:'',
-                            user_id:''
+                            user_id:'',
+                            supply_ablity: 'yes',
+                            price_unit: 'Hour'
                         };
 
 
@@ -90,7 +92,9 @@ export class AddUpdateEquipmentComponent {
                             termsConditions: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod',
                             quantity: '',
                             user:'',
-                            user_id:''
+                            user_id:'',
+                            supply_ablity: 'yes',
+                            price_unit: 'Hour'
                         };
     }
 
