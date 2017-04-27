@@ -8,7 +8,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AddInputComponent {
     private input     = {
+        category_id:'',
         manufacturer_id:'',
+        units:'',
+        variety:'',
         tearm_and_conditions:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
     };
     
@@ -16,6 +19,7 @@ export class AddInputComponent {
     private response:any;
     private showMessage:boolean = false;
     private action:string = 'Add';
+    private category = [];
     private manuf = [];
 
     constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _inputService: InputService) {
@@ -27,8 +31,9 @@ export class AddInputComponent {
                  this.input.manufacturer_id = res.manufacturer.id;
                  this.action = 'Update'
             }, err => {});
-        }        
+        }
 
+        this._inputService.getAllCategories().subscribe( res => { this.category = res; }, err => {});
         this._inputService.getManuf().subscribe( res => { this.manuf = res; }, err => {});
     }
 
@@ -43,6 +48,7 @@ export class AddInputComponent {
 
     addInput() {
         this.input["manufacturer"] = this.input["manufacturer_id"];
+        this.input["category"] = this.input["category_id"];
         this._inputService.inputadd(this.input).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
@@ -55,6 +61,7 @@ export class AddInputComponent {
 
     updateInput() {
         this.input["manufacturer"] = this.input["manufacturer_id"];
+        this.input["category"] = this.input["category_id"];
         this._inputService.updateInput(this.input).subscribe(res => {
             this.response    = res;
             this.showMessage = true;

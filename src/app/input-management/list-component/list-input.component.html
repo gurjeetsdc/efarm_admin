@@ -3,7 +3,12 @@
    
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+        <!-- loading section -->
+            <div class="aligncenter_loader" *ngIf="isLoading">
+                <div class="is-loading"><i class="page-loader"></i></div>        
+            </div>
+            <!-- section ends  -->
+            <div class="card"  *ngIf="!isLoading">
 
                 <div class="card-header">
                     <div class="row">
@@ -38,34 +43,39 @@
                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
+                                <th width="20%">Category</th>
+                                <th width="20%">Manufacturer</th>
+
                                 <th width="20%"><mfDefaultSorter by="price">Price
                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
                                 
-                                <th width="10%"><mfDefaultSorter by="quantity">Qty
+                                <!-- <th width="10%"><mfDefaultSorter by="quantity">Qty
                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
-                                <th width="20%"><mfDefaultSorter by="variety">Units
+                                <th width="20%"><mfDefaultSorter by="units">Units
                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                </mfDefaultSorter></th>
+                                </mfDefaultSorter></th> -->
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
-                            <tr *ngIf="isLoading">
+                            <!-- <tr *ngIf="isLoading">
                                 <td colspan="5">
                                     <div class="is-loading"><i class="page-loader"></i></div>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <tr *ngFor="let input of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewInput(input.id)">{{input.name}}</a></td>
+                                <td>{{input.category?.name}}</td>
+                                <td>{{input.manufacturer?.name}}</td>
                                 <td>{{input.price}}</td>
                                 
-                                <td>{{input.quantity}}</td>
-                                <td>{{input.units}}</td>
+                                <!-- <td>{{input.quantity}}</td>
+                                <td>{{input.units}}</td> -->
 
                                 <td>                                    
                                     <button (click)="sendUpdateinput(input.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>

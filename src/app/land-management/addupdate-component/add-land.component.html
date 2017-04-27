@@ -19,21 +19,21 @@
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="nf-name">Owner Name</label>
-                            <input autofocus=""  type="text" id="nf-name" name="nf-name" class="form-control" placeholder="Enter Name" [(ngModel)]="land.name" required>
+                            <input autofocus=""  type="text" id="nf-name" name="nf-name" class="form-control"  [(ngModel)]="land.name" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
                        <div class="form-group  radiobuttons_top44">
                             <div class="form-group pull-left">
                                 <div class="radio_button">
-                                    <input type="radio"  name="rentSell" class="" id="nf-rentslell" value="rent"  [(ngModel)]="land.rentSell" checked required>
-                                    <label for="nf-rentslell">Rent</label>
+                                    <input type="radio"  name="rentSell" class="" id="nf-rentslell" value="Lease"  [(ngModel)]="land.rentSell" checked required>
+                                    <label for="nf-rentslell">Lease</label>
                                 </div>
                             </div>
                            
                             <div class="form-group pull-left">
                                 <div class="radio_button">                     
-                                    <input type="radio" name="rentSell" class="" id="rentSell" value="sell"  [(ngModel)]="land.rentSell" required>
+                                    <input type="radio" name="rentSell" class="" id="rentSell" value="Sell"  [(ngModel)]="land.rentSell" required>
                                     <label for="rentSell">Sell</label>
                                 </div>
                             </div>
@@ -45,27 +45,36 @@
                         <div class="form-group  has-required">
                             <label for="nf-variety">Location</label>
                             <select id="select1" name="select1" class="form-control" [(ngModel)]="land.location" size="1" required>
-                                <option selected="" value="0">Please select</option>
+                                <option selected="" value="">Please select</option>
                                 <option value="location 1">location 1</option>
                                 <option value="location 2">location 2</option>
                                 <option value="location 3">location 3</option>
                             </select>
                         </div>
                     </div>
-                      <div class="col-sm-6">
-                        <div class="form-group has-required">
-                            <label for="nf-area">Area</label>
-                            <div class="input-group">
-                              <input type="text" id="nf-area" name="area" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area" placeholder="Enter Bigha" required>
-                              <div class="input-group-btn">
-                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Bigha
-                                </button>
-                              </div>
-                            </div>
-                        </div>
+                    <div class="col-sm-6">
+                   <div class="form-group has-required">
+                    <label for="nf-qty">Area</label>
+                     <div class="input-group">
+                     
+                         <input type="text" id="nf-area" name="area" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area" required>
+                          <div class="input-group-btn">
+                              <select id="select2" name="select2" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.unit" size="1" required>
+                                <option value="">Unit</option>
+                                <option value="Sq.Ft">Sq.Ft</option>
+                                <option value="Sq. Yards">Sq. Yards</option>
+                                <option value="Sq. Meter">Sq. Meter</option>
+                                <option value="Acres">Acres</option>
+                                <option value="Marla">Marla</option>
+                                <option value="Bigha">Bigha</option>
+                                <option value="Kanal">Kanal</option>
+                            </select>
+                         </div>
+                       </div>                      
+                   </div>
 
-                    </div>
+                   </div>
+
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
@@ -77,8 +86,11 @@
                 
                     <div class="col-sm-6">
                     <div class="form-group has-required">
-                            <label for="nf-price">Expected price <i class="fa fa-rupee"></i></label>
-                            <input maxlength="10" type="number" id="nf-expected_price" name="nf-expected_price" class="form-control" [(ngModel)]="land.expected_price" placeholder="Enter expected price" required>
+                            <label for="nf-price">Expected price </label>
+                            <div class="input-group">
+                                <div class="icnposition"><i class="fa fa-rupee"></i></div>
+                                <input maxlength="10" type="number" id="nf-expected_price" name="nf-expected_price" class="form-control pleft25" [(ngModel)]="land.expected_price" required>
+                            </div>    
                         </div>
                     </div>
                 </div>
@@ -87,7 +99,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-description">Description</label>
-                            <textarea type="text" id="nf-description" name="nf-description" class="form-control" [(ngModel)]="land.description" placeholder="Enter Description" rows="4"></textarea>
+                            <textarea type="text" id="nf-description" name="nf-description" class="form-control" [(ngModel)]="land.description" rows="4"></textarea>
                         </div>
                     </div>
                 
@@ -95,7 +107,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-termsConditions">Terms & Conditions</label>
-                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="land.term_condition" placeholder="Enter Terms & Conditions" rows="4" [disabled]="true"></textarea>
+                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="land.term_condition" rows="4" [disabled]="true"></textarea>
                         </div>
                     </div>
                 </div>

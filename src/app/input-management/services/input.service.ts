@@ -47,6 +47,19 @@ export class InputService {
         return this.http.get(this.host +'/manufacturer', { headers: headers }).map((res:Response) => res.json())
     }
 
+    getAllCategories() {
+          
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
+
+        this.access_token   = JSON.parse(localStorage.getItem("user"));
+        this.token          = 'Bearer ' + this.access_token["access_token"];
+
+        headers.append('Authorization', this.token );
+        return this.http.get(this.host +'/category', { headers: headers }).map((res:Response) => res.json());
+    }
+
+
     /*
     *@Description: Input save data method
     *@Param: Input form unicode data post

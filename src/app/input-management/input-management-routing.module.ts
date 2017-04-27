@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Input'
+      title: 'Inputs'
     },
     children: [
      {

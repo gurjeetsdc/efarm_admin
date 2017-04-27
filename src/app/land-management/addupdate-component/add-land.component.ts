@@ -9,7 +9,9 @@ import { Router, ActivatedRoute  } from '@angular/router';
 })
 export class AddLandComponent {
 	private land = {
-        rentSell: 'rent',
+        rentSell: 'Lease',
+        unit:'',
+        location:'',
         term_condition:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
     };
 

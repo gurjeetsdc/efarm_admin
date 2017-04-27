@@ -3,7 +3,12 @@
   
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+        <!-- loading section -->
+            <div class="aligncenter_loader" *ngIf="isLoading">
+                <div class="is-loading"><i class="page-loader"></i></div>        
+            </div>
+            <!-- section ends  -->
+            <div class="card" *ngIf="!isLoading">
 
                  <div class="card-header">
                     <div class="row">
@@ -34,7 +39,7 @@
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                         <thead>
                             <tr>
-                                <th width="30%"><mfDefaultSorter by="name">Name
+                                <th width="30%"><mfDefaultSorter by="name">Owner Name
                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
@@ -46,23 +51,28 @@
                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
-                                <th width="15%"><mfDefaultSorter by="expected_price">Expected price<i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                <th width="15%"><mfDefaultSorter by="expected_price">Expected price <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                </mfDefaultSorter></th>
+                                <th width="20%"><mfDefaultSorter by="rentSell">Land For
+                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
-                            <tr *ngIf="isLoading">
+                           <!--  <tr *ngIf="isLoading">
                                 <td colspan="5">
                                     <div class="is-loading"><i class="page-loader"></i></div>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <tr *ngFor="let land of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.name}}</a></td>
                                 <td>{{land.location}}</td>
-                                <td>{{land.area}}</td>
+                                <td>{{land.area}} {{land.unit}}</td>
                                 <td>{{land.expected_price}}</td>
+                                <td>{{land.rentSell}}</td>
 
                                 <td>                                    
                                     <button (click)="sendUpdateLand(land.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>

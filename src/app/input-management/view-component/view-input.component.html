@@ -29,42 +29,60 @@
                             <p>{{input.name}}</p>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                   <div class="col-sm-6">
                         <div class="form-group">
-                            <label >Company/Manufacturer</label>
-                            <p>{{input.manufacturer?.name}}</p>
+                            <label >Category</label>
+                            <p>{{input.category?.name}}</p>
                         </div>
                     </div>
                     
                  </div>   
                 <div class="row">
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                            <label >Company/Manufacturer</label>
+                            <p>{{input.manufacturer?.name}}</p>
+                        </div>
+                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-variety">Variety</label>
                             <p>{{input.variety}}</p>
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
+                    
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-grade">Quantity</label>
                             <p>{{input.quantity}}</p>
                         </div>
                     </div>
-                </div>   
-                <div class="row">
-                    
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-color">Unit</label>
                             <p>{{input.units}}</p>
                         </div>
                     </div>
+                </div>   
+                <div class="row">
+                    
+                    
                      <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-price">Price</label>
                             <p><i class="fa fa-rupee"></i> {{input.price}}</p>
                         </div>
                     </div>
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-termsConditions">Additional information</label>
+                            <p>{{input.description}}</p>
+                        </div>
+                    </div>
+                    
                 
                 </div>
 
