@@ -109,7 +109,6 @@ var FullLayoutComponent = (function () {
         this.status = { isopen: false };
         this.user = {};
         this.user = JSON.parse(localStorage.getItem("user"));
-        console.log("this._route.snapshot", this._route.snapshot["_urlSegment"].segments[0].path);
         this.active = this._route.snapshot["_urlSegment"].segments[0].path;
     }
     FullLayoutComponent.prototype.toggled = function (open) {
