@@ -24,9 +24,22 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-name">Equipment Name</label>
-                            <input type="text" autofocus id="name" name="name" class="form-control" [(ngModel)]="equipment.name" required>
+                            <input type="text" autofocus id="name" name="name"  class="form-control" [(ngModel)]="equipment.name" required>                           
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group  has-required">
+                            <label for="user">Supplier</label>
+                            <select id="user" name="user" class="form-control" size="1" [(ngModel)]="equipment.user_id" required>
+                                <option value="">Please select</option>                                
+                                <option *ngFor="let user of users" [value]="user.id">
+                                    {{user.username}}
+                                </option>       
+                            </select>
+                        </div>
+                    </div>                   
+                </div>
+                <div class="row">                    
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="category">Category</label>                            
@@ -38,33 +51,17 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group has-required">
+                        <div class="form-group">
                             <label for="companyManufacturer">Company/Manufacturer</label>
-                            <select id="companyManufacturer" name="companyManufacturer" class="form-control" [(ngModel)]="equipment.companyManufacturer" size="1" required>
+                            <select id="companyManufacturer" name="companyManufacturer" class="form-control" [(ngModel)]="equipment.companyManufacturer" size="1">
                                 <option value="">Please select</option>
-                                <option value="1">Variety 1</option>
-                                <option value="2">Variety 2</option>
-                                <option value="3">Variety 3</option>
+                                <option value="Manufacturer 1">Manufacturer 1</option>
+                                <option value="Manufacturer 2">Manufacturer 2</option>
+                                <option value="Manufacturer 3">Manufacturer 3</option>
                             </select>
                         </div>
-                    </div>
-                      <div class="col-sm-6">
-                        <div class="form-group has-required">
-                            <label for="model">Model</label>
-                           <!--  <select id="model" name="model" class="form-control" size="1" [(ngModel)]="equipment.model" required>
-                                <option value="">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select> -->
-                            
-                            <input type="text" id="model" name="model" class="form-control" [(ngModel)]="equipment.model" placeholder="" />
-
-                        </div>
-                    </div>
+                    </div>                    
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
@@ -76,42 +73,48 @@
                             </select>
                         </div>
                     </div>
-                
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="enginePower">Engine Power</label>
-                            <input type="text" id="enginePower" name="enginePower" class="form-control" [(ngModel)]="equipment.enginepower" placeholder="" />
+                            <label for="model">Model</label>                          
+                            <input type="text" id="model" name="model" class="form-control" [(ngModel)]="equipment.model" placeholder="" />
                         </div>
                     </div>
                 </div>
-                 <div class="row p10">
+                    
+                <div class="row">
                     <div class="col-sm-6">
-                       <div class="form-group radiobuttons_top">
-                            <div class="form-group pull-left">
-                                <div class="radio_button">
-                                    <input type="radio"  name="rentSell" class="" id="nf-rentslell" value="rent"  [(ngModel)]="equipment.rentSell" checked required>
-                                    <label for="nf-rentslell">Rent</label>
-                                </div>
-                            </div>
-                           
-                            <div class="form-group pull-left">
-                                <div class="radio_button">                     
-                                    <input type="radio" name="rentSell" class="" id="rentSell" value="sell"  [(ngModel)]="equipment.rentSell" required>
-                                    <label for="rentSell">Sell</label>
+                       <div class="form-group  has-required">
+                            <label for="rentSell">Type</label>
+                            <div class="radiobuttons_top">
+                                <div class="form-group pull-left">
+                                    <div class="radio_button">
+                                        <input type="radio"  name="rentSell" class="" id="nf-rentslell" value="rent"  [(ngModel)]="equipment.rentSell" checked required>
+                                        <label for="nf-rentslell">Rent</label>
+                                    </div>
+                                </div>                           
+                                <div class="form-group pull-left">
+                                    <div class="radio_button">                     
+                                        <input type="radio" name="rentSell" class="" id="rentSell" value="sell"  [(ngModel)]="equipment.rentSell" required>
+                                        <label for="rentSell">Sell</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>                    
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-6">                    
                         <div class="form-group has-required">
+                            <label for="rentSell">Price</label>
                             <div class="input-group">
                                 <div class="icnposition"><i class="fa fa-rupee"></i></div>
-                                <input type="text" id="nf-quantity_per_pack" name="quantity_per_pack" class="form-control pleft25" aria-label="Text input with dropdown button" [(ngModel)]="equipment.rate" placeholder="Enter Rate">                                
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    hr
-                                    </button>
+                                <input type="number" id="price" name="price" class="form-control pleft25" [(ngModel)]="equipment.rate" min="1" placeholder="" required />
+                                <div class="input-group-btn" *ngIf="equipment.rentSell != 'sell'">
+                                    <select class="btn btn-secondary dropdown-toggle" [(ngModel)]="equipment.price_unit" name="price_unit">
+                                        <option>Hour</option>
+                                        <option>Day</option>
+                                        <option>Week</option>
+                                        <option>Month</option>
+                                    </select>
                                 </div>
                             </div>                       
                         </div>
@@ -124,18 +127,26 @@
                             <input type="number" min="1" id="quantity" name="quantity" class="form-control" [(ngModel)]="equipment.quantity" placeholder="" />
                         </div>
                     </div>
-                     <div class="col-sm-6">
-                        <div class="form-group  has-required">
-                            <label for="user">User</label>
-                            <select id="user" name="user" class="form-control" size="1" [(ngModel)]="equipment.user_id" required>
-                                <option value="">Please select</option>                                
-                                <option *ngFor="let user of users" [value]="user.id">
-                                    {{user.username}}
-                                </option>       
-                            </select>
-                        </div>
-                    </div>
-                </div>                
+                    <div class="col-sm-6">
+                       <div class="form-group radiobuttons_top has-required">
+                            <label for="nf-supply_ablity">Supply Ability</label>
+                            <div class="radiobuttons_top">
+                                <div class="form-group pull-left">
+                                    <div class="radio_button">
+                                        <input type="radio"  name="supply_ablity" class="" id="nf-supply_ablity" value="yes"  [(ngModel)]="equipment.supply_ablity" checked required>
+                                        <label for="nf-supply_ablity">Yes</label>
+                                    </div>
+                                </div>
+                                <div class="form-group pull-left">
+                                    <div class="radio_button">                     
+                                        <input type="radio" name="supply_ablity" class="" id="supply_ablity" value="no"  [(ngModel)]="equipment.supply_ablity" required>
+                                        <label for="supply_ablity">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                        
+                    </div>                    
+                </div>                            
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">

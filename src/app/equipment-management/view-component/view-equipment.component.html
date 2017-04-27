@@ -1,5 +1,5 @@
-<div class="equipment-wrapper">    
-   
+<div class="equipment-wrapper">
+ 
     <!-- loading section -->
     <div class="aligncenter_loader" *ngIf="isLoading">
         <div class="is-loading"><i class="page-loader"></i></div>        
@@ -7,7 +7,7 @@
     <!-- section ends  -->
 
     <div class="card" *ngIf="!isLoading">
-        <div class="card-header">
+          <div class="card-header">
             <div class="row">
                 <div class="col-sm-3 col-12">
                    <strong>View Equipment</strong>           
@@ -21,108 +21,110 @@
                 </div>
             </div> <!-- .row -->
         </div>
-        <div class="card-block viewmode">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="nf-name">Equipment Name</label>
-                        <p>{{equipment.name}}</p>
+        <div class="card-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Equipment Name</label>
+                            <p>{{equipment.name}}</p>
+                        </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group  has-required">
+                            <label for="user">Supplier</label>
+                            <p>{{equipment.user?.username}}</p>
+                        </div>
+                    </div>                   
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="category">Category</label>
-                        <p>{{equipment.category?.name}}</p>                            
+                <div class="row">                    
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="category">Category</label>                            
+                            <p>{{equipment.category?.name}}</p>
+                        </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="companyManufacturer">Company/Manufacturer</label>
+                            <p>{{equipment.companyManufacturer}}</p>
+                        </div>
+                    </div>                    
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="companyManufacturer">Company/Manufacturer</label>
-                        <p>{{equipment.companyManufacturer}}</p>                           
-                    </div>
-                </div>
+                <div class="row">
                   <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="model">Model</label>
-                        <p>{{equipment.model}}</p>
+                        <div class="form-group">
+                            <label for="modelyear">Model year</label>
+                            <p>{{equipment.modelyear}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="model">Model</label>                          
+                            <p>{{equipment.model}}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="modelyear">Model year</label>
-                        <p>{{equipment.modelyear}}</p>
+                    
+                <div class="row">
+                    <div class="col-sm-6">
+                       <div class="form-group  has-required">
+                            <label for="rentSell">Type</label>
+                            <div class="radiobuttons_top">
+                                <p>{{equipment.rentSell}}</p>
+                            </div>
+                        </div>                    
                     </div>
-                </div>
-            
-                <div class="col-sm-6">
-                <div class="form-group">
-                        <label for="enginePower">Engine power</label>
-                        <p>{{equipment.enginepower}}</p>
-                    </div>
-                </div>
-            </div>
-             <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="nf-rentslell">Rent/sell</label>
-                        <p>{{equipment.rentSell}}</p>                        
-                    </div>                      
-                </div>
 
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="rate">Price</label>                         
-                        <p>{{equipment.rate}}</p>
+                    <div class="col-sm-6">                    
+                        <div class="form-group has-required">
+                            <label >Price</label>
+                            <p>{{equipment.rate}}<span *ngIf="equipment.rentSell == 'rent'"> /{{equipment.price_unit}}</span></p>            
+                        </div>
                     </div>
                 </div>
-            </div>
-              <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="usage">Usage</label>
-                        <p>{{equipment.usage}}</p>
+                <div class="row">                   
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="termsConditions">Quantity</label>
+                            <p>{{equipment.quantity}}</p>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-sm-6">
+                       <div class="form-group radiobuttons_top has-required">
+                            <label for="nf-supply_ablity">Supply Ability</label>
+                            <p>{{equipment.supply_ablity}}</p>
+                        </div>                                        
+                    </div>                    
+                </div>                            
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="usage">Usage</label>
+                            <p>{{equipment.usage}}</p>
+                        </div>
+                    </div>
 
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <p>{{equipment.description}}</p>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="description">Description</label>
+                            <p>{{equipment.description}}</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="termsConditions">Terms & Conditions</label>
-                        <p>{{equipment.termsConditions}}</p>
+                </div>                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-image">Image</label>
+                            <p>Not available</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="quantity">Qty</label>
-                        <p>{{equipment.quantity}}</p>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="termsConditions">Terms & Conditions</label>
+                            <p>{{equipment.termsConditions}}</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="image">Image</label>
-                        <p>Not Available</p>
-                    </div>
-                </div>
-                 <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="image">User</label>
-                        <p>{{equipment.user?.username}}</p>                        
-                    </div>
-                </div>
-            </div>                           
+                </div>                                        
         </div>
     </div> <!-- .card -->
 </div> <!-- .equipment-wrapper -->

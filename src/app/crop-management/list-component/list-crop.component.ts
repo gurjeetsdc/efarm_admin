@@ -35,7 +35,7 @@ export class ListCropComponent implements OnInit {
         });
 
         this._cropService.getAllCrops().subscribe(res => {
-            this.data = res["Data"];
+            this.data = res;
             this.totalRecords = this.data.length;
             if(this.data.length == 0) this.err_message = "No record to display";
             this.isLoading = false;

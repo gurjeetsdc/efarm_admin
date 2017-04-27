@@ -18,7 +18,7 @@ export class CropService {
         this.token = 'Bearer ' + this.access_token["access_token"];
         
         headers.append('Authorization', this.token);
-		return this._http.get(this.host +'/crops/listing', { headers: headers }).map((res:Response) => res.json())
+		return this._http.get(this.host +'/crops', { headers: headers }).map((res:Response) => res.json())
     }
 
     add(crop) {
@@ -30,7 +30,7 @@ export class CropService {
         this.token = 'Bearer ' + this.access_token["access_token"];
         
         headers.append('Authorization', this.token);
-        return this._http.post(this.host +'/crops/add', crop, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this.host +'/crops', crop, { headers: headers }).map((res:Response) => res.json())
     }
 
     get(crop) {
@@ -54,7 +54,7 @@ export class CropService {
         this.token = 'Bearer ' + this.access_token["access_token"];
 
         headers.append('Authorization', this.token);
-        return this._http.post(this.host +'/crops/'+ crop.id, crop, { headers: headers }).map((res:Response) => res.json())
+        return this._http.put(this.host +'/crops/'+ crop.id, crop, { headers: headers }).map((res:Response) => res.json())
     }
 
     /** Delete crop by ID **/

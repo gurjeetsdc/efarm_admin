@@ -38,43 +38,38 @@
 
                                 <th width="25%">
                                     <mfDefaultSorter by="first_name">Name 
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'asc'  && sortBy == 'first_name'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'  && sortBy == 'first_name'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="15%">
                                     <mfDefaultSorter by="phone">Phone
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'asc'  && sortBy == 'phone'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'  && sortBy == 'phone'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="15%">
                                     <mfDefaultSorter by="district">District 
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'asc'  && sortBy == 'district'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'  && sortBy == 'district'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="15%">
                                     <mfDefaultSorter by="email">Email
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'asc'  && sortBy == 'email'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'  && sortBy == 'email'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="15%">
                                     <mfDefaultSorter by="createdAt">Created On 
-                                        <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'asc'  && sortBy == 'createdAt'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc'  && sortBy == 'createdAt'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
-                            <!-- <tr *ngIf="isLoading">
-                                <td colspan="8">
-                                    <div class="is-loading"><i class="page-loader"></i></div>
-                                </td>
-                            </tr> -->
                             <tr *ngFor="let user of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.first_name}} {{user.last_name}}</a></td>
                                 <td>{{user.phone}}</td>
@@ -104,7 +99,6 @@
                                             </select>
                                             &nbsp;
                                            <label class="label-control">entries</label>
-
                                            &nbsp;
                                            &nbsp;
                                            <span>Showing {{rowsOnPage < totalRecords? rowsOnPage:totalRecords }} of {{totalRecords}} entries</span>

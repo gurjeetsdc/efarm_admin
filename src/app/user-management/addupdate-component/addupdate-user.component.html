@@ -10,7 +10,7 @@
         <div class="card-header">
             <strong>{{userID ? 'Edit' : 'Add'}} User</strong>
         </div>
-         <form role="form" (ngSubmit)="save()" #dailyExpenseForm="ngForm">
+         <form role="form" (ngSubmit)="save()" #addUserForm="ngForm">
         <div class="card-block">
            
                 <div class="row">
@@ -50,8 +50,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-pincode">Pin Code </label>
-                            <input type="number" id="nf-pincode" name="nf-pincode" class="form-control" [(ngModel)]="user.pincode" max="999999" placeholder="" required>
+                            <label for="nf-district">District</label>
+                            <input type="text" id="nf-district" name="nf-district" class="form-control" [(ngModel)]="user.district" placeholder="" required>
                         </div>
                     </div>
                 </div>
@@ -64,8 +64,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-district">District</label>
-                            <input type="text" id="nf-district" name="nf-district" class="form-control" [(ngModel)]="user.district" placeholder="" required>
+                            <label for="nf-pincode">Pin Code </label>
+                            <input type="number" id="nf-pincode" name="nf-pincode" class="form-control" [(ngModel)]="user.pincode" max="999999" placeholder="" required>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
         </div>
         <div class="card-footer">
                     <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/user/list']"> Cancel</button>
-                    <button type="submit" class="pull-right btn btn-primary orangeclr">{{userID ? 'Update' : 'Save'}}</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr"  [disabled]="!addUserForm.valid"  [class.disabled]="isClickedOnce" >{{userID ? 'Update' : 'Save'}}</button>
                 </div>
           </form>
     </div>

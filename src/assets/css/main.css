@@ -219,6 +219,10 @@ button, input, optgroup, select, textarea {
 	align-items: center;
 	display: flex;
 	min-height: 330px;
+	height: 330px
+}
+select::-ms-expand {
+    display: none;
 }
  @keyframes spin {
  0% {
@@ -1147,7 +1151,7 @@ a:hover, a:active, a:focus {
 }
 .form-group i.fa-rupee, header.navbar .nav-item i.fa-ellipsis-v {
 	position: relative;
-	top: 2px;
+	top: 4px;
 }
 header.navbar .navbar-nav.ml-auto {
 	font-size: 18px;
@@ -1176,6 +1180,15 @@ header.navbar .navbar-nav.ml-auto {
 }
 .radiobuttons_top {
 	padding-top: 12px;
+	display: block;
+}
+.mainarea .card-block .form-group select.btn.btn-secondary.dropdown-toggle {
+    padding: 10px 35px 10px 20px;
+}
+.mainarea .card-block .form-group select.dropdown-toggle{
+    border-bottom-left-radius: 0;
+    border-color: #c2c2c2;
+    border-top-left-radius: 0;
 }
 .radiobuttons_top44 {
 	padding-top: 44px;
@@ -5076,7 +5089,7 @@ ul.navbar-nav.width {
 	transition: width .1s ease-in-out;*/
 }
 .btn:focus, .btn.focus {
-	border-color: #5cb3fd;
+	border-color: #5cb3fd !important;
 }
 .custome-check.loginpage {
 	padding-top: 3px;

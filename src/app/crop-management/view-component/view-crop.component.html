@@ -24,50 +24,50 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-password">Category</label>
+                            <label for="nf-password">Seller</label>
+							<p>{{crop.seller ? crop.seller?.first_name ? crop.seller?.first_name + ' ' + crop.seller?.last_name : crop.seller?.username : ''}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Category</label>
 							<p>{{crop.category?.name}}</p>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-variety">Variety</label>
-							<p>{{crop.variety}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-price">Offer Price <i class="fa fa-rupee"></i> *</label>
-							<p><i class="fa fa-rupee"></i>{{crop.price}}</p>
+                            <p>{{crop.variety}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-price">Offer Price</label>
+                            <p><i class="fa fa-rupee"></i> {{crop.price}}</p>
+                        </div>
+                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-grade">Grade</label>
 							<p>{{crop.grade}}</p>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-color">Color</label>
-							<p>{{crop.color}}</p>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-size">Size/Weight</label>
-							<p>{{crop.size}}</p>
+                            <label for="nf-color">Color</label>
+                            <p>{{crop.color}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-otherSpeciality">Other Speciality</label>
-							<p>{{crop.other_speciality}}</p>
+                            <label for="nf-size">Size/Weight</label>
+							<p>{{crop.size}}</p>
                         </div>
                     </div>
                 </div>
@@ -94,58 +94,44 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-destinationForShipping">Destination for Shipping</label>
-							<p>{{crop.destination_shipping}}</p>
+                            <label for="nf-packSize">Pack Size</label>
+                            <p>{{crop.pack_size}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-packSize">Pack Size</label>
-							<p>{{crop.pack_size}}</p>
-                        </div>
-                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-qty">Quantity Per Pack</label>
-							<p>{{crop.quantity_per_pack}}</p>
+							<p>{{crop.quantity_per_pack}} {{crop.unit}}</p>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-label">Label/Making on Pack</label>
-							<p>{{crop.label}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-paymentTerms">Payment Terms</label>
-							<p>{{crop.payment_method}}</p>
+                            <p>{{crop.label}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-moq">MOQ</label>
-							<p>{{crop.moq}}</p>
-                        </div>
-                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-averageLeadTime">Average Lead Time</label>
 							<p>{{crop.average_lead_time}}</p>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-additionalInformation">Additional Information</label>
+                            <p>{{crop.additional_info}}</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-additionalInformation">Additional Information</label>
-							<p>{{crop.additional_info}}</p>
+                            <label for="nf-paymentTerms">Payment Terms</label>
+                            <p>{{crop.payment_method}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
