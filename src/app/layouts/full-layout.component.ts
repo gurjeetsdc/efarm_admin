@@ -12,7 +12,6 @@ export class FullLayoutComponent implements OnInit {
   public active;
   constructor(private router : Router, private _route: ActivatedRoute ) { 
     this.user = JSON.parse(localStorage.getItem("user"));
-    console.log("this._route.snapshot",this._route.snapshot["_urlSegment"].segments[0].path);
     this.active = this._route.snapshot["_urlSegment"].segments[0].path;
   }
 
