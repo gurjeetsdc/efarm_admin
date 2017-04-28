@@ -1,6 +1,6 @@
 webpackJsonp([6,16],{
 
-/***/ 1418:
+/***/ 1419:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23,7 +23,7 @@ var P404Component = (function () {
 }());
 P404Component = __decorate([
     core_1.Component({
-        template: __webpack_require__(1466)
+        template: __webpack_require__(1467)
     }),
     __metadata("design:paramtypes", [])
 ], P404Component);
@@ -32,7 +32,7 @@ exports.P404Component = P404Component;
 
 /***/ }),
 
-/***/ 1419:
+/***/ 1420:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55,7 +55,7 @@ var P500Component = (function () {
 }());
 P500Component = __decorate([
     core_1.Component({
-        template: __webpack_require__(1467)
+        template: __webpack_require__(1468)
     }),
     __metadata("design:paramtypes", [])
 ], P500Component);
@@ -64,7 +64,7 @@ exports.P500Component = P500Component;
 
 /***/ }),
 
-/***/ 1420:
+/***/ 1421:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -87,7 +87,7 @@ var LoginComponent = (function () {
 }());
 LoginComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1468)
+        template: __webpack_require__(1469)
     }),
     __metadata("design:paramtypes", [])
 ], LoginComponent);
@@ -96,7 +96,7 @@ exports.LoginComponent = LoginComponent;
 
 /***/ }),
 
-/***/ 1421:
+/***/ 1422:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -119,7 +119,7 @@ var RegisterComponent = (function () {
 }());
 RegisterComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1469)
+        template: __webpack_require__(1470)
     }),
     __metadata("design:paramtypes", [])
 ], RegisterComponent);
@@ -128,7 +128,7 @@ exports.RegisterComponent = RegisterComponent;
 
 /***/ }),
 
-/***/ 1434:
+/***/ 1435:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -142,10 +142,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(64);
-var _404_component_1 = __webpack_require__(1418);
-var _500_component_1 = __webpack_require__(1419);
-var login_component_1 = __webpack_require__(1420);
-var register_component_1 = __webpack_require__(1421);
+var _404_component_1 = __webpack_require__(1419);
+var _500_component_1 = __webpack_require__(1420);
+var login_component_1 = __webpack_require__(1421);
+var register_component_1 = __webpack_require__(1422);
 var routes = [
     {
         path: '',
@@ -200,35 +200,35 @@ exports.PagesRoutingModule = PagesRoutingModule;
 
 /***/ }),
 
-/***/ 1466:
+/***/ 1467:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"clearfix\">\n          <h1 class=\"float-left display-3 mr-2\">404</h1>\n          <h4 class=\"pt-1\">Oops! You're lost.</h4>\n          <p class=\"text-muted\">The page you are looking for was not found.</p>\n        </div>\n        <div class=\"input-prepend input-group\">\n          <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\n          <span class=\"input-group-btn\">\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 1467:
+/***/ 1468:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"clearfix\">\n          <h1 class=\"float-left display-3 mr-2\">500</h1>\n          <h4 class=\"pt-1\">Houston, we have a problem!</h4>\n          <p class=\"text-muted\">The page you are looking for is temporarily unavailable.</p>\n        </div>\n        <div class=\"input-prepend input-group\">\n          <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\n          <span class=\"input-group-btn\">\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>  \n"
 
 /***/ }),
 
-/***/ 1468:
+/***/ 1469:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-8\">\n        <div class=\"card-group mb-0\">\n          <div class=\"card p-2\">\n            <div class=\"card-block\">\n              <h1>Login</h1>\n              <p class=\"text-muted\">Sign In to your account</p>\n              <div class=\"input-group mb-1\">\n                <span class=\"input-group-addon\"><i class=\"icon-user\"></i></span>\n                <input type=\"text\" class=\"form-control\" placeholder=\"Username\">\n              </div>\n              <div class=\"input-group mb-2\">\n                <span class=\"input-group-addon\"><i class=\"icon-lock\"></i></span>\n                <input type=\"password\" class=\"form-control\" placeholder=\"Password\">\n              </div>\n              <div class=\"row\">\n                <div class=\"col-6\">\n                  <button type=\"button\" class=\"btn btn-primary px-2\">Login</button>\n                </div>\n                <div class=\"col-6 text-right\">\n                  <button type=\"button\" class=\"btn btn-link px-0\">Forgot password?</button>\n                </div>\n              </div>\n            </div>\n          </div>\n          <div class=\"card card-inverse card-primary py-3 hidden-md-down\" style=\"width:44%\">\n            <div class=\"card-block text-center\">\n              <div>\n                <h2>Sign up</h2>\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>\n                <button type=\"button\" class=\"btn btn-primary active mt-1\">Register Now!</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 1469:
+/***/ 1470:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"card mx-2\">\n          <div class=\"card-block p-2\">\n            <h1>Register</h1>\n            <p class=\"text-muted\">Create your account</p>\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\"><i class=\"icon-user\"></i></span>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\">\n            </div>\n\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\">@</span>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Email\">\n            </div>\n\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\"><i class=\"icon-lock\"></i></span>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\">\n            </div>\n\n            <div class=\"input-group mb-2\">\n              <span class=\"input-group-addon\"><i class=\"icon-lock\"></i></span>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Repeat password\">\n            </div>\n\n            <button type=\"button\" class=\"btn btn-block btn-success\">Create Account</button>\n          </div>\n          <div class=\"card-footer p-2\">\n            <div class=\"row\">\n              <div class=\"col-6\">\n                <button class=\"btn btn-block btn-facebook\" type=\"button\"><span>facebook</span></button>\n              </div>\n              <div class=\"col-6\">\n                <button class=\"btn btn-block btn-twitter\" type=\"button\"><span>twitter</span></button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 943:
+/***/ 944:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -241,11 +241,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var _404_component_1 = __webpack_require__(1418);
-var _500_component_1 = __webpack_require__(1419);
-var login_component_1 = __webpack_require__(1420);
-var register_component_1 = __webpack_require__(1421);
-var pages_routing_module_1 = __webpack_require__(1434);
+var _404_component_1 = __webpack_require__(1419);
+var _500_component_1 = __webpack_require__(1420);
+var login_component_1 = __webpack_require__(1421);
+var register_component_1 = __webpack_require__(1422);
+var pages_routing_module_1 = __webpack_require__(1435);
 var PagesModule = (function () {
     function PagesModule() {
     }

@@ -1,6 +1,6 @@
 webpackJsonp([9,16],{
 
-/***/ 1406:
+/***/ 1407:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -454,7 +454,7 @@ var DashboardComponent = (function () {
 }());
 DashboardComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1454)
+        template: __webpack_require__(1455)
     })
 ], DashboardComponent);
 exports.DashboardComponent = DashboardComponent;
@@ -462,7 +462,7 @@ exports.DashboardComponent = DashboardComponent;
 
 /***/ }),
 
-/***/ 1429:
+/***/ 1430:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -476,7 +476,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(64);
-var dashboard_component_1 = __webpack_require__(1406);
+var dashboard_component_1 = __webpack_require__(1407);
 var routes = [
     {
         path: '',
@@ -502,14 +502,14 @@ exports.DashboardRoutingModule = DashboardRoutingModule;
 
 /***/ }),
 
-/***/ 1454:
+/***/ 1455:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"content-wrapper\"> \r\n\r\n</div>"
 
 /***/ }),
 
-/***/ 938:
+/***/ 939:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -522,10 +522,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var ng2_charts_1 = __webpack_require__(615);
+var ng2_charts_1 = __webpack_require__(616);
 // import { DropdownModule } from 'ng2-bootstrap/dropdown';
-var dashboard_component_1 = __webpack_require__(1406);
-var dashboard_routing_module_1 = __webpack_require__(1429);
+var dashboard_component_1 = __webpack_require__(1407);
+var dashboard_routing_module_1 = __webpack_require__(1430);
 var DashboardModule = (function () {
     function DashboardModule() {
     }

@@ -132,7 +132,7 @@ var FullLayoutComponent = (function () {
 FullLayoutComponent = __decorate([
     core_1.Component({
         selector: 'app-dashboard',
-        template: __webpack_require__(917)
+        template: __webpack_require__(918)
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object])
 ], FullLayoutComponent);
@@ -192,7 +192,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var login_service_1 = __webpack_require__(733);
+var login_service_1 = __webpack_require__(734);
 var router_1 = __webpack_require__(64);
 var LoginComponent = (function () {
     function LoginComponent(router, loginService) {
@@ -243,8 +243,8 @@ var LoginComponent = (function () {
 LoginComponent = __decorate([
     core_1.Component({
         selector: 'app-login',
-        template: __webpack_require__(918),
-        styles: [__webpack_require__(890)],
+        template: __webpack_require__(919),
+        styles: [__webpack_require__(891)],
         providers: [login_service_1.LoginService]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof login_service_1.LoginService !== "undefined" && login_service_1.LoginService) === "function" && _b || Object])
@@ -271,7 +271,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var register_service_1 = __webpack_require__(734);
+var register_service_1 = __webpack_require__(735);
 var router_1 = __webpack_require__(64);
 var RegisterComponent = (function () {
     function RegisterComponent(router, _registerService) {
@@ -303,8 +303,8 @@ var RegisterComponent = (function () {
 RegisterComponent = __decorate([
     core_1.Component({
         selector: 'app-register',
-        template: __webpack_require__(919),
-        styles: [__webpack_require__(891)],
+        template: __webpack_require__(920),
+        styles: [__webpack_require__(892)],
         providers: [register_service_1.RegisterService]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof register_service_1.RegisterService !== "undefined" && register_service_1.RegisterService) === "function" && _b || Object])
@@ -315,52 +315,52 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 589:
+/***/ 590:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"./chartjs/chartjs.module": [
-		935,
+		936,
 		10
 	],
 	"./components/components.module": [
-		936,
+		937,
 		5
 	],
 	"./crop-management/crop-management.module": [
-		937,
+		938,
 		1
 	],
 	"./dashboard/dashboard.module": [
-		938,
+		939,
 		9
 	],
 	"./equipment-management/equipment-management.module": [
-		939,
+		940,
 		0
 	],
 	"./icons/icons.module": [
-		940,
+		941,
 		7
 	],
 	"./input-management/input-management.module": [
-		941,
+		942,
 		4
 	],
 	"./land-management/land-management.module": [
-		942,
+		943,
 		3
 	],
 	"./pages/pages.module": [
-		943,
+		944,
 		6
 	],
 	"./user-management/user-management.module": [
-		944,
+		945,
 		2
 	],
 	"./widgets/widgets.module": [
-		945,
+		946,
 		8
 	]
 };
@@ -375,21 +375,21 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
 module.exports = webpackAsyncContext;
-webpackAsyncContext.id = 589;
+webpackAsyncContext.id = 590;
 
 
 /***/ }),
 
-/***/ 590:
+/***/ 591:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var platform_browser_dynamic_1 = __webpack_require__(700);
-var app_module_1 = __webpack_require__(731);
-var environment_1 = __webpack_require__(739);
+var platform_browser_dynamic_1 = __webpack_require__(701);
+var app_module_1 = __webpack_require__(732);
+var environment_1 = __webpack_require__(740);
 if (environment_1.environment.production) {
     core_1.enableProdMode();
 }
@@ -398,7 +398,7 @@ platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1
 
 /***/ }),
 
-/***/ 730:
+/***/ 731:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -428,7 +428,7 @@ exports.AppComponent = AppComponent;
 
 /***/ }),
 
-/***/ 731:
+/***/ 732:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -440,24 +440,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var platform_browser_1 = __webpack_require__(122);
+var platform_browser_1 = __webpack_require__(123);
 var core_1 = __webpack_require__(0);
 var common_1 = __webpack_require__(17);
-var forms_1 = __webpack_require__(27);
-var app_component_1 = __webpack_require__(730);
+var forms_1 = __webpack_require__(26);
+var app_component_1 = __webpack_require__(731);
 // import { DropdownModule } from 'ng2-bootstrap/dropdown';
 var tabs_1 = __webpack_require__(293);
-var nav_dropdown_directive_1 = __webpack_require__(737);
+var nav_dropdown_directive_1 = __webpack_require__(738);
 var activate_route_guard_1 = __webpack_require__(379);
 var deactivate_route_guard_1 = __webpack_require__(380);
-var ng2_charts_1 = __webpack_require__(615);
-var sidebar_directive_1 = __webpack_require__(738);
-var aside_directive_1 = __webpack_require__(735);
-var breadcrumb_component_1 = __webpack_require__(736);
-var ng2_bootstrap_1 = __webpack_require__(603);
+var ng2_charts_1 = __webpack_require__(616);
+var sidebar_directive_1 = __webpack_require__(739);
+var aside_directive_1 = __webpack_require__(736);
+var breadcrumb_component_1 = __webpack_require__(737);
+var ng2_bootstrap_1 = __webpack_require__(604);
 // Routing Module
-var app_routing_1 = __webpack_require__(732);
-var http_1 = __webpack_require__(121);
+var app_routing_1 = __webpack_require__(733);
+var http_1 = __webpack_require__(122);
 // Layouts
 var full_layout_component_1 = __webpack_require__(381);
 var simple_layout_component_1 = __webpack_require__(382);
@@ -509,7 +509,7 @@ exports.AppModule = AppModule;
 
 /***/ }),
 
-/***/ 732:
+/***/ 733:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -523,7 +523,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(64);
-var http_1 = __webpack_require__(121);
+var http_1 = __webpack_require__(122);
 // Layouts
 var full_layout_component_1 = __webpack_require__(381);
 var simple_layout_component_1 = __webpack_require__(382);
@@ -630,7 +630,7 @@ exports.AppRoutingModule = AppRoutingModule;
 
 /***/ }),
 
-/***/ 733:
+/***/ 734:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -646,7 +646,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var http_1 = __webpack_require__(121);
+var http_1 = __webpack_require__(122);
 var LoginService = (function () {
     function LoginService(http) {
         this.http = http;
@@ -681,7 +681,7 @@ var _a;
 
 /***/ }),
 
-/***/ 734:
+/***/ 735:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -697,7 +697,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var http_1 = __webpack_require__(121);
+var http_1 = __webpack_require__(122);
 var RegisterService = (function () {
     function RegisterService(http) {
         this.http = http;
@@ -729,7 +729,7 @@ var _a;
 
 /***/ }),
 
-/***/ 735:
+/***/ 736:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -774,7 +774,7 @@ exports.AsideToggleDirective = AsideToggleDirective;
 
 /***/ }),
 
-/***/ 736:
+/***/ 737:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -791,7 +791,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(64);
-__webpack_require__(285);
+__webpack_require__(183);
 var BreadcrumbsComponent = (function () {
     function BreadcrumbsComponent(router, route) {
         this.router = router;
@@ -834,7 +834,7 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 737:
+/***/ 738:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -899,7 +899,7 @@ var _a;
 
 /***/ }),
 
-/***/ 738:
+/***/ 739:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1015,7 +1015,7 @@ exports.SIDEBAR_TOGGLE_DIRECTIVES = [SidebarToggleDirective, SidebarOffCanvasClo
 
 /***/ }),
 
-/***/ 739:
+/***/ 740:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1032,28 +1032,10 @@ exports.environment = {
 
 /***/ }),
 
-/***/ 890:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(123)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 891:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(123)();
+exports = module.exports = __webpack_require__(124)();
 // imports
 
 
@@ -1069,6 +1051,24 @@ module.exports = module.exports.toString();
 /***/ }),
 
 /***/ 892:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(124)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 893:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -1303,39 +1303,39 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 892;
+webpackContext.id = 893;
 
-
-/***/ }),
-
-/***/ 917:
-/***/ (function(module, exports) {
-
-module.exports = "<header class=\"app-header navbar\">\r\n  <button class=\"navbar-toggler mobile-sidebar-toggler hidden-lg-up\" type=\"button\">&#9776;</button>\r\n  <a class=\"navbar-brand hidden-md-down\" href=\"#\"></a>\r\n \r\n  <ul class=\"nav navbar-nav hidden-md-down width\">\r\n    <li class=\"nav-item\">\r\n      <a class=\"nav-link navbar-toggler sidebar-toggler\" href=\"#\">&#9776;</a>\r\n    </li>\r\n\t  <li class=\"search\">\r\n\t  \t\r\n\t  \t<form action=\"#\" method=\"get\" class=\"topsearch-form pull-left\">\r\n        <div class=\"input-group\">\r\n          <input name=\"q\" class=\"form-control\" placeholder=\"Search here\" type=\"text\">\r\n          <span class=\"input-group-btn\">\r\n          <button type=\"submit\" name=\"search\" id=\"search-btn\" class=\"btn btn-flat\"><i class=\"fa fa-search\"></i> </button>\r\n          </span> </div>\r\n      </form>\r\n      \r\n\t  </li>\r\n  </ul>\r\n  <ul class=\"nav navbar-nav ml-auto\">\r\n   \r\n\t <li class=\"nav-item dropdown\" dropdown (onToggle)=\"toggled($event)\">\r\n      <a class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\" dropdownToggle>\r\n          All Market\r\n        </a>\r\n       <!-- <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\" id=\"navbarDropdownMenuLink\">\r\n          <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\">Action</a>\r\n          <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\">Another action</a>\r\n          <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\">Something else here</a>\r\n        </div> -->\r\n      </li>\r\n   \r\n   \r\n   \r\n   \r\n    <li class=\"nav-item\">\r\n      <a class=\"nav-link\" href=\"JavaScript:Void(0);\"><i class=\"fa fa-bell\"></i>\r\n      <span class=\"badge badge-pill badge-danger\"><!-- 5 --></span></a>\r\n    </li>\r\n   \r\n    <li class=\"nav-item\">\r\n      <a class=\"nav-link\" href=\"JavaScript:Void(0);\"><i class=\"fa fa-envelope\"></i>\r\n\t\t  <span class=\"badge badge-pill badge-danger\"><!-- 11 --></span>\r\n       </a>\r\n    </li>\r\n    <li class=\"nav-item dropdown removedropdwn\" dropdown (onToggle)=\"toggled($event)\">\r\n      <a class=\"nav-link\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\" dropdownToggle>\r\n          <img src=\"assets/img/avatars/6.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n\t\t  <i class=\"fa fa-ellipsis-v\"></i> \r\n      </a>\r\n      <div class=\"dropdown-menu dropdown-menu-right\">\r\n        <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\"><i class=\"fa fa-user\"></i> Profile</a>\r\n        <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\"><i class=\"fa fa-wrench\"></i> Setting</a>\r\n        <div class=\"divider\"></div>\r\n        <a class=\"dropdown-item\" (click)=\"logout()\" href=\"#\"><i class=\"fa fa-lock\"></i> Logout</a>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n</header>\r\n\r\n<div class=\"app-body\">\r\n  <div class=\"sidebar\">\r\n    <nav class=\"sidebar-nav\">\r\n      <ul class=\"nav panel-body\">\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" title=\"Dashboard\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"icon-dashboard\"></i><span> Dashboard</span></a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Logistic Partners\"> <i class=\"icon-logistic-partner\"></i> <span>Logistic Partners</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Channel Partners\"> <i class=\"icon-channel-partner\"></i> <span>Channel Partners</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Orders\"> <i class=\"icon-order\"></i> <span>Orders</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Category\"> <i class=\"fa fa-list-alt\"></i> <span>Category</span></a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Manufacturer\"> <i class=\"fa fa-cogs\"></i> <span>Manufacturer</span></a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Settings\"> <i class=\"icon-settings\"></i> <span>Settings</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Wishlist\"> <i class=\"fa fa-heart-o\"></i> <span>Wishlist</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"SMS\"> <i class=\"icon-sms\"></i> <span>SMS</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Email\"> <i class=\"fa fa-envelope-o\"></i> <span>Email</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Cart\"> <i class=\"icon-cart\"></i> <span>Cart</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Admin Roles\"> <i class=\"icon-user\"></i> <span>Admin Roles</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Blog\"> <i class=\"icon-post\"></i> <span>Blog</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Reports\"> <i class=\"icon-Shape-1194\"></i> <span>Reports</span></a> </li>\r\n      </ul>\r\n    </nav>\r\n  </div>\r\n\r\n  <!-- Main content -->\r\n  <main class=\"main\">\r\n\r\n    <div class=\"mainarea\">\r\n        <!-- top header -->\r\n        <div class=\"top-nav-header\">\r\n            <div class=\"row\">\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-green\" (click)=\"layout('crop')\" [ngClass]=\"{'active': active == 'crop'}\" [routerLink]=\"['/crop/list']\">\r\n                        <div class=\"icon\">                           \r\n                            <i class=\"icon-Shape-13\"></i>\r\n                        </div>\r\n                        <div class=\"inner\" title=\"Crops\">\r\n                          <p>Crops</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-aqua\" (click)=\"layout('input')\" [ngClass]=\"{'active': active == 'input'}\" [routerLink]=\"['/input/list']\">\r\n                        <div class=\"inner\" title=\"Inputs\">\r\n                            <p>Inputs</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"icon-Shape-18\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-red\" (click)=\"layout('equipments')\" [ngClass]=\"{'active': active == 'equipments'}\" [routerLink]=\"['/equipment/list']\">\r\n                        <div class=\"inner\" title=\"Equipments\">\r\n                            <p>Equipments</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"icon-Shape-19\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-yellow\" (click)=\"layout('land')\" [ngClass]=\"{'active': active == 'land'}\" [routerLink]=\"['/land/list']\">\r\n                        <div class=\"inner\" title=\"Lands\">\r\n                          <p>Lands</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"icon-Shape-21\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col --> \r\n\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-purple\">\r\n                        <div class=\"inner\" title=\"Services\" style=\"cursor:not-allowed;\">\r\n                          <p>Services</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"icon-Shape-22\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col --> \r\n\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\">\r\n                    <div class=\"small-box bg-teal\" (click)=\"layout('user')\" [ngClass]=\"{'active': active == 'user'}\" [routerLink]=\"['/user/list']\">\r\n                        <div class=\"inner\" title=\"Users\">\r\n                            <p>Users</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"fa fa-user\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col --> \r\n            </div>\r\n        </div>\r\n\r\n       \r\n\r\n        <div class=\"main-content\">\r\n\r\n        <div class=\"content-header\">\r\n           <!-- Breadcrumb -->\r\n        <ol class=\"breadcrumb\">\r\n          <breadcrumbs></breadcrumbs>\r\n        </ol>\r\n        </div>\r\n            <router-outlet></router-outlet>\r\n        </div>\r\n    </div><!-- /.conainer-fluid -->\r\n  </main>\r\n\r\n  <aside class=\"aside-menu\">\r\n    <tabset>\r\n      <tab>\r\n        <template tabHeading><i class=\"icon-list\"></i></template>\r\n        <div class=\"callout m-0 py-h text-muted text-center bg-faded text-uppercase\">\r\n          <small><b>Today</b></small>\r\n        </div>\r\n        <hr class=\"transparent mx-1 my-0\">\r\n        <div class=\"callout callout-warning m-0 py-1\">\r\n          <div class=\"avatar float-right\">\r\n            <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n          </div>\r\n          <div>Meeting with <strong>Lucas</strong></div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 1 - 3pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-location-pin\"></i>&nbsp; Palo Alto, CA </small>\r\n        </div>\r\n        <hr class=\"mx-1 my-0\">\r\n        <div class=\"callout callout-info m-0 py-1\">\r\n          <div class=\"avatar float-right\">\r\n            <img src=\"assets/img/avatars/4.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n          </div>\r\n          <div>Skype with <strong>Megan</strong></div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 4 - 5pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-social-skype\"></i>&nbsp; On-line </small>\r\n        </div>\r\n        <hr class=\"transparent mx-1 my-0\">\r\n        <div class=\"callout m-0 py-h text-muted text-center bg-faded text-uppercase\">\r\n          <small><b>Tomorrow</b></small>\r\n        </div>\r\n        <hr class=\"transparent mx-1 my-0\">\r\n        <div class=\"callout callout-danger m-0 py-1\">\r\n          <div>New UI Project - <strong>deadline</strong></div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 10 - 11pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-home\"></i>&nbsp; creativeLabs HQ </small>\r\n          <div class=\"avatars-stack mt-h\">\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/2.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/3.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/4.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/5.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/6.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <hr class=\"mx-1 my-0\">\r\n        <div class=\"callout callout-success m-0 py-1\">\r\n          <div><strong>#10 Startups.Garden</strong> Meetup</div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 1 - 3pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-location-pin\"></i>&nbsp; Palo Alto, CA </small>\r\n        </div>\r\n        <hr class=\"mx-1 my-0\">\r\n        <div class=\"callout callout-primary m-0 py-1\">\r\n          <div><strong>Team meeting</strong></div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 4 - 6pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-home\"></i>&nbsp; creativeLabs HQ </small>\r\n          <div class=\"avatars-stack mt-h\">\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/2.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/3.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/4.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/5.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/6.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/8.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <hr class=\"mx-1 my-0\">\r\n      </tab>\r\n      <tab>\r\n        <template tabHeading><i class=\"icon-speech\"></i></template>\r\n        <div class=\"p-1\">\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n          <hr>\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n          <hr>\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n          <hr>\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n          <hr>\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n        </div>\r\n      </tab>\r\n      <tab>\r\n        <template tabHeading><i class=\"icon-settings\"></i></template>\r\n        <div class=\"p-1\">\r\n          <h6>Settings</h6>\r\n\r\n          <div class=\"aside-options\">\r\n            <div class=\"clearfix mt-2\">\r\n              <small><b>Option 1</b></small>\r\n              <label class=\"switch switch-text switch-pill switch-success switch-sm float-right\">\r\n                <input type=\"checkbox\" class=\"switch-input\" checked>\r\n                <span class=\"switch-label\" data-on=\"On\" data-off=\"Off\"></span>\r\n                <span class=\"switch-handle\"></span>\r\n              </label>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"aside-options\">\r\n            <div class=\"clearfix mt-1\">\r\n              <small><b>Option 2</b></small>\r\n              <label class=\"switch switch-text switch-pill switch-success switch-sm float-right\">\r\n                <input type=\"checkbox\" class=\"switch-input\">\r\n                <span class=\"switch-label\" data-on=\"On\" data-off=\"Off\"></span>\r\n                <span class=\"switch-handle\"></span>\r\n              </label>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"aside-options\">\r\n            <div class=\"clearfix mt-1\">\r\n              <small><b>Option 3</b></small>\r\n              <label class=\"switch switch-text switch-pill switch-success switch-sm float-right\">\r\n                <input type=\"checkbox\" class=\"switch-input\">\r\n                <span class=\"switch-label\" data-on=\"On\" data-off=\"Off\"></span>\r\n                <span class=\"switch-handle\"></span>\r\n              </label>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"aside-options\">\r\n            <div class=\"clearfix mt-1\">\r\n              <small><b>Option 4</b></small>\r\n              <label class=\"switch switch-text switch-pill switch-success switch-sm float-right\">\r\n                <input type=\"checkbox\" class=\"switch-input\" checked>\r\n                <span class=\"switch-label\" data-on=\"On\" data-off=\"Off\"></span>\r\n                <span class=\"switch-handle\"></span>\r\n              </label>\r\n            </div>\r\n          </div>\r\n\r\n          <hr>\r\n          <h6>System Utilization</h6>\r\n\r\n          <div class=\"text-uppercase mb-q mt-2\"><small><b>CPU Usage</b></small></div>\r\n          <div class=\"progress progress-xs\">\r\n            <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 25%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n          </div>\r\n          <small class=\"text-muted\">348 Processes. 1/4 Cores.</small>\r\n\r\n          <div class=\"text-uppercase mb-q mt-h\"><small><b>Memory Usage</b></small></div>\r\n          <div class=\"progress progress-xs\">\r\n            <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 70%\" aria-valuenow=\"70\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n          </div>\r\n          <small class=\"text-muted\">11444GB/16384MB</small>\r\n\r\n          <div class=\"text-uppercase mb-q mt-h\"><small><b>SSD 1 Usage</b></small></div>\r\n          <div class=\"progress progress-xs\">\r\n            <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 95%\" aria-valuenow=\"95\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n          </div>\r\n          <small class=\"text-muted\">243GB/256GB</small>\r\n\r\n          <div class=\"text-uppercase mb-q mt-h\"><small><b>SSD 2 Usage</b></small></div>\r\n          <div class=\"progress progress-xs\">\r\n            <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 10%\" aria-valuenow=\"10\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n          </div>\r\n          <small class=\"text-muted\">25GB/256GB</small>\r\n        </div>\r\n      </tab>\r\n    </tabset>\r\n  </aside>\r\n</div>\r\n\r\n<!-- <footer class=\"app-footer\">\r\n</footer> -->\r\n"
 
 /***/ }),
 
 /***/ 918:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Loader div -->\n<div *ngIf=\"isPageLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div>\n</div>\n<section class=\"login-page\"></section>\n<div class=\"login-box\">\n    <!-- /.login-logo -->\n    <div class=\"login-box-body\">\n        <div class=\"login-logo\">\n            <img src=\"assets/img/logo.png\" alt=\"logo\">\n        </div>\n        <form role=\"form\" #loginForm=\"ngForm\" (ngSubmit)=\"login()\">\n            <div class=\"text-center\" *ngIf=\"err_message\">\n                <span class=\"text-danger\">\n                    {{err_message}}\n                </span>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Email</label>\n                <input type=\"text\" name=\"username\" class=\"form-control\" [(ngModel)]=\"user.username\" (ngModelChange)=\"checkemail(user.username);err_message=''\" #username=\"ngModel\" autofocus required>\n                <li *ngIf=\"username.errors && username.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!username.errors.required\">Email is required</span>\n                </li>\n                <li *ngIf=\"!username.errors && !valid_email\">\n                    <span class=\"text-danger\">Email id is not valid</span>\n                </li>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Password</label>\n                <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\" #password=\"ngModel\" (ngModelChange)=\"err_message=''\" required>\n                <li *ngIf=\"password.errors && password.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!password.errors.required\">Password is required</span>\n                </li>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-12 col-12\">\n                    <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" [disabled]=\"!loginForm.valid || !valid_email\">Login</button>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-6 col-6\">\n                    <div class=\"custome-check loginpage\">\n                        <input id=\"option5\" name=\"status\" type=\"checkbox\" [(ngModel)]=\"remember_me\">\n                        <label for=\"option5\">Remember me</label>\n                    </div>\n                </div>\n                <!--  <div class=\"col-sm-6 col-6\">\n                    <a class=\"forgotlink\" href=\"#\">Forgot password</a>\n                </div>\n              <div class=\"col-sm-12 col-12 text-center\">\n                    Don't have an account. <a class=\"\" routerLinkActive=\"active\" [routerLink]=\"['/register']\">Click here</a>\n                </div> -->\n            </div> \n        </form>\n    </div>\n    <!-- /.login-box-body -->\n</div>\n"
+module.exports = "<header class=\"app-header navbar\">\r\n  <button class=\"navbar-toggler mobile-sidebar-toggler hidden-lg-up\" type=\"button\">&#9776;</button>\r\n  <a class=\"navbar-brand hidden-md-down\" href=\"#\"></a>\r\n \r\n  <ul class=\"nav navbar-nav hidden-md-down width\">\r\n    <li class=\"nav-item\">\r\n      <a class=\"nav-link navbar-toggler sidebar-toggler\" href=\"#\">&#9776;</a>\r\n    </li>\r\n\t  <li class=\"search\">\r\n\t  \t\r\n\t  \t<form action=\"#\" method=\"get\" class=\"topsearch-form pull-left\">\r\n        <div class=\"input-group\">\r\n          <input name=\"q\" class=\"form-control\" placeholder=\"Search here\" type=\"text\">\r\n          <span class=\"input-group-btn\">\r\n          <button type=\"submit\" name=\"search\" id=\"search-btn\" class=\"btn btn-flat\"><i class=\"fa fa-search\"></i> </button>\r\n          </span> </div>\r\n      </form>\r\n      \r\n\t  </li>\r\n  </ul>\r\n  <ul class=\"nav navbar-nav ml-auto\">\r\n   \r\n\t <li class=\"nav-item dropdown\" dropdown (onToggle)=\"toggled($event)\">\r\n      <a class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\" dropdownToggle>\r\n          All Market\r\n        </a>\r\n       <!-- <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\" id=\"navbarDropdownMenuLink\">\r\n          <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\">Action</a>\r\n          <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\">Another action</a>\r\n          <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\">Something else here</a>\r\n        </div> -->\r\n      </li>\r\n   \r\n   \r\n   \r\n   \r\n    <li class=\"nav-item\">\r\n      <a class=\"nav-link\" href=\"JavaScript:Void(0);\"><i class=\"fa fa-bell\"></i>\r\n      <span class=\"badge badge-pill badge-danger\"><!-- 5 --></span></a>\r\n    </li>\r\n   \r\n    <li class=\"nav-item\">\r\n      <a class=\"nav-link\" href=\"JavaScript:Void(0);\"><i class=\"fa fa-envelope\"></i>\r\n\t\t  <span class=\"badge badge-pill badge-danger\"><!-- 11 --></span>\r\n       </a>\r\n    </li>\r\n    <li class=\"nav-item dropdown removedropdwn\" dropdown (onToggle)=\"toggled($event)\">\r\n      <a class=\"nav-link\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\" dropdownToggle>\r\n          <img src=\"assets/img/avatars/6.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n\t\t  <i class=\"fa fa-ellipsis-v\"></i> \r\n      </a>\r\n      <div class=\"dropdown-menu dropdown-menu-right\">\r\n        <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\"><i class=\"fa fa-user\"></i> Profile</a>\r\n        <a class=\"dropdown-item\" href=\"JavaScript:Void(0);\"><i class=\"fa fa-wrench\"></i> Setting</a>\r\n        <div class=\"divider\"></div>\r\n        <a class=\"dropdown-item\" (click)=\"logout()\" href=\"#\"><i class=\"fa fa-lock\"></i> Logout</a>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n</header>\r\n\r\n<div class=\"app-body\">\r\n  <div class=\"sidebar\">\r\n    <nav class=\"sidebar-nav\">\r\n      <ul class=\"nav panel-body\">\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" title=\"Dashboard\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"icon-dashboard\"></i><span> Dashboard</span></a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Logistic Partners\"> <i class=\"icon-logistic-partner\"></i> <span>Logistic Partners</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Channel Partners\"> <i class=\"icon-channel-partner\"></i> <span>Channel Partners</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Orders\"> <i class=\"icon-order\"></i> <span>Orders</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Category\"> <i class=\"fa fa-list-alt\"></i> <span>Category</span></a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Manufacturer\"> <i class=\"fa fa-cogs\"></i> <span>Manufacturer</span></a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Settings\"> <i class=\"icon-settings\"></i> <span>Settings</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Wishlist\"> <i class=\"fa fa-heart-o\"></i> <span>Wishlist</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"SMS\"> <i class=\"icon-sms\"></i> <span>SMS</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Email\"> <i class=\"fa fa-envelope-o\"></i> <span>Email</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Cart\"> <i class=\"icon-cart\"></i> <span>Cart</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Admin Roles\"> <i class=\"icon-user\"></i> <span>Admin Roles</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Blog\"> <i class=\"icon-post\"></i> <span>Blog</span> </a> </li>\r\n        <li class=\"nav-item\"> <a class=\"nav-link\" href=\"javascript:void(0)\" title=\"Reports\"> <i class=\"icon-Shape-1194\"></i> <span>Reports</span></a> </li>\r\n      </ul>\r\n    </nav>\r\n  </div>\r\n\r\n  <!-- Main content -->\r\n  <main class=\"main\">\r\n\r\n    <div class=\"mainarea\">\r\n        <!-- top header -->\r\n        <div class=\"top-nav-header\">\r\n            <div class=\"row\">\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-green\" (click)=\"layout('crop')\" [ngClass]=\"{'active': active == 'crop'}\" [routerLink]=\"['/crop/list']\">\r\n                        <div class=\"icon\">                           \r\n                            <i class=\"icon-Shape-13\"></i>\r\n                        </div>\r\n                        <div class=\"inner\" title=\"Crops\">\r\n                          <p>Crops</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-aqua\" (click)=\"layout('input')\" [ngClass]=\"{'active': active == 'input'}\" [routerLink]=\"['/input/list']\">\r\n                        <div class=\"inner\" title=\"Inputs\">\r\n                            <p>Inputs</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"icon-Shape-18\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-red\" (click)=\"layout('equipments')\" [ngClass]=\"{'active': active == 'equipments'}\" [routerLink]=\"['/equipment/list']\">\r\n                        <div class=\"inner\" title=\"Equipments\">\r\n                            <p>Equipments</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"icon-Shape-19\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-yellow\" (click)=\"layout('land')\" [ngClass]=\"{'active': active == 'land'}\" [routerLink]=\"['/land/list']\">\r\n                        <div class=\"inner\" title=\"Lands\">\r\n                          <p>Lands</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"icon-Shape-21\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col --> \r\n\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\"> \r\n                    <!-- small box -->\r\n                    <div class=\"small-box bg-purple\">\r\n                        <div class=\"inner\" title=\"Services\" style=\"cursor:not-allowed;\">\r\n                          <p>Services</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"icon-Shape-22\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col --> \r\n\r\n                <!-- col -->\r\n                <div class=\"col-lg-2 col-6\">\r\n                    <div class=\"small-box bg-teal\" (click)=\"layout('user')\" [ngClass]=\"{'active': active == 'user'}\" [routerLink]=\"['/user/list']\">\r\n                        <div class=\"inner\" title=\"Users\">\r\n                            <p>Users</p>\r\n                        </div>\r\n                        <div class=\"icon\">\r\n                            <i class=\"fa fa-user\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- col --> \r\n            </div>\r\n        </div>\r\n\r\n       \r\n\r\n        <div class=\"main-content\">\r\n\r\n        <div class=\"content-header\">\r\n           <!-- Breadcrumb -->\r\n        <ol class=\"breadcrumb\">\r\n          <breadcrumbs></breadcrumbs>\r\n        </ol>\r\n        </div>\r\n            <router-outlet></router-outlet>\r\n        </div>\r\n    </div><!-- /.conainer-fluid -->\r\n  </main>\r\n\r\n  <aside class=\"aside-menu\">\r\n    <tabset>\r\n      <tab>\r\n        <template tabHeading><i class=\"icon-list\"></i></template>\r\n        <div class=\"callout m-0 py-h text-muted text-center bg-faded text-uppercase\">\r\n          <small><b>Today</b></small>\r\n        </div>\r\n        <hr class=\"transparent mx-1 my-0\">\r\n        <div class=\"callout callout-warning m-0 py-1\">\r\n          <div class=\"avatar float-right\">\r\n            <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n          </div>\r\n          <div>Meeting with <strong>Lucas</strong></div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 1 - 3pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-location-pin\"></i>&nbsp; Palo Alto, CA </small>\r\n        </div>\r\n        <hr class=\"mx-1 my-0\">\r\n        <div class=\"callout callout-info m-0 py-1\">\r\n          <div class=\"avatar float-right\">\r\n            <img src=\"assets/img/avatars/4.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n          </div>\r\n          <div>Skype with <strong>Megan</strong></div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 4 - 5pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-social-skype\"></i>&nbsp; On-line </small>\r\n        </div>\r\n        <hr class=\"transparent mx-1 my-0\">\r\n        <div class=\"callout m-0 py-h text-muted text-center bg-faded text-uppercase\">\r\n          <small><b>Tomorrow</b></small>\r\n        </div>\r\n        <hr class=\"transparent mx-1 my-0\">\r\n        <div class=\"callout callout-danger m-0 py-1\">\r\n          <div>New UI Project - <strong>deadline</strong></div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 10 - 11pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-home\"></i>&nbsp; creativeLabs HQ </small>\r\n          <div class=\"avatars-stack mt-h\">\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/2.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/3.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/4.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/5.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/6.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <hr class=\"mx-1 my-0\">\r\n        <div class=\"callout callout-success m-0 py-1\">\r\n          <div><strong>#10 Startups.Garden</strong> Meetup</div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 1 - 3pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-location-pin\"></i>&nbsp; Palo Alto, CA </small>\r\n        </div>\r\n        <hr class=\"mx-1 my-0\">\r\n        <div class=\"callout callout-primary m-0 py-1\">\r\n          <div><strong>Team meeting</strong></div>\r\n          <small class=\"text-muted mr-1\"><i class=\"icon-calendar\"></i>&nbsp; 4 - 6pm</small>\r\n          <small class=\"text-muted\"><i class=\"icon-home\"></i>&nbsp; creativeLabs HQ </small>\r\n          <div class=\"avatars-stack mt-h\">\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/2.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/3.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/4.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/5.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/6.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n            <div class=\"avatar avatar-xs\">\r\n              <img src=\"assets/img/avatars/8.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <hr class=\"mx-1 my-0\">\r\n      </tab>\r\n      <tab>\r\n        <template tabHeading><i class=\"icon-speech\"></i></template>\r\n        <div class=\"p-1\">\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n          <hr>\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n          <hr>\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n          <hr>\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n          <hr>\r\n          <div class=\"message\">\r\n            <div class=\"py-1 pb-3 mr-1 float-left\">\r\n              <div class=\"avatar\">\r\n                <img src=\"assets/img/avatars/7.jpg\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\">\r\n                <span class=\"avatar-status badge-success\"></span>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lukasz Holeczek</small>\r\n              <small class=\"text-muted float-right mt-q\">1:52 PM</small>\r\n            </div>\r\n            <div class=\"text-truncate font-weight-bold\">Lorem ipsum dolor sit amet</div>\r\n            <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>\r\n          </div>\r\n        </div>\r\n      </tab>\r\n      <tab>\r\n        <template tabHeading><i class=\"icon-settings\"></i></template>\r\n        <div class=\"p-1\">\r\n          <h6>Settings</h6>\r\n\r\n          <div class=\"aside-options\">\r\n            <div class=\"clearfix mt-2\">\r\n              <small><b>Option 1</b></small>\r\n              <label class=\"switch switch-text switch-pill switch-success switch-sm float-right\">\r\n                <input type=\"checkbox\" class=\"switch-input\" checked>\r\n                <span class=\"switch-label\" data-on=\"On\" data-off=\"Off\"></span>\r\n                <span class=\"switch-handle\"></span>\r\n              </label>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"aside-options\">\r\n            <div class=\"clearfix mt-1\">\r\n              <small><b>Option 2</b></small>\r\n              <label class=\"switch switch-text switch-pill switch-success switch-sm float-right\">\r\n                <input type=\"checkbox\" class=\"switch-input\">\r\n                <span class=\"switch-label\" data-on=\"On\" data-off=\"Off\"></span>\r\n                <span class=\"switch-handle\"></span>\r\n              </label>\r\n            </div>\r\n            <div>\r\n              <small class=\"text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"aside-options\">\r\n            <div class=\"clearfix mt-1\">\r\n              <small><b>Option 3</b></small>\r\n              <label class=\"switch switch-text switch-pill switch-success switch-sm float-right\">\r\n                <input type=\"checkbox\" class=\"switch-input\">\r\n                <span class=\"switch-label\" data-on=\"On\" data-off=\"Off\"></span>\r\n                <span class=\"switch-handle\"></span>\r\n              </label>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"aside-options\">\r\n            <div class=\"clearfix mt-1\">\r\n              <small><b>Option 4</b></small>\r\n              <label class=\"switch switch-text switch-pill switch-success switch-sm float-right\">\r\n                <input type=\"checkbox\" class=\"switch-input\" checked>\r\n                <span class=\"switch-label\" data-on=\"On\" data-off=\"Off\"></span>\r\n                <span class=\"switch-handle\"></span>\r\n              </label>\r\n            </div>\r\n          </div>\r\n\r\n          <hr>\r\n          <h6>System Utilization</h6>\r\n\r\n          <div class=\"text-uppercase mb-q mt-2\"><small><b>CPU Usage</b></small></div>\r\n          <div class=\"progress progress-xs\">\r\n            <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 25%\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n          </div>\r\n          <small class=\"text-muted\">348 Processes. 1/4 Cores.</small>\r\n\r\n          <div class=\"text-uppercase mb-q mt-h\"><small><b>Memory Usage</b></small></div>\r\n          <div class=\"progress progress-xs\">\r\n            <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 70%\" aria-valuenow=\"70\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n          </div>\r\n          <small class=\"text-muted\">11444GB/16384MB</small>\r\n\r\n          <div class=\"text-uppercase mb-q mt-h\"><small><b>SSD 1 Usage</b></small></div>\r\n          <div class=\"progress progress-xs\">\r\n            <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 95%\" aria-valuenow=\"95\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n          </div>\r\n          <small class=\"text-muted\">243GB/256GB</small>\r\n\r\n          <div class=\"text-uppercase mb-q mt-h\"><small><b>SSD 2 Usage</b></small></div>\r\n          <div class=\"progress progress-xs\">\r\n            <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 10%\" aria-valuenow=\"10\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n          </div>\r\n          <small class=\"text-muted\">25GB/256GB</small>\r\n        </div>\r\n      </tab>\r\n    </tabset>\r\n  </aside>\r\n</div>\r\n\r\n<!-- <footer class=\"app-footer\">\r\n</footer> -->\r\n"
 
 /***/ }),
 
 /***/ 919:
 /***/ (function(module, exports) {
 
+module.exports = "<!-- Loader div -->\n<div *ngIf=\"isPageLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div>\n</div>\n<section class=\"login-page\"></section>\n<div class=\"login-box\">\n    <!-- /.login-logo -->\n    <div class=\"login-box-body\">\n        <div class=\"login-logo\">\n            <img src=\"assets/img/logo.png\" alt=\"logo\">\n        </div>\n        <form role=\"form\" #loginForm=\"ngForm\" (ngSubmit)=\"login()\">\n            <div class=\"text-center\" *ngIf=\"err_message\">\n                <span class=\"text-danger\">\n                    {{err_message}}\n                </span>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Email</label>\n                <input type=\"text\" name=\"username\" class=\"form-control\" [(ngModel)]=\"user.username\" (ngModelChange)=\"checkemail(user.username);err_message=''\" #username=\"ngModel\" autofocus required>\n                <li *ngIf=\"username.errors && username.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!username.errors.required\">Email is required</span>\n                </li>\n                <li *ngIf=\"!username.errors && !valid_email\">\n                    <span class=\"text-danger\">Email id is not valid</span>\n                </li>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Password</label>\n                <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\" #password=\"ngModel\" (ngModelChange)=\"err_message=''\" required>\n                <li *ngIf=\"password.errors && password.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!password.errors.required\">Password is required</span>\n                </li>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-12 col-12\">\n                    <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" [disabled]=\"!loginForm.valid || !valid_email\">Login</button>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-6 col-6\">\n                    <div class=\"custome-check loginpage\">\n                        <input id=\"option5\" name=\"status\" type=\"checkbox\" [(ngModel)]=\"remember_me\">\n                        <label for=\"option5\">Remember me</label>\n                    </div>\n                </div>\n                <!--  <div class=\"col-sm-6 col-6\">\n                    <a class=\"forgotlink\" href=\"#\">Forgot password</a>\n                </div>\n              <div class=\"col-sm-12 col-12 text-center\">\n                    Don't have an account. <a class=\"\" routerLinkActive=\"active\" [routerLink]=\"['/register']\">Click here</a>\n                </div> -->\n            </div> \n        </form>\n    </div>\n    <!-- /.login-box-body -->\n</div>\n"
+
+/***/ }),
+
+/***/ 920:
+/***/ (function(module, exports) {
+
 module.exports = "<section class=\"login-page overlay\"></section>\n<div class=\"register-box\">\n    <!-- /.login-logo -->\n    <div class=\"login-box-body\">\n        <div class=\"login-logo\">\n            <img src=\"assets/img/logo.png\" alt=\"logo\">\n        </div>\n        <form role=\"form\" (ngSubmit)=\"onSubmit()\" #registerForm=\"ngForm\">\n            <div class=\"form-group has-feedback\">\n                <label>Full name</label>\n                <input type=\"text\" name=\"name\" class=\"form-control\" [(ngModel)]=\"user.name\" #name=\"ngModel\" required>\n                <li *ngIf=\"name.errors && name.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!name.errors.required\">Full Name is required</span>\n                </li>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Email</label>\n                <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>\n                <input type=\"email\" name=\"email\" class=\"form-control\" [(ngModel)]=\"user.email\" (ngModelChange)=\"checkemail(user.email)\" #email=\"ngModel\" required>\n                <li *ngIf=\"email.errors && email.touched && valid_email\">\n                    <span class=\"text-danger\" [hidden]=\"!email.errors.required\">Email is required</span>\n                </li>\n                <li *ngIf=\"!valid_email\">\n                    <span class=\"text-danger\">Email id is not valid</span>\n                </li>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Password</label>\n                <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\" #password=\"ngModel\" minlength=\"8\" required>\n                <li *ngIf=\"password.errors && password.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!password.errors.required\">Password is required</span>\n                    <span class=\"text-danger\" [hidden]=\"!password.errors.minlength\">Minimum 8 character is Required</span>\n                </li>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Confirm Password</label>\n                <span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>\n                <input type=\"password\" name=\"confirmPassword\" class=\"form-control\" [(ngModel)]=\"user.confirmPassword\" minlength=\"8\" #confirmPassword=\"ngModel\" required>\n                <li *ngIf=\"confirmPassword.errors && confirmPassword.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!confirmPassword.errors.required\">Confirm Password is required</span>\n                    <span class=\"text-danger\" [hidden]=\"!confirmPassword.errors.minlength\">Minimum 8 character Required</span>\n                </li>\n                <li *ngIf=\"confirmPassword.touched && user.confirmPassword != user.password\" [hidden]=\"confirmPassword.errors && confirmPassword.errors.required\">\n                    <span class=\"text-danger\">Password and confirm password not matched..</span>\n                </li>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" [disabled]=\"!registerForm.valid || (user.confirmPassword != user.password)\">Register</button>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-6 col-sm-6\">\n                    <div class=\"custome-check loginpage\">\n                        <input id=\"option5\" name=\"terms\" type=\"checkbox\" #terms=\"ngModel\" [(ngModel)]=\"term\" required>\n                        <label for=\"option5\">I agree to the terms.</label>\n                        <li *ngIf=\"term.errors && term.touched\">\n                            <span class=\"text-danger\" [hidden]=\"!term.errors.required\">Plese Select term and conditions</span>\n                        </li>\n                    </div>\n                </div>\n                <!-- /.col -->\n                <div class=\"col-6 col-sm-6 text-right\">\n                    <a class=\"forgotlink\" routerLinkActive=\"active\" [routerLink]=\"['/login']\">I already have membership.</a>\n                </div>\n                <!-- /.col -->\n            </div>\n        </form>\n    </div>\n    <!-- /.login-box-body -->\n</div>\n\n\n<!-- <div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"card mx-2\">\n          <div class=\"card-block p-2\">\n            <h1>Register</h1>\n            <p class=\"text-muted\">Create your account</p>\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\"><i class=\"icon-user\"></i></span>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\">\n            </div>\n\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\">@</span>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Email\">\n            </div>\n\n            <div class=\"input-group mb-1\">\n              <span class=\"input-group-addon\"><i class=\"icon-lock\"></i></span>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\">\n            </div>\n\n            <div class=\"input-group mb-2\">\n              <span class=\"input-group-addon\"><i class=\"icon-lock\"></i></span>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Repeat password\">\n            </div>\n\n            <button type=\"button\" class=\"btn btn-block btn-success\">Create Account</button>\n          </div>\n          <div class=\"card-footer p-2\">\n            <div class=\"row\">\n              <div class=\"col-6\">\n                <button class=\"btn btn-block btn-facebook\" type=\"button\"><span>facebook</span></button>\n              </div>\n              <div class=\"col-6\">\n                <button class=\"btn btn-block btn-twitter\" type=\"button\"><span>twitter</span></button>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n -->\n"
 
 /***/ }),
 
-/***/ 931:
+/***/ 932:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(590);
+module.exports = __webpack_require__(591);
 
 
 /***/ })
 
-},[931]);
+},[932]);
 //# sourceMappingURL=main.bundle.js.map
