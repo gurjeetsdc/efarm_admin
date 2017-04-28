@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
 // import { FormGroup, FormBuilder ,Validators } from '@angular/forms';
 
 import { EquipmentService } from '../services/equipment.service';
@@ -15,8 +16,7 @@ export class AddUpdateEquipmentComponent {
                             category: '',
                             companyManufacturer: '',
                             model: '',
-                            modelyear: '',
-                            enginepower: '',
+                            modelyear: '',                            
                             rentSell: 'rent',
                             rate: '',
                             usage: '',
@@ -49,13 +49,27 @@ export class AddUpdateEquipmentComponent {
         this.equipmentID = _activateRouter.snapshot.params['id'];        
         
         if( this.equipmentID ) {
-            this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { this.equipment = res; this.action = 'Edit'; this.isLoading = false;}, err => {});
+            this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { 
+                        this.equipment = res; this.action = 'Edit'; this.isLoading = false;
+                    }, 
+                    err => {
+                        this.checkAccessToken(err);
+                    });
         }else{
             this.isLoading = false;
         }
 
-        this._equipmentService.getAllCategories().subscribe( res => { this.category = res; console.log(this.category) }, err => {});
-        this._equipmentService.getUsers().subscribe( res => { this.users = res; }, err => {});
+        this._equipmentService.getAllCategories().subscribe( res => { 
+                this.category = res; console.log(this.category) 
+            }, 
+            err => {
+                this.checkAccessToken(err);
+            });
+        this._equipmentService.getUsers().subscribe( res => { 
+                this.users = res; }, 
+            err => {
+                this.checkAccessToken(err);     
+            });
         
          
         /*create years array. */
@@ -83,8 +97,7 @@ export class AddUpdateEquipmentComponent {
                             category: '',
                             companyManufacturer: '',
                             model: '',
-                            modelyear: '',
-                            enginepower: '',
+                            modelyear: '',                            
                             rentSell: 'rent',
                             rate: '',
                             usage: '',
@@ -111,6 +124,9 @@ export class AddUpdateEquipmentComponent {
             this.clearEquipment();
             this._router.navigate(['/equipment/list', {data: "success"} ]);
             console.log(this.response)
+        },
+        err => {
+            this.checkAccessToken(err);
         });      
     	
     }
@@ -127,13 +143,28 @@ export class AddUpdateEquipmentComponent {
             this.showMessage = true;
             
 
-            this.clearEquipment();
-            
+            this.clearEquipment();            
             this._router.navigate(['/equipment/list', {data: "success"} ]);
+        },
+        err =>{
+            this.checkAccessToken(err);
         }); 
     }   
 
     closeMessage() {
         this.showMessage = false;
-    } 
+    }
+
+    checkAccessToken( err ): void {
+        console.log(err);
+        let status     = err.status;
+        let statusText = err.statusText;
+
+        if( (status == 401 && statusText == 'Unauthorized')) {
+            localStorage.removeItem('user');
+            this._router.navigate(['/login', {data: true}]);
+        }else {
+            console.log('Something unexpected happened, please try again later.');
+        }        
+    }   
 }

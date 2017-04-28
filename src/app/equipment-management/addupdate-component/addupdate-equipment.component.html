@@ -24,31 +24,57 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-name">Equipment Name</label>
-                            <input type="text" autofocus id="name" name="name"  class="form-control" [(ngModel)]="equipment.name" required>                           
+                            <input type="text" autofocus id="name"  maxlength="20" name="name" #name="ngModel" pattern="[A-Za-z0-9-]*" class="form-control" [(ngModel)]="equipment.name" required>
+
+                            <p>{{equipment.name}}</p>
+                            <div class="error-block">
+                                <small *ngIf="name.errors?.required && name.touched" class="text-danger">
+                                    Name is required.
+                                </small>                          
+                                <small *ngIf="name.errors?.maxlength && name.touched" class="text-danger">
+                                    Maximum of 20 characters.
+                                </small>
+                                <small *ngIf="name.errors?.pattern && name.touched" class="text-danger">
+                                    Invalid input.
+                                </small>
+                            </div>                                
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="user">Supplier</label>
-                            <select id="user" name="user" class="form-control" size="1" [(ngModel)]="equipment.user_id" required>
+                            <select id="user" name="user" class="form-control" size="1"  #user="ngModel" [(ngModel)]="equipment.user_id" required>
                                 <option value="">Please select</option>                                
                                 <option *ngFor="let user of users" [value]="user.id">
                                     {{user.username}}
                                 </option>       
                             </select>
-                        </div>
+                              
+                            <div class="error-block">
+                                <small *ngIf="user.errors?.required && user.touched" class="text-danger">
+                                    Supplier is required.
+                                </small>                                                          
+                            </div>                                
+                        </div>                       
                     </div>                   
                 </div>
                 <div class="row">                    
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="category">Category</label>                            
-                            <select id="category" name="category"  class="form-control" size="1" [(ngModel)]="equipment.category_id" required>
+                            <select id="category" name="category"  class="form-control" size="1" #category_id="ngModel" [(ngModel)]="equipment.category_id" required>
                                 <option value="">Please select</option>                                
                                 <option *ngFor="let cat of category" [value]="cat.id">
                                     {{cat.name}}
                                 </option>       
                             </select>
+                              
+                            <div class="error-block">
+                                <small *ngIf="category_id.errors?.required && category_id.touched" class="text-danger">
+                                    Category is required.
+                                </small>                                                          
+                            </div>    
+                            
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -107,7 +133,8 @@
                             <label for="rentSell">Price</label>
                             <div class="input-group">
                                 <div class="icnposition"><i class="fa fa-rupee"></i></div>
-                                <input type="number" id="price" name="price" class="form-control pleft25" [(ngModel)]="equipment.rate" min="1" placeholder="" required />
+                                <input type="number" id="price" name="price" max="10" class="form-control pleft25" #rate="ngModel" [(ngModel)]="equipment.rate" min="1" placeholder="" required />                                  
+                                
                                 <div class="input-group-btn" *ngIf="equipment.rentSell != 'sell'">
                                     <select class="btn btn-secondary dropdown-toggle" [(ngModel)]="equipment.price_unit" name="price_unit">
                                         <option>Hour</option>
@@ -116,7 +143,13 @@
                                         <option>Month</option>
                                     </select>
                                 </div>
-                            </div>                       
+
+                            </div> 
+                            <div class="error-block">
+                                <small *ngIf="rate.errors?.required && rate.touched" class="text-danger">
+                                    Price is required.
+                                </small>
+                            </div>                                             
                         </div>
                     </div>
                 </div>
@@ -151,14 +184,24 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="usage">Usage</label>
-                            <textarea type="text" id="usage" name="usage" class="form-control" [(ngModel)]="equipment.usage" placeholder="" rows="4" required></textarea>
+                            <textarea type="text" id="usage" name="usage" class="form-control" #usage="ngModel" [(ngModel)]="equipment.usage" placeholder="" rows="4" required></textarea>
+                            <div class="error-block">
+                                <small *ngIf="usage.errors?.required && usage.touched" class="text-danger">
+                                    Usage is required.
+                                </small>                                                          
+                            </div>                            
                         </div>
                     </div>
 
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="description">Description</label>
-                            <textarea type="text" id="description" name="description" class="form-control" [(ngModel)]="equipment.description" placeholder="" rows="4" required></textarea>
+                            <textarea type="text" id="description" name="description" class="form-control" #description="ngModel" [(ngModel)]="equipment.description" placeholder="" rows="4" required></textarea>
+                            <div class="error-block">
+                                <small *ngIf="description.errors?.required && description.touched" class="text-danger">
+                                    Description is required.
+                                </small>                                                          
+                            </div>    
                         </div>
                     </div>
                 </div>                

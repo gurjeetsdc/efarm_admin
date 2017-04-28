@@ -73,7 +73,10 @@
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
-                        <tbody>                          
+                        <tbody>  
+                            <tr *ngIf="totalRecords == 0">
+                                <td colspan="7">No record to display</td>
+                            </tr>                        
                             <tr *ngFor="let equipment of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
                                 <td>{{equipment.user?.username}}</td>                                
@@ -89,13 +92,6 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <!-- no records found -->
-                                <td colspan="7"  *ngIf="totalRecords == 0">
-                                    <div class="text-center">
-                                        <p class="text-center">No record to display</p>                                                               
-                                    </div>  
-                                </td>
-
                                 <td colspan="7">
                                     <div class="pagination-section" *ngIf="totalRecords > 0">
                                         <div class="row-on-page">
