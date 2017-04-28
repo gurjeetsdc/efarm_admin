@@ -63,7 +63,10 @@
                             </tr>
                         </thead>                        
                         <tbody>
-                            <tr *ngFor="let crop of mf.data">                        
+                            <tr *ngIf='err_message'>
+                                <td colspan="7">{{err_message}}</td>
+                            </tr>
+                            <tr *ngFor="let crop of mf.data">    
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
                                 <td>{{crop.price}}</td>
                                 <td>{{crop.quantity_per_pack}}</td>
@@ -79,7 +82,6 @@
                             <tr>
                                 <td colspan="7">
                                     <div class="pagination-section">
-                                        <div class="text-danger" *ngIf='err_message'>{{err_message}}</div>
                                         <div class="row-on-page" *ngIf='data.length > 0'>
                                             <label class="label-control">Show</label>
                                             &nbsp;

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 /*For list table.*/
 import {DataTableModule} from "angular2-datatable";
+import { CustomFormsModule } from 'ng2-validation'
 
 
 import { ListEquipmentComponent } from './list-component/list-equipment.component';
@@ -13,16 +14,18 @@ import { AddUpdateEquipmentComponent } from './addupdate-component/addupdate-equ
 
 import { EquipmentManagementRoutingModule } from './equipment-management-routing.module';
 
+
 @NgModule({
     imports: [
         EquipmentManagementRoutingModule,
         CommonModule,
-        DataTableModule
+        DataTableModule,
+        CustomFormsModule
     ],
     declarations: [
         ListEquipmentComponent,
         AddUpdateEquipmentComponent,
-        ViewEquipmentComponent        
+        ViewEquipmentComponent           
     ]
 })
 export class EquipmentManagementModule { }

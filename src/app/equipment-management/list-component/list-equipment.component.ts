@@ -47,6 +47,9 @@ export class ListEquipmentComponent implements OnInit {
             this.isLoading    = false;
             // console.log(allEquipments);
             console.log("allEquipments loaded");
+        }, 
+        err => {
+              this.checkAccessToken( err );
         });             
     }
 
@@ -95,5 +98,18 @@ export class ListEquipmentComponent implements OnInit {
            }
         }
         return arr;
-    } 
+    }  
+
+    checkAccessToken( err ): void {
+        console.log(err);
+        let status     = err.status;
+        let statusText = err.statusText;
+
+        if( (status == 401 && statusText == 'Unauthorized')) {
+            localStorage.removeItem('user');
+            this._router.navigate(['/login', {data: true}]);
+        }else {
+            console.log('Something unexpected happened, please try again later.');
+        }        
+    }  
 }
