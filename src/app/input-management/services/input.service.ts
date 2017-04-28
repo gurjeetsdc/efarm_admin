@@ -131,4 +131,21 @@ export class InputService {
         return this.http.delete(this.host +'/inputs/'+ inputId,  { headers: headers }).map((res:Response) => res.json());
     }   
 
+     /*
+    *@Description: get seller user list
+    *@Param: nothing
+    *@return: seller user list
+    *@Author: Rohitk.kumar
+    */
+    getAllUsers() {
+          
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
+        this.access_token   = JSON.parse(localStorage.getItem("user"));
+        this.token          = 'Bearer ' + this.access_token["access_token"];
+        headers.append('Authorization', this.token );
+        
+        return this.http.get(this.host +'/users', { headers: headers }).map((res:Response) => res.json());
+    }
+
 }

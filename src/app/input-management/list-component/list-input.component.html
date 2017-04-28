@@ -50,33 +50,20 @@
                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
-                                
-                                <!-- <th width="10%"><mfDefaultSorter by="quantity">Qty
-                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                </mfDefaultSorter></th>
-                                <th width="20%"><mfDefaultSorter by="units">Units
-                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                </mfDefaultSorter></th> -->
+                                <th width="20%">Seller</th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
-                            <!-- <tr *ngIf="isLoading">
-                                <td colspan="5">
-                                    <div class="is-loading"><i class="page-loader"></i></div>
-                                </td>
-                            </tr> -->
+                            <tr *ngIf='err_message'>
+                               <td colspan="5">{{err_message}}</td>
+                            </tr>
                             <tr *ngFor="let input of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewInput(input.id)">{{input.name}}</a></td>
                                 <td>{{input.category?.name}}</td>
                                 <td>{{input.manufacturer?.name}}</td>
                                 <td>{{input.price}}</td>
-                                
-                                <!-- <td>{{input.quantity}}</td>
-                                <td>{{input.units}}</td> -->
-
+                                <td>{{input.user?.username}}</td>
                                 <td>                                    
                                     <button (click)="sendUpdateinput(input.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeInput(input.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
@@ -87,7 +74,6 @@
                             <tr>
                                 <td colspan="8">
                                     <div class="pagination-section">
-                                        <div class="text-danger" *ngIf='err_message'>{{err_message}}</div>
                                         <div class="row-on-page" *ngIf='data.length > 0'>
                                             <label class="label-control">Show</label>
                                             &nbsp;

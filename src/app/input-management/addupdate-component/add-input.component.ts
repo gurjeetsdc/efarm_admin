@@ -10,6 +10,7 @@ export class AddInputComponent {
     private input     = {
         category_id:'',
         manufacturer_id:'',
+        seller_id:'',
         units:'',
         variety:'',
         tearm_and_conditions:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
@@ -21,6 +22,7 @@ export class AddInputComponent {
     private action:string = 'Add';
     private category = [];
     private manuf = [];
+    private sellers = [];
 
     constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _inputService: InputService) {
         this.Id = _activateRouter.snapshot.params['id'];        
@@ -35,10 +37,10 @@ export class AddInputComponent {
 
         this._inputService.getAllCategories().subscribe( res => { this.category = res; }, err => {});
         this._inputService.getManuf().subscribe( res => { this.manuf = res; }, err => {});
+        this._inputService.getAllUsers().subscribe( res => { this.sellers = res; }, err => {});
     }
 
     submitInput() {
-
         if( this.action == 'Update' ) {
             this.updateInput();            
         }else {
@@ -49,19 +51,19 @@ export class AddInputComponent {
     addInput() {
         this.input["manufacturer"] = this.input["manufacturer_id"];
         this.input["category"] = this.input["category_id"];
+        if(this.input["seller_id"]) this.input["user"] = this.input["seller_id"];
         this._inputService.inputadd(this.input).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
             this._router.navigate(['/input/list', {data: "success"} ]);
             console.log(this.response)
-        });      
-      
+        });
     }
-
 
     updateInput() {
         this.input["manufacturer"] = this.input["manufacturer_id"];
         this.input["category"] = this.input["category_id"];
+        if(this.input["seller_id"]) this.input["user"] = this.input["seller_id"];
         this._inputService.updateInput(this.input).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
@@ -74,7 +76,4 @@ export class AddInputComponent {
     } 
 
 
-
-
-  
 }
