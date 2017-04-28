@@ -131,7 +131,7 @@
                             <label for="rentSell">Price</label>
                             <div class="input-group">
                                 <div class="icnposition"><i class="fa fa-rupee"></i></div>
-                                <input type="number" id="price" name="price" max="10" class="form-control pleft25" #rate="ngModel" [(ngModel)]="equipment.rate" min="1" placeholder="" required />                                  
+                                <input type="number" id="price" name="price" max="10" class="form-control pleft25" #rate="ngModel" [(ngModel)]="equipment.rate" placeholder="" required />                                  
                                 
                                 <div class="input-group-btn" *ngIf="equipment.rentSell != 'sell'">
                                     <select class="btn btn-secondary dropdown-toggle" [(ngModel)]="equipment.price_unit" name="price_unit">
