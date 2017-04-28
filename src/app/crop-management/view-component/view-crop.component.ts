@@ -8,10 +8,11 @@ export class ViewCropComponent {
 
 	private cropID      = '';
 	private crop        = {};
-
+    private isLoading   = true;
     constructor(private _router: Router, route: ActivatedRoute,private _cropService: CropService) { 
       	this.cropID = route.snapshot.params['id'];
   	    this._cropService.get(this.cropID).subscribe(res => {
+            this.isLoading = false;
             this.crop = res;
         },err => {
 

@@ -14,7 +14,15 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-name">Crop Name</label>
-                            <input autofocus type="text" id="nf-name" name="nf-name" class="form-control" placeholder="" [(ngModel)]="crop.name" required>
+                            <input autofocus type="text" id="name" name="name" class="form-control" placeholder="" #name="ngModel" [(ngModel)]="crop.name" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <div class="error-block">
+                                <small *ngIf="name.errors?.required && name.touched" class="text-danger">
+                                    Crop name is required.
+                                </small>
+                                <small *ngIf="name.errors?.pattern && name.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>    
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -34,10 +42,15 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-category">Category</label>
-                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="crop.category_id" required>
+                            <select id="nfcategory" name="nfcategory" class="form-control" size="1" #nfcategory="ngModel" [(ngModel)]="crop.category_id" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
+                            <div class="error-block">
+                                <small *ngIf="nfcategory.errors?.required && nfcategory.touched" class="text-danger">
+                                    Category is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -59,7 +72,18 @@
                             <label for="nf-price">Offer Price</label>
                             <div class="input-group">
                             <div class="icnposition"><i class="fa fa-rupee"></i></div>
-                            <input type="number" id="nf-price" name="nf-price" class="form-control pleft25" [(ngModel)]="crop.price" placeholder="" required="" min="1" max="9999999999999998">
+                            <input type="number" id="nfprice" name="nfprice" class="form-control pleft25" #nfprice="ngModel" [(ngModel)]="crop.price" placeholder="" required="" min="1" max="9999999999999998">
+                            </div>
+                            <div class="error-block">
+                                <small *ngIf="nfprice.errors?.required && nfprice.touched" class="text-danger">
+                                    Offer Price is required.
+                                </small>
+                                <small *ngIf="nfprice.errors?.min && nfprice.touched" class="text-danger">
+                                    Minimum 1 quantity is required.
+                                </small>                                                          
+                                <small *ngIf="nfprice.errors?.max && nfprice.touched" class="text-danger">
+                                    Maximum quantity is allow upto 16 digit.
+                                </small>                                                           
                             </div>
                         </div>
                     </div>
@@ -89,13 +113,23 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-color">Color</label>
-                            <input type="text" id="nf-color" name="nf-color" class="form-control" [(ngModel)]="crop.color" placeholder="" required>
+                            <input type="text" id="nfcolor" name="nfcolor" class="form-control" #nfcolor="ngModel" [(ngModel)]="crop.color" placeholder="" required>
+                            <div class="error-block">
+                                <small *ngIf="nfcolor.errors?.required && nfcolor.touched" class="text-danger">
+                                    Color is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-size">Size/Weight</label>
-                            <input type="text" id="nf-size" name="nf-size" class="form-control" [(ngModel)]="crop.size" placeholder="" required>
+                            <input type="text" id="nfsize" name="nfsize" class="form-control" #nfsize="ngModel" [(ngModel)]="crop.size" placeholder="" required>
+                            <div class="error-block">
+                                <small *ngIf="nfsize.errors?.required && nfsize.touched" class="text-danger">
+                                    Size/Weight is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,24 +137,34 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-availibility">Availibility Peroid</label>
-                            <input type="text" id="nf-availibility" name="nf-availibility" class="form-control" [(ngModel)]="crop.availibility" placeholder="" required>
+                            <input type="text" id="nfavailibility" name="nfavailibility" class="form-control" #nfavailibility="ngModel" [(ngModel)]="crop.availibility" placeholder="" required>
+                            <div class="error-block">
+                                <small *ngIf="nfavailibility.errors?.required && nfavailibility.touched" class="text-danger">
+                                    Availibility Peroid is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-packaging">Packaging</label>
-                            <select id="select2" name="select2" class="form-control" size="1" [(ngModel)]="crop.packaging" required>
+                            <select id="ngpackaging" name="ngpackaging" class="form-control" size="1" #ngpackaging="ngModel" [(ngModel)]="crop.packaging" required>
                                 <option value="">Please select</option>
                                 <option value="Pack 1">Pack 1</option>
                                 <option value="Pack 2">Pack 2</option>
                                 <option value="Pack 3">Pack 3</option>
                             </select>
+                            <div class="error-block">
+                                <small *ngIf="ngpackaging.errors?.required && ngpackaging.touched" class="text-danger">
+                                    Packaging is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row p10">
                     <div class="col-sm-6">
-                       <div class="form-group radiobuttons_top has-required">
+                       <div class="form-group has-required">
                             <label for="nf-supply_ablity">Supply Ability</label>
                             <div class="radiobuttons_top">
                             <div class="form-group pull-left">
@@ -141,7 +185,12 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-pack_size">Pack Size</label>
-                            <input type="text" id="nf-pack_size" name="nf-pack_size" class="form-control" [(ngModel)]="crop.pack_size" placeholder="" required>
+                            <input type="text" id="nfpack_size" name="nfpack_size" class="form-control" #nfpack_size="ngModel" [(ngModel)]="crop.pack_size" placeholder="" required>
+                            <div class="error-block">
+                                <small *ngIf="nfpack_size.errors?.required && nfpack_size.touched" class="text-danger">
+                                    Pack Size is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -150,7 +199,7 @@
                         <div class="form-group has-required">
                          <label for="nf-qty">Quantity Per Pack</label>
                           <div class="input-group">
-                              <input type="number" id="nf-quantity_per_pack" name="quantity_per_pack" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="crop.quantity_per_pack" min="1" max="999999999999999" placeholder="" required>
+                              <input type="number" id="quantity_per_pack" name="quantity_per_pack" class="form-control" aria-label="Text input with dropdown button" #quantity_per_pack="ngModel" [(ngModel)]="crop.quantity_per_pack" min="1" max="9999999999999998" placeholder="" required>
                                <div class="input-group-btn">
                                   <select id="select4" name="select4" class="btn btn-secondary dropdown-toggle" [(ngModel)]="crop.unit" required>
                                     <option value="Kg">Kg</option>
@@ -158,13 +207,29 @@
                                     <option value="Quintal">Quintal</option>
                                  </select>
                               </div>
+                            </div>
+                            <div class="error-block">
+                                <small *ngIf="quantity_per_pack.errors?.required && quantity_per_pack.touched" class="text-danger">
+                                    Quantity Per Pack is required.
+                                </small>
+                                <small *ngIf="quantity_per_pack.errors?.min && quantity_per_pack.touched" class="text-danger">
+                                    Minimum 1 quantity is required.
+                                </small>                                                          
+                                <small *ngIf="quantity_per_pack.errors?.max && quantity_per_pack.touched" class="text-danger">
+                                    Maximum quantity is allow upto 16 digit.
+                                </small> 
                             </div>                       
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-label">Label/Making on Pack</label>
-                            <input type="text" id="nf-label" name="nf-label" class="form-control" [(ngModel)]="crop.label" placeholder="" required>
+                            <input type="text" id="nflabel" name="nflabel" class="form-control" #nflabel="ngModel" [(ngModel)]="crop.label" placeholder="" required>
+                            <div class="error-block">
+                                <small *ngIf="nflabel.errors?.required && nflabel.touched" class="text-danger">
+                                        Label/Making on Pack is required.
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,18 +237,32 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-average_lead_time">Average Lead Time</label>
-                            
                             <div class="input-group">
-                        <input type="number" id="average_lead_time" name="average_lead_time" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="crop.average_lead_time" min="1" required>
-                        <span class="input-group-addon width">Days</span>
-                        </div>
-
+                                <input type="number" id="average_lead_time" name="average_lead_time" class="form-control" aria-label="Amount (to the nearest dollar)" #average_lead_time="ngModel" [(ngModel)]="crop.average_lead_time" min="1" max="9999999999999998" required>
+                                <span class="input-group-addon width">Days</span>
+                            </div>
+                            <div class="error-block">
+                                <small *ngIf="average_lead_time.errors?.required && average_lead_time.touched" class="text-danger">
+                                    Average Lead Time is required.
+                                </small>
+                                <small *ngIf="average_lead_time.errors?.min && average_lead_time.touched" class="text-danger">
+                                    Minimum 1 quantity is required.
+                                </small>                                                          
+                                <small *ngIf="average_lead_time.errors?.max && average_lead_time.touched" class="text-danger">
+                                    Maximum quantity is allow upto 16 digit.
+                                </small>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-additional_info">Additional Information</label>
-                            <textarea type="text" id="nf-additional_info" name="nf-additional_info" class="form-control" [(ngModel)]="crop.additional_info" placeholder="" rows="4" required ></textarea>
+                            <textarea type="text" id="nfadditional_info" name="nfadditional_info" class="form-control"  #nfadditional_info="ngModel" [(ngModel)]="crop.additional_info" placeholder="" rows="4" required ></textarea>
+                            <div class="error-block">
+                                <small *ngIf="nfadditional_info.errors?.required && nfadditional_info.touched" class="text-danger">
+                                   Additional Information is required.
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>

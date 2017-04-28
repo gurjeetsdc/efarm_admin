@@ -57,7 +57,7 @@
                                 </th>
                                 <th width="15%">Category
                                 </th>
-                                <th width="15%">seller
+                                <th width="15%">Seller
                                 </th>
                                 <th width="10%">Actions</th>
                             </tr>
@@ -68,8 +68,8 @@
                             </tr>
                             <tr *ngFor="let crop of mf.data">    
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
-                                <td>{{crop.price}}</td>
-                                <td>{{crop.quantity_per_pack}}</td>
+                                <td><p><i class="fa fa-rupee"></i> {{crop.price}}</td>
+                                <td>{{crop.quantity_per_pack}} {{crop.unit}}</td>
                                 <td>{{crop.category?.name}}</td>
                                 <td>{{crop.seller ? crop.seller?.first_name ? crop.seller?.first_name + ' ' + crop.seller?.last_name : crop.seller?.username : ''}}</td>
                                 <td>                                    

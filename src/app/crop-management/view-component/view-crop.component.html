@@ -1,6 +1,10 @@
 <div>
-<form role="form" (ngSubmit)="save()" #dailyExpenseForm="ngForm">
-    <div class="card">
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+    <div class="card"  *ngIf="!isLoading">
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-3 col-12">
@@ -156,6 +160,5 @@
                     </div>
                 </div>
         </div>
-    </div>
-</form>    
+    </div>   
 </div>

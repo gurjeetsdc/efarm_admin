@@ -7,12 +7,14 @@ import { AddUpdateCropComponent } from './addupdate-component/addupdate-crop.com
 import { ViewCropComponent } from './view-component/view-crop.component';
 import { CropManagementRoutingModule } from './crop-management-routing.module';
 import { CropService } from './services/crop.service';
+import { CustomFormsModule } from 'ng2-validation'
 
 @NgModule({
   imports: [
   	CropManagementRoutingModule,
   	 CommonModule,
-     DataTableModule    
+     DataTableModule,
+     CustomFormsModule    
   ],
   providers: [
   	CropService
