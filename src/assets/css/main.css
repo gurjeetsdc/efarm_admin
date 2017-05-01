@@ -30,6 +30,9 @@ body {
 .wrapper:after {
 	clear: both;
 }
+.flex{
+	display: flex;
+}
 /*login page*/
 
 .login-logo, .register-logo {
@@ -4481,7 +4484,6 @@ table.text-center, table.text-center td, table.text-center th {
 }
 .card-header .input-group input[type="text"] {
 	border-right: 0;
-	font-family: 'Open Sans', sans-serif !important;
 }
  .card-header .form-control::placeholder {
  font-family: 'Open Sans', sans-serif !important;
@@ -4507,6 +4509,7 @@ table.text-center, table.text-center td, table.text-center th {
 	-moz-appearance: none;
 	appearance: none;
 	background: url("../img/drop_down.png") no-repeat right 10px center;
+	padding: 0.8rem 3rem 0.8rem 0.75rem !important;
 }
 .sidebar .nav .nav-item > .nav-link i {
 	bottom: 4px;
@@ -4526,12 +4529,17 @@ table.text-center, table.text-center td, table.text-center th {
 	font-size: 18px;
 	font-weight: 300;
 	margin-right: 8px;
-	padding: 13px 42px;
+	padding: 14px 42px;
 }
-.grade label input[type="radio"]{
+.grade input[type="radio"]{
 opacity: 0;
-margin-right: -12px;	
+margin-right: -13px;	
 }
+
+.grade input[type="radio"]:focus+ label  {
+    border:1px solid #3c8dbc ; 
+}
+
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
 	border-radius: 3px !important;
 }
@@ -4938,6 +4946,7 @@ span.red {
 	border: 1px solid #c2c2c2;
 	box-shadow: none;
 	height: 38px;
+	border-left: 0;
 }
 .card-footer {
 	padding: 1.55rem 1.25rem !important;
@@ -5079,6 +5088,7 @@ header.navbar .nav-item {
 	background: #3fa14c;
 	border-bottom: 1px solid #69c675;
 	border-left: 2px solid #50b75e;
+	cursor: no-drop;
 }
 ul.navbar-nav.width {
 	width: 60%
@@ -5801,6 +5811,21 @@ h2.search_it {
 .linehght {
 	padding-top: 12px;
 }
+.text-right.linehght{
+	text-align: left !important;
+}
+
+.card-header .linehght button.btn-secondary{
+ width: 46%;
+}
+
+.card-header .linehght button.btn-success{
+ width: 46%;
+}
+    
+.linehght {
+ line-height: 1px;
+}
  
 }
 
@@ -5830,22 +5855,6 @@ button.orangeclr {
 }
 button.whiteclr {
 	padding: 0.5rem;
-}
-
-.text-right.linehght{
-	text-align: left !important;
-}
-
-.card-header .linehght button.btn-secondary{
- width: 46%;
-}
-
-.card-header .linehght button.btn-success{
- width: 46%;
-}
-    
-.linehght {
- line-height: 1px;
 }
 
 .login-box {
