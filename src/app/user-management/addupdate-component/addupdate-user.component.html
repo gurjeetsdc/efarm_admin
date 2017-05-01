@@ -17,13 +17,29 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-fname">First Name</label>
-                            <input autofocus="autofocus" type="text" id="nf-fname" name="nf-fname" class="form-control" placeholder="" [(ngModel)]="user.first_name" required>
+                            <input autofocus="autofocus" type="text" id="nffname" name="nffname" class="form-control" placeholder="" #nffname="ngModel" [(ngModel)]="user.first_name" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <div class="error-block">
+                                <small *ngIf="nffname.errors?.required && nffname.touched" class="text-danger">
+                                    First Name is required.
+                                </small>
+                                <small *ngIf="nffname.errors?.pattern && nffname.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-lname">Last Name</label>
-                            <input type="text" id="nf-lname" name="nf-lname" class="form-control" placeholder="" [(ngModel)]="user.last_name" required>
+                            <input type="text" id="nflname" name="nflname" class="form-control" placeholder="" #nflname="ngModel" [(ngModel)]="user.last_name" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <div class="error-block">
+                                <small *ngIf="nflname.errors?.required && nflname.touched" class="text-danger">
+                                    Last Name is required.
+                                </small>
+                                <small *ngIf="nflname.errors?.pattern && nflname.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -31,13 +47,38 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-phone">Phone</label>
-                            <input type="number" id="nf-phone" name="nf-phone" class="form-control" [(ngModel)]="user.phone" placeholder="" required="" min="1" max="9999999999" required>
+                            <input type="number" id="nfphone" name="nfphone" class="form-control" #nfphone="ngModel" [(ngModel)]="user.phone" placeholder="" required="" min="1" max="9999999999" required>
+                            <div class="error-block">
+                                <small *ngIf="nfphone.errors?.required && nfphone.touched" class="text-danger">
+                                    Phone Number is required.
+                                </small>
+                                <small *ngIf="nfphone.errors?.min && nfphone.touched" class="text-danger">
+                                    Minimum 1 value allow.
+                                </small>
+                                <small *ngIf="nfphone.errors?.max && nfphone.touched" class="text-danger">
+                                    Maximum 10 Digit allow.
+                                </small>
+                                <small *ngIf="nfphone.errors?.pattern && nfphone.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-email">Email</label>
-                            <input type="email" id="nf-email" name="nf-email" class="form-control" [(ngModel)]="user.email" placeholder="" required="" required>
+                            <input type="text" id="nfemail" name="nfemail" class="form-control" #nfemail="ngModel" [(ngModel)]="user.email" placeholder="" email required>
+                            <div class="error-block">
+                                <small *ngIf="nfemail.errors?.required && nfemail.touched" class="text-danger">
+                                    Email is required.
+                                </small>
+                                <small *ngIf="nfemail.errors?.email && nfemail.touched" class="text-danger">
+                                    Email id not valid.
+                                </small>
+                                <small *ngIf="nfemail.errors?.pattern && nfemail.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,13 +86,29 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-city">City/Village</label>
-                            <input type="text" id="nf-city" name="nf-city" class="form-control" [(ngModel)]="user.city" placeholder="" required>
+                            <input type="text" id="nfcity" name="nfcity" class="form-control" #nfcity="ngModel" [(ngModel)]="user.city" placeholder="" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <div class="error-block">
+                                <small *ngIf="nfcity.errors?.required && nfcity.touched" class="text-danger">
+                                    City Name is required.
+                                </small>
+                                <small *ngIf="nfcity.errors?.pattern && nfcity.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-district">District</label>
-                            <input type="text" id="nf-district" name="nf-district" class="form-control" [(ngModel)]="user.district" placeholder="" required>
+                            <input type="text" id="nfdistrict" name="nfdistrict" class="form-control" #nfdistrict="ngModel" [(ngModel)]="user.district" placeholder="" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <div class="error-block">
+                                <small *ngIf="nfdistrict.errors?.required && nfdistrict.touched" class="text-danger">
+                                    District Name is required.
+                                </small>
+                                <small *ngIf="nfdistrict.errors?.pattern && nfdistrict.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,13 +116,35 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-state">State</label>
-                            <input type="text" id="nf-state" name="nf-state" class="form-control" [(ngModel)]="user.state" placeholder="" required>
+                            <input type="text" id="nfstate" name="nfstate" class="form-control" #nfstate="ngModel" [(ngModel)]="user.state" placeholder="" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <div class="error-block">
+                                <small *ngIf="nfstate.errors?.required && nfstate.touched" class="text-danger">
+                                    State Name is required.
+                                </small>
+                                <small *ngIf="nfstate.errors?.pattern && nfstate.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-pincode">Pin Code </label>
-                            <input type="number" id="nf-pincode" name="nf-pincode" class="form-control" [(ngModel)]="user.pincode" max="999999" placeholder="" required>
+                            <input type="number" id="nfpincode" name="nfpincode" class="form-control" #nfpincode="ngModel" [(ngModel)]="user.pincode" min="1" max="999999" placeholder="" required>
+                            <div class="error-block">
+                                <small *ngIf="nfpincode.errors?.required && nfpincode.touched" class="text-danger">
+                                    Pin Code is required.
+                                </small>
+                                <small *ngIf="nfpincode.errors?.min && nfpincode.touched" class="text-danger">
+                                    Minimum 1 value allow.
+                                </small>
+                                <small *ngIf="nfpincode.errors?.max && nfpincode.touched" class="text-danger">
+                                    Maximum 6 digit allow.
+                                </small>
+                                <small *ngIf="nfpincode.errors?.pattern && nfpincode.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                 </div>

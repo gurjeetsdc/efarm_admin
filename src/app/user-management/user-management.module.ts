@@ -6,12 +6,14 @@ import { ListUserComponent } from './list-component/list-user.component';
 import { AddUpdateUserComponent } from './addupdate-component/addupdate-user.component';
 import { ViewUserComponent } from './view-component/view-user.component';
 import { UserManagementRoutingModule } from './user-management-routing.module';
+import { CustomFormsModule } from 'ng2-validation'
 
 @NgModule({
   imports: [
   	UserManagementRoutingModule,
   	 CommonModule,
-  	 DataTableModule    
+  	 DataTableModule,
+     CustomFormsModule    
   ],
   declarations: [
   	ListUserComponent,
