@@ -4481,7 +4481,6 @@ table.text-center, table.text-center td, table.text-center th {
 }
 .card-header .input-group input[type="text"] {
 	border-right: 0;
-	font-family: 'Open Sans', sans-serif !important;
 }
  .card-header .form-control::placeholder {
  font-family: 'Open Sans', sans-serif !important;
@@ -5079,6 +5078,7 @@ header.navbar .nav-item {
 	background: #3fa14c;
 	border-bottom: 1px solid #69c675;
 	border-left: 2px solid #50b75e;
+	cursor: no-drop;
 }
 ul.navbar-nav.width {
 	width: 60%
@@ -5801,6 +5801,21 @@ h2.search_it {
 .linehght {
 	padding-top: 12px;
 }
+.text-right.linehght{
+	text-align: left !important;
+}
+
+.card-header .linehght button.btn-secondary{
+ width: 46%;
+}
+
+.card-header .linehght button.btn-success{
+ width: 46%;
+}
+    
+.linehght {
+ line-height: 1px;
+}
  
 }
 
@@ -5830,22 +5845,6 @@ button.orangeclr {
 }
 button.whiteclr {
 	padding: 0.5rem;
-}
-
-.text-right.linehght{
-	text-align: left !important;
-}
-
-.card-header .linehght button.btn-secondary{
- width: 46%;
-}
-
-.card-header .linehght button.btn-success{
- width: 46%;
-}
-    
-.linehght {
- line-height: 1px;
 }
 
 .login-box {
