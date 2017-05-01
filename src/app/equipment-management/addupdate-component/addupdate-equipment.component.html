@@ -10,9 +10,9 @@
         <div class="card-header">
             <strong>{{action}} Equipment</strong>
         </div>
-        <div class="card-block">
             <form role="form" (ngSubmit)="submitEquipment()" #addEquipmentForm="ngForm">
-                
+            
+            <div class="card-block">
                <div *ngIf="showMessage" class="alert alert-success alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert"  (click)="closeMessage()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -155,7 +155,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="termsConditions">Quantity</label>
-                            <input type="number" min="1" id="quantity" name="quantity" class="form-control" [(ngModel)]="equipment.quantity" placeholder="" />
+                            <input type="number" id="quantity" name="quantity" class="form-control" [(ngModel)]="equipment.quantity" placeholder="" />
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -218,12 +218,24 @@
                             <textarea type="text" id="termsConditions" name="termsConditions" class="form-control" [(ngModel)]="equipment.termsConditions" placeholder="" rows="4" [disabled]="true"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">                       
+                </div> 
+
+                   <div class="row">                   
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="termsConditions">Address</label>
+                            <input placeholder="" type="text" class="form-control"
+                             (setAddress)="getAddress($event)" (formatted_address)="formatted_address=$event"
+                             googleplace data-location="name" />
+                        </div>
+                    </div>
+                </div> 
+                     
+            </div>
+            <div class="card-footer">                       
                     <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/equipment/list']"> Cancel</button>
                     <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addEquipmentForm.valid"  [class.disabled]="isClickedOnce"  (click)="isClickedOnce = true">{{action == 'Add' ? 'Save' : 'Update'}}</button>
                 </div>               
             </form>
-        </div>
     </div> <!-- .card -->
 </div> <!-- .equipment-wrapper -->

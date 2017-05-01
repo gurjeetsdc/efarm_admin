@@ -44,6 +44,8 @@ export class AddUpdateEquipmentComponent {
 
     private currentYear = new Date().getFullYear();
     private years = [];
+
+    private address:any;
     
     constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _equipmentService: EquipmentService) {
         this.equipmentID = _activateRouter.snapshot.params['id'];        
@@ -77,6 +79,21 @@ export class AddUpdateEquipmentComponent {
         for (var i = 1; i <= 50; i++) {
             this.years.push(this.currentYear - i);
         }
+    }
+
+    getAddress(place: Object) {
+        this.address = place['formatted_address'];
+        console.log(this.address)
+
+        let location = place['geometry']['location'];
+        let lat      = location.lat();
+        let lng      = location.lng();
+        
+
+        console.log("Address lat", lat);
+        console.log("Address lng", lng);
+        
+        
     }
 
     submitEquipment() {
