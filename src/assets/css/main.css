@@ -4509,6 +4509,7 @@ table.text-center, table.text-center td, table.text-center th {
 	-moz-appearance: none;
 	appearance: none;
 	background: url("../img/drop_down.png") no-repeat right 10px center;
+	padding: 0.8rem 3rem 0.8rem 0.75rem !important;
 }
 .sidebar .nav .nav-item > .nav-link i {
 	bottom: 4px;
