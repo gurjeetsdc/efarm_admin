@@ -11,10 +11,10 @@
     <div class="card" *ngIf="!isLoading">
      <div class="card-header">
             <div class="row">
-                <div class="col-sm-3 col-12">
+                <div class="col-sm-6 col-12">
                    <strong>View Land</strong>           
                 </div>
-                <div class="col-sm-9 col-12 text-right linehght">
+                <div class="col-sm-6 col-12 text-right linehght">
                    <button type="button" class="btn btn-secondary" [routerLink]="['/land/list']">Back</button>  
 
                    <button type="button" class="btn btn-success pull-right" (click)="updateLand(land.id)">Edit Land</button>            
