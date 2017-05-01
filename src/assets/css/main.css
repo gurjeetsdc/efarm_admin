@@ -4529,12 +4529,17 @@ table.text-center, table.text-center td, table.text-center th {
 	font-size: 18px;
 	font-weight: 300;
 	margin-right: 8px;
-	padding: 13px 42px;
+	padding: 14px 42px;
 }
-.grade label input[type="radio"]{
+.grade input[type="radio"]{
 opacity: 0;
-margin-right: -12px;	
+margin-right: -13px;	
 }
+
+.grade input[type="radio"]:focus+ label  {
+    border:1px solid #3c8dbc ; 
+}
+
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
 	border-radius: 3px !important;
 }
