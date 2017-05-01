@@ -30,6 +30,9 @@ body {
 .wrapper:after {
 	clear: both;
 }
+.flex{
+	display: flex;
+}
 /*login page*/
 
 .login-logo, .register-logo {
@@ -4937,6 +4940,7 @@ span.red {
 	border: 1px solid #c2c2c2;
 	box-shadow: none;
 	height: 38px;
+	border-left: 0;
 }
 .card-footer {
 	padding: 1.55rem 1.25rem !important;
