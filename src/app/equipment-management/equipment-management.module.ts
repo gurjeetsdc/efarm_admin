@@ -14,6 +14,7 @@ import { AddUpdateEquipmentComponent } from './addupdate-component/addupdate-equ
 
 import { EquipmentManagementRoutingModule } from './equipment-management-routing.module';
 
+import { GoogleplaceDirective } from '../shared/directives/googleplaces/googleplaces.directive';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { EquipmentManagementRoutingModule } from './equipment-management-routing
     declarations: [
         ListEquipmentComponent,
         AddUpdateEquipmentComponent,
-        ViewEquipmentComponent           
+        ViewEquipmentComponent,
+        GoogleplaceDirective           
     ]
 })
 export class EquipmentManagementModule { }
