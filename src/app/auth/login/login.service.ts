@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map'
+import tsConstants = require('./../../tsconstant');
 
 @Injectable()
 export class LoginService {
-    private host = "https://efarmapi.herokuapp.com";
-    // private host = "http://localhost:1337";
-  	private port = 3000;
+    private _host = tsConstants.HOST;
   	
   	constructor(private _http: Http) { }
 
 	login(user) {
-
-        console.log('User In service');
-        console.log(user);
 
         let headers           = new Headers();
         let username:string   = user.username;
@@ -29,6 +25,6 @@ export class LoginService {
         urlSearchParams.append('client_id', client_id);
         let body = urlSearchParams.toString()
 		
-        return this._http.post(this.host +'/oauth/token', body, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this._host +'/oauth/token', body, { headers: headers }).map((res:Response) => res.json())
     }
 }

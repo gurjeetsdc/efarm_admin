@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
-
+import tsConstants = require('./../../tsconstant');
 import { CookieService } from 'ngx-cookie';
 
 
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     
     public user = {
         grant_type : 'password',
-        client_id  : '5x7EuN09HAeBn2pYJnvvq7szgJaULh14'
+        client_id  : tsConstants.CLIENT_ID
     };
 
     public errMessage            = '';

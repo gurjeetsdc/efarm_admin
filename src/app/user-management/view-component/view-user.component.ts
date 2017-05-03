@@ -6,9 +6,9 @@ import { UserService } from '../services/user.service';
     templateUrl: 'view-user.component.html'
 })
 export class ViewUserComponent {
-	private userID = '';
-	private user = {};
-    private isLoading = true;
+	public userID = '';
+	public user = {};
+    public isLoading = true;
 
     constructor(route: ActivatedRoute, private _router : Router,private _userService: UserService) { 
         this.userID = route.snapshot.params['id'];
@@ -16,11 +16,12 @@ export class ViewUserComponent {
            this.user = res;
            this.isLoading = false;
         },err => {
-           this.isLoading = false 
+           this.isLoading = false
+           this.checkAccessToken(err); 
         });
     }
 
-    updateUser(userid) {        
+    editUser(userid) {        
         let route = '/user/edit/'+ userid;
         this._router.navigate([route]);       
     }
@@ -35,5 +36,17 @@ export class ViewUserComponent {
                 this.isLoading = false;
             });             
         }
+    }
+
+    checkAccessToken( err ): void {
+        let status     = err.status;
+        let statusText = err.statusText;
+
+        if( (status == 401 && statusText == 'Unauthorized')) {
+            localStorage.removeItem('user');
+            this._router.navigate(['/login', {data: true}]);
+        }else {
+            console.log('Something unexpected happened, please try again later.');
+        }        
     }
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-// import {PaginationInstance} from 'ng2-pagination';
 import { UserService } from '../services/user.service';
-// import {DataTableModule} from "angular2-datatable";
 
 @Component({
   selector: 'app-user-management',
@@ -10,13 +8,14 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./list-user.component.scss']
 })
 export class ListUserComponent implements OnInit {
+
     public data                = [];
     public totalRecords        = 0;
     public filterQuery         = "";
     public rowsOnPage          = 10;
     public sortBy              = "createdAt";
     public sortOrder           = "desc";
-    public err_message         = "";
+    public errMessage          = "";
     public isLoading:boolean   = true;
     public response:any;
    
@@ -36,11 +35,12 @@ export class ListUserComponent implements OnInit {
         this._userService.getAllUsers().subscribe(res => {
             this.data = res;
             this.totalRecords = this.data.length;
-            if(this.data.length == 0) this.err_message = "No record to display";
+            if(this.data.length == 0) this.errMessage = "No record to display";
             this.isLoading = false;
         },err => {
             this.isLoading = false;
-            this.err_message = "No record to display";
+            this.errMessage = "No record to display";
+            this.checkAccessToken(err);
        });             
     }
 
@@ -66,6 +66,7 @@ export class ListUserComponent implements OnInit {
                 this._router.navigate(['/user/list/']);      
             },err => {
                 this.isLoading = false;
+                this.checkAccessToken(err);
             });             
         }
     }
@@ -81,12 +82,24 @@ export class ListUserComponent implements OnInit {
 
            }
         }
+        if(this.data.length == 0) this.errMessage = "No record to display";
         return arr;
     }
 
-    sendUpdateUser(userID) {     
+    editUser(userID) {     
         let route = '/user/edit/'+ userID;
         this._router.navigate([route]);       
     } 
 
+    checkAccessToken( err ): void {
+        let status     = err.status;
+        let statusText = err.statusText;
+
+        if( (status == 401 && statusText == 'Unauthorized')) {
+            localStorage.removeItem('user');
+            this._router.navigate(['/login', {data: true}]);
+        }else {
+            console.log('Something unexpected happened, please try again later.');
+        }        
+    }
 }
