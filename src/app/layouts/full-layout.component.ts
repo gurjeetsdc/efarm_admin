@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { CookieService } from 'ngx-cookie';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './full-layout.component.html'
@@ -10,7 +13,7 @@ export class FullLayoutComponent implements OnInit {
   public status: {isopen: boolean}   = {isopen: false};
   public user:Object                 = {};
   public active;
-  constructor(private router : Router, private _route: ActivatedRoute ) { 
+  constructor(private router : Router, private _route: ActivatedRoute, private _cookieService: CookieService ) { 
     this.user = JSON.parse(localStorage.getItem("user"));
     this.active = this._route.snapshot["_urlSegment"].segments[0].path;
   }
@@ -32,6 +35,7 @@ export class FullLayoutComponent implements OnInit {
   }
 
   logout() {
+    this._cookieService.removeAll();
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }

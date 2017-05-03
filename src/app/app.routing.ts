@@ -3,11 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
-import { SimpleLayoutComponent } from './layouts/simple-layout.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ActiveRouteGuard } from './activate-route-guard';
+
+import { LoginComponent } from './auth/login/login.component';
+
+import { ActiveRouteGuard } from './auth/services/activate-route-guard';
+import { DeactiveRouteGuard } from './auth/services/deactivate-route-guard';
+
+/*import { ActiveRouteGuard } from './activate-route-guard';
 import { DeactiveRouteGuard } from './deactivate-route-guard';
+*/
 export const routes: Routes = [
   {
     path: '',
@@ -17,11 +21,6 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [ActiveRouteGuard]
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
     canActivate: [ActiveRouteGuard]
   },
   {

@@ -7,8 +7,14 @@ import { AppComponent } from './app.component';
 // import { DropdownModule } from 'ng2-bootstrap/dropdown';
 import { TabsModule } from 'ng2-bootstrap/tabs';
 import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
-import { ActiveRouteGuard } from './activate-route-guard';
-import { DeactiveRouteGuard } from './deactivate-route-guard';
+
+import { CookieModule } from 'ngx-cookie';
+
+import { ActiveRouteGuard } from './auth/services/activate-route-guard';
+import { DeactiveRouteGuard } from './auth/services/deactivate-route-guard';
+
+/*import { ActiveRouteGuard } from './activate-route-guard';
+import { DeactiveRouteGuard } from './deactivate-route-guard';*/
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
@@ -18,11 +24,13 @@ import { PaginationModule } from 'ng2-bootstrap';
 // Routing Module
 import { AppRoutingModule } from './app.routing';
 import { HttpModule } from '@angular/http';
+
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
-import { SimpleLayoutComponent } from './layouts/simple-layout.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+
+
+import { LoginComponent } from './auth/login/login.component';
+
 
 @NgModule({
   imports: [
@@ -33,18 +41,17 @@ import { RegisterComponent } from './register/register.component';
     TabsModule.forRoot(),
     ChartsModule,
     PaginationModule.forRoot(),
+    CookieModule.forRoot(),    
     HttpModule
   ],
   declarations: [
     AppComponent,
-    FullLayoutComponent,
-    SimpleLayoutComponent,
+    FullLayoutComponent,    
     NAV_DROPDOWN_DIRECTIVES,
     BreadcrumbsComponent,
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
-    LoginComponent,
-    RegisterComponent,        
+    LoginComponent    
   ],
   providers: [
     {
