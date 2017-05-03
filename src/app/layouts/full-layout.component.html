@@ -90,20 +90,20 @@
             <div class="row">
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-green" (click)="layout('crop')" [ngClass]="{'active': active == 'crop'}" [routerLink]="['/crop/list']">
+                    <div class="small-box bg-green">
+                        <div class="inner" title="Crops" style="cursor:not-allowed;">
+                          <p>Crops</p>
+                        </div>
                         <div class="icon">                           
                             <i class="icon-Shape-13"></i>
-                        </div>
-                        <div class="inner" title="Crops">
-                          <p>Crops</p>
                         </div>
                     </div>
                 </div>
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-aqua" (click)="layout('input')" [ngClass]="{'active': active == 'input'}" [routerLink]="['/input/list']">
-                        <div class="inner" title="Inputs">
+                    <div class="small-box bg-aqua">
+                        <div class="inner" title="Inputs" style="cursor:not-allowed;">
                             <p>Inputs</p>
                         </div>
                         <div class="icon">
@@ -114,8 +114,8 @@
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-red" (click)="layout('equipments')" [ngClass]="{'active': active == 'equipments'}" [routerLink]="['/equipment/list']">
-                        <div class="inner" title="Equipments">
+                    <div class="small-box bg-red">
+                        <div class="inner" title="Equipments" style="cursor:not-allowed;">
                             <p>Equipments</p>
                         </div>
                         <div class="icon">
@@ -126,8 +126,8 @@
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-yellow" (click)="layout('land')" [ngClass]="{'active': active == 'land'}" [routerLink]="['/land/list']">
-                        <div class="inner" title="Lands">
+                    <div class="small-box bg-yellow">
+                        <div class="inner" title="Lands" style="cursor:not-allowed;">
                           <p>Lands</p>
                         </div>
                         <div class="icon">

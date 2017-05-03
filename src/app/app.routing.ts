@@ -15,6 +15,16 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [ActiveRouteGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [ActiveRouteGuard]
+  },
+  {
     path: '',
     component: FullLayoutComponent,
     data: {
@@ -25,70 +35,12 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: './dashboard/dashboard.module#DashboardModule'
-      },     
-      {
-        path: 'components',
-        loadChildren: './components/components.module#ComponentsModule'
-      },
-      {
-        path: 'icons',
-        loadChildren: './icons/icons.module#IconsModule'
-      },
-      {
-        path: 'widgets',
-        loadChildren: './widgets/widgets.module#WidgetsModule'
-      },
-      {
-        path: 'charts',
-        loadChildren: './chartjs/chartjs.module#ChartJSModule'
-      },
-      {
-        path: 'crop',
-        loadChildren: './crop-management/crop-management.module#CropManagementModule'
-        // loadChildren: './chartjs/chartjs.module#ChartJSModule'        
-      },
-      {
-        path: 'input',
-        loadChildren: './input-management/input-management.module#InputManagementModule'
-        // loadChildren: './chartjs/chartjs.module#ChartJSModule'        
       },
       {
         path: 'user',
-        loadChildren: './user-management/user-management.module#UserManagementModule'
-        // loadChildren: './chartjs/chartjs.module#ChartJSModule'        
-      },
-      {
-        path: 'equipment',
-        loadChildren: './equipment-management/equipment-management.module#EquipmentManagementModule'
-      },
-      {
-        path: 'land',
-        loadChildren: './land-management/land-management.module#LandManagementModule'
+        loadChildren: './user-management/user-management.module#UserManagementModule'      
       }
     ]
-  },
-  {
-    path: 'pages',
-    component: SimpleLayoutComponent,
-    data: {
-      title: 'Pages'
-    },
-    children: [
-      {
-        path: '',
-        loadChildren: './pages/pages.module#PagesModule',
-      }
-    ]
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [ActiveRouteGuard]
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    canActivate: [ActiveRouteGuard]
   }
 ];
 
