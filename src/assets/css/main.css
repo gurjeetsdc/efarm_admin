@@ -4529,7 +4529,7 @@ table.text-center, table.text-center td, table.text-center th {
 	font-size: 18px;
 	font-weight: 300;
 	margin-right: 8px;
-	padding: 14px 42px;
+	padding: 14px 34px;
 }
 .grade input[type="radio"]{
 opacity: 0;
@@ -5434,6 +5434,12 @@ i.addimage {
 	padding-top: 6px;
 }
 
+.grade .graderadiobutton input{
+	 position: absolute;
+}
+.relative{
+	position: relative;
+}
 /* media queries */
 
 @media (min-width:1300px) {
@@ -5462,6 +5468,9 @@ i.addimage {
 	left: auto;
 	position: relative;
 	top: -2px;
+}
+.grade label {
+	padding: 0.5rem 0.7rem;
 }
 .first_block {
 	text-align: center;
@@ -5844,9 +5853,7 @@ header.main-header.header_main div.navbar-custom-menu {
 	margin: 0px auto;
 	float: none;
 }
-.grade label {
-	padding: 0.5rem 0.7rem;
-}
+
 }
 
 @media (max-width:420px) {
@@ -5924,3 +5931,41 @@ button.whiteclr {
 }
 }
 /* media queries */
+.datepicker-input {
+    position: absolute;
+    z-index: 9999;
+    left: 33px;
+    border: 0 !important;
+    width: 110px !important;
+    top: 11px;
+}
+
+.datepicker-input-icon{
+     position: absolute;
+    left: 15px;
+    z-index: 999;
+    top: 18px;
+}
+
+.nopointer{
+	cursor: no-drop;
+    pointer-events: none;
+}
+.datepicker-input{
+	cursor: no-drop;
+    pointer-events: none;
+    z-index: 3;	
+}
+
+.datepicker-input:focus{
+	cursor: no-drop;
+    pointer-events: none;
+    z-index: 3;	
+    border:1px solid red;
+}
+
+select.disable:disabled {
+    background-color: #cfd8dc !important;
+    opacity: 1;
+}
+

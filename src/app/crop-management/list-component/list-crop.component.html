@@ -50,9 +50,9 @@
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="10%">
-                                    <mfDefaultSorter by="quantity_per_pack">Qty. 
-                                        <i *ngIf="sortOrder == 'asc' && sortBy == 'quantity_per_pack'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'quantity_per_pack'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    <mfDefaultSorter by="quantity">Qty. 
+                                        <i *ngIf="sortOrder == 'asc' && sortBy == 'quantity'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'quantity'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="15%">Category
@@ -69,7 +69,7 @@
                             <tr *ngFor="let crop of mf.data">    
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
                                 <td><p><i class="fa fa-rupee"></i> {{crop.price}}</td>
-                                <td>{{crop.quantity_per_pack}} {{crop.unit}}</td>
+                                <td>{{crop.quantity}} {{crop.quantity_unit}}</td>
                                 <td>{{crop.category?.name}}</td>
                                 <td>{{crop.seller ? crop.seller?.first_name ? crop.seller?.first_name + ' ' + crop.seller?.last_name : crop.seller?.username : ''}}</td>
                                 <td>                                    

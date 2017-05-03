@@ -8,13 +8,15 @@ import { ViewCropComponent } from './view-component/view-crop.component';
 import { CropManagementRoutingModule } from './crop-management-routing.module';
 import { CropService } from './services/crop.service';
 import { CustomFormsModule } from 'ng2-validation'
+import { DatePickerModule } from 'ng2-datepicker';
 
 @NgModule({
   imports: [
   	CropManagementRoutingModule,
   	 CommonModule,
      DataTableModule,
-     CustomFormsModule    
+     CustomFormsModule,
+     DatePickerModule    
   ],
   providers: [
   	CropService

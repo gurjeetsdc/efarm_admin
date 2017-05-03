@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CropService } from '../services/crop.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
 @Component({
   templateUrl: 'addupdate-crop.component.html'
@@ -14,13 +15,18 @@ export class AddUpdateCropComponent {
         payment_method:'COD',
         category_id:'',
         seller_id:'',
-        supply_ablity:'Yes',
-        unit:'Kg'
+        supply_area:'',
+        supply_ability:'No',
+        quantity_unit:'Kg',
+        available_unit : 'Days',
+        verified: 'No'
     };
     public isLoading = true;
     private category = [];
     private sellers = [];
     private cropID:any;
+    public date: DateModel;
+    public options: DatePickerOptions;
     constructor(private router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService) { 
         this._cropService.getAllCategories().subscribe( res => { this.category = res; }, err => {});
         this._cropService.getAllUsers().subscribe( res => { this.sellers = res; }, err => {});
@@ -37,11 +43,15 @@ export class AddUpdateCropComponent {
         } else {
             this.isLoading = false;
         }
+        this.options = new DatePickerOptions();
 
     }
 
     save() {
         this.isLoading = true;
+        if(this.crop["supply_ability"] == "No") {
+            delete this.crop["supply_range"]
+        }
         if(this.cropID) {
             this.crop["category"] = this.crop["category_id"];
             if(this.crop["seller_id"]) this.crop["seller"] = this.crop["seller_id"];
