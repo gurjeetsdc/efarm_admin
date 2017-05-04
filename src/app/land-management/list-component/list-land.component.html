@@ -66,7 +66,8 @@
                                <td colspan="6">{{err_message}}</td>
                             </tr>
                             <tr *ngFor="let land of mf.data">                        
-                                <td><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.name}}</a></td>
+                            
+                                <td><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.user?.username}}</a></td>
                                 <td>{{land.location}}</td>
                                 <td>{{land.area}} {{land.unit}}</td>
                                 <td>{{land.expected_price}}</td>

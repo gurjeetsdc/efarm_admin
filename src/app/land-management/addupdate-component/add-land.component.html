@@ -16,10 +16,22 @@
                 </div>
                 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <!-- <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="nf-name">Owner Name</label>
                             <input autofocus=""  type="text" id="nf-name" name="nf-name" class="form-control"  [(ngModel)]="land.name" required>
+                        </div>
+                    </div> -->
+
+                    <div class="col-sm-6">
+                        <div class="form-group  has-required">
+                            <label for="seller">Seller</label>
+                            <select id="seller" name="seller" class="form-control" size="1" [(ngModel)]="land.seller_id" required>
+                                <option value="">Please select</option>                                
+                                <option *ngFor="let obj of sellers" value="{{obj.id}}">
+                                    {{obj.username}}
+                                </option>       
+                            </select>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -33,48 +45,62 @@
                            
                             <div class="form-group pull-left">
                                 <div class="radio_button">                     
-                                    <input type="radio" name="rentSell" class="" id="rentSell" value="Sell"  [(ngModel)]="land.rentSell" required>
+                                    <input type="radio" name="rentSell" class="" id="rentSell" value="Sell"  [(ngModel)]="land.rentSell" (change)="land.avail_date = '';land.periods='';" required>
                                     <label for="rentSell">Sell</label>
                                 </div>
                             </div>
                         </div>                    
                     </div>
                 </div>
-                <div class="row">
+                <div class="row"  >
                     <div class="col-sm-6">
-                        <div class="form-group  has-required">
-                            <label for="nf-variety">Location</label>
-                            <select id="select1" name="select1" class="form-control" [(ngModel)]="land.location" size="1" required>
-                                <option selected="" value="">Please select</option>
-                                <option value="location 1">location 1</option>
-                                <option value="location 2">location 2</option>
-                                <option value="location 3">location 3</option>
+                       <div class="form-group has-required">
+                           <label for="nf-password">Available Date</label>
+                             <div class="input-group">
+                              <ng2-datepicker [options]="options" id="nfavail_date" name="nfavail_date" [(ngModel)]="land.avail_date" required></ng2-datepicker>                         
+                            </div>
+                       </div>
+                   </div>
+                
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                                <label for="nf-price">Periods</label>
+                         <div class="input-group">
+                            <input type="number" id="nf-periods" name="nf-periods" class="form-control pleft25" [(ngModel)]="land.periods" [disabled]="land.rentSell == 'Sell'" >
+                          <div class="input-group-btn">
+                              <select id="select3" [disabled]="land.rentSell == 'Sell'" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.periodsunit" size="1" required>
+                                <option value="">-Units-</option>
+                                <option value="Day">Day</option>
+                                <option value="Week">Week</option>
+                                <option value="Month">Month</option>
+                                <option value="Year">Year</option>
+                            </select>
+                         </div>
+                       </div>  
+
+                            </div>
+                        </div>
+                </div>
+
+                <div class="row">
+
+                     <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-category">Category</label>
+                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="land.category_id" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                   <div class="form-group has-required">
-                    <label for="nf-qty">Area</label>
-                     <div class="input-group">
-                     
-                         <input type="text" id="nf-area" name="area" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area" required>
-                          <div class="input-group-btn">
-                              <select id="select2" name="select2" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.unit" size="1" required>
-                                <option value="">Unit</option>
-                                <option value="Sq.Ft">Sq.Ft</option>
-                                <option value="Sq. Yards">Sq. Yards</option>
-                                <option value="Sq. Meter">Sq. Meter</option>
-                                <option value="Acres">Acres</option>
-                                <option value="Marla">Marla</option>
-                                <option value="Bigha">Bigha</option>
-                                <option value="Kanal">Kanal</option>
-                            </select>
-                         </div>
-                       </div>                      
-                   </div>
-
-                   </div>
-
+                        <div class="form-group  has-required">
+                            <label for="nf-variety">Location</label>
+                            <input type="text" id="nf-location" name="nf-location" class="form-control" [(ngModel)]="land.location" required>
+                           
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
@@ -83,14 +109,45 @@
                         <input type="number" id="nf-khasra" name="nf-khasra" class="form-control" [(ngModel)]="land.khasra_no" required maxlength="20">
                     </div>
                 </div>
-                
+                    <div class="col-sm-6">
+                   <div class="form-group has-required">
+                    <label for="nf-qty">Area</label>
+                     <div class="input-group">
+                     
+                         <input type="text" id="nf-area" name="area" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area" required>
+                          <div class="input-group-btn">
+                              <select id="select2" name="select2" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.unit" size="1" required>
+                                <option value="">-Units-</option>
+                                <option value="Sq.Ft">Sq.Ft</option>
+                                <option value="Sq. Yards">Sq. Yards</option>
+                                <option value="Sq. Meter">Sq. Meter</option>
+                            </select>
+                         </div>
+                       </div>                      
+                   </div>
+                   </div>
+                </div>
+                 <div class="row">  
                     <div class="col-sm-6">
                     <div class="form-group has-required">
                             <label for="nf-price">Expected price </label>
                             <div class="input-group">
                                 <div class="icnposition"><i class="fa fa-rupee"></i></div>
                                 <input maxlength="10" type="number" id="nf-expected_price" name="nf-expected_price" class="form-control pleft25" [(ngModel)]="land.expected_price" required>
-                            </div>    
+
+                                <div class="input-group-btn">
+                              <select id="select3" [disabled]="land.rentSell == 'Sell'" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" required>
+                                <option value="">-Units-</option>
+                                <option value="Day">Per Day</option>
+                                <option value="Week">Per Week</option>
+                                <option value="Month">Per Month</option>
+                                <option value="Year">Per Year</option>
+                            </select>
+                         </div>
+                            </div>  
+
+                            
+
                         </div>
                     </div>
                 </div>

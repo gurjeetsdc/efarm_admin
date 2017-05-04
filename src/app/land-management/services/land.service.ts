@@ -3,8 +3,8 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 @Injectable()
 export class LandService {
 
-  private host = "https://efarmapi.herokuapp.com";
-  //private host = "http://localhost:1337";
+  //private host = "https://efarmapi.herokuapp.com";
+  private host = "http://localhost:1337";
   private access_token = {};
   private token = '';
   
@@ -79,7 +79,6 @@ export class LandService {
     return this.http.put(this.host +'/land/'+ land.id, land, { headers: headers }).map((res:Response) => res.json())
     }
 
-
     /*
     *@Description: update land info method
     *@Param: land id param and Land( data
@@ -97,5 +96,34 @@ export class LandService {
         headers.append('Authorization', this.token );
         return this.http.delete(this.host +'/land/'+ landId,  { headers: headers }).map((res:Response) => res.json());
     }   
+    
+    /*
+    *@Description: get seller user list
+    *@Param: nothing
+    *@return: seller user list
+    *@Author: Rohitk.kumar
+    */
+    getAllUsers() {
+          
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
+        this.access_token   = JSON.parse(localStorage.getItem("user"));
+        this.token          = 'Bearer ' + this.access_token["access_token"];
+        headers.append('Authorization', this.token );
+        
+        return this.http.get(this.host +'/users', { headers: headers }).map((res:Response) => res.json());
+    }
+
+    getAllCategories() {
+          
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
+
+        this.access_token   = JSON.parse(localStorage.getItem("user"));
+        this.token          = 'Bearer ' + this.access_token["access_token"];
+
+        headers.append('Authorization', this.token );
+        return this.http.get(this.host +'/category', { headers: headers }).map((res:Response) => res.json());
+    }
 
 }
