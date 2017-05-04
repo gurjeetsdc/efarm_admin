@@ -53,7 +53,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var login_service_1 = __webpack_require__(797);
 var router_1 = __webpack_require__(76);
-var ngx_cookie_1 = __webpack_require__(97);
+var ngx_cookie_1 = __webpack_require__(96);
 var tsConstants = __webpack_require__(310);
 var LoginComponent = (function () {
     function LoginComponent(_router, _loginService, _cookieService) {
@@ -117,7 +117,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(76);
-var ngx_cookie_1 = __webpack_require__(97);
+var ngx_cookie_1 = __webpack_require__(96);
 var ActiveRouteGuard = (function () {
     function ActiveRouteGuard(router, _cookieService) {
         this.router = router;
@@ -161,7 +161,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(76);
-var ngx_cookie_1 = __webpack_require__(97);
+var ngx_cookie_1 = __webpack_require__(96);
 var DeactiveRouteGuard = (function () {
     function DeactiveRouteGuard(router, _cookieService) {
         this.router = router;
@@ -205,7 +205,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(76);
-var ngx_cookie_1 = __webpack_require__(97);
+var ngx_cookie_1 = __webpack_require__(96);
 var FullLayoutComponent = (function () {
     function FullLayoutComponent(router, _route, _cookieService) {
         this.router = router;
@@ -231,7 +231,6 @@ var FullLayoutComponent = (function () {
     };
     FullLayoutComponent.prototype.logout = function () {
         this._cookieService.removeAll();
-        localStorage.removeItem('user');
         this.router.navigate(['/login']);
     };
     return FullLayoutComponent;
@@ -346,7 +345,7 @@ var app_component_1 = __webpack_require__(794);
 // import { DropdownModule } from 'ng2-bootstrap/dropdown';
 var tabs_1 = __webpack_require__(606);
 var nav_dropdown_directive_1 = __webpack_require__(800);
-var ngx_cookie_1 = __webpack_require__(97);
+var ngx_cookie_1 = __webpack_require__(96);
 var activate_route_guard_1 = __webpack_require__(406);
 var deactivate_route_guard_1 = __webpack_require__(407);
 var ng2_charts_1 = __webpack_require__(669);

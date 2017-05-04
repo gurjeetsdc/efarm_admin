@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-users',
@@ -19,7 +20,7 @@ export class ListUserComponent implements OnInit {
     public isLoading:boolean   = true;
     public response:any;
    
-    public constructor(private _router: Router, private _userService: UserService) { 
+    public constructor(private _router: Router, private _userService: UserService, private _cookieService: CookieService ) { 
         
     }
 
@@ -96,7 +97,7 @@ export class ListUserComponent implements OnInit {
         let statusText = err.statusText;
 
         if( (status == 401 && statusText == 'Unauthorized')) {
-            localStorage.removeItem('user');
+            this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         }else {
             console.log('Something unexpected happened, please try again later.');

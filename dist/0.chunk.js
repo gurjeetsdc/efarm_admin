@@ -302,7 +302,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var http_1 = __webpack_require__(196);
-var ngx_cookie_1 = __webpack_require__(97);
+var ngx_cookie_1 = __webpack_require__(96);
 var tsConstants = __webpack_require__(310);
 var UserService = (function () {
     function UserService(_http, _cookieService) {
@@ -1506,12 +1506,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var user_service_1 = __webpack_require__(1092);
 var router_1 = __webpack_require__(76);
+var ngx_cookie_1 = __webpack_require__(96);
 var AddUpdateUserComponent = (function () {
-    function AddUpdateUserComponent(_router, _activateRouter, _userService) {
+    function AddUpdateUserComponent(_router, _activateRouter, _userService, _cookieService) {
         var _this = this;
         this._router = _router;
         this._activateRouter = _activateRouter;
         this._userService = _userService;
+        this._cookieService = _cookieService;
         this.user = {};
         this.isLoading = true;
         this.userID = _activateRouter.snapshot.params['id'];
@@ -1555,7 +1557,7 @@ var AddUpdateUserComponent = (function () {
         var status = err.status;
         var statusText = err.statusText;
         if ((status == 401 && statusText == 'Unauthorized')) {
-            localStorage.removeItem('user');
+            this._cookieService.removeAll();
             this._router.navigate(['/login', { data: true }]);
         }
         else {
@@ -1568,10 +1570,10 @@ AddUpdateUserComponent = __decorate([
     core_1.Component({
         template: __webpack_require__(1140)
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof user_service_1.UserService !== "undefined" && user_service_1.UserService) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof user_service_1.UserService !== "undefined" && user_service_1.UserService) === "function" && _c || Object, typeof (_d = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _d || Object])
 ], AddUpdateUserComponent);
 exports.AddUpdateUserComponent = AddUpdateUserComponent;
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/addupdate-user.component.js.map
 
 /***/ }),
@@ -1593,10 +1595,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(76);
 var user_service_1 = __webpack_require__(1092);
+var ngx_cookie_1 = __webpack_require__(96);
 var ListUserComponent = (function () {
-    function ListUserComponent(_router, _userService) {
+    function ListUserComponent(_router, _userService, _cookieService) {
         this._router = _router;
         this._userService = _userService;
+        this._cookieService = _cookieService;
         this.data = [];
         this.totalRecords = 0;
         this.filterQuery = "";
@@ -1671,7 +1675,7 @@ var ListUserComponent = (function () {
         var status = err.status;
         var statusText = err.statusText;
         if ((status == 401 && statusText == 'Unauthorized')) {
-            localStorage.removeItem('user');
+            this._cookieService.removeAll();
             this._router.navigate(['/login', { data: true }]);
         }
         else {
@@ -1686,10 +1690,10 @@ ListUserComponent = __decorate([
         template: __webpack_require__(1141),
         styles: [__webpack_require__(1135)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof user_service_1.UserService !== "undefined" && user_service_1.UserService) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof user_service_1.UserService !== "undefined" && user_service_1.UserService) === "function" && _b || Object, typeof (_c = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _c || Object])
 ], ListUserComponent);
 exports.ListUserComponent = ListUserComponent;
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/list-user.component.js.map
 
 /***/ }),
@@ -1711,11 +1715,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(76);
 var user_service_1 = __webpack_require__(1092);
+var ngx_cookie_1 = __webpack_require__(96);
 var ViewUserComponent = (function () {
-    function ViewUserComponent(route, _router, _userService) {
+    function ViewUserComponent(route, _router, _userService, _cookieService) {
         var _this = this;
         this._router = _router;
         this._userService = _userService;
+        this._cookieService = _cookieService;
         this.userID = '';
         this.user = {};
         this.isLoading = true;
@@ -1748,7 +1754,7 @@ var ViewUserComponent = (function () {
         var status = err.status;
         var statusText = err.statusText;
         if ((status == 401 && statusText == 'Unauthorized')) {
-            localStorage.removeItem('user');
+            this._cookieService.removeAll();
             this._router.navigate(['/login', { data: true }]);
         }
         else {
@@ -1761,10 +1767,10 @@ ViewUserComponent = __decorate([
     core_1.Component({
         template: __webpack_require__(1142)
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object, typeof (_c = typeof user_service_1.UserService !== "undefined" && user_service_1.UserService) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object, typeof (_c = typeof user_service_1.UserService !== "undefined" && user_service_1.UserService) === "function" && _c || Object, typeof (_d = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _d || Object])
 ], ViewUserComponent);
 exports.ViewUserComponent = ViewUserComponent;
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/view-user.component.js.map
 
 /***/ }),
@@ -19204,7 +19210,7 @@ var tryCatch_1 = __webpack_require__(660);
 var errorObject_1 = __webpack_require__(304);
 var Observable_1 = __webpack_require__(9);
 var Subscriber_1 = __webpack_require__(24);
-var map_1 = __webpack_require__(96);
+var map_1 = __webpack_require__(97);
 function getCORSRequest() {
     if (root_1.root.XMLHttpRequest) {
         return new root_1.root.XMLHttpRequest();
@@ -28761,7 +28767,7 @@ exports.partition = partition;
 
 "use strict";
 
-var map_1 = __webpack_require__(96);
+var map_1 = __webpack_require__(97);
 /**
  * Maps each source value (an object) to its specified nested property.
  *

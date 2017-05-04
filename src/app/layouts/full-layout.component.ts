@@ -36,7 +36,6 @@ export class FullLayoutComponent implements OnInit {
 
   logout() {
     this._cookieService.removeAll();
-    localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 }

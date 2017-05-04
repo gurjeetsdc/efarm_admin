@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router,ActivatedRoute } from '@angular/router';
-
+import { CookieService } from 'ngx-cookie';
 @Component({
   templateUrl: 'addupdate-user.component.html'
 })
@@ -11,7 +11,7 @@ export class AddUpdateUserComponent {
     public isLoading       = true;
     public userID:any;
 
-    constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService) { 
+    constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService, private _cookieService: CookieService ) { 
         this.userID = _activateRouter.snapshot.params['id'];        
         if( this.userID ) {
             this._userService.get(this.userID).subscribe(res => {
@@ -53,7 +53,7 @@ export class AddUpdateUserComponent {
         let statusText = err.statusText;
 
         if( (status == 401 && statusText == 'Unauthorized')) {
-            localStorage.removeItem('user');
+            this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         } else {
             console.log('Something unexpected happened, please try again later.');
