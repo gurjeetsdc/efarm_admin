@@ -3,7 +3,7 @@ webpackJsonp([3,7],{
 /***/ 1071:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Loader div -->\n<div *ngIf=\"isPageLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div>\n</div>\n<section class=\"login-page\"></section>\n<div class=\"login-box\">\n    <!-- /.login-logo -->\n    <div class=\"login-box-body\">\n        <div class=\"login-logo\">\n            <img src=\"assets/img/logo.png\" alt=\"logo\">\n        </div>\n        <form role=\"form\" #loginForm=\"ngForm\" (ngSubmit)=\"login()\">\n            <div class=\"text-center\" *ngIf=\"errMessage\">\n                <span class=\"text-danger\">\n                    {{errMessage}}\n                </span>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Email</label>\n                <input type=\"text\" name=\"username\" class=\"form-control\" [(ngModel)]=\"user.username\" (ngModelChange)=\"errMessage=''\" #username=\"ngModel\" autofocus email required>\n                <li *ngIf=\"username.errors && username.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!username.errors.required\">Email is required</span>\n                </li>\n                <li *ngIf=\"username.errors?.email && username.touched\">\n                    <span class=\"text-danger\">Email id not valid.</span>\n                </li>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Password</label>\n                <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\" #password=\"ngModel\" (ngModelChange)=\"errMessage=''\" required>\n                <li *ngIf=\"password.errors && password.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!password.errors.required\">Password is required</span>\n                </li>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-12 col-12\">\n                    <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" [disabled]=\"!loginForm.valid\">Login</button>\n                </div>\n            </div>            \n        </form>\n    </div>\n    <!-- /.login-box-body -->\n</div>\n"
+module.exports = "<!-- Loader div -->\n<div *ngIf=\"isPageLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div>\n</div>\n<section class=\"login-page\"></section>\n<div class=\"login-box\">\n    <!-- /.login-logo -->\n    <div class=\"login-box-body\">\n        <div class=\"login-logo\">\n            <img src=\"assets/img/logo.png\" alt=\"logo\">\n        </div>\n        <form role=\"form\" #loginForm=\"ngForm\" (ngSubmit)=\"login()\">\n            <div class=\"text-center\" *ngIf=\"errMessage\">\n                <span class=\"text-danger\">\n                    {{errMessage}}\n                </span>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Email</label>\n                <input type=\"text\" name=\"username\" class=\"form-control\" [(ngModel)]=\"user.username\" (ngModelChange)=\"errMessage=''\" #username=\"ngModel\" autofocus email required>\n                <li *ngIf=\"username.errors && username.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!username.errors.required\">Email is required.</span>\n                </li>\n                <li *ngIf=\"username.errors?.email && username.touched\">\n                    <span class=\"text-danger\">Email is not valid.</span>\n                </li>\n            </div>\n            <div class=\"form-group has-feedback\">\n                <label>Password</label>\n                <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"user.password\" #password=\"ngModel\" (ngModelChange)=\"errMessage=''\" required>\n                <li *ngIf=\"password.errors && password.touched\">\n                    <span class=\"text-danger\" [hidden]=\"!password.errors.required\">Password is required.</span>\n                </li>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-sm-12 col-12\">\n                    <button type=\"submit\" class=\"btn btn-success btn-block btn-flat\" [disabled]=\"!loginForm.valid\">Login</button>\n                </div>\n            </div>            \n        </form>\n    </div>\n    <!-- /.login-box-body -->\n</div>\n"
 
 /***/ }),
 
@@ -56,16 +56,22 @@ var router_1 = __webpack_require__(76);
 var ngx_cookie_1 = __webpack_require__(96);
 var tsConstants = __webpack_require__(310);
 var LoginComponent = (function () {
-    function LoginComponent(_router, _loginService, _cookieService) {
+    function LoginComponent(_router, _loginService, _cookieService, _activateRouter) {
         this._router = _router;
         this._loginService = _loginService;
         this._cookieService = _cookieService;
+        this._activateRouter = _activateRouter;
         this.user = {
             grant_type: 'password',
             client_id: tsConstants.CLIENT_ID
         };
         this.errMessage = '';
         this.isPageLoading = false;
+        this._session = false;
+        this._session = _activateRouter.snapshot.params['data'];
+        if (this._session) {
+            this.errMessage = 'Session expired please login again';
+        }
     }
     LoginComponent.prototype.ngOnInit = function () { };
     LoginComponent.prototype.login = function () {
@@ -92,10 +98,10 @@ LoginComponent = __decorate([
         styles: [__webpack_require__(990)],
         providers: [login_service_1.LoginService]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof login_service_1.LoginService !== "undefined" && login_service_1.LoginService) === "function" && _b || Object, typeof (_c = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof login_service_1.LoginService !== "undefined" && login_service_1.LoginService) === "function" && _b || Object, typeof (_c = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _c || Object, typeof (_d = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _d || Object])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/login.component.js.map
 
 /***/ }),
