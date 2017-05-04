@@ -13,9 +13,6 @@ import { CookieModule } from 'ngx-cookie';
 import { ActiveRouteGuard } from './auth/services/activate-route-guard';
 import { DeactiveRouteGuard } from './auth/services/deactivate-route-guard';
 
-/*import { ActiveRouteGuard } from './activate-route-guard';
-import { DeactiveRouteGuard } from './deactivate-route-guard';*/
-
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
 import { AsideToggleDirective } from './shared/aside.directive';
@@ -30,7 +27,7 @@ import { FullLayoutComponent } from './layouts/full-layout.component';
 
 
 import { LoginComponent } from './auth/login/login.component';
-
+import { CustomFormsModule } from 'ng2-validation'
 
 @NgModule({
   imports: [
@@ -42,7 +39,8 @@ import { LoginComponent } from './auth/login/login.component';
     ChartsModule,
     PaginationModule.forRoot(),
     CookieModule.forRoot(),    
-    HttpModule
+    HttpModule,
+    CustomFormsModule
   ],
   declarations: [
     AppComponent,

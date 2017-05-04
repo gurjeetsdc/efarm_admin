@@ -9,9 +9,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { ActiveRouteGuard } from './auth/services/activate-route-guard';
 import { DeactiveRouteGuard } from './auth/services/deactivate-route-guard';
 
-/*import { ActiveRouteGuard } from './activate-route-guard';
-import { DeactiveRouteGuard } from './deactivate-route-guard';
-*/
 export const routes: Routes = [
   {
     path: '',

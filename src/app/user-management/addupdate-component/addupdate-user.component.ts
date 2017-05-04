@@ -55,7 +55,7 @@ export class AddUpdateUserComponent {
         if( (status == 401 && statusText == 'Unauthorized')) {
             localStorage.removeItem('user');
             this._router.navigate(['/login', {data: true}]);
-        }else {
+        } else {
             console.log('Something unexpected happened, please try again later.');
         }        
     } 
