@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { UserService } from '../services/user.service';
-
+import { CookieService } from 'ngx-cookie';
 @Component({
     templateUrl: 'view-user.component.html'
 })
@@ -10,7 +10,7 @@ export class ViewUserComponent {
 	public user = {};
     public isLoading = true;
 
-    constructor(route: ActivatedRoute, private _router : Router,private _userService: UserService) { 
+    constructor(route: ActivatedRoute, private _router : Router,private _userService: UserService, private _cookieService: CookieService ) { 
         this.userID = route.snapshot.params['id'];
   	    this._userService.get(this.userID).subscribe(res => {
            this.user = res;
@@ -43,7 +43,7 @@ export class ViewUserComponent {
         let statusText = err.statusText;
 
         if( (status == 401 && statusText == 'Unauthorized')) {
-            localStorage.removeItem('user');
+            this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         }else {
             console.log('Something unexpected happened, please try again later.');
