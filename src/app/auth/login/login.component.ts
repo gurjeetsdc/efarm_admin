@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import tsConstants = require('./../../tsconstant');
 
@@ -20,9 +20,15 @@ export class LoginComponent implements OnInit {
 
     public errMessage            = '';
     public isPageLoading:boolean = false;
+    private _session             = false;
     
 
-    constructor(private _router : Router, private _loginService: LoginService, private _cookieService: CookieService) { }
+    constructor(private _router : Router, private _loginService: LoginService, private _cookieService: CookieService, private _activateRouter: ActivatedRoute) { 
+        this._session = _activateRouter.snapshot.params['data'];
+        if(this._session) {
+            this.errMessage = 'Session expired please login again';
+        }
+    }
 
     ngOnInit() {}
 
