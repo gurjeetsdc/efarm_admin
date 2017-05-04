@@ -22,7 +22,7 @@ export class ViewUserComponent {
     }
 
     editUser(userid) {        
-        let route = '/user/edit/'+ userid;
+        let route = '/users/edit/'+ userid;
         this._router.navigate([route]);       
     }
 
@@ -31,7 +31,7 @@ export class ViewUserComponent {
             this.isLoading = true;
             this._userService.delete(userid).subscribe(res => {
                 this.isLoading = false;
-                this._router.navigate(['/user/list/']);      
+                this._router.navigate(['/users/list/']);      
             },err => {
                 this.isLoading = false;
             });             

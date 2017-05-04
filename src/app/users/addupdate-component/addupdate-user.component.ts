@@ -32,7 +32,7 @@ export class AddUpdateUserComponent {
         if(this.userID) {
             this._userService.update(this.user).subscribe(res => {
                 this.isLoading = false;
-                this._router.navigate(['/user/list']);
+                this._router.navigate(['/users/list']);
             },err => {
                 this.isLoading = false;
                 this.checkAccessToken(err);
@@ -40,7 +40,7 @@ export class AddUpdateUserComponent {
         } else {
             this._userService.add(this.user).subscribe(res => {
                 this.isLoading = false;
-                this._router.navigate(['/user/list']);
+                this._router.navigate(['/users/list']);
             },err => {
                 this.isLoading = false;
                 this.checkAccessToken(err);

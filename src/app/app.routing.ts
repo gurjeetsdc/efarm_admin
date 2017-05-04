@@ -33,8 +33,8 @@ export const routes: Routes = [
         loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
-        path: 'user',
-        loadChildren: './user-management/user-management.module#UserManagementModule'      
+        path: 'users',
+        loadChildren: './users/users.module#UsersModule'      
       }
     ]
   }

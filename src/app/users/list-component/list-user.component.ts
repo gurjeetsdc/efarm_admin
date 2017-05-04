@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-user-management',
+  selector: 'app-users',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.scss']
 })
@@ -53,7 +53,7 @@ export class ListUserComponent implements OnInit {
     }
 
     viewUser (userID) {
-        let route = '/user/list/' + userID;
+        let route = '/users/list/' + userID;
         this._router.navigate([route]);       
     }
     
@@ -63,7 +63,7 @@ export class ListUserComponent implements OnInit {
             this._userService.delete(userid).subscribe(res => {
                 this.isLoading = false;
                 this.removeByAttr(this.data, 'id', userid);
-                this._router.navigate(['/user/list/']);      
+                this._router.navigate(['/users/list/']);      
             },err => {
                 this.isLoading = false;
                 this.checkAccessToken(err);
@@ -87,7 +87,7 @@ export class ListUserComponent implements OnInit {
     }
 
     editUser(userID) {     
-        let route = '/user/edit/'+ userID;
+        let route = '/users/edit/'+ userID;
         this._router.navigate([route]);       
     } 
 

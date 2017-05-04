@@ -73,4 +73,4 @@ const routes: Routes = [
     PaginationModule
   ]
 })
-export class UserManagementRoutingModule {}
+export class UsersRoutingModule {}
