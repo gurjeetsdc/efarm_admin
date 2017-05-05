@@ -10,14 +10,15 @@ import { CookieService } from 'ngx-cookie';
 })
 export class ListUserComponent implements OnInit {
 
-    public data                = [];
-    public totalRecords        = 0;
-    public filterQuery         = "";
-    public rowsOnPage          = 10;
-    public sortBy              = "createdAt";
-    public sortOrder           = "desc";
-    public errMessage          = "";
-    public isLoading:boolean   = true;
+    public data                  = [];
+    public totalRecords          = 0;
+    public filterQuery           = "";
+    public rowsOnPage            = 10;
+    public sortBy                = "createdAt";
+    public sortOrder             = "desc";
+    public errMessage            = "";
+    public isLoading:boolean     = false;
+    public isPageLoading:boolean = true;
     public response:any;
    
     public constructor(private _router: Router, private _userService: UserService, private _cookieService: CookieService ) { 
@@ -37,9 +38,9 @@ export class ListUserComponent implements OnInit {
             this.data = res;
             this.totalRecords = this.data.length;
             if(this.data.length == 0) this.errMessage = "No record to display";
-            this.isLoading = false;
+            this.isPageLoading = false;
         },err => {
-            this.isLoading = false;
+            this.isPageLoading = false;
             this.errMessage = "No record to display";
             this.checkAccessToken(err);
        });             

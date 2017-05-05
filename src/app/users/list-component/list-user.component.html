@@ -1,13 +1,17 @@
+<!-- Loader div -->
+<div *ngIf="isLoading" class="overlayloader">
+    <div class="loader"></div>
+</div>
 <!-- <div class="user-wrapper animated fadeIn">       -->
 <div class="user-wrapper">
     <div class="row">
         <div class="col-lg-12">
             <!-- loading section -->
-            <div class="aligncenter_loader" *ngIf="isLoading">
+            <div class="aligncenter_loader" *ngIf="isPageLoading">
                 <div class="is-loading"><i class="page-loader"></i></div>
             </div>
             <!-- loading section ends  -->
-            <div class="card" *ngIf="!isLoading">
+            <div class="card" *ngIf="!isPageLoading">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-3 col-12">

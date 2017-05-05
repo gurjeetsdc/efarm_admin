@@ -8,7 +8,8 @@ import { CookieService } from 'ngx-cookie';
 export class AddUpdateUserComponent {
 	
     public user            = {};
-    public isLoading       = true;
+    public isLoading       = false;
+    public isPageLoading   = true;
     public userID:any;
 
     constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService, private _cookieService: CookieService ) { 
@@ -16,13 +17,13 @@ export class AddUpdateUserComponent {
         if( this.userID ) {
             this._userService.get(this.userID).subscribe(res => {
                 this.user = res;
-                this.isLoading = false;
+                this.isPageLoading = false;
             },err => {
-                this.isLoading = false;
+                this.isPageLoading = false;
                 this.checkAccessToken(err);
             });
         } else {
-            this.isLoading = false;
+            this.isPageLoading = false;
         }
     } 
 
