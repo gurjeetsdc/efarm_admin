@@ -28,7 +28,7 @@ export class ListLandComponent implements OnInit {
 
     public documents = [];
     public selectedDocument = [];
-    public err_message = '';
+    public errMessage = '';
 
     public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _landService: LandService) { 
         
@@ -46,11 +46,11 @@ export class ListLandComponent implements OnInit {
             this.data = resdata.data;            
             this.isLoading = false;
             this.totalRecords = this.data.length;
-            if(this.data.length == 0) this.err_message = "No record to display";
+            if(this.data.length == 0) this.errMessage = "No record to display";
             this.isLoading = false;
         },err => {
             this.isLoading = false;
-            this.err_message = "No record to display";
+            this.errMessage = "No record to display";
        });         
     }
 

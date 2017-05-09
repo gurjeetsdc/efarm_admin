@@ -26,7 +26,7 @@
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="seller">Seller</label>
-                            <select id="seller" name="seller" class="form-control" size="1" [(ngModel)]="land.seller_id" required>
+                            <select id="seller" name="seller" class="form-control" size="1" [(ngModel)]="land.sellerId" required>
                                 <option value="">Please select</option>                                
                                 <option *ngFor="let obj of sellers" value="{{obj.id}}">
                                     {{obj.username}}
@@ -87,7 +87,7 @@
                      <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-category">Category</label>
-                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="land.category_id" required>
+                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="land.categoryId" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>

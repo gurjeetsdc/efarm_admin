@@ -39,10 +39,12 @@
                                [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                         <thead>
                             <tr>
-                                <th width="30%"><mfDefaultSorter by="name">Owner Name
-                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                <th width="30%">Owner Name
+                                <!--<mfDefaultSorter by="name">Owner Name
+                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                </mfDefaultSorter></th>
+                                </mfDefaultSorter> -->
+                                </th>
                                 <th width="20%"><mfDefaultSorter by="location">Location
                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
@@ -62,8 +64,8 @@
                             </tr>
                         </thead>                        
                         <tbody>
-                           <tr *ngIf='err_message'>
-                               <td colspan="6">{{err_message}}</td>
+                           <tr *ngIf='errMessage'>
+                               <td colspan="6">{{errMessage}}</td>
                             </tr>
                             <tr *ngFor="let land of mf.data">                        
                             

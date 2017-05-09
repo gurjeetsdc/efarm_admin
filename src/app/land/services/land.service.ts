@@ -62,7 +62,7 @@ export class LandService {
         let body = {};
         let urlSearchParams = new URLSearchParams();
         headers.append('Authorization', this._accessToken);
-        console.log("addCrop----------------",land);
+        
     return this.http.get(this.host +'/land/'+ land, { headers: headers }).map((res:Response) => res.json())
     }
 
@@ -73,11 +73,13 @@ export class LandService {
     *@Author: Rohitk.kumar
     */
     updateLand(land) {
+
+        let body            = {};
         let token           = this._cookieService.get('token');
         this._accessToken   = 'Bearer ' + token;
-        let headers = new Headers();
-        let body = {};        
+        let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
+        
         headers.append('Authorization', this._accessToken);
     return this.http.put(this.host +'/land/'+ land.id, land, { headers: headers }).map((res:Response) => res.json())
     }
@@ -93,7 +95,6 @@ export class LandService {
         
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
-
         let token           = this._cookieService.get('token');
         this._accessToken   = 'Bearer ' + token;
         

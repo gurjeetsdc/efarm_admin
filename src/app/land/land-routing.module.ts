@@ -69,4 +69,4 @@ const routes: Routes = [
     PaginationModule
   ]
 })
-export class LandManagementRoutingModule {}
+export class LandRoutingModule {}
