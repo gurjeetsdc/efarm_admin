@@ -43,7 +43,7 @@ export class ListLandComponent implements OnInit {
         });
 
         this._landService.landlist().subscribe(resdata => {
-            this.data = resdata;            
+            this.data = resdata.data;            
             this.isLoading = false;
             this.totalRecords = this.data.length;
             if(this.data.length == 0) this.err_message = "No record to display";
