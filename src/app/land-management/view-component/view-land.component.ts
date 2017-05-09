@@ -16,7 +16,7 @@ export class ViewLandComponent {
     
         if( this.Id ) {
             this._landService.getLand(this.Id).subscribe( res => {
-             this.land = res;
+             this.land = res.data;
              this.isLoading = false;
              //console.log(res);
               }, err => {

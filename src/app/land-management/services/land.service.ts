@@ -1,27 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { CookieService } from 'ngx-cookie';
+import tsConstants = require('./../../tsconstant');
 @Injectable()
 export class LandService {
 
-  private host = "https://efarmapi.herokuapp.com";
+ private host = tsConstants.HOST;
   //private host = "http://localhost:1337";
   private access_token = {};
   private token = '';
   
-  constructor(private http: Http) { }
+  private _accessToken = '';
+    constructor(private http: Http, private _cookieService: CookieService) { }
 
-  	/*
+      /*
     *@Description: Land listing method
     *@Param: no parameter pass
     *@return: Multiple json array
     *@Author: Rohitk.kumar
     */
     landlist() {
-        this.access_token = JSON.parse(localStorage.getItem("user"));
-        this.token = 'Bearer ' + this.access_token["access_token"];
+        let token           = this._cookieService.get('token');
+        this._accessToken   = 'Bearer ' + token;
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
-        headers.append('Authorization', this.token);
+        headers.append('Authorization', this._accessToken);
         
         //let body = urlSearchParams.toString()
     return this.http.get(this.host +'/land', { headers: headers }).map((res:Response) => res.json())
@@ -36,11 +39,11 @@ export class LandService {
     landadd(land) {
       console.log("inside land add");
 
-        this.access_token = JSON.parse(localStorage.getItem("user"));
-        this.token = 'Bearer ' + this.access_token["access_token"];
+        let token           = this._cookieService.get('token');
+        this._accessToken   = 'Bearer ' + token;
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
-        headers.append('Authorization', this.token);
+        headers.append('Authorization', this._accessToken);
         
     return this.http.post(this.host +'/land', land, { headers: headers }).map((res:Response) => res.json())
     }
@@ -53,12 +56,12 @@ export class LandService {
     */
     getLand(land) {
       console.log(land);
-        this.access_token = JSON.parse(localStorage.getItem("user"));
-        this.token = 'Bearer ' + this.access_token["access_token"];
+        let token           = this._cookieService.get('token');
+        this._accessToken   = 'Bearer ' + token;
         let headers = new Headers();
         let body = {};
         let urlSearchParams = new URLSearchParams();
-        headers.append('Authorization', this.token);
+        headers.append('Authorization', this._accessToken);
         console.log("addCrop----------------",land);
     return this.http.get(this.host +'/land/'+ land, { headers: headers }).map((res:Response) => res.json())
     }
@@ -70,12 +73,12 @@ export class LandService {
     *@Author: Rohitk.kumar
     */
     updateLand(land) {
-        this.access_token = JSON.parse(localStorage.getItem("user"));
-        this.token = 'Bearer ' + this.access_token["access_token"];
+        let token           = this._cookieService.get('token');
+        this._accessToken   = 'Bearer ' + token;
         let headers = new Headers();
         let body = {};        
         let urlSearchParams = new URLSearchParams();
-        headers.append('Authorization', this.token);
+        headers.append('Authorization', this._accessToken);
     return this.http.put(this.host +'/land/'+ land.id, land, { headers: headers }).map((res:Response) => res.json())
     }
 
@@ -91,11 +94,40 @@ export class LandService {
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
 
-        this.access_token   = JSON.parse(localStorage.getItem("user"));
-        this.token          = 'Bearer ' + this.access_token["access_token"];
+        let token           = this._cookieService.get('token');
+        this._accessToken   = 'Bearer ' + token;
         
-        headers.append('Authorization', this.token );
+        headers.append('Authorization', this._accessToken );
         return this.http.delete(this.host +'/land/'+ landId,  { headers: headers }).map((res:Response) => res.json());
-    }   
+    }      
+    
+    /*
+    *@Description: get seller user list
+    *@Param: nothing
+    *@return: seller user list
+    *@Author: Rohitk.kumar
+    */
+    getAllUsers() {
+          
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
+        let token           = this._cookieService.get('token');
+        this._accessToken   = 'Bearer ' + token;
+        headers.append('Authorization', this._accessToken );
+        
+        return this.http.get(this.host +'/user', { headers: headers }).map((res:Response) => res.json());
+    }
+
+    getAllCategories() {
+          
+        let headers         = new Headers();
+        let urlSearchParams = new URLSearchParams();
+
+        let token           = this._cookieService.get('token');
+        this._accessToken   = 'Bearer ' + token;
+
+        headers.append('Authorization', this._accessToken );
+        return this.http.get(this.host +'/category', { headers: headers }).map((res:Response) => res.json());
+    }
 
 }

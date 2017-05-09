@@ -11,10 +11,10 @@
     <div class="card" *ngIf="!isLoading">
      <div class="card-header">
             <div class="row">
-                <div class="col-sm-3 col-12">
+                <div class="col-sm-6 col-12">
                    <strong>View Land</strong>           
                 </div>
-                <div class="col-sm-9 col-12 text-right linehght">
+                <div class="col-sm-6 col-12 text-right linehght">
                    <button type="button" class="btn btn-secondary" [routerLink]="['/land/list']">Back</button>  
 
                    <button type="button" class="btn btn-success pull-right" (click)="updateLand(land.id)">Edit Land</button>            
@@ -29,7 +29,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-name">Owner Name</label>
-                            <p>{{land.name}}</p>
+                            <p>{{land.user?.username}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -38,7 +38,7 @@
                             <p>{{land.rentSell}}</p>
                         </div>
                     </div>
-                </div>
+            </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -63,7 +63,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-expectedprice">Expected Price</label>
-                            <p><i class="fa fa-rupee"></i> {{land.expected_price}}</p>
+                            <p><i class="fa fa-rupee"></i> {{land.expected_price}} {{land.priceunit ? 'per':''}} {{land.priceunit}} </p>
                         </div>
                     </div>
                 </div>
@@ -74,12 +74,12 @@
                             <p>{{land.description}}</p>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <!-- <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-termsConditions">Terms & Conditions</label>
                             <p>{{land.term_condition}}</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>              
         </div>
     </div> <!-- .card -->
