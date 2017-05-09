@@ -1,0 +1,86 @@
+
+<div class="input-wrapper">    
+ 
+
+<!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+
+    <div class="card" *ngIf="!isLoading">
+     <div class="card-header">
+            <div class="row">
+                <div class="col-sm-3 col-12">
+                   <strong>View Land</strong>           
+                </div>
+                <div class="col-sm-9 col-12 text-right linehght">
+                   <button type="button" class="btn btn-secondary" [routerLink]="['/land/list']">Back</button>  
+
+                   <button type="button" class="btn btn-success pull-right" (click)="updateLand(land.id)">Edit Land</button>            
+                 &nbsp;
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="card-block">
+            <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-name">Owner Name</label>
+                            <p>{{land.name}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-rentsell">Land For</label>
+                            <p>{{land.rentSell}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-location">Location</label>
+                            <p>{{land.location}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-area">Area</label>
+                            <p>{{land.area}} {{land.unit}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-khasrano">Khasra no</label>
+                            <p>{{land.khasra_no}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-expectedprice">Expected Price</label>
+                            <p><i class="fa fa-rupee"></i> {{land.expected_price}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-description">Description</label>
+                            <p>{{land.description}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-termsConditions">Terms & Conditions</label>
+                            <p>{{land.term_condition}}</p>
+                        </div>
+                    </div>
+                </div>              
+        </div>
+    </div> <!-- .card -->
+</div> <!-- .land-wrapper -->

@@ -1,0 +1,136 @@
+<div class="input-wrapper">
+   
+    <div class="card">
+        <div class="card-header">
+            <strong>{{action}} Input</strong>
+        </div>
+          <form role="form" (ngSubmit)="submitInput()" #addInputsForm="ngForm">
+        <div class="card-block">
+          
+                
+               <div *ngIf="showMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"  (click)="closeMessage()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Success</strong> Input Added Successfully.
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group  has-required">
+                            <label for="nf-name">Name</label>
+                            <input autofocus="" type="text" id="nf-name" name="nf-name" class="form-control"  [(ngModel)]="input.name" required>
+                        </div>
+                    </div>
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="seller">Seller</label>
+                            <select id="seller" name="seller" class="form-control" size="1" [(ngModel)]="input.seller_id">
+                                <option value="">Please select</option>                                
+                                <option *ngFor="let obj of sellers" value="{{obj.id}}">
+                                    {{obj.username}}
+                                </option>       
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-category">Category</label>
+                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="input.category_id" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+<div class="form-group  has-required">
+<label for="nf-password">Company/Manufacturer</label>
+ <select id="Manufacturer" name="Manufacturer" class="form-control" size="1" [(ngModel)]="input.manufacturer_id" required>
+        <option value="">Please select</option>
+        <option *ngFor="let mf of manuf" [ngValue]="mf.id">
+            {{mf.name}}
+        </option>
+    </select>
+</div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-unit">Unit</label>
+                            <!-- <input type="text" id="nf-unit" name="nf-unit" class="form-control" [(ngModel)]="input.units" placeholder="Enter Unit" required> -->
+                            <select size="1" id="select2" name="select2" class="form-control" [(ngModel)]="input.units"  required>
+                                <option value="">Select Units</option>
+                                <option value="Bags">Bags</option>
+                                <option value="Litres">Litres</option>
+                                <option value="Packets">Packets</option>
+                                <option value="Pieces">Pieces</option>
+                                <option value="Tons">Tons</option>
+                           </select>
+                        </div>
+                    </div>
+                    
+                     <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-variety">Variety</label>
+                            <select id="select1" name="select1" class="form-control" [(ngModel)]="input.variety" size="1" required>
+                                <option value="">Please select</option>
+                                <option value="1">Variety 1</option>
+                                <option value="2">Variety 2</option>
+                                <option value="3">Variety 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                    <div class="form-group  has-required">
+                            <label for="nf-price">Price </label>
+                            <div class="input-group">
+                                <div class="icnposition"><i class="fa fa-rupee"></i></div>
+                            <input type="text" id="nf-price" name="nf-price" class="form-control  pleft25" [(ngModel)]="input.price" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-quantity">Quantity</label>
+                            <!-- <div class="input-group"> -->
+                                <input type="number" id="nf-quantity" name="nf-quantity" class="form-control" [(ngModel)]="input.quantity" >
+                                <!-- <div class="input-group-btn">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Qnts
+                                    </button>
+                                </div> -->
+                            <!-- </div>       -->
+                        </div>
+                    </div>
+                </div>
+              <div class="row">
+                <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-description">Additional information</label>
+                            <textarea type="text" id="nf-description" name="nf-description" class="form-control" [(ngModel)]="input.description" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-termsConditions">Terms & Conditions</label>
+                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="input.tearm_and_conditions" placeholder="Enter Terms & Conditions" rows="4" [disabled]="true"></textarea>
+                        </div>
+                    </div>
+              </div>
+        </div>
+        <div class="card-footer">
+                    <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/input/list']"> Cancel</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addInputsForm.valid">{{Id ? 'Update' : 'Save'}}</button>
+                    
+                </div>
+                    
+            </form>
+    </div> <!-- .card -->
+</div> <!-- .inputs-wrapper -->

@@ -91,7 +91,7 @@
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
                     <div class="small-box bg-green">
-                        <div class="inner" title="Crops" style="cursor:not-allowed;">
+                        <div class="inner" title="Crops" (click)="layout('crop')" [ngClass]="{'active': active == 'crop'}" [routerLink]="['/crop/list']">
                           <p>Crops</p>
                         </div>
                         <div class="icon">                           
@@ -103,7 +103,7 @@
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
                     <div class="small-box bg-aqua">
-                        <div class="inner" title="Inputs" style="cursor:not-allowed;">
+                        <div class="inner" title="Inputs" (click)="layout('input')" [ngClass]="{'active': active == 'input'}" [routerLink]="['/input/list']">
                             <p>Inputs</p>
                         </div>
                         <div class="icon">
@@ -115,7 +115,7 @@
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
                     <div class="small-box bg-red">
-                        <div class="inner" title="Equipments" style="cursor:not-allowed;">
+                        <div class="inner" title="Equipments" (click)="layout('equipment')" [ngClass]="{'active': active == 'equipment'}" [routerLink]="['/equipment/list']">
                             <p>Equipments</p>
                         </div>
                         <div class="icon">
@@ -127,7 +127,7 @@
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
                     <div class="small-box bg-yellow">
-                        <div class="inner" title="Lands" style="cursor:not-allowed;">
+                        <div class="inner" title="Lands" (click)="layout('land')" [ngClass]="{'active': active == 'land'}" [routerLink]="['/land/list']">
                           <p>Lands</p>
                         </div>
                         <div class="icon">
