@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
 import { ListInputComponent } from './list-component/list-input.component';
-import { AddInputComponent } from './addupdate-component/add-input.component';
+import { AddUpdateInputComponent } from './addupdate-component/addupdate-input.component';
 
 import { ViewInputComponent } from './view-component/view-input.component';
 
@@ -32,7 +32,7 @@ const routes: Routes = [
       },
       {
         path: 'add',
-        component: AddInputComponent,
+        component: AddUpdateInputComponent,
         data: {
           title: 'Add Input'
         }
@@ -45,8 +45,8 @@ const routes: Routes = [
         }
       },
       {
-        path: 'update/:id',
-        component: AddInputComponent,
+        path: 'edit/:id',
+        component: AddUpdateInputComponent,
         data: {
           title: 'Edit Input'
         }
@@ -70,4 +70,4 @@ const routes: Routes = [
     PaginationModule
   ]
 })
-export class InputManagementRoutingModule {}
+export class InputsRoutingModule {}

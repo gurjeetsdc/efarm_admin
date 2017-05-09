@@ -1,0 +1,123 @@
+<div class="input-wrapper">
+    <div *ngIf="isLoading" class="overlayloader">
+        <div class="loader"></div>
+    </div>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- loading section ends  -->
+    <div class="card" *ngIf="!isPageLoading">
+        <div class="card-header">
+            <strong>{{inputID ? 'Edit' : 'Add'}} Input</strong>
+        </div>
+        <form role="form" (ngSubmit)="save()" #addInputsForm="ngForm">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group  has-required">
+                            <label for="nf-name">Name</label>
+                            <input autofocus="" type="text" id="nf-name" name="nf-name" class="form-control" [(ngModel)]="input.name" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="seller">Seller</label>
+                            <select id="seller" name="seller" class="form-control" size="1" [(ngModel)]="input.sellerID">
+                                <option value="">Please select</option>
+                                <option *ngFor="let obj of sellers" value="{{obj.id}}">
+                                    {{obj.username}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-category">Category</label>
+                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="input.categoryID" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group  has-required">
+                            <label for="nf-password">Company/Manufacturer</label>
+                            <select id="Manufacturer" name="Manufacturer" class="form-control" size="1" [(ngModel)]="input.manufacturerID" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let mf of manuf" [ngValue]="mf.id">
+                                    {{mf.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-unit">Unit</label>
+                            <select size="1" id="select2" name="select2" class="form-control" [(ngModel)]="input.units" required>
+                                <option value="">Please select</option>
+                                <option value="Bags">Bags</option>
+                                <option value="Litres">Litres</option>
+                                <option value="Packets">Packets</option>
+                                <option value="Pieces">Pieces</option>
+                                <option value="Tons">Tons</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-variety">Variety</label>
+                            <select id="select1" name="select1" class="form-control" [(ngModel)]="input.variety" size="1" required>
+                                <option value="">Please select</option>
+                                <option value="Variety 1">Variety 1</option>
+                                <option value="Variety 2">Variety 2</option>
+                                <option value="Variety 3">Variety 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group  has-required">
+                            <label for="nf-price">Price </label>
+                            <div class="input-group">
+                                <div class="icnposition"><i class="fa fa-rupee"></i></div>
+                                <input type="number" id="nf-price" name="nf-price" class="form-control  pleft25" [(ngModel)]="input.price" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-quantity">Quantity</label>
+                            <input type="number" id="nf-quantity" name="nf-quantity" class="form-control" [(ngModel)]="input.quantity">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-additionalInformation">Additional information</label>
+                            <textarea type="text" id="nf-additionalInformation" name="nf-additionalInformation" class="form-control" [(ngModel)]="input.additionalInformation" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-termsConditions">Terms & Conditions</label>
+                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="input.terms" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/inputs/list']"> Cancel</button>
+                <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addInputsForm.valid">{{inputId ? 'Update' : 'Save'}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- .card -->
+</div>
+<!-- .inputs-wrapper -->

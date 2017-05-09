@@ -15,18 +15,18 @@
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                             <div class="input-group">
-                                <input class="form-control" name="q" placeholder="Search" type="text">
+                                <input class="form-control" name="q" placeholder="Search" type="text" style="cursor:not-allowed;pointer-events: none;">
                                 <span class="input-group-btn">
-                                <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                <button class="btn btn-flat" id="search-btn" name="search" type="submit" style="cursor:not-allowed;"><i class="fa fa-search"></i> </button>
                                 </span>
                             </div>
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght">
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/input/add']">Add Input</button>
+                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/inputs/add']">Add Input</button>
                             <div class="icns">
-                                <a><img src="assets/img/pdf.png" alt="pdf"></a>
-                                <a><img src="assets/img/xls.png" alt="pdf"></a>
+                                <a style="cursor:not-allowed;"><img src="assets/img/pdf.png" alt="pdf"></a>
+                                <a style="cursor:not-allowed;"><img src="assets/img/xls.png" alt="pdf"></a>
                             </div>
                         </div>
                     </div> <!-- .row -->
@@ -40,15 +40,15 @@
                         <thead>
                             <tr>
                                 <th width="30%"><mfDefaultSorter by="name">Name
-                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                <i *ngIf="sortOrder == 'asc' && sortBy == 'name'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'name'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
                                 <th width="20%">Category</th>
                                 <th width="20%">Manufacturer</th>
 
                                 <th width="20%"><mfDefaultSorter by="price">Price
-                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                <i *ngIf="sortOrder == 'asc' && sortBy == 'price'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'price'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter></th>
                                 <th width="20%">Seller</th>
                                 <th width="10%">Actions</th>
@@ -62,7 +62,7 @@
                                 <td><a href="javascript:void(0);" (click)="viewInput(input.id)">{{input.name}}</a></td>
                                 <td>{{input.category?.name}}</td>
                                 <td>{{input.manufacturer?.name}}</td>
-                                <td>{{input.price}}</td>
+                                <td><i class="fa fa-rupee"></i> {{input.price}}</td>
                                 <td>{{input.user?.username}}</td>
                                 <td>                                    
                                     <button (click)="sendUpdateinput(input.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>

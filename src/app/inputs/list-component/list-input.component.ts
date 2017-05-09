@@ -16,8 +16,6 @@ import {DataTableModule} from "angular2-datatable";
 })
 export class ListInputComponent implements OnInit {
 
-  test: any = [];
-
     public data                = [];
     public totalRecords        = 0;
     public filterQuery         = "";
@@ -65,14 +63,14 @@ export class ListInputComponent implements OnInit {
     viewInput (inputID) {
       //console.log(inputID);
       
-       let route = '/input/list/'+inputID;
+       let route = '/inputs/list/'+inputID;
        this._router.navigate([route]);       
     }
 
     sendUpdateinput( inputID ) {     
         //console.log(inputID);
       
-       let route = '/input/update/'+inputID;
+       let route = '/inputs/edit/'+inputID;
         this._router.navigate([route]);       
     }
 

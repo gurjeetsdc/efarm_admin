@@ -6,13 +6,13 @@ import { CommonModule } from '@angular/common';
 import {DataTableModule} from "angular2-datatable";
 import { InputService } from './services/input.service';
 import { ListInputComponent } from './list-component/list-input.component';
-import { AddInputComponent } from './addupdate-component/add-input.component';
+import { AddUpdateInputComponent } from './addupdate-component/addupdate-input.component';
 import { ViewInputComponent } from './view-component/view-input.component';
-import { InputManagementRoutingModule } from './input-management-routing.module';
+import { InputsRoutingModule } from './inputs-routing.module';
 
 @NgModule({
   imports: [
-  	InputManagementRoutingModule,
+  	InputsRoutingModule,
   	 CommonModule,
      DataTableModule
   ],
@@ -21,8 +21,8 @@ import { InputManagementRoutingModule } from './input-management-routing.module'
   ],
   declarations: [
   	ListInputComponent,
-  	AddInputComponent,
+  	AddUpdateInputComponent,
   	ViewInputComponent
   ]
 })
-export class InputManagementModule { }
+export class InputsModule { }
