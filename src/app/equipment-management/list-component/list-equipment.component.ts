@@ -16,16 +16,24 @@ import { EquipmentService } from '../services/equipment.service';
 })
 export class ListEquipmentComponent implements OnInit {
 
-    public data;
-    public totalRecords;
-    public filterQuery = "";
-    public rowsOnPage  = 10;
-    public sortBy      = "createdAt";
-    public sortOrder   = "desc";
+ 
+    public data         = [];
+    public totalRecords = 0;
+    public filterQuery  = "";
+    public rowsOnPage   = 5;
+    public sortBy       = "createdAt";
+    public sortOrder    = "desc";
+    public activePage   = 1;
+    public itemsTotal   = 0;
+    public searchTerm   = '';
+
+    public itemsOnPage;
 
 
     public response:any;
-    public isLoading:boolean = true;
+    public isLoading:boolean     = false;
+    public isPageLoading:boolean = true;
+    public errMessage            = "";
 
    
     public constructor( private activatedRouter: ActivatedRoute, private _router: Router, private _equipmentService: EquipmentService) { 
@@ -40,19 +48,13 @@ export class ListEquipmentComponent implements OnInit {
             }
             window.scrollTo(0, 0)
         });
+        
+        /*Load data*/
+        this.getEquipments();        
+        this.activePage = 1;
+        this.getEquipments();
 
-        this._equipmentService.getAllEquipments().subscribe(res => {
-            
-            console.log(res);
-            this.data         = res.data.equipments;
-            this.totalRecords = res.data.total;
-            this.isLoading    = false;
-            // console.log(allEquipments);
-            console.log("allEquipments loaded");
-        }, 
-        err => {
-              this.checkAccessToken( err );
-        });             
+        this.itemsOnPage = this.rowsOnPage;
     }
 
     public toInt(num: string) {
@@ -113,5 +115,53 @@ export class ListEquipmentComponent implements OnInit {
         }else {
             console.log('Something unexpected happened, please try again later.');
         }        
-    }  
+    }
+
+    /*get all equipments*/
+    getEquipments() {   
+        this._equipmentService.getAllEquipments( this.rowsOnPage, this.activePage, this.searchTerm ).subscribe(res => {
+            this.data       = res.data.equipments;
+            this.itemsTotal = res.data.total;
+            this.isLoading     = false;
+            this.isPageLoading = false;
+            console.log("allEquipments loaded");
+        }, 
+        err => {
+              this.checkAccessToken( err );
+              this.isLoading     = false;
+              this.isPageLoading = false;
+        });
+    }
+
+    /**/
+    public onPageChange(event) {
+        this.isLoading     = true;
+        this.rowsOnPage = event.rowsOnPage;
+        this.activePage = event.activePage;
+        this.getEquipments();
+    }
+
+    public onRowsChange( event ): void {
+        this.isLoading  = true;
+        this.rowsOnPage = this.itemsOnPage;
+        this.activePage = 1;
+        this.getEquipments();      
+    }
+
+    public onSortOrder(event) {
+        this.getEquipments();
+    }
+
+    public searchEquipment( ) {
+        console.log(this.searchTerm);
+
+        if( this.searchTerm.length > 3 ){
+            // this.isLoading  = true;
+            this.getEquipments(); 
+        }else if( this.searchTerm.length == 0 ){
+            // this.isLoading  = true;
+            this.getEquipments(); 
+        }
+    }
+
 }

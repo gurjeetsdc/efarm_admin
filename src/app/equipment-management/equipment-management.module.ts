@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /*For list table.*/
-import {DataTableModule} from "angular2-datatable";
+// import {DataTableModule} from "angular2-datatable";
+import {NG2DataTableModule} from "angular2-datatable-pagination";
 import { CustomFormsModule } from 'ng2-validation'
 
 
@@ -20,7 +21,7 @@ import { GoogleplaceDirective } from '../shared/directives/googleplaces/googlepl
     imports: [
         EquipmentManagementRoutingModule,
         CommonModule,
-        DataTableModule,
+        NG2DataTableModule,
         CustomFormsModule
     ],
     declarations: [

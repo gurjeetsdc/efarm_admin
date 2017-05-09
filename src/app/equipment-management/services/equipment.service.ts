@@ -14,15 +14,17 @@ export class EquipmentService {
 
   	constructor(private _http: Http, private _cookieService: CookieService) { }
   	
-  	getAllEquipments() {
+  	getAllEquipments( rowsOnPage, activePage, search = '') {
   		
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
 
         this.token          = this.getAccessToken();
         
+        let url = this.host +'/equipment?count='+rowsOnPage+'&page='+activePage+'&search='+search;
+
         headers.append('Authorization', this.token );
-		return this._http.get(this.host +'/equipment', { headers: headers }).map((res:Response) => res.json());
+		return this._http.get( url, { headers: headers }).map((res:Response) => res.json());
   	}
 
   	postEquipment( equipment ) {

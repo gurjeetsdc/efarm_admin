@@ -85,9 +85,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngIf='errMessage'>
+                                <!-- <tr *ngIf="itemsTotal > 0">
                                     <td colspan="6">{{errMessage}}</td>
-                                </tr>
+                                </tr> -->
                                 <tr *ngFor="let user of mf.data">
                                     <td data-label="Name"><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.firstname}} {{user.lastName}}</a></td>
                                     <td data-label="Email">{{user.email}}</td>
@@ -104,7 +104,7 @@
                                 <tr>
                                     <td colspan="6">
                                         <div class="pagination-section">
-                                            <div class="row-on-page" *ngIf='data.length > 0'>
+                                            <div class="row-on-page">
                                                <!--  <label class="label-control">Show</label>
                                                 &nbsp;
                                                 <select class="input-sm" [(ngModel)]="rowsOnPage" (change)="onRowsChange($event)">
