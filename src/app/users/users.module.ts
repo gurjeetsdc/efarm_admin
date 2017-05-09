@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataTableModule } from "angular2-datatable";
+// import { DataTableModule } from "angular2-datatable";
+import {NG2DataTableModule} from "angular2-datatable-pagination";
+
 
 import { ListUserComponent } from './list-component/list-user.component';
 import { AddUpdateUserComponent } from './addupdate-component/addupdate-user.component';
@@ -12,7 +14,8 @@ import { CustomFormsModule } from 'ng2-validation'
     imports: [
       	UsersRoutingModule,
       	CommonModule,
-      	DataTableModule,
+      	// DataTableModule,
+        NG2DataTableModule,
         CustomFormsModule    
     ],
     declarations: [

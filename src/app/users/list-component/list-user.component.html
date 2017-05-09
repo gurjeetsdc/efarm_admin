@@ -37,13 +37,24 @@
                 <!-- .card-header -->
                 <div class="card-block">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                    <!--     <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> -->
+                    <table class="table table-striped" [mfData]="data"
+                        #mf="mfDataTable" 
+                        [mfRowsOnPage]="rowsOnPage"
+                        [(mfSortBy)]="sortBy" 
+                        [(mfSortOrder)]="sortOrder" 
+                        [mfActivePage]="activePage" 
+                        (mfOnPageChange)="onPageChange($event)"
+                        [mfIsServerPagination]="true" 
+                        [(mfAmountOfRows)]="itemsTotal" 
+                        >
+
                             <thead>
                                 <tr>
                                     <th width="25%">
-                                        <mfDefaultSorter by="firstName">Name
-                                            <i *ngIf="sortOrder == 'asc'  && sortBy == 'firstName'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                            <i *ngIf="sortOrder == 'desc'  && sortBy == 'firstName'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <mfDefaultSorter by="firstname">Name
+                                            <i *ngIf="sortOrder == 'asc'  && sortBy == 'firstname'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'  && sortBy == 'firstname'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                         </mfDefaultSorter>
                                     </th>
                                     <th width="15%">
@@ -78,7 +89,7 @@
                                     <td colspan="6">{{errMessage}}</td>
                                 </tr>
                                 <tr *ngFor="let user of mf.data">
-                                    <td data-label="Name"><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.firstName}} {{user.lastName}}</a></td>
+                                    <td data-label="Name"><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.firstname}} {{user.lastName}}</a></td>
                                     <td data-label="Email">{{user.email}}</td>
                                     <td data-label="Mobile">{{user.mobile}}</td>
                                     <td data-label="District">{{user.state}}</td>
@@ -94,22 +105,25 @@
                                     <td colspan="6">
                                         <div class="pagination-section">
                                             <div class="row-on-page" *ngIf='data.length > 0'>
-                                                <label class="label-control">Show</label>
+                                               <!--  <label class="label-control">Show</label>
                                                 &nbsp;
-                                                <select class="input-sm" [(ngModel)]="rowsOnPage">
+                                                <select class="input-sm" [(ngModel)]="rowsOnPage" (change)="onRowsChange($event)">
+                                                    <option [ngValue]="2">2</option>
                                                     <option [ngValue]="5">5</option>
                                                     <option [ngValue]="10">10</option>
-                                                    <option [ngValue]="15">25</option>
-                                                    <option [ngValue]="15">50</option>
-                                                    <option [ngValue]="15">100</option>
+                                                    <option [ngValue]="25">25</option>
+                                                    <option [ngValue]="50">50</option>
+                                                    <option [ngValue]="100">100</option>
                                                 </select>
                                                 &nbsp;
                                                 <label class="label-control">entries</label>
-                                                &nbsp; &nbsp;
-                                                <span>Showing {{rowsOnPage < totalRecords? rowsOnPage:totalRecords }} of {{totalRecords}} entries</span>
+                                                &nbsp; &nbsp; -->
+                                               <!--  <span>Showing {{rowsOnPage < itemsTotal? rowsOnPage:itemsTotal }} of {{itemsTotal}} entries</span>
+ -->
+                                           <span>showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>
                                             </div>
                                             <div class="text-right">
-                                                <mfBootstrapPaginator></mfBootstrapPaginator>
+                                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25,50,100]"></mfBootstrapPaginator>   
                                             </div>
                                             <div style="clear: both;"></div>
                                         </div>

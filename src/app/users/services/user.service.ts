@@ -5,12 +5,13 @@ import tsConstants = require('./../../tsconstant');
 @Injectable()
 export class UserService {
   
-  private _host = tsConstants.HOST;
-  private _accessToken = '';
-  constructor(private _http: Http, private _cookieService: CookieService) { }
+    private _host = tsConstants.HOST;
+    private _accessToken = '';
+    
+    constructor(private _http: Http, private _cookieService: CookieService) { }
 
     /*Use to get all Users*/  
-   getAllUsers() {
+    getAllUsers(rowsOnPage, activePage ) {
 
         let headers         = new Headers();        
         let urlSearchParams = new URLSearchParams();
@@ -18,7 +19,10 @@ export class UserService {
         this._accessToken   = 'Bearer ' + token;
         
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host +'/enduser', { headers: headers }).map((res:Response) => res.json())
+
+        let url = this._host +'/user?count='+rowsOnPage+'&page='+activePage;
+
+        return this._http.get(url, { headers: headers }).map((res:Response) => res.json())
     }
      
     /*Use to add new user*/
@@ -30,7 +34,7 @@ export class UserService {
         this._accessToken   = 'Bearer ' + token;
         
         headers.append('Authorization', this._accessToken);
-        return this._http.post(this._host +'/enduser/add', user, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this._host +'/user', user, { headers: headers }).map((res:Response) => res.json())
     }
 
     /*User to get user detail with ID*/
@@ -42,7 +46,7 @@ export class UserService {
         this._accessToken   = 'Bearer ' + token;
       
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host +'/enduser/'+ userid, { headers: headers }).map((res:Response) => res.json())
+        return this._http.get(this._host +'/user/'+ userid, { headers: headers }).map((res:Response) => res.json())
     }
 
     /*Use to update user detail with there ID*/
@@ -54,7 +58,7 @@ export class UserService {
         this._accessToken   = 'Bearer ' + token;
         
         headers.append('Authorization', this._accessToken);
-        return this._http.put(this._host +'/enduser/'+ user.id, user, { headers: headers }).map((res:Response) => res.json())
+        return this._http.put(this._host +'/user/'+ user.id, user, { headers: headers }).map((res:Response) => res.json())
     }
 
     /** Delete user by ID **/
@@ -66,7 +70,7 @@ export class UserService {
         this._accessToken   = 'Bearer ' + token;
         
         headers.append('Authorization', this._accessToken);
-        return this._http.delete(this._host +'/enduser/'+ userID,  { headers: headers }).map((res:Response) => res.json());
+        return this._http.delete(this._host +'/user/'+ userID,  { headers: headers }).map((res:Response) => res.json());
     }
 
 }

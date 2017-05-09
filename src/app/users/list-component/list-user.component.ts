@@ -13,12 +13,16 @@ export class ListUserComponent implements OnInit {
     public data                  = [];
     public totalRecords          = 0;
     public filterQuery           = "";
-    public rowsOnPage            = 10;
+    public rowsOnPage            = 5;
     public sortBy                = "createdAt";
     public sortOrder             = "desc";
-    public errMessage            = "";
+    public activePage            = 1;
+    public itemsTotal            = 0;
+    
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
+    public errMessage            = "";
+    
     public response:any;
    
     public constructor(private _router: Router, private _userService: UserService, private _cookieService: CookieService ) { 
@@ -34,16 +38,11 @@ export class ListUserComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
-        this._userService.getAllUsers().subscribe(res => {
-            this.data = res;
-            this.totalRecords = this.data.length;
-            if(this.data.length == 0) this.errMessage = "No record to display";
-            this.isPageLoading = false;
-        },err => {
-            this.isPageLoading = false;
-            this.errMessage = "No record to display";
-            this.checkAccessToken(err);
-       });             
+        /*Load data*/
+        this.getUsers();        
+        this.activePage = 1;
+        this.getUsers();
+        // this.changePage(1);
     }
 
     public toInt(num: string) {
@@ -58,6 +57,29 @@ export class ListUserComponent implements OnInit {
         let route = '/users/list/' + userID;
         this._router.navigate([route]);       
     }
+
+    /* getUsers */
+    getUsers(): void {
+
+        this._userService.getAllUsers( this.rowsOnPage, this.activePage ).subscribe(res => {
+
+            this.data         = res.data.users;
+            this.itemsTotal   = res.data.total;
+
+            if(this.data.length == 0) {this.errMessage = "No record to display";}
+            
+            this.isLoading     = false;
+            this.isPageLoading = false;
+        
+        },err => {
+            
+            this.isLoading     = false;
+            this.isPageLoading = false;
+            
+            this.errMessage = "No record to display";
+            this.checkAccessToken(err);
+       });             
+    }    
     
     removeUser(userid) {
         if(confirm("Do you want to delete?")) {
@@ -103,5 +125,33 @@ export class ListUserComponent implements OnInit {
         }else {
             console.log('Something unexpected happened, please try again later.');
         }        
+    }
+
+
+    public onSortOrder(event) {
+        this.getUsers();
+    }
+    public onPageChange(event) {
+        this.isLoading     = true;
+        this.rowsOnPage = event.rowsOnPage;
+        this.activePage = event.activePage;
+        this.getUsers();
+    }
+
+    changePage( page ) {
+        console.log("showing: ",page)
+        // this.rowsOnPage = event.rowsOnPage;
+        this.activePage = page;
+        this.getUsers();   
+    }
+
+    onRowsChange( event ): void {
+        /*this.rowsOnPage = event.rowsOnPage;
+        this.activePage = this.activePage;*/
+        console.log("Changed.")
+        this.rowsOnPage = event.rowsOnPage;
+        this.activePage = event.activePage;
+        
+        this.getUsers();      
     }
 }

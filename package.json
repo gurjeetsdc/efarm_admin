@@ -27,6 +27,7 @@
     "@angular/upgrade": "2.4.9",
     "angular-cli": "^1.0.0-beta.28.3",
     "angular2-datatable": "^0.6.0",
+    "angular2-datatable-pagination": "0.0.3",
     "chart.js": "2.5.0",
     "core-js": "2.4.1",
     "moment": "2.17.1",
