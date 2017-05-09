@@ -41,9 +41,11 @@ export class ListEquipmentComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
-        this._equipmentService.getAllEquipments().subscribe(allEquipments => {
-            this.data         = allEquipments;
-            this.totalRecords = this.data.length;
+        this._equipmentService.getAllEquipments().subscribe(res => {
+            
+            console.log(res);
+            this.data         = res.data.equipments;
+            this.totalRecords = res.data.total;
             this.isLoading    = false;
             // console.log(allEquipments);
             console.log("allEquipments loaded");
