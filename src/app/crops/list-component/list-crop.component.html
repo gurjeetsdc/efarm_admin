@@ -1,27 +1,31 @@
-     <!-- <div class="crop-wrapper animated fadeIn">       -->
+<!-- Loader div -->
+<div *ngIf="isLoading" class="overlayloader">
+    <div class="loader"></div>
+</div>
+<!-- <div class="crop-wrapper animated fadeIn">       -->
 <div class="crop-wrapper">      
     <div class="row">
         <div class="col-lg-12">
-            <!-- loading section -->
-            <div class="aligncenter_loader" *ngIf="isLoading">
+            <!-- Page loading section -->
+            <div class="aligncenter_loader" *ngIf="isPageLoading">
                 <div class="is-loading"><i class="page-loader"></i></div>        
             </div>
-            <!-- section ends  -->
-            <div class="card" *ngIf="!isLoading">
+            <!--Page loading section ends  -->
+            <div class="card" *ngIf="!isPageLoading">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                             <div class="flex">
-                                <input class="form-control" name="q" placeholder="Search" type="text">
+                                <input class="form-control" name="q" placeholder="Search" style="cursor:not-allowed;pointer-events: none;" type="text">
                                 <span class="input-group-btn">
-                                <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                <button class="btn btn-flat" id="search-btn" name="search" style="cursor:not-allowed;" type="submit"><i class="fa fa-search"></i> </button>
                                 </span>
                             </div>
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght"> 
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/crop/add']">Add Crop</button>
+                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/crops/add']">Add Crop</button>
                             <div class="icns">
                                 <a><img src="assets/img/pdf.png" alt="pdf"></a>
                                 <a><img src="assets/img/xls.png" alt="pdf"></a>
@@ -63,17 +67,17 @@
                             </tr>
                         </thead>                        
                         <tbody>
-                            <tr *ngIf='err_message'>
-                                <td colspan="7">{{err_message}}</td>
+                            <tr *ngIf='errMessage'>
+                                <td colspan="7">{{errMessage}}</td>
                             </tr>
                             <tr *ngFor="let crop of mf.data">    
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
                                 <td><p><i class="fa fa-rupee"></i> {{crop.price}}</td>
-                                <td>{{crop.quantity}} {{crop.quantity_unit}}</td>
+                                <td>{{crop.quantity}} {{crop.quantityUnit}}</td>
                                 <td>{{crop.category?.name}}</td>
-                                <td>{{crop.seller ? crop.seller?.first_name ? crop.seller?.first_name + ' ' + crop.seller?.last_name : crop.seller?.username : ''}}</td>
+                                <td>{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : ''}}</td>
                                 <td>                                    
-                                    <button (click)="sendUpdateCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                    <button (click)="editCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeCrop(crop.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
                             </tr>

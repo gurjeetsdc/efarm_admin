@@ -175,6 +175,11 @@
      position: relative;
      top: 4px;
  }
+
+.viewmode .form-group i.fa-rupee {
+     position: relative;
+     top: 1px;
+ } 
  
  header.navbar .navbar-nav.ml-auto {
      font-size: 18px;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import {PaginationInstance} from 'ng2-pagination';
 import { CropService } from '../services/crop.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-crop-management',
@@ -11,17 +11,20 @@ import { Router, NavigationEnd } from '@angular/router';
 
 export class ListCropComponent implements OnInit {
 
-    public data                = [];
-    public totalRecords        = 0;
-    public filterQuery         = "";
-    public rowsOnPage          = 10;
-    public sortBy              = "createdAt";
-    public sortOrder           = "desc";
-    public err_message         = "";
-    public isLoading:boolean   = true;
-    public response:any;
+    public data                  = [];
+    public totalRecords          = 0;
+    public filterQuery           = "";
+    public rowsOnPage            = 10;
+    public sortBy                = "createdAt";
+    public sortOrder             = "desc";
+    
+    public isLoading:boolean     = false;
+    public isPageLoading:boolean = true;
+    public errMessage            = "";
    
-    public constructor(private _router: Router, private _cropService: CropService) { 
+    public response:any;
+
+    public constructor(private _router: Router, private _cropService: CropService, private _cookieService: CookieService ) { 
         
     }
 
@@ -37,11 +40,12 @@ export class ListCropComponent implements OnInit {
         this._cropService.getAllCrops().subscribe(res => {
             this.data = res;
             this.totalRecords = this.data.length;
-            if(this.data.length == 0) this.err_message = "No record to display";
-            this.isLoading = false;
+            if(this.data.length == 0) this.errMessage = "No record to display";
+            this.isPageLoading = false;
         },err => {
-            this.isLoading = false;
-            this.err_message = "No record to display";
+            this.isPageLoading = false;
+            this.errMessage = "No record to display";
+            this.checkAccessToken(err);
        });             
     }
 
@@ -53,32 +57,33 @@ export class ListCropComponent implements OnInit {
         return a.city.length;
     }
 
-    viewCrop (cropID) {
-        let route = '/crop/list/' + cropID;
+    viewCrop(cropID) {
+        let route = '/crops/list/' + cropID;
         this._router.navigate([route]);       
     }
 
-    sendUpdateCrop(cropID) {     
-        let route = '/crop/edit/'+cropID;
+    editCrop(cropID) {     
+        let route = '/crops/edit/'+cropID;
         this._router.navigate([route]);       
     }
 
-     
+     /* Function use to remove Crop with crop id*/
     removeCrop(cropid) {
         if(confirm("Do you want to delete?")) {
             this.isLoading = true;
-            // crop["isDeleted"] = true;
             this._cropService.delete(cropid).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
                 this.removeByAttr(this.data, 'id', cropid);
-                this._router.navigate(['/crop/list/']);      
+                this._router.navigate(['/crops/list/']);      
             },err => {
                 this.isLoading = false;
+                this.checkAccessToken(err);
             });             
         }
     } 
   
+    /*Function use to remove deleted crop from list*/  
     removeByAttr(arr, attr, value){
         let i = arr.length;
         while(i--){
@@ -92,4 +97,17 @@ export class ListCropComponent implements OnInit {
         }
         return arr;
     } 
+
+    /*This function is use to remove user session if Access token expired. */
+    checkAccessToken( err ): void {
+        let status     = err.status;
+        let statusText = err.statusText;
+
+        if( (status == 401 && statusText == 'Unauthorized')) {
+            this._cookieService.removeAll();
+            this._router.navigate(['/login', {data: true}]);
+        }else {
+            console.log('Something unexpected happened, please try again later.');
+        }        
+    }
 }

@@ -33,8 +33,8 @@ export const routes: Routes = [
         loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
-        path: 'crop',
-        loadChildren: './crop-management/crop-management.module#CropManagementModule'
+        path: 'crops',
+        loadChildren: './crops/crops.module#CropsModule'
       },
       {
         path: 'input',

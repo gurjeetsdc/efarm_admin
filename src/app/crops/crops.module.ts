@@ -5,14 +5,14 @@ import {DataTableModule} from "angular2-datatable";
 import { ListCropComponent } from './list-component/list-crop.component';
 import { AddUpdateCropComponent } from './addupdate-component/addupdate-crop.component';
 import { ViewCropComponent } from './view-component/view-crop.component';
-import { CropManagementRoutingModule } from './crop-management-routing.module';
+import { CropsRoutingModule } from './crops-routing.module';
 import { CropService } from './services/crop.service';
 import { CustomFormsModule } from 'ng2-validation'
 import { DatePickerModule } from 'ng2-datepicker';
 
 @NgModule({
   imports: [
-  	CropManagementRoutingModule,
+  	CropsRoutingModule,
   	 CommonModule,
      DataTableModule,
      CustomFormsModule,
@@ -27,4 +27,4 @@ import { DatePickerModule } from 'ng2-datepicker';
   	ViewCropComponent
   ]
 })
-export class CropManagementModule { }
+export class CropsModule { }

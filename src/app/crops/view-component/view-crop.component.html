@@ -11,9 +11,9 @@
                    <strong>View Crop</strong>           
                 </div>
                 <div class="col-sm-6 col-12 text-right linehght">
-                   <button type="button" class="btn btn-secondary" [routerLink]="['/crop/list']">Back</button>  
+                   <button type="button" class="btn btn-secondary" [routerLink]="['/crops/list']">Back</button>  
 
-                    <button type="button" class="btn btn-success pull-right" (click)="updateCrop(crop.id)">Edit Crop</button> 
+                    <button type="button" class="btn btn-success pull-right" (click)="editCrop(crop.id)">Edit Crop</button> 
                                              &nbsp;
                 </div>
             </div>
@@ -40,10 +40,16 @@
 							<p>{{crop.category?.name}}</p>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <!-- <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-variety">Variety</label>
                             <p>{{crop.variety}}</p>
+                        </div>
+                    </div> -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-price">Quantity</label>
+                            <p>{{crop.quantity}} {{crop.quantityUnit}}</p>
                         </div>
                     </div>
                 </div>
@@ -57,105 +63,69 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-grade">Grade</label>
-							<p>{{crop.grade}}</p>
+                            <p>{{crop.grade}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-color">Color</label>
-                            <p>{{crop.color}}</p>
+                            <label for="nf-size">Available From</label>
+							<p>{{crop.availableFrom?.momentObj  | date: 'dd/MM/yyyy'}}</p>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-size">Size/Weight</label>
-							<p>{{crop.size}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-availibility">Availibility Period</label>
-							<p>{{crop.availibility}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-packaging">Packaging</label>
-							<p>{{crop.packaging}}</p>
+                            <p>{{crop.availablePeriod}} {{crop.availableUnit}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-supplyAblity">Supply Ability</label>
-							<p>{{crop.supply_ablity}}</p>
+                            <label for="nf-supplyAbility">Supply Ability</label>
+							<p>{{crop.supplyAbility}}</p>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="nf-packSize">Pack Size</label>
-                            <p>{{crop.pack_size}}</p>
+                            <label for="nf-packSize">Supply Area</label>
+                            <p>{{crop.supplyArea ? crop.supplyArea == 'withinstate' ? "With In State" : 'Any Where' : ''}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="nf-packSize">Supply Range(km)</label>
+                            <p>{{crop.supplyRange}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-qty">Quantity Per Pack</label>
-							<p>{{crop.quantity_per_pack}} {{crop.unit}}</p>
+                            <label for="nf-qty">Payment Preference</label>
+							<p>{{crop.paymentPreference}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-label">Label/Making on Pack</label>
-                            <p>{{crop.label}}</p>
+                            <label for="nf-averageLeadTime">Verified</label>
+                            <p>{{crop.verified}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-averageLeadTime">Average Lead Time</label>
-							<p>{{crop.average_lead_time}}</p>
+                            <label for="nf-additionalInformation">Terms & Conditions</label>
+                            <p>{{crop.terms}}</p>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-additionalInformation">Additional Information</label>
-                            <p>{{crop.additional_info}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-paymentTerms">Payment Terms</label>
-                            <p>{{crop.payment_method}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-termsConditions">Terms & Conditions</label>
-							<p>{{crop.terms}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-image">Image</label>
-							<p><i class="fa fa-file-image-o"></i> {{crop.image}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nf-termsConditions">Farmer</label>
-                            <p>{{crop.user?.first_name ? crop.user?.first_name + ' ' + crop.user?.last_name : crop.user?.username}}</p>
+                            <p><i class="fa fa-file-image-o"></i> {{crop.image}}</p>
                         </div>
                     </div>
                 </div>

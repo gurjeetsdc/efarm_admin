@@ -68,4 +68,4 @@ const routes: Routes = [
     PaginationModule
   ]
 })
-export class CropManagementRoutingModule {}
+export class CropsRoutingModule {}
