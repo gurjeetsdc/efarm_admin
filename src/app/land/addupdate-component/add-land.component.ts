@@ -12,9 +12,9 @@ export class AddLandComponent {
 	private land = {
         rentSell: 'Lease',
         unit:'',
-        category_id:'',
+        categoryId:'',
         location:'',
-        seller_id:'',
+        sellerId:'',
         periodsunit:'',
         priceunit:'',
         term_condition:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
@@ -37,7 +37,7 @@ export class AddLandComponent {
             this._landService.getLand(this.Id).subscribe( res => { 
                 this.land = res.data; 
                 this.action = 'Update'
-                this.land.seller_id = res.data.user.id;
+                this.land.sellerId = res.data.user.id;
               }, err => {});
         }
         this._landService.getAllCategories().subscribe( res => { this.category = res.data; }, err => {});
@@ -53,7 +53,8 @@ export class AddLandComponent {
     }
 
     addLand() {
-        if(this.land["seller_id"]) this.land["user"] = this.land["seller_id"];
+        if(this.land["sellerId"]) this.land["user"] = this.land["sellerId"];
+        if(this.land["categoryId"]) this.land["category"] = this.land["categoryId"];
 
         this._landService.landadd(this.land).subscribe(res => {
             this.response    = res;
@@ -66,7 +67,8 @@ export class AddLandComponent {
 
 
     updateLand() {
-        if(this.land["seller_id"]) this.land["user_id"] = this.land["seller_id"];
+        if(this.land["sellerId"]) this.land["user"] = this.land["sellerId"];
+        if(this.land["categoryId"]) this.land["category"] = this.land["categoryId"];
         this._landService.updateLand(this.land).subscribe(res => {
             this.response    = res;
             this.showMessage = true;

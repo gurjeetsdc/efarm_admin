@@ -7,11 +7,11 @@ import {DataTableModule} from "angular2-datatable";
 import { ListLandComponent } from './list-component/list-land.component';
 import { AddLandComponent } from './addupdate-component/add-land.component';
 import { ViewLandComponent } from './view-component/view-land.component';
-import { LandManagementRoutingModule } from './land-management-routing.module';
+import { LandRoutingModule } from './land-routing.module';
 
 @NgModule({
   imports: [
-  	LandManagementRoutingModule,
+  	LandRoutingModule,
   	CommonModule,
     DataTableModule,
     DatePickerModule
@@ -25,4 +25,4 @@ import { LandManagementRoutingModule } from './land-management-routing.module';
   	ViewLandComponent
   ]
 })
-export class LandManagementModule { }
+export class LandModule { }

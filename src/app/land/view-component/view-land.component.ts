@@ -8,7 +8,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 export class ViewLandComponent {
   private Id = '';
   private land = {};
-  private copy_land = {};
+
   private edit = false;
       public isLoading:boolean   = true;
   constructor(private _router: Router, private _activatedRouter: ActivatedRoute,  private _landService: LandService) { 

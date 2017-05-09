@@ -46,7 +46,7 @@ export const routes: Routes = [
       },
       {
         path: 'land',
-        loadChildren: './land-management/land-management.module#LandManagementModule'
+        loadChildren: './land/land.module#LandModule'
       },
       {
         path: 'users',
