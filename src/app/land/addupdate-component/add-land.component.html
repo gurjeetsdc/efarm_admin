@@ -26,11 +26,11 @@
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="seller">Seller</label>
-                            <select id="seller" name="seller" class="form-control" size="1" [(ngModel)]="land.sellerId" required>
+                            <select id="seller" name="seller" class="form-control" size="1" [(ngModel)]="land.sellerId" >
                                 <option value="">Please select</option>                                
                                 <option *ngFor="let obj of sellers" value="{{obj.id}}">
                                     {{obj.username}}
-                                </option>       
+                                </option>      
                             </select>
                         </div>
                     </div>
@@ -54,21 +54,23 @@
                 </div>
                 <div class="row"  >
                     <div class="col-sm-6">
-                       <div class="form-group has-required">
+                       <div class="form-group">
                            <label for="nf-password">Available Date</label>
                              <div class="input-group">
-                              <ng2-datepicker [options]="options" id="nfavail_date" name="nfavail_date" [(ngModel)]="land.avail_date" required></ng2-datepicker>                         
+                              <ng2-datepicker [options]="options" id="nfavail_date" name="nfavail_date" [(ngModel)]="land.avail_date" ></ng2-datepicker>
+                              <input type="number" id="availabledate" name="availabledate" class="form-control nopointer" placeholder="" style="pointer-events: none;" />   
                             </div>
                        </div>
+
                    </div>
                 
                     <div class="col-sm-6">
-                        <div class="form-group has-required">
+                        <div class="form-group">
                                 <label for="nf-price">Periods</label>
                          <div class="input-group">
-                            <input type="number" id="nf-periods" name="nf-periods" class="form-control pleft25" [(ngModel)]="land.periods" [disabled]="land.rentSell == 'Sell'" >
+                            <input type="number" id="nf-periods" name="nf-periods" class="form-control pleft25" [(ngModel)]="land.periods" >
                           <div class="input-group-btn">
-                              <select id="select3" [disabled]="land.rentSell == 'Sell'" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.periodsunit" size="1" required>
+                              <select id="select3" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.periodsunit" size="1">
                                 <option value="">-Units-</option>
                                 <option value="Day">Day</option>
                                 <option value="Week">Week</option>
@@ -87,17 +89,26 @@
                      <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-category">Category</label>
-                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="land.categoryId" required>
+                            <select id="nfcategory" name="nfcategory" class="form-control" #nfcategory="ngModel" size="1" [(ngModel)]="land.categoryId" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
+                            <div class="error-block">
+                                <small *ngIf="nfcategory.errors?.required && nfcategory.touched" class="text-danger">
+                                    Category is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="nf-variety">Location</label>
-                            <input type="text" id="nf-location" name="nf-location" class="form-control" [(ngModel)]="land.location" required>
-                           
+                            <input type="text" id="nflocation" name="nflocation" #nflocation="ngModel" class="form-control" [(ngModel)]="land.location" required>
+                           <div class="error-block">
+                                <small *ngIf="nflocation.errors?.required && nflocation.touched" class="text-danger">
+                                    Location is required.
+                                </small>
+                            </div>
                         </div>
                     </div>
                     
@@ -106,7 +117,18 @@
                   <div class="col-sm-6">
                     <div class="form-group has-required">
                         <label for="nf-password">Khasra no</label>
-                        <input type="number" id="nf-khasra" name="nf-khasra" class="form-control" [(ngModel)]="land.khasra_no" required maxlength="20">
+                        <input type="number" id="nfkhasra" name="nfkhasra" #nfkhasra="ngModel" class="form-control" [(ngModel)]="land.khasra_no" required maxlength="20">
+                        <div class="error-block">
+                                <small *ngIf="nfkhasra.errors?.required && nfkhasra.touched" class="text-danger">
+                                    khasra is required.
+                                </small>
+                                <small *ngIf="nfkhasra.errors?.min && nfkhasra.touched" class="text-danger">
+                                    Minimum khasra should be 1.
+                                </small>                                                          
+                                <small *ngIf="nfkhasra.errors?.max && nfkhasra.touched" class="text-danger">
+                                    Maximum khasra is allow upto 16 digit.
+                                </small>                                                           
+                            </div>
                     </div>
                 </div>
                     <div class="col-sm-6">
@@ -114,15 +136,27 @@
                     <label for="nf-qty">Area</label>
                      <div class="input-group">
                      
-                         <input type="text" id="nf-area" name="area" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area" required>
+                         <input type="text" id="nfarea" name="nfarea" #nfarea="ngModel" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area" required>
+                         <div class="error-block">
+                                <small *ngIf="nfarea.errors?.required && nfarea.touched" class="text-danger">
+                                    Area is required.
+                                </small>
+                                <small *ngIf="nfarea.errors?.min && nfarea.touched" class="text-danger">
+                                    Minimum offer area should be 1.
+                                </small>                                                          
+                                <small *ngIf="nfarea.errors?.max && nfarea.touched" class="text-danger">
+                                    Maximum offer area is allow upto 16 digit.
+                                </small>                                                           
+                            </div>
                           <div class="input-group-btn">
                               <select id="select2" name="select2" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.unit" size="1" required>
                                 <option value="">-Units-</option>
-                                <option value="Sq.Ft">Sq.Ft</option>
-                                <option value="Sq. Yards">Sq. Yards</option>
-                                <option value="Sq. Meter">Sq. Meter</option>
+                                <option value="Ft">Sq.Ft</option>
+                                <option value="Yards">Sq. Yards</option>
+                                <option value="Meter">Sq. Meter</option>
                             </select>
                          </div>
+                         
                        </div>                      
                    </div>
                    </div>
@@ -133,10 +167,21 @@
                             <label for="nf-price">Expected price </label>
                             <div class="input-group">
                                 <div class="icnposition"><i class="fa fa-rupee"></i></div>
-                                <input maxlength="10" type="number" id="nf-expected_price" name="nf-expected_price" class="form-control pleft25" [(ngModel)]="land.expected_price" required>
-
+                                <input maxlength="10" #nfexpected_price="ngModel"  type="number" id="nfexpected_price" name="nfexpected_price" class="form-control pleft25" [(ngModel)]="land.expected_price" required>
+                                <div class="error-block">
+                                <small *ngIf="nfexpected_price.errors?.required && nfexpected_price.touched" class="text-danger">
+                                    Expected price is required.
+                                </small>
+                                <small *ngIf="nfexpected_price.errors?.min && nfexpected_price.touched" class="text-danger">
+                                    Minimum Expected price should be 1.
+                                </small>                                                          
+                                <small *ngIf="nfexpected_price.errors?.max && nfexpected_price.touched" class="text-danger">
+                                    Maximum Expected price is allow upto 16 digit.
+                                </small>                                                           
+                            </div>
                                 <div class="input-group-btn">
-                              <select id="select3" [disabled]="land.rentSell == 'Sell'" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" required>
+                              <!-- <select id="select3" [disabled]="land.rentSell == 'Sell'" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" required> -->
+                              <select id="select3" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" >
                                 <option value="">-Units-</option>
                                 <option value="Day">Per Day</option>
                                 <option value="Week">Per Week</option>

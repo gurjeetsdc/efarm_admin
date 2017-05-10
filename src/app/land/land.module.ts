@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { LandService } from './services/land.service';
 import { DatePickerModule } from 'ng2-datepicker';
 /*For list table.*/
-import {DataTableModule} from "angular2-datatable";
+import {NG2DataTableModule} from "angular2-datatable-pagination";
+import { CustomFormsModule } from 'ng2-validation'
 import { ListLandComponent } from './list-component/list-land.component';
 import { AddLandComponent } from './addupdate-component/add-land.component';
 import { ViewLandComponent } from './view-component/view-land.component';
@@ -13,7 +14,8 @@ import { LandRoutingModule } from './land-routing.module';
   imports: [
   	LandRoutingModule,
   	CommonModule,
-    DataTableModule,
+    NG2DataTableModule,
+    CustomFormsModule,
     DatePickerModule
   ],
   providers: [

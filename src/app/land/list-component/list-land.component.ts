@@ -18,17 +18,22 @@ export class ListLandComponent implements OnInit {
     public data                = [];
     public totalRecords        = 0;
     public filterQuery         = "";
-    public rowsOnPage          = 10;
-
+    public rowsOnPage          = 5;
     public sortBy              = "createdAt";
     public sortOrder           = "desc";
+    public activePage   = 1;
+    public itemsTotal   = 0;
+    public searchTerm   = '';
+
+    public itemsOnPage;
+
     public response:any;
-
     private isLoading:boolean = true;
-
     public documents = [];
     public selectedDocument = [];
     public errMessage = '';
+    public isPageLoading:boolean = true;
+
 
     public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _landService: LandService) { 
         
@@ -42,16 +47,14 @@ export class ListLandComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
-        this._landService.landlist().subscribe(resdata => {
-            this.data = resdata.data;            
-            this.isLoading = false;
-            this.totalRecords = this.data.length;
-            if(this.data.length == 0) this.errMessage = "No record to display";
-            this.isLoading = false;
-        },err => {
-            this.isLoading = false;
-            this.errMessage = "No record to display";
-       });         
+
+        /*Load data*/
+        this.getLands();        
+        this.activePage = 1;
+        this.getLands();
+
+        this.itemsOnPage = this.rowsOnPage;
+
     }
 
     public toInt(num: string) {
@@ -106,6 +109,88 @@ export class ListLandComponent implements OnInit {
         }
         return arr;
     } 
+
+
+        checkAccessToken( err ): void {
+        console.log(err);
+        let status     = err.status;
+        let statusText = err.statusText;
+
+        if( (status == 401 && statusText == 'Unauthorized')) {
+            localStorage.removeItem('user');
+            this._router.navigate(['/login', {data: true}]);
+        }else {
+            console.log('Something unexpected happened, please try again later.');
+        }        
+    }
+
+    /*get all getLands*/
+    getLands() {   
+        this._landService.landlist( this.rowsOnPage, this.activePage, this.searchTerm ).subscribe(res => {
+            this.data       = res.data.lands;
+            this.itemsTotal = res.data.total;
+            this.isLoading     = false;
+            this.isPageLoading = false;
+            console.log("allLand loaded");
+        }, 
+        err => {
+              this.checkAccessToken( err );
+              this.isLoading     = false;
+              this.isPageLoading = false;
+        });
+
+
+/*        this._landService.landlist().subscribe(resdata => {
+            this.data = resdata.data;            
+            this.isLoading = false;
+            this.totalRecords = this.data.length;
+            if(this.data.length == 0) this.errMessage = "No record to display";
+            this.isLoading = false;
+        },err => {
+            this.isLoading = false;
+            this.errMessage = "No record to display";
+       });         
+*/
+
+
+
+
+
+    }
+
+    /**/
+    public onPageChange(event) {
+        this.isLoading     = true;
+        this.rowsOnPage = event.rowsOnPage;
+        this.activePage = event.activePage;
+        this.getLands();
+    }
+
+    public onRowsChange( event ): void {
+        this.isLoading  = true;
+        this.rowsOnPage = this.itemsOnPage;
+        this.activePage = 1;
+        this.getLands();      
+    }
+
+    public onSortOrder(event) {
+        this.getLands();
+    }
+
+    public searchLand( ) {
+        console.log(this.searchTerm);
+
+        if( this.searchTerm.length > 3 ){
+            // this.isLoading  = true;
+            this.getLands(); 
+        }else if( this.searchTerm.length == 0 ){
+            // this.isLoading  = true;
+            this.getLands(); 
+        }
+    }
+
+
+
 
 
 

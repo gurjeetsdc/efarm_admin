@@ -1,25 +1,31 @@
+<!-- Loader div -->
+<div *ngIf="isLoading" class="overlayloader">
+    <div class="loader"></div>
+</div>
+
+
 <!-- <div class="land-wrapper animated fadeIn">       -->
 <div class="land-wrapper">      
   
     <div class="row">
         <div class="col-lg-12">
         <!-- loading section -->
-            <div class="aligncenter_loader" *ngIf="isLoading">
+            <div class="aligncenter_loader" *ngIf="isPageLoading">
                 <div class="is-loading"><i class="page-loader"></i></div>        
             </div>
             <!-- section ends  -->
-            <div class="card" *ngIf="!isLoading">
+            <div class="card" *ngIf="!isPageLoading">
 
                  <div class="card-header">
                     <div class="row">
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
-                            <div class="flex">
-                                <input class="form-control" name="q" placeholder="Search" type="text">
+                            <!-- <div class="flex">
+                                <input class="form-control" name="search" (keyup)="searchLand()" [(ngModel)]="searchTerm" placeholder="Search" type="text">
                                 <span class="input-group-btn">
                                 <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
                                 </span>
-                            </div>
+                            </div> -->
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght">
@@ -35,8 +41,15 @@
                
                 <div class="card-block">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
-                               [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                    <table class="table table-bordered table-striped table-condensed" [mfData]="data" 
+                    #mf="mfDataTable" 
+                        [mfRowsOnPage]="rowsOnPage"
+                        [(mfSortBy)]="sortBy" 
+                        [(mfSortOrder)]="sortOrder" 
+                        [mfActivePage]="activePage" 
+                        (mfOnPageChange)="onPageChange($event)"
+                        [mfIsServerPagination]="true" 
+                        [(mfAmountOfRows)]="itemsTotal">
                         <thead>
                             <tr>
                                 <th width="30%">Owner Name
@@ -45,21 +58,29 @@
                                         <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </mfDefaultSorter> -->
                                 </th>
-                                <th width="20%"><mfDefaultSorter by="location">Location
-                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                </mfDefaultSorter></th>
-                                <th width="20%"><mfDefaultSorter by="area">Area
-                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                </mfDefaultSorter></th>
-                                <th width="15%"><mfDefaultSorter by="expected_price">Expected price <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                </mfDefaultSorter></th>
-                                <th width="20%"><mfDefaultSorter by="rentSell">Land For
-                                <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                </mfDefaultSorter></th>
+                                <th width="20%">Location
+                                    <!-- <mfDefaultSorter by="location">Location
+                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter> -->
+                                </th>
+                                <th width="20%">Area
+                                    <!-- <mfDefaultSorter by="area">Area
+                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter> -->
+                                </th>
+                                <th width="15%">Expected price
+                                    <!-- <mfDefaultSorter by="expected_price">Expected price <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter> -->
+                                </th>
+                                <th width="20%">Land For
+                                    <!-- <mfDefaultSorter by="rentSell">Land For
+                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter> -->
+                                </th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
@@ -72,7 +93,7 @@
                                 <td><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.user?.username}}</a></td>
                                 <td>{{land.location}}</td>
                                 <td>{{land.area}} {{land.unit}}</td>
-                                <td>{{land.expected_price}}</td>
+                                <td><i class="fa fa-rupee"></i>{{land.expected_price}}</td>
                                 <td>{{land.rentSell}}</td>
 
                                 <td>                                    
@@ -83,30 +104,28 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="8">
-                                    <div class="pagination-section">
-                                        <div class="row-on-page" *ngIf='data.length > 0'>
-                                            <label class="label-control">Show</label>
-                                            &nbsp;
-                                            <select class="land-sm" [(ngModel)]="rowsOnPage">
-                                                <option [ngValue]="5">5</option>
-                                                <option [ngValue]="10">10</option>
-                                                <option [ngValue]="15">25</option>
-                                                <option [ngValue]="15">50</option>
-                                                <option [ngValue]="15">100</option>
-                                            </select>
-                                             &nbsp;
-                                           <label class="label-control">entries</label>
-
-                                           &nbsp;
-                                           &nbsp;
-                                           <span>Showing {{rowsOnPage < totalRecords? rowsOnPage:totalRecords }} of {{totalRecords}} entries</span>
-                                        </div>
-                                        <div class="text-right">                                    
-                                            <mfBootstrapPaginator></mfBootstrapPaginator>
-                                        </div>
+                                <td colspan="7">
+                                    <div class="pagination-section" *ngIf="itemsTotal > 0">
+                                        <div class="row-on-page">
+                                                <label class="label-control">Show</label>
+                                                &nbsp;
+                                                <select class="input-sm" name="itemsOnPage"  [(ngModel)]="itemsOnPage"  (change)="onRowsChange()">
+                                                    <option [ngValue]="5">5</option>
+                                                    <option [ngValue]="10">10</option>
+                                                    <option [ngValue]="25">25</option>
+                                                    <option [ngValue]="50">50</option>
+                                                    <option [ngValue]="100">100</option>
+                                                </select>
+                                                &nbsp;
+                                                <label class="label-control">entries</label>
+                                                &nbsp; &nbsp;
+                                            <span>Showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>
+                                            </div>
+                                            <div class="text-right">
+                                                <mfBootstrapPaginator></mfBootstrapPaginator>   
+                                            </div>
                                         <div style="clear: both;"></div>
-                                    </div>    
+                                    </div>  
                                 </td>    
                             </tr>                            
                         </tfoot>

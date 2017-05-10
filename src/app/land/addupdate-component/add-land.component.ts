@@ -11,12 +11,12 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 export class AddLandComponent {
 	private land = {
         rentSell: 'Lease',
-        unit:'',
+        unit:'Ft',
         categoryId:'',
         location:'',
         sellerId:'',
-        periodsunit:'',
-        priceunit:'',
+        periodsunit:'Day',
+        priceunit:'Day',
         term_condition:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
     };
     private sellers = [];
@@ -38,6 +38,7 @@ export class AddLandComponent {
                 this.land = res.data; 
                 this.action = 'Update'
                 this.land.sellerId = res.data.user.id;
+                this.land.categoryId = res.data.categoryId;
               }, err => {});
         }
         this._landService.getAllCategories().subscribe( res => { this.category = res.data; }, err => {});
