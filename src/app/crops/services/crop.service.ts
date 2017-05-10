@@ -10,13 +10,15 @@ export class CropService {
     constructor(private _http: Http, private _cookieService: CookieService) { }
 
     /*Use to fetch all crops*/
-  	getAllCrops() {
+  	getAllCrops(rowsOnPage, activePage, search = '') {
 
         let headers         = new Headers();
         this._accessToken   = this.getAccessToken();
         
+        let url = this._host +'/crops?count='+rowsOnPage+'&page='+activePage+'&search='+search;
+
         headers.append('Authorization', this._accessToken);
-		return this._http.get(this._host +'/crops', { headers: headers }).map((res:Response) => res.json())
+		return this._http.get(url, { headers: headers }).map((res:Response) => res.json())
     }
 
     /*Use to add new crop*/
@@ -76,7 +78,7 @@ export class CropService {
         this._accessToken   = this.getAccessToken();
 
         headers.append('Authorization', this._accessToken );
-        return this._http.get(this._host +'/users', { headers: headers }).map((res:Response) => res.json());
+        return this._http.get(this._host +'/user', { headers: headers }).map((res:Response) => res.json());
     }
 
     getAccessToken(): string {

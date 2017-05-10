@@ -17,12 +17,14 @@ export class ListCropComponent implements OnInit {
     public rowsOnPage            = 10;
     public sortBy                = "createdAt";
     public sortOrder             = "desc";
-    
+    public activePage            = 1;
+    public itemsTotal            = 0;
+    public searchTerm            = '';
+    public itemsOnPage;    
+
+    public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
-    public errMessage            = "";
-   
-    public response:any;
 
     public constructor(private _router: Router, private _cropService: CropService, private _cookieService: CookieService ) { 
         
@@ -37,16 +39,12 @@ export class ListCropComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
-        this._cropService.getAllCrops().subscribe(res => {
-            this.data = res;
-            this.totalRecords = this.data.length;
-            if(this.data.length == 0) this.errMessage = "No record to display";
-            this.isPageLoading = false;
-        },err => {
-            this.isPageLoading = false;
-            this.errMessage = "No record to display";
-            this.checkAccessToken(err);
-       });             
+        /*Load data*/
+        this.getCrops();        
+        this.activePage = 1;
+        this.getCrops();   
+
+        this.itemsOnPage = this.rowsOnPage;        
     }
 
     public toInt(num: string) {
@@ -68,14 +66,14 @@ export class ListCropComponent implements OnInit {
     }
 
      /* Function use to remove Crop with crop id*/
-    removeCrop(cropid) {
+    removeCrop(cropID) {
         if(confirm("Do you want to delete?")) {
             this.isLoading = true;
-            this._cropService.delete(cropid).subscribe(res => {
+            this._cropService.delete(cropID).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
-                this.removeByAttr(this.data, 'id', cropid);
-                this._router.navigate(['/crops/list/']);      
+                this.totalRecords = this.data.length;
+                this.removeByAttr(this.data, 'id', cropID);    
             },err => {
                 this.isLoading = false;
                 this.checkAccessToken(err);
@@ -109,5 +107,45 @@ export class ListCropComponent implements OnInit {
         }else {
             console.log('Something unexpected happened, please try again later.');
         }        
+    }
+
+    /*get all equipments*/
+    getCrops() {   
+        this._cropService.getAllCrops( this.rowsOnPage, this.activePage, this.searchTerm ).subscribe(res => {
+            this.data          = res.data.crops;
+            this.itemsTotal    = res.data.total;
+            this.isLoading     = false;
+            this.isPageLoading = false;
+        },err => {
+            this.checkAccessToken(err);
+            this.isLoading     = false;
+            this.isPageLoading = false;
+       });
+    }
+
+    public onPageChange(event) {
+        this.isLoading     = true;
+        this.rowsOnPage = event.rowsOnPage;
+        this.activePage = event.activePage;
+        this.getCrops();
+    }
+
+    public onRowsChange( event ): void {
+        this.isLoading  = true;
+        this.rowsOnPage = this.itemsOnPage;
+        this.activePage = 1;
+        this.getCrops();      
+    }
+
+    public onSortOrder(event) {
+        this.getCrops();
+    }
+
+    public search( ) {
+        if( this.searchTerm.length > 3 ){
+            this.getCrops(); 
+        }else if( this.searchTerm.length == 0 ){
+            this.getCrops(); 
+        }
     }
 }

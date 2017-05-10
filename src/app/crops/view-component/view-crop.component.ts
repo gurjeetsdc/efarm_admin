@@ -15,7 +15,7 @@ export class ViewCropComponent {
       	this.cropID = route.snapshot.params['id'];
   	    this._cropService.get(this.cropID).subscribe(res => {
             this.isLoading = false;
-            this.crop = res;
+            this.crop = res.data;
         },err => {
             this.isLoading = false;
             this.checkAccessToken(err);

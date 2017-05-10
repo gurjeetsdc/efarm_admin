@@ -17,9 +17,9 @@
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                             <div class="flex">
-                                <input class="form-control" name="q" placeholder="Search" style="cursor:not-allowed;pointer-events: none;" type="text">
+                                <input class="form-control" name="search" (keyup)="search()" [(ngModel)]="searchTerm" placeholder="Search" type="text">
                                 <span class="input-group-btn">
-                                <button class="btn btn-flat" id="search-btn" name="search" style="cursor:not-allowed;" type="submit"><i class="fa fa-search"></i> </button>
+                                <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
                                 </span>
                             </div>
                             </form>
@@ -36,8 +36,17 @@
                 
                 <div class="card-block">    
                     <div class="table-responsive">                                    
-                    <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
-                               [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                    <!-- <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable"
+                               [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> -->
+                    <table class="table table-striped" [mfData]="data" 
+                        #mf="mfDataTable" 
+                        [mfRowsOnPage]="rowsOnPage"
+                        [(mfSortBy)]="sortBy" 
+                        [(mfSortOrder)]="sortOrder" 
+                        [mfActivePage]="activePage" 
+                        (mfOnPageChange)="onPageChange($event)"
+                        [mfIsServerPagination]="true" 
+                        [(mfAmountOfRows)]="itemsTotal">                                 
                         <thead>
                             <tr>
 
@@ -67,9 +76,12 @@
                             </tr>
                         </thead>                        
                         <tbody>
-                            <tr *ngIf='errMessage'>
+                            <!-- <tr *ngIf='errMessage'>
                                 <td colspan="7">{{errMessage}}</td>
-                            </tr>
+                            </tr> -->
+                            <tr *ngIf="itemsTotal == 0">
+                                <td colspan="7">No record to display</td>
+                            </tr> 
                             <tr *ngFor="let crop of mf.data">    
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
                                 <td><p><i class="fa fa-rupee"></i> {{crop.price}}</td>
@@ -85,29 +97,27 @@
                         <tfoot>
                             <tr>
                                 <td colspan="7">
-                                    <div class="pagination-section">
-                                        <div class="row-on-page" *ngIf='data.length > 0'>
+                                    <div class="pagination-section" *ngIf="itemsTotal > 0">
+                                        <div class="row-on-page">
                                             <label class="label-control">Show</label>
                                             &nbsp;
-                                            <select class="input-sm" [(ngModel)]="rowsOnPage">
+                                            <select class="input-sm" name="itemsOnPage"  [(ngModel)]="itemsOnPage"  (change)="onRowsChange()">
                                                 <option [ngValue]="5">5</option>
                                                 <option [ngValue]="10">10</option>
-                                                <option [ngValue]="15">25</option>
-                                                <option [ngValue]="15">50</option>
-                                                <option [ngValue]="15">100</option>
+                                                <option [ngValue]="25">25</option>
+                                                <option [ngValue]="50">50</option>
+                                                <option [ngValue]="100">100</option>
                                             </select>
                                             &nbsp;
-                                           <label class="label-control">entries</label>
-
-                                           &nbsp;
-                                           &nbsp;
-                                           <span>Showing {{rowsOnPage < totalRecords? rowsOnPage:totalRecords }} of {{totalRecords}} entries</span>
-                                        </div>
-                                        <div class="text-right">                                    
-                                            <mfBootstrapPaginator></mfBootstrapPaginator>
-                                        </div>
+                                            <label class="label-control">entries</label>
+                                                &nbsp; &nbsp;
+                                            <span>Showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>
+                                            </div>
+                                            <div class="text-right">
+                                                <mfBootstrapPaginator></mfBootstrapPaginator>   
+                                            </div>
                                         <div style="clear: both;"></div>
-                                    </div>    
+                                    </div>  
                                 </td>    
                             </tr>                            
                         </tfoot>

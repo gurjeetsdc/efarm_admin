@@ -32,14 +32,14 @@ export class AddUpdateCropComponent {
     public options: DatePickerOptions;
     
     constructor(private _router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService, private _cookieService: CookieService ) { 
-        this._cropService.getAllCategories().subscribe( res => { this.category = res; }, err => {});
-        this._cropService.getAllUsers().subscribe( res => { this.sellers = res; }, err => {});
+        this._cropService.getAllCategories().subscribe( res => { this.category = res.data; }, err => {});
+        this._cropService.getAllUsers().subscribe( res => { this.sellers = res.data.users; }, err => {});
         this.cropID = _activateRouter.snapshot.params['id'];        
         if( this.cropID ) {
             this._cropService.get(this.cropID).subscribe(res => {
-                this.crop = res;
-                this.crop.categoryID = res.category.id;
-                if(res.seller && res.seller.id )this.crop.sellerID = res.seller.id;
+                this.crop = res.data;
+                this.crop.categoryID = res.data.category.id;
+                if(res.data.seller && res.data.seller.id )this.crop.sellerID = res.data.seller.id;
                 this.isPageLoading = false;
             },err => {
                 this.isPageLoading = false;
