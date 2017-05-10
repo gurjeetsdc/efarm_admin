@@ -14,14 +14,11 @@ export class UserService {
     getAllUsers(rowsOnPage, activePage ) {
 
         let headers         = new Headers();        
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
-        headers.append('Authorization', this._accessToken);
-
         let url = this._host +'/user?count='+rowsOnPage+'&page='+activePage;
 
+        headers.append('Authorization', this._accessToken);
         return this._http.get(url, { headers: headers }).map((res:Response) => res.json())
     }
      
@@ -29,9 +26,7 @@ export class UserService {
     add(user) {
 
         let headers         = new Headers();        
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
         return this._http.post(this._host +'/user', user, { headers: headers }).map((res:Response) => res.json())
@@ -41,9 +36,7 @@ export class UserService {
     get(userid) {
 
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
       
         headers.append('Authorization', this._accessToken);
         return this._http.get(this._host +'/user/'+ userid, { headers: headers }).map((res:Response) => res.json())
@@ -53,9 +46,7 @@ export class UserService {
     update(user) {
 
         let headers         = new Headers();    
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
         return this._http.put(this._host +'/user/'+ user.id, user, { headers: headers }).map((res:Response) => res.json())
@@ -65,12 +56,15 @@ export class UserService {
     delete( userID ) {
         
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
         return this._http.delete(this._host +'/user/'+ userID,  { headers: headers }).map((res:Response) => res.json());
+    }
+
+    getAccessToken(): string {
+        let token           = this._cookieService.get('token');
+        return 'Bearer ' + token;
     }
 
 }

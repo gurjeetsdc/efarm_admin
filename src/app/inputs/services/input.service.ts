@@ -11,137 +11,88 @@ export class InputService {
   
     constructor(private _http: Http, private _cookieService: CookieService) { }
 
-    /*
-    *@Description: Input listing method
-    *@Param: no parameter pass
-    *@return: Multiple json array
-    *@Author: Rohitk.kumar
-    */
-  	inputlist() {
+    /*Use to fetch all Inputs*/
+  	getAllInputs() {
 
   		let headers         = new Headers();        
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
 		return this._http.get(this._host +'/inputs', { headers: headers }).map((res:Response) => res.json())
     }
 
-
-    /*
-    *@Description: Get Manufacturer list for dropdown in input section
-    *@Param: no parameter pass
-    *@return: Multiple json array
-    *@Author: Rohitk.kumar
-    */
-      getManuf() {
-          
-        let headers = new Headers();        
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken    = 'Bearer ' + token;
-        
-        headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host +'/manufacturer', { headers: headers }).map((res:Response) => res.json())
-    }
-
-    getAllCategories() {
-          
-        let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
-
-        headers.append('Authorization', this._accessToken );
-        return this._http.get(this._host +'/category', { headers: headers }).map((res:Response) => res.json());
-    }
-
-
-    /*
-    *@Description: Input save data method
-    *@Param: Input form unicode data post
-    *@return: success/fail
-    *@Author: Rohitk.kumar
-    */
-    inputadd(inputs) {
-      console.log("inside input add");
+    /*Use to add new Input*/
+    add(input) {
 
         let headers         = new Headers();        
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
-        return this._http.post(this._host +'/inputs', inputs, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this._host +'/inputs', input, { headers: headers }).map((res:Response) => res.json())
     }
     
-    /*
-    *@Description: Input detail info method
-    *@Param: input id param
-    *@return: input detail data
-    *@Author: Rohitk.kumar
-    */
-    getInput(input) {
+    /*Use to get input with input id*/
+    get(inputID) {
 
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host +'/inputs/'+ input, { headers: headers }).map((res:Response) => res.json())
+        return this._http.get(this._host +'/inputs/'+ inputID, { headers: headers }).map((res:Response) => res.json())
     }
 
-    /*
-    *@Description: update Input info method
-    *@Param: input id param and input data
-    *@return: update success/fail 
-    *@Author: Rohitk.kumar
-    */
-    updateInput(input) {
+    /*Use to update input*/
+    update(input) {
         
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
         return this._http.put(this._host +'/inputs/'+ input.id, input, { headers: headers }).map((res:Response) => res.json())
     }
 
 
-    /*
-    *@Description: update Input info method
-    *@Param: input id param and input data
-    *@return: update success/fail 
-    *@Author: Rohitk.kumar
-    */
-    deleteInput( inputId ) {
+    /*Use to Delete input with input id */
+    delete( inputId ) {
         
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken );
         return this._http.delete(this._host +'/inputs/'+ inputId,  { headers: headers }).map((res:Response) => res.json());
     }   
 
-     /*
-    *@Description: get seller user list
-    *@Param: nothing
-    *@return: seller user list
-    *@Author: Rohitk.kumar
-    */
+    /*Use to fetch all Users*/
     getAllUsers() {
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken );
         return this._http.get(this._host +'/users', { headers: headers }).map((res:Response) => res.json());
     }
 
+    /*Use to fetch all Manufactures*/
+      getAllManufactures() {
+          
+        let headers = new Headers();        
+        this._accessToken   = this.getAccessToken();
+        
+        headers.append('Authorization', this._accessToken);
+        return this._http.get(this._host +'/manufacturer', { headers: headers }).map((res:Response) => res.json())
+    }
+
+    /*Use to fetch all categories*/
+    getAllCategories() {
+          
+        let headers         = new Headers();
+        this._accessToken   = this.getAccessToken();
+
+        headers.append('Authorization', this._accessToken );
+        return this._http.get(this._host +'/category', { headers: headers }).map((res:Response) => res.json());
+    }
+
+    getAccessToken(): string {
+        let token           = this._cookieService.get('token');
+        return 'Bearer ' + token;
+    }
 }

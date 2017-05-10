@@ -12,10 +12,8 @@ export class CropService {
     /*Use to fetch all crops*/
   	getAllCrops() {
 
-        let headers         = new Headers();        
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        let headers         = new Headers();
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
 		return this._http.get(this._host +'/crops', { headers: headers }).map((res:Response) => res.json())
@@ -24,10 +22,8 @@ export class CropService {
     /*Use to add new crop*/
     add(crop) {
 
-        let headers         = new Headers();        
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        let headers         = new Headers();
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
         return this._http.post(this._host +'/crops', crop, { headers: headers }).map((res:Response) => res.json())
@@ -37,9 +33,7 @@ export class CropService {
     get(cropID) {
         
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
     
         headers.append('Authorization', this._accessToken);
         return this._http.get(this._host +'/crops/'+ cropID, { headers: headers }).map((res:Response) => res.json())
@@ -49,9 +43,7 @@ export class CropService {
     update(crop) {
 
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
 
         headers.append('Authorization', this._accessToken);
         return this._http.put(this._host +'/crops/'+ crop.id, crop, { headers: headers }).map((res:Response) => res.json())
@@ -61,9 +53,7 @@ export class CropService {
     delete( cropID ) {
         
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken );
         return this._http.delete(this._host +'/crops/'+ cropID,  { headers: headers }).map((res:Response) => res.json());
@@ -73,9 +63,7 @@ export class CropService {
     getAllCategories() {
           
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
 
         headers.append('Authorization', this._accessToken );
         return this._http.get(this._host +'/category', { headers: headers }).map((res:Response) => res.json());
@@ -85,12 +73,14 @@ export class CropService {
     getAllUsers() {
           
         let headers         = new Headers();
-        let urlSearchParams = new URLSearchParams();
-        let token           = this._cookieService.get('token');
-        this._accessToken   = 'Bearer ' + token;
+        this._accessToken   = this.getAccessToken();
 
         headers.append('Authorization', this._accessToken );
         return this._http.get(this._host +'/users', { headers: headers }).map((res:Response) => res.json());
     }
 
+    getAccessToken(): string {
+        let token           = this._cookieService.get('token');
+        return 'Bearer ' + token;
+    }
 }

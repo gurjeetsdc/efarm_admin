@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-block">
+        <div class="card-block viewmode">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -28,7 +28,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Seller</label>
-                        <p>{{input.user?.username}}</p>
+                        <p>{{input.user?.email}}</p>
                     </div>
                 </div>
             </div>
@@ -49,28 +49,28 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="nf-variety">Variety</label>
-                        <p>{{input.variety}}</p>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="nf-grade">Quantity</label>
-                        <p>{{input.quantity}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
                         <label for="nf-color">Unit</label>
                         <p>{{input.units}}</p>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
+                        <label for="nf-variety">Variety</label>
+                        <p>{{input.variety}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
                         <label for="nf-price">Price</label>
                         <p><i class="fa fa-rupee"></i> {{input.price}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-grade">Quantity</label>
+                        <p>{{input.quantity}}</p>
                     </div>
                 </div>
             </div>

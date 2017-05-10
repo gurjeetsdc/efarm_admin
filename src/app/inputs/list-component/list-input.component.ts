@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { cropTable } from './crop-seed'
-//import {PaginationInstance} from 'ng2-pagination';
 import { InputService } from '../services/input.service';
 import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
-import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
 
 
@@ -23,10 +20,10 @@ export class ListInputComponent implements OnInit {
     public sortBy              = "createdAt";
     public sortOrder           = "desc";
     public response:any;
-    private isLoading:boolean = true;
-    public documents = [];
-    public selectedDocument = [];
-    public err_message = '';
+    public isLoading:boolean   = true;
+    public documents           = [];
+    public selectedDocument    = [];
+    public err_message         = '';
 
     public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _inputService: InputService) { 
         
@@ -40,7 +37,7 @@ export class ListInputComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
-        this._inputService.inputlist().subscribe(resInputs => {
+        this._inputService.getAllInputs().subscribe(resInputs => {
                 
             this.data = resInputs;            
             this.totalRecords = this.data.length;
@@ -61,28 +58,21 @@ export class ListInputComponent implements OnInit {
     }
 
     viewInput (inputID) {
-      //console.log(inputID);
-      
        let route = '/inputs/list/'+inputID;
        this._router.navigate([route]);       
     }
 
     sendUpdateinput( inputID ) {     
-        //console.log(inputID);
-      
        let route = '/inputs/edit/'+inputID;
         this._router.navigate([route]);       
     }
 
      
     removeInput( inputID ) {
-
-      //console.log(inputID);
-      
         if(confirm("Do you want to delete?")) {
             console.log("Implement delete functionality here");
             this.isLoading = true;
-            this._inputService.deleteInput(inputID).subscribe(res => {
+            this._inputService.delete(inputID).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
 

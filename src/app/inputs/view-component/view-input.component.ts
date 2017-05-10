@@ -8,17 +8,15 @@ import { CookieService } from 'ngx-cookie';
 })
 export class ViewInputComponent {
 
-	public inputID = '';
-	public input = {};
-  public copy_input = {};
-  public edit = false;
-  public isLoading:boolean   = true;
+	public inputID             = '';
+	public input               = {};
+    public isLoading:boolean   = true;
 
     constructor(private _router: Router, private _activatedRouter: ActivatedRoute,  private _inputService: InputService, private _cookieService: CookieService ) { 
   	    this.inputID =  _activatedRouter.snapshot.params['id'];
   	
         if( this.inputID ) {
-            this._inputService.getInput(this.inputID).subscribe( res => {
+            this._inputService.get(this.inputID).subscribe( res => {
                 this.input = res;
                 this.isLoading = false;
             }, err => {
