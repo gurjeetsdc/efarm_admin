@@ -15,6 +15,8 @@ import { AddUpdateEquipmentComponent } from './addupdate-component/addupdate-equ
 
 import { EquipmentManagementRoutingModule } from './equipment-management-routing.module';
 
+import { DatePickerModule } from 'ng2-datepicker';
+
 import { GoogleplaceDirective } from '../shared/directives/googleplaces/googleplaces.directive';
 
 @NgModule({
@@ -22,7 +24,8 @@ import { GoogleplaceDirective } from '../shared/directives/googleplaces/googlepl
         EquipmentManagementRoutingModule,
         CommonModule,
         NG2DataTableModule,
-        CustomFormsModule
+        CustomFormsModule,
+        DatePickerModule
     ],
     declarations: [
         ListEquipmentComponent,

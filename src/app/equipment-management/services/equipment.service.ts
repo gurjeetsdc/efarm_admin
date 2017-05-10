@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { CookieService } from 'ngx-cookie';
+import tsConstants = require('./../../tsconstant');
 
 @Injectable()
 export class EquipmentService {
 	
-    // private host         = "https://efarmapi.herokuapp.com";    
-    private host         = "http://localhost:1337";    
+    // private _host         = "https://efarmapi.herokuapp.com";    
+    // private _host         = "http://localhost:1337";    
+    private _host = tsConstants.HOST;
 
     private access_token = {};
     private token        = '';
@@ -21,7 +23,7 @@ export class EquipmentService {
 
         this.token          = this.getAccessToken();
         
-        let url = this.host +'/equipment?count='+rowsOnPage+'&page='+activePage+'&search='+search;
+        let url = this._host +'/equipment?count='+rowsOnPage+'&page='+activePage+'&search='+search;
 
         headers.append('Authorization', this.token );
 		return this._http.get( url, { headers: headers }).map((res:Response) => res.json());
@@ -35,7 +37,7 @@ export class EquipmentService {
         this.token          = this.getAccessToken();
         
         headers.append('Authorization', this.token );
-    	return this._http.post(this.host +'/equipment', equipment, { headers: headers }).map((res:Response) => res.json());
+    	return this._http.post(this._host +'/equipment', equipment, { headers: headers }).map((res:Response) => res.json());
     }
 
     /** get a single Equipment by ID **/
@@ -47,7 +49,7 @@ export class EquipmentService {
         this.token          = this.getAccessToken();
         
         headers.append('Authorization', this.token );
-        return this._http.get( this.host +'/equipment/' + equipmentID, { headers: headers }).map((res:Response) => res.json());
+        return this._http.get( this._host +'/equipment/' + equipmentID, { headers: headers }).map((res:Response) => res.json());
     }
 
     /** update equipment **/
@@ -59,7 +61,7 @@ export class EquipmentService {
         this.token          = this.getAccessToken();
         
         headers.append('Authorization', this.token );
-        return this._http.put(this.host +'/equipment/'+ equipment.id, equipment, { headers: headers }).map((res:Response) => res.json());
+        return this._http.put(this._host +'/equipment/'+ equipment.id, equipment, { headers: headers }).map((res:Response) => res.json());
     }
 
     /** DeleteID equipment by ID **/
@@ -71,31 +73,34 @@ export class EquipmentService {
         this.token          = this.getAccessToken();
         
         headers.append('Authorization', this.token );
-        return this._http.delete(this.host +'/equipment/'+ equipmentID,  { headers: headers }).map((res:Response) => res.json());
+        return this._http.delete(this._host +'/equipment/'+ equipmentID,  { headers: headers }).map((res:Response) => res.json());
     }
+   
 
+   /*Use to fetch all categories*/
     getAllCategories() {
           
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
-
         this.token          = this.getAccessToken();
 
         headers.append('Authorization', this.token );
-        return this._http.get(this.host +'/category', { headers: headers }).map((res:Response) => res.json());
+        return this._http.get(this._host +'/category', { headers: headers }).map((res:Response) => res.json());
     }
 
-    getUsers() {
+    /*Use to fetch all Users*/
+    getAllUsers() {
           
         let headers         = new Headers();
         let urlSearchParams = new URLSearchParams();
-
+        
         this.token          = this.getAccessToken();
 
         headers.append('Authorization', this.token );
-        return this._http.get(this.host +'/users', { headers: headers }).map((res:Response) => res.json());
+        return this._http.get(this._host +'/user', { headers: headers }).map((res:Response) => res.json());
     }
 
+    
     getAccessToken(): string {
         let token           = this._cookieService.get('token');
         return 'Bearer ' + token;

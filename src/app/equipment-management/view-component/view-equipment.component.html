@@ -7,124 +7,198 @@
     <!-- section ends  -->
 
     <div class="card" *ngIf="!isLoading">
-          <div class="card-header">
-            <div class="row">
-                <div class="col-sm-6 col-12">
-                   <strong>View Equipment</strong>           
-                </div>
-                <div class="col-sm-6 col-12 text-right linehght">
-                   
-                   <button type="button" class="btn btn-secondary" [routerLink]="['/equipment/list']">Back</button>     
-                    <button type="button" class="btn btn-success pull-right" (click)="editEquipment(equipment.id)">Edit Equipment</button> 
-                    &nbsp;    
-                                          
-                </div>
-            </div> <!-- .row -->
+        <div class="card-header">
+            <strong>{{action}} Equipment</strong>
         </div>
         <div class="card-block">
+            <form role="form" (ngSubmit)="submitEquipment()" #addEquipmentForm="ngForm">
+                
+               <div *ngIf="showMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"  (click)="closeMessage()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Success</strong> Equipment added successfully.
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group ">
+                            <label for="nf-name">Equipment Name</label>
+                            <p>{{equipment.name ? equipment.name : '-'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group  ">
+                            <label for="rentSell">Type</label>
+                            <p>{{equipment.rentSell ? equipment.rentSell : '-'}}</p>
+                        </div>                        
+                    </div>                   
+                </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-name">Equipment Name</label>
-                            <p>{{equipment.name}}</p>
+                            <label for="availablefrom">Available From</label>
+                            <p>{{equipment.availableFrom.day}}/{{equipment.availableFrom.month}}/{{equipment.availableFrom.year }}</p>
+                        </div>
+                    </div>
+                      <div class="col-sm-6">
+                         <div class="form-group">
+                            <label for="avalibilityperiod">Availibility Period</label>
+                            <p>{{equipment?.avalibilityperiod ? equipment?.avalibilityperiod : '-'}}<span *ngIf="equipment?.avalibilityperiod">/{{equipment.avalibilityperiodUnits}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group ">
+                            <label for="seller">Seller</label>
+                            <p>{{equipment.user?.email ? equipment.user?.email : '-'}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group ">
-                            <label for="user">Supplier</label>
-                            <p>{{equipment.user?.username}}</p>
-                        </div>
-                    </div>                   
+                            <label for="address">Address</label>                          
+                            <p>{{equipment.address ? equipment.address : '-'}}</p>
+                        </div>                                    
+                    </div> 
                 </div>
-                <div class="row">                    
+                <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="category">Category</label>                            
-                            <p>{{equipment.category?.name}}</p>
+                        <div class="form-group ">
+                            <label for="nf-city">City/Village</label>
+                            <p>{{equipment.city ? equipment.city : '-'}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group ">
+                            <label for="nf-district">District</label>
+                            <p>{{equipment.district ? equipment.district : '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group ">
+                            <label for="nf-state">State</label>
+                            <p>{{equipment.state ? equipment.state : '-'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group ">
+                            <label for="nf-pincode">Pin Code </label>
+                            <p>{{equipment.pincode ? equipment.pincode : '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">                    
+                    <div class="col-sm-6">
+                        <div class="form-group ">
+                            <label for="category">Category</label>                            
+                            <p>{{equipment.category ? equipment.category : '-'?.name}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group ">
+                            <label for="variety">Variety</label>
+                            <p>{{equipment.variety ? equipment.variety : '-'}}</p>
+                        </div>
+                    </div>                    
+                </div>
+                  <div class="row">                    
+                    <div class="col-sm-6">
+                       <div class="form-group ">
                             <label for="companyManufacturer">Company/Manufacturer</label>
-                            <p>{{equipment.companyManufacturer}}</p>
+                            <p>{{equipment.companyManufacturer ? equipment.companyManufacturer : '-'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                         <div class="form-group">
+                            <label for="modelyear">Model year</label>
+                            <p>{{equipment.modelyear ? equipment.modelyear : '-'}}</p>                            
                         </div>
                     </div>                    
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="modelyear">Model year</label>
-                            <p>{{equipment.modelyear}}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
                             <label for="model">Model</label>                          
-                            <p>{{equipment.model}}</p>
+                            <p>{{equipment.model ? equipment.model : '-'}}</p>
                         </div>
                     </div>
-                </div>
-                    
-                <div class="row">
                     <div class="col-sm-6">
-                       <div class="form-group ">
-                            <label for="rentSell">Type</label>
-                            <div class="radiobuttons_top">
-                                <p>{{equipment.rentSell}}</p>
-                            </div>
-                        </div>                    
-                    </div>
-
-                    <div class="col-sm-6">                    
-                        <div class="form-group">
-                            <label >Price</label>
-                            <p><i class="fa fa-rupee"></i> {{equipment.rate}}<span *ngIf="equipment.rentSell == 'rent'"> /{{equipment.price_unit}}</span></p>            
+                        <div class="form-group ">
+                            <label for="rentSell">Price</label>
+                            <p><i class="fa fa-rupee"></i> {{equipment.rate}}<span *ngIf="equipment.rentSell == 'rent'"> /{{equipment.price_unit}}</span></p>
                         </div>
                     </div>
                 </div>
                 <div class="row">                   
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="termsConditions">Quantity</label>
-                            <p>{{equipment.quantity}}</p>
+                       <div class="form-group ">
+                            <label for="quantity">Quantity</label>
+                            <p>{{equipment.quantity ? equipment.quantity : '-'}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                       <div class="form-group radiobuttons_top">
+                        <div class="form-group radiobuttons_top ">
                             <label for="nf-supply_ablity">Supply Ability</label>
-                            <p>{{equipment.supply_ablity}}</p>
-                        </div>                                        
-                    </div>                    
-                </div>                            
-                <div class="row">
+                            <p>{{equipment.supply_ablity ? equipment.supply_ablity : '-'}}</p>                            
+                        </div> 
+                    </div>
+                                       
+                </div>    
+                  <div class="row">                   
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="usage">Usage</label>
-                            <p>{{equipment.usage}}</p>
+                         <div class="form-group ">
+                            <label for="nf-paymentTerms">Payment Preference</label>
+                            <p>{{equipment.payment_method ? equipment.payment_method : '-'}}</p>
                         </div>
                     </div>
-
+                    <div class="col-sm-3">
+                         <div class="form-group" >
+                            <label for="supplyarea">Supply Area</label>
+                            <p>{{equipment.supply_area ? equipment.supply_area : '-'}}</p>
+                        </div>
+                    </div> 
+                    <div class="col-sm-3">
+                         <div class="form-group">
+                            <label for="kmrange">Supply Range(km)</label>
+                            <p>{{equipment.kmrange ? equipment.kmrange : '-'}}</p>
+                        </div>
+                    </div>                                 
+                                        
+                </div>                        
+                       
+                <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label for="description">Description</label>
-                            <p>{{equipment.description}}</p>
+                            <p>{{equipment.description ? equipment.description : '-'}}</p>
+                        </div>                       
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-verified">Verified</label>
+                            <p>{{equipment.verified ? equipment.verified : '-'}}</p>
                         </div>
                     </div>
-                </div>                
-                <div class="row">
+                </div>
+                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-image">Image</label>
                             <p>Not available</p>
                         </div>
                     </div>
+
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="termsConditions">Terms & Conditions</label>
-                            <p>{{equipment.termsConditions}}</p>
-                        </div>
+                         <div class="form-group radiobuttons_top ">
+                            <!-- <label for="termsConditions">Terms & Conditions</label>
+                            <p>{{equipment.termsConditions ? equipment.termsConditions : '-'}}</p> -->                            
+                        </div> 
                     </div>
-                </div>                                        
+                </div>                                      
+            </form>
         </div>
     </div> <!-- .card -->
 </div> <!-- .equipment-wrapper -->
