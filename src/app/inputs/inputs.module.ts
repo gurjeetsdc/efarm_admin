@@ -9,12 +9,14 @@ import { ListInputComponent } from './list-component/list-input.component';
 import { AddUpdateInputComponent } from './addupdate-component/addupdate-input.component';
 import { ViewInputComponent } from './view-component/view-input.component';
 import { InputsRoutingModule } from './inputs-routing.module';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   imports: [
   	InputsRoutingModule,
   	 CommonModule,
-     DataTableModule
+     DataTableModule,
+     CustomFormsModule
   ],
   providers: [
     InputService

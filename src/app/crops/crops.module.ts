@@ -7,7 +7,7 @@ import { AddUpdateCropComponent } from './addupdate-component/addupdate-crop.com
 import { ViewCropComponent } from './view-component/view-crop.component';
 import { CropsRoutingModule } from './crops-routing.module';
 import { CropService } from './services/crop.service';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ng2-validation';
 import { DatePickerModule } from 'ng2-datepicker';
 
 @NgModule({

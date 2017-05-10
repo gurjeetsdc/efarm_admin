@@ -17,7 +17,15 @@
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="nf-name">Name</label>
-                            <input autofocus="" type="text" id="nf-name" name="nf-name" class="form-control" [(ngModel)]="input.name" required>
+                            <input autofocus="" type="text" id="name" name="name" class="form-control" #name="ngModel" [(ngModel)]="input.name" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <div class="error-block">
+                                <small *ngIf="name.errors?.required && name.touched" class="text-danger">
+                                    Name is required.
+                                </small>
+                                <small *ngIf="name.errors?.pattern && name.touched" class="text-danger">
+                                    Name is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -36,10 +44,15 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-category">Category</label>
-                            <select id="category" name="category" class="form-control" size="1" [(ngModel)]="input.categoryID" required>
+                            <select id="category1" name="category1" class="form-control" size="1" #category1="ngModel" [(ngModel)]="input.categoryID" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
+                             <div class="error-block">
+                                <small *ngIf="category1.errors?.required && category1.touched" class="text-danger">
+                                    Category is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
