@@ -17,10 +17,10 @@
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                                 <div class="flex">
-                                    <input class="form-control" style="cursor:not-allowed;" name="search" placeholder="Search" type="text">
+                                    <input class="form-control" name="search" (keyup)="search()" [(ngModel)]="searchTerm" placeholder="Search" type="text">
                                     <span class="input-group-btn">
-                                <button class="btn btn-flat" style="cursor:not-allowed;" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
-                                </span>
+                                    <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                    </span>
                                 </div>
                             </form>
                         </div>
@@ -52,9 +52,9 @@
                             <thead>
                                 <tr>
                                     <th width="25%">
-                                        <mfDefaultSorter by="firstname">Name
-                                            <i *ngIf="sortOrder == 'asc'  && sortBy == 'firstname'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                            <i *ngIf="sortOrder == 'desc'  && sortBy == 'firstname'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <mfDefaultSorter by="firstName">Name
+                                            <i *ngIf="sortOrder == 'asc'  && sortBy == 'firstName'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'  && sortBy == 'firstName'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                         </mfDefaultSorter>
                                     </th>
                                     <th width="15%">
@@ -85,14 +85,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr *ngIf="itemsTotal > 0">
-                                    <td colspan="6">{{errMessage}}</td>
-                                </tr> -->
+                                <tr *ngIf="itemsTotal == 0">
+                                    <td colspan="7">No record to display</td>
+                                </tr> 
                                 <tr *ngFor="let user of mf.data">
-                                    <td data-label="Name"><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.firstname}} {{user.lastName}}</a></td>
+                                    <td data-label="Name"><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.firstName}} {{user.lastName}}</a></td>
                                     <td data-label="Email">{{user.email}}</td>
                                     <td data-label="Mobile">{{user.mobile}}</td>
-                                    <td data-label="District">{{user.state}}</td>
+                                    <td data-label="District">{{user.state ? user.state : '-'}}</td>
                                     <td data-label="Registered On">{{user.createdAt | date: 'dd/MM/yyyy'}}</td>
                                     <td data-label="Actions">
                                         <button (click)="editUser(user.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
@@ -102,13 +102,12 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="6">
-                                        <div class="pagination-section">
+                                    <td colspan="7">
+                                        <div class="pagination-section" *ngIf="itemsTotal > 0">
                                             <div class="row-on-page">
-                                               <!--  <label class="label-control">Show</label>
+                                                <label class="label-control">Show</label>
                                                 &nbsp;
-                                                <select class="input-sm" [(ngModel)]="rowsOnPage" (change)="onRowsChange($event)">
-                                                    <option [ngValue]="2">2</option>
+                                                <select class="input-sm" name="itemsOnPage"  [(ngModel)]="itemsOnPage"  (change)="onRowsChange()">
                                                     <option [ngValue]="5">5</option>
                                                     <option [ngValue]="10">10</option>
                                                     <option [ngValue]="25">25</option>
@@ -117,18 +116,16 @@
                                                 </select>
                                                 &nbsp;
                                                 <label class="label-control">entries</label>
-                                                &nbsp; &nbsp; -->
-                                               <!--  <span>Showing {{rowsOnPage < itemsTotal? rowsOnPage:itemsTotal }} of {{itemsTotal}} entries</span>
- -->
-                                           <span>showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>
+                                                    &nbsp; &nbsp;
+                                                <span>Showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>
                                             </div>
                                             <div class="text-right">
-                                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25,50,100]"></mfBootstrapPaginator>   
+                                                <mfBootstrapPaginator></mfBootstrapPaginator>   
                                             </div>
                                             <div style="clear: both;"></div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </div>  
+                                    </td>    
+                                </tr>                            
                             </tfoot>
                         </table>
                     </div>

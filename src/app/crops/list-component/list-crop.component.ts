@@ -109,8 +109,8 @@ export class ListCropComponent implements OnInit {
         }        
     }
 
-    /*get all equipments*/
-    getCrops() {   
+    /*get all Crops*/
+    getCrops(): void {   
         this._cropService.getAllCrops( this.rowsOnPage, this.activePage, this.searchTerm ).subscribe(res => {
             this.data          = res.data.crops;
             this.itemsTotal    = res.data.total;

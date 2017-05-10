@@ -50,13 +50,13 @@
                         <thead>
                             <tr>
 
-                                <th width="25%">
+                                <th width="20%">
                                     <mfDefaultSorter by="name">Crop Name
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'name'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'name'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="15%">Category</th>
+                                <th width="10%">Category</th>
                                 <th width="10%">
                                     <mfDefaultSorter by="price">Offer Price
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'price'" class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -69,10 +69,10 @@
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'quantity'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="15%">Highest Bid</th>
-                                <th width="15%">Area</th>
-                                <th width="15%">Available On</th>
-                                <th width="15%">Ends in</th>
+                                <th width="12%">Highest Bid</th>
+                                <th width="8%">Area</th>
+                                <th width="12%">Available On</th>
+                                <th width="10%">Ends in</th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
@@ -81,7 +81,7 @@
                                 <td colspan="7">{{errMessage}}</td>
                             </tr> -->
                             <tr *ngIf="itemsTotal == 0">
-                                <td colspan="7">No record to display</td>
+                                <td colspan="9">No record to display</td>
                             </tr> 
                             <tr *ngFor="let crop of mf.data">    
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
@@ -101,7 +101,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="7">
+                                <td colspan="9">
                                     <div class="pagination-section" *ngIf="itemsTotal > 0">
                                         <div class="row-on-page">
                                             <label class="label-control">Show</label>

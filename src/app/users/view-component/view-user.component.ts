@@ -13,7 +13,7 @@ export class ViewUserComponent {
     constructor(route: ActivatedRoute, private _router : Router,private _userService: UserService, private _cookieService: CookieService ) { 
         this.userID = route.snapshot.params['id'];
   	    this._userService.get(this.userID).subscribe(res => {
-           this.user = res;
+           this.user = res.data;
            this.isLoading = false;
         },err => {
            this.isLoading = false

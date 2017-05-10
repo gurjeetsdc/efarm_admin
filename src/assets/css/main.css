@@ -631,8 +631,8 @@
  }
  
  .sidebar .nav .nav-item > .nav-link i {
-     bottom: 4px;
-     position: relative;
+    /* bottom: 4px;
+     position: relative;*/
  }
  
  .sidebar-hidden .sidebar .nav .nav-item > .nav-link i {
@@ -814,11 +814,14 @@
  
  .sidebar .nav .nav-item .nav-link span {
      display: inline-block;
-     overflow: hidden;
      text-overflow: ellipsis;
      white-space: nowrap;
      width: 138px;
  }
+
+ .sidebar .nav .nav-item .nav-link i, .sidebar .nav .nav-item .navbar .dropdown-toggle i, .navbar .sidebar .nav .nav-item .dropdown-toggle i {
+    vertical-align: middle;
+}
  
  .sidebar-hidden header.navbar .navbar-brand {
      width: 75px;

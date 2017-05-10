@@ -16,7 +16,7 @@ export class AddUpdateUserComponent {
         this.userID = _activateRouter.snapshot.params['id'];        
         if( this.userID ) {
             this._userService.get(this.userID).subscribe(res => {
-                this.user = res;
+                this.user = res.data;
                 this.isPageLoading = false;
             },err => {
                 this.isPageLoading = false;
@@ -31,6 +31,7 @@ export class AddUpdateUserComponent {
     save() {
         this.isLoading = true;
         if(this.userID) {
+            this.user["username"] = this.user["email"];
             this._userService.update(this.user).subscribe(res => {
                 this.isLoading = false;
                 this._router.navigate(['/users/list']);
@@ -39,6 +40,7 @@ export class AddUpdateUserComponent {
                 this.checkAccessToken(err);
             })
         } else {
+            this.user["username"] = this.user["email"];
             this._userService.add(this.user).subscribe(res => {
                 this.isLoading = false;
                 this._router.navigate(['/users/list']);

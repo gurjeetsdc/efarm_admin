@@ -13,17 +13,18 @@ export class ListUserComponent implements OnInit {
     public data                  = [];
     public totalRecords          = 0;
     public filterQuery           = "";
-    public rowsOnPage            = 5;
+    public rowsOnPage            = 10;
     public sortBy                = "createdAt";
     public sortOrder             = "desc";
     public activePage            = 1;
     public itemsTotal            = 0;
-    
-    public isLoading:boolean     = false;
-    public isPageLoading:boolean = true;
-    public errMessage            = "";
+    public searchTerm            = '';
+    public roles                 = 'U';
+    public itemsOnPage;  
     
     public response:any;
+    public isLoading:boolean     = false;
+    public isPageLoading:boolean = true;
    
     public constructor(private _router: Router, private _userService: UserService, private _cookieService: CookieService ) { 
         
@@ -42,7 +43,8 @@ export class ListUserComponent implements OnInit {
         this.getUsers();        
         this.activePage = 1;
         this.getUsers();
-        // this.changePage(1);
+        
+        this.itemsOnPage = this.rowsOnPage;
     }
 
     public toInt(num: string) {
@@ -58,36 +60,19 @@ export class ListUserComponent implements OnInit {
         this._router.navigate([route]);       
     }
 
-    /* getUsers */
-    getUsers(): void {
-
-        this._userService.getAllUsers( this.rowsOnPage, this.activePage ).subscribe(res => {
-
-            this.data         = res.data.users;
-            this.itemsTotal   = res.data.total;
-
-            if(this.data.length == 0) {this.errMessage = "No record to display";}
-            
-            this.isLoading     = false;
-            this.isPageLoading = false;
-        
-        },err => {
-            
-            this.isLoading     = false;
-            this.isPageLoading = false;
-            
-            this.errMessage = "No record to display";
-            this.checkAccessToken(err);
-       });             
-    }    
+    editUser(userID) {     
+        let route = '/users/edit/'+ userID;
+        this._router.navigate([route]);       
+    } 
     
-    removeUser(userid) {
+    removeUser(userID) {
         if(confirm("Do you want to delete?")) {
             this.isLoading = true;
-            this._userService.delete(userid).subscribe(res => {
+            this._userService.delete(userID).subscribe(res => {
+                this.response  = res;
                 this.isLoading = false;
-                this.removeByAttr(this.data, 'id', userid);
-                this._router.navigate(['/users/list/']);      
+                this.totalRecords = this.data.length;
+                this.removeByAttr(this.data, 'id', userID);
             },err => {
                 this.isLoading = false;
                 this.checkAccessToken(err);
@@ -95,6 +80,7 @@ export class ListUserComponent implements OnInit {
         }
     }
 
+    /*Function use to remove deleted crop from list*/ 
     removeByAttr(arr, attr, value){
         let i = arr.length;
         while(i--){
@@ -106,15 +92,10 @@ export class ListUserComponent implements OnInit {
 
            }
         }
-        if(this.data.length == 0) this.errMessage = "No record to display";
         return arr;
     }
 
-    editUser(userID) {     
-        let route = '/users/edit/'+ userID;
-        this._router.navigate([route]);       
-    } 
-
+    /*This function is use to remove user session if Access token expired. */
     checkAccessToken( err ): void {
         let status     = err.status;
         let statusText = err.statusText;
@@ -127,10 +108,20 @@ export class ListUserComponent implements OnInit {
         }        
     }
 
+    /*Get all Users */
+    getUsers(): void {
+        this._userService.getAllUsers( this.rowsOnPage, this.activePage, this.searchTerm, this.roles ).subscribe(res => {
+            this.data          = res.data.users;
+            this.itemsTotal    = res.data.total;
+            this.isLoading     = false;
+            this.isPageLoading = false;
+        },err => {
+            this.checkAccessToken(err);
+            this.isLoading     = false;
+            this.isPageLoading = false;
+       });             
+    }    
 
-    public onSortOrder(event) {
-        this.getUsers();
-    }
     public onPageChange(event) {
         this.isLoading     = true;
         this.rowsOnPage = event.rowsOnPage;
@@ -138,20 +129,22 @@ export class ListUserComponent implements OnInit {
         this.getUsers();
     }
 
-    changePage( page ) {
-        console.log("showing: ",page)
-        // this.rowsOnPage = event.rowsOnPage;
-        this.activePage = page;
-        this.getUsers();   
+    public onRowsChange( event ): void {
+        this.isLoading  = true;
+        this.rowsOnPage = this.itemsOnPage;
+        this.activePage = 1;
+        this.getUsers();      
     }
 
-    onRowsChange( event ): void {
-        /*this.rowsOnPage = event.rowsOnPage;
-        this.activePage = this.activePage;*/
-        console.log("Changed.")
-        this.rowsOnPage = event.rowsOnPage;
-        this.activePage = event.activePage;
-        
-        this.getUsers();      
+    public onSortOrder(event) {
+        this.getUsers();
+    }
+
+    public search( ) {
+        if( this.searchTerm.length > 3 ){
+            this.getUsers(); 
+        }else if( this.searchTerm.length == 0 ){
+            this.getUsers(); 
+        }
     }
 }
