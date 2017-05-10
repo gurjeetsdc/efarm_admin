@@ -51,11 +51,12 @@
                             <tr>
 
                                 <th width="25%">
-                                    <mfDefaultSorter by="name">Crop 
+                                    <mfDefaultSorter by="name">Crop Name
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'name'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'name'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
+                                <th width="15%">Category</th>
                                 <th width="10%">
                                     <mfDefaultSorter by="price">Offer Price
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'price'" class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -68,10 +69,10 @@
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'quantity'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="15%">Category
-                                </th>
-                                <th width="15%">Seller
-                                </th>
+                                <th width="15%">Highest Bid</th>
+                                <th width="15%">Area</th>
+                                <th width="15%">Available On</th>
+                                <th width="15%">End in</th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
@@ -84,10 +85,14 @@
                             </tr> 
                             <tr *ngFor="let crop of mf.data">    
                                 <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
+                                <td>{{crop.category?.name}}</td>
                                 <td><p><i class="fa fa-rupee"></i> {{crop.price}}</td>
                                 <td>{{crop.quantity}} {{crop.quantityUnit}}</td>
-                                <td>{{crop.category?.name}}</td>
-                                <td>{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : ''}}</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>{{crop.availableFrom?.momentObj  | date: 'dd/MM/yyyy'}}</td>
+                                <td>-</td>
+                                <!-- <td>{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : ''}}</td> -->
                                 <td>                                    
                                     <button (click)="editCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeCrop(crop.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
