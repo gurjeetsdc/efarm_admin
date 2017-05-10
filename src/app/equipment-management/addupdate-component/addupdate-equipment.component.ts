@@ -36,7 +36,9 @@ export class AddUpdateEquipmentComponent {
                             pincode: '',
                             supply_area: '',
                             verified: 'No',
-                            avalibilityperiodUnits: 'Hour'
+                            avalibilityperiodUnits: 'Hour',
+                            variety: '',
+                            payment_method: 'COD'
                         };
 
 
@@ -195,7 +197,9 @@ export class AddUpdateEquipmentComponent {
                             pincode: '',
                             supply_area: '',
                             verified: 'No',
-                            avalibilityperiodUnits: 'Hour'
+                            avalibilityperiodUnits: 'Hour',
+                            variety: '',
+                            payment_method: 'COD'
                         };
     }
 
