@@ -65,7 +65,7 @@
                         <div class="form-group">
                             <label for="availablefrom">Available From</label>
                              <div class="input-group form-control" [ngClass]="{'form-control': equipment.rentSell != 'sell'}">
-                                <ng2-datepicker name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="equipment.availableFrom"  *ngIf="equipment.rentSell != 'sell'"></ng2-datepicker>
+                                <ng2-datepicker placeholder="DD/MM/YYYY" name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="equipment.availableFrom"  *ngIf="equipment.rentSell != 'sell'"></ng2-datepicker>
                                 <input type="number" id="availablefrom" name="availablefrom" class="form-control nopointer" placeholder="" style="pointer-events: none;" *ngIf="equipment.rentSell == 'sell'" [disabled]="equipment.rentSell == 'sell'"  />
                              </div>                          
                         </div>
@@ -240,16 +240,21 @@
                         </div>
                     </div>                    
                 </div>
-                  <div class="row">                    
+                  <div class="row">                                      
                     <div class="col-sm-6">
-                       <div class="form-group has-required">
+                        <div class="form-group  has-required">
                             <label for="companyManufacturer">Company/Manufacturer</label>
-                            <select id="companyManufacturer" name="companyManufacturer" class="form-control" [(ngModel)]="equipment.companyManufacturer" size="1">
+                            <select id="companyManufacturer" name="companyManufacturer" class="form-control" size="1" #companyManufacturer="ngModel" [(ngModel)]="equipment.companyManufacturer" required>
                                 <option value="">Please select</option>
-                                <option value="Manufacturer 1">Manufacturer 1</option>
-                                <option value="Manufacturer 2">Manufacturer 2</option>
-                                <option value="Manufacturer 3">Manufacturer 3</option>
+                                <option *ngFor="let mf of manufacturers" [ngValue]="mf.id">
+                                    {{mf.name}}
+                                </option>
                             </select>
+                            <div class="error-block">
+                                <small *ngIf="companyManufacturer.errors?.required && companyManufacturer.touched" class="text-danger">
+                                    Company/Manufacturer is required.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">

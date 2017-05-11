@@ -17,6 +17,7 @@ import { EquipmentManagementRoutingModule } from './equipment-management-routing
 
 import { DatePickerModule } from 'ng2-datepicker';
 
+
 import { GoogleplaceDirective } from '../shared/directives/googleplaces/googleplaces.directive';
 
 @NgModule({

@@ -100,6 +100,15 @@ export class EquipmentService {
         return this._http.get(this._host +'/user?roles=U', { headers: headers }).map((res:Response) => res.json());
     }
 
+    /*Use to fetch all Manufactures*/
+    getAllManufactures() {
+          
+        let headers = new Headers();        
+        this.token   = this.getAccessToken();
+        
+        headers.append('Authorization', this.token);
+        return this._http.get(this._host +'/manufacturer', { headers: headers }).map((res:Response) => res.json())
+    }
     
     getAccessToken(): string {
         let token           = this._cookieService.get('token');

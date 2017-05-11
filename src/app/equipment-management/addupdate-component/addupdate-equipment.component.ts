@@ -42,9 +42,11 @@ export class AddUpdateEquipmentComponent {
                         };
 
 
-    private allEquipments = [];
-    private category      = [];
-    private sellers:any     = [];
+    private allEquipments     = [];
+    private category          = [];
+    private sellers:any       = [];
+    private manufacturers:any = [];
+    
 
     private equipmentID: any;
     private response:any;
@@ -80,19 +82,25 @@ export class AddUpdateEquipmentComponent {
         }
 
         this._equipmentService.getAllCategories().subscribe( res => { 
-            this.category = res.data; console.log(this.category) 
+            this.category = res.data;
         }, 
         err => {
             this.checkAccessToken(err);
         });
         
         this._equipmentService.getAllUsers().subscribe( res => { 
-            this.sellers = res.data.users;  
-            console.log(this.sellers);
+            this.sellers = res.data.users;              
         }, 
         err => {
             this.checkAccessToken(err);     
         });
+
+        this._equipmentService.getAllManufactures().subscribe( res => { 
+            this.manufacturers = res.data;              
+        }, 
+        err => {
+            this.checkAccessToken(err);     
+        });        
         
          
         /*create years array. */
@@ -101,66 +109,6 @@ export class AddUpdateEquipmentComponent {
             this.years.push(this.currentYear - i);
         }
     }
-
-    getAddress(place: Object) {
-        this.address = place['formatted_address'];
-        
-        let location = place['geometry']['location'];
-        let lat      = location.lat();
-        let lng      = location.lng();
-        
-        let address_components = place['address_components'];
-
-        console.log(place);
-
-        let city     = address_components[2].long_name;
-        let district = address_components[3].long_name;
-        let state    = address_components[4].long_name;
-        let pin      = address_components[5].long_name;
-
-        this.equipment.city     = city;
-        this.equipment.district = district;
-        this.equipment.state    = state;
-        this.equipment.pincode  = pin;
-
-
-
-        let arrayLength = address_components.length;        
-
-        console.log(arrayLength);
-        console.log(address_components);
-
-        switch (new Date().getDay()) {
-            case 0:
-                console.log("Sunday");
-                break;
-            case 1:
-                console.log("Monday");
-                break;
-            case 2:
-                console.log("Tuesday");
-                break;
-            case 3:
-                console.log("Wednesday");
-                break;
-            case 4:
-                console.log("Thursday");
-                break;
-            case 5:
-                console.log("Friday");
-                break;
-            case 6:
-                console.log("Saturday");
-        }
-
-
-
-        
-        console.log("Address lat", lat);
-        console.log("Address lng", lng);
-
-        this.changeDetectorRef.detectChanges();
-    }   
 
     submitEquipment() {
         this.isLoading = true;
