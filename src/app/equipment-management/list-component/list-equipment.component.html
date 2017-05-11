@@ -22,9 +22,9 @@
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                             <div class="flex">
-                                <input class="form-control" name="search" (keyup)="searchEquipment()" [(ngModel)]="searchTerm" placeholder="Search" type="text">
+                                <input class="form-control" name="search" (keyup)="searchEquipment($event)" [(ngModel)]="searchTerm" placeholder="Search" type="text">
                                 <span class="input-group-btn">
-                                <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                <button class="btn btn-flat" id="search-btn" (click)="searchEquipment($event, 'button')" name="search" type="submit"><i class="fa fa-search"></i> </button>
                                 </span>
                             </div>
                             </form>
@@ -51,11 +51,12 @@
                         [mfActivePage]="activePage" 
                         (mfOnPageChange)="onPageChange($event)"
                         [mfIsServerPagination]="true" 
-                        [(mfAmountOfRows)]="itemsTotal">      
+                        [(mfAmountOfRows)]="itemsTotal"
+                        (mfSortOrderChange)="onSortOrder($event)" >      
                         <thead>
                             <tr>
                                 <th width="20%">
-                                    <mfDefaultSorter by="name">Name 
+                                    <mfDefaultSorter by="name" >Name 
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'name'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'name'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>

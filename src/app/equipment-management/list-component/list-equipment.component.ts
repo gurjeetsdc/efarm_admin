@@ -26,6 +26,7 @@ export class ListEquipmentComponent implements OnInit {
     public activePage   = 1;
     public itemsTotal   = 0;
     public searchTerm   = '';
+    public sortTrem     = '';
 
     public itemsOnPage;
 
@@ -55,6 +56,9 @@ export class ListEquipmentComponent implements OnInit {
         this.getEquipments();
 
         this.itemsOnPage = this.rowsOnPage;
+
+        /*set initial sort condition */
+        this.sortTrem = this.sortBy+' '+this.sortOrder;
     }
 
     public toInt(num: string) {
@@ -83,9 +87,11 @@ export class ListEquipmentComponent implements OnInit {
             this._equipmentService.deleteEquipment(equipmentID).subscribe(res => {
                 this.response     = res;
                 this.isLoading    = false;
-                this.totalRecords = this.data.length;
-                // this.data = [];
-                this.removeByAttr(this.data, 'id', equipmentID);   
+                // //this.totalRecords = this.data.length;
+                // this.itemsTotal   = this.itemsTotal - 1;
+                // // this.data = [];
+                // this.removeByAttr(this.data, 'id', equipmentID);   
+                this.getEquipments();
             });  
         }
     }
@@ -119,7 +125,7 @@ export class ListEquipmentComponent implements OnInit {
 
     /*get all equipments*/
     getEquipments() {   
-        this._equipmentService.getAllEquipments( this.rowsOnPage, this.activePage, this.searchTerm ).subscribe(res => {
+        this._equipmentService.getAllEquipments( this.rowsOnPage, this.activePage, this.sortTrem,  this.searchTerm ).subscribe(res => {
             this.data       = res.data.equipments;
             this.itemsTotal = res.data.total;
             this.isLoading     = false;
@@ -149,17 +155,23 @@ export class ListEquipmentComponent implements OnInit {
     }
 
     public onSortOrder(event) {
+        this.sortTrem = this.sortBy+' '+this.sortOrder;
+        this.isLoading  = true;        
         this.getEquipments();
     }
 
-    public searchEquipment( ) {
-        console.log(this.searchTerm);
-
-        if( this.searchTerm.length > 3 ){
-            // this.isLoading  = true;
-            this.getEquipments(); 
-        }else if( this.searchTerm.length == 0 ){
-            // this.isLoading  = true;
+    public searchEquipment( event, element = 'input' ) {
+        
+        if( element == 'input'  ){
+            if(event.keyCode == 13) {
+                this.isLoading  = true;
+                this.activePage = 1;
+                this.getEquipments(); 
+            }
+        }else{
+            
+            this.isLoading  = true;
+            this.activePage = 1;
             this.getEquipments(); 
         }
     }
