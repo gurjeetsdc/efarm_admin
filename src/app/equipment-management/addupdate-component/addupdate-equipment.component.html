@@ -92,15 +92,15 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="seller">Seller</label>
-                            <select id="seller" name="user_id" class="form-control" size="1" [(ngModel)]="equipment.user_id" #user_id="ngModel" required>
+                            <label for="supplier">Supplier</label>
+                            <select id="supplier" name="user_id" class="form-control" size="1" [(ngModel)]="equipment.user_id" #user_id="ngModel" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let seller of sellers" value="{{seller.id}}">
                                     {{seller.username}}
                                 </option> 
                                 <div class="error-block">
                                     <small *ngIf="user_id.errors?.required && user_id.touched" class="text-danger">
-                                        Seller is required.
+                                        Supplier is required.
                                     </small>                                                          
                                 </div>      
                             </select>
@@ -199,6 +199,9 @@
                         <div class="error-block">
                             <small *ngIf="pincode.errors?.required && pincode.touched" class="text-danger">
                                 Pin is required.
+                            </small> 
+                            <small *ngIf="pincode.errors?.max && pincode.touched" class="text-danger">
+                                Pin is invalid.
                             </small>                                                          
                         </div> 
                     </div>
@@ -349,14 +352,14 @@
                             <label for="supplyarea">Supply Area</label>
                             <select id="supplyarea" name="supply_area" [disabled]="equipment.supply_ablity == 'No'" class="disable form-control" [(ngModel)]="equipment.supply_area" size="1">
                                 <option value="">Please select</option>
-                                <option value="withinstate">With In State</option>
-                                <option value="anywhere">Any Where</option>                                
+                                <option value="With In State">With In State</option>
+                                <option value="Anywhere">Anywhere</option>                                
                             </select>
                         </div>
                     </div> 
                     <div class="col-sm-3">
                          <div class="form-group">
-                            <label for="kmrange">Supply Range(km)</label>
+                            <label for="kmrange">Supply Range (km)</label>
                             <input type="number" id="kmrange" [disabled]="equipment.supply_ablity == 'No'" name="kmrange" class="form-control" [(ngModel)]="equipment.kmrange" />
                         </div>
                     </div>                                 

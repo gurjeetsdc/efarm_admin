@@ -52,7 +52,7 @@ export class ListEquipmentComponent implements OnInit {
         
         /*set initial sort condition */
         this.sortTrem = this.sortBy+' '+this.sortOrder;
-                
+
         /*Load data*/
         this.getEquipments();        
         this.activePage = 1;
@@ -87,19 +87,24 @@ export class ListEquipmentComponent implements OnInit {
      
     removeEquipment( equipmentID ) {
         if(confirm("Do you want to delete?")) {
-            console.log(  );
-            console.log(  );
-            // this.isLoading = true;
+            this.isLoading  = true;     
+            this._equipmentService.deleteEquipment(equipmentID).subscribe(res => {
+                this.response     = res;
+                this.isLoading    = false;
+                // //this.totalRecords = this.data.length;
+                // this.itemsTotal   = this.itemsTotal - 1;
+                // // this.data = [];                
+                // this.removeByAttr(this.data, 'id', equipmentID);   
 
-            // this._equipmentService.deleteEquipment(equipmentID).subscribe(res => {
-            //     this.response     = res;
-            //     this.isLoading    = false;
-            //     // //this.totalRecords = this.data.length;
-            //     // this.itemsTotal   = this.itemsTotal - 1;
-            //     // // this.data = [];
-            //     // this.removeByAttr(this.data, 'id', equipmentID);   
-            //     this.getEquipments();
-            // });  
+                let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
+                this.itemsTotal = this.itemsTotal - 1;
+                
+                if( ! (this.itemsTotal >= start) ){
+                   this.activePage = this.activePage -1
+                }
+                /* reload page. */
+                this.getEquipments();
+            });  
         }
     }
 

@@ -68,13 +68,19 @@
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'user.firstName'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="10%">
+                                <th width="15%">
+                                    <mfDefaultSorter by="district" >District
+                                        <i *ngIf="sortOrder == 'asc' && sortBy == 'district'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'district'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="5%">
                                     <mfDefaultSorter by="rentSell">Type
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'rentSell'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'rentSell'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="15%">
+                                <th width="10%">
                                     <mfDefaultSorter by="modelyear">Model Year 
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'modelyear'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'modelyear'" class="fa fa-sort-desc" aria-hidden="true"></i>
@@ -102,6 +108,7 @@
                             <tr *ngFor="let equipment of mf.data">                        
                                 <td><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
                                 <td>{{equipment.user?.firstName ? equipment.user?.firstName : '-'}}</td>                                
+                                <td>{{equipment.district}}</td>
                                 <td>{{equipment.rentSell}}</td>
                                 <td>{{equipment.modelyear}}</td>
                                 <td>{{equipment.quantity}}</td>
@@ -114,7 +121,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="7">
+                                <td colspan="8">
                                     <div class="pagination-section" *ngIf="itemsTotal > 0">
                                         <div class="row-on-page">
                                                 <label class="label-control">Show</label>
