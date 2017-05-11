@@ -101,7 +101,7 @@ export class LandService {
         
         headers.append('Authorization', this._accessToken );
         return this.http.delete(this._host +'/land/'+ landId,  { headers: headers }).map((res:Response) => res.json());
-    }      
+    }    
     
     /*
     *@Description: get seller user list

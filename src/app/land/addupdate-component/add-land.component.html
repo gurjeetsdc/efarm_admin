@@ -128,7 +128,7 @@
                                 <small *ngIf="nfkhasra.errors?.max && nfkhasra.touched" class="text-danger">
                                     Maximum khasra is allow upto 16 digit.
                                 </small>                                                           
-                            </div>
+                         </div>
                     </div>
                 </div>
                     <div class="col-sm-6">
@@ -137,17 +137,7 @@
                      <div class="input-group">
                      
                          <input type="text" id="nfarea" name="nfarea" #nfarea="ngModel" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area" required>
-                         <div class="error-block">
-                                <small *ngIf="nfarea.errors?.required && nfarea.touched" class="text-danger">
-                                    Area is required.
-                                </small>
-                                <small *ngIf="nfarea.errors?.min && nfarea.touched" class="text-danger">
-                                    Minimum offer area should be 1.
-                                </small>                                                          
-                                <small *ngIf="nfarea.errors?.max && nfarea.touched" class="text-danger">
-                                    Maximum offer area is allow upto 16 digit.
-                                </small>                                                           
-                            </div>
+                        
                           <div class="input-group-btn">
                               <select id="select2" name="select2" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.unit" size="1" required>
                                 <option value="">-Units-</option>
@@ -157,7 +147,18 @@
                             </select>
                          </div>
                          
-                       </div>                      
+                       </div>  
+                        <div class="error-block">
+                                <small *ngIf="nfarea.errors?.required && nfarea.touched" class="text-danger">
+                                    Area is required.
+                                </small>
+                                <small *ngIf="nfarea.errors?.min && nfarea.touched" class="text-danger">
+                                    Minimum offer area should be 1.
+                                </small>                                                          
+                                <small *ngIf="nfarea.errors?.max && nfarea.touched" class="text-danger">
+                                    Maximum offer area is allow upto 16 digit.
+                                </small>                                                           
+                            </div>                    
                    </div>
                    </div>
                 </div>
@@ -168,17 +169,7 @@
                             <div class="input-group">
                                 <div class="icnposition"><i class="fa fa-rupee"></i></div>
                                 <input maxlength="10" #nfexpected_price="ngModel"  type="number" id="nfexpected_price" name="nfexpected_price" class="form-control pleft25" [(ngModel)]="land.expected_price" required>
-                                <div class="error-block">
-                                <small *ngIf="nfexpected_price.errors?.required && nfexpected_price.touched" class="text-danger">
-                                    Expected price is required.
-                                </small>
-                                <small *ngIf="nfexpected_price.errors?.min && nfexpected_price.touched" class="text-danger">
-                                    Minimum Expected price should be 1.
-                                </small>                                                          
-                                <small *ngIf="nfexpected_price.errors?.max && nfexpected_price.touched" class="text-danger">
-                                    Maximum Expected price is allow upto 16 digit.
-                                </small>                                                           
-                            </div>
+                               
                                 <div class="input-group-btn">
                               <!-- <select id="select3" [disabled]="land.rentSell == 'Sell'" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" required> -->
                               <select id="select3" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" >
@@ -190,6 +181,17 @@
                             </select>
                          </div>
                             </div>  
+                             <div class="error-block">
+                                <small *ngIf="nfexpected_price.errors?.required && nfexpected_price.touched" class="text-danger">
+                                    Expected price is required.
+                                </small>
+                                <small *ngIf="nfexpected_price.errors?.min && nfexpected_price.touched" class="text-danger">
+                                    Minimum Expected price should be 1.
+                                </small>                                                          
+                                <small *ngIf="nfexpected_price.errors?.max && nfexpected_price.touched" class="text-danger">
+                                    Maximum Expected price is allow upto 16 digit.
+                                </small>                                                           
+                            </div>
 
                             
 
