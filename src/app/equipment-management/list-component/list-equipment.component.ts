@@ -50,15 +50,15 @@ export class ListEquipmentComponent implements OnInit {
             window.scrollTo(0, 0)
         });
         
+        /*set initial sort condition */
+        this.sortTrem = this.sortBy+' '+this.sortOrder;
+                
         /*Load data*/
         this.getEquipments();        
         this.activePage = 1;
         this.getEquipments();
 
-        this.itemsOnPage = this.rowsOnPage;
-
-        /*set initial sort condition */
-        this.sortTrem = this.sortBy+' '+this.sortOrder;
+        this.itemsOnPage = this.rowsOnPage;        
     }
 
     public toInt(num: string) {
@@ -67,6 +67,10 @@ export class ListEquipmentComponent implements OnInit {
 
     public sortByWordLength = (a: any) => {
         return a.city.length;
+    }
+
+    public sortByUser = (seller: any) => {
+        return seller.firstname;
     }
 
     viewEquipment (equipmentID) {
@@ -83,16 +87,19 @@ export class ListEquipmentComponent implements OnInit {
      
     removeEquipment( equipmentID ) {
         if(confirm("Do you want to delete?")) {
-            this.isLoading = true;
-            this._equipmentService.deleteEquipment(equipmentID).subscribe(res => {
-                this.response     = res;
-                this.isLoading    = false;
-                // //this.totalRecords = this.data.length;
-                // this.itemsTotal   = this.itemsTotal - 1;
-                // // this.data = [];
-                // this.removeByAttr(this.data, 'id', equipmentID);   
-                this.getEquipments();
-            });  
+            console.log(  );
+            console.log(  );
+            // this.isLoading = true;
+
+            // this._equipmentService.deleteEquipment(equipmentID).subscribe(res => {
+            //     this.response     = res;
+            //     this.isLoading    = false;
+            //     // //this.totalRecords = this.data.length;
+            //     // this.itemsTotal   = this.itemsTotal - 1;
+            //     // // this.data = [];
+            //     // this.removeByAttr(this.data, 'id', equipmentID);   
+            //     this.getEquipments();
+            // });  
         }
     }
 
