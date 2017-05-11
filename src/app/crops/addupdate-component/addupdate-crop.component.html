@@ -96,17 +96,6 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-district">District</label>
-                            <input type="text" id="nf-district" name="district" #district="ngModel" class="form-control" [(ngModel)]="crop.district" placeholder="" required>
-                            <div class="error-block">
-                                <small *ngIf="district.errors?.required && district.touched" class="text-danger">
-                                    District is required.
-                                </small>                                                          
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group has-required">
                             <label for="state">State</label>
                             <select id="state" name="state"  [(ngModel)]="crop.state" placeholder="" required class="form-control" size="1" #state="ngModel" required>
                                 <option value="">Select State</option>
@@ -153,15 +142,32 @@
                             </div> 
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-district">District</label>
+                            <input type="text" id="nf-district" name="district" #district="ngModel" class="form-control" [(ngModel)]="crop.district" placeholder="" required>
+                            <div class="error-block">
+                                <small *ngIf="district.errors?.required && district.touched" class="text-danger">
+                                    District is required.
+                                </small>                                                          
+                            </div> 
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-pincode">Pin Code </label>
-                            <input type="number" id="nf-pincode" name="pincode" #pincode="ngModel" class="form-control" [(ngModel)]="crop.pincode" max="999999" placeholder="" required>
+                            <input type="number" id="nf-pincode" name="pincode" #pincode="ngModel" class="form-control" [(ngModel)]="crop.pincode" min="1" max="999999" placeholder="" required>
                             <div class="error-block">
                                 <small *ngIf="pincode.errors?.required && pincode.touched" class="text-danger">
                                     Pin Code is required.
+                                </small>                                
+                                <small *ngIf="pincode.errors?.min && pincode.touched" class="text-danger">
+                                    Minimum value should be 1.
+                                </small>                                
+                                <small *ngIf="pincode.errors?.max && pincode.touched" class="text-danger">
+                                    maximum 6 digit allow.
                                 </small>                                                          
                             </div> 
                         </div>
@@ -169,7 +175,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                          <label for="nf-qty">Quantity</label>
-                          <div class="input-group">
+                          <div class="flex">
                               <input type="number" id="quantity" name="quantity" class="form-control" aria-label="Text input with dropdown button" #quantity="ngModel" [(ngModel)]="crop.quantity" min="1" max="9999999999999998" placeholder="" required>
                                <div class="input-group-btn">
                                   <select id="select4" name="select4" class="btn btn-secondary dropdown-toggle" [(ngModel)]="crop.quantityUnit" required>
@@ -197,7 +203,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-price">Offer Price</label>
-                            <div class="relative    ">
+                            <div class="flex">
                             <div class="icnposition"><i class="fa fa-rupee"></i></div>
                             <input type="number" id="nfprice" name="nfprice" class="form-control pleft25" #nfprice="ngModel" [(ngModel)]="crop.price" placeholder="" required="" min="1" max="9999999999999998">
                             </div>
@@ -243,16 +249,15 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="availablefrom">Available From</label>
-                            <div class="input-group">
+                            <div class="input-group form-control">
                                 <ng2-datepicker name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="crop.availableFrom"></ng2-datepicker>
-                                <input type="number" id="availablefrom" name="availablefrom" class="form-control nopointer" placeholder="" style="pointer-events: none;" />
                              </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                          <label for="nf-qty">Availibile Period</label>
-                          <div class="input-group">
+                          <div class="flex">
                               <input type="number" id="availablePeriod" name="availablePeriod" class="form-control" aria-label="Text input with dropdown button" #availablePeriod="ngModel" [(ngModel)]="crop.availablePeriod" min="1" max="9999999999999998" placeholder="">
                                <div class="input-group-btn">
                                   <select id="select5" name="select5" class="btn btn-secondary dropdown-toggle" [(ngModel)]="crop.availableUnit">

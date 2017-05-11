@@ -87,9 +87,13 @@
      border: 1px solid rgba(0, 0, 0, 0.15)
  }
  
- .card-block .form-group .input-group input {
+ .card-block .form-group .flex input {
      border-top-right-radius: 0 !important;
      border-bottom-right-radius: 0 !important;
+ }
+
+  .card-header .input-group-btn{
+     min-width: auto;
  }
  
  .mainarea .card-block .form-group textarea#nf-terms,
@@ -97,6 +101,38 @@
  .mainarea .card-block .form-group textarea#termsConditions {
      color: #3b3b3b !important;
  }
+ .datepicker-calendar-top{
+     background: #ff8c15 !important;
+ }
+ .datepicker-calendar-container{
+     background: #eee !important;
+ }
+.datepicker-calendar-days-container .day.selected, .datepicker-calendar-days-container .day:hover{
+    background: #50b75e !important;
+    border: 1px solid #50b75e !important;
+    color: #fff !important;
+}
+.datepicker-calendar-month-section svg g{
+     fill: #444 !important;
+}
+
+ .datepicker-calendar-top svg g{
+    fill: #ccc !important;
+}
+
+.datepicker-calendar-container .month-title{
+     color: #444 !important;
+}
+
+.datepicker-calendar-container .datepicker-buttons .u-is-secondary{
+    background: #fff !important;
+    color: #939393 !important;
+    border-color: #b0bec5 !important;
+}
+.datepicker-calendar-container .datepicker-buttons .u-is-primary{
+    background-color: #f47100 !important;
+    border: 1px solid #ff8c15 !important;
+}
  
  a {
      color: #3c8dbc;
@@ -226,6 +262,7 @@
  
  .flex {
      display: flex;
+     position: relative;
  }
  
  .box-footer .form-control {
@@ -600,7 +637,7 @@
  }
  
  .card-header .form-control:focus {
-     border-color: #c6c6c6 !important;
+     border-color: #5cb3fd !important;
  }
  
  .mainarea .card-block .form-group .form-control {
@@ -624,6 +661,15 @@
      appearance: none;
      background: url("../img/drop_down.png") no-repeat right 10px center;
      padding: 0.8rem 3rem 0.8rem 0.75rem !important;
+ }
+
+
+ .table>tfoot>tr>td select {
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     background: url("../img/drop_down.png") no-repeat right 10px center;
+     padding: 0.1rem 2rem 0.1rem 0.35rem !important;
  }
  
  select::-ms-expand {
@@ -698,8 +744,11 @@
      border: 1px solid #c2c2c2;
      box-shadow: none;
      height: 38px;
-     border-left: 0;
  }
+
+ .input-group-btn {
+    min-width: auto;
+}
  
  .card-footer {
      padding: 1.55rem 1.25rem !important;
@@ -1482,6 +1531,11 @@
      border-top: 1px solid #f4f4f4;
  }
  
+ .table>tfoot>tr>td{
+   padding-right: 0;
+   padding-left: 0;
+ }
+
  .table>thead>tr>th {
      border-bottom: 2px solid #f4f4f4;
  }
