@@ -97,7 +97,7 @@ export class EquipmentService {
         this.token          = this.getAccessToken();
 
         headers.append('Authorization', this.token );
-        return this._http.get(this._host +'/user', { headers: headers }).map((res:Response) => res.json());
+        return this._http.get(this._host +'/user?roles=U', { headers: headers }).map((res:Response) => res.json());
     }
 
     

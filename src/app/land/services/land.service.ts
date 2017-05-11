@@ -116,7 +116,7 @@ export class LandService {
         this._accessToken          = this.getAccessToken();
         headers.append('Authorization', this._accessToken );
         
-        return this.http.get(this._host +'/user', { headers: headers }).map((res:Response) => res.json());
+        return this.http.get(this._host +'/user?roles=U', { headers: headers }).map((res:Response) => res.json());
     }
 
     getAllCategories() {
