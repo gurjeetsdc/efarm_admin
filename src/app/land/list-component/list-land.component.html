@@ -20,12 +20,12 @@
                     <div class="row">
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
-                            <!-- <div class="flex">
-                                <input class="form-control" name="search" (keyup)="searchLand()" [(ngModel)]="searchTerm" placeholder="Search" type="text">
+                            <div class="flex">
+                                <input class="form-control" name="search" (keyup)="search()" [(ngModel)]="searchTerm" placeholder="Search" type="text">
                                 <span class="input-group-btn">
                                 <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
                                 </span>
-                            </div> -->
+                            </div>
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght">
@@ -64,6 +64,12 @@
                                             <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter> -->
                                 </th>
+                                <th width="20%">Khasra No.
+                                    <!-- <mfDefaultSorter by="area">Area
+                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter> -->
+                                </th>
                                 <th width="20%">Area
                                     <!-- <mfDefaultSorter by="area">Area
                                     <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -92,6 +98,7 @@
                             
                                 <td><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.user?.username}}</a></td>
                                 <td>{{land.location}}</td>
+                                <td>{{land.khasra_no}}</td>
                                 <td>{{land.area}} {{land.unit}}</td>
                                 <td><i class="fa fa-rupee"></i>{{land.expected_price}}</td>
                                 <td>{{land.rentSell}}</td>

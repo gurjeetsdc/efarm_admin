@@ -28,7 +28,7 @@ export class ListLandComponent implements OnInit {
     public itemsOnPage;
 
     public response:any;
-    private isLoading:boolean = true;
+    public isLoading:boolean     = false;
     public documents = [];
     public selectedDocument = [];
     public errMessage = '';
@@ -73,16 +73,12 @@ export class ListLandComponent implements OnInit {
     }
 
     sendUpdateLand( Id ) {    
-        console.log(Id);
-      
+        
        let route = '/land/update/'+Id;
         this._router.navigate([route]);       
     }
 
     removeLand( Id ) {
-
-      console.log(Id);
-      
         if(confirm("Do you want to delete?")) {
             console.log("Implement delete functionality here");
             this.isLoading = true;
@@ -139,26 +135,8 @@ export class ListLandComponent implements OnInit {
               this.isPageLoading = false;
         });
 
-
-/*        this._landService.landlist().subscribe(resdata => {
-            this.data = resdata.data;            
-            this.isLoading = false;
-            this.totalRecords = this.data.length;
-            if(this.data.length == 0) this.errMessage = "No record to display";
-            this.isLoading = false;
-        },err => {
-            this.isLoading = false;
-            this.errMessage = "No record to display";
-       });         
-*/
-
-
-
-
-
     }
 
-    /**/
     public onPageChange(event) {
         this.isLoading     = true;
         this.rowsOnPage = event.rowsOnPage;
@@ -177,9 +155,7 @@ export class ListLandComponent implements OnInit {
         this.getLands();
     }
 
-    public searchLand( ) {
-        console.log(this.searchTerm);
-
+    public search( ) {
         if( this.searchTerm.length > 3 ){
             // this.isLoading  = true;
             this.getLands(); 
