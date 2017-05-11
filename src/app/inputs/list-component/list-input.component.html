@@ -17,9 +17,9 @@
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                                 <div class="flex">
-                                    <input class="form-control" name="search" (keyup)="search()" [(ngModel)]="searchTerm" placeholder="Search" type="text">
+                                    <input class="form-control" name="search" (keyup)="search($event)" [(ngModel)]="searchTerm" placeholder="Search" type="text">
                                     <span class="input-group-btn">
-                                    <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                    <button class="btn btn-flat" id="search-btn" (click)="search($event, 'button')" name="search" type="submit"><i class="fa fa-search"></i> </button>
                                     </span>
                                 </div>
                             </form>
@@ -46,7 +46,7 @@
                             (mfOnPageChange)="onPageChange($event)"
                             [mfIsServerPagination]="true" 
                             [(mfAmountOfRows)]="itemsTotal" 
-                            >
+                            (mfSortOrderChange)="onSortOrder($event)">
                             <thead>
                                 <tr>
                                     <th width="30%">

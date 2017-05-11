@@ -313,7 +313,7 @@
                     </div>
                     <div class="col-sm-3">
                          <div class="form-group has-required">
-                            <label for="kmrange">Supply Range(km)</label>
+                            <label for="kmrange">Supply Range (km)</label>
                             <input type="number" id="nfkmrange" name="nfkmrange" class="form-control" [(ngModel)]="crop.supplyRange" placeholder=""  #nfkmrange="ngModel" [disabled]="crop.supplyAbility == 'No'" min="1" max="9999999999999998" required>
                             <div class="error-block">
                                 <small *ngIf="nfkmrange.errors?.required && nfkmrange.touched" class="text-danger">

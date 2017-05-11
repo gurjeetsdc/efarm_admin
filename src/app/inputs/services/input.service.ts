@@ -12,12 +12,12 @@ export class InputService {
     constructor(private _http: Http, private _cookieService: CookieService) { }
 
     /*Use to fetch all Inputs*/
-  	getAllInputs(rowsOnPage, activePage, search = '') {
+  	getAllInputs(rowsOnPage, activePage, sortTrem , search = '') {
 
   		let headers         = new Headers();        
         this._accessToken   = this.getAccessToken();
         
-        let url = this._host +'/inputs?count='+rowsOnPage+'&page='+activePage+'&search='+search;
+        let url = this._host +'/inputs?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search;;
 
         headers.append('Authorization', this._accessToken);
         return this._http.get(url, { headers: headers }).map((res:Response) => res.json())

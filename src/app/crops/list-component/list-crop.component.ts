@@ -8,7 +8,6 @@ import { CookieService } from 'ngx-cookie';
   templateUrl: './list-crop.component.html',
   styleUrls: ['./list-crop.component.scss']
 })
-
 export class ListCropComponent implements OnInit {
 
     public data                  = [];
@@ -20,6 +19,8 @@ export class ListCropComponent implements OnInit {
     public activePage            = 1;
     public itemsTotal            = 0;
     public searchTerm            = '';
+    public sortTrem              = '';
+
     public itemsOnPage;    
 
     public response:any;
@@ -39,12 +40,15 @@ export class ListCropComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
+        /*set initial sort condition */
+        this.sortTrem = this.sortBy + ' ' + this.sortOrder;         
+
         /*Load data*/
         this.getCrops();        
         this.activePage = 1;
         this.getCrops();   
 
-        this.itemsOnPage = this.rowsOnPage;        
+        this.itemsOnPage = this.rowsOnPage;
     }
 
     public toInt(num: string) {
@@ -109,9 +113,9 @@ export class ListCropComponent implements OnInit {
         }        
     }
 
-    /*get all Crops*/
+    /*Get all Crops*/
     getCrops(): void {   
-        this._cropService.getAllCrops( this.rowsOnPage, this.activePage, this.searchTerm ).subscribe(res => {
+        this._cropService.getAllCrops( this.rowsOnPage, this.activePage, this.sortTrem,  this.searchTerm ).subscribe(res => {
             this.data          = res.data.crops;
             this.itemsTotal    = res.data.total;
             this.isLoading     = false;
@@ -138,14 +142,25 @@ export class ListCropComponent implements OnInit {
     }
 
     public onSortOrder(event) {
+        this.sortTrem = this.sortBy+' '+this.sortOrder;
+        this.isLoading  = true; 
         this.getCrops();
     }
 
-    public search( ) {
-        if( this.searchTerm.length > 3 ){
-            this.getCrops(); 
-        }else if( this.searchTerm.length == 0 ){
+    public search( event, element = 'input' ) {
+        
+        if( element == 'input'  ){
+            if(event.keyCode == 13) {
+                this.isLoading  = true;
+                this.activePage = 1;
+                this.getCrops(); 
+            }
+        }else{
+            
+            this.isLoading  = true;
+            this.activePage = 1;
             this.getCrops(); 
         }
     }
+
 }

@@ -22,9 +22,10 @@ export class ListInputComponent implements OnInit {
     public activePage            = 1;
     public itemsTotal            = 0;
     public searchTerm            = '';
-    public roles                 = 'U';
-    public itemsOnPage;  
-    
+    public sortTrem              = '';
+
+    public itemsOnPage;    
+
     public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
@@ -32,15 +33,19 @@ export class ListInputComponent implements OnInit {
     public constructor(private _router: Router, private _inputService: InputService, private _cookieService: CookieService ) { 
         
     }
+
     ngOnInit(): void {
 
-      this._router.events.subscribe((evt) => {
+        this._router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
             }
             window.scrollTo(0, 0)
         });
 
+        /*set initial sort condition */
+        this.sortTrem = this.sortBy + ' ' + this.sortOrder; 
+          
         /*Load data*/
         this.getInputs();        
         this.activePage = 1;
@@ -67,22 +72,24 @@ export class ListInputComponent implements OnInit {
         this._router.navigate([route]);       
     }
 
-     
+    /* Function use to remove Crop with crop id*/ 
     removeInput( inputID ) {
         if(confirm("Do you want to delete?")) {
-            console.log("Implement delete functionality here");
             this.isLoading = true;
             this._inputService.delete(inputID).subscribe(res => {
                 this.response  = res;
                 this.isLoading = false;
-
-                
+                this.totalRecords = this.data.length;
                 this.removeByAttr(this.data, 'id', inputID);     
+            },err => {
+                this.isLoading = false;
+                this.checkAccessToken(err);
             });  
         }
     } 
 
-     removeByAttr(arr, attr, value){
+    /*Function use to remove deleted crop from list*/ 
+    removeByAttr(arr, attr, value){
         let i = arr.length;
         while(i--){
            if( arr[i] 
@@ -111,7 +118,7 @@ export class ListInputComponent implements OnInit {
 
     /*Get all Users */
     getInputs(): void {
-        this._inputService.getAllInputs( this.rowsOnPage, this.activePage, this.searchTerm ).subscribe(res => {
+        this._inputService.getAllInputs( this.rowsOnPage, this.activePage, this.sortTrem,  this.searchTerm ).subscribe(res => {
             this.data          = res.data.inputs;
             this.itemsTotal    = res.data.total;
             this.isLoading     = false;
@@ -138,16 +145,25 @@ export class ListInputComponent implements OnInit {
     }
 
     public onSortOrder(event) {
+        this.sortTrem = this.sortBy+' '+this.sortOrder;
+        this.isLoading  = true; 
         this.getInputs();
     }
 
-    public search( ) {
-        if( this.searchTerm.length > 3 ){
-            this.getInputs(); 
-        }else if( this.searchTerm.length == 0 ){
+    public search( event, element = 'input' ) {
+        
+        if( element == 'input'  ){
+            if(event.keyCode == 13) {
+                this.isLoading  = true;
+                this.activePage = 1;
+                this.getInputs(); 
+            }
+        }else{
+            
+            this.isLoading  = true;
+            this.activePage = 1;
             this.getInputs(); 
         }
     } 
-
 
 }

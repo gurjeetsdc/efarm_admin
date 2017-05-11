@@ -1,6 +1,6 @@
     <!-- Loader div -->
 <div *ngIf="isLoading" class="overlayloader">
-    <div class="loader"></div>
+    <div class="loader"></div> 
 </div>
 <!-- <div class="crop-wrapper animated fadeIn">       -->
 <div class="crop-wrapper">      
@@ -16,12 +16,12 @@
                     <div class="row">
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
-                            <div class="flex">
-                                <input class="form-control" name="search" (keyup)="search()" [(ngModel)]="searchTerm" placeholder="Search" type="text">
-                                <span class="input-group-btn">
-                                <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
-                                </span>
-                            </div>
+                                <div class="flex">
+                                    <input class="form-control" name="search" (keyup)="search($event)" [(ngModel)]="searchTerm" placeholder="Search" type="text">
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-flat" id="search-btn" (click)="search($event, 'button')" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                    </span>
+                                </div>
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght"> 
@@ -46,7 +46,8 @@
                         [mfActivePage]="activePage" 
                         (mfOnPageChange)="onPageChange($event)"
                         [mfIsServerPagination]="true" 
-                        [(mfAmountOfRows)]="itemsTotal">                                 
+                        [(mfAmountOfRows)]="itemsTotal"
+                        (mfSortOrderChange)="onSortOrder($event)">                                 
                         <thead>
                             <tr>
 
