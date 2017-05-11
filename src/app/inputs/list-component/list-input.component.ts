@@ -1,31 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { InputService } from '../services/input.service';
-import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
-import {DataTableModule} from "angular2-datatable";
+import { CookieService } from 'ngx-cookie';
 
 
 
 @Component({
-  selector: 'app-input-management',
+  selector: 'app-inputs',
   templateUrl: './list-input.component.html',
   styleUrls: ['./list-input.component.scss'],
   providers: [InputService]
 })
 export class ListInputComponent implements OnInit {
 
-    public data                = [];
-    public totalRecords        = 0;
-    public filterQuery         = "";
-    public rowsOnPage          = 10;
-    public sortBy              = "createdAt";
-    public sortOrder           = "desc";
+    public data                  = [];
+    public totalRecords          = 0;
+    public filterQuery           = "";
+    public rowsOnPage            = 10;
+    public sortBy                = "createdAt";
+    public sortOrder             = "desc";
+    public activePage            = 1;
+    public itemsTotal            = 0;
+    public searchTerm            = '';
+    public roles                 = 'U';
+    public itemsOnPage;  
+    
     public response:any;
-    public isLoading:boolean   = true;
-    public documents           = [];
-    public selectedDocument    = [];
-    public err_message         = '';
+    public isLoading:boolean     = false;
+    public isPageLoading:boolean = true;
 
-    public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _inputService: InputService) { 
+    public constructor(private _router: Router, private _inputService: InputService, private _cookieService: CookieService ) { 
         
     }
     ngOnInit(): void {
@@ -37,16 +41,12 @@ export class ListInputComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
-        this._inputService.getAllInputs().subscribe(resInputs => {
-                
-            this.data = resInputs;            
-            this.totalRecords = this.data.length;
-           if(this.data.length == 0) this.err_message = "No record to display";
-            this.isLoading = false;
-        },err => {
-            this.isLoading = false;
-            this.err_message = "No record to display";
-       });        
+        /*Load data*/
+        this.getInputs();        
+        this.activePage = 1;
+        this.getInputs();
+        
+        this.itemsOnPage = this.rowsOnPage;
     }
 
     public toInt(num: string) {
@@ -62,7 +62,7 @@ export class ListInputComponent implements OnInit {
        this._router.navigate([route]);       
     }
 
-    sendUpdateinput( inputID ) {     
+    editInput( inputID ) {     
        let route = '/inputs/edit/'+inputID;
         this._router.navigate([route]);       
     }
@@ -94,6 +94,59 @@ export class ListInputComponent implements OnInit {
            }
         }
         return arr;
+    }
+
+    /*This function is use to remove user session if Access token expired. */
+    checkAccessToken( err ): void {
+        let status     = err.status;
+        let statusText = err.statusText;
+
+        if( (status == 401 && statusText == 'Unauthorized')) {
+            this._cookieService.removeAll();
+            this._router.navigate(['/login', {data: true}]);
+        }else {
+            console.log('Something unexpected happened, please try again later.');
+        }        
+    }
+
+    /*Get all Users */
+    getInputs(): void {
+        this._inputService.getAllInputs( this.rowsOnPage, this.activePage, this.searchTerm ).subscribe(res => {
+            this.data          = res.data.inputs;
+            this.itemsTotal    = res.data.total;
+            this.isLoading     = false;
+            this.isPageLoading = false;
+        },err => {
+            this.checkAccessToken(err);
+            this.isLoading     = false;
+            this.isPageLoading = false;
+       });             
+    }    
+
+    public onPageChange(event) {
+        this.isLoading     = true;
+        this.rowsOnPage = event.rowsOnPage;
+        this.activePage = event.activePage;
+        this.getInputs();
+    }
+
+    public onRowsChange( event ): void {
+        this.isLoading  = true;
+        this.rowsOnPage = this.itemsOnPage;
+        this.activePage = 1;
+        this.getInputs();      
+    }
+
+    public onSortOrder(event) {
+        this.getInputs();
+    }
+
+    public search( ) {
+        if( this.searchTerm.length > 3 ){
+            this.getInputs(); 
+        }else if( this.searchTerm.length == 0 ){
+            this.getInputs(); 
+        }
     } 
 
 

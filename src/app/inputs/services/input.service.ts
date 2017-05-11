@@ -6,19 +6,21 @@ import tsConstants = require('./../../tsconstant');
 @Injectable()
 export class InputService {
 
-    private _host = tsConstants.HOST;
-    private _accessToken = '';
+    private _host           = tsConstants.HOST;
+    private _accessToken    = '';
   
     constructor(private _http: Http, private _cookieService: CookieService) { }
 
     /*Use to fetch all Inputs*/
-  	getAllInputs() {
+  	getAllInputs(rowsOnPage, activePage, search = '') {
 
   		let headers         = new Headers();        
         this._accessToken   = this.getAccessToken();
         
+        let url = this._host +'/inputs?count='+rowsOnPage+'&page='+activePage+'&search='+search;
+
         headers.append('Authorization', this._accessToken);
-		return this._http.get(this._host +'/inputs', { headers: headers }).map((res:Response) => res.json())
+        return this._http.get(url, { headers: headers }).map((res:Response) => res.json())
     }
 
     /*Use to add new Input*/
@@ -68,7 +70,7 @@ export class InputService {
         this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken );
-        return this._http.get(this._host +'/users', { headers: headers }).map((res:Response) => res.json());
+        return this._http.get(this._host +'/user', { headers: headers }).map((res:Response) => res.json());
     }
 
     /*Use to fetch all Manufactures*/

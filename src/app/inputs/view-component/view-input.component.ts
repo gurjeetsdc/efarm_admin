@@ -17,7 +17,7 @@ export class ViewInputComponent {
   	
         if( this.inputID ) {
             this._inputService.get(this.inputID).subscribe( res => {
-                this.input = res;
+                this.input     = res.data;
                 this.isLoading = false;
             }, err => {
                 this.isLoading = false;

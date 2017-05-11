@@ -26,18 +26,20 @@ export class AddUpdateInputComponent {
     public sellers = [];
 
     constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _inputService: InputService, private _cookieService: CookieService ) {
-        this._inputService.getAllCategories().subscribe( res => { this.categories = res; }, err => {});
-        this._inputService.getAllUsers().subscribe( res => { this.sellers = res; }, err => {});
-        this._inputService.getAllManufactures().subscribe( res => { this.manufacturers = res; }, err => {});
+        this._inputService.getAllCategories().subscribe( res => { this.categories = res.data; }, err => {});
+        this._inputService.getAllUsers().subscribe( res => { this.sellers = res.data.users; }, err => {});
+        this._inputService.getAllManufactures().subscribe( res => { this.manufacturers = res.data; }, err => {});
         this.inputID = _activateRouter.snapshot.params['id'];        
 
         if( this.inputID ) {
             this._inputService.get(this.inputID).subscribe( res => {
                 this.isPageLoading = false;
-                this.input = res;
-                this.input.manufacturerID = res.manufacturer.id;
-                if(res.user && res.user.id )this.input.sellerID = res.user.id;
-                if(res.category && res.category.id )this.input.categoryID = res.category.id;
+                if(res.data) {
+                    this.input = res.data;
+                    if(res.data.manufacturer && res.data.manufacturer.id) this.input.manufacturerID = res.data.manufacturer.id;
+                    if(res.data.user && res.data.user.id ) this.input.sellerID = res.data.user.id;
+                    if(res.data.category && res.data.category.id )this.input.categoryID = res.data.category.id;
+                }
             }, err => {
                 this.isPageLoading = false;
                 this.checkAccessToken(err);
@@ -47,7 +49,7 @@ export class AddUpdateInputComponent {
         }
     }
 
-
+    /*If inputID exist then will update existing input otherwise will add new input*/
     save() {
         this.isLoading = true;
         if(this.inputID) {
