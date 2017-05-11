@@ -16,7 +16,7 @@ export class ListInputComponent implements OnInit {
     public data                  = [];
     public totalRecords          = 0;
     public filterQuery           = "";
-    public rowsOnPage            = 10;
+    public rowsOnPage            = 5;
     public sortBy                = "createdAt";
     public sortOrder             = "desc";
     public activePage            = 1;
@@ -78,9 +78,15 @@ export class ListInputComponent implements OnInit {
             this.isLoading = true;
             this._inputService.delete(inputID).subscribe(res => {
                 this.response  = res;
-                this.isLoading = false;
-                this.totalRecords = this.data.length;
-                this.removeByAttr(this.data, 'id', inputID);     
+                this.isLoading = false;  
+                let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
+                this.itemsTotal = this.itemsTotal - 1;
+                
+                if( ! (this.itemsTotal >= start) ){
+                   this.activePage = this.activePage -1
+                }
+                /* reload page. */
+                this.getInputs();     
             },err => {
                 this.isLoading = false;
                 this.checkAccessToken(err);

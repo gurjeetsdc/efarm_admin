@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
-  selector: 'app-crop-management',
+  selector: 'app-crops',
   templateUrl: './list-crop.component.html',
   styleUrls: ['./list-crop.component.scss']
 })
@@ -13,7 +13,7 @@ export class ListCropComponent implements OnInit {
     public data                  = [];
     public totalRecords          = 0;
     public filterQuery           = "";
-    public rowsOnPage            = 10;
+    public rowsOnPage            = 5;
     public sortBy                = "createdAt";
     public sortOrder             = "desc";
     public activePage            = 1;
@@ -75,9 +75,15 @@ export class ListCropComponent implements OnInit {
             this.isLoading = true;
             this._cropService.delete(cropID).subscribe(res => {
                 this.response  = res;
-                this.isLoading = false;
-                this.totalRecords = this.data.length;
-                this.removeByAttr(this.data, 'id', cropID);    
+                this.isLoading = false;  
+                let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
+                this.itemsTotal = this.itemsTotal - 1;
+                
+                if( ! (this.itemsTotal >= start) ){
+                   this.activePage = this.activePage -1
+                }
+                /* reload page. */
+                this.getCrops();
             },err => {
                 this.isLoading = false;
                 this.checkAccessToken(err);
@@ -148,8 +154,7 @@ export class ListCropComponent implements OnInit {
     }
 
     public search( event, element = 'input' ) {
-        
-        if( element == 'input'  ){
+        if( element == 'input' ) {
             if(event.keyCode == 13) {
                 this.isLoading  = true;
                 this.activePage = 1;

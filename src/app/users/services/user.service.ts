@@ -11,12 +11,12 @@ export class UserService {
     constructor(private _http: Http, private _cookieService: CookieService) { }
 
     /*Use to get all Users*/  
-    getAllUsers(rowsOnPage, activePage, search = '',roles) {
+    getAllUsers(rowsOnPage, activePage, sortTrem, search = '',roles) {
 
         let headers         = new Headers();        
         this._accessToken   = this.getAccessToken();
         
-        let url = this._host +'/user?count='+rowsOnPage+'&page='+activePage+'&search='+search+'&roles='+roles;
+        let url = this._host +'/user?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search+'&roles='+roles;
 
         headers.append('Authorization', this._accessToken);
         return this._http.get(url, { headers: headers }).map((res:Response) => res.json())

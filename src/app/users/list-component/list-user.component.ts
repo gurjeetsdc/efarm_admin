@@ -13,18 +13,20 @@ export class ListUserComponent implements OnInit {
     public data                  = [];
     public totalRecords          = 0;
     public filterQuery           = "";
-    public rowsOnPage            = 10;
+    public rowsOnPage            = 5;
     public sortBy                = "createdAt";
     public sortOrder             = "desc";
     public activePage            = 1;
     public itemsTotal            = 0;
     public searchTerm            = '';
-    public roles                 = 'U';
+    public sortTrem              = '';
+    
     public itemsOnPage;  
     
     public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
+    public roles                 = 'U';
    
     public constructor(private _router: Router, private _userService: UserService, private _cookieService: CookieService ) { 
         
@@ -38,6 +40,9 @@ export class ListUserComponent implements OnInit {
             }
             window.scrollTo(0, 0)
         });
+
+        /*set initial sort condition */
+        this.sortTrem = this.sortBy + ' ' + this.sortOrder; 
 
         /*Load data*/
         this.getUsers();        
@@ -70,9 +75,15 @@ export class ListUserComponent implements OnInit {
             this.isLoading = true;
             this._userService.delete(userID).subscribe(res => {
                 this.response  = res;
-                this.isLoading = false;
-                this.totalRecords = this.data.length;
-                this.removeByAttr(this.data, 'id', userID);
+                this.isLoading = false;    
+                let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
+                this.itemsTotal = this.itemsTotal - 1;
+                
+                if( ! (this.itemsTotal >= start) ){
+                   this.activePage = this.activePage -1
+                }
+                /* reload page. */
+                this.getUsers();
             },err => {
                 this.isLoading = false;
                 this.checkAccessToken(err);
@@ -110,7 +121,7 @@ export class ListUserComponent implements OnInit {
 
     /*Get all Users */
     getUsers(): void {
-        this._userService.getAllUsers( this.rowsOnPage, this.activePage, this.searchTerm, this.roles ).subscribe(res => {
+        this._userService.getAllUsers( this.rowsOnPage, this.activePage, this.sortTrem,  this.searchTerm, this.roles ).subscribe(res => {
             this.data          = res.data.users;
             this.itemsTotal    = res.data.total;
             this.isLoading     = false;
@@ -137,13 +148,22 @@ export class ListUserComponent implements OnInit {
     }
 
     public onSortOrder(event) {
+        this.sortTrem = this.sortBy+' '+this.sortOrder;
+        this.isLoading  = true; 
         this.getUsers();
     }
 
-    public search( ) {
-        if( this.searchTerm.length > 3 ){
-            this.getUsers(); 
-        }else if( this.searchTerm.length == 0 ){
+    public search( event, element = 'input' ) {
+        if( element == 'input' ) {
+            if(event.keyCode == 13) {
+                this.isLoading  = true;
+                this.activePage = 1;
+                this.getUsers(); 
+            }
+        }else{
+            
+            this.isLoading  = true;
+            this.activePage = 1;
             this.getUsers(); 
         }
     }
