@@ -90,8 +90,8 @@
             <div class="row">
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-green">
-                        <div class="inner" title="Crops" (click)="layout('crop')" [ngClass]="{'active': active == 'crop'}" [routerLink]="['/crops/list']">
+                    <div class="small-box bg-green" (click)="layout('crops')" [ngClass]="{'active': active == 'crops'}" [routerLink]="['/crops/list']">
+                        <div class="inner" title="Crops">
                           <p>Crops</p>
                         </div>
                         <div class="icon">                           
@@ -102,8 +102,8 @@
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-aqua">
-                        <div class="inner" title="Inputs" (click)="layout('input')" [ngClass]="{'active': active == 'input'}" [routerLink]="['/inputs/list']">
+                    <div class="small-box bg-aqua" (click)="layout('inputs')" [ngClass]="{'active': active == 'inputs'}" [routerLink]="['/inputs/list']">
+                        <div class="inner" title="Inputs">
                             <p>Inputs</p>
                         </div>
                         <div class="icon">
@@ -114,8 +114,8 @@
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner" title="Equipments" (click)="layout('equipment')" [ngClass]="{'active': active == 'equipment'}" [routerLink]="['/equipment/list']">
+                    <div class="small-box bg-red" (click)="layout('equipment')" [ngClass]="{'active': active == 'equipment'}" [routerLink]="['/equipment/list']">
+                        <div class="inner" title="Equipments">
                             <p>Equipments</p>
                         </div>
                         <div class="icon">
@@ -126,8 +126,8 @@
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-yellow">
-                        <div class="inner" title="Lands" (click)="layout('land')" [ngClass]="{'active': active == 'land'}" [routerLink]="['/land/list']">
+                    <div class="small-box bg-yellow" (click)="layout('land')" [ngClass]="{'active': active == 'land'}" [routerLink]="['/land/list']">
+                        <div class="inner" title="Lands">
                           <p>Lands</p>
                         </div>
                         <div class="icon">
@@ -153,7 +153,7 @@
 
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6">
-                    <div class="small-box bg-teal" (click)="layout('user')" [ngClass]="{'active': active == 'user'}" [routerLink]="['/users/list']">
+                    <div class="small-box bg-teal" (click)="layout('users')" [ngClass]="{'active': active == 'users'}" [routerLink]="['/users/list']">
                         <div class="inner" title="Users">
                             <p>Users</p>
                         </div>

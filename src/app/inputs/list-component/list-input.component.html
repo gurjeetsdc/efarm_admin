@@ -72,12 +72,12 @@
                                     <td colspan="9">No record to display</td>
                                 </tr>
                                 <tr *ngFor="let input of mf.data">
-                                    <td><a href="javascript:void(0);" (click)="viewInput(input.id)">{{input.name}}</a></td>
-                                    <td>{{input.category?.name}}</td>
-                                    <td>{{input.manufacturer?.name}}</td>
-                                    <td><i class="fa fa-rupee"></i> {{input.price}}</td>
-                                    <td>{{input.user?.username}}</td>
-                                    <td>
+                                    <td data-label="Name"><a href="javascript:void(0);" (click)="viewInput(input.id)">{{input.name}}</a></td>
+                                    <td data-label="Category">{{input.category?.name}}</td>
+                                    <td data-label="Manufacturer">{{input.manufacturer?.name}}</td>
+                                    <td data-label="Price"><i class="fa fa-rupee"></i> {{input.price}}</td>
+                                    <td data-label="Seller">{{input.user?.username}}</td>
+                                    <td data-label="Actions">
                                         <button (click)="editInput(input.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                         <button (click)="removeInput(input.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>
                                     </td>

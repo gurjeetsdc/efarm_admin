@@ -11,10 +11,8 @@ export class FullLayoutComponent implements OnInit {
 
   public disabled: boolean           = false;
   public status: {isopen: boolean}   = {isopen: false};
-  public user:Object                 = {};
   public active;
   constructor(private router : Router, private _route: ActivatedRoute, private _cookieService: CookieService ) { 
-    this.user = JSON.parse(localStorage.getItem("user"));
     this.active = this._route.snapshot["_urlSegment"].segments[0].path;
   }
 

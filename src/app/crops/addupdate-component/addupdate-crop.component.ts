@@ -20,7 +20,8 @@ export class AddUpdateCropComponent {
         supplyAbility:'No',
         quantityUnit:'Kg',
         availableUnit : 'Days',
-        verified: 'No'
+        verified: 'No',
+        state:''
     };
 
     public isLoading       = false;

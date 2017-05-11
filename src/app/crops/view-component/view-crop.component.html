@@ -29,7 +29,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-password">Seller</label>
-							<p>{{crop.seller ? crop.seller?.first_name ? crop.seller?.first_name + ' ' + crop.seller?.last_name : crop.seller?.username : ''}}</p>
+							<p>{{crop.seller ? crop.seller?.first_name ? crop.seller?.first_name + ' ' + crop.seller?.last_name : crop.seller?.username : '-'}}</p>
                         </div>
                     </div>
                 </div>
@@ -40,12 +40,48 @@
 							<p>{{crop.category?.name}}</p>
                         </div>
                     </div>
-                    <!-- <div class="col-sm-6">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-variety">Variety</label>
-                            <p>{{crop.variety}}</p>
+                            <p>{{crop.variety ? crop.variety :'-'}}</p>
                         </div>
-                    </div> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Address</label>
+                            <p>{{crop.address}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">City</label>
+                            <p>{{crop.city}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">District</label>
+                            <p>{{crop.district}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">State</label>
+                            <p>{{crop.state}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Pin Code</label>
+                            <p>{{crop.pincode}}</p>
+                        </div>
+                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-price">Quantity</label>
@@ -71,13 +107,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-size">Available From</label>
-							<p>{{crop.availableFrom?.momentObj  | date: 'dd/MM/yyyy'}}</p>
+							<p>{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf="!crop.availableFrom?.momentObj">-</span></p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-availibility">Availibility Period</label>
-                            <p>{{crop.availablePeriod ? crop.availablePeriod : '-'}} {{crop.availableUnit}}</p>
+                            <p>{{crop.availablePeriod ? crop.availablePeriod : '-'}} {{crop.availablePeriod ? crop.availableUnit : ''}}</p>
                         </div>
                     </div>
                 </div>

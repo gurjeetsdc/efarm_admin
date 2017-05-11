@@ -1,4 +1,4 @@
-<!-- Loader div -->
+    <!-- Loader div -->
 <div *ngIf="isLoading" class="overlayloader">
     <div class="loader"></div>
 </div>
@@ -72,7 +72,7 @@
                                 <th width="12%">Highest Bid</th>
                                 <th width="8%">Area</th>
                                 <th width="12%">Available On</th>
-                                <th width="10%">Ends in</th>
+                                <th width="10%">Seller</th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
@@ -84,16 +84,15 @@
                                 <td colspan="9">No record to display</td>
                             </tr> 
                             <tr *ngFor="let crop of mf.data">    
-                                <td><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
-                                <td>{{crop.category?.name}}</td>
-                                <td><p><i class="fa fa-rupee"></i> {{crop.price}}</td>
-                                <td>{{crop.quantity}} {{crop.quantityUnit}}</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>{{crop.availableFrom?.momentObj  | date: 'dd/MM/yyyy'}}</td>
-                                <td>-</td>
-                                <!-- <td>{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : ''}}</td> -->
-                                <td>                                    
+                                <td data-label="Crop Name"><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
+                                <td data-label="Category">{{crop.category?.name}}</td>
+                                <td data-label="Offer Price"><p><i class="fa fa-rupee"></i> {{crop.price}}</td>
+                                <td data-label="Qty.">{{crop.quantity}} {{crop.quantityUnit}}</td>
+                                <td data-label="Highest Bid">-</td>
+                                <td data-label="Area">-</td>
+                                <td data-label="Available On">{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf="!crop.availableFrom?.momentObj">-</span></td>
+                                <td data-label="Seller">{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : '-'}}<br>{{crop.seller ? crop.seller?.state ? '(' + crop.seller?.state + ')' : '' : ''}}</td>
+                                <td data-label="Actions">                                    
                                     <button (click)="editCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeCrop(crop.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
