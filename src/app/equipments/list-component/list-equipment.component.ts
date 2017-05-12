@@ -74,13 +74,13 @@ export class ListEquipmentComponent implements OnInit {
     }
 
     viewEquipment (equipmentID) {
-        let route = '/equipment/list/'+equipmentID;
+        let route = '/equipments/list/'+equipmentID;
         this._router.navigate([route]);       
     }
 
     sendUpdateEquipment( equipmentID ) {     
         console.log(equipmentID);   
-        let route = '/equipment/edit/'+equipmentID;
+        let route = '/equipments/edit/'+equipmentID;
         this._router.navigate([route]);       
     }
 
@@ -175,11 +175,11 @@ export class ListEquipmentComponent implements OnInit {
     public searchEquipment( event, element = 'input' ) {
         
         if( element == 'input'  ){
-            if(event.keyCode == 13) {
+            if(event.keyCode == 13 || this.searchTerm == '') {
                 this.isLoading  = true;
                 this.activePage = 1;
                 this.getEquipments(); 
-            }
+            }           
         }else{
             
             this.isLoading  = true;

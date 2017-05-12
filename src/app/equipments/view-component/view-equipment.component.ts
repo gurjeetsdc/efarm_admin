@@ -31,7 +31,7 @@ export class ViewEquipmentComponent {
     }
 
     editEquipment( equipmentID ) {        
-        let route = '/equipment/edit/'+equipmentID;
+        let route = '/equipments/edit/'+equipmentID;
         this._router.navigate([route]);       
     }   
 

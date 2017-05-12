@@ -13,7 +13,7 @@ import { ViewEquipmentComponent } from './view-component/view-equipment.componen
 import { AddUpdateEquipmentComponent } from './addupdate-component/addupdate-equipment.component';
 
 
-import { EquipmentManagementRoutingModule } from './equipment-management-routing.module';
+import { EquipmentsRoutingModule } from './equipments-routing.module';
 
 import { DatePickerModule } from 'ng2-datepicker';
 
@@ -22,7 +22,7 @@ import { GoogleplaceDirective } from '../shared/directives/googleplaces/googlepl
 
 @NgModule({
     imports: [
-        EquipmentManagementRoutingModule,
+        EquipmentsRoutingModule,
         CommonModule,
         NG2DataTableModule,
         CustomFormsModule,
@@ -35,4 +35,4 @@ import { GoogleplaceDirective } from '../shared/directives/googleplaces/googlepl
         GoogleplaceDirective           
     ]
 })
-export class EquipmentManagementModule { }
+export class EquipmentsModule { }

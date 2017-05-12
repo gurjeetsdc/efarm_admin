@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="availablefrom">Available From</label>
+                            <label for="availablefrom">Available From (DD/MM/YYYY)</label>
                              <div class="input-group form-control" [ngClass]="{'form-control': equipment.rentSell != 'sell'}">
                                 <ng2-datepicker placeholder="DD/MM/YYYY" name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="equipment.availableFrom"  *ngIf="equipment.rentSell != 'sell'"></ng2-datepicker>
                                 <input type="number" id="availablefrom" name="availablefrom" class="form-control nopointer" placeholder="" style="pointer-events: none;" *ngIf="equipment.rentSell == 'sell'" [disabled]="equipment.rentSell == 'sell'"  />
@@ -428,7 +428,7 @@
            
         </div>
          <div class="card-footer">                       
-                    <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/equipment/list']"> Cancel</button>
+                    <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/equipments/list']"> Cancel</button>
                     <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addEquipmentForm.valid"  [class.disabled]="isClickedOnce"  (click)="isClickedOnce = true">{{action == 'Add' ? 'Save' : 'Update'}}</button>
                 </div> 
                 </form>

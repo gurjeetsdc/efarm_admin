@@ -78,4 +78,4 @@ const routes: Routes = [
     PaginationModule    
   ]
 })
-export class EquipmentManagementRoutingModule {}
+export class EquipmentsRoutingModule {}

@@ -41,8 +41,8 @@ export const routes: Routes = [
         loadChildren: './inputs/inputs.module#InputsModule'  
       },
       {
-        path: 'equipment',
-        loadChildren: './equipment-management/equipment-management.module#EquipmentManagementModule'
+        path: 'equipments',
+        loadChildren: './equipments/equipments.module#EquipmentsModule'
       },
       {
         path: 'land',

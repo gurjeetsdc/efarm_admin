@@ -38,7 +38,14 @@ export class AddUpdateEquipmentComponent {
                             verified: 'No',
                             avalibilityperiodUnits: 'Hour',
                             variety: '',
-                            payment_method: 'COD'
+                            payment_method: 'COD',
+                            availableFrom: {
+                                    "day" : null,
+                                    "month" : null,
+                                    "year" : null,
+                                    "formatted" : "DD/MM/YYYY",
+                                    "momentObj" : "2017-05-04T18:30:00.000Z"
+                                }
                         };
 
 
@@ -147,7 +154,14 @@ export class AddUpdateEquipmentComponent {
                             verified: 'No',
                             avalibilityperiodUnits: 'Hour',
                             variety: '',
-                            payment_method: 'COD'
+                            payment_method: 'COD',
+                            availableFrom: {
+                                    "day" : null,
+                                    "month" : null,
+                                    "year" : null,
+                                    "formatted" : "DD/MM/YYYY",
+                                    "momentObj" : "2017-05-04T18:30:00.000Z"
+                                }
                         };
     }
 
@@ -162,7 +176,7 @@ export class AddUpdateEquipmentComponent {
             this.showMessage = true;
             // this.equipment   = {};
             this.clearEquipment();
-            this._router.navigate(['/equipment/list', {data: "success"} ]);
+            this._router.navigate(['/equipments/list', {data: "success"} ]);
             console.log(this.response)
         },
         err => {
@@ -184,7 +198,7 @@ export class AddUpdateEquipmentComponent {
             
 
             this.clearEquipment();            
-            this._router.navigate(['/equipment/list', {data: "success"} ]);
+            this._router.navigate(['/equipments/list', {data: "success"} ]);
         },
         err =>{
             this.checkAccessToken(err);
