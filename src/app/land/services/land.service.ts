@@ -12,13 +12,8 @@ export class LandService {
   private _accessToken = '';
     constructor(private http: Http, private _cookieService: CookieService) { }
 
-    /*
-    *@Description: Land listing method
-    *@Param: no parameter pass
-    *@return: Multiple json array
-    *@Author: Rohitk.kumar
-    */
-    landlist(rowsOnPage, activePage, search = '') {
+    /**@Description: Land listing method**/
+    landlist(rowsOnPage, activePage, sortTerm , search = '') {
         
         let headers = new Headers();        
         let urlSearchParams = new URLSearchParams();
@@ -26,19 +21,14 @@ export class LandService {
 
         headers.append('Authorization', this._accessToken);
 
-        let url = this._host +'/land?count='+rowsOnPage+'&page='+activePage+'&search='+search;
+        let url = this._host +'/land?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTerm+'&search='+search;
 
         
         //let body = urlSearchParams.toString()
     return this.http.get(url, { headers: headers }).map((res:Response) => res.json())
     }
 
-    /*
-    *@Description: land save data method
-    *@Param: land form unicode data post
-    *@return: success/fail
-    *@Author: Rohitk.kumar
-    */
+    /**@Description: land save data method*/
     landadd(land) {
       console.log("inside land add");
 
@@ -50,12 +40,7 @@ export class LandService {
     return this.http.post(this._host +'/land', land, { headers: headers }).map((res:Response) => res.json())
     }
     
-    /*
-    *@Description: land detail info method
-    *@Param: land id param
-    *@return: land detail data
-    *@Author: Rohitk.kumar
-    */
+    /**@Description: land detail info method**/
     getLand(land) {
       
         let headers = new Headers();
@@ -68,12 +53,7 @@ export class LandService {
     return this.http.get(this._host +'/land/'+ land, { headers: headers }).map((res:Response) => res.json())
     }
 
-    /*
-    *@Description: update land info method
-    *@Param: land id param and land data
-    *@return: update success/fail 
-    *@Author: Rohitk.kumar
-    */
+    /**@Description: update land info method**/
     updateLand(land) {
 
         let body            = {};
@@ -87,12 +67,7 @@ export class LandService {
     }
 
 
-    /*
-    *@Description: update land info method
-    *@Param: land id param and Land( data
-    *@return: update success/fail 
-    *@Author: Rohitk.kumar
-    */
+    /**@Description: update land info method**/
     deleteLand( landId ) {
         
         let headers         = new Headers();
@@ -103,12 +78,7 @@ export class LandService {
         return this.http.delete(this._host +'/land/'+ landId,  { headers: headers }).map((res:Response) => res.json());
     }    
     
-    /*
-    *@Description: get seller user list
-    *@Param: nothing
-    *@return: seller user list
-    *@Author: Rohitk.kumar
-    */
+    /**@Description: get seller user list**/
     getAllUsers() {
           
         let headers         = new Headers();
@@ -119,6 +89,7 @@ export class LandService {
         return this.http.get(this._host +'/user?roles=U', { headers: headers }).map((res:Response) => res.json());
     }
 
+    /**get category list from category table . this will save as foreign key**/
     getAllCategories() {
           
         let headers         = new Headers();
@@ -130,6 +101,7 @@ export class LandService {
         return this.http.get(this._host +'/category', { headers: headers }).map((res:Response) => res.json());
     }
 
+    /**Check access token which saved in cookie here**/
     getAccessToken(): string {
         let token           = this._cookieService.get('token');
         return 'Bearer ' + token;

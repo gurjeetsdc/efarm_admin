@@ -61,7 +61,6 @@ export class AddLandComponent {
             this.response    = res;
             this.showMessage = true;
             this._router.navigate(['/land/list', {data: "success"} ]);
-            console.log(this.response)
         });      
       
     }

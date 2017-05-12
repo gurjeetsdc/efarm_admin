@@ -173,15 +173,15 @@ export class ListEquipmentComponent implements OnInit {
     }
 
     public searchEquipment( event, element = 'input' ) {
-        
         if( element == 'input'  ){
             if(event.keyCode == 13 || this.searchTerm == '') {
+                this.searchTerm = this.searchTerm.trim();
                 this.isLoading  = true;
                 this.activePage = 1;
                 this.getEquipments(); 
             }           
         }else{
-            
+            this.searchTerm = this.searchTerm.trim();
             this.isLoading  = true;
             this.activePage = 1;
             this.getEquipments(); 

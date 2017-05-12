@@ -16,13 +16,7 @@
                 </div>
                 
                 <div class="row">
-                    <!-- <div class="col-sm-6">
-                        <div class="form-group  has-required">
-                            <label for="nf-name">Owner Name</label>
-                            <input autofocus=""  type="text" id="nf-name" name="nf-name" class="form-control"  [(ngModel)]="land.name" required>
-                        </div>
-                    </div> -->
-
+                  
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="seller">Seller</label>
@@ -45,7 +39,7 @@
                            
                             <div class="form-group pull-left">
                                 <div class="radio_button">                     
-                                    <input type="radio" name="rentSell" class="" id="rentSell" value="Sell"  [(ngModel)]="land.rentSell" (change)="land.avail_date = '';land.periods='';" required>
+                                    <input type="radio" name="rentSell" class="" id="rentSell" value="Sell" (click)="land.avail_date={};land.periods=''" [(ngModel)]="land.rentSell" required>
                                     <label for="rentSell">Sell</label>
                                 </div>
                             </div>
@@ -55,21 +49,21 @@
                 <div class="row"  >
                     <div class="col-sm-6">
                        <div class="form-group">
-                           <label for="nf-password">Available Date</label>
-                             <div class="input-group form-control">
-                              <ng2-datepicker [options]="options" id="nfavail_date" name="nfavail_date" [(ngModel)]="land.avail_date" ></ng2-datepicker>
+                           <label for="avail_date">Available Date</label>
+                             <div class="input-group form-control" [ngClass]="{'form-control': land.rentSell != 'Sell'}">
+                              
+                              <ng2-datepicker placeholder="DD/MM/YYYY" name="date" [options]="options" id="nfavail_date" name="nfavail_date" [(ngModel)]="land.avail_date"  *ngIf="land.rentSell != 'Sell'"></ng2-datepicker>
+                                <input type="number" id="avail_date" name="avail_date" class="form-control nopointer" placeholder="" style="pointer-events: none;" *ngIf="land.rentSell == 'Sell'" [disabled]="land.rentSell == 'Sell'"  />
                             </div>
                        </div>
-
                    </div>
-                
                     <div class="col-sm-6">
                         <div class="form-group">
-                                <label for="nf-price">Periods</label>
+                                <label for="periods">Periods</label>
                          <div class="flex">
-                            <input type="number" id="nf-periods" name="nf-periods" class="form-control pleft25" [(ngModel)]="land.periods" >
+                            <input type="number" id="nf-periods" [disabled]="land.rentSell == 'Sell'" name="nf-periods" class="form-control pleft25" [(ngModel)]="land.periods" >
                           <div class="input-group-btn">
-                              <select id="select3" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.periodsunit" size="1">
+                              <select id="select3"  [disabled]="land.rentSell == 'Sell'" name="select3" class="disable btn btn-secondary dropdown-toggle"  [(ngModel)]="land.periodsunit" size="1">
                                 <option value="">-Units-</option>
                                 <option value="Day">Day</option>
                                 <option value="Week">Week</option>
@@ -77,10 +71,9 @@
                                 <option value="Year">Year</option>
                             </select>
                          </div>
-                       </div>  
-
-                            </div>
+                        </div>  
                         </div>
+                       </div>
                 </div>
 
                 <div class="row">
@@ -210,7 +203,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-termsConditions">Terms & Conditions</label>
-                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="land.term_condition" rows="4" [disabled]="true"></textarea>
+                            <textarea type="text" id="nf-termsConditions" name="nf-termsConditions" class="form-control" [(ngModel)]="land.term_condition" rows="4" ></textarea>
                         </div>
                     </div>
                 </div>

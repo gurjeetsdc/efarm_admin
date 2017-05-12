@@ -21,9 +21,10 @@
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                             <div class="flex">
-                                <input class="form-control" name="search" (keyup)="search()" [(ngModel)]="searchTerm" placeholder="Search" type="text">
+                                <!-- <input class="form-control" name="search" (keyup)="search()" [(ngModel)]="searchTerm" placeholder="Search" type="text"> -->
+                                <input class="form-control" name="search" [(ngModel)]="searchTerm"   placeholder="Search" type="text">
                                 <span class="input-group-btn">
-                                <button class="btn btn-flat" id="search-btn" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                <button class="btn btn-flat" id="search-btn" (click)="search($event, 'button')" name="search" type="submit"><i class="fa fa-search"></i> </button>
                                 </span>
                             </div>
                             </form>
@@ -49,61 +50,63 @@
                         [mfActivePage]="activePage" 
                         (mfOnPageChange)="onPageChange($event)"
                         [mfIsServerPagination]="true" 
-                        [(mfAmountOfRows)]="itemsTotal">
+                        [(mfAmountOfRows)]="itemsTotal"
+                        (mfSortOrderChange)="onSortOrder($event)" >
                         <thead>
                             <tr>
                                 <th width="30%">Owner Name
-                                <!--<mfDefaultSorter by="name">Owner Name
-                                 <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                        <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                </mfDefaultSorter> -->
+                                <!-- <mfDefaultSorter by="name">Owner Name
+                                 <i *ngIf="sortOrder == 'asc' && sortBy == 'user.firstName'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                 <i *ngIf="sortOrder == 'desc' && sortBy == 'user.firstName'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                </mfDefaultSorter>  -->
                                 </th>
-                                <th width="20%">Location
-                                    <!-- <mfDefaultSorter by="location">Location
+                                <!-- <th width="20%">
+                                    <mfDefaultSorter by="location">Location
+                                     <i *ngIf="sortOrder == 'asc' && sortBy == 'location'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                     <i *ngIf="sortOrder == 'desc' && sortBy == 'location'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th> -->
+                                <th width="20%">
+                                    <mfDefaultSorter by="area">Khasra No.
+                                     <i *ngIf="sortOrder == 'asc'  && sortBy == 'khasra_no'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                     <i *ngIf="sortOrder == 'desc'  && sortBy == 'khasra_no'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <!--<th width="20%">Area
+                                     <mfDefaultSorter by="area">Area
                                     <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                             <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter> -->
+                                    </mfDefaultSorter>
+                                </th> -->
+                                <th width="15%">
+                                    <mfDefaultSorter by="expected_price">Expected Price
+                                    <i *ngIf="sortOrder == 'asc'  && sortBy == 'expected_price'"  class="fa fa-sort-asc" aria-hidden="true"></i>
+                                    <i *ngIf="sortOrder == 'desc'  && sortBy == 'expected_price'"  class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
                                 </th>
-                                <th width="20%">Khasra No.
-                                    <!-- <mfDefaultSorter by="area">Area
-                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter> -->
-                                </th>
-                                <th width="20%">Area
-                                    <!-- <mfDefaultSorter by="area">Area
-                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter> -->
-                                </th>
-                                <th width="15%">Expected price
-                                    <!-- <mfDefaultSorter by="expected_price">Expected price <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter> -->
-                                </th>
-                                <th width="20%">Land For
-                                    <!-- <mfDefaultSorter by="rentSell">Land For
-                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter> -->
+                                <th width="20%">
+                                    <mfDefaultSorter by="rentSell">Land For
+                                     <i *ngIf="sortOrder == 'asc' && sortBy == 'rentSell'"  class="fa fa-sort-asc" aria-hidden="true"></i>
+                                     <i *ngIf="sortOrder == 'desc' && sortBy == 'rentSell'"  class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
                                 </th>
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
                         <tbody>
-                           <tr *ngIf='errMessage'>
-                               <td colspan="6">{{errMessage}}</td>
-                            </tr>
+                           <tr *ngIf="itemsTotal == 0">
+                                <td colspan="5">No record to display</td>
+                            </tr>  
                             <tr *ngFor="let land of mf.data">                        
                             
-                                <td><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.user?.username}}</a></td>
-                                <td>{{land.location}}</td>
-                                <td>{{land.khasra_no}}</td>
-                                <td>{{land.area}} {{land.unit}}</td>
-                                <td><i class="fa fa-rupee"></i>{{land.expected_price}}</td>
-                                <td>{{land.rentSell}}</td>
+                                <td data-label="Owner Name"><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.user?.firstName}} {{land.user?.lastName}}</a></td>
+                                <!-- <td>{{land.location}}</td> -->
+                                <td data-label="khasra No.">{{land.khasra_no}}</td>
+                                <!-- <td>{{land.area}} {{land.unit}}</td> -->
+                                <td data-label="Expected Price"><i class="fa fa-rupee"></i>{{land.expected_price}}</td>
+                                <td data-label="Land For">{{land.rentSell}}</td>
 
-                                <td>                                    
+                                <td data-label="Actions">                                    
                                     <button (click)="sendUpdateLand(land.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeLand(land.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
@@ -111,7 +114,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="7">
+                                <td colspan="5">
                                     <div class="pagination-section" *ngIf="itemsTotal > 0">
                                         <div class="row-on-page">
                                                 <label class="label-control">Show</label>
