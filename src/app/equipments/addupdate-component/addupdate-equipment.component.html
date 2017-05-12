@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="availablefrom">Available From </label>
+                            <label for="availablefrom">Available From (dd/mm/yyyy)</label>
                              <div class="input-group form-control" [ngClass]="{'form-control': equipment.rentSell != 'sell'}">
                                 <ng2-datepicker name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="equipment.availableFrom"  *ngIf="equipment.rentSell != 'sell'"></ng2-datepicker>
                                 <input type="number" id="availablefrom" name="availablefrom" class="form-control nopointer" placeholder="" style="pointer-events: none;" *ngIf="equipment.rentSell == 'sell'" [disabled]="equipment.rentSell == 'sell'"  />
@@ -181,13 +181,13 @@
                             <input type="number" id="nf-pincode" name="pincode" #pincode="ngModel" class="form-control" [(ngModel)]="equipment.pincode" min="1" max="999999" placeholder="" required>
                             <div class="error-block">
                                 <small *ngIf="pincode.errors?.required && pincode.touched" class="text-danger">
-                                    Pin is required.
+                                    Pin Code is required.
                                 </small>   
                                 <small *ngIf="pincode.errors?.min && pincode.touched" class="text-danger">
-                                    Minimum 1 value allow.
+                                    Minimum 1 value allowed.
                                 </small>
                                 <small *ngIf="pincode.errors?.max && pincode.touched" class="text-danger">
-                                    Maximum 6 digit allow.
+                                    Maximum 6 digit allowed.
                                 </small>                                                        
                             </div> 
                         </div>
@@ -339,7 +339,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-6 col-md-3">
                          <div class="form-group">
                             <label for="supplyarea">Supply Area</label>
                             <select id="supplyarea" name="supply_area" [disabled]="equipment.supply_ablity == 'No'" class="disable form-control" [(ngModel)]="equipment.supply_area" size="1">
@@ -349,7 +349,7 @@
                             </select>
                         </div>
                     </div> 
-                    <div class="col-sm-3">
+                    <div class="col-sm-6 col-md-3">
                          <div class="form-group">
                             <label for="kmrange">Supply Range (km)</label>
                             <input type="number" id="kmrange" [disabled]="equipment.supply_ablity == 'No'" name="kmrange" class="form-control" [(ngModel)]="equipment.kmrange" />

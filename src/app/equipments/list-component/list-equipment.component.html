@@ -112,7 +112,7 @@
                                 <td data-label="Type">{{equipment.rentSell}}</td>
                                 <td data-label="Model Year">{{equipment.modelyear}}</td>
                                 <td data-label="Qty">{{equipment.quantity}}</td>
-                                <td data-label="Price"><i class="fa fa-rupee"></i> {{equipment.rate}}</td>
+                                <td data-label="Price"><i class="fa fa-rupee"></i>{{equipment.rate}}<span *ngIf="equipment.rentSell == 'rent'"> /{{equipment.price_unit}}</span></td>
                                 <td data-label="Actions">                                    
                                     <button (click)="sendUpdateEquipment(equipment.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeEquipment(equipment.id)" class="btn btn-danger orange" title="Delete" style="padding:1px 4px"><i class="fa fa-trash"></i></button>                                    

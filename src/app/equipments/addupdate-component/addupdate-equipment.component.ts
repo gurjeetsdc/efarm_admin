@@ -72,7 +72,7 @@ export class AddUpdateEquipmentComponent {
     
     constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _equipmentService: EquipmentService,  private changeDetectorRef: ChangeDetectorRef) {
         
-        this.options = new DatePickerOptions();                
+        this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});                
 
         this.equipmentID = _activateRouter.snapshot.params['id'];        
         
