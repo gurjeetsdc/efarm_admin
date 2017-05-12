@@ -24,7 +24,7 @@ export class ListLandComponent implements OnInit {
     public activePage   = 1;
     public itemsTotal   = 0;
     public searchTerm   = '';
-
+    public sortTerm     = '';
     public itemsOnPage;
 
     public response:any;
@@ -47,6 +47,8 @@ export class ListLandComponent implements OnInit {
             window.scrollTo(0, 0)
         });
 
+         /*set initial sort condition */
+        this.sortTerm = this.sortBy+' '+this.sortOrder;
 
         /*Load data*/
         this.getLands();        
@@ -64,10 +66,12 @@ export class ListLandComponent implements OnInit {
     public sortByWordLength = (a: any) => {
         return a.city.length;
     }
+    public sortByUser = (seller: any) => {
+        return seller.firstname;
+    }
 
     viewLand (Id) {
-      console.log(Id);
-      
+           
        let route = '/land/list/'+Id;
        this._router.navigate([route]);       
     }
@@ -121,13 +125,13 @@ export class ListLandComponent implements OnInit {
     }
 
     /*get all getLands*/
-    getLands() {   
-        this._landService.landlist( this.rowsOnPage, this.activePage, this.searchTerm ).subscribe(res => {
+    getLands() {
+        this._landService.landlist( this.rowsOnPage, this.activePage, this.sortTerm, this.searchTerm ).subscribe(res => {
             this.data       = res.data.lands;
             this.itemsTotal = res.data.total;
             this.isLoading     = false;
             this.isPageLoading = false;
-            console.log("allLand loaded");
+            
         }, 
         err => {
               this.checkAccessToken( err );
@@ -152,15 +156,15 @@ export class ListLandComponent implements OnInit {
     }
 
     public onSortOrder(event) {
+        this.sortTerm = this.sortBy+' '+this.sortOrder;
+        this.isLoading  = true;        
         this.getLands();
     }
 
     public search( ) {
         if( this.searchTerm.length > 3 ){
-            // this.isLoading  = true;
             this.getLands(); 
         }else if( this.searchTerm.length == 0 ){
-            // this.isLoading  = true;
             this.getLands(); 
         }
     }

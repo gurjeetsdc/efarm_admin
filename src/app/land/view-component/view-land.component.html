@@ -29,7 +29,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-name">Owner Name</label>
-                            <p>{{land.user?.username}}</p>
+                            <p>{{land.user?.firstName ? land.user?.firstName : 'N-A' }} {{land.user?.lastName ? land.user?.lastName : 'N-A' }}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -39,17 +39,32 @@
                         </div>
                     </div>
             </div>
+             <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-location">Available Date</label>
+                            <p>{{land.avail_date?.momentObj | date:'yyyy/MM/dd'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-area">Periods</label>
+                            <p>{{land.periods ? land.periods : "N-A"}} {{land.periods ? land.periodsunit : ""}}</p>
+                        </div>
+                    </div>
+            </div>
+
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-location">Location</label>
-                            <p>{{land.location}}</p>
+                            <p>{{land.location ? land.location : 'N-A'}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-area">Area</label>
-                            <p>{{land.area}} {{land.unit}}</p>
+                            <p>{{land.area}} Sq. {{land.unit}}</p>
                         </div>
                     </div>
                 </div>
@@ -57,7 +72,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-khasrano">Khasra no</label>
-                            <p>{{land.khasra_no}}</p>
+                            <p>{{land.khasra_no ? land.khasra_no : 'N-A'}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
