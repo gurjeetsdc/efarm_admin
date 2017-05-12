@@ -69,7 +69,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngIf="itemsTotal == 0">
-                                    <td colspan="9">No record to display</td>
+                                    <td colspan="6">No record to display.</td>
                                 </tr>
                                 <tr *ngFor="let input of mf.data">
                                     <td data-label="Name"><a href="javascript:void(0);" (click)="viewInput(input.id)">{{input.name}}</a></td>
@@ -85,7 +85,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="7">
+                                    <td colspan="6">
                                         <div class="pagination-section" *ngIf="itemsTotal > 0">
                                             <div class="row-on-page">
                                                 <label class="label-control">Show</label>

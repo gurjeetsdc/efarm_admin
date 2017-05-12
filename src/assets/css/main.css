@@ -360,6 +360,14 @@
      background-color: #cfd8dc !important;
      border-color: #cfd8dc !important;
  }
+
+ .sidebar-hidden.sidebar-mobile-show .sidebar{
+    width: 75px;
+}
+
+.sidebar-hidden.sidebar-mobile-show .main{
+    margin-left: 75px !important;
+}
  
  .small-box {
      border-radius: 4px;
@@ -1540,7 +1548,7 @@
  .table>thead>tr>td,
  .table>tbody>tr>td,
  .table>tfoot>tr>td {
-     border: 1px solid #f4f4f4;
+     border: 1px solid #ededed;
  }
  
 
@@ -2146,7 +2154,6 @@
      .card-block table td {
          display: block;
          text-align: right;
-         font-size: 13px;
          border-bottom: 1px dotted #ccc;
      }
  }
