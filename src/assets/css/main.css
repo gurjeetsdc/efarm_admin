@@ -226,10 +226,11 @@
  }
  
  .icnposition {
-     font-size: 23px;
+     font-size: 18px;
      left: 10px;
+     color:#626262;
      position: absolute;
-     top: 7px;
+     top: 11px;
      z-index: 99;
  }
  
@@ -1097,9 +1098,9 @@
  
  .datepicker-input-icon {
      position: absolute;
-     left: 15px;
+     left: 0px;
      z-index: 999;
-     top: 18px;
+     top: 15px;
  }
  
  .nopointer {
