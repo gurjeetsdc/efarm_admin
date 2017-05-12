@@ -155,7 +155,7 @@ export class ListCropComponent implements OnInit {
 
     public search( event, element = 'input' ) {
         if( element == 'input' ) {
-            if(event.keyCode == 13) {
+            if(event.keyCode == 13 || this.searchTerm == '') {
                 this.isLoading  = true;
                 this.activePage = 1;
                 this.getCrops(); 

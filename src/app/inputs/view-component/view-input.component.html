@@ -28,7 +28,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Seller</label>
-                        <p>{{input.user?.email}}</p>
+                        <p>{{input.user?.email ? input.user?.email : '-'}}</p>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-grade">Quantity</label>
-                        <p>{{input.quantity}}</p>
+                        <p>{{input.quantity ? input.quantity : '-'}}</p>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-termsConditions">Additional information</label>
-                        <p>{{input.additionalInformation}}</p>
+                        <p>{{input.additionalInformation ? input.additionalInformation : '-'}}</p>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-termsConditions">Terms & Conditions</label>
-                        <p>{{input.terms}}</p>
+                        <p>{{input.terms ? input.terms : '-'}}</p>
                     </div>
                 </div>
             </div>
