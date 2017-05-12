@@ -106,14 +106,14 @@
                                 <td colspan="7">No record to display</td>
                             </tr>                        
                             <tr *ngFor="let equipment of mf.data">                        
-                                <td><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
-                                <td>{{equipment.user?.firstName ? equipment.user?.firstName : '-'}}</td>                                
-                                <td>{{equipment.district}}</td>
-                                <td>{{equipment.rentSell}}</td>
-                                <td>{{equipment.modelyear}}</td>
-                                <td>{{equipment.quantity}}</td>
-                                <td><i class="fa fa-rupee"></i> {{equipment.rate}}</td>
-                                <td>                                    
+                                <td data-label="Name"><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
+                                <td data-label="Supplier">{{equipment.user?.firstName ? equipment.user?.firstName : '-'}}</td>                                
+                                <td data-label="District">{{equipment.district}}</td>
+                                <td data-label="Type">{{equipment.rentSell}}</td>
+                                <td data-label="Model Year">{{equipment.modelyear}}</td>
+                                <td data-label="Qty">{{equipment.quantity}}</td>
+                                <td data-label="Price"><i class="fa fa-rupee"></i> {{equipment.rate}}</td>
+                                <td data-label="Actions">                                    
                                     <button (click)="sendUpdateEquipment(equipment.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeEquipment(equipment.id)" class="btn btn-danger orange" title="Delete" style="padding:1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
