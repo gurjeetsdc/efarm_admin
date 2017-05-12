@@ -103,7 +103,7 @@
                         </thead>                        
                         <tbody>  
                             <tr *ngIf="itemsTotal == 0">
-                                <td colspan="7">No record to display</td>
+                                <td colspan="8">No record to display</td>
                             </tr>                        
                             <tr *ngFor="let equipment of mf.data">                        
                                 <td data-label="Name"><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>

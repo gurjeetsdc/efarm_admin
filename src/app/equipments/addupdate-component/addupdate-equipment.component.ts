@@ -39,13 +39,7 @@ export class AddUpdateEquipmentComponent {
                             avalibilityperiodUnits: 'Hour',
                             variety: '',
                             payment_method: 'COD',
-                            availableFrom: {
-                                    "day" : null,
-                                    "month" : null,
-                                    "year" : null,
-                                    "formatted" : "DD/MM/YYYY",
-                                    "momentObj" : "2017-05-04T18:30:00.000Z"
-                                }
+                            availableFrom: {}
                         };
 
 
@@ -70,6 +64,11 @@ export class AddUpdateEquipmentComponent {
 
     private date: DateModel;
     private options: DatePickerOptions;
+
+    private varieties: any;
+    
+    private states: any;
+    private districts: any;
     
     constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _equipmentService: EquipmentService,  private changeDetectorRef: ChangeDetectorRef) {
         
@@ -79,7 +78,9 @@ export class AddUpdateEquipmentComponent {
         
         if( this.equipmentID ) {
             this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { 
-                        this.equipment = res.data; this.action = 'Edit'; this.isLoading = false;
+                        this.equipment = res.data; 
+                        this.action = 'Edit'; 
+                        this.isLoading = false;                        
                     }, 
                     err => {
                         this.checkAccessToken(err);
@@ -90,6 +91,9 @@ export class AddUpdateEquipmentComponent {
 
         this._equipmentService.getAllCategories().subscribe( res => { 
             this.category = res.data;
+            if( this.action == 'Edit' ){                
+                this.setVarieties();                
+            }
         }, 
         err => {
             this.checkAccessToken(err);
@@ -107,9 +111,18 @@ export class AddUpdateEquipmentComponent {
         }, 
         err => {
             this.checkAccessToken(err);     
+        });
+
+        this._equipmentService.getStates().subscribe( res => { 
+            this.states = res.data;   
+            if( this.action == 'Edit' ){                
+                this.setDistrict();
+            }           
+        }, 
+        err => {
+            this.checkAccessToken(err);     
         });        
-        
-         
+                 
         /*create years array. */
         this.years.push(this.currentYear);
         for (var i = 1; i <= 50; i++) {
@@ -155,14 +168,44 @@ export class AddUpdateEquipmentComponent {
                             avalibilityperiodUnits: 'Hour',
                             variety: '',
                             payment_method: 'COD',
-                            availableFrom: {
-                                    "day" : null,
-                                    "month" : null,
-                                    "year" : null,
-                                    "formatted" : "DD/MM/YYYY",
-                                    "momentObj" : "2017-05-04T18:30:00.000Z"
-                                }
+                            availableFrom: {}
                         };
+    }
+
+    setVarieties( ): void {  
+        /* reset values. */
+        this.varieties         = null;
+        if( this.action !== 'Edit' ){
+            this.equipment.variety = null;
+            this.equipment.variety = '';
+        }
+        /* Initialize category. */
+        let categoryID = this.equipment.category_id;        
+        if( categoryID ){
+            this.category.filter(obj => obj.id == categoryID).map( obj => this.varieties = obj.variety)
+        }
+        
+        this.changeDetectorRef.detectChanges();
+    }
+
+    setDistrict( ): void {  
+        /* reset values. */
+        this.districts         = null;
+        if( this.action !== 'Edit' ){
+            this.equipment.district = null;
+            this.equipment.district = '';
+        }    
+
+        /* Initialize category. */
+        let stateName = this.equipment.state; 
+
+        console.log(stateName);
+
+        if( stateName ){
+            this.states.filter(obj => obj.stateName == stateName).map( obj => this.districts = obj.districts)
+        }
+        
+        this.changeDetectorRef.detectChanges();
     }
 
     addEquipment() {
@@ -222,3 +265,4 @@ export class AddUpdateEquipmentComponent {
         }        
     }   
 }
+

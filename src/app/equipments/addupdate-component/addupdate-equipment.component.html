@@ -63,9 +63,9 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="availablefrom">Available From (DD/MM/YYYY)</label>
+                            <label for="availablefrom">Available From </label>
                              <div class="input-group form-control" [ngClass]="{'form-control': equipment.rentSell != 'sell'}">
-                                <ng2-datepicker placeholder="DD/MM/YYYY" name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="equipment.availableFrom"  *ngIf="equipment.rentSell != 'sell'"></ng2-datepicker>
+                                <ng2-datepicker name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="equipment.availableFrom"  *ngIf="equipment.rentSell != 'sell'"></ng2-datepicker>
                                 <input type="number" id="availablefrom" name="availablefrom" class="form-control nopointer" placeholder="" style="pointer-events: none;" *ngIf="equipment.rentSell == 'sell'" [disabled]="equipment.rentSell == 'sell'"  />
                              </div>                          
                         </div>
@@ -130,7 +130,7 @@
                             </div> 
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                   <!--  <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-district">District</label>
                             <input type="text" id="nf-district" name="district" #district="ngModel" class="form-control" [(ngModel)]="equipment.district" placeholder="" required>
@@ -140,54 +140,38 @@
                                 </small>                                                          
                             </div> 
                         </div>
+                    </div> -->
+                     <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="state">State</label>
+                            <select id="state" name="state" (change)="setDistrict()"  [(ngModel)]="equipment.state" placeholder="" required class="form-control" size="1" #state="ngModel" required>
+                                <option value="">Select State</option>
+                                <option *ngFor="let state of states" [value]="state.stateName">
+                                    {{state.stateName}}
+                                </option>                                       
+                            </select>
+                            <div class="error-block">
+                                <small *ngIf="state.errors?.required && state.touched" class="text-danger">
+                                    State is required.
+                                </small>                                                        
+                            </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="state">State</label>
-                            <select id="state" name="state"  [(ngModel)]="equipment.state" placeholder="" required class="form-control" size="1" #state="ngModel" required>
-                                <option value="">Select State</option>
-                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                <option value="Assam">Assam</option>
-                                <option value="Bihar">Bihar</option>
-                                <option value="Chandigarh">Chandigarh</option>
-                                <option value="Chhattisgarh">Chhattisgarh</option>
-                                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                                <option value="Daman and Diu">Daman and Diu</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Goa">Goa</option>
-                                <option value="Gujarat">Gujarat</option>
-                                <option value="Haryana">Haryana</option>
-                                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                <option value="Jharkhand">Jharkhand</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Lakshadweep">Lakshadweep</option>
-                                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Manipur">Manipur</option>
-                                <option value="Meghalaya">Meghalaya</option>
-                                <option value="Mizoram">Mizoram</option>
-                                <option value="Nagaland">Nagaland</option>
-                                <option value="Orissa">Orissa</option>
-                                <option value="Pondicherry">Pondicherry</option>
-                                <option value="Punjab">Punjab</option>
-                                <option value="Rajasthan">Rajasthan</option>
-                                <option value="Sikkim">Sikkim</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Tripura">Tripura</option>
-                                <option value="Uttaranchal">Uttaranchal</option>
-                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                <option value="West Bengal">West Bengal</option>
+                            <label for="district">District</label>
+                            <select id="district" name="district"  [(ngModel)]="equipment.district" placeholder="" required class="form-control" size="1" #district="ngModel" required>
+                                <option value="">Select District</option>
+                                <option *ngFor="let district of districts" [value]="district.districtName">
+                                    {{district.districtName}}
+                                </option>                                       
                             </select>
                             <div class="error-block">
-                                <small *ngIf="state.errors?.required && state.touched" class="text-danger">
-                                    State is required.
-                                </small>                                                          
+                                <small *ngIf="district.errors?.required && district.touched" class="text-danger">
+                                    District is required.
+                                </small>                                                        
                             </div> 
                         </div>
                     </div>
@@ -213,7 +197,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="category">Category</label>                            
-                            <select id="category" name="category_id"  class="form-control" size="1" #category_id="ngModel" [(ngModel)]="equipment.category_id" required>
+                            <select id="category" name="category_id"  (change)="setVarieties( cat )" class="form-control" size="1" #category_id="ngModel" [(ngModel)]="equipment.category_id" required>
                                 <option value="">Please select</option>                                
                                 <option *ngFor="let cat of category" [value]="cat.id">
                                     {{cat.name}}
@@ -233,9 +217,9 @@
                             <label for="variety">Variety</label>
                             <select id="variety" name="variety" class="form-control" [(ngModel)]="equipment.variety" size="1">
                                 <option value="">Please select</option>
-                                <option value="variety 1">variety 1</option>
-                                <option value="variety 2">variety 2</option>
-                                <option value="variety 3">variety 3</option>
+                                <option *ngFor="let variety of varieties" [value]="variety">
+                                    {{variety}}
+                                </option>                                  
                             </select>
                         </div>
                     </div>                    
