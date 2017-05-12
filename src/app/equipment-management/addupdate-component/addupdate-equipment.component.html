@@ -73,7 +73,7 @@
                       <div class="col-sm-6">
                          <div class="form-group">
                             <label for="avalibilityperiod">Availibility Period</label>
-                            <div class="input-group">                                
+                            <div class="flex">                                
                                 <input type="number" id="avalibilityperiod" [disabled]="equipment.rentSell == 'sell'" name="avalibilityperiod" class="form-control pleft25" #avalibilityperiod="ngModel" [(ngModel)]="equipment.avalibilityperiod" placeholder=""/>
                                 <div class="input-group-btn" >
                                     <select class="disable btn btn-secondary dropdown-toggle"  [disabled]="equipment.rentSell == 'sell'" [(ngModel)]="equipment.avalibilityperiodUnits" name="avalibilityperiodUnits">
@@ -277,7 +277,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="rate">Price</label>
-                            <div class="input-group">
+                            <div class="flex">
                                 <div class="icnposition"><i class="fa fa-rupee"></i></div>
                                 <input type="number" id="rate" name="rate" class="form-control pleft25" #rate="ngModel" [(ngModel)]="equipment.rate" placeholder="" required />                                  
                                 
