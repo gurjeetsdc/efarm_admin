@@ -33779,7 +33779,7 @@ var AddUpdateCropComponent = (function () {
         this.category = [];
         this.sellers = [];
         this._cropService.getAllCategories().subscribe(function (res) { _this.category = res.data; }, function (err) { });
-        this._cropService.getAllUsers().subscribe(function (res) { if (res.sucess) {
+        this._cropService.getAllUsers().subscribe(function (res) { if (res.success) {
             _this.sellers = res.data.users;
         } }, function (err) { });
         this.cropID = _activateRouter.snapshot.params['id'];
