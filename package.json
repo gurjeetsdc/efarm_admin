@@ -26,6 +26,7 @@
     "@angular/router": "3.4.9",
     "@angular/upgrade": "2.4.9",
     "angular-cli": "^1.0.0-beta.28.3",
+    "angular2-csv": "^0.2.1",
     "angular2-datatable": "^0.6.0",
     "angular2-datatable-pagination": "0.0.3",
     "chart.js": "2.5.0",

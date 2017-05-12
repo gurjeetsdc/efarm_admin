@@ -33,7 +33,7 @@
                             <button type="button" class="btn btn-success btnadd" [routerLink]="['/equipments/add']">Add Equipment</button>
                             <div class="icns">
                                 <a><img src="assets/img/pdf.png" alt="pdf"></a>
-                                <a><img src="assets/img/xls.png" alt="pdf"></a>
+                                <a (click)="downloadCSV()" style="cursor: pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
                             </div>
                         </div>
                     </div> <!-- .row -->

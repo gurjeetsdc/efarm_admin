@@ -7,6 +7,8 @@ import {DataTableModule} from "angular2-datatable";
 
 import { EquipmentService } from '../services/equipment.service';
 
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+
 
 @Component({
     selector: 'app-equipment-management',
@@ -100,7 +102,7 @@ export class ListEquipmentComponent implements OnInit {
                 this.itemsTotal = this.itemsTotal - 1;
                 
                 if( ! (this.itemsTotal >= start) ){
-                   this.activePage = this.activePage -1
+                   this.activePage = (this.activePage - 1)
                 }
                 /* reload page. */
                 this.getEquipments();
@@ -177,15 +179,51 @@ export class ListEquipmentComponent implements OnInit {
             if(event.keyCode == 13 || this.searchTerm == '') {
                 this.searchTerm = this.searchTerm.trim();
                 this.isLoading  = true;
+                this.getEquipments(); 
                 this.activePage = 1;
                 this.getEquipments(); 
             }           
         }else{
             this.searchTerm = this.searchTerm.trim();
             this.isLoading  = true;
+            this.getEquipments(); 
             this.activePage = 1;
             this.getEquipments(); 
         }
     }
 
+    downloadCSV(): void {
+        console.log('Downlaod CSV');
+        let i;
+        let filteredData = [];
+        
+        let header = {
+            name:"Name",
+            supplier:'Supplier',
+            district:'District',
+            rentSell:'Type',
+            modelyear:'Model Year',
+            quantity:'Quantity',
+            price:'Price'
+        }
+
+        filteredData.push(header);
+
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let temp = {
+                name: this.data[i].name,
+                supplier: this.data[i].user.firstName,
+                district: this.data[i].district,
+                rentSell: this.data[i].rentSell,
+                modelyear: this.data[i].modelyear,
+                quantity: this.data[i].quantity,
+                price: (this.data[i].rentSell == 'rent') ? this.data[i].rate +'/'+ this.data[i].price_unit : this.data[i].rate,
+            };
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "EquipmentReport-"+Math.floor(Date.now() / 1000); 
+        new Angular2Csv( filteredData, fileName);
+    }
 }
