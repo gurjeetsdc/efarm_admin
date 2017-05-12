@@ -18,7 +18,7 @@
  }
  
  .card {
-     font-family: 'Roboto', sans-serif !important;
+     font-family: 'Open Sans', sans-serif !important;
      border-radius: 5px !important;
      -moz-border-radius: 5px !important;
      -webkit-border-radius: 5px !important;
@@ -29,7 +29,7 @@
  optgroup,
  select,
  textarea {
-     font-family: 'Roboto', sans-serif !important;
+     font-family:'Open Sans', sans-serif !important;
      margin: 0;
  }
  
@@ -643,7 +643,7 @@
  
  .mainarea .card-block .form-group .form-control {
      color: #666666;
-     font-family: "Roboto", sans-serif !important;
+     font-family: 'Open Sans', sans-serif !important;
      font-size: 18px;
      font-weight: 300;
  }
@@ -785,7 +785,7 @@
  
  .pagination {
      float: right;
-     padding-right: 16px;
+     padding-right: 0;
  }
  
  .icns {
@@ -1053,7 +1053,7 @@
  .mainarea .card-block .form-group select,
  .mainarea .card-block .form-group input {
      color: #666666 !important;
-     font-family: "Roboto", sans-serif !important;
+     font-family: 'Open Sans', sans-serif !important;
      font-size: 18px !important;
      font-weight: 300;
  }
@@ -1513,6 +1513,12 @@
  
  .table {
      font-family: 'Open Sans', sans-serif !important;
+ }
+
+  .card-block option{
+    font-family: 'Open Sans', sans-serif !important;
+    font-size: 18px;
+    font-weight: 300;
  }
  
  .main-content .card-block table td > a {
