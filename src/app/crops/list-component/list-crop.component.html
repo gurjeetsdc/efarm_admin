@@ -72,7 +72,7 @@
                                 </th>
                                 <th width="12%">Highest Bid</th>
                                 <th width="8%">District</th>
-                                <th width="12%">Available On</th>
+                                <th width="12%">Available From</th>
                                 <th width="20%">Seller</th>
                                 <th width="10%">Actions</th>
                             </tr>
@@ -91,7 +91,7 @@
                                 <td data-label="Qty.">{{crop.quantity}} {{crop.quantityUnit}}</td>
                                 <td data-label="Highest Bid">-</td>
                                 <td data-label="District">{{crop.district}}</td>
-                                <td data-label="Available On">{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf="!crop.availableFrom?.momentObj">-</span></td>
+                                <td data-label="Available From">{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf="!crop.availableFrom?.momentObj">-</span></td>
                                 <td data-label="Seller">{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : '-'}} {{crop.seller ? crop.seller?.state ? '(' + crop.seller?.state + ')' : '' : ''}}</td>
                                 <td data-label="Actions">                                    
                                     <button (click)="editCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>

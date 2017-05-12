@@ -304,11 +304,11 @@
                         </div>                    
                     </div>
                     <div class="col-sm-6 col-md-3">
-                        <div class="form-group has-required">
+                        <div class="form-group" [ngClass]="{'has-required': crop.supplyAbility == 'Yes'}">
                             <label for="nf-supplyarea">Supply Area</label>
                             <select id="nfsupplyarea" name="nfsupplyarea" class="form-control disable" #nfsupplyarea="ngModel" [(ngModel)]="crop.supplyArea" size="1" [disabled]="crop.supplyAbility == 'No'" required>
                                 <option value="">Please select</option>
-                                <option value="withinstate">With In State</option>
+                                <option value="withinstate">Within State</option>
                                 <option value="anywhere">Any Where</option>
                             </select>
                             <div class="error-block">
@@ -319,7 +319,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">
-                         <div class="form-group has-required">
+                         <div class="form-group" [ngClass]="{'has-required': crop.supplyAbility == 'Yes'}">
                             <label for="kmrange">Supply Range (km)</label>
                             <input type="number" id="nfkmrange" name="nfkmrange" class="form-control" [(ngModel)]="crop.supplyRange" placeholder=""  #nfkmrange="ngModel" [disabled]="crop.supplyAbility == 'No'" min="1" max="9999999999999998" required>
                             <div class="error-block">

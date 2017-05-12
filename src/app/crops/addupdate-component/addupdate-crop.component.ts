@@ -34,7 +34,7 @@ export class AddUpdateCropComponent {
     
     constructor(private _router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService, private _cookieService: CookieService ) { 
         this._cropService.getAllCategories().subscribe( res => { this.category = res.data; }, err => {});
-        this._cropService.getAllUsers().subscribe( res => { if(res.sucess) {this.sellers = res.data.users;} }, err => {});
+        this._cropService.getAllUsers().subscribe( res => { if(res.success) {this.sellers = res.data.users;} }, err => {});
         this.cropID = _activateRouter.snapshot.params['id'];        
         if( this.cropID ) {
             this._cropService.get(this.cropID).subscribe(res => {
