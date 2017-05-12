@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CropService } from '../services/crop.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
@@ -31,11 +31,20 @@ export class AddUpdateCropComponent {
     public cropID:any;
     public date: DateModel;
     public options: DatePickerOptions;
+
+    public varieties: any;
+    public states: any;
+    public districts: any;
     
-    constructor(private _router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService, private _cookieService: CookieService ) { 
-        this._cropService.getAllCategories().subscribe( res => { this.category = res.data; }, err => {});
-        this._cropService.getAllUsers().subscribe( res => { if(res.success) {this.sellers = res.data.users;} }, err => {});
+    constructor(private _router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService, private _cookieService: CookieService,  private changeDetectorRef: ChangeDetectorRef ) { 
         this.cropID = _activateRouter.snapshot.params['id'];        
+        this._cropService.getAllCategories().subscribe( res => {
+             this.category = res.data; 
+            if( this.cropID ) this.setVarieties();
+         }, err => {});
+        this._cropService.getAllUsers().subscribe( res => {
+             if(res.success) {this.sellers = res.data.users;} 
+         }, err => {});
         if( this.cropID ) {
             this._cropService.get(this.cropID).subscribe(res => {
                 this.isPageLoading = false;
@@ -83,17 +92,30 @@ export class AddUpdateCropComponent {
         }
     }
 
+    setVarieties( ): void {  
+        /* reset values. */
+        this.varieties         = null;
+        if( !this.cropID ){
+            this.crop.variety = null;
+            this.crop.variety = '';
+        }
+        /* Initialize category. */
+        let categoryID = this.crop.categoryID;        
+        if( categoryID ){
+            this.category.filter(obj => obj.id == categoryID).map( obj => this.varieties = obj.variety)
+        }
+        
+        this.changeDetectorRef.detectChanges();
+    }
+
     /*This function is use to remove user session if Access token expired. */
     checkAccessToken( err ): void {
-        console.log("errrrrrrrr checkaccess token",err);
         let code    = err.code;
         let message = err.message;
 
         if( (code == 401 && message == "authorization")) {
             this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
-        }else {
-            console.log('Something unexpected happened, please try again later.');
-        }        
+        }       
     }
 }

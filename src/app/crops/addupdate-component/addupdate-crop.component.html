@@ -46,7 +46,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-category">Category</label>
-                            <select id="nfcategory" name="nfcategory" class="form-control" size="1" #nfcategory="ngModel" [(ngModel)]="crop.categoryID" required>
+                            <select id="nfcategory" name="nfcategory" class="form-control" size="1" (change)="setVarieties( cat )" #nfcategory="ngModel" [(ngModel)]="crop.categoryID" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
@@ -60,11 +60,11 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-variety">Variety</label>
-                            <select id="select1" name="select1" class="form-control" [(ngModel)]="crop.variety" size="1">
+                            <select id="variety" name="variety" class="form-control" [(ngModel)]="crop.variety" size="1">
                                 <option value="">Please select</option>
-                                <option value="Variety 1">Variety 1</option>
-                                <option value="Variety 2">Variety 2</option>
-                                <option value="Variety 3">Variety 3</option>
+                                <option *ngFor="let variety of varieties" [value]="variety">
+                                    {{variety}}
+                                </option>                                  
                             </select>
                         </div>
                     </div>
@@ -250,7 +250,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="availablefrom">Available From</label>
+                            <label for="availablefrom">Available From (dd/mm/yyyy)</label>
                             <div class="input-group form-control">
                                 <ng2-datepicker name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="crop.availableFrom"></ng2-datepicker>
                              </div>
