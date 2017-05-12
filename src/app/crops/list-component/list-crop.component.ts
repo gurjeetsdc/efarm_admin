@@ -86,7 +86,6 @@ export class ListCropComponent implements OnInit {
                 this.getCrops();
             },err => {
                 this.isLoading = false;
-                this.checkAccessToken(err);
             });             
         }
     } 
@@ -108,10 +107,10 @@ export class ListCropComponent implements OnInit {
 
     /*This function is use to remove user session if Access token expired. */
     checkAccessToken( err ): void {
-        let status     = err.status;
-        let statusText = err.statusText;
+        let code    = err.code;
+        let message = err.message;
 
-        if( (status == 401 && statusText == 'Unauthorized')) {
+        if( (code == 401 && message == "authorization")) {
             this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         }else {
@@ -122,12 +121,15 @@ export class ListCropComponent implements OnInit {
     /*Get all Crops*/
     getCrops(): void {   
         this._cropService.getAllCrops( this.rowsOnPage, this.activePage, this.sortTrem,  this.searchTerm ).subscribe(res => {
-            this.data          = res.data.crops;
-            this.itemsTotal    = res.data.total;
             this.isLoading     = false;
             this.isPageLoading = false;
+            if(res.success) {
+                this.data          = res.data.crops;
+                this.itemsTotal    = res.data.total;
+            } else {
+                this.checkAccessToken(res.error);    
+            }
         },err => {
-            this.checkAccessToken(err);
             this.isLoading     = false;
             this.isPageLoading = false;
        });

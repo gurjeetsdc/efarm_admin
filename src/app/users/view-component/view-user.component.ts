@@ -13,11 +13,14 @@ export class ViewUserComponent {
     constructor(route: ActivatedRoute, private _router : Router,private _userService: UserService, private _cookieService: CookieService ) { 
         this.userID = route.snapshot.params['id'];
   	    this._userService.get(this.userID).subscribe(res => {
-           this.user = res.data;
-           this.isLoading = false;
+            if(res.success) {
+               this.user = res.data;
+               this.isLoading = false;
+            } else {
+               this.checkAccessToken(res.error); 
+            } 
         },err => {
            this.isLoading = false
-           this.checkAccessToken(err); 
         });
     }
 
@@ -38,15 +41,14 @@ export class ViewUserComponent {
         }
     }
 
+    /*This function is use to remove user session if Access token expired. */
     checkAccessToken( err ): void {
-        let status     = err.status;
-        let statusText = err.statusText;
+        let code    = err.code;
+        let message = err.message;
 
-        if( (status == 401 && statusText == 'Unauthorized')) {
+        if( (code == 401 && message == "authorization")) {
             this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
-        }else {
-            console.log('Something unexpected happened, please try again later.');
         }        
     }
 }

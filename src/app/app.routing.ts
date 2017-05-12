@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { FullLayoutComponent } from './layouts/full-layout.component';
 
 import { LoginComponent } from './auth/login/login.component';
-
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component'
 import { ActiveRouteGuard } from './auth/services/activate-route-guard';
 import { DeactiveRouteGuard } from './auth/services/deactivate-route-guard';
 
@@ -18,6 +18,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [ActiveRouteGuard]
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
     canActivate: [ActiveRouteGuard]
   },
   {

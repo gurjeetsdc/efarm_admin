@@ -182,6 +182,8 @@
                                     <option value="Kg">Kg</option>
                                     <option value="Quintal">Quintal</option>
                                     <option value="Tonnes">Tonnes</option>
+                                    <option value="Count">Count</option>
+                                    <option value="Dozen">Dozen</option>
                                  </select>
                               </div>
                             </div>
@@ -203,7 +205,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-price">Offer Price</label>
-                            <div class="flex">
+                            <div class="relative">
                             <div class="icnposition"><i class="fa fa-rupee"></i></div>
                             <input type="number" id="nfprice" name="nfprice" class="form-control pleft25" #nfprice="ngModel" [(ngModel)]="crop.price" placeholder="" required="" min="1" max="9999999999999998">
                             </div>
@@ -301,7 +303,7 @@
                             </div>
                         </div>                    
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-6 col-md-3">
                         <div class="form-group has-required">
                             <label for="nf-supplyarea">Supply Area</label>
                             <select id="nfsupplyarea" name="nfsupplyarea" class="form-control disable" #nfsupplyarea="ngModel" [(ngModel)]="crop.supplyArea" size="1" [disabled]="crop.supplyAbility == 'No'" required>
@@ -316,7 +318,7 @@
                             </div> 
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-6 col-md-3">
                          <div class="form-group has-required">
                             <label for="kmrange">Supply Range (km)</label>
                             <input type="number" id="nfkmrange" name="nfkmrange" class="form-control" [(ngModel)]="crop.supplyRange" placeholder=""  #nfkmrange="ngModel" [disabled]="crop.supplyAbility == 'No'" min="1" max="9999999999999998" required>
@@ -382,15 +384,18 @@
                             </div>
                         </div>                    
                     </div>
-                    <div class="col-sm-6  has-required">
+                    <div class="col-sm-6 ">
+                        <div class="form-group">
+                            <label for="nf-description">Description</label>
+                            <textarea type="text" id="description" name="description" class="form-control" [(ngModel)]="crop.description" placeholder="" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-terms">Terms & Conditions</label>
-                            <textarea type="text" id="nfterms" name="nfterms" class="form-control" [(ngModel)]="crop.terms" #nfterms="ngModel" placeholder="" rows="4" required=""></textarea>
-                            <div class="error-block">
-                                <small *ngIf="nfterms.errors?.required && nfterms.touched" class="text-danger">
-                                    Terms & Conditions is required.
-                                </small>
-                            </div> 
+                            <textarea type="text" id="nfterms" name="nfterms" class="form-control" [(ngModel)]="crop.terms" placeholder="" rows="4"></textarea> 
                         </div>
                     </div>
                 </div>

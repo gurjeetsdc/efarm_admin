@@ -27,7 +27,8 @@ import { FullLayoutComponent } from './layouts/full-layout.component';
 
 
 import { LoginComponent } from './auth/login/login.component';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ng2-validation';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { CustomFormsModule } from 'ng2-validation'
     BreadcrumbsComponent,
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
-    LoginComponent    
+    LoginComponent,
+    ForgotPasswordComponent    
   ],
   providers: [
     {

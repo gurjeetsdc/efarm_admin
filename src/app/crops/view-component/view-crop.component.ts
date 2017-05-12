@@ -15,10 +15,13 @@ export class ViewCropComponent {
       	this.cropID = route.snapshot.params['id'];
   	    this._cropService.get(this.cropID).subscribe(res => {
             this.isLoading = false;
-            this.crop = res.data;
+            if(res.success) {
+                this.crop = res.data;
+            } else {
+                this.checkAccessToken(res.error);
+            }
         },err => {
             this.isLoading = false;
-            this.checkAccessToken(err);
         });
     }
 
@@ -29,10 +32,10 @@ export class ViewCropComponent {
 
     /*This function is use to remove user session if Access token expired. */
     checkAccessToken( err ): void {
-        let status     = err.status;
-        let statusText = err.statusText;
+        let code    = err.code;
+        let message = err.message;
 
-        if( (status == 401 && statusText == 'Unauthorized')) {
+        if( (code == 401 && message == "authorization")) {
             this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         }else {

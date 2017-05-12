@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
 
     public errMessage            = '';
     public isPageLoading:boolean = false;
+    public rememberMe            = true;
     private _session             = false;
-    
 
     constructor(private _router : Router, private _loginService: LoginService, private _cookieService: CookieService, private _activateRouter: ActivatedRoute) { 
         this._session = _activateRouter.snapshot.params['data'];
@@ -30,7 +30,11 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        if(localStorage.getItem("remember")) {
+            this.user["username"] = localStorage.getItem("remember");
+        }
+    }
 
   	login() {
         
@@ -38,7 +42,11 @@ export class LoginComponent implements OnInit {
         this.errMessage        = '';        
 
 		this._loginService.login(this.user).subscribe(res => {
-
+            if(this.rememberMe) {
+                localStorage.setItem("remember",this.user["username"]);
+            } else {
+                 localStorage.removeItem('remember');
+            }
             this.isPageLoading = false;
             let token          = res.access_token;            
             /* Setup Cookie */

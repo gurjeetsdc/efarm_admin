@@ -34,17 +34,20 @@ export class AddUpdateCropComponent {
     
     constructor(private _router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService, private _cookieService: CookieService ) { 
         this._cropService.getAllCategories().subscribe( res => { this.category = res.data; }, err => {});
-        this._cropService.getAllUsers().subscribe( res => { this.sellers = res.data.users; }, err => {});
+        this._cropService.getAllUsers().subscribe( res => { if(res.sucess) {this.sellers = res.data.users;} }, err => {});
         this.cropID = _activateRouter.snapshot.params['id'];        
         if( this.cropID ) {
             this._cropService.get(this.cropID).subscribe(res => {
-                this.crop = res.data;
-                this.crop.categoryID = res.data.category.id;
-                if(res.data.seller && res.data.seller.id )this.crop.sellerID = res.data.seller.id;
                 this.isPageLoading = false;
+                if(res.success) {
+                    this.crop = res.data;
+                    this.crop.categoryID = res.data.category.id;
+                    if(res.data.seller && res.data.seller.id )this.crop.sellerID = res.data.seller.id;
+                } else {
+                    this.checkAccessToken(res.error);
+                }
             },err => {
                 this.isPageLoading = false;
-                this.checkAccessToken(err);
             });
         } else {
             this.isPageLoading = false;
@@ -67,7 +70,6 @@ export class AddUpdateCropComponent {
                 this._router.navigate(['/crops/list']);
             },err => {
                 this.isLoading = false;
-                this.checkAccessToken(err);
             })
         } else {
             this.crop["category"] = this.crop["categoryID"];
@@ -77,17 +79,17 @@ export class AddUpdateCropComponent {
                 this._router.navigate(['/crops/list']);
             },err => {
                 this.isLoading = false;
-                this.checkAccessToken(err);
             });
         }
     }
 
     /*This function is use to remove user session if Access token expired. */
     checkAccessToken( err ): void {
-        let status     = err.status;
-        let statusText = err.statusText;
+        console.log("errrrrrrrr checkaccess token",err);
+        let code    = err.code;
+        let message = err.message;
 
-        if( (status == 401 && statusText == 'Unauthorized')) {
+        if( (code == 401 && message == "authorization")) {
             this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         }else {

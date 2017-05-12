@@ -64,14 +64,14 @@
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'price'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="10%">
-                                    <mfDefaultSorter by="quantity">Qty. 
+                                <th width="10%">Qty.
+                                    <!-- <mfDefaultSorter by="quantity">Qty. 
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'quantity'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'quantity'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter>
+                                    </mfDefaultSorter> -->
                                 </th>
                                 <th width="12%">Highest Bid</th>
-                                <th width="8%">Area</th>
+                                <th width="8%">District</th>
                                 <th width="12%">Available On</th>
                                 <th width="20%">Seller</th>
                                 <th width="10%">Actions</th>
@@ -90,7 +90,7 @@
                                 <td data-label="Offer Price"><p><i class="fa fa-rupee"></i> {{crop.price}}</td>
                                 <td data-label="Qty.">{{crop.quantity}} {{crop.quantityUnit}}</td>
                                 <td data-label="Highest Bid">-</td>
-                                <td data-label="Area">-</td>
+                                <td data-label="District">{{crop.district}}</td>
                                 <td data-label="Available On">{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf="!crop.availableFrom?.momentObj">-</span></td>
                                 <td data-label="Seller">{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : '-'}} {{crop.seller ? crop.seller?.state ? '(' + crop.seller?.state + ')' : '' : ''}}</td>
                                 <td data-label="Actions">                                    

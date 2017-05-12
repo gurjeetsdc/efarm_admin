@@ -36,6 +36,17 @@
                 <div class="col-sm-12 col-12">
                     <button type="submit" class="btn btn-success btn-block btn-flat" [disabled]="!loginForm.valid">Login</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-6">
+                    <div class="custome-check loginpage">
+                        <input id="option5" name="status" type="checkbox" [(ngModel)]="rememberMe">
+                        <label for="option5">Remember me</label>
+                    </div>
+                </div>
+                 <div class="col-sm-6 col-6">
+                    <a class="forgotlink" routerLinkActive="active" [routerLink]="['/forgot-password']">Forgot password ?</a>
+                </div>
             </div>            
         </form>
     </div>

@@ -62,7 +62,7 @@
  
  .card-header input[type="text"] {
      border: 1px solid #c2c2c2;
-     padding: 0.5rem 0.75rem;
+     padding: 0.6rem 0.75rem;
      border-radius: 4px;
  }
  
@@ -264,6 +264,11 @@
  .flex {
      display: flex;
      position: relative;
+ }
+
+ .flex > input{
+     flex: 1 1 auto;
+     width: 1%;
  }
  
  .box-footer .form-control {
@@ -719,7 +724,7 @@
  
  .grade input[type="radio"] {
      opacity: 0;
-     margin-right: -13px;
+     margin-right: -17px;
  }
  
  .grade input[type="radio"]:focus+ label {
@@ -795,6 +800,7 @@
  .pagination {
      float: right;
      padding-right: 0px;
+     margin-bottom: 13px;
  }
  
  .icns {
@@ -1097,23 +1103,39 @@
  
  .pagination-section > .row-on-page {
      float: left;
-     padding-top: 6px;
+     padding-top: 4px;
+ }
+
+ .table>tfoot>tr>td{
+     padding-bottom: 0;
  }
  
  .datepicker-input {
      position: absolute;
      z-index: 9999;
-     left: 33px;
+     left: 0;
      border: 0 !important;
-     width: 110px !important;
-     top: 11px;
+     top: 9px;
  }
+
+ .datepicker-input {
+    display: inline-block;
+    width: 120px !important;
+}
  
  .datepicker-input-icon {
      position: absolute;
-     left: 0px;
+     right: 12px;
      z-index: 999;
      top: 15px;
+ }
+
+ .datepicker-container{
+     position: static !important;
+ }
+
+  .datepicker-container .datepicker-calendar{
+     right: 0;
  }
  
  .nopointer {
@@ -1151,6 +1173,16 @@
 
  /*login page*/
  
+ .login-box-body .forgotpswd h2{
+    color: #444;
+    font-size: 23px;
+    font-weight: 600;
+    padding-top: 11px; }
+
+ .login-box-body .forgotpswd p{
+   color: #444;
+ }
+
  .login-box-body .btn.btn-flat {
      margin-top: 7px;
  }
@@ -1215,10 +1247,18 @@
  
  .forgotlink {
      color: #444;
+    float: right;
+    padding-top: 4px;
+ }
+
+ .linktext{
+     color:#444;
  }
  
  .forgotlink:hover,
- .forgotlink:focus {
+ .forgotlink:focus,
+ .linktext:hover,
+ .linktext:focus {
      color: #4dbd74 !important;
  }
  
@@ -1861,6 +1901,7 @@
      width: 21px;
      height: 21px;
      left: 0;
+     top: 3px;
      border: 3px solid #cccccc;
      border-radius: 50%;
      background-color: #fff;
@@ -1876,7 +1917,7 @@
      width: 11px;
      height: 11px;
      left: 5px;
-     top: 5px;
+     top: 8px;
      border-radius: 50%;
      background-color: #555555;
      -webkit-transform: scale(0, 0);
@@ -1979,19 +2020,33 @@
          position: relative;
          top: -2px;
      }
-     .grade label {
-         padding: 0.5rem 0.7rem;
-     }
+    
      .first_block {
          text-align: center;
      }
  }
+
+@media (min-width:1024px) and (max-width:1200px) {
+     .grade label {
+        padding: 0.6rem 1.3rem;
+     }
+}
+
+ @media (max-width:1024px) {
+     .grade label {
+         padding: 0.5rem 0.4rem;
+     }
+}
  
  @media (min-width:992px) and (max-width:1150px) {
      ul.navbar-nav.width {
          width: 52%
      }
+     .form-group > label {
+     font-size:16px;
+     }
  }
+
  
  @media (max-width:991px) {
      .navbar-brand {
@@ -2107,6 +2162,8 @@
      }
  }
  
+
+
  @media (min-width:768px) and (max-width:992px) {
      .product_first {
          font-size: 14px;
@@ -2114,6 +2171,9 @@
      .overview_table1 tr th,
      .overview_table1 tr td {
          padding: 3px;
+     }
+     .form-group > label {
+        font-size: 16px;
      }
      .frst_dv li.sml_txt {
          font-size: 22px;
@@ -2179,11 +2239,19 @@
      }
  }
  
+
  @media (min-width:570px) and (max-width:1020px) {
      .grade label {
          padding: 0.5rem 0.8rem;
      }
  }
+
+@media (min-width:576px) and (max-width:720px) {
+.grade label {
+    font-size: 16px;
+    padding: 7px;
+}
+}
  
  @media (max-width:480px) {
      .content-wrapper header.main-header form.sidebar-form {
