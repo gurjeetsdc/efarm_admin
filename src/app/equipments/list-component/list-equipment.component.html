@@ -14,13 +14,13 @@
                 <div class="is-loading"><i class="page-loader"></i></div>        
             </div>
             <!-- section ends  -->
-
+            <ngx-flash-messages></ngx-flash-messages>
             <div class="card" *ngIf="!isPageLoading">
             <!-- <div class="card"> -->
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-3 col-12">
-                            <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
+                                <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                             <div class="flex">
                                 <input class="form-control" name="search" (keyup)="searchEquipment($event)" [(ngModel)]="searchTerm" placeholder="Search" type="text">
                                 <span class="input-group-btn">

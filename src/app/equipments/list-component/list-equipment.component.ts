@@ -9,6 +9,8 @@ import { EquipmentService } from '../services/equipment.service';
 
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
+import { FlashMessagesService } from 'ngx-flash-messages';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
     selector: 'app-equipment-management',
@@ -39,13 +41,12 @@ export class ListEquipmentComponent implements OnInit {
     public errMessage            = "";
 
    
-    public constructor( private activatedRouter: ActivatedRoute, private _router: Router, private _equipmentService: EquipmentService) { 
+    public constructor( private activatedRouter: ActivatedRoute, private _router: Router, private _equipmentService: EquipmentService, private _flashMessagesService: FlashMessagesService, private _cookieService: CookieService) { 
         
-    }
+    }   
 
     ngOnInit(): void {
-        
-        this._router.events.subscribe((evt) => {
+         this._router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
             }
@@ -60,7 +61,8 @@ export class ListEquipmentComponent implements OnInit {
         this.activePage = 1;
         this.getEquipments();
 
-        this.itemsOnPage = this.rowsOnPage;        
+        this.itemsOnPage = this.rowsOnPage;
+
     }
 
     public toInt(num: string) {
@@ -81,7 +83,7 @@ export class ListEquipmentComponent implements OnInit {
     }
 
     sendUpdateEquipment( equipmentID ) {     
-        console.log(equipmentID);   
+        
         let route = '/equipments/edit/'+equipmentID;
         this._router.navigate([route]);       
     }
@@ -125,26 +127,32 @@ export class ListEquipmentComponent implements OnInit {
     }  
 
     checkAccessToken( err ): void {
-        console.log(err);
-        let status     = err.status;
-        let statusText = err.statusText;
+        let code    = err.code;
+        let message = err.message;
 
-        if( (status == 401 && statusText == 'Unauthorized')) {
-            localStorage.removeItem('user');
+        if( (code == 401 && message == "authorization")) {
+            this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         }else {
-            console.log('Something unexpected happened, please try again later.');
-        }        
+            
+        }      
     }
 
     /*get all equipments*/
     getEquipments() {   
         this._equipmentService.getAllEquipments( this.rowsOnPage, this.activePage, this.sortTrem,  this.searchTerm ).subscribe(res => {
-            this.data       = res.data.equipments;
-            this.itemsTotal = res.data.total;
+            
             this.isLoading     = false;
             this.isPageLoading = false;
-            console.log("allEquipments loaded");
+            
+            if(res.success) {
+                this.data       = res.data.equipments;
+                this.itemsTotal = res.data.total;
+                this.showAlert();
+            } else {
+                this.checkAccessToken(res.error);    
+            }    
+            
         }, 
         err => {
               this.checkAccessToken( err );
@@ -193,7 +201,7 @@ export class ListEquipmentComponent implements OnInit {
     }
 
     downloadCSV(): void {
-        console.log('Downlaod CSV');
+        
         let i;
         let filteredData = [];
         
@@ -225,5 +233,17 @@ export class ListEquipmentComponent implements OnInit {
 
         let fileName = "EquipmentReport-"+Math.floor(Date.now() / 1000); 
         new Angular2Csv( filteredData, fileName);
+    }
+
+    showAlert(): void {
+
+        let alertMessage = this._cookieService.get('equipmentAlert');
+        if( alertMessage ) {
+            this._flashMessagesService.show( alertMessage, {
+                classes: ['alert', 'alert-success'],
+                timeout: 3000,
+            });
+            this._cookieService.remove('equipmentAlert');
+        }    
     }
 }

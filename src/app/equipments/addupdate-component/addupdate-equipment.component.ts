@@ -7,6 +7,7 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
 
 import { EquipmentService } from '../services/equipment.service';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
     templateUrl: 'addupdate-equipment.component.html'
@@ -70,7 +71,7 @@ export class AddUpdateEquipmentComponent {
     private states: any;
     private districts: any;
     
-    constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _equipmentService: EquipmentService,  private changeDetectorRef: ChangeDetectorRef) {
+    constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _equipmentService: EquipmentService,  private changeDetectorRef: ChangeDetectorRef, private _cookieService: CookieService) {
         
         this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});                
 
@@ -78,9 +79,13 @@ export class AddUpdateEquipmentComponent {
         
         if( this.equipmentID ) {
             this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { 
-                        this.equipment = res.data; 
-                        this.action = 'Edit'; 
-                        this.isLoading = false;                        
+                        this.isLoading = false;
+                        if(res.success) {
+                            this.equipment = res.data; 
+                            this.action = 'Edit';                                                     
+                        } else {
+                            this.checkAccessToken(res.error);    
+                        } 
                     }, 
                     err => {
                         this.checkAccessToken(err);
@@ -132,7 +137,6 @@ export class AddUpdateEquipmentComponent {
 
     submitEquipment() {
         this.isLoading = true;
-        console.log('submitting Equipment...');
 
         if( this.action == 'Edit' ) {
             this.editEquipment();            
@@ -199,7 +203,6 @@ export class AddUpdateEquipmentComponent {
         /* Initialize category. */
         let stateName = this.equipment.state; 
 
-        console.log(stateName);
 
         if( stateName ){
             this.states.filter(obj => obj.stateName == stateName).map( obj => this.districts = obj.districts)
@@ -209,7 +212,6 @@ export class AddUpdateEquipmentComponent {
     }
 
     addEquipment() {
-        console.log('Posting Equipment...');
         this.equipment.category = this.equipment.category_id;
         this.equipment.user     = this.equipment.user_id;
 
@@ -218,9 +220,9 @@ export class AddUpdateEquipmentComponent {
             this.response    = res;
             this.showMessage = true;
             // this.equipment   = {};
+            this._cookieService.put('equipmentAlert', 'Added successfully.');
             this.clearEquipment();
             this._router.navigate(['/equipments/list', {data: "success"} ]);
-            console.log(this.response)
         },
         err => {
             this.checkAccessToken(err);
@@ -230,7 +232,6 @@ export class AddUpdateEquipmentComponent {
 
 
     editEquipment() {
-        console.log('Udpating Equipment...');
         
         this.equipment.category = this.equipment.category_id;
         this.equipment.user     = this.equipment.user_id;
@@ -239,6 +240,7 @@ export class AddUpdateEquipmentComponent {
             this.response    = res;
             this.showMessage = true;
             
+            this._cookieService.put('equipmentAlert', 'Updated successfully.');
 
             this.clearEquipment();            
             this._router.navigate(['/equipments/list', {data: "success"} ]);
@@ -253,16 +255,14 @@ export class AddUpdateEquipmentComponent {
     }
 
     checkAccessToken( err ): void {
-        console.log(err);
-        let status     = err.status;
-        let statusText = err.statusText;
+        let code    = err.code;
+        let message = err.message;
 
-        if( (status == 401 && statusText == 'Unauthorized')) {
-            localStorage.removeItem('user');
+        if( (code == 401 && message == "authorization")) {
+            this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         }else {
-            console.log('Something unexpected happened, please try again later.');
-        }        
-    }   
+        }      
+    }
 }
 

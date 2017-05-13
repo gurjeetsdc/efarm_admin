@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
 import { EquipmentService } from '../services/equipment.service';
+import { CookieService } from 'ngx-cookie';
 
 
 @Component({
@@ -16,13 +17,17 @@ export class ViewEquipmentComponent {
 
     private isLoading:boolean = true;
 
-    constructor(private _router: Router, private _activatedRouter: ActivatedRoute, private _equipmentService: EquipmentService) {     	
+    constructor(private _router: Router, private _activatedRouter: ActivatedRoute, private _equipmentService: EquipmentService, private _cookieService: CookieService) {     	
         
         this.equipmentID = _activatedRouter.snapshot.params['id'];
         if( this.equipmentID ) {
             this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { 
-                this.equipment = res.data;  
-                this.isLoading = false; 
+                this.isLoading = false;
+                if( res.success  ){
+                    this.equipment = res.data;  
+                }else{
+                    this.checkAccessToken( res.error );    
+                }
             }, 
             err => {
                 this.checkAccessToken( err );
@@ -35,16 +40,15 @@ export class ViewEquipmentComponent {
         this._router.navigate([route]);       
     }   
 
-    checkAccessToken( err ): void {
-        console.log(err);
-        let status     = err.status;
-        let statusText = err.statusText;
+   checkAccessToken( err ): void {
+        let code    = err.code;
+        let message = err.message;
 
-        if( (status == 401 && statusText == 'Unauthorized')) {
-            localStorage.removeItem('user');
+        if( (code == 401 && message == "authorization")) {
+            this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         }else {
-            console.log('Something unexpected happened, please try again later.');
-        }        
-    }   
+            
+        }      
+    }
 }

@@ -243,7 +243,7 @@
                     </div>
                     <div class="col-sm-6">
                          <div class="form-group">
-                            <label for="modelyear">Model year</label>
+                            <label for="modelyear">Model Year</label>
                             <select id="modelyear" name="modelyear" class="form-control" size="1" [(ngModel)]="equipment.modelyear">
                                 <option value="">Please select</option>
                                 <option *ngFor="let year of years" value="{{year}}">{{year}}</option>                                                                
@@ -263,7 +263,7 @@
                             <label for="rate">Price</label>
                             <div class="flex">
                                 <div class="icnposition"><i class="fa fa-rupee"></i></div>
-                                <input type="number" id="rate" name="rate" class="form-control pleft25" #rate="ngModel" [(ngModel)]="equipment.rate" placeholder="" required />                                  
+                                <input type="number" id="rate" name="rate" min="1" class="form-control pleft25" #rate="ngModel" [(ngModel)]="equipment.rate" placeholder="" required />                                  
                                 
                                 <div class="input-group-btn" *ngIf="equipment.rentSell != 'sell'">
                                     <select class="btn btn-secondary dropdown-toggle" [(ngModel)]="equipment.price_unit" name="price_unit">
@@ -279,6 +279,9 @@
                                 <small *ngIf="rate.errors?.required && rate.touched" class="text-danger">
                                     Price is required.
                                 </small>
+                                <small *ngIf="rate.errors?.min && rate.touched" class="text-danger">
+                                    Minimum price should be 1.
+                                </small>
                             </div>                                             
                         </div>
                     </div>
@@ -288,15 +291,13 @@
                        <div class="form-group has-required">
                             <label for="quantity">Quantity</label>
                             <div class="input-group">                                
-                                <input type="number" id="quantity" name="quantity" min="1" class="form-control pleft25" #quantity="ngModel" [(ngModel)]="equipment.quantity" placeholder="" required />                                                                  
-                                <div class="error-block">
-                                    <small *ngIf="quantity.errors?.required && quantity.touched" class="text-danger">
-                                        Quantity is required.
-                                    </small>
-                                </div>
-
+                                <input type="number" id="quantity" name="quantity" min="1" class="form-control pleft25" #quantity="ngModel" [(ngModel)]="equipment.quantity" placeholder="" required />
                             </div> 
-                                                                        
+                            <div class="error-block">
+                                <small *ngIf="quantity.errors?.required && quantity.touched" class="text-danger">
+                                    Quantity is required.
+                                </small>
+                            </div>                                                                 
                         </div>
                     </div>
                     <div class="col-sm-6">

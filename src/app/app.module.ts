@@ -25,6 +25,8 @@ import { HttpModule } from '@angular/http';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 
+import { FlashMessagesModule } from 'ngx-flash-messages';
+
 
 import { LoginComponent } from './auth/login/login.component';
 import { CustomFormsModule } from 'ng2-validation';
@@ -41,7 +43,8 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
     PaginationModule.forRoot(),
     CookieModule.forRoot(),    
     HttpModule,
-    CustomFormsModule
+    CustomFormsModule,
+    FlashMessagesModule
   ],
   declarations: [
     AppComponent,
