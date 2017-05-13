@@ -68,7 +68,7 @@ export class CropService {
         this._accessToken   = this.getAccessToken();
 
         headers.append('Authorization', this._accessToken );
-        return this._http.get(this._host +'/category?type=crops', { headers: headers }).map((res:Response) => res.json());
+        return this._http.get(this._host +'/category?type=crops&sort=name', { headers: headers }).map((res:Response) => res.json());
     }
 
     /*Use to fetch all Users*/
@@ -87,7 +87,7 @@ export class CropService {
         this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host +'/states', { headers: headers }).map((res:Response) => res.json())
+        return this._http.get(this._host +'/states?sort=stateName', { headers: headers }).map((res:Response) => res.json())
     }
 
     getAccessToken(): string {
