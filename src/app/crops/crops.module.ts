@@ -9,6 +9,7 @@ import { CropsRoutingModule } from './crops-routing.module';
 import { CropService } from './services/crop.service';
 import { CustomFormsModule } from 'ng2-validation';
 import { DatePickerModule } from 'ng2-datepicker';
+import { FlashMessagesModule } from 'ngx-flash-messages';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { DatePickerModule } from 'ng2-datepicker';
      NG2DataTableModule,
      // DataTableModule,
      CustomFormsModule,
-     DatePickerModule    
+     DatePickerModule, 
+     FlashMessagesModule    
   ],
   providers: [
   	CropService

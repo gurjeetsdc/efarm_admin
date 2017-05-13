@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { CookieService } from 'ngx-cookie';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+import { FlashMessagesService } from 'ngx-flash-messages';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,7 @@ export class ListUserComponent implements OnInit {
     public totalRecords          = 0;
     public filterQuery           = "";
     public rowsOnPage            = 5;
-    public sortBy                = "createdAt";
+    public sortBy                = "";
     public sortOrder             = "desc";
     public activePage            = 1;
     public itemsTotal            = 0;
@@ -29,7 +30,7 @@ export class ListUserComponent implements OnInit {
     public isPageLoading:boolean = true;
     public roles                 = 'U';
    
-    public constructor(private _router: Router, private _userService: UserService, private _cookieService: CookieService ) { 
+    public constructor(private _router: Router, private _userService: UserService, private _cookieService: CookieService, private _flashMessagesService: FlashMessagesService ) { 
         
     }
 
@@ -43,7 +44,7 @@ export class ListUserComponent implements OnInit {
         });
 
         /*set initial sort condition */
-        this.sortTrem = this.sortBy + ' ' + this.sortOrder; 
+        this.sortTrem = 'createdAt' + ' ' + this.sortOrder; 
 
         /*Load data*/
         this.getUsers();        
@@ -125,6 +126,7 @@ export class ListUserComponent implements OnInit {
             if(res.success) {
                 this.data          = res.data.users;
                 this.itemsTotal    = res.data.total;
+                this.showAlert();
             } else {
                 this.checkAccessToken(res.error);
             }
@@ -200,5 +202,17 @@ export class ListUserComponent implements OnInit {
 
         let fileName = "UsersReport-"+Math.floor(Date.now() / 1000); 
         new Angular2Csv( filteredData, fileName);
+    }
+
+    showAlert(): void {
+
+        let alertMessage = this._cookieService.get('userAlert');
+        if( alertMessage ) {
+            this._flashMessagesService.show( alertMessage, {
+                classes: ['alert', 'alert-success'],
+                timeout: 3000,
+            });
+            this._cookieService.remove('userAlert');
+        }    
     }
 }

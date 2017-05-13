@@ -88,6 +88,7 @@ export class AddUpdateCropComponent {
             if(this.crop["sellerID"]) this.crop["seller"] = this.crop["sellerID"];
             this._cropService.update(this.crop).subscribe(res => {
                 this.isLoading = false;
+                this._cookieService.put('cropAlert', 'Updated successfully.');
                 this._router.navigate(['/crops/list']);
             },err => {
                 this.isLoading = false;
@@ -97,6 +98,7 @@ export class AddUpdateCropComponent {
             if(this.crop["sellerID"]) this.crop["seller"] = this.crop["sellerID"];
       	    this._cropService.add(this.crop).subscribe(res => {
                 this.isLoading = false;
+                this._cookieService.put('cropAlert', 'Added successfully.');
                 this._router.navigate(['/crops/list']);
             },err => {
                 this.isLoading = false;

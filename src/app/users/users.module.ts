@@ -9,6 +9,7 @@ import { AddUpdateUserComponent } from './addupdate-component/addupdate-user.com
 import { ViewUserComponent } from './view-component/view-user.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { CustomFormsModule } from 'ng2-validation'
+import { FlashMessagesModule } from 'ngx-flash-messages';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { CustomFormsModule } from 'ng2-validation'
       	CommonModule,
       	// DataTableModule,
         NG2DataTableModule,
-        CustomFormsModule    
+        CustomFormsModule,
+        FlashMessagesModule    
     ],
     declarations: [
       	ListUserComponent,

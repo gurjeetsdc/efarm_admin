@@ -20,12 +20,6 @@ export class AddUpdateUserComponent {
     constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService, private _cookieService: CookieService, private changeDetectorRef: ChangeDetectorRef ) { 
         this.userID = _activateRouter.snapshot.params['id'];        
 
-        /*Use to get all states*/
-        this._userService.getStates().subscribe( res => { 
-            this.states = res.data;   
-            if( this.userID ) this.setDistrict();
-        },err => {});
-
         if( this.userID ) {
             this._userService.get(this.userID).subscribe(res => {
                 if(res.success) {
@@ -40,6 +34,12 @@ export class AddUpdateUserComponent {
         } else {
             this.isPageLoading = false;
         }
+        
+        /*Use to get all states*/
+        this._userService.getStates().subscribe( res => { 
+            this.states = res.data;   
+            if( this.userID ) this.setDistrict();
+        },err => {});
     } 
 
     /*If useID exist then will update existing user otherwise will add new user*/
@@ -50,6 +50,7 @@ export class AddUpdateUserComponent {
             this._userService.update(this.user).subscribe(res => {
                 if(res.success) {                    
                     this.isLoading = false;
+                    this._cookieService.put('userAlert', 'Updated successfully.');
                     this._router.navigate(['/users/list']);
                 } else {
                     this.checkAccessToken(res.error);
@@ -62,6 +63,7 @@ export class AddUpdateUserComponent {
             this._userService.add(this.user).subscribe(res => {
                 if(res.success) {
                     this.isLoading = false;
+                    this._cookieService.put('userAlert', 'Added successfully.');
                     this._router.navigate(['/users/list']);
                 } else {
                     this.checkAccessToken(res.error);
