@@ -20,8 +20,9 @@ var addupdate_crop_component_1 = __webpack_require__(1405);
 var view_crop_component_1 = __webpack_require__(1407);
 var crops_routing_module_1 = __webpack_require__(1421);
 var crop_service_1 = __webpack_require__(1400);
-var ng2_validation_1 = __webpack_require__(673);
+var ng2_validation_1 = __webpack_require__(674);
 var ng2_datepicker_1 = __webpack_require__(1396);
+var ngx_flash_messages_1 = __webpack_require__(672);
 var CropsModule = (function () {
     function CropsModule() {
     }
@@ -35,7 +36,8 @@ CropsModule = __decorate([
             angular2_datatable_pagination_1.NG2DataTableModule,
             // DataTableModule,
             ng2_validation_1.CustomFormsModule,
-            ng2_datepicker_1.DatePickerModule
+            ng2_datepicker_1.DatePickerModule,
+            ngx_flash_messages_1.FlashMessagesModule
         ],
         providers: [
             crop_service_1.CropService
@@ -739,7 +741,7 @@ var queue_1 = __webpack_require__(1132);
 var Subscription_1 = __webpack_require__(130);
 var observeOn_1 = __webpack_require__(671);
 var ObjectUnsubscribedError_1 = __webpack_require__(311);
-var SubjectSubscription_1 = __webpack_require__(674);
+var SubjectSubscription_1 = __webpack_require__(675);
 /**
  * @class ReplaySubject<T>
  */
@@ -18701,7 +18703,7 @@ exports.NG2Paginator = NG2Paginator;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36), __webpack_require__(683)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36), __webpack_require__(684)(module)))
 
 /***/ }),
 /* 1120 */
@@ -19834,7 +19836,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var FromObservable_1 = __webpack_require__(679);
+var FromObservable_1 = __webpack_require__(680);
 var isArray_1 = __webpack_require__(309);
 var OuterSubscriber_1 = __webpack_require__(194);
 var subscribeToResult_1 = __webpack_require__(195);
@@ -20637,7 +20639,7 @@ __webpack_require__(1147);
 __webpack_require__(1148);
 __webpack_require__(1151);
 __webpack_require__(1152);
-__webpack_require__(675);
+__webpack_require__(676);
 __webpack_require__(1153);
 __webpack_require__(1154);
 __webpack_require__(1155);
@@ -20674,7 +20676,7 @@ __webpack_require__(1183);
 __webpack_require__(1184);
 __webpack_require__(1189);
 __webpack_require__(1185);
-__webpack_require__(676);
+__webpack_require__(677);
 __webpack_require__(1186);
 __webpack_require__(1187);
 __webpack_require__(1188);
@@ -20705,7 +20707,7 @@ __webpack_require__(1209);
 __webpack_require__(1210);
 __webpack_require__(1211);
 __webpack_require__(1212);
-__webpack_require__(677);
+__webpack_require__(678);
 __webpack_require__(1213);
 __webpack_require__(1214);
 __webpack_require__(1215);
@@ -20749,7 +20751,7 @@ __webpack_require__(1252);
 __webpack_require__(1253);
 __webpack_require__(1254);
 __webpack_require__(1255);
-__webpack_require__(678);
+__webpack_require__(679);
 __webpack_require__(1256);
 __webpack_require__(1257);
 __webpack_require__(1258);
@@ -20782,7 +20784,7 @@ var ObjectUnsubscribedError_1 = __webpack_require__(311);
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError_1.ObjectUnsubscribedError;
 var TimeoutError_1 = __webpack_require__(1135);
 exports.TimeoutError = TimeoutError_1.TimeoutError;
-var UnsubscriptionError_1 = __webpack_require__(682);
+var UnsubscriptionError_1 = __webpack_require__(683);
 exports.UnsubscriptionError = UnsubscriptionError_1.UnsubscriptionError;
 var timeInterval_1 = __webpack_require__(1128);
 exports.TimeInterval = timeInterval_1.TimeInterval;
@@ -21537,7 +21539,7 @@ Observable_1.Observable.prototype.isEmpty = isEmpty_1.isEmpty;
 "use strict";
 
 var Observable_1 = __webpack_require__(9);
-var last_1 = __webpack_require__(680);
+var last_1 = __webpack_require__(681);
 Observable_1.Observable.prototype.last = last_1.last;
 //# sourceMappingURL=last.js.map
 
@@ -22090,7 +22092,7 @@ Observable_1.Observable.prototype.timestamp = timestamp_1.timestamp;
 "use strict";
 
 var Observable_1 = __webpack_require__(9);
-var toPromise_1 = __webpack_require__(681);
+var toPromise_1 = __webpack_require__(682);
 Observable_1.Observable.prototype.toPromise = toPromise_1.toPromise;
 //# sourceMappingURL=toPromise.js.map
 
@@ -34017,6 +34019,7 @@ var AddUpdateCropComponent = (function () {
                 this.crop["seller"] = this.crop["sellerID"];
             this._cropService.update(this.crop).subscribe(function (res) {
                 _this.isLoading = false;
+                _this._cookieService.put('cropAlert', 'Updated successfully.');
                 _this._router.navigate(['/crops/list']);
             }, function (err) {
                 _this.isLoading = false;
@@ -34028,6 +34031,7 @@ var AddUpdateCropComponent = (function () {
                 this.crop["seller"] = this.crop["sellerID"];
             this._cropService.add(this.crop).subscribe(function (res) {
                 _this.isLoading = false;
+                _this._cookieService.put('cropAlert', 'Added successfully.');
                 _this._router.navigate(['/crops/list']);
             }, function (err) {
                 _this.isLoading = false;
@@ -34108,11 +34112,13 @@ var crop_service_1 = __webpack_require__(1400);
 var router_1 = __webpack_require__(65);
 var ngx_cookie_1 = __webpack_require__(78);
 var Angular2_csv_1 = __webpack_require__(1399);
+var ngx_flash_messages_1 = __webpack_require__(672);
 var ListCropComponent = (function () {
-    function ListCropComponent(_router, _cropService, _cookieService) {
+    function ListCropComponent(_router, _cropService, _cookieService, _flashMessagesService) {
         this._router = _router;
         this._cropService = _cropService;
         this._cookieService = _cookieService;
+        this._flashMessagesService = _flashMessagesService;
         this.data = [];
         this.totalRecords = 0;
         this.filterQuery = "";
@@ -34208,6 +34214,7 @@ var ListCropComponent = (function () {
             if (res.success) {
                 _this.data = res.data.crops;
                 _this.itemsTotal = res.data.total;
+                _this.showAlert();
             }
             else {
                 _this.checkAccessToken(res.error);
@@ -34285,6 +34292,16 @@ var ListCropComponent = (function () {
         var fileName = "CropsReport-" + Math.floor(Date.now() / 1000);
         new Angular2_csv_1.Angular2Csv(filteredData, fileName);
     };
+    ListCropComponent.prototype.showAlert = function () {
+        var alertMessage = this._cookieService.get('cropAlert');
+        if (alertMessage) {
+            this._flashMessagesService.show(alertMessage, {
+                classes: ['alert', 'alert-success'],
+                timeout: 3000,
+            });
+            this._cookieService.remove('cropAlert');
+        }
+    };
     return ListCropComponent;
 }());
 ListCropComponent = __decorate([
@@ -34293,10 +34310,10 @@ ListCropComponent = __decorate([
         template: __webpack_require__(1434),
         styles: [__webpack_require__(1428)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _b || Object, typeof (_c = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _b || Object, typeof (_c = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _c || Object, typeof (_d = typeof ngx_flash_messages_1.FlashMessagesService !== "undefined" && ngx_flash_messages_1.FlashMessagesService) === "function" && _d || Object])
 ], ListCropComponent);
 exports.ListCropComponent = ListCropComponent;
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=/home/gurjeets/workingProjects/projects/efarm/code/efarm_admin/src/list-crop.component.js.map
 
 /***/ }),
@@ -34399,7 +34416,7 @@ var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(65);
 var forms_1 = __webpack_require__(3);
 var ng2_table_1 = __webpack_require__(1142);
-var ng2_bootstrap_1 = __webpack_require__(672);
+var ng2_bootstrap_1 = __webpack_require__(673);
 var list_crop_component_1 = __webpack_require__(1406);
 var addupdate_crop_component_1 = __webpack_require__(1405);
 var view_crop_component_1 = __webpack_require__(1407);
@@ -34511,7 +34528,7 @@ module.exports = "<div>\r\n    <div *ngIf=\"isLoading\" class=\"overlayloader\">
 /* 1434 */
 /***/ (function(module, exports) {
 
-module.exports = "    <!-- Loader div -->\n<div *ngIf=\"isLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div> \n</div>\n<!-- <div class=\"crop-wrapper animated fadeIn\">       -->\n<div class=\"crop-wrapper\">      \n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n            <!-- Page loading section -->\n            <div class=\"aligncenter_loader\" *ngIf=\"isPageLoading\">\n                <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \n            </div>\n            <!--Page loading section ends  -->\n            <div class=\"card\" *ngIf=\"!isPageLoading\">\n                <div class=\"card-header\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-3 col-12\">\n                            <form action=\"#\" class=\"ng-untouched ng-pristine ng-valid\" method=\"get\">\n                                <div class=\"flex\">\n                                    <input class=\"form-control\" name=\"search\" (keyup)=\"search($event)\" [(ngModel)]=\"searchTerm\" placeholder=\"Search\" type=\"text\">\n                                    <span class=\"input-group-btn\">\n                                    <button class=\"btn btn-flat\" id=\"search-btn\" (click)=\"search($event, 'button')\" name=\"search\" type=\"submit\"><i class=\"fa fa-search\"></i> </button>\n                                    </span>\n                                </div>\n                            </form>\n                        </div>\n                        <div class=\"col-sm-9 col-12 text-right linehght\"> \n                            <button type=\"button\" class=\"btn btn-success btnadd\" [routerLink]=\"['/crops/add']\">Add Crop</button>\n                            <div class=\"icns\">\n                                <a style=\"cursor:not-allowed;\"><img src=\"assets/img/pdf.png\" alt=\"pdf\"></a>\n                                <a (click)=\"downloadCSV()\" style=\"cursor:pointer;\"><img src=\"assets/img/xls.png\" alt=\"pdf\"></a>\n                            </div>\n                        </div>\n                    </div> <!-- .row -->\n                </div><!-- .card-header -->\n                \n                <div class=\"card-block\">    \n                    <div class=\"table-responsive\">                                    \n                    <!-- <table class=\"table table-bordered table-striped table-condensed\" [mfData]=\"data\" #mf=\"mfDataTable\"\n                               [mfRowsOnPage]=\"rowsOnPage\" [(mfSortBy)]=\"sortBy\" [(mfSortOrder)]=\"sortOrder\"> -->\n                    <table class=\"table table-striped\" [mfData]=\"data\" \n                        #mf=\"mfDataTable\" \n                        [mfRowsOnPage]=\"rowsOnPage\"\n                        [(mfSortBy)]=\"sortBy\" \n                        [(mfSortOrder)]=\"sortOrder\" \n                        [mfActivePage]=\"activePage\" \n                        (mfOnPageChange)=\"onPageChange($event)\"\n                        [mfIsServerPagination]=\"true\" \n                        [(mfAmountOfRows)]=\"itemsTotal\"\n                        (mfSortOrderChange)=\"onSortOrder($event)\">                                 \n                        <thead>\n                            <tr>\n\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"name\">Crop Name\n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'name'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'name'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">Category</th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"price\">Offer Price\n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'price'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'price'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">Qty.\n                                    <!-- <mfDefaultSorter by=\"quantity\">Qty. \n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'quantity'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'quantity'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter> -->\n                                </th>\n                                <th width=\"12%\">Highest Bid</th>\n                                <th width=\"8%\">\n                                    <mfDefaultSorter by=\"district\">District \n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'district'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'district'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"12%\">Available From</th>\n                                <th width=\"20%\">Seller</th>\n                                <th width=\"10%\">Actions</th>\n                            </tr>\n                        </thead>                        \n                        <tbody>\n                            <!-- <tr *ngIf='errMessage'>\n                                <td colspan=\"7\">{{errMessage}}</td>\n                            </tr> -->\n                            <tr *ngIf=\"itemsTotal == 0\">\n                                <td colspan=\"9\">No record to display.</td>\n                            </tr> \n                            <tr *ngFor=\"let crop of mf.data\">    \n                                <td data-label=\"Crop Name\"><a href=\"javascript:void(0);\" (click)=\"viewCrop(crop.id)\">{{crop.name}}</a></td>\n                                <td data-label=\"Category\">{{crop.category?.name}}</td>\n                                <td data-label=\"Offer Price\"><p><i class=\"fa fa-rupee\"></i> {{crop.price}}</td>\n                                <td data-label=\"Qty.\">{{crop.quantity}} {{crop.quantityUnit}}</td>\n                                <td data-label=\"Highest Bid\">-</td>\n                                <td data-label=\"District\">{{crop.district}}</td>\n                                <td data-label=\"Available From\">{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf=\"!crop.availableFrom?.momentObj\">-</span></td>\n                                <td data-label=\"Seller\">{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : '-'}} {{crop.seller ? crop.seller?.state ? '(' + crop.seller?.state + ')' : '' : ''}}</td>\n                                <td data-label=\"Actions\">                                    \n                                    <button (click)=\"editCrop(crop.id)\" class=\"btn btn-success\" title=\"Edit\" style=\"padding:1px 4px\"><i class=\"fa fa-pencil\"></i></button>\n                                    <button  (click)=\"removeCrop(crop.id)\" class=\"btn btn-danger orange\" title=\"Delete\" style=\"padding: 1px 4px\"><i class=\"fa fa-trash\"></i></button>                                    \n                                </td>\n                            </tr>\n                        </tbody>\n                        <tfoot>\n                            <tr>\n                                <td colspan=\"9\">\n                                    <div class=\"pagination-section\" *ngIf=\"itemsTotal > 0\">\n                                        <div class=\"row-on-page\">\n                                            <label class=\"label-control\">Show</label>\n                                            &nbsp;\n                                            <select class=\"input-sm\" name=\"itemsOnPage\"  [(ngModel)]=\"itemsOnPage\"  (change)=\"onRowsChange()\">\n                                                <option [ngValue]=\"5\">5</option>\n                                                <option [ngValue]=\"10\">10</option>\n                                                <option [ngValue]=\"25\">25</option>\n                                                <option [ngValue]=\"50\">50</option>\n                                                <option [ngValue]=\"100\">100</option>\n                                            </select>\n                                            &nbsp;\n                                            <label class=\"label-control\">entries</label>\n                                                &nbsp; &nbsp;\n                                            <span>Showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>\n                                            </div>\n                                            <div class=\"text-right\">\n                                                <mfBootstrapPaginator></mfBootstrapPaginator>   \n                                            </div>\n                                        <div style=\"clear: both;\"></div>\n                                    </div>  \n                                </td>    \n                            </tr>                            \n                        </tfoot>\n                    </table> \n                    </div>                            \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+module.exports = "    <!-- Loader div -->\n<div *ngIf=\"isLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div> \n</div>\n<!-- <div class=\"crop-wrapper animated fadeIn\">       -->\n<div class=\"crop-wrapper\">      \n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n            <!-- Page loading section -->\n            <div class=\"aligncenter_loader\" *ngIf=\"isPageLoading\">\n                <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \n            </div>\n             <ngx-flash-messages></ngx-flash-messages>\n            <!--Page loading section ends  -->\n            <div class=\"card\" *ngIf=\"!isPageLoading\">\n                <div class=\"card-header\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-3 col-12\">\n                            <form action=\"#\" class=\"ng-untouched ng-pristine ng-valid\" method=\"get\">\n                                <div class=\"flex\">\n                                    <input class=\"form-control\" name=\"search\" (keyup)=\"search($event)\" [(ngModel)]=\"searchTerm\" placeholder=\"Search\" type=\"text\">\n                                    <span class=\"input-group-btn\">\n                                    <button class=\"btn btn-flat\" id=\"search-btn\" (click)=\"search($event, 'button')\" name=\"search\" type=\"submit\"><i class=\"fa fa-search\"></i> </button>\n                                    </span>\n                                </div>\n                            </form>\n                        </div>\n                        <div class=\"col-sm-9 col-12 text-right linehght\"> \n                            <button type=\"button\" class=\"btn btn-success btnadd\" [routerLink]=\"['/crops/add']\">Add Crop</button>\n                            <div class=\"icns\">\n                                <a style=\"cursor:not-allowed;\"><img src=\"assets/img/pdf.png\" alt=\"pdf\"></a>\n                                <a (click)=\"downloadCSV()\" style=\"cursor:pointer;\"><img src=\"assets/img/xls.png\" alt=\"pdf\"></a>\n                            </div>\n                        </div>\n                    </div> <!-- .row -->\n                </div><!-- .card-header -->\n                \n                <div class=\"card-block\">    \n                    <div class=\"table-responsive\">                                    \n                    <!-- <table class=\"table table-bordered table-striped table-condensed\" [mfData]=\"data\" #mf=\"mfDataTable\"\n                               [mfRowsOnPage]=\"rowsOnPage\" [(mfSortBy)]=\"sortBy\" [(mfSortOrder)]=\"sortOrder\"> -->\n                    <table class=\"table table-striped\" [mfData]=\"data\" \n                        #mf=\"mfDataTable\" \n                        [mfRowsOnPage]=\"rowsOnPage\"\n                        [(mfSortBy)]=\"sortBy\" \n                        [(mfSortOrder)]=\"sortOrder\" \n                        [mfActivePage]=\"activePage\" \n                        (mfOnPageChange)=\"onPageChange($event)\"\n                        [mfIsServerPagination]=\"true\" \n                        [(mfAmountOfRows)]=\"itemsTotal\"\n                        (mfSortOrderChange)=\"onSortOrder($event)\">                                 \n                        <thead>\n                            <tr>\n\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"name\">Crop Name\n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'name'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'name'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">Category</th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"price\">Offer Price\n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'price'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'price'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">Qty.\n                                    <!-- <mfDefaultSorter by=\"quantity\">Qty. \n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'quantity'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'quantity'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter> -->\n                                </th>\n                                <th width=\"12%\">Highest Bid</th>\n                                <th width=\"8%\">\n                                    <mfDefaultSorter by=\"district\">District \n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'district'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'district'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"12%\">Available From</th>\n                                <th width=\"20%\">Seller</th>\n                                <th width=\"10%\">Actions</th>\n                            </tr>\n                        </thead>                        \n                        <tbody>\n                            <!-- <tr *ngIf='errMessage'>\n                                <td colspan=\"7\">{{errMessage}}</td>\n                            </tr> -->\n                            <tr *ngIf=\"itemsTotal == 0\">\n                                <td colspan=\"9\">No record to display.</td>\n                            </tr> \n                            <tr *ngFor=\"let crop of mf.data\">    \n                                <td data-label=\"Crop Name\"><a href=\"javascript:void(0);\" (click)=\"viewCrop(crop.id)\">{{crop.name}}</a></td>\n                                <td data-label=\"Category\">{{crop.category?.name}}</td>\n                                <td data-label=\"Offer Price\"><p><i class=\"fa fa-rupee\"></i> {{crop.price}}</td>\n                                <td data-label=\"Qty.\">{{crop.quantity}} {{crop.quantityUnit}}</td>\n                                <td data-label=\"Highest Bid\">-</td>\n                                <td data-label=\"District\">{{crop.district}}</td>\n                                <td data-label=\"Available From\">{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf=\"!crop.availableFrom?.momentObj\">-</span></td>\n                                <td data-label=\"Seller\">{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : '-'}} {{crop.seller ? crop.seller?.state ? '(' + crop.seller?.state + ')' : '' : ''}}</td>\n                                <td data-label=\"Actions\">                                    \n                                    <button (click)=\"editCrop(crop.id)\" class=\"btn btn-success\" title=\"Edit\" style=\"padding:1px 4px\"><i class=\"fa fa-pencil\"></i></button>\n                                    <button  (click)=\"removeCrop(crop.id)\" class=\"btn btn-danger orange\" title=\"Delete\" style=\"padding: 1px 4px\"><i class=\"fa fa-trash\"></i></button>                                    \n                                </td>\n                            </tr>\n                        </tbody>\n                        <tfoot>\n                            <tr>\n                                <td colspan=\"9\">\n                                    <div class=\"pagination-section\" *ngIf=\"itemsTotal > 0\">\n                                        <div class=\"row-on-page\">\n                                            <label class=\"label-control\">Show</label>\n                                            &nbsp;\n                                            <select class=\"input-sm\" name=\"itemsOnPage\"  [(ngModel)]=\"itemsOnPage\"  (change)=\"onRowsChange()\">\n                                                <option [ngValue]=\"5\">5</option>\n                                                <option [ngValue]=\"10\">10</option>\n                                                <option [ngValue]=\"25\">25</option>\n                                                <option [ngValue]=\"50\">50</option>\n                                                <option [ngValue]=\"100\">100</option>\n                                            </select>\n                                            &nbsp;\n                                            <label class=\"label-control\">entries</label>\n                                                &nbsp; &nbsp;\n                                            <span>Showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>\n                                            </div>\n                                            <div class=\"text-right\">\n                                                <mfBootstrapPaginator></mfBootstrapPaginator>   \n                                            </div>\n                                        <div style=\"clear: both;\"></div>\n                                    </div>  \n                                </td>    \n                            </tr>                            \n                        </tfoot>\n                    </table> \n                    </div>                            \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
 
 /***/ }),
 /* 1435 */

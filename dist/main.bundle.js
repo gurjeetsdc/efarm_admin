@@ -695,15 +695,15 @@ var ng2_charts_1 = __webpack_require__(685);
 var sidebar_directive_1 = __webpack_require__(807);
 var aside_directive_1 = __webpack_require__(804);
 var breadcrumb_component_1 = __webpack_require__(805);
-var ng2_bootstrap_1 = __webpack_require__(672);
+var ng2_bootstrap_1 = __webpack_require__(673);
 // Routing Module
 var app_routing_1 = __webpack_require__(801);
 var http_1 = __webpack_require__(131);
 // Layouts
 var full_layout_component_1 = __webpack_require__(410);
-var ngx_flash_messages_1 = __webpack_require__(684);
+var ngx_flash_messages_1 = __webpack_require__(672);
 var login_component_1 = __webpack_require__(407);
-var ng2_validation_1 = __webpack_require__(673);
+var ng2_validation_1 = __webpack_require__(674);
 var forgot_password_component_1 = __webpack_require__(406);
 var AppModule = (function () {
     function AppModule() {
