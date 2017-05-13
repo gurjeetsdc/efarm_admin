@@ -28,7 +28,7 @@
                             <button type="button" class="btn btn-success btnadd" [routerLink]="['/users/add']">Add User</button>
                             <div class="icns">
                                 <a style="cursor:not-allowed;"><img src="assets/img/pdf.png" alt="pdf"></a>
-                                <a style="cursor:not-allowed;"><img src="assets/img/xls.png" alt="pdf"></a>
+                                <a (click)="downloadCSV()" style="cursor:pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
                             </div>
                         </div>
                     </div>

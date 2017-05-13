@@ -37,7 +37,7 @@ export class AddUpdateCropComponent {
     public states: any;
     public districts: any;
     
-    constructor(private _router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService, private _cookieService: CookieService,  private changeDetectorRef: ChangeDetectorRef ) { 
+    constructor(private _router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService, private _cookieService: CookieService, private changeDetectorRef: ChangeDetectorRef ) { 
         this.cropID = _activateRouter.snapshot.params['id'];        
         
         if( this.cropID ) {
@@ -71,10 +71,7 @@ export class AddUpdateCropComponent {
         this._cropService.getStates().subscribe( res => { 
             this.states = res.data;   
             if( this.cropID ) this.setDistrict();
-        }, 
-        err => {
-            this.checkAccessToken(err);     
-        });
+        },err => {});
         
         this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});
 
@@ -107,6 +104,7 @@ export class AddUpdateCropComponent {
         }
     }
 
+    /*Use to set variety get from selected on category*/
     setVarieties( ): void {  
         /* reset values. */
         this.varieties         = null;
@@ -123,6 +121,7 @@ export class AddUpdateCropComponent {
         this.changeDetectorRef.detectChanges();
     }
 
+    /*Use to set district based on state name*/
     setDistrict( ): void {  
         /* reset values. */
         this.districts         = null;

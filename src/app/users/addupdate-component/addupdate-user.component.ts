@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
@@ -7,13 +7,25 @@ import { CookieService } from 'ngx-cookie';
 })
 export class AddUpdateUserComponent {
 	
-    public user            = {};
+    public user = {
+        district:'',
+        state:''
+    };
     public isLoading       = false;
     public isPageLoading   = true;
     public userID:any;
+    public states: any;
+    public districts: any;
 
-    constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService, private _cookieService: CookieService ) { 
+    constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService, private _cookieService: CookieService, private changeDetectorRef: ChangeDetectorRef ) { 
         this.userID = _activateRouter.snapshot.params['id'];        
+
+        /*Use to get all states*/
+        this._userService.getStates().subscribe( res => { 
+            this.states = res.data;   
+            if( this.userID ) this.setDistrict();
+        },err => {});
+
         if( this.userID ) {
             this._userService.get(this.userID).subscribe(res => {
                 if(res.success) {
@@ -58,6 +70,25 @@ export class AddUpdateUserComponent {
                 this.isLoading = false;
             });
         }
+    }
+
+    /*Use to set district based on state name*/
+    setDistrict( ): void {  
+        /* reset values. */
+        this.districts         = null;
+        if( !this.userID ){
+            this.user.district = null;
+            this.user.district = '';
+        }    
+
+        /* Initialize category. */
+        let stateName = this.user.state; 
+
+        if( stateName ){
+            this.states.filter(obj => obj.stateName == stateName).map( obj => this.districts = obj.districts)
+        }
+        
+        this.changeDetectorRef.detectChanges();
     }
 
     /*This function is use to remove user session if Access token expired. */

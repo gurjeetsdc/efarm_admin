@@ -62,6 +62,15 @@ export class UserService {
         return this._http.delete(this._host +'/user/'+ userID,  { headers: headers }).map((res:Response) => res.json());
     }
 
+    /*Use to fetch all States*/
+    getStates() {
+        let headers = new Headers();        
+        this._accessToken   = this.getAccessToken();
+        
+        headers.append('Authorization', this._accessToken);
+        return this._http.get(this._host +'/states', { headers: headers }).map((res:Response) => res.json())
+    }
+    
     getAccessToken(): string {
         let token           = this._cookieService.get('token');
         return 'Bearer ' + token;

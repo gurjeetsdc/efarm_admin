@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { CookieService } from 'ngx-cookie';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 @Component({
   selector: 'app-users',
@@ -155,16 +156,49 @@ export class ListUserComponent implements OnInit {
 
     public search( event, element = 'input' ) {
         if( element == 'input' ) {
+            this.searchTerm = this.searchTerm.trim();
             if(event.keyCode == 13 || this.searchTerm == '') {
                 this.isLoading  = true;
                 this.activePage = 1;
                 this.getUsers(); 
             }
         }else{
-            
+            this.searchTerm = this.searchTerm.trim();
             this.isLoading  = true;
             this.activePage = 1;
             this.getUsers(); 
         }
+    }
+
+    downloadCSV(): void {
+        let i;
+        let filteredData = [];
+        
+        let header = {
+            name:"Name",
+            email:'Email',
+            mobile:'Mobile',
+            state:'State',
+            registeredOn:'Registered On'
+        }
+
+        filteredData.push(header);
+
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let date = new Date(this.data[i].createdAt);
+            let registeredOn = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+            let temp = {
+                name: this.data[i].firstName + ' ' + this.data[i].lastName,
+                email: this.data[i].email ? this.data[i].email : '-',
+                mobile: this.data[i].mobile ? this.data[i].mobile :'-',
+                state: this.data[i].state ? this.data[i].state : '-',
+                registeredOn: registeredOn
+            };
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "UsersReport-"+Math.floor(Date.now() / 1000); 
+        new Angular2Csv( filteredData, fileName);
     }
 }

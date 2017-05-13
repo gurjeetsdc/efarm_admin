@@ -208,7 +208,7 @@ export class ListCropComponent implements OnInit {
             filteredData.push(temp);
         }       
 
-        let fileName = "CropReport-"+Math.floor(Date.now() / 1000); 
+        let fileName = "CropsReport-"+Math.floor(Date.now() / 1000); 
         new Angular2Csv( filteredData, fileName);
     }
 }
