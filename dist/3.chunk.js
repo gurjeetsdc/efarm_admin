@@ -33197,7 +33197,7 @@ var UserService = (function () {
         var headers = new http_1.Headers();
         this._accessToken = this.getAccessToken();
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host + '/states', { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this._host + '/states?sort=stateName', { headers: headers }).map(function (res) { return res.json(); });
     };
     UserService.prototype.getAccessToken = function () {
         var token = this._cookieService.get('token');

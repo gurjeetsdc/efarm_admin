@@ -33883,7 +33883,7 @@ var CropService = (function () {
         var headers = new http_1.Headers();
         this._accessToken = this.getAccessToken();
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host + '/category?type=crops', { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this._host + '/category?type=crops&sort=name', { headers: headers }).map(function (res) { return res.json(); });
     };
     /*Use to fetch all Users*/
     CropService.prototype.getAllUsers = function () {
@@ -33897,7 +33897,7 @@ var CropService = (function () {
         var headers = new http_1.Headers();
         this._accessToken = this.getAccessToken();
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host + '/states', { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this._host + '/states?sort=stateName', { headers: headers }).map(function (res) { return res.json(); });
     };
     CropService.prototype.getAccessToken = function () {
         var token = this._cookieService.get('token');

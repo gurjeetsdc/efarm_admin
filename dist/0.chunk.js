@@ -33889,7 +33889,7 @@ var EquipmentService = (function () {
         var urlSearchParams = new http_1.URLSearchParams();
         this.token = this.getAccessToken();
         headers.append('Authorization', this.token);
-        return this._http.get(this._host + '/category?type=equipments', { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this._host + '/category?type=equipments&sort=name', { headers: headers }).map(function (res) { return res.json(); });
     };
     /*Use to fetch all Users*/
     EquipmentService.prototype.getAllUsers = function () {
@@ -33904,13 +33904,13 @@ var EquipmentService = (function () {
         var headers = new http_1.Headers();
         this.token = this.getAccessToken();
         headers.append('Authorization', this.token);
-        return this._http.get(this._host + '/manufacturer', { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this._host + '/manufacturer?sort=name', { headers: headers }).map(function (res) { return res.json(); });
     };
     EquipmentService.prototype.getStates = function () {
         var headers = new http_1.Headers();
         this.token = this.getAccessToken();
         headers.append('Authorization', this.token);
-        return this._http.get(this._host + '/states', { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.get(this._host + '/states?sort=stateName', { headers: headers }).map(function (res) { return res.json(); });
     };
     EquipmentService.prototype.getAccessToken = function () {
         var token = this._cookieService.get('token');
