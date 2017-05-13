@@ -85,7 +85,7 @@ export class EquipmentService {
         this.token          = this.getAccessToken();
 
         headers.append('Authorization', this.token );
-        return this._http.get(this._host +'/category?type=equipments', { headers: headers }).map((res:Response) => res.json());
+        return this._http.get(this._host +'/category?type=equipments&sort=name', { headers: headers }).map((res:Response) => res.json());
     }
 
     /*Use to fetch all Users*/
@@ -107,15 +107,15 @@ export class EquipmentService {
         this.token   = this.getAccessToken();
         
         headers.append('Authorization', this.token);
-        return this._http.get(this._host +'/manufacturer', { headers: headers }).map((res:Response) => res.json())
+        return this._http.get(this._host +'/manufacturer?sort=name', { headers: headers }).map((res:Response) => res.json())
     }
 
     getStates() {
         let headers = new Headers();        
         this.token   = this.getAccessToken();
         
-        headers.append('Authorization', this.token);
-        return this._http.get(this._host +'/states', { headers: headers }).map((res:Response) => res.json())
+        headers.append('Authorization', this.token);        
+        return this._http.get(this._host +'/states?sort=stateName', { headers: headers }).map((res:Response) => res.json())
     }
     
     getAccessToken(): string {

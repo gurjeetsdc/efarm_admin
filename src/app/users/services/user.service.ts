@@ -68,7 +68,7 @@ export class UserService {
         this._accessToken   = this.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host +'/states', { headers: headers }).map((res:Response) => res.json())
+        return this._http.get(this._host +'/states?sort=stateName', { headers: headers }).map((res:Response) => res.json())
     }
     
     getAccessToken(): string {
