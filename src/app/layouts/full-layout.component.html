@@ -102,8 +102,9 @@
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-aqua" (click)="layout('inputs')" [ngClass]="{'active': active == 'inputs'}" [routerLink]="['/inputs/list']">
-                        <div class="inner" title="Inputs">
+                    <div class="small-box bg-aqua">
+                    <!-- <div class="small-box bg-aqua" (click)="layout('inputs')" [ngClass]="{'active': active == 'inputs'}" [routerLink]="['/inputs/list']"> -->
+                        <div class="inner" title="Inputs" style="cursor:not-allowed;">
                             <p>Inputs</p>
                         </div>
                         <div class="icon">
