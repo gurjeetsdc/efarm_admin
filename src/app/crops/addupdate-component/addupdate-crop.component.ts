@@ -21,7 +21,8 @@ export class AddUpdateCropComponent {
         quantityUnit:'Kg',
         availableUnit : 'Days',
         verified: 'No',
-        state:''
+        state:'',
+        district:''
     };
 
     public isLoading       = false;
@@ -38,13 +39,7 @@ export class AddUpdateCropComponent {
     
     constructor(private _router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService, private _cookieService: CookieService,  private changeDetectorRef: ChangeDetectorRef ) { 
         this.cropID = _activateRouter.snapshot.params['id'];        
-        this._cropService.getAllCategories().subscribe( res => {
-             this.category = res.data; 
-            if( this.cropID ) this.setVarieties();
-         }, err => {});
-        this._cropService.getAllUsers().subscribe( res => {
-             if(res.success) {this.sellers = res.data.users;} 
-         }, err => {});
+        
         if( this.cropID ) {
             this._cropService.get(this.cropID).subscribe(res => {
                 this.isPageLoading = false;
@@ -61,7 +56,27 @@ export class AddUpdateCropComponent {
         } else {
             this.isPageLoading = false;
         }
-        this.options = new DatePickerOptions();
+        /*Use to get all Crops categories*/
+        this._cropService.getAllCategories().subscribe( res => {
+             this.category = res.data; 
+            if( this.cropID ) this.setVarieties();
+        }, err => {});
+        
+        /*Use to get all users*/
+        this._cropService.getAllUsers().subscribe( res => {
+             if(res.success) {this.sellers = res.data.users;} 
+        }, err => {});
+
+        /*Use to get all states*/
+        this._cropService.getStates().subscribe( res => { 
+            this.states = res.data;   
+            if( this.cropID ) this.setDistrict();
+        }, 
+        err => {
+            this.checkAccessToken(err);     
+        });
+        
+        this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});
 
     }
 
@@ -103,6 +118,24 @@ export class AddUpdateCropComponent {
         let categoryID = this.crop.categoryID;        
         if( categoryID ){
             this.category.filter(obj => obj.id == categoryID).map( obj => this.varieties = obj.variety)
+        }
+        
+        this.changeDetectorRef.detectChanges();
+    }
+
+    setDistrict( ): void {  
+        /* reset values. */
+        this.districts         = null;
+        if( !this.cropID ){
+            this.crop.district = null;
+            this.crop.district = '';
+        }    
+
+        /* Initialize category. */
+        let stateName = this.crop.state; 
+
+        if( stateName ){
+            this.states.filter(obj => obj.stateName == stateName).map( obj => this.districts = obj.districts)
         }
         
         this.changeDetectorRef.detectChanges();

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CropService } from '../services/crop.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 @Component({
   selector: 'app-crops',
@@ -158,16 +159,56 @@ export class ListCropComponent implements OnInit {
     public search( event, element = 'input' ) {
         if( element == 'input' ) {
             if(event.keyCode == 13 || this.searchTerm == '') {
+                this.searchTerm = this.searchTerm.trim();
                 this.isLoading  = true;
                 this.activePage = 1;
                 this.getCrops(); 
             }
         }else{
-            
+            this.searchTerm = this.searchTerm.trim();
             this.isLoading  = true;
             this.activePage = 1;
             this.getCrops(); 
         }
     }
 
+    downloadCSV(): void {
+        let i;
+        let filteredData = [];
+        
+        let header = {
+            name:"Crop Name",
+            category:'Category',
+            price:'Offer Price',
+            quantity:'Qty.',
+            highestBid:'Highest Bid',
+            district:'District',
+            availableFrom:'Available From',
+            seller:'Seller'
+        }
+
+        filteredData.push(header);
+
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let availableDate = this.data[i].availableFrom ? this.data[i].availableFrom.day ? this.data[i].availableFrom.day + '/' + this.data[i].availableFrom.month + '/' + this.data[i].availableFrom.year : '-' :'-';
+            let seller = this.data[i].seller ? this.data[i].seller.firstName ? this.data[i].seller.firstName + ' ' + this.data[i].seller.lastName : this.data[i].seller.email : '-';
+            let state = this.data[i].seller ? this.data[i].seller.state ? '(' + this.data[i].seller.state + ')' : '' : '';
+            seller += ' ' + state;
+            let temp = {
+                name: this.data[i].name,
+                category: this.data[i].category.name,
+                price: this.data[i].price,
+                quantity: this.data[i].quantity,
+                highestBid: '-',
+                district: this.data[i].district,
+                availableFrom: availableDate,
+                seller: seller
+            };
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "CropReport-"+Math.floor(Date.now() / 1000); 
+        new Angular2Csv( filteredData, fileName);
+    }
 }

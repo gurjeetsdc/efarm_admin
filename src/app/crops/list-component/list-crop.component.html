@@ -28,7 +28,7 @@
                             <button type="button" class="btn btn-success btnadd" [routerLink]="['/crops/add']">Add Crop</button>
                             <div class="icns">
                                 <a style="cursor:not-allowed;"><img src="assets/img/pdf.png" alt="pdf"></a>
-                                <a style="cursor:not-allowed;"><img src="assets/img/xls.png" alt="pdf"></a>
+                                <a (click)="downloadCSV()" style="cursor:pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
                             </div>
                         </div>
                     </div> <!-- .row -->
@@ -71,7 +71,12 @@
                                     </mfDefaultSorter> -->
                                 </th>
                                 <th width="12%">Highest Bid</th>
-                                <th width="8%">District</th>
+                                <th width="8%">
+                                    <mfDefaultSorter by="district">District 
+                                        <i *ngIf="sortOrder == 'asc' && sortBy == 'district'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'district'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
                                 <th width="12%">Available From</th>
                                 <th width="20%">Seller</th>
                                 <th width="10%">Actions</th>
