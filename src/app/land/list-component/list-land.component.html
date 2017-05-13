@@ -67,21 +67,9 @@
                                     </mfDefaultSorter>
                                 </th> -->
                                 <th width="20%">
-                                    <mfDefaultSorter by="area">Khasra No.
-                                     <i *ngIf="sortOrder == 'asc'  && sortBy == 'khasra_no'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                     <i *ngIf="sortOrder == 'desc'  && sortBy == 'khasra_no'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter>
-                                </th>
-                                <!--<th width="20%">Area
-                                     <mfDefaultSorter by="area">Area
-                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
-                                    </mfDefaultSorter>
-                                </th> -->
-                                <th width="15%">
-                                    <mfDefaultSorter by="expected_price">Expected Price
-                                    <i *ngIf="sortOrder == 'asc'  && sortBy == 'expected_price'"  class="fa fa-sort-asc" aria-hidden="true"></i>
-                                    <i *ngIf="sortOrder == 'desc'  && sortBy == 'expected_price'"  class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    <mfDefaultSorter by="area">District
+                                     <i *ngIf="sortOrder == 'asc'  && sortBy == 'district'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                     <i *ngIf="sortOrder == 'desc'  && sortBy == 'district'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="20%">
@@ -90,6 +78,19 @@
                                      <i *ngIf="sortOrder == 'desc' && sortBy == 'rentSell'"  class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
+                                <th width="20%">Area
+                                     <mfDefaultSorter by="area">Area
+                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th> 
+                                <th width="15%">
+                                    <mfDefaultSorter by="expected_price">Expected Price
+                                    <i *ngIf="sortOrder == 'asc'  && sortBy == 'expected_price'"  class="fa fa-sort-asc" aria-hidden="true"></i>
+                                    <i *ngIf="sortOrder == 'desc'  && sortBy == 'expected_price'"  class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                
                                 <th width="10%">Actions</th>
                             </tr>
                         </thead>                        
@@ -101,10 +102,11 @@
                             
                                 <td data-label="Owner Name"><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.user?.firstName}} {{land.user?.lastName}}</a></td>
                                 <!-- <td>{{land.location}}</td> -->
-                                <td data-label="khasra No.">{{land.khasra_no}}</td>
-                                <!-- <td>{{land.area}} {{land.unit}}</td> -->
-                                <td data-label="Expected Price"><i class="fa fa-rupee"></i>{{land.expected_price}}</td>
+                                <td data-label="District">{{land.district}}</td>
                                 <td data-label="Land For">{{land.rentSell}}</td>
+                                <td>{{land.area}} {{land.unit}}</td>
+                                <td data-label="Expected Price"><i class="fa fa-rupee"></i>{{land.expected_price}} / {{land.priceunit}}</td>
+                                
 
                                 <td data-label="Actions">                                    
                                     <button (click)="sendUpdateLand(land.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>

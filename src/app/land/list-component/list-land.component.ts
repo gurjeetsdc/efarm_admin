@@ -92,7 +92,14 @@ export class ListLandComponent implements OnInit {
                 this.isLoading = false;
 
                 
-                this.removeByAttr(this.data, 'id', Id);     
+                 let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
+                this.itemsTotal = this.itemsTotal - 1;
+                
+                if( ! (this.itemsTotal >= start) ){
+                   this.activePage = (this.activePage - 1)
+                }
+                /* reload page. */
+                this.getLands();
             });  
         }
     } 
@@ -165,32 +172,23 @@ export class ListLandComponent implements OnInit {
         this.getLands();
     }
 
-   /* public search( ) {
-        if( this.searchTerm.length > 3 ){
-            this.getLands(); 
-        }else if( this.searchTerm.length == 0 ){
-            this.getLands(); 
-        }
-    }*/
-
-
     public search( event, element = 'input' ) {
         if( element == 'input' ) {
             if(event.keyCode == 13 || this.searchTerm == '') {
+                this.searchTerm = this.searchTerm.trim();
                 this.isLoading  = true;
+                this.getLands();
                 this.activePage = 1;
                 this.getLands(); 
             }
         }else{
-            
+            this.searchTerm = this.searchTerm.trim();
             this.isLoading  = true;
+            this.getLands(); 
             this.activePage = 1;
             this.getLands(); 
         }
     }
-
-
-
 
 
 

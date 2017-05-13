@@ -101,6 +101,15 @@ export class LandService {
         return this.http.get(this._host +'/category', { headers: headers }).map((res:Response) => res.json());
     }
 
+    getStates() {
+        let headers = new Headers();        
+        this.token   = this.getAccessToken();
+        
+        headers.append('Authorization', this.token);
+        return this.http.get(this._host +'/states', { headers: headers }).map((res:Response) => res.json())
+    }
+
+
     /**Check access token which saved in cookie here**/
     getAccessToken(): string {
         let token           = this._cookieService.get('token');

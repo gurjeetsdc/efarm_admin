@@ -29,7 +29,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-name">Owner Name</label>
-                            <p>{{land.user?.firstName ? land.user?.firstName : 'N-A' }} {{land.user?.lastName ? land.user?.lastName : 'N-A' }}</p>
+                            <p>{{land.user?.firstName ? land.user?.firstName : '-' }} {{land.user?.lastName ? land.user?.lastName : '-' }}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -49,7 +49,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-area">Periods</label>
-                            <p>{{land.periods ? land.periods : "N-A"}} {{land.periods ? land.periodsunit : ""}}</p>
+                            <p>{{land.periods ? land.periods : "-"}} {{land.periods ? land.periodsunit : ""}}</p>
                         </div>
                     </div>
             </div>
@@ -57,8 +57,24 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nf-location">Location</label>
-                            <p>{{land.location ? land.location : 'N-A'}}</p>
+                            <label for="nf-location">Address</label>
+                            <p>{{land.location ? land.location : '-'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-district">District</label>
+                            <p>{{land.district ? land.district : '-'}}</p>
+                        </div>
+                    </div>
+                   
+                </div>
+                 <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-state">State</label>
+                            <p>{{land.state ? land.state : "" }}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -67,18 +83,19 @@
                             <p>{{land.area}} Sq. {{land.unit}}</p>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-khasrano">Khasra no</label>
-                            <p>{{land.khasra_no ? land.khasra_no : 'N-A'}}</p>
+                            <p>{{land.khasra_no ? land.khasra_no : '-'}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-expectedprice">Expected Price</label>
-                            <p><i class="fa fa-rupee"></i> {{land.expected_price}} {{land.priceunit ? 'per':''}} {{land.priceunit}} </p>
+                            <p><i class="fa fa-rupee"></i> {{land.expected_price}} {{land.priceunit ? '/':''}} {{land.priceunit}} </p>
                         </div>
                     </div>
                 </div>
