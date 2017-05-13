@@ -3,7 +3,7 @@ import { CropService } from '../services/crop.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
-
+import { FlashMessagesService } from 'ngx-flash-messages';
 @Component({
   selector: 'app-crops',
   templateUrl: './list-crop.component.html',
@@ -28,7 +28,7 @@ export class ListCropComponent implements OnInit {
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
 
-    public constructor(private _router: Router, private _cropService: CropService, private _cookieService: CookieService ) { 
+    public constructor(private _router: Router, private _cropService: CropService, private _cookieService: CookieService, private _flashMessagesService: FlashMessagesService ) { 
         
     }
 
@@ -127,6 +127,7 @@ export class ListCropComponent implements OnInit {
             if(res.success) {
                 this.data          = res.data.crops;
                 this.itemsTotal    = res.data.total;
+                this.showAlert();
             } else {
                 this.checkAccessToken(res.error);    
             }
@@ -210,5 +211,17 @@ export class ListCropComponent implements OnInit {
 
         let fileName = "CropsReport-"+Math.floor(Date.now() / 1000); 
         new Angular2Csv( filteredData, fileName);
+    }
+
+    showAlert(): void {
+
+        let alertMessage = this._cookieService.get('cropAlert');
+        if( alertMessage ) {
+            this._flashMessagesService.show( alertMessage, {
+                classes: ['alert', 'alert-success'],
+                timeout: 3000,
+            });
+            this._cookieService.remove('cropAlert');
+        }    
     }
 }
