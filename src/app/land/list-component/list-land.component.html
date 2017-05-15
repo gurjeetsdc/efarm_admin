@@ -13,6 +13,7 @@
             <div class="aligncenter_loader" *ngIf="isPageLoading">
                 <div class="is-loading"><i class="page-loader"></i></div>        
             </div>
+            <ngx-flash-messages></ngx-flash-messages>
             <!-- section ends  -->
             <div class="card" *ngIf="!isPageLoading">
 
@@ -67,7 +68,7 @@
                                     </mfDefaultSorter>
                                 </th> -->
                                 <th width="20%">
-                                    <mfDefaultSorter by="area">District
+                                    <mfDefaultSorter by="district">District
                                      <i *ngIf="sortOrder == 'asc'  && sortBy == 'district'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                      <i *ngIf="sortOrder == 'desc'  && sortBy == 'district'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>

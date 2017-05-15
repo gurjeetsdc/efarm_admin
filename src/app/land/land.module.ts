@@ -9,6 +9,7 @@ import { ListLandComponent } from './list-component/list-land.component';
 import { AddLandComponent } from './addupdate-component/add-land.component';
 import { ViewLandComponent } from './view-component/view-land.component';
 import { LandRoutingModule } from './land-routing.module';
+import { FlashMessagesModule } from 'ngx-flash-messages';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { LandRoutingModule } from './land-routing.module';
   	CommonModule,
     NG2DataTableModule,
     CustomFormsModule,
-    DatePickerModule
+    DatePickerModule,
+    FlashMessagesModule
   ],
   providers: [
     LandService
