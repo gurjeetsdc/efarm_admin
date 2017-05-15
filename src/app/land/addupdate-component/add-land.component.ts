@@ -21,6 +21,7 @@ export class AddLandComponent {
         state: '',
         pincode: '',        
         periodsunit:'Day',
+        verified: 'No',
         priceunit:'Day',
         term_condition:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
     };
