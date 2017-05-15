@@ -73,14 +73,11 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="address">Address</label>
-                            <input type="text" id="address" name="address" #address="ngModel"  class="form-control" [(ngModel)]="crop.address" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" placeholder="" required />
+                            <input type="text" id="address" name="address" #address="ngModel"  class="form-control" [(ngModel)]="crop.address" placeholder="" required />
                             <div class="error-block">
                                 <small *ngIf="address.errors?.required && address.touched" class="text-danger">
                                     Address is required.
-                                </small>
-                                <small *ngIf="address.errors?.pattern && address.touched" class="text-danger">
-                                    Invalid input.
-                                </small>                                                           
+                                </small>                              
                             </div> 
                         </div>                                    
                     </div>
