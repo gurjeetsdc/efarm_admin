@@ -5,6 +5,8 @@ import { CookieService } from 'ngx-cookie';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { FlashMessagesService } from 'ngx-flash-messages';
 
+declare let jsPDF; 
+
 @Component({
   selector: 'app-users',
   templateUrl: './list-user.component.html',
@@ -180,7 +182,7 @@ export class ListUserComponent implements OnInit {
         
         let header = {
             name:"Name",
-            email:'Email',
+            Email:'Email',
             mobile:'Mobile',
             state:'State',
             registeredOn:'Registered On'
@@ -204,6 +206,62 @@ export class ListUserComponent implements OnInit {
 
         let fileName = "UsersReport-"+Math.floor(Date.now() / 1000); 
         new Angular2Csv( filteredData, fileName);
+    }
+
+    downloadPDF() {
+        
+        let i;
+        let filteredData = [];
+
+        let header = [
+            "Name",
+            "Email",
+            "Mobile",
+            "State",
+            "Registered On"
+        ]  
+
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let date = new Date(this.data[i].createdAt);
+            let registeredOn = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
+            let temp = [
+                this.data[i].firstName + ' ' + this.data[i].lastName,                
+                this.data[i].email,
+                this.data[i].mobile,
+                this.data[i].state ? this.data[i].state : '-',
+                registeredOn
+            ];
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "UsersReport-"+Math.floor(Date.now() / 1000); 
+
+        var doc = new jsPDF();    
+
+        doc.autoTable(header, filteredData,  {
+            theme: 'grid',
+            headerStyles: {fillColor: 0},
+            startY: 10, // false (indicates margin top value) or a number 
+            margin: {horizontal: 7}, // a number, array or object 
+            pageBreak: 'auto', // 'auto', 'avoid' or 'always' 
+            tableWidth: 'wrap', // 'auto', 'wrap' or a number,  
+            tableHeight: '1', // 'auto', 'wrap' or a number,  
+            showHeader: 'everyPage',
+            tableLineColor: 200, // number, array (see color section below) 
+            tableLineWidth: 0,
+            fontSize: 10,
+            overflow : 'linebreak',
+            columnWidth : 'auto',
+            cellPadding : 2,       
+            cellSpacing : 0,       
+            valign : 'top',
+            lineHeight: 15, 
+
+        });
+
+        doc.save(fileName);
     }
 
     showAlert(): void {
