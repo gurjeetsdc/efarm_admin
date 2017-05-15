@@ -237,7 +237,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                         <label for="nf-qty">Available Periods</label>
+                         <label for="nf-qty">Available Period</label>
                           <div class="flex">
                               <input type="number" id="availablePeriod" name="availablePeriod" class="form-control" aria-label="Text input with dropdown button" #availablePeriod="ngModel" [(ngModel)]="crop.availablePeriod" min="1" max="9999999999999998" placeholder="">
                                <div class="input-group-btn">
@@ -250,7 +250,7 @@
                             </div>
                             <div class="error-block">
                                 <small *ngIf="availablePeriod.errors?.required && availablePeriod.touched" class="text-danger">
-                                    Availibility Period is required.
+                                    Available Period is required.
                                 </small>
                                 <small *ngIf="availablePeriod.errors?.min && availablePeriod.touched" class="text-danger">
                                     Minimum 1 Day is required.
