@@ -39,17 +39,17 @@
                         </div>
                     </div>
             </div>
-             <div class="row">
+            <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-location">Available Date</label>
-                            <p>{{land.avail_date?.momentObj | date:'yyyy/MM/dd'}}</p>
+                            <p>{{land.avail_date?.momentObj | date:'dd/MM/yyyy'}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-area">Periods</label>
-                            <p>{{land.periods ? land.periods : "-"}} {{land.periods ? land.periodsunit : ""}}</p>
+                            <p>{{land.periods ? land.periods : "-"}} / {{land.periods ? land.periodsunit : ""}}</p>
                         </div>
                     </div>
             </div>

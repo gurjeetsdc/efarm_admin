@@ -61,24 +61,27 @@
                         <div class="form-group">
                                 <label for="periods">Periods</label>
                          <div class="flex">
-                            <input type="number" id="nf-periods" [disabled]="land.rentSell == 'Sell'" name="nf-periods" class="form-control pleft25" [(ngModel)]="land.periods" >
+                            <input type="number"  id="periods" [disabled]="land.rentSell == 'Sell'" name="periods" class="form-control pleft25" [(ngModel)]="land.periods" >
                           <div class="input-group-btn">
                               <select id="select3"  [disabled]="land.rentSell == 'Sell'" name="select3" class="disable btn btn-secondary dropdown-toggle"  [(ngModel)]="land.periodsunit" size="1">
-                                <option value="">-Units-</option>
+                                <!-- <option value="">-Units-</option> -->
                                 <option value="Day">Day</option>
                                 <option value="Week">Week</option>
                                 <option value="Month">Month</option>
                                 <option value="Year">Year</option>
                             </select>
                          </div>
-                        </div>  
+                        </div> 
+
+                    
                         </div>
+
                        </div>
                 </div>
 
                 <div class="row">
 
-                     <div class="col-sm-6">
+                     <!-- <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-category">Category</label>
                             <select id="nfcategory" name="nfcategory" class="form-control" #nfcategory="ngModel" size="1" [(ngModel)]="land.categoryId" required>
@@ -91,32 +94,40 @@
                                 </small>                                                          
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="nf-variety">Address</label>
-                            <input type="text" id="nflocation" name="nflocation" #nflocation="ngModel" class="form-control" [(ngModel)]="land.location" required>
+                            <input type="text" id="nflocation" name="nflocation" #nflocation="ngModel" class="form-control" [(ngModel)]="land.location"  pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
                            <div class="error-block">
                                 <small *ngIf="nflocation.errors?.required && nflocation.touched" class="text-danger">
-                                    Location is required.
+                                    Address is required.
                                 </small>
+                                <small *ngIf="nflocation.errors?.pattern && nflocation.touched" class="text-danger">
+                                    Address is required.
+                                </small> 
                             </div>
                         </div>
                     </div>
-                    
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
+
+                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-city">City/Village</label>
-                            <input type="text" id="nf-city" name="city" #city="ngModel" class="form-control" [(ngModel)]="land.city" placeholder="" required>
+                            <input type="text" id="city" name="city" #city="ngModel" class="form-control" [(ngModel)]="land.city" placeholder=""  pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
                             <div class="error-block">
                                 <small *ngIf="city.errors?.required && city.touched" class="text-danger">
                                     City is required.
-                                </small>                                                          
+                                </small>   
+                                <small *ngIf="city.errors?.pattern && city.touched" class="text-danger">
+                                    City/Village is required.
+                                </small>                                                        
                             </div> 
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
+                   
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="state">State</label>
@@ -133,9 +144,7 @@
                             </div> 
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                <div class="col-sm-6">
+                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="district">District</label>
                             <select id="district" name="district"  [(ngModel)]="land.district" placeholder="" required class="form-control" size="1" #district="ngModel" required>
@@ -151,6 +160,10 @@
                             </div> 
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
+               
 
                   <div class="col-sm-6">
                     <div class="form-group has-required">
@@ -169,21 +182,16 @@
                          </div>
                     </div>
                 </div>
-                  
-                </div>
-                 
-
-                 <div class="row">  
-                      <div class="col-sm-6">
+                 <div class="col-sm-6">
                    <div class="form-group has-required">
                     <label for="nf-qty">Area</label>
                      <div class="flex">
                      
-                         <input type="text" id="nfarea" name="nfarea" #nfarea="ngModel" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area" required>
+                         <input type="text" id="nfarea" name="nfarea"  class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="land.area"  required #nfarea="ngModel">
                         
                           <div class="input-group-btn">
                               <select id="select2" name="select2" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.unit" size="1" required>
-                                <option value="">-Units-</option>
+                                <!-- <option value="">-Units-</option> -->
                                 <option value="Ft">Sq.Ft</option>
                                 <option value="Yards">Sq. Yards</option>
                                 <option value="Meter">Sq. Meter</option>
@@ -200,10 +208,17 @@
                                 </small>                                                          
                                 <small *ngIf="nfarea.errors?.max && nfarea.touched" class="text-danger">
                                     Maximum offer area is allow upto 16 digit.
-                                </small>                                                           
+                                </small>                                                         
                             </div>                    
                    </div>
                    </div>
+
+                  
+                </div>
+                 
+
+                 <div class="row">  
+                     
                    
                     <div class="col-sm-6">
                     <div class="form-group has-required">
@@ -215,7 +230,7 @@
                                 <div class="input-group-btn">
                               <!-- <select id="select3" [disabled]="land.rentSell == 'Sell'" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" required> -->
                               <select id="select3" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" >
-                                <option value="">-Units-</option>
+                                <!-- <option value="">-Units-</option> -->
                                 <option value="Day">Per Day</option>
                                 <option value="Week">Per Week</option>
                                 <option value="Month">Per Month</option>
@@ -239,6 +254,7 @@
 
                         </div>
                     </div>
+                    
                 </div>
                  
                   <div class="row">

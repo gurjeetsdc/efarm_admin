@@ -78,11 +78,12 @@
                                      <i *ngIf="sortOrder == 'desc' && sortBy == 'rentSell'"  class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
-                                <th width="20%">Area
+                                <th width="20%">                                     
                                      <mfDefaultSorter by="area">Area
-                                    <i *ngIf="sortOrder == 'asc'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                            <i *ngIf="sortOrder == 'desc'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'area'"  class="fa fa-sort-asc" aria-hidden="true"></i>
+                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'area'"  class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
+
                                 </th> 
                                 <th width="15%">
                                     <mfDefaultSorter by="expected_price">Expected Price
@@ -96,7 +97,7 @@
                         </thead>                        
                         <tbody>
                            <tr *ngIf="itemsTotal == 0">
-                                <td colspan="5">No record to display</td>
+                                <td colspan="6">No record to display</td>
                             </tr>  
                             <tr *ngFor="let land of mf.data">                        
                             
@@ -116,7 +117,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="5">
+                                <td colspan="6">
                                     <div class="pagination-section" *ngIf="itemsTotal > 0">
                                         <div class="row-on-page">
                                                 <label class="label-control">Show</label>
