@@ -32,7 +32,7 @@
                         <div class="col-sm-9 col-12 text-right linehght">
                             <button type="button" class="btn btn-success btnadd" [routerLink]="['/equipments/add']">Add Equipment</button>
                             <div class="icns">
-                                <a><img src="assets/img/pdf.png" alt="pdf"></a>
+                                <a><img src="assets/img/pdf.png" (click)="downloadPDF()" style="cursor: pointer;" alt="pdf"></a>
                                 <a (click)="downloadCSV()" style="cursor: pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
                             </div>
                         </div>
@@ -107,12 +107,12 @@
                             </tr>                        
                             <tr *ngFor="let equipment of mf.data">                        
                                 <td data-label="Name"><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
-                                <td data-label="Supplier">{{equipment.user?.firstName ? equipment.user?.firstName : '-'}}</td>                                
+                                <td data-label="Supplier">{{equipment.user?.email ? equipment.user?.email : '-'}}</td>                                
                                 <td data-label="District">{{equipment.district}}</td>
                                 <td data-label="Type">{{equipment.rentSell}}</td>
                                 <td data-label="Model Year">{{equipment.modelyear}}</td>
                                 <td data-label="Qty">{{equipment.quantity}}</td>
-                                <td data-label="Price"><i class="fa fa-rupee"></i>{{equipment.rate}}<span *ngIf="equipment.rentSell == 'rent'"> /{{equipment.price_unit}}</span></td>
+                                <td data-label="Price"><i class="fa fa-rupee"></i>{{equipment.rate}}<span *ngIf="equipment.rentSell == 'rent'">/{{equipment.price_unit}}</span></td>
                                 <td data-label="Actions">                                    
                                     <button (click)="sendUpdateEquipment(equipment.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeEquipment(equipment.id)" class="btn btn-danger orange" title="Delete" style="padding:1px 4px"><i class="fa fa-trash"></i></button>                                    

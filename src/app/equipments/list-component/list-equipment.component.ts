@@ -12,6 +12,8 @@ import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { FlashMessagesService } from 'ngx-flash-messages';
 import { CookieService } from 'ngx-cookie';
 
+declare let jsPDF; 
+
 @Component({
     selector: 'app-equipment-management',
     templateUrl: './list-equipment.component.html',
@@ -98,7 +100,7 @@ export class ListEquipmentComponent implements OnInit {
                 // //this.totalRecords = this.data.length;
                 // this.itemsTotal   = this.itemsTotal - 1;
                 // // this.data = [];                
-                // this.removeByAttr(this.data, 'id', equipmentID);   
+                // this.removeByAttr(this.data, 'id', equipmentID);  
 
                 let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
                 this.itemsTotal = this.itemsTotal - 1;
@@ -106,6 +108,8 @@ export class ListEquipmentComponent implements OnInit {
                 if( ! (this.itemsTotal >= start) ){
                    this.activePage = (this.activePage - 1)
                 }
+                this._cookieService.put('equipmentAlert', 'Deleted successfully.');
+                
                 /* reload page. */
                 this.getEquipments();
             });  
@@ -233,6 +237,74 @@ export class ListEquipmentComponent implements OnInit {
 
         let fileName = "EquipmentReport-"+Math.floor(Date.now() / 1000); 
         new Angular2Csv( filteredData, fileName);
+    }
+
+    downloadPDF() {
+        
+        let i;
+        let filteredData = [];
+
+        let header = [
+            "Name",
+            "Supplier",
+            "District",
+            "Type",
+            "Model Year",
+            "Quantity",
+            "Price",
+        ];      
+       
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let username = '-';
+            
+            console.log( typeof(this.data[i].user))
+            
+            if( typeof(this.data[i].user) != 'undefined'){
+                username = this.data[i].user.email;
+            } 
+
+            let temp = [
+
+                this.data[i].name,                
+                username,
+                this.data[i].district,
+                this.data[i].rentSell,
+                this.data[i].modelyear,
+                this.data[i].quantity,
+                (this.data[i].rentSell == 'rent') ? this.data[i].rate +'/'+ this.data[i].price_unit : this.data[i].rate,
+            ];
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "EquipmentReport-"+Math.floor(Date.now() / 1000); 
+
+        var doc = new jsPDF();    
+        // doc.setFontSize(10);
+        // doc.setFontSize(12);
+
+        doc.autoTable(header, filteredData,  {
+            theme: 'grid',
+            headerStyles: {fillColor: 0},
+            startY: 10, // false (indicates margin top value) or a number 
+            margin: {horizontal: 7}, // a number, array or object 
+            pageBreak: 'auto', // 'auto', 'avoid' or 'always' 
+            tableWidth: 'wrap', // 'auto', 'wrap' or a number,  
+            tableHeight: '1', // 'auto', 'wrap' or a number,  
+            showHeader: 'everyPage',
+            tableLineColor: 200, // number, array (see color section below) 
+            tableLineWidth: 0,
+            fontSize: 10,
+            overflow : 'linebreak',
+            columnWidth : 'auto',
+            cellPadding : 2,       
+            cellSpacing : 0,       
+            valign : 'top',
+            lineHeight: 15, 
+
+        });
+
+        doc.save(fileName);
     }
 
     showAlert(): void {
