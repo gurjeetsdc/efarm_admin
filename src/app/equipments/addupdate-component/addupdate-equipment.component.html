@@ -62,19 +62,19 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group " [ngClass]="{'has-required': equipment.rentSell  == 'rent'}">
                             <label for="availablefrom">Available From (dd/mm/yyyy)</label>
                              <div class="input-group form-control" [ngClass]="{'form-control': equipment.rentSell != 'sell'}">
-                                <ng2-datepicker name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="equipment.availableFrom"  *ngIf="equipment.rentSell != 'sell'"></ng2-datepicker>
+                                <ng2-datepicker name="date" [options]="options" id="nfavailibility" name="nfavailibility" [(ngModel)]="equipment.availableFrom"  *ngIf="equipment.rentSell != 'sell'" required></ng2-datepicker> 
                                 <input type="number" id="availablefrom" name="availablefrom" class="form-control nopointer" placeholder="" style="pointer-events: none;" *ngIf="equipment.rentSell == 'sell'" [disabled]="equipment.rentSell == 'sell'"  />
                              </div>                          
                         </div>
                     </div>
                       <div class="col-sm-6">
-                         <div class="form-group">
-                            <label for="avalibilityperiod">Availibility Period</label>
+                         <div class="form-group"  [ngClass]="{'has-required': equipment.rentSell  == 'rent'}">
+                            <label for="avalibilityperiod">Availability Period</label>
                             <div class="flex">                                
-                                <input type="number" id="avalibilityperiod" [disabled]="equipment.rentSell == 'sell'" name="avalibilityperiod" class="form-control pleft25" #avalibilityperiod="ngModel" [(ngModel)]="equipment.avalibilityperiod" placeholder="" min="1" #avalibilityperiod="ngModel" />
+                                <input type="number" id="avalibilityperiod" [disabled]="equipment.rentSell == 'sell'" name="avalibilityperiod" class="form-control" #avalibilityperiod="ngModel" [(ngModel)]="equipment.avalibilityperiod" placeholder="" min="1" #avalibilityperiod="ngModel" required />
                                 <div class="input-group-btn" >
                                     <select class="disable btn btn-secondary dropdown-toggle"  [disabled]="equipment.rentSell == 'sell'" [(ngModel)]="equipment.avalibilityperiodUnits" name="avalibilityperiodUnits">
                                         <option>Hour</option>
@@ -85,12 +85,20 @@
                                 </div>                                
                             </div> 
                             <div class="error-block">
+                                 <small *ngIf="avalibilityperiod.errors?.required && avalibilityperiod.touched" class="text-danger">
+                                    Availability Period is required.
+                                </small>
                                 <small *ngIf="avalibilityperiod.errors?.min && avalibilityperiod.touched" class="text-danger">
                                     Minimum 1 value required.
                                 </small>
                             </div>                                              
                         </div>
-                    </div>
+                        <div class="error-block">
+                                <small *ngIf="userid.errors?.required && userid.touched" class="text-danger">
+                                    Supplier is required.
+                                </small>                                                          
+                            </div>    
+                        </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
@@ -231,14 +239,14 @@
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="companyManufacturer">Company/Manufacturer</label>
-                            <select id="companyManufacturer" name="companyManufacturer" class="form-control" size="1" #companyManufacturer="ngModel" [(ngModel)]="equipment.companyManufacturer" required>
+                            <select id="companyManufacturer" name="companyManufacturer" class="form-control" size="1" #companyManufacturer_id="ngModel" [(ngModel)]="equipment.companyManufacturer_id" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let mf of manufacturers" [ngValue]="mf.id">
                                     {{mf.name}}
                                 </option>
                             </select>
                             <div class="error-block">
-                                <small *ngIf="companyManufacturer.errors?.required && companyManufacturer.touched" class="text-danger">
+                                <small *ngIf="companyManufacturer_id.errors?.required && companyManufacturer_id.touched" class="text-danger">
                                     Company/Manufacturer is required.
                                 </small>                                                          
                             </div>
@@ -294,7 +302,7 @@
                        <div class="form-group has-required">
                             <label for="quantity">Quantity</label>
                             <div class="input-group">                                
-                                <input type="number" id="quantity" name="quantity" min="1" class="form-control pleft25" #quantity="ngModel" [(ngModel)]="equipment.quantity" placeholder="" required />
+                                <input type="number" id="quantity" name="quantity" min="1" class="form-control" #quantity="ngModel" [(ngModel)]="equipment.quantity" placeholder="" required />
                             </div> 
                             <div class="error-block">
                                 <small *ngIf="quantity.errors?.required && quantity.touched" class="text-danger">
@@ -321,6 +329,23 @@
                                 </div>
                             </div>
                         </div> 
+                       <!--  <div class="form-group has-required">
+                            <label for="nf-supplyAbility">Supply Ability</label>
+                            <div class="radiobuttons_top">
+                            <div class="form-group pull-left">
+                                <div class="radio_button">
+                                    <input type="radio"  name="supplyAbility" class="" id="nf-rentslell" value="Yes"  [(ngModel)]="crop.supplyAbility" checked required>
+                                    <label for="nf-rentslell">Yes</label>
+                                </div>
+                            </div>
+                            <div class="form-group pull-left">
+                                <div class="radio_button">                     
+                                    <input type="radio" name="supplyAbility" class="" id="supplyAbility" value="No"  [(ngModel)]="crop.supplyAbility" (change)="crop.supplyArea = '';crop.supplyRange='';" required>
+                                    <label for="supplyAbility">No</label>
+                                </div>
+                            </div>
+                            </div>
+                        </div> -->
                     </div>
                                        
                 </div>    
@@ -344,6 +369,39 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">
+                        <div class="form-group" [ngClass]="{'has-required': equipment.supply_ablity  == 'Yes'}">
+                            <label for="supply_ablity">Supply Area</label>
+                            <select id="supply_area" name="supply_area" class="form-control disable" #supply_area="ngModel" [(ngModel)]="equipment.supply_area" size="1" [disabled]="equipment.supply_ablity == 'No'" required>
+                                <option value="">Please select</option>
+                                <option value="Within State">Within State</option>
+                                <option value="Anywhere">Anywhere</option>
+                            </select>
+                            <div class="error-block">
+                                <small *ngIf="supply_area.errors?.required && supply_area.touched" class="text-danger">
+                                    Supply Area is required.
+                                </small>                                                          
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="form-group" [ngClass]="{'has-required': equipment.supply_ablity  == 'Yes'}">
+                            <label for="kmrange">Supply Range (km)</label>
+                            <input type="number" id="kmrange" name="kmrange" class="form-control" [(ngModel)]="equipment.kmrange" placeholder=""  #kmrange="ngModel" [disabled]="equipment.supply_ablity == 'No'" min="1" max="9999999999999998" required>
+                            <div class="error-block">
+                                <small *ngIf="kmrange.errors?.required && kmrange.touched" class="text-danger">
+                                    Supply Range is required.
+                                </small>
+                                <small *ngIf="kmrange.errors?.min && kmrange.touched" class="text-danger">
+                                    Minimum Range should be 1 km.
+                                </small>                                                          
+                                <small *ngIf="kmrange.errors?.max && kmrange.touched" class="text-danger">
+                                    Maximum Range is allow upto 16 digit.
+                                </small>                                                           
+                            </div> 
+                       </div>
+                    </div>
+
+                   <!--  <div class="col-sm-6 col-md-3">
                          <div class="form-group">
                             <label for="supplyarea">Supply Area</label>
                             <select id="supplyarea" name="supply_area" [disabled]="equipment.supply_ablity == 'No'" class="disable form-control" [(ngModel)]="equipment.supply_area" size="1">
@@ -358,20 +416,20 @@
                             <label for="kmrange">Supply Range (km)</label>
                             <input type="number" id="kmrange" [disabled]="equipment.supply_ablity == 'No'" name="kmrange" class="form-control" [(ngModel)]="equipment.kmrange" />
                         </div>
-                    </div>                                 
+                    </div>    -->                              
                                         
                 </div>                        
                        
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group has-required">
+                        <div class="form-group ">
                             <label for="description">Description</label>
-                            <textarea type="text" id="description" name="description" class="form-control" #description="ngModel" [(ngModel)]="equipment.description" placeholder="" rows="4" required></textarea>
-                            <div class="error-block">
+                            <textarea type="text" id="description" name="description" class="form-control" #description="ngModel" [(ngModel)]="equipment.description" placeholder="" rows="4"></textarea>
+                            <!-- <div class="error-block">
                                 <small *ngIf="description.errors?.required && description.touched" class="text-danger">
                                     Description is required.
                                 </small>                                                          
-                            </div>    
+                            </div>     -->
                         </div>
                        
                     </div>
