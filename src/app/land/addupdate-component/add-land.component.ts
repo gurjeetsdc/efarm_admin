@@ -69,7 +69,7 @@ export class AddLandComponent {
 
         this._landService.getStates().subscribe( res => { 
             this.states = res.data;   
-            if( this.action == 'Edit' ){                
+            if( this.action == 'Update' ){                
                 this.setDistrict();
             }           
         }, 
@@ -117,18 +117,22 @@ export class AddLandComponent {
         }); 
     }
 
-    setDistrict( ): void {
+    setDistrict( ): void {  
         /* reset values. */
         this.districts         = null;
-        if( this.action !== 'Edit' ){
+        if( this.action !== 'Update' ){
             this.land.district = null;
             this.land.district = '';
         }    
+
         /* Initialize category. */
         let stateName = this.land.state; 
+
+
         if( stateName ){
             this.states.filter(obj => obj.stateName == stateName).map( obj => this.districts = obj.districts)
         }
+        
     }
 
 
