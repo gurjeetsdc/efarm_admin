@@ -198,7 +198,7 @@ export class ListLandComponent implements OnInit {
         let header = {
             name:"Owner Name",
             district:'District ',
-            rentSell:'Land For.',
+            rentSell:'Land For',
             area:'Area',
             price:'Expected Price'
         }
@@ -206,7 +206,7 @@ export class ListLandComponent implements OnInit {
         filteredData.push(header);
 
         for ( i = 0; i < this.data.length ; i++ ) { 
-            let user = this.data[i].user.firstName + '/' + this.data[i].user.lastName ;
+            let user = this.data[i].user.firstName + ' ' + this.data[i].user.lastName ;
 
             let temp = {
                 name: user,
@@ -230,7 +230,7 @@ export class ListLandComponent implements OnInit {
         let header = [
             "Owner Name",
             'District ',
-            'Land For.',
+            'Land For',
             'Area',
             'Expected Price'
         ];      

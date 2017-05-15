@@ -97,7 +97,7 @@
                         </thead>                        
                         <tbody>
                            <tr *ngIf="itemsTotal == 0">
-                                <td colspan="6">No record to display</td>
+                                <td colspan="6">No record to display.</td>
                             </tr>  
                             <tr *ngFor="let land of mf.data">                        
                             
@@ -105,8 +105,8 @@
                                 <!-- <td>{{land.location}}</td> -->
                                 <td data-label="District">{{land.district}}</td>
                                 <td data-label="Land For">{{land.rentSell}}</td>
-                                <td>{{land.area}} {{land.unit}}</td>
-                                <td data-label="Expected Price"><i class="fa fa-rupee"></i>{{land.expected_price}} / {{land.priceunit}}</td>
+                                <td>{{land.area}} Sq.{{land.unit}}</td>
+                                <td data-label="Expected Price"><i class="fa fa-rupee"></i>{{land.expected_price}}<span *ngIf="land.rentSell == 'Lease'">/{{land.priceunit}}</span></td>
                                 
 
                                 <td data-label="Actions">                                    

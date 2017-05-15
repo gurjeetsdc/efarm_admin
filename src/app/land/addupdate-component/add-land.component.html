@@ -49,7 +49,7 @@
                 <div class="row"  >
                     <div class="col-sm-6">
                        <div class="form-group">
-                           <label for="avail_date">Available Date</label>
+                           <label for="avail_date">Availability Date</label>
                              <div class="input-group form-control" [ngClass]="{'form-control': land.rentSell != 'Sell'}">
                               
                               <ng2-datepicker placeholder="DD/MM/YYYY" name="date" [options]="options" id="nfavail_date" name="nfavail_date" [(ngModel)]="land.avail_date"  *ngIf="land.rentSell != 'Sell'"></ng2-datepicker>
@@ -59,9 +59,9 @@
                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                                <label for="periods">Periods</label>
+                                <label for="periods">Availability Period</label>
                          <div class="flex">
-                            <input type="number"  id="periods" [disabled]="land.rentSell == 'Sell'" name="periods" class="form-control pleft25" [(ngModel)]="land.periods" >
+                            <input type="number"  id="periods" [disabled]="land.rentSell == 'Sell'" name="periods" class="form-control" [(ngModel)]="land.periods" >
                           <div class="input-group-btn">
                               <select id="select3"  [disabled]="land.rentSell == 'Sell'" name="select3" class="disable btn btn-secondary dropdown-toggle"  [(ngModel)]="land.periodsunit" size="1">
                                 <!-- <option value="">-Units-</option> -->
@@ -98,14 +98,12 @@
                     <div class="col-sm-6">
                         <div class="form-group  has-required">
                             <label for="nf-variety">Address</label>
-                            <input type="text" id="nflocation" name="nflocation" #nflocation="ngModel" class="form-control" [(ngModel)]="land.location"  pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <input type="text" id="nflocation" name="nflocation" #nflocation="ngModel" class="form-control" [(ngModel)]="land.location" required>
                            <div class="error-block">
                                 <small *ngIf="nflocation.errors?.required && nflocation.touched" class="text-danger">
                                     Address is required.
                                 </small>
-                                <small *ngIf="nflocation.errors?.pattern && nflocation.touched" class="text-danger">
-                                    Address is required.
-                                </small> 
+                                
                             </div>
                         </div>
                     </div>
@@ -167,17 +165,17 @@
 
                   <div class="col-sm-6">
                     <div class="form-group has-required">
-                        <label for="nf-password">Khasra no</label>
+                        <label for="nf-password">Khasra No</label>
                         <input type="number" id="nfkhasra" name="nfkhasra" #nfkhasra="ngModel" class="form-control" [(ngModel)]="land.khasra_no" required maxlength="20">
                         <div class="error-block">
                                 <small *ngIf="nfkhasra.errors?.required && nfkhasra.touched" class="text-danger">
-                                    khasra is required.
+                                    Khasra No is required.
                                 </small>
                                 <small *ngIf="nfkhasra.errors?.min && nfkhasra.touched" class="text-danger">
-                                    Minimum khasra should be 1.
+                                    Minimum khasra No should be 1.
                                 </small>                                                          
                                 <small *ngIf="nfkhasra.errors?.max && nfkhasra.touched" class="text-danger">
-                                    Maximum khasra is allow upto 16 digit.
+                                    Maximum khasra No is allow upto 16 digit.
                                 </small>                                                           
                          </div>
                     </div>
@@ -253,6 +251,26 @@
                             
 
                         </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                         <div class="form-group  has-required">
+                            <label for="nf-verified">Verified</label>
+                            <div class="radiobuttons_top">
+                                <div class="form-group pull-left">
+                                    <div class="radio_button">
+                                        <input type="radio"  name="verified" class="" id="nf-verified" value="Yes"  [(ngModel)]="land.verified" checked required>
+                                        <label for="nf-verified">Yes</label>
+                                    </div>
+                                </div>
+                                <div class="form-group pull-left">
+                                    <div class="radio_button">                     
+                                        <input type="radio" name="verified" class="" id="verified" value="No"  [(ngModel)]="land.verified" required>
+                                        <label for="verified">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
                     
                 </div>
