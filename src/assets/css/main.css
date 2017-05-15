@@ -741,6 +741,8 @@
  
  .grade label.active {
      background: #eee;
+     border: 1px solid #b0b0b0 ;
+     color: #666;
  }
  
  .brdr_btm {
@@ -1113,13 +1115,21 @@
  /*.table>tfoot>tr>td{
      padding-bottom: 0;
  }*/
+
+ .card-block.viewmode label{
+      font-weight: 600;
+ }
+
  
- .datepicker-input {
+ .datepicker-container .datepicker-input-container .datepicker-input {
      position: absolute;
      z-index: 9999;
      left: 0;
      border: 0 !important;
      top: 9px;
+     width: 81% !important;
+     text-align: left !important;
+     padding-left: 12px !important;
  }
 
  .datepicker-input {
@@ -1139,8 +1149,8 @@
 .datepicker-container .datepicker-input-container .datepicker-input-icon i svg{
     height: 15px;
     position: absolute;
-    right: 10px;
-    width: 17px;
+    right: 10px !important;
+    width: 17px !important;
 }
 
  .datepicker-container{
