@@ -349,6 +349,10 @@
  .icheck>label {
      padding-left: 0;
  }
+
+ .flash-message > p{
+     margin-bottom: 0;
+ }
  
  .form-control-feedback.fa {
      line-height: 34px;
@@ -800,7 +804,7 @@
  .pagination {
      float: right;
      padding-right: 0px;
-     margin-bottom: 13px;
+     margin-bottom: 0;
  }
  
  .icns {
@@ -1106,9 +1110,9 @@
      padding-top: 4px;
  }
 
- .table>tfoot>tr>td{
+ /*.table>tfoot>tr>td{
      padding-bottom: 0;
- }
+ }*/
  
  .datepicker-input {
      position: absolute;
@@ -1124,11 +1128,20 @@
 }
  
  .datepicker-input-icon {
-     position: absolute;
-     right: 12px;
-     z-index: 999;
-     top: 15px;
- }
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 18px;
+    width: 100%;
+    z-index: 999;
+}
+
+.datepicker-container .datepicker-input-container .datepicker-input-icon i svg{
+    height: 15px;
+    position: absolute;
+    right: 10px;
+    width: 17px;
+}
 
  .datepicker-container{
      position: static !important;
@@ -2173,7 +2186,7 @@
          padding: 3px;
      }
      .form-group > label {
-        font-size: 16px;
+        font-size: 15.8px;
      }
      .frst_dv li.sml_txt {
          font-size: 22px;
@@ -2189,6 +2202,10 @@
  @media (min-width:768px) {}
  
  @media (max-width:767px) {
+     .table>tfoot>tr>td .row-on-page span{
+         display: block;
+         text-align: left;
+     }
      .card-block table td:before {
          content: attr(data-label);
          float: left;

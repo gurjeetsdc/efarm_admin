@@ -38,7 +38,6 @@
                 <!-- .card-header -->
                 <div class="card-block">
                     <div class="table-responsive">
-                    <!--     <table class="table table-bordered table-striped table-condensed" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"> -->
                     <table class="table table-striped" [mfData]="data"
                         #mf="mfDataTable" 
                         [mfRowsOnPage]="rowsOnPage"
@@ -51,7 +50,7 @@
                         (mfSortOrderChange)="onSortOrder($event)">
                             <thead>
                                 <tr>
-                                    <th width="25%">
+                                    <th width="15%">
                                         <mfDefaultSorter by="firstName">Name
                                             <i *ngIf="sortOrder == 'asc'  && sortBy == 'firstName'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                             <i *ngIf="sortOrder == 'desc'  && sortBy == 'firstName'" class="fa fa-sort-desc" aria-hidden="true"></i>

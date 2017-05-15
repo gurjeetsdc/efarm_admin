@@ -97,7 +97,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="state">State</label>
-                            <select id="state" name="state" (change)="setDistrict();crop.district=''"  [(ngModel)]="crop.state" placeholder="" required class="form-control" size="1" #state="ngModel" required>
+                            <select id="state" name="state" (change)="setDistrict();"  [(ngModel)]="crop.state" placeholder="" required class="form-control" size="1" #state="ngModel" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let state of states" [value]="state.stateName">
                                     {{state.stateName}}
@@ -281,8 +281,8 @@
                             <label for="nf-supplyarea">Supply Area</label>
                             <select id="nfsupplyarea" name="nfsupplyarea" class="form-control disable" #nfsupplyarea="ngModel" [(ngModel)]="crop.supplyArea" size="1" [disabled]="crop.supplyAbility == 'No'" required>
                                 <option value="">Please select</option>
-                                <option value="withinstate">Within State</option>
-                                <option value="anywhere">Any Where</option>
+                                <option value="Within State">Within State</option>
+                                <option value="Anywhere">Anywhere</option>
                             </select>
                             <div class="error-block">
                                 <small *ngIf="nfsupplyarea.errors?.required && nfsupplyarea.touched" class="text-danger">

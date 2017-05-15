@@ -2,6 +2,8 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
+import { FlashMessagesService } from 'ngx-flash-messages'
+
 @Component({
   templateUrl: 'addupdate-user.component.html'
 })
@@ -16,8 +18,9 @@ export class AddUpdateUserComponent {
     public userID:any;
     public states: any;
     public districts: any;
+    public errMessage      = '';
 
-    constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService, private _cookieService: CookieService, private changeDetectorRef: ChangeDetectorRef ) { 
+    constructor(private _router : Router, private _activateRouter: ActivatedRoute, private _userService: UserService, private _cookieService: CookieService, private changeDetectorRef: ChangeDetectorRef, private _flashMessagesService: FlashMessagesService  ) { 
         this.userID = _activateRouter.snapshot.params['id'];        
 
         if( this.userID ) {
@@ -61,12 +64,14 @@ export class AddUpdateUserComponent {
         } else {
             this.user["username"] = this.user["email"];
             this._userService.add(this.user).subscribe(res => {
+                this.isLoading = false;
                 if(res.success) {
-                    this.isLoading = false;
                     this._cookieService.put('userAlert', 'Added successfully.');
                     this._router.navigate(['/users/list']);
                 } else {
-                    this.checkAccessToken(res.error);
+                    console.log("errrrrrrrrrrrrrr",res)
+                    this.errMessage = res.error.message;
+                    this.showAlert();
                 }
             },err => {
                 this.isLoading = false;
@@ -102,5 +107,13 @@ export class AddUpdateUserComponent {
             this._cookieService.removeAll();
             this._router.navigate(['/login', {data: true}]);
         }        
+    }
+
+    showAlert(): void {
+
+            this._flashMessagesService.show( this.errMessage, {
+                classes: ['alert', 'alert-danger'],
+                timeout: 3000,
+            });
     } 
 }

@@ -48,7 +48,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-email">Email</label>
-                            <input type="text" id="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" placeholder="" email required>
+                            <input type="text" id="email" name="email" class="form-control"[disabled]="userID" #email="ngModel" [(ngModel)]="user.email" placeholder="" email required>
                             <div class="error-block">
                                 <small *ngIf="email.errors?.required && email.touched" class="text-danger">
                                     Email is required.
@@ -101,7 +101,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="state">State</label>
-                            <select id="state" name="state" (change)="setDistrict();user.district=''"  [(ngModel)]="user.state" placeholder=""  class="form-control" size="1">
+                            <select id="state" name="state" (change)="setDistrict();"  [(ngModel)]="user.state" placeholder=""  class="form-control" size="1">
                                 <option value="">Please select</option>
                                 <option *ngFor="let state of states" [value]="state.stateName">
                                     {{state.stateName}}
@@ -125,7 +125,15 @@
                     <div class="col-sm-6">
                         <div class="form-group ">
                             <label for="nf-pincode">Pin Code</label>
-                            <input type="number" id="pincode" name="pincode" class="form-control" [(ngModel)]="user.pincode">
+                            <input type="number" id="pincode" name="pincode" class="form-control" #pincode="ngModel" [(ngModel)]="user.pincode" max="999999" min="1">
+                            <div class="error-block">                             
+                                <small *ngIf="pincode.errors?.min && pincode.touched" class="text-danger">
+                                    Minimum value should be 1.
+                                </small>                                
+                                <small *ngIf="pincode.errors?.max && pincode.touched" class="text-danger">
+                                    Maximum 6 digit allow.
+                                </small>                                                          
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="col-sm-6">
@@ -144,4 +152,5 @@
             </div>
         </form>
     </div>
+    <ngx-flash-messages></ngx-flash-messages>
 </div>

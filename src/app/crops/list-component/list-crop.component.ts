@@ -162,12 +162,14 @@ export class ListCropComponent implements OnInit {
             if(event.keyCode == 13 || this.searchTerm == '') {
                 this.searchTerm = this.searchTerm.trim();
                 this.isLoading  = true;
+                this.getCrops(); 
                 this.activePage = 1;
                 this.getCrops(); 
             }
         }else{
             this.searchTerm = this.searchTerm.trim();
             this.isLoading  = true;
+            this.getCrops(); 
             this.activePage = 1;
             this.getCrops(); 
         }

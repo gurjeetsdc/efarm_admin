@@ -158,15 +158,17 @@ export class ListUserComponent implements OnInit {
 
     public search( event, element = 'input' ) {
         if( element == 'input' ) {
-            this.searchTerm = this.searchTerm.trim();
             if(event.keyCode == 13 || this.searchTerm == '') {
+                this.searchTerm = this.searchTerm.trim();
                 this.isLoading  = true;
+                this.getUsers();
                 this.activePage = 1;
                 this.getUsers(); 
             }
         }else{
             this.searchTerm = this.searchTerm.trim();
             this.isLoading  = true;
+            this.getUsers();
             this.activePage = 1;
             this.getUsers(); 
         }

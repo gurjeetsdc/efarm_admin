@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     constructor(private _router : Router, private _loginService: LoginService, private _cookieService: CookieService, private _activateRouter: ActivatedRoute) { 
         this._session = _activateRouter.snapshot.params['data'];
         if(this._session) {
-            this.errMessage = 'Session expired please login again.';
+            this.errMessage = 'Your session has expired. Please login again.';
         }
     }
 
