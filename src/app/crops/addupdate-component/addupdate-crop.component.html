@@ -24,7 +24,7 @@
                                     Crop name is required.
                                 </small>
                                 <small *ngIf="name.errors?.pattern && name.touched" class="text-danger">
-                                    Crop name is required.
+                                    Invalid input.
                                 </small>                                                          
                             </div>    
                         </div>
@@ -73,22 +73,28 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="address">Address</label>
-                            <input type="text" id="address" name="address" #address="ngModel"  class="form-control" [(ngModel)]="crop.address" placeholder="" required />
+                            <input type="text" id="address" name="address" #address="ngModel"  class="form-control" [(ngModel)]="crop.address" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" placeholder="" required />
                             <div class="error-block">
                                 <small *ngIf="address.errors?.required && address.touched" class="text-danger">
                                     Address is required.
-                                </small>                                                          
+                                </small>
+                                <small *ngIf="address.errors?.pattern && address.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                           
                             </div> 
                         </div>                                    
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-city">City/Village</label>
-                            <input type="text" id="nf-city" name="city" #city="ngModel" class="form-control" [(ngModel)]="crop.city" placeholder="" required>
+                            <input type="text" id="nf-city" name="city" #city="ngModel" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" class="form-control" [(ngModel)]="crop.city" placeholder="" required>
                             <div class="error-block">
                                 <small *ngIf="city.errors?.required && city.touched" class="text-danger">
                                     City is required.
-                                </small>                                                          
+                                </small>
+                                <small *ngIf="city.errors?.pattern && city.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                           
                             </div> 
                         </div>
                     </div> 
@@ -231,7 +237,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                         <label for="nf-qty">Availibile Period</label>
+                         <label for="nf-qty">Available Period</label>
                           <div class="flex">
                               <input type="number" id="availablePeriod" name="availablePeriod" class="form-control" aria-label="Text input with dropdown button" #availablePeriod="ngModel" [(ngModel)]="crop.availablePeriod" min="1" max="9999999999999998" placeholder="">
                                <div class="input-group-btn">
@@ -244,7 +250,7 @@
                             </div>
                             <div class="error-block">
                                 <small *ngIf="availablePeriod.errors?.required && availablePeriod.touched" class="text-danger">
-                                    Availibility Period is required.
+                                    Available Period is required.
                                 </small>
                                 <small *ngIf="availablePeriod.errors?.min && availablePeriod.touched" class="text-danger">
                                     Minimum 1 Day is required.

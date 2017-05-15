@@ -21,7 +21,7 @@
                 </div>
             </div> <!-- .row -->
         </div>
-        <div class="card-block">
+        <div class="card-block viewmode">
             <form role="form" (ngSubmit)="submitEquipment()" #addEquipmentForm="ngForm">
                 
                <div *ngIf="showMessage" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -54,7 +54,7 @@
                     </div>
                       <div class="col-sm-6">
                          <div class="form-group">
-                            <label for="avalibilityperiod">Availibility Period</label>
+                            <label for="avalibilityperiod">Availability Period</label>
                             <p>{{equipment?.avalibilityperiod ? equipment?.avalibilityperiod : '-'}}<span *ngIf="equipment?.avalibilityperiod"> {{equipment.avalibilityperiodUnits}}</span></p>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                     <div class="col-sm-6">
                        <div class="form-group ">
                             <label for="companyManufacturer">Company/Manufacturer</label>
-                            <p>{{equipment.companyManufacturer ? equipment.companyManufacturer : '-'}}</p>
+                            <p>{{equipment.companyManufacturer ? equipment.companyManufacturer.name : '-'}}</p>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -198,8 +198,8 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-image">Image</label>
-                            <p>Not available</p>
-                        </div>
+                            <p><i class="fa fa-file-image-o"></i></p>
+                        </div>                        
                     </div>
 
                     <div class="col-sm-6">

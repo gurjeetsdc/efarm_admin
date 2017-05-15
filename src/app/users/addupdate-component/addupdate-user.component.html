@@ -24,7 +24,7 @@
                                     First Name is required.
                                 </small>
                                 <small *ngIf="firstName.errors?.pattern && firstName.touched" class="text-danger">
-                                    First Name is required.
+                                    Invalid input.
                                 </small>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                                     Last Name is required.
                                 </small>
                                 <small *ngIf="lastName.errors?.pattern && lastName.touched" class="text-danger">
-                                    Last Name is required.
+                                    Invalid input.
                                 </small>
                             </div>
                         </div>

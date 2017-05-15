@@ -4,6 +4,9 @@ import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { FlashMessagesService } from 'ngx-flash-messages';
+
+declare let jsPDF; 
+
 @Component({
   selector: 'app-crops',
   templateUrl: './list-crop.component.html',
@@ -83,6 +86,7 @@ export class ListCropComponent implements OnInit {
                 if( ! (this.itemsTotal >= start) ){
                    this.activePage = this.activePage -1
                 }
+                this._cookieService.put('cropAlert', 'Deleted successfully.');
                 /* reload page. */
                 this.getCrops();
             },err => {
@@ -201,7 +205,7 @@ export class ListCropComponent implements OnInit {
                 name: this.data[i].name,
                 category: this.data[i].category.name,
                 price: this.data[i].price,
-                quantity: this.data[i].quantity,
+                quantity: this.data[i].quantity + ' ' + this.data[i].quantityUnit,
                 highestBid: '-',
                 district: this.data[i].district,
                 availableFrom: availableDate,
@@ -213,6 +217,70 @@ export class ListCropComponent implements OnInit {
 
         let fileName = "CropsReport-"+Math.floor(Date.now() / 1000); 
         new Angular2Csv( filteredData, fileName);
+    }
+
+    downloadPDF() {
+        
+        let i;
+        let filteredData = [];
+
+        let header = [
+            "Crop Name",
+            "Category",
+            "Offer Price",
+            "Qty.",
+            "Highest Bid",
+            "District",
+            "Available From",
+            "Seller",
+        ]   
+
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let availableDate = this.data[i].availableFrom ? this.data[i].availableFrom.day ? this.data[i].availableFrom.day + '/' + this.data[i].availableFrom.month + '/' + this.data[i].availableFrom.year : '-' :'-';
+            let seller = this.data[i].seller ? this.data[i].seller.firstName ? this.data[i].seller.firstName + ' ' + this.data[i].seller.lastName : this.data[i].seller.email : '-';
+            let state = this.data[i].seller ? this.data[i].seller.state ? '(' + this.data[i].seller.state + ')' : '' : '';
+            seller += ' ' + state;
+            let temp = [
+
+                this.data[i].name,                
+                this.data[i].category.name,
+                this.data[i].price,
+                this.data[i].quantity + ' ' + this.data[i].quantityUnit,
+                '-',
+                this.data[i].district,
+                availableDate,
+                seller
+            ];
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "CropsReport-"+Math.floor(Date.now() / 1000); 
+
+        var doc = new jsPDF();    
+
+        doc.autoTable(header, filteredData,  {
+            theme: 'grid',
+            headerStyles: {fillColor: 0},
+            startY: 10, // false (indicates margin top value) or a number 
+            margin: {horizontal: 7}, // a number, array or object 
+            pageBreak: 'auto', // 'auto', 'avoid' or 'always' 
+            tableWidth: 'wrap', // 'auto', 'wrap' or a number,  
+            tableHeight: '1', // 'auto', 'wrap' or a number,  
+            showHeader: 'everyPage',
+            tableLineColor: 200, // number, array (see color section below) 
+            tableLineWidth: 0,
+            fontSize: 10,
+            overflow : 'linebreak',
+            columnWidth : 'auto',
+            cellPadding : 2,       
+            cellSpacing : 0,       
+            valign : 'top',
+            lineHeight: 15, 
+
+        });
+
+        doc.save(fileName);
     }
 
     showAlert(): void {

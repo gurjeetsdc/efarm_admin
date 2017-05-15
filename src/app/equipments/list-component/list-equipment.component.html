@@ -108,10 +108,10 @@
                             <tr *ngFor="let equipment of mf.data">                        
                                 <td data-label="Name"><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
                                 <td data-label="Supplier">{{equipment.user?.email ? equipment.user?.email : '-'}}</td>                                
-                                <td data-label="District">{{equipment.district}}</td>
-                                <td data-label="Type">{{equipment.rentSell}}</td>
-                                <td data-label="Model Year">{{equipment.modelyear}}</td>
-                                <td data-label="Qty">{{equipment.quantity}}</td>
+                                <td data-label="District">{{equipment.district ? equipment.district : '-' }}</td>
+                                <td data-label="Type">{{equipment.rentSell ? equipment.rentSell : '-'}}</td>
+                                <td data-label="Model Year">{{equipment.modelyear ? equipment.modelyear : '-'}}</td>
+                                <td data-label="Qty">{{equipment.quantity ? equipment.quantity : '-' }}</td>
                                 <td data-label="Price"><i class="fa fa-rupee"></i>{{equipment.rate}}<span *ngIf="equipment.rentSell == 'rent'">/{{equipment.price_unit}}</span></td>
                                 <td data-label="Actions">                                    
                                     <button (click)="sendUpdateEquipment(equipment.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
