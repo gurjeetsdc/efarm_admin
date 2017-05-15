@@ -102,6 +102,7 @@ export class AddLandComponent {
         this._landService.landadd(this.land).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
+            this._cookieService.put('landAlert', 'Added Successfully.');
             this._router.navigate(['/land/list', {data: "success"} ]);
         });      
       
@@ -114,6 +115,7 @@ export class AddLandComponent {
         this._landService.updateLand(this.land).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
+            this._cookieService.put('landAlert', 'Updated Successfully.');
             this._router.navigate(['/land/list', {data: "success"} ]);
         }); 
     }

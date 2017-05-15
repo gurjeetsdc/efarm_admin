@@ -6,6 +6,8 @@ import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { CookieService } from 'ngx-cookie';
+import { FlashMessagesService } from 'ngx-flash-messages';
+
 
 declare let jsPDF; 
 
@@ -37,7 +39,7 @@ export class ListLandComponent implements OnInit {
     public isPageLoading:boolean = true;
 
 
-    public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _landService: LandService, private _cookieService: CookieService) { 
+    public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _landService: LandService, private _cookieService: CookieService,  private _flashMessagesService: FlashMessagesService) { 
         
     }
     ngOnInit(): void {
@@ -99,6 +101,8 @@ export class ListLandComponent implements OnInit {
                 if( ! (this.itemsTotal >= start) ){
                    this.activePage = (this.activePage - 1)
                 }
+
+                this._cookieService.put('landAlert', 'Deleted Successfully.');
                 /* reload page. */
                 this.getLands();
             });  
@@ -139,8 +143,10 @@ export class ListLandComponent implements OnInit {
             this.isPageLoading = false;
 
             if(res.success) {
-            this.data       = res.data.lands;
-            this.itemsTotal = res.data.total;
+                this.data       = res.data.lands;
+                this.itemsTotal = res.data.total;
+               this.showAlert();
+            
             } else {
                 this.checkAccessToken(res.error);    
             }        
@@ -280,6 +286,18 @@ export class ListLandComponent implements OnInit {
         });
 
         doc.save(fileName);
+    }
+
+    showAlert(): void {
+
+        let alertMessage = this._cookieService.get('landAlert');
+        if( alertMessage ) {
+            this._flashMessagesService.show( alertMessage, {
+                classes: ['alert', 'alert-success'],
+                timeout: 3000,
+            });
+            this._cookieService.remove('landAlert');
+        }    
     }
 
 }
