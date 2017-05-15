@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
 import {PaginationInstance} from 'ng2-pagination';
 import { LandService } from '../services/land.service';
 import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { CookieService } from 'ngx-cookie';
+
+declare let jsPDF; 
 
 @Component({
   selector: 'app-land-management',
@@ -14,8 +16,7 @@ import { CookieService } from 'ngx-cookie';
 })
 export class ListLandComponent implements OnInit {
 
-  test: any = [];
-
+    test: any = [];
     public data                = [];
     public totalRecords        = 0;
     public filterQuery         = "";
@@ -190,6 +191,95 @@ export class ListLandComponent implements OnInit {
         }
     }
 
+     downloadCSV(): void {
+        let i;
+        let filteredData = [];
+        
+        let header = {
+            name:"Owner Name",
+            district:'District ',
+            rentSell:'Land For.',
+            area:'Area',
+            price:'Expected Price'
+        }
 
+        filteredData.push(header);
+
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let user = this.data[i].user.firstName + '/' + this.data[i].user.lastName ;
+
+            let temp = {
+                name: user,
+                district: this.data[i].district,
+                rentSell: this.data[i].rentSell,
+                area: this.data[i].area,
+                price: this.data[i].expected_price,
+                
+            };
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "LandsReport-"+Math.floor(Date.now() / 1000); 
+        new Angular2Csv( filteredData, fileName);
+    }
+
+    downloadPDF() {        
+        let i;
+        let filteredData = [];
+        let header = [
+            "Owner Name",
+            'District ',
+            'Land For.',
+            'Area',
+            'Expected Price'
+        ];      
+       
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let name = '-';
+            if( typeof(this.data[i].user) != 'undefined'){
+                name = this.data[i].user.firstName +" "+ this.data[i].user.lastName;
+            } 
+
+            let temp = [
+                name,
+                this.data[i].district,
+                this.data[i].rentSell,
+                this.data[i].area,
+                (this.data[i].rentSell == 'Lease') ? this.data[i].expected_price +'/'+ this.data[i].priceunit : this.data[i].expected_price,
+            ];
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "LandReport-"+Math.floor(Date.now() / 1000); 
+
+        var doc = new jsPDF();    
+        // doc.setFontSize(10);
+        // doc.setFontSize(12);
+
+        doc.autoTable(header, filteredData,  {
+            theme: 'grid',
+            headerStyles: {fillColor: 0},
+            startY: 10, // false (indicates margin top value) or a number 
+            margin: {horizontal: 7}, // a number, array or object 
+            pageBreak: 'auto', // 'auto', 'avoid' or 'always' 
+            tableWidth: 'wrap', // 'auto', 'wrap' or a number,  
+            tableHeight: '1', // 'auto', 'wrap' or a number,  
+            showHeader: 'everyPage',
+            tableLineColor: 200, // number, array (see color section below) 
+            tableLineWidth: 0,
+            fontSize: 10,
+            overflow : 'linebreak',
+            columnWidth : 'auto',
+            cellPadding : 2,       
+            cellSpacing : 0,       
+            valign : 'top',
+            lineHeight: 15, 
+
+        });
+
+        doc.save(fileName);
+    }
 
 }

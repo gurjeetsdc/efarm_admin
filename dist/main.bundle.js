@@ -581,7 +581,7 @@ var _a, _b, _c;
 var map = {
 	"./crops/crops.module": [
 		1096,
-		1
+		2
 	],
 	"./dashboard/dashboard.module": [
 		1097,
@@ -597,7 +597,7 @@ var map = {
 	],
 	"./land/land.module": [
 		1100,
-		2
+		1
 	],
 	"./users/users.module": [
 		1101,

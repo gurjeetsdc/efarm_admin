@@ -86,6 +86,7 @@ export class ListUserComponent implements OnInit {
                 if( ! (this.itemsTotal >= start) ){
                    this.activePage = this.activePage -1
                 }
+                this._cookieService.put('userAlert', 'Deleted successfully.');
                 /* reload page. */
                 this.getUsers();
             },err => {

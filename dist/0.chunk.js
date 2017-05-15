@@ -33309,7 +33309,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_slimscroll__ = __webpack_require__(1397);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_slimscroll__ = __webpack_require__(1398);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_slimscroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ng2_slimscroll__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng2_datepicker_component__ = __webpack_require__(1395);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "DatePickerOptions", function() { return __WEBPACK_IMPORTED_MODULE_4__ng2_datepicker_component__["a"]; });
@@ -33353,6 +33353,183 @@ var DatePickerModule = (function () {
 
 "use strict";
 
+Object.defineProperty(exports, "__esModule", { value: true });
+var CsvConfigConsts = (function () {
+    function CsvConfigConsts() {
+    }
+    return CsvConfigConsts;
+}());
+CsvConfigConsts.EOL = "\r\n";
+CsvConfigConsts.BOM = "\ufeff";
+CsvConfigConsts.DEFAULT_FIELD_SEPARATOR = ',';
+CsvConfigConsts.DEFAULT_DECIMAL_SEPARATOR = '.';
+CsvConfigConsts.DEFAULT_QUOTE = '"';
+CsvConfigConsts.DEFAULT_SHOW_TITLE = false;
+CsvConfigConsts.DEFAULT_TITLE = 'My Report';
+CsvConfigConsts.DEFAULT_FILENAME = 'mycsv.csv';
+CsvConfigConsts.DEFAULT_SHOW_LABELS = false;
+exports.CsvConfigConsts = CsvConfigConsts;
+exports.ConfigDefaults = {
+    filename: CsvConfigConsts.DEFAULT_FILENAME,
+    fieldSeparator: CsvConfigConsts.DEFAULT_FIELD_SEPARATOR,
+    quoteStrings: CsvConfigConsts.DEFAULT_QUOTE,
+    decimalseparator: CsvConfigConsts.DEFAULT_DECIMAL_SEPARATOR,
+    showLabels: CsvConfigConsts.DEFAULT_SHOW_LABELS,
+    showTitle: CsvConfigConsts.DEFAULT_SHOW_TITLE,
+    title: CsvConfigConsts.DEFAULT_TITLE
+};
+var Angular2Csv = (function () {
+    function Angular2Csv(DataJSON, filename, options) {
+        this.csv = "";
+        var config = options || {};
+        this.data = typeof DataJSON != 'object' ? JSON.parse(DataJSON) : DataJSON;
+        this._options = objectAssign({}, exports.ConfigDefaults, config);
+        if (this._options.filename) {
+            this._options.filename = filename;
+        }
+        this.generateCsv();
+    }
+    /**
+     * Generate and Download Csv
+     */
+    Angular2Csv.prototype.generateCsv = function () {
+        this.csv += CsvConfigConsts.BOM;
+        if (this._options.showTitle) {
+            this.csv += this._options.title + '\r\n\n';
+        }
+        this.getHeaders();
+        this.getBody();
+        if (this.csv == '') {
+            console.log("Invalid data");
+            return;
+        }
+        if (navigator.msSaveBlob) {
+            var filename = this._options.filename.replace(/ /g, "_") + ".csv";
+            var blob = new Blob([this.csv], { "type": "text/csv;charset=utf8;" });
+            navigator.msSaveBlob(blob, filename);
+        }
+        else {
+            var uri = 'data:text/csv;charset=utf-8,' + encodeURI(this.csv);
+            var link = document.createElement("a");
+            link.href = uri;
+            link.setAttribute('visibility', 'hidden');
+            link.download = this._options.filename.replace(/ /g, "_") + ".csv";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    };
+    /**
+     * Create Headers
+     */
+    Angular2Csv.prototype.getHeaders = function () {
+        if (this._options.showLabels) {
+            var row = "";
+            for (var index in this.data[0]) {
+                row += index + this._options.fieldSeparator;
+            }
+            row = row.slice(0, -1);
+            this.csv += row + CsvConfigConsts.EOL;
+        }
+    };
+    /**
+     * Create Body
+     */
+    Angular2Csv.prototype.getBody = function () {
+        for (var i = 0; i < this.data.length; i++) {
+            var row = "";
+            for (var index in this.data[i]) {
+                row += this.formartData(this.data[i][index]) + this._options.fieldSeparator;
+                ;
+            }
+            row.slice(0, row.length - 1);
+            this.csv += row + CsvConfigConsts.EOL;
+        }
+    };
+    /**
+     * Format Data
+     * @param {any} data
+     */
+    Angular2Csv.prototype.formartData = function (data) {
+        if (this._options.decimalseparator === 'locale' && this.isFloat(data)) {
+            return data.toLocaleString();
+        }
+        if (this._options.decimalseparator !== '.' && this.isFloat(data)) {
+            return data.toString().replace('.', this._options.decimalseparator);
+        }
+        if (typeof data === 'string') {
+            data = data.replace(/"/g, '""');
+            if (this._options.quoteStrings || data.indexOf(',') > -1 || data.indexOf('\n') > -1 || data.indexOf('\r') > -1) {
+                data = this._options.quoteStrings + data + this._options.quoteStrings;
+            }
+            return data;
+        }
+        if (typeof data === 'boolean') {
+            return data ? 'TRUE' : 'FALSE';
+        }
+        return data;
+    };
+    /**
+     * Check if is Float
+     * @param {any} input
+     */
+    Angular2Csv.prototype.isFloat = function (input) {
+        return +input === input && (!isFinite(input) || Boolean(input % 1));
+    };
+    return Angular2Csv;
+}());
+exports.Angular2Csv = Angular2Csv;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+/**
+ * Convet to Object
+ * @param {any} val
+ */
+function toObject(val) {
+    if (val === null || val === undefined) {
+        throw new TypeError('Object.assign cannot be called with null or undefined');
+    }
+    return Object(val);
+}
+/**
+ * Assign data  to new Object
+ * @param {any}   target
+ * @param {any[]} ...source
+ */
+function objectAssign(target) {
+    var source = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        source[_i - 1] = arguments[_i];
+    }
+    var from;
+    var to = toObject(target);
+    var symbols;
+    for (var s = 1; s < arguments.length; s++) {
+        from = Object(arguments[s]);
+        for (var key in from) {
+            if (hasOwnProperty.call(from, key)) {
+                to[key] = from[key];
+            }
+        }
+        if (Object.getOwnPropertySymbols) {
+            symbols = Object.getOwnPropertySymbols(from);
+            for (var i = 0; i < symbols.length; i++) {
+                if (propIsEnumerable.call(from, symbols[i])) {
+                    to[symbols[i]] = from[symbols[i]];
+                }
+            }
+        }
+    }
+    return to;
+}
+//# sourceMappingURL=Angular2-csv.js.map
+
+/***/ }),
+/* 1398 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -33364,7 +33541,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var slimscroll_directive_1 = __webpack_require__(1398);
+var slimscroll_directive_1 = __webpack_require__(1399);
 __export(__webpack_require__(1394));
 var SlimScrollModule = (function () {
     function SlimScrollModule() {
@@ -33385,7 +33562,7 @@ exports.SlimScrollModule = SlimScrollModule;
 //# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/index.js.map
 
 /***/ }),
-/* 1398 */
+/* 1399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33632,183 +33809,6 @@ SlimScrollDirective = __decorate([
 exports.SlimScrollDirective = SlimScrollDirective;
 var _a, _b, _c;
 //# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/slimscroll.directive.js.map
-
-/***/ }),
-/* 1399 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var CsvConfigConsts = (function () {
-    function CsvConfigConsts() {
-    }
-    return CsvConfigConsts;
-}());
-CsvConfigConsts.EOL = "\r\n";
-CsvConfigConsts.BOM = "\ufeff";
-CsvConfigConsts.DEFAULT_FIELD_SEPARATOR = ',';
-CsvConfigConsts.DEFAULT_DECIMAL_SEPARATOR = '.';
-CsvConfigConsts.DEFAULT_QUOTE = '"';
-CsvConfigConsts.DEFAULT_SHOW_TITLE = false;
-CsvConfigConsts.DEFAULT_TITLE = 'My Report';
-CsvConfigConsts.DEFAULT_FILENAME = 'mycsv.csv';
-CsvConfigConsts.DEFAULT_SHOW_LABELS = false;
-exports.CsvConfigConsts = CsvConfigConsts;
-exports.ConfigDefaults = {
-    filename: CsvConfigConsts.DEFAULT_FILENAME,
-    fieldSeparator: CsvConfigConsts.DEFAULT_FIELD_SEPARATOR,
-    quoteStrings: CsvConfigConsts.DEFAULT_QUOTE,
-    decimalseparator: CsvConfigConsts.DEFAULT_DECIMAL_SEPARATOR,
-    showLabels: CsvConfigConsts.DEFAULT_SHOW_LABELS,
-    showTitle: CsvConfigConsts.DEFAULT_SHOW_TITLE,
-    title: CsvConfigConsts.DEFAULT_TITLE
-};
-var Angular2Csv = (function () {
-    function Angular2Csv(DataJSON, filename, options) {
-        this.csv = "";
-        var config = options || {};
-        this.data = typeof DataJSON != 'object' ? JSON.parse(DataJSON) : DataJSON;
-        this._options = objectAssign({}, exports.ConfigDefaults, config);
-        if (this._options.filename) {
-            this._options.filename = filename;
-        }
-        this.generateCsv();
-    }
-    /**
-     * Generate and Download Csv
-     */
-    Angular2Csv.prototype.generateCsv = function () {
-        this.csv += CsvConfigConsts.BOM;
-        if (this._options.showTitle) {
-            this.csv += this._options.title + '\r\n\n';
-        }
-        this.getHeaders();
-        this.getBody();
-        if (this.csv == '') {
-            console.log("Invalid data");
-            return;
-        }
-        if (navigator.msSaveBlob) {
-            var filename = this._options.filename.replace(/ /g, "_") + ".csv";
-            var blob = new Blob([this.csv], { "type": "text/csv;charset=utf8;" });
-            navigator.msSaveBlob(blob, filename);
-        }
-        else {
-            var uri = 'data:text/csv;charset=utf-8,' + encodeURI(this.csv);
-            var link = document.createElement("a");
-            link.href = uri;
-            link.setAttribute('visibility', 'hidden');
-            link.download = this._options.filename.replace(/ /g, "_") + ".csv";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    };
-    /**
-     * Create Headers
-     */
-    Angular2Csv.prototype.getHeaders = function () {
-        if (this._options.showLabels) {
-            var row = "";
-            for (var index in this.data[0]) {
-                row += index + this._options.fieldSeparator;
-            }
-            row = row.slice(0, -1);
-            this.csv += row + CsvConfigConsts.EOL;
-        }
-    };
-    /**
-     * Create Body
-     */
-    Angular2Csv.prototype.getBody = function () {
-        for (var i = 0; i < this.data.length; i++) {
-            var row = "";
-            for (var index in this.data[i]) {
-                row += this.formartData(this.data[i][index]) + this._options.fieldSeparator;
-                ;
-            }
-            row.slice(0, row.length - 1);
-            this.csv += row + CsvConfigConsts.EOL;
-        }
-    };
-    /**
-     * Format Data
-     * @param {any} data
-     */
-    Angular2Csv.prototype.formartData = function (data) {
-        if (this._options.decimalseparator === 'locale' && this.isFloat(data)) {
-            return data.toLocaleString();
-        }
-        if (this._options.decimalseparator !== '.' && this.isFloat(data)) {
-            return data.toString().replace('.', this._options.decimalseparator);
-        }
-        if (typeof data === 'string') {
-            data = data.replace(/"/g, '""');
-            if (this._options.quoteStrings || data.indexOf(',') > -1 || data.indexOf('\n') > -1 || data.indexOf('\r') > -1) {
-                data = this._options.quoteStrings + data + this._options.quoteStrings;
-            }
-            return data;
-        }
-        if (typeof data === 'boolean') {
-            return data ? 'TRUE' : 'FALSE';
-        }
-        return data;
-    };
-    /**
-     * Check if is Float
-     * @param {any} input
-     */
-    Angular2Csv.prototype.isFloat = function (input) {
-        return +input === input && (!isFinite(input) || Boolean(input % 1));
-    };
-    return Angular2Csv;
-}());
-exports.Angular2Csv = Angular2Csv;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-/**
- * Convet to Object
- * @param {any} val
- */
-function toObject(val) {
-    if (val === null || val === undefined) {
-        throw new TypeError('Object.assign cannot be called with null or undefined');
-    }
-    return Object(val);
-}
-/**
- * Assign data  to new Object
- * @param {any}   target
- * @param {any[]} ...source
- */
-function objectAssign(target) {
-    var source = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        source[_i - 1] = arguments[_i];
-    }
-    var from;
-    var to = toObject(target);
-    var symbols;
-    for (var s = 1; s < arguments.length; s++) {
-        from = Object(arguments[s]);
-        for (var key in from) {
-            if (hasOwnProperty.call(from, key)) {
-                to[key] = from[key];
-            }
-        }
-        if (Object.getOwnPropertySymbols) {
-            symbols = Object.getOwnPropertySymbols(from);
-            for (var i = 0; i < symbols.length; i++) {
-                if (propIsEnumerable.call(from, symbols[i])) {
-                    to[symbols[i]] = from[symbols[i]];
-                }
-            }
-        }
-    }
-    return to;
-}
-//# sourceMappingURL=Angular2-csv.js.map
 
 /***/ }),
 /* 1400 */,
@@ -34194,7 +34194,7 @@ var core_1 = __webpack_require__(0);
 // import { cropTable } from './crop-seed'
 var router_1 = __webpack_require__(65);
 var equipment_service_1 = __webpack_require__(1401);
-var Angular2_csv_1 = __webpack_require__(1399);
+var Angular2_csv_1 = __webpack_require__(1397);
 var ngx_flash_messages_1 = __webpack_require__(672);
 var ngx_cookie_1 = __webpack_require__(78);
 var ListEquipmentComponent = (function () {
@@ -34765,7 +34765,7 @@ module.exports = "<!-- Loader div -->\n<div *ngIf=\"isLoading\" class=\"overlayl
 /* 1439 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"equipment-wrapper\">\r\n \r\n    <!-- loading section -->\r\n    <div class=\"aligncenter_loader\" *ngIf=\"isLoading\">\r\n        <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \r\n    </div>\r\n    <!-- section ends  -->\r\n\r\n    <div class=\"card\" *ngIf=\"!isLoading\">\r\n        <div class=\"card-header\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6 col-12\">\r\n                   <strong>View Equipment</strong>           \r\n                </div>\r\n                <div class=\"col-sm-6 col-12 text-right linehght\">\r\n                   \r\n                   <button type=\"button\" class=\"btn btn-secondary\" [routerLink]=\"['/equipments/list']\">Back</button>     \r\n                    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"editEquipment(equipment.id)\">Edit Equipment</button> \r\n                    &nbsp;    \r\n                                          \r\n                </div>\r\n            </div> <!-- .row -->\r\n        </div>\r\n        <div class=\"card-block\">\r\n            <form role=\"form\" (ngSubmit)=\"submitEquipment()\" #addEquipmentForm=\"ngForm\">\r\n                \r\n               <div *ngIf=\"showMessage\" class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\r\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\"  (click)=\"closeMessage()\" aria-label=\"Close\">\r\n                        <span aria-hidden=\"true\">&times;</span>\r\n                    </button>\r\n                    <strong>Success</strong> Equipment added successfully.\r\n                </div>\r\n                \r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-name\">Equipment Name</label>\r\n                            <p>{{equipment.name ? equipment.name : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group  \">\r\n                            <label for=\"rentSell\">Type</label>\r\n                            <p>{{equipment.rentSell ? equipment.rentSell : '-'}}</p>\r\n                        </div>                        \r\n                    </div>                   \r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"availablefrom\">Available From</label>\r\n                            <p>{{equipment?.availableFrom?.day ? equipment?.availableFrom?.day : '-'}} {{equipment?.availableFrom?.day ? '/' : ''}} {{equipment?.availableFrom?.month ?  equipment?.availableFrom?.month : ''}} {{ equipment?.availableFrom?.day ? ' / ' : ''}} {{equipment?.availableFrom?.year ? equipment?.availableFrom?.year : ''}} </p>\r\n                        </div>\r\n                    </div>\r\n                      <div class=\"col-sm-6\">\r\n                         <div class=\"form-group\">\r\n                            <label for=\"avalibilityperiod\">Availibility Period</label>\r\n                            <p>{{equipment?.avalibilityperiod ? equipment?.avalibilityperiod : '-'}}<span *ngIf=\"equipment?.avalibilityperiod\"> {{equipment.avalibilityperiodUnits}}</span></p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"supplier\">Supplier</label>\r\n                            <p>{{equipment.user?.firstName ? equipment.user?.firstName : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"address\">Address</label>                          \r\n                            <p>{{equipment.address ? equipment.address : '-'}}</p>\r\n                        </div>                                    \r\n                    </div> \r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-city\">City/Village</label>\r\n                            <p>{{equipment.city ? equipment.city : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-district\">District</label>\r\n                            <p>{{equipment.district ? equipment.district : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-state\">State</label>\r\n                            <p>{{equipment.state ? equipment.state : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-pincode\">Pin Code </label>\r\n                            <p>{{equipment.pincode ? equipment.pincode : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">                    \r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"category\">Category</label>                            \r\n                            <p>{{equipment.category?.name ? equipment?.category?.name : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"variety\">Variety</label>\r\n                            <p>{{equipment.variety ? equipment.variety : '-'}}</p>\r\n                        </div>\r\n                    </div>                    \r\n                </div>\r\n                  <div class=\"row\">                    \r\n                    <div class=\"col-sm-6\">\r\n                       <div class=\"form-group \">\r\n                            <label for=\"companyManufacturer\">Company/Manufacturer</label>\r\n                            <p>{{equipment.companyManufacturer ? equipment.companyManufacturer : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                         <div class=\"form-group\">\r\n                            <label for=\"modelyear\">Model Year</label>\r\n                            <p>{{equipment.modelyear ? equipment.modelyear : '-'}}</p>                            \r\n                        </div>\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"model\">Model</label>                          \r\n                            <p>{{equipment.model ? equipment.model : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"rate\">Price</label>\r\n                            <p><i class=\"fa fa-rupee\"></i> {{equipment.rate}}<span *ngIf=\"equipment.rentSell == 'rent'\">/{{equipment.price_unit}}</span></p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">                   \r\n                    <div class=\"col-sm-6\">\r\n                       <div class=\"form-group \">\r\n                            <label for=\"quantity\">Quantity</label>\r\n                            <p>{{equipment.quantity ? equipment.quantity : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group radiobuttons_top \">\r\n                            <label for=\"nf-supply_ablity\">Supply Ability</label>\r\n                            <p>{{equipment.supply_ablity ? equipment.supply_ablity : '-'}}</p>                            \r\n                        </div> \r\n                    </div>\r\n                                       \r\n                </div>    \r\n                  <div class=\"row\">                   \r\n                    <div class=\"col-sm-6\">\r\n                         <div class=\"form-group \">\r\n                            <label for=\"nf-paymentTerms\">Payment Preference</label>\r\n                            <p>{{equipment.payment_method ? equipment.payment_method : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-3\">\r\n                         <div class=\"form-group\" >\r\n                            <label for=\"supplyarea\">Supply Area</label>\r\n                            <p>{{equipment.supply_area ? equipment.supply_area : '-'}}</p>\r\n                        </div>\r\n                    </div> \r\n                    <div class=\"col-sm-3\">\r\n                         <div class=\"form-group\">\r\n                            <label for=\"kmrange\">Supply Range(km)</label>\r\n                            <p>{{equipment.kmrange ? equipment.kmrange : '-'}}</p>\r\n                        </div>\r\n                    </div>                                 \r\n                                        \r\n                </div>                        \r\n                       \r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"description\">Description</label>\r\n                            <p>{{equipment.description ? equipment.description : '-'}}</p>\r\n                        </div>                       \r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-verified\">Verified</label>\r\n                            <p>{{equipment.verified ? equipment.verified : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                 <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-image\">Image</label>\r\n                            <p>Not available</p>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"col-sm-6\">\r\n                         <div class=\"form-group radiobuttons_top \">\r\n                            <!-- <label for=\"termsConditions\">Terms & Conditions</label>\r\n                            <p>{{equipment.termsConditions ? equipment.termsConditions : '-'}}</p> -->                            \r\n                        </div> \r\n                    </div>\r\n                </div>                                      \r\n            </form>\r\n        </div>\r\n    </div> <!-- .card -->\r\n</div> <!-- .equipment-wrapper -->"
+module.exports = "<div class=\"equipment-wrapper\">\r\n \r\n    <!-- loading section -->\r\n    <div class=\"aligncenter_loader\" *ngIf=\"isLoading\">\r\n        <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \r\n    </div>\r\n    <!-- section ends  -->\r\n\r\n    <div class=\"card\" *ngIf=\"!isLoading\">\r\n        <div class=\"card-header\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6 col-12\">\r\n                   <strong>View Equipment</strong>           \r\n                </div>\r\n                <div class=\"col-sm-6 col-12 text-right linehght\">\r\n                   \r\n                   <button type=\"button\" class=\"btn btn-secondary\" [routerLink]=\"['/equipments/list']\">Back</button>     \r\n                    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"editEquipment(equipment.id)\">Edit Equipment</button> \r\n                    &nbsp;    \r\n                                          \r\n                </div>\r\n            </div> <!-- .row -->\r\n        </div>\r\n        <div class=\"card-block\">\r\n            <form role=\"form\" (ngSubmit)=\"submitEquipment()\" #addEquipmentForm=\"ngForm\">\r\n                \r\n               <div *ngIf=\"showMessage\" class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\r\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\"  (click)=\"closeMessage()\" aria-label=\"Close\">\r\n                        <span aria-hidden=\"true\">&times;</span>\r\n                    </button>\r\n                    <strong>Success</strong> Equipment added successfully.\r\n                </div>\r\n                \r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-name\">Equipment Name</label>\r\n                            <p>{{equipment.name ? equipment.name : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group  \">\r\n                            <label for=\"rentSell\">Type</label>\r\n                            <p>{{equipment.rentSell ? equipment.rentSell : '-'}}</p>\r\n                        </div>                        \r\n                    </div>                   \r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"availablefrom\">Available From</label>\r\n                            <p>{{equipment?.availableFrom?.day ? equipment?.availableFrom?.day : '-'}} {{equipment?.availableFrom?.day ? '/' : ''}} {{equipment?.availableFrom?.month ?  equipment?.availableFrom?.month : ''}} {{ equipment?.availableFrom?.day ? ' / ' : ''}} {{equipment?.availableFrom?.year ? equipment?.availableFrom?.year : ''}} </p>\r\n                        </div>\r\n                    </div>\r\n                      <div class=\"col-sm-6\">\r\n                         <div class=\"form-group\">\r\n                            <label for=\"avalibilityperiod\">Availibility Period</label>\r\n                            <p>{{equipment?.avalibilityperiod ? equipment?.avalibilityperiod : '-'}}<span *ngIf=\"equipment?.avalibilityperiod\"> {{equipment.avalibilityperiodUnits}}</span></p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"supplier\">Supplier</label>\r\n                            <p>{{equipment.user?.firstName ? equipment.user?.firstName : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"address\">Address</label>                          \r\n                            <p>{{equipment.address ? equipment.address : '-'}}</p>\r\n                        </div>                                    \r\n                    </div> \r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-city\">City/Village</label>\r\n                            <p>{{equipment.city ? equipment.city : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-district\">District</label>\r\n                            <p>{{equipment.district ? equipment.district : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-state\">State</label>\r\n                            <p>{{equipment.state ? equipment.state : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"nf-pincode\">Pin Code </label>\r\n                            <p>{{equipment.pincode ? equipment.pincode : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">                    \r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"category\">Category</label>                            \r\n                            <p>{{equipment.category?.name ? equipment?.category?.name : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"variety\">Variety</label>\r\n                            <p>{{equipment.variety ? equipment.variety : '-'}}</p>\r\n                        </div>\r\n                    </div>                    \r\n                </div>\r\n                  <div class=\"row\">                    \r\n                    <div class=\"col-sm-6\">\r\n                       <div class=\"form-group \">\r\n                            <label for=\"companyManufacturer\">Company/Manufacturer</label>\r\n                            <p>{{equipment.companyManufacturer ? equipment.companyManufacturer.name : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                         <div class=\"form-group\">\r\n                            <label for=\"modelyear\">Model Year</label>\r\n                            <p>{{equipment.modelyear ? equipment.modelyear : '-'}}</p>                            \r\n                        </div>\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"model\">Model</label>                          \r\n                            <p>{{equipment.model ? equipment.model : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"rate\">Price</label>\r\n                            <p><i class=\"fa fa-rupee\"></i> {{equipment.rate}}<span *ngIf=\"equipment.rentSell == 'rent'\">/{{equipment.price_unit}}</span></p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">                   \r\n                    <div class=\"col-sm-6\">\r\n                       <div class=\"form-group \">\r\n                            <label for=\"quantity\">Quantity</label>\r\n                            <p>{{equipment.quantity ? equipment.quantity : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group radiobuttons_top \">\r\n                            <label for=\"nf-supply_ablity\">Supply Ability</label>\r\n                            <p>{{equipment.supply_ablity ? equipment.supply_ablity : '-'}}</p>                            \r\n                        </div> \r\n                    </div>\r\n                                       \r\n                </div>    \r\n                  <div class=\"row\">                   \r\n                    <div class=\"col-sm-6\">\r\n                         <div class=\"form-group \">\r\n                            <label for=\"nf-paymentTerms\">Payment Preference</label>\r\n                            <p>{{equipment.payment_method ? equipment.payment_method : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-3\">\r\n                         <div class=\"form-group\" >\r\n                            <label for=\"supplyarea\">Supply Area</label>\r\n                            <p>{{equipment.supply_area ? equipment.supply_area : '-'}}</p>\r\n                        </div>\r\n                    </div> \r\n                    <div class=\"col-sm-3\">\r\n                         <div class=\"form-group\">\r\n                            <label for=\"kmrange\">Supply Range(km)</label>\r\n                            <p>{{equipment.kmrange ? equipment.kmrange : '-'}}</p>\r\n                        </div>\r\n                    </div>                                 \r\n                                        \r\n                </div>                        \r\n                       \r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group \">\r\n                            <label for=\"description\">Description</label>\r\n                            <p>{{equipment.description ? equipment.description : '-'}}</p>\r\n                        </div>                       \r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-verified\">Verified</label>\r\n                            <p>{{equipment.verified ? equipment.verified : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                 <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-image\">Image</label>\r\n                            <p>Not available</p>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"col-sm-6\">\r\n                         <div class=\"form-group radiobuttons_top \">\r\n                            <!-- <label for=\"termsConditions\">Terms & Conditions</label>\r\n                            <p>{{equipment.termsConditions ? equipment.termsConditions : '-'}}</p> -->                            \r\n                        </div> \r\n                    </div>\r\n                </div>                                      \r\n            </form>\r\n        </div>\r\n    </div> <!-- .card -->\r\n</div> <!-- .equipment-wrapper -->"
 
 /***/ })
 ]));

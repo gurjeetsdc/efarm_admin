@@ -32946,9 +32946,7 @@ exports.not = not;
 /* 1394 */,
 /* 1395 */,
 /* 1396 */,
-/* 1397 */,
-/* 1398 */,
-/* 1399 */
+/* 1397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33125,6 +33123,8 @@ function objectAssign(target) {
 //# sourceMappingURL=Angular2-csv.js.map
 
 /***/ }),
+/* 1398 */,
+/* 1399 */,
 /* 1400 */,
 /* 1401 */,
 /* 1402 */,
@@ -33388,7 +33388,7 @@ var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(65);
 var user_service_1 = __webpack_require__(1404);
 var ngx_cookie_1 = __webpack_require__(78);
-var Angular2_csv_1 = __webpack_require__(1399);
+var Angular2_csv_1 = __webpack_require__(1397);
 var ngx_flash_messages_1 = __webpack_require__(672);
 var ListUserComponent = (function () {
     function ListUserComponent(_router, _userService, _cookieService, _flashMessagesService) {
@@ -33451,6 +33451,7 @@ var ListUserComponent = (function () {
                 if (!(_this.itemsTotal >= start)) {
                     _this.activePage = _this.activePage - 1;
                 }
+                _this._cookieService.put('userAlert', 'Deleted successfully.');
                 /* reload page. */
                 _this.getUsers();
             }, function (err) {

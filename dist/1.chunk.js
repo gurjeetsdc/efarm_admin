@@ -1,5 +1,5 @@
-webpackJsonp([1,11],Array(1096).concat([
-/* 1096 */
+webpackJsonp([1,11],Array(1100).concat([
+/* 1100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13,50 +13,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var common_1 = __webpack_require__(14);
-// import {DataTableModule} from "angular2-datatable";
-var angular2_datatable_pagination_1 = __webpack_require__(1138);
-var list_crop_component_1 = __webpack_require__(1406);
-var addupdate_crop_component_1 = __webpack_require__(1405);
-var view_crop_component_1 = __webpack_require__(1407);
-var crops_routing_module_1 = __webpack_require__(1421);
-var crop_service_1 = __webpack_require__(1400);
-var ng2_validation_1 = __webpack_require__(674);
+var land_service_1 = __webpack_require__(1403);
 var ng2_datepicker_1 = __webpack_require__(1396);
-var ngx_flash_messages_1 = __webpack_require__(672);
-var CropsModule = (function () {
-    function CropsModule() {
+/*For list table.*/
+var angular2_datatable_pagination_1 = __webpack_require__(1138);
+var ng2_validation_1 = __webpack_require__(674);
+var list_land_component_1 = __webpack_require__(1416);
+var add_land_component_1 = __webpack_require__(1415);
+var view_land_component_1 = __webpack_require__(1417);
+var land_routing_module_1 = __webpack_require__(1425);
+var LandModule = (function () {
+    function LandModule() {
     }
-    return CropsModule;
+    return LandModule;
 }());
-CropsModule = __decorate([
+LandModule = __decorate([
     core_1.NgModule({
         imports: [
-            crops_routing_module_1.CropsRoutingModule,
+            land_routing_module_1.LandRoutingModule,
             common_1.CommonModule,
             angular2_datatable_pagination_1.NG2DataTableModule,
-            // DataTableModule,
             ng2_validation_1.CustomFormsModule,
-            ng2_datepicker_1.DatePickerModule,
-            ngx_flash_messages_1.FlashMessagesModule
+            ng2_datepicker_1.DatePickerModule
         ],
         providers: [
-            crop_service_1.CropService
+            land_service_1.LandService
         ],
         declarations: [
-            list_crop_component_1.ListCropComponent,
-            addupdate_crop_component_1.AddUpdateCropComponent,
-            view_crop_component_1.ViewCropComponent
+            list_land_component_1.ListLandComponent,
+            add_land_component_1.AddLandComponent,
+            view_land_component_1.ViewLandComponent
         ]
     })
-], CropsModule);
-exports.CropsModule = CropsModule;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/crops.module.js.map
+], LandModule);
+exports.LandModule = LandModule;
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/land.module.js.map
 
 /***/ }),
-/* 1097 */,
-/* 1098 */,
-/* 1099 */,
-/* 1100 */,
 /* 1101 */,
 /* 1102 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -33313,7 +33306,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_slimscroll__ = __webpack_require__(1397);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_slimscroll__ = __webpack_require__(1398);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_slimscroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ng2_slimscroll__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng2_datepicker_component__ = __webpack_require__(1395);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "DatePickerOptions", function() { return __WEBPACK_IMPORTED_MODULE_4__ng2_datepicker_component__["a"]; });
@@ -33357,6 +33350,183 @@ var DatePickerModule = (function () {
 
 "use strict";
 
+Object.defineProperty(exports, "__esModule", { value: true });
+var CsvConfigConsts = (function () {
+    function CsvConfigConsts() {
+    }
+    return CsvConfigConsts;
+}());
+CsvConfigConsts.EOL = "\r\n";
+CsvConfigConsts.BOM = "\ufeff";
+CsvConfigConsts.DEFAULT_FIELD_SEPARATOR = ',';
+CsvConfigConsts.DEFAULT_DECIMAL_SEPARATOR = '.';
+CsvConfigConsts.DEFAULT_QUOTE = '"';
+CsvConfigConsts.DEFAULT_SHOW_TITLE = false;
+CsvConfigConsts.DEFAULT_TITLE = 'My Report';
+CsvConfigConsts.DEFAULT_FILENAME = 'mycsv.csv';
+CsvConfigConsts.DEFAULT_SHOW_LABELS = false;
+exports.CsvConfigConsts = CsvConfigConsts;
+exports.ConfigDefaults = {
+    filename: CsvConfigConsts.DEFAULT_FILENAME,
+    fieldSeparator: CsvConfigConsts.DEFAULT_FIELD_SEPARATOR,
+    quoteStrings: CsvConfigConsts.DEFAULT_QUOTE,
+    decimalseparator: CsvConfigConsts.DEFAULT_DECIMAL_SEPARATOR,
+    showLabels: CsvConfigConsts.DEFAULT_SHOW_LABELS,
+    showTitle: CsvConfigConsts.DEFAULT_SHOW_TITLE,
+    title: CsvConfigConsts.DEFAULT_TITLE
+};
+var Angular2Csv = (function () {
+    function Angular2Csv(DataJSON, filename, options) {
+        this.csv = "";
+        var config = options || {};
+        this.data = typeof DataJSON != 'object' ? JSON.parse(DataJSON) : DataJSON;
+        this._options = objectAssign({}, exports.ConfigDefaults, config);
+        if (this._options.filename) {
+            this._options.filename = filename;
+        }
+        this.generateCsv();
+    }
+    /**
+     * Generate and Download Csv
+     */
+    Angular2Csv.prototype.generateCsv = function () {
+        this.csv += CsvConfigConsts.BOM;
+        if (this._options.showTitle) {
+            this.csv += this._options.title + '\r\n\n';
+        }
+        this.getHeaders();
+        this.getBody();
+        if (this.csv == '') {
+            console.log("Invalid data");
+            return;
+        }
+        if (navigator.msSaveBlob) {
+            var filename = this._options.filename.replace(/ /g, "_") + ".csv";
+            var blob = new Blob([this.csv], { "type": "text/csv;charset=utf8;" });
+            navigator.msSaveBlob(blob, filename);
+        }
+        else {
+            var uri = 'data:text/csv;charset=utf-8,' + encodeURI(this.csv);
+            var link = document.createElement("a");
+            link.href = uri;
+            link.setAttribute('visibility', 'hidden');
+            link.download = this._options.filename.replace(/ /g, "_") + ".csv";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    };
+    /**
+     * Create Headers
+     */
+    Angular2Csv.prototype.getHeaders = function () {
+        if (this._options.showLabels) {
+            var row = "";
+            for (var index in this.data[0]) {
+                row += index + this._options.fieldSeparator;
+            }
+            row = row.slice(0, -1);
+            this.csv += row + CsvConfigConsts.EOL;
+        }
+    };
+    /**
+     * Create Body
+     */
+    Angular2Csv.prototype.getBody = function () {
+        for (var i = 0; i < this.data.length; i++) {
+            var row = "";
+            for (var index in this.data[i]) {
+                row += this.formartData(this.data[i][index]) + this._options.fieldSeparator;
+                ;
+            }
+            row.slice(0, row.length - 1);
+            this.csv += row + CsvConfigConsts.EOL;
+        }
+    };
+    /**
+     * Format Data
+     * @param {any} data
+     */
+    Angular2Csv.prototype.formartData = function (data) {
+        if (this._options.decimalseparator === 'locale' && this.isFloat(data)) {
+            return data.toLocaleString();
+        }
+        if (this._options.decimalseparator !== '.' && this.isFloat(data)) {
+            return data.toString().replace('.', this._options.decimalseparator);
+        }
+        if (typeof data === 'string') {
+            data = data.replace(/"/g, '""');
+            if (this._options.quoteStrings || data.indexOf(',') > -1 || data.indexOf('\n') > -1 || data.indexOf('\r') > -1) {
+                data = this._options.quoteStrings + data + this._options.quoteStrings;
+            }
+            return data;
+        }
+        if (typeof data === 'boolean') {
+            return data ? 'TRUE' : 'FALSE';
+        }
+        return data;
+    };
+    /**
+     * Check if is Float
+     * @param {any} input
+     */
+    Angular2Csv.prototype.isFloat = function (input) {
+        return +input === input && (!isFinite(input) || Boolean(input % 1));
+    };
+    return Angular2Csv;
+}());
+exports.Angular2Csv = Angular2Csv;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+/**
+ * Convet to Object
+ * @param {any} val
+ */
+function toObject(val) {
+    if (val === null || val === undefined) {
+        throw new TypeError('Object.assign cannot be called with null or undefined');
+    }
+    return Object(val);
+}
+/**
+ * Assign data  to new Object
+ * @param {any}   target
+ * @param {any[]} ...source
+ */
+function objectAssign(target) {
+    var source = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        source[_i - 1] = arguments[_i];
+    }
+    var from;
+    var to = toObject(target);
+    var symbols;
+    for (var s = 1; s < arguments.length; s++) {
+        from = Object(arguments[s]);
+        for (var key in from) {
+            if (hasOwnProperty.call(from, key)) {
+                to[key] = from[key];
+            }
+        }
+        if (Object.getOwnPropertySymbols) {
+            symbols = Object.getOwnPropertySymbols(from);
+            for (var i = 0; i < symbols.length; i++) {
+                if (propIsEnumerable.call(from, symbols[i])) {
+                    to[symbols[i]] = from[symbols[i]];
+                }
+            }
+        }
+    }
+    return to;
+}
+//# sourceMappingURL=Angular2-csv.js.map
+
+/***/ }),
+/* 1398 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -33368,7 +33538,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var slimscroll_directive_1 = __webpack_require__(1398);
+var slimscroll_directive_1 = __webpack_require__(1399);
 __export(__webpack_require__(1394));
 var SlimScrollModule = (function () {
     function SlimScrollModule() {
@@ -33389,7 +33559,7 @@ exports.SlimScrollModule = SlimScrollModule;
 //# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/index.js.map
 
 /***/ }),
-/* 1398 */
+/* 1399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33638,184 +33808,10 @@ var _a, _b, _c;
 //# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/slimscroll.directive.js.map
 
 /***/ }),
-/* 1399 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var CsvConfigConsts = (function () {
-    function CsvConfigConsts() {
-    }
-    return CsvConfigConsts;
-}());
-CsvConfigConsts.EOL = "\r\n";
-CsvConfigConsts.BOM = "\ufeff";
-CsvConfigConsts.DEFAULT_FIELD_SEPARATOR = ',';
-CsvConfigConsts.DEFAULT_DECIMAL_SEPARATOR = '.';
-CsvConfigConsts.DEFAULT_QUOTE = '"';
-CsvConfigConsts.DEFAULT_SHOW_TITLE = false;
-CsvConfigConsts.DEFAULT_TITLE = 'My Report';
-CsvConfigConsts.DEFAULT_FILENAME = 'mycsv.csv';
-CsvConfigConsts.DEFAULT_SHOW_LABELS = false;
-exports.CsvConfigConsts = CsvConfigConsts;
-exports.ConfigDefaults = {
-    filename: CsvConfigConsts.DEFAULT_FILENAME,
-    fieldSeparator: CsvConfigConsts.DEFAULT_FIELD_SEPARATOR,
-    quoteStrings: CsvConfigConsts.DEFAULT_QUOTE,
-    decimalseparator: CsvConfigConsts.DEFAULT_DECIMAL_SEPARATOR,
-    showLabels: CsvConfigConsts.DEFAULT_SHOW_LABELS,
-    showTitle: CsvConfigConsts.DEFAULT_SHOW_TITLE,
-    title: CsvConfigConsts.DEFAULT_TITLE
-};
-var Angular2Csv = (function () {
-    function Angular2Csv(DataJSON, filename, options) {
-        this.csv = "";
-        var config = options || {};
-        this.data = typeof DataJSON != 'object' ? JSON.parse(DataJSON) : DataJSON;
-        this._options = objectAssign({}, exports.ConfigDefaults, config);
-        if (this._options.filename) {
-            this._options.filename = filename;
-        }
-        this.generateCsv();
-    }
-    /**
-     * Generate and Download Csv
-     */
-    Angular2Csv.prototype.generateCsv = function () {
-        this.csv += CsvConfigConsts.BOM;
-        if (this._options.showTitle) {
-            this.csv += this._options.title + '\r\n\n';
-        }
-        this.getHeaders();
-        this.getBody();
-        if (this.csv == '') {
-            console.log("Invalid data");
-            return;
-        }
-        if (navigator.msSaveBlob) {
-            var filename = this._options.filename.replace(/ /g, "_") + ".csv";
-            var blob = new Blob([this.csv], { "type": "text/csv;charset=utf8;" });
-            navigator.msSaveBlob(blob, filename);
-        }
-        else {
-            var uri = 'data:text/csv;charset=utf-8,' + encodeURI(this.csv);
-            var link = document.createElement("a");
-            link.href = uri;
-            link.setAttribute('visibility', 'hidden');
-            link.download = this._options.filename.replace(/ /g, "_") + ".csv";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    };
-    /**
-     * Create Headers
-     */
-    Angular2Csv.prototype.getHeaders = function () {
-        if (this._options.showLabels) {
-            var row = "";
-            for (var index in this.data[0]) {
-                row += index + this._options.fieldSeparator;
-            }
-            row = row.slice(0, -1);
-            this.csv += row + CsvConfigConsts.EOL;
-        }
-    };
-    /**
-     * Create Body
-     */
-    Angular2Csv.prototype.getBody = function () {
-        for (var i = 0; i < this.data.length; i++) {
-            var row = "";
-            for (var index in this.data[i]) {
-                row += this.formartData(this.data[i][index]) + this._options.fieldSeparator;
-                ;
-            }
-            row.slice(0, row.length - 1);
-            this.csv += row + CsvConfigConsts.EOL;
-        }
-    };
-    /**
-     * Format Data
-     * @param {any} data
-     */
-    Angular2Csv.prototype.formartData = function (data) {
-        if (this._options.decimalseparator === 'locale' && this.isFloat(data)) {
-            return data.toLocaleString();
-        }
-        if (this._options.decimalseparator !== '.' && this.isFloat(data)) {
-            return data.toString().replace('.', this._options.decimalseparator);
-        }
-        if (typeof data === 'string') {
-            data = data.replace(/"/g, '""');
-            if (this._options.quoteStrings || data.indexOf(',') > -1 || data.indexOf('\n') > -1 || data.indexOf('\r') > -1) {
-                data = this._options.quoteStrings + data + this._options.quoteStrings;
-            }
-            return data;
-        }
-        if (typeof data === 'boolean') {
-            return data ? 'TRUE' : 'FALSE';
-        }
-        return data;
-    };
-    /**
-     * Check if is Float
-     * @param {any} input
-     */
-    Angular2Csv.prototype.isFloat = function (input) {
-        return +input === input && (!isFinite(input) || Boolean(input % 1));
-    };
-    return Angular2Csv;
-}());
-exports.Angular2Csv = Angular2Csv;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-/**
- * Convet to Object
- * @param {any} val
- */
-function toObject(val) {
-    if (val === null || val === undefined) {
-        throw new TypeError('Object.assign cannot be called with null or undefined');
-    }
-    return Object(val);
-}
-/**
- * Assign data  to new Object
- * @param {any}   target
- * @param {any[]} ...source
- */
-function objectAssign(target) {
-    var source = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        source[_i - 1] = arguments[_i];
-    }
-    var from;
-    var to = toObject(target);
-    var symbols;
-    for (var s = 1; s < arguments.length; s++) {
-        from = Object(arguments[s]);
-        for (var key in from) {
-            if (hasOwnProperty.call(from, key)) {
-                to[key] = from[key];
-            }
-        }
-        if (Object.getOwnPropertySymbols) {
-            symbols = Object.getOwnPropertySymbols(from);
-            for (var i = 0; i < symbols.length; i++) {
-                if (propIsEnumerable.call(from, symbols[i])) {
-                    to[symbols[i]] = from[symbols[i]];
-                }
-            }
-        }
-    }
-    return to;
-}
-//# sourceMappingURL=Angular2-csv.js.map
-
-/***/ }),
-/* 1400 */
+/* 1400 */,
+/* 1401 */,
+/* 1402 */,
+/* 1403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33834,91 +33830,111 @@ var core_1 = __webpack_require__(0);
 var http_1 = __webpack_require__(131);
 var ngx_cookie_1 = __webpack_require__(78);
 var tsConstants = __webpack_require__(200);
-var CropService = (function () {
-    function CropService(_http, _cookieService) {
-        this._http = _http;
+var LandService = (function () {
+    function LandService(http, _cookieService) {
+        this.http = http;
         this._cookieService = _cookieService;
         this._host = tsConstants.HOST;
+        this.access_token = {};
+        this.token = '';
         this._accessToken = '';
     }
-    /*Use to fetch all crops*/
-    CropService.prototype.getAllCrops = function (rowsOnPage, activePage, sortTrem, search) {
+    /**@Description: Land listing method**/
+    LandService.prototype.landlist = function (rowsOnPage, activePage, sortTerm, search) {
         if (search === void 0) { search = ''; }
         var headers = new http_1.Headers();
+        var urlSearchParams = new http_1.URLSearchParams();
         this._accessToken = this.getAccessToken();
-        var url = this._host + '/crops?count=' + rowsOnPage + '&page=' + activePage + '&sortBy=' + sortTrem + '&search=' + search;
         headers.append('Authorization', this._accessToken);
-        return this._http.get(url, { headers: headers }).map(function (res) { return res.json(); });
+        var url = this._host + '/land?count=' + rowsOnPage + '&page=' + activePage + '&sortBy=' + sortTerm + '&search=' + search;
+        //let body = urlSearchParams.toString()
+        return this.http.get(url, { headers: headers }).map(function (res) { return res.json(); });
     };
-    /*Use to add new crop*/
-    CropService.prototype.add = function (crop) {
+    /**@Description: land save data method*/
+    LandService.prototype.landadd = function (land) {
+        console.log("inside land add");
         var headers = new http_1.Headers();
+        var urlSearchParams = new http_1.URLSearchParams();
         this._accessToken = this.getAccessToken();
         headers.append('Authorization', this._accessToken);
-        return this._http.post(this._host + '/crops', crop, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.post(this._host + '/land', land, { headers: headers }).map(function (res) { return res.json(); });
     };
-    /*Use to get crop with crop id*/
-    CropService.prototype.get = function (cropID) {
+    /**@Description: land detail info method**/
+    LandService.prototype.getLand = function (land) {
         var headers = new http_1.Headers();
+        var body = {};
+        var urlSearchParams = new http_1.URLSearchParams();
         this._accessToken = this.getAccessToken();
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host + '/crops/' + cropID, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get(this._host + '/land/' + land, { headers: headers }).map(function (res) { return res.json(); });
     };
-    /*Use to update crop*/
-    CropService.prototype.update = function (crop) {
+    /**@Description: update land info method**/
+    LandService.prototype.updateLand = function (land) {
+        var body = {};
         var headers = new http_1.Headers();
+        var urlSearchParams = new http_1.URLSearchParams();
         this._accessToken = this.getAccessToken();
         headers.append('Authorization', this._accessToken);
-        return this._http.put(this._host + '/crops/' + crop.id, crop, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.put(this._host + '/land/' + land.id, land, { headers: headers }).map(function (res) { return res.json(); });
     };
-    /*Use to Delete crop with crop id */
-    CropService.prototype.delete = function (cropID) {
+    /**@Description: update land info method**/
+    LandService.prototype.deleteLand = function (landId) {
         var headers = new http_1.Headers();
+        var urlSearchParams = new http_1.URLSearchParams();
         this._accessToken = this.getAccessToken();
         headers.append('Authorization', this._accessToken);
-        return this._http.delete(this._host + '/crops/' + cropID, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.delete(this._host + '/land/' + landId, { headers: headers }).map(function (res) { return res.json(); });
     };
-    /*Use to fetch all categories*/
-    CropService.prototype.getAllCategories = function () {
+    /**@Description: get seller user list**/
+    LandService.prototype.getAllUsers = function () {
         var headers = new http_1.Headers();
+        var urlSearchParams = new http_1.URLSearchParams();
         this._accessToken = this.getAccessToken();
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host + '/category?type=crops&sort=name', { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get(this._host + '/user?roles=U', { headers: headers }).map(function (res) { return res.json(); });
     };
-    /*Use to fetch all Users*/
-    CropService.prototype.getAllUsers = function () {
+    /**get category list from category table . this will save as foreign key**/
+    LandService.prototype.getAllCategories = function () {
         var headers = new http_1.Headers();
+        var urlSearchParams = new http_1.URLSearchParams();
         this._accessToken = this.getAccessToken();
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host + '/user?roles=U', { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.get(this._host + '/category?type=lands&sort=name', { headers: headers }).map(function (res) { return res.json(); });
     };
-    /*Use to fetch all States*/
-    CropService.prototype.getStates = function () {
+    LandService.prototype.getStates = function () {
         var headers = new http_1.Headers();
-        this._accessToken = this.getAccessToken();
-        headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host + '/states?sort=stateName', { headers: headers }).map(function (res) { return res.json(); });
+        this.token = this.getAccessToken();
+        headers.append('Authorization', this.token);
+        return this.http.get(this._host + '/states', { headers: headers }).map(function (res) { return res.json(); });
     };
-    CropService.prototype.getAccessToken = function () {
+    /**Check access token which saved in cookie here**/
+    LandService.prototype.getAccessToken = function () {
         var token = this._cookieService.get('token');
         return 'Bearer ' + token;
     };
-    return CropService;
+    return LandService;
 }());
-CropService = __decorate([
+LandService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [typeof (_a = typeof http_1.Http !== "undefined" && http_1.Http) === "function" && _a || Object, typeof (_b = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _b || Object])
-], CropService);
-exports.CropService = CropService;
+], LandService);
+exports.LandService = LandService;
 var _a, _b;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/crop.service.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/land.service.js.map
 
 /***/ }),
-/* 1401 */,
-/* 1402 */,
-/* 1403 */,
 /* 1404 */,
-/* 1405 */
+/* 1405 */,
+/* 1406 */,
+/* 1407 */,
+/* 1408 */,
+/* 1409 */,
+/* 1410 */,
+/* 1411 */,
+/* 1412 */,
+/* 1413 */,
+/* 1414 */,
+/* 1415 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33934,165 +33950,150 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var crop_service_1 = __webpack_require__(1400);
+var land_service_1 = __webpack_require__(1403);
 var router_1 = __webpack_require__(65);
 var ng2_datepicker_1 = __webpack_require__(1396);
 var ngx_cookie_1 = __webpack_require__(78);
-var AddUpdateCropComponent = (function () {
-    function AddUpdateCropComponent(_router, _activateRouter, _cropService, _cookieService, changeDetectorRef) {
+var AddLandComponent = (function () {
+    function AddLandComponent(_router, _activateRouter, _landService, _cookieService) {
         var _this = this;
         this._router = _router;
         this._activateRouter = _activateRouter;
-        this._cropService = _cropService;
+        this._landService = _landService;
         this._cookieService = _cookieService;
-        this.changeDetectorRef = changeDetectorRef;
-        this.crop = {
-            terms: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod",
-            category: '',
-            variety: '',
-            packaging: '',
-            paymentPreference: 'COD',
-            categoryID: '',
-            sellerID: '',
-            supplyArea: '',
-            supplyAbility: 'No',
-            quantityUnit: 'Kg',
-            availableUnit: 'Days',
-            verified: 'No',
+        this.land = {
+            rentSell: 'Lease',
+            unit: 'Ft',
+            categoryId: '',
+            location: '',
+            sellerId: '',
+            city: '',
+            district: '',
             state: '',
-            district: ''
+            pincode: '',
+            periodsunit: 'Day',
+            priceunit: 'Day',
+            term_condition: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
         };
-        this.isLoading = false;
-        this.isPageLoading = true;
-        this.category = [];
         this.sellers = [];
-        this.cropID = _activateRouter.snapshot.params['id'];
-        if (this.cropID) {
-            this._cropService.get(this.cropID).subscribe(function (res) {
-                _this.isPageLoading = false;
+        this.category = [];
+        this.years = [];
+        this.isLoading = true;
+        this.currentYear = new Date().getFullYear();
+        this.showMessage = false;
+        this.action = 'Add';
+        this.options = new ng2_datepicker_1.DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true });
+        this.Id = _activateRouter.snapshot.params['id'];
+        if (this.Id) {
+            this._landService.getLand(this.Id).subscribe(function (res) {
+                _this.isLoading = false;
                 if (res.success) {
-                    _this.crop = res.data;
-                    _this.crop.categoryID = res.data.category.id;
-                    if (res.data.seller && res.data.seller.id)
-                        _this.crop.sellerID = res.data.seller.id;
+                    _this.land = res.data;
+                    _this.action = 'Update';
+                    _this.land.sellerId = res.data.user.id;
+                    _this.land.categoryId = res.data.categoryId;
                 }
                 else {
                     _this.checkAccessToken(res.error);
                 }
             }, function (err) {
-                _this.isPageLoading = false;
+                _this.checkAccessToken(err);
             });
         }
         else {
-            this.isPageLoading = false;
+            this.isLoading = false;
         }
-        /*Use to get all Crops categories*/
-        this._cropService.getAllCategories().subscribe(function (res) {
-            _this.category = res.data;
-            if (_this.cropID)
-                _this.setVarieties();
-        }, function (err) { });
-        /*Use to get all users*/
-        this._cropService.getAllUsers().subscribe(function (res) {
-            if (res.success) {
-                _this.sellers = res.data.users;
-            }
-        }, function (err) { });
-        /*Use to get all states*/
-        this._cropService.getStates().subscribe(function (res) {
+        this._landService.getAllCategories().subscribe(function (res) { _this.category = res.data; }, function (err) { _this.checkAccessToken(err); });
+        this._landService.getAllUsers().subscribe(function (res) { _this.sellers = res.data.users; }, function (err) { _this.checkAccessToken(err); });
+        this._landService.getStates().subscribe(function (res) {
             _this.states = res.data;
-            if (_this.cropID)
+            if (_this.action == 'Update') {
                 _this.setDistrict();
-        }, function (err) { });
-        this.options = new ng2_datepicker_1.DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true });
-    }
-    /*If cropID exist then will update existing crop otherwise will add new crop*/
-    AddUpdateCropComponent.prototype.save = function () {
-        var _this = this;
-        this.isLoading = true;
-        if (this.crop["supplyAbility"] == "No") {
-            this.crop["supplyRange"] = null;
+            }
+        }, function (err) {
+            _this.checkAccessToken(err);
+        });
+        /*create years array. */
+        this.years.push(this.currentYear);
+        for (var i = 1; i <= 50; i++) {
+            this.years.push(this.currentYear - i);
         }
-        if (this.cropID) {
-            this.crop["category"] = this.crop["categoryID"];
-            if (this.crop["sellerID"])
-                this.crop["seller"] = this.crop["sellerID"];
-            this._cropService.update(this.crop).subscribe(function (res) {
-                _this.isLoading = false;
-                _this._cookieService.put('cropAlert', 'Updated successfully.');
-                _this._router.navigate(['/crops/list']);
-            }, function (err) {
-                _this.isLoading = false;
-            });
+    }
+    AddLandComponent.prototype.submitLand = function () {
+        this.isLoading = true;
+        if (this.action == 'Update') {
+            this.updateLand();
         }
         else {
-            this.crop["category"] = this.crop["categoryID"];
-            if (this.crop["sellerID"])
-                this.crop["seller"] = this.crop["sellerID"];
-            this._cropService.add(this.crop).subscribe(function (res) {
-                _this.isLoading = false;
-                _this._cookieService.put('cropAlert', 'Added successfully.');
-                _this._router.navigate(['/crops/list']);
-            }, function (err) {
-                _this.isLoading = false;
-            });
+            this.addLand();
         }
     };
-    /*Use to set variety get from selected on category*/
-    AddUpdateCropComponent.prototype.setVarieties = function () {
+    AddLandComponent.prototype.addLand = function () {
         var _this = this;
-        /* reset values. */
-        this.varieties = null;
-        if (!this.cropID) {
-            this.crop.variety = null;
-            this.crop.variety = '';
-        }
-        /* Initialize category. */
-        var categoryID = this.crop.categoryID;
-        if (categoryID) {
-            this.category.filter(function (obj) { return obj.id == categoryID; }).map(function (obj) { return _this.varieties = obj.variety; });
-        }
-        this.changeDetectorRef.detectChanges();
+        if (this.land["sellerId"])
+            this.land["user"] = this.land["sellerId"];
+        if (this.land["categoryId"])
+            this.land["category"] = this.land["categoryId"];
+        this._landService.landadd(this.land).subscribe(function (res) {
+            _this.response = res;
+            _this.showMessage = true;
+            _this._router.navigate(['/land/list', { data: "success" }]);
+        });
     };
-    /*Use to set district based on state name*/
-    AddUpdateCropComponent.prototype.setDistrict = function () {
+    AddLandComponent.prototype.updateLand = function () {
+        var _this = this;
+        if (this.land["sellerId"])
+            this.land["user"] = this.land["sellerId"];
+        if (this.land["categoryId"])
+            this.land["category"] = this.land["categoryId"];
+        this._landService.updateLand(this.land).subscribe(function (res) {
+            _this.response = res;
+            _this.showMessage = true;
+            _this._router.navigate(['/land/list', { data: "success" }]);
+        });
+    };
+    AddLandComponent.prototype.setDistrict = function () {
         var _this = this;
         /* reset values. */
         this.districts = null;
-        if (!this.cropID) {
-            this.crop.district = null;
-            this.crop.district = '';
+        if (this.action !== 'Update') {
+            this.land.district = null;
+            this.land.district = '';
         }
         /* Initialize category. */
-        var stateName = this.crop.state;
+        var stateName = this.land.state;
         if (stateName) {
             this.states.filter(function (obj) { return obj.stateName == stateName; }).map(function (obj) { return _this.districts = obj.districts; });
         }
-        this.changeDetectorRef.detectChanges();
     };
-    /*This function is use to remove user session if Access token expired. */
-    AddUpdateCropComponent.prototype.checkAccessToken = function (err) {
+    AddLandComponent.prototype.closeMessage = function () {
+        this.showMessage = false;
+    };
+    AddLandComponent.prototype.checkAccessToken = function (err) {
         var code = err.code;
         var message = err.message;
         if ((code == 401 && message == "authorization")) {
             this._cookieService.removeAll();
             this._router.navigate(['/login', { data: true }]);
         }
+        else {
+        }
     };
-    return AddUpdateCropComponent;
+    return AddLandComponent;
 }());
-AddUpdateCropComponent = __decorate([
+AddLandComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1433)
+        template: __webpack_require__(1443),
+        providers: [land_service_1.LandService]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _c || Object, typeof (_d = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _d || Object, typeof (_e = typeof core_1.ChangeDetectorRef !== "undefined" && core_1.ChangeDetectorRef) === "function" && _e || Object])
-], AddUpdateCropComponent);
-exports.AddUpdateCropComponent = AddUpdateCropComponent;
-var _a, _b, _c, _d, _e;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/addupdate-crop.component.js.map
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof land_service_1.LandService !== "undefined" && land_service_1.LandService) === "function" && _c || Object, typeof (_d = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _d || Object])
+], AddLandComponent);
+exports.AddLandComponent = AddLandComponent;
+var _a, _b, _c, _d;
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/add-land.component.js.map
 
 /***/ }),
-/* 1406 */
+/* 1416 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34108,17 +34109,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var crop_service_1 = __webpack_require__(1400);
+var land_service_1 = __webpack_require__(1403);
 var router_1 = __webpack_require__(65);
+var Angular2_csv_1 = __webpack_require__(1397);
 var ngx_cookie_1 = __webpack_require__(78);
-var Angular2_csv_1 = __webpack_require__(1399);
-var ngx_flash_messages_1 = __webpack_require__(672);
-var ListCropComponent = (function () {
-    function ListCropComponent(_router, _cropService, _cookieService, _flashMessagesService) {
+var ListLandComponent = (function () {
+    function ListLandComponent(activatedRouter, _router, _landService, _cookieService) {
+        this.activatedRouter = activatedRouter;
         this._router = _router;
-        this._cropService = _cropService;
+        this._landService = _landService;
         this._cookieService = _cookieService;
-        this._flashMessagesService = _flashMessagesService;
+        this.test = [];
         this.data = [];
         this.totalRecords = 0;
         this.filterQuery = "";
@@ -34128,14 +34129,20 @@ var ListCropComponent = (function () {
         this.activePage = 1;
         this.itemsTotal = 0;
         this.searchTerm = '';
-        this.sortTrem = '';
+        this.sortTerm = '';
         this.isLoading = false;
+        this.documents = [];
+        this.selectedDocument = [];
+        this.errMessage = '';
         this.isPageLoading = true;
         this.sortByWordLength = function (a) {
             return a.city.length;
         };
+        this.sortByUser = function (seller) {
+            return seller.firstname;
+        };
     }
-    ListCropComponent.prototype.ngOnInit = function () {
+    ListLandComponent.prototype.ngOnInit = function () {
         this._router.events.subscribe(function (evt) {
             if (!(evt instanceof router_1.NavigationEnd)) {
                 return;
@@ -34143,46 +34150,43 @@ var ListCropComponent = (function () {
             window.scrollTo(0, 0);
         });
         /*set initial sort condition */
-        this.sortTrem = this.sortBy + ' ' + this.sortOrder;
+        this.sortTerm = this.sortBy + ' ' + this.sortOrder;
         /*Load data*/
-        this.getCrops();
+        this.getLands();
         this.activePage = 1;
-        this.getCrops();
+        this.getLands();
         this.itemsOnPage = this.rowsOnPage;
     };
-    ListCropComponent.prototype.toInt = function (num) {
+    ListLandComponent.prototype.toInt = function (num) {
         return +num;
     };
-    ListCropComponent.prototype.viewCrop = function (cropID) {
-        var route = '/crops/list/' + cropID;
+    ListLandComponent.prototype.viewLand = function (Id) {
+        var route = '/land/list/' + Id;
         this._router.navigate([route]);
     };
-    ListCropComponent.prototype.editCrop = function (cropID) {
-        var route = '/crops/edit/' + cropID;
+    ListLandComponent.prototype.sendUpdateLand = function (Id) {
+        var route = '/land/update/' + Id;
         this._router.navigate([route]);
     };
-    /* Function use to remove Crop with crop id*/
-    ListCropComponent.prototype.removeCrop = function (cropID) {
+    ListLandComponent.prototype.removeLand = function (Id) {
         var _this = this;
         if (confirm("Do you want to delete?")) {
+            console.log("Implement delete functionality here");
             this.isLoading = true;
-            this._cropService.delete(cropID).subscribe(function (res) {
+            this._landService.deleteLand(Id).subscribe(function (res) {
                 _this.response = res;
                 _this.isLoading = false;
                 var start = (_this.activePage * _this.rowsOnPage - _this.rowsOnPage + 1);
                 _this.itemsTotal = _this.itemsTotal - 1;
                 if (!(_this.itemsTotal >= start)) {
-                    _this.activePage = _this.activePage - 1;
+                    _this.activePage = (_this.activePage - 1);
                 }
                 /* reload page. */
-                _this.getCrops();
-            }, function (err) {
-                _this.isLoading = false;
+                _this.getLands();
             });
         }
     };
-    /*Function use to remove deleted crop from list*/
-    ListCropComponent.prototype.removeByAttr = function (arr, attr, value) {
+    ListLandComponent.prototype.removeByAttr = function (arr, attr, value) {
         var i = arr.length;
         while (i--) {
             if (arr[i]
@@ -34194,138 +34198,122 @@ var ListCropComponent = (function () {
         return arr;
     };
     /*This function is use to remove user session if Access token expired. */
-    ListCropComponent.prototype.checkAccessToken = function (err) {
+    ListLandComponent.prototype.checkAccessToken = function (err) {
         var code = err.code;
         var message = err.message;
         if ((code == 401 && message == "authorization")) {
             this._cookieService.removeAll();
             this._router.navigate(['/login', { data: true }]);
         }
-        else {
-            console.log('Something unexpected happened, please try again later.');
-        }
     };
-    /*Get all Crops*/
-    ListCropComponent.prototype.getCrops = function () {
+    /*get all getLands*/
+    ListLandComponent.prototype.getLands = function () {
         var _this = this;
-        this._cropService.getAllCrops(this.rowsOnPage, this.activePage, this.sortTrem, this.searchTerm).subscribe(function (res) {
+        this._landService.landlist(this.rowsOnPage, this.activePage, this.sortTerm, this.searchTerm).subscribe(function (res) {
             _this.isLoading = false;
             _this.isPageLoading = false;
             if (res.success) {
-                _this.data = res.data.crops;
+                _this.data = res.data.lands;
                 _this.itemsTotal = res.data.total;
-                _this.showAlert();
             }
             else {
                 _this.checkAccessToken(res.error);
             }
         }, function (err) {
+            _this.checkAccessToken(err);
             _this.isLoading = false;
             _this.isPageLoading = false;
         });
     };
-    ListCropComponent.prototype.onPageChange = function (event) {
+    ListLandComponent.prototype.onPageChange = function (event) {
         this.isLoading = true;
         this.rowsOnPage = event.rowsOnPage;
         this.activePage = event.activePage;
-        this.getCrops();
+        this.getLands();
     };
-    ListCropComponent.prototype.onRowsChange = function (event) {
+    ListLandComponent.prototype.onRowsChange = function (event) {
         this.isLoading = true;
         this.rowsOnPage = this.itemsOnPage;
         this.activePage = 1;
-        this.getCrops();
+        this.getLands();
     };
-    ListCropComponent.prototype.onSortOrder = function (event) {
-        this.sortTrem = this.sortBy + ' ' + this.sortOrder;
+    ListLandComponent.prototype.onSortOrder = function (event) {
+        this.sortTerm = this.sortBy + ' ' + this.sortOrder;
         this.isLoading = true;
-        this.getCrops();
+        this.getLands();
     };
-    ListCropComponent.prototype.search = function (event, element) {
+    ListLandComponent.prototype.search = function (event, element) {
         if (element === void 0) { element = 'input'; }
         if (element == 'input') {
             if (event.keyCode == 13 || this.searchTerm == '') {
                 this.searchTerm = this.searchTerm.trim();
                 this.isLoading = true;
-                this.getCrops();
+                this.getLands();
                 this.activePage = 1;
-                this.getCrops();
+                this.getLands();
             }
         }
         else {
             this.searchTerm = this.searchTerm.trim();
             this.isLoading = true;
-            this.getCrops();
+            this.getLands();
             this.activePage = 1;
-            this.getCrops();
+            this.getLands();
         }
     };
-    ListCropComponent.prototype.downloadCSV = function () {
+    ListLandComponent.prototype.downloadCSV = function () {
         var i;
         var filteredData = [];
         var header = {
-            name: "Crop Name",
-            category: 'Category',
-            price: 'Offer Price',
-            quantity: 'Qty.',
-            highestBid: 'Highest Bid',
-            district: 'District',
-            availableFrom: 'Available From',
-            seller: 'Seller'
+            name: "Owner Name",
+            district: 'District ',
+            rentSell: 'Land For.',
+            area: 'Area',
+            price: 'Expected Price'
         };
         filteredData.push(header);
         for (i = 0; i < this.data.length; i++) {
-            var availableDate = this.data[i].availableFrom ? this.data[i].availableFrom.day ? this.data[i].availableFrom.day + '/' + this.data[i].availableFrom.month + '/' + this.data[i].availableFrom.year : '-' : '-';
-            var seller = this.data[i].seller ? this.data[i].seller.firstName ? this.data[i].seller.firstName + ' ' + this.data[i].seller.lastName : this.data[i].seller.email : '-';
-            var state = this.data[i].seller ? this.data[i].seller.state ? '(' + this.data[i].seller.state + ')' : '' : '';
-            seller += ' ' + state;
+            var user = this.data[i].user.firstName + '/' + this.data[i].user.lastName;
             var temp = {
-                name: this.data[i].name,
-                category: this.data[i].category.name,
-                price: this.data[i].price,
-                quantity: this.data[i].quantity,
-                highestBid: '-',
+                name: user,
                 district: this.data[i].district,
-                availableFrom: availableDate,
-                seller: seller
+                rentSell: this.data[i].rentSell,
+                area: this.data[i].area,
+                price: this.data[i].expected_price,
             };
             filteredData.push(temp);
         }
-        var fileName = "CropsReport-" + Math.floor(Date.now() / 1000);
+        var fileName = "LandsReport-" + Math.floor(Date.now() / 1000);
         new Angular2_csv_1.Angular2Csv(filteredData, fileName);
     };
-    ListCropComponent.prototype.downloadPDF = function () {
+    ListLandComponent.prototype.downloadPDF = function () {
         var i;
         var filteredData = [];
         var header = [
-            "Crop Name",
-            "Category",
-            "Offer Price",
-            "Qty.",
-            "Highest Bid",
-            "District",
-            "Available From",
-            "Seller",
+            "Owner Name",
+            'District ',
+            'Land For.',
+            'Area',
+            'Expected Price'
         ];
         for (i = 0; i < this.data.length; i++) {
-            var availableDate = this.data[i].availableFrom ? this.data[i].availableFrom.day ? this.data[i].availableFrom.day + '/' + this.data[i].availableFrom.month + '/' + this.data[i].availableFrom.year : '-' : '-';
-            var seller = this.data[i].seller ? this.data[i].seller.firstName ? this.data[i].seller.firstName + ' ' + this.data[i].seller.lastName : this.data[i].seller.email : '-';
-            var state = this.data[i].seller ? this.data[i].seller.state ? '(' + this.data[i].seller.state + ')' : '' : '';
-            seller += ' ' + state;
+            var name = '-';
+            if (typeof (this.data[i].user) != 'undefined') {
+                name = this.data[i].user.firstName + " " + this.data[i].user.lastName;
+            }
             var temp = [
-                this.data[i].name,
-                this.data[i].category.name,
-                this.data[i].price,
-                this.data[i].quantity,
-                '-',
+                name,
                 this.data[i].district,
-                availableDate,
-                seller
+                this.data[i].rentSell,
+                this.data[i].area,
+                (this.data[i].rentSell == 'Lease') ? this.data[i].expected_price + '/' + this.data[i].priceunit : this.data[i].expected_price,
             ];
             filteredData.push(temp);
         }
-        var fileName = "CropsReport-" + Math.floor(Date.now() / 1000);
+        var fileName = "LandReport-" + Math.floor(Date.now() / 1000);
         var doc = new jsPDF();
+        // doc.setFontSize(10);
+        // doc.setFontSize(12);
         doc.autoTable(header, filteredData, {
             theme: 'grid',
             headerStyles: { fillColor: 0 },
@@ -34347,32 +34335,22 @@ var ListCropComponent = (function () {
         });
         doc.save(fileName);
     };
-    ListCropComponent.prototype.showAlert = function () {
-        var alertMessage = this._cookieService.get('cropAlert');
-        if (alertMessage) {
-            this._flashMessagesService.show(alertMessage, {
-                classes: ['alert', 'alert-success'],
-                timeout: 3000,
-            });
-            this._cookieService.remove('cropAlert');
-        }
-    };
-    return ListCropComponent;
+    return ListLandComponent;
 }());
-ListCropComponent = __decorate([
+ListLandComponent = __decorate([
     core_1.Component({
-        selector: 'app-crops',
-        template: __webpack_require__(1434),
-        styles: [__webpack_require__(1428)]
+        selector: 'app-land-management',
+        template: __webpack_require__(1444),
+        styles: [__webpack_require__(1431)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _b || Object, typeof (_c = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _c || Object, typeof (_d = typeof ngx_flash_messages_1.FlashMessagesService !== "undefined" && ngx_flash_messages_1.FlashMessagesService) === "function" && _d || Object])
-], ListCropComponent);
-exports.ListCropComponent = ListCropComponent;
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object, typeof (_c = typeof land_service_1.LandService !== "undefined" && land_service_1.LandService) === "function" && _c || Object, typeof (_d = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _d || Object])
+], ListLandComponent);
+exports.ListLandComponent = ListLandComponent;
 var _a, _b, _c, _d;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/list-crop.component.js.map
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/list-land.component.js.map
 
 /***/ }),
-/* 1407 */
+/* 1417 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34388,74 +34366,55 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
+var land_service_1 = __webpack_require__(1403);
 var router_1 = __webpack_require__(65);
-var crop_service_1 = __webpack_require__(1400);
-var ngx_cookie_1 = __webpack_require__(78);
-var ViewCropComponent = (function () {
-    function ViewCropComponent(_router, route, _cropService, _cookieService) {
+var ViewLandComponent = (function () {
+    function ViewLandComponent(_router, _activatedRouter, _landService) {
         var _this = this;
         this._router = _router;
-        this._cropService = _cropService;
-        this._cookieService = _cookieService;
-        this.cropID = '';
-        this.crop = {};
+        this._activatedRouter = _activatedRouter;
+        this._landService = _landService;
+        this.Id = '';
+        this.land = {};
+        this.edit = false;
         this.isLoading = true;
-        this.cropID = route.snapshot.params['id'];
-        this._cropService.get(this.cropID).subscribe(function (res) {
-            _this.isLoading = false;
-            if (res.success) {
-                _this.crop = res.data;
-            }
-            else {
-                _this.checkAccessToken(res.error);
-            }
-        }, function (err) {
-            _this.isLoading = false;
-        });
+        this.Id = _activatedRouter.snapshot.params['id'];
+        if (this.Id) {
+            this._landService.getLand(this.Id).subscribe(function (res) {
+                _this.land = res.data;
+                _this.isLoading = false;
+                //console.log(res);
+            }, function (err) {
+                _this.isLoading = false;
+            });
+        }
     }
-    ViewCropComponent.prototype.editCrop = function (cropid) {
-        var route = '/crops/edit/' + cropid;
+    ViewLandComponent.prototype.updateLand = function (ID) {
+        var route = '/land/update/' + ID;
         this._router.navigate([route]);
     };
-    /*This function is use to remove user session if Access token expired. */
-    ViewCropComponent.prototype.checkAccessToken = function (err) {
-        var code = err.code;
-        var message = err.message;
-        if ((code == 401 && message == "authorization")) {
-            this._cookieService.removeAll();
-            this._router.navigate(['/login', { data: true }]);
-        }
-        else {
-            console.log('Something unexpected happened, please try again later.');
-        }
-    };
-    return ViewCropComponent;
+    return ViewLandComponent;
 }());
-ViewCropComponent = __decorate([
+ViewLandComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1435)
+        template: __webpack_require__(1445),
+        providers: [land_service_1.LandService]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof crop_service_1.CropService !== "undefined" && crop_service_1.CropService) === "function" && _c || Object, typeof (_d = typeof ngx_cookie_1.CookieService !== "undefined" && ngx_cookie_1.CookieService) === "function" && _d || Object])
-], ViewCropComponent);
-exports.ViewCropComponent = ViewCropComponent;
-var _a, _b, _c, _d;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/view-crop.component.js.map
+    __metadata("design:paramtypes", [typeof (_a = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _a || Object, typeof (_b = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _b || Object, typeof (_c = typeof land_service_1.LandService !== "undefined" && land_service_1.LandService) === "function" && _c || Object])
+], ViewLandComponent);
+exports.ViewLandComponent = ViewLandComponent;
+var _a, _b, _c;
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/view-land.component.js.map
 
 /***/ }),
-/* 1408 */,
-/* 1409 */,
-/* 1410 */,
-/* 1411 */,
-/* 1412 */,
-/* 1413 */,
-/* 1414 */,
-/* 1415 */,
-/* 1416 */,
-/* 1417 */,
 /* 1418 */,
 /* 1419 */,
 /* 1420 */,
-/* 1421 */
+/* 1421 */,
+/* 1422 */,
+/* 1423 */,
+/* 1424 */,
+/* 1425 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34472,61 +34431,61 @@ var router_1 = __webpack_require__(65);
 var forms_1 = __webpack_require__(3);
 var ng2_table_1 = __webpack_require__(1142);
 var ng2_bootstrap_1 = __webpack_require__(673);
-var list_crop_component_1 = __webpack_require__(1406);
-var addupdate_crop_component_1 = __webpack_require__(1405);
-var view_crop_component_1 = __webpack_require__(1407);
+var list_land_component_1 = __webpack_require__(1416);
+var add_land_component_1 = __webpack_require__(1415);
+var view_land_component_1 = __webpack_require__(1417);
 var http_1 = __webpack_require__(131);
 var routes = [
     {
         path: '',
         data: {
-            title: 'Crops'
+            title: 'Lands'
         },
         children: [
             {
                 path: '',
-                component: list_crop_component_1.ListCropComponent,
+                component: list_land_component_1.ListLandComponent,
                 data: {
                     title: 'List'
                 }
             },
             {
                 path: 'list',
-                component: list_crop_component_1.ListCropComponent,
+                component: list_land_component_1.ListLandComponent,
                 data: {
                     title: 'List'
                 }
             },
             {
                 path: 'add',
-                component: addupdate_crop_component_1.AddUpdateCropComponent,
+                component: add_land_component_1.AddLandComponent,
                 data: {
-                    title: 'Add Crop'
+                    title: 'Add Land'
                 }
             },
             {
                 path: 'list/:id',
-                component: view_crop_component_1.ViewCropComponent,
+                component: view_land_component_1.ViewLandComponent,
                 data: {
                     title: 'View'
                 }
             },
             {
-                path: 'edit/:id',
-                component: addupdate_crop_component_1.AddUpdateCropComponent,
+                path: 'update/:id',
+                component: add_land_component_1.AddLandComponent,
                 data: {
-                    title: 'Edit Crop'
+                    title: 'Edit Land'
                 }
             }
         ]
     }
 ];
-var CropsRoutingModule = (function () {
-    function CropsRoutingModule() {
+var LandRoutingModule = (function () {
+    function LandRoutingModule() {
     }
-    return CropsRoutingModule;
+    return LandRoutingModule;
 }());
-CropsRoutingModule = __decorate([
+LandRoutingModule = __decorate([
     core_1.NgModule({
         imports: [
             router_1.RouterModule.forChild(routes),
@@ -34542,18 +34501,17 @@ CropsRoutingModule = __decorate([
             ng2_bootstrap_1.PaginationModule
         ]
     })
-], CropsRoutingModule);
-exports.CropsRoutingModule = CropsRoutingModule;
-//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/crops-routing.module.js.map
+], LandRoutingModule);
+exports.LandRoutingModule = LandRoutingModule;
+//# sourceMappingURL=/home/manpreets/Documents/office/efarm/efarm_admin/src/land-routing.module.js.map
 
 /***/ }),
-/* 1422 */,
-/* 1423 */,
-/* 1424 */,
-/* 1425 */,
 /* 1426 */,
 /* 1427 */,
-/* 1428 */
+/* 1428 */,
+/* 1429 */,
+/* 1430 */,
+/* 1431 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(133)();
@@ -34570,26 +34528,33 @@ exports.push([module.i, "", ""]);
 module.exports = module.exports.toString();
 
 /***/ }),
-/* 1429 */,
-/* 1430 */,
-/* 1431 */,
 /* 1432 */,
-/* 1433 */
+/* 1433 */,
+/* 1434 */,
+/* 1435 */,
+/* 1436 */,
+/* 1437 */,
+/* 1438 */,
+/* 1439 */,
+/* 1440 */,
+/* 1441 */,
+/* 1442 */,
+/* 1443 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <div *ngIf=\"isLoading\" class=\"overlayloader\">\r\n        <div class=\"loader\"></div>\r\n    </div>\r\n    <!-- loading section -->\r\n    <div class=\"aligncenter_loader\" *ngIf=\"isPageLoading\">\r\n        <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \r\n    </div>\r\n    <!-- loading section ends  -->\r\n    <div class=\"card\" *ngIf=\"!isPageLoading\">\r\n        <div class=\"card-header\">\r\n            <strong>{{cropID ? 'Edit' : 'Add'}} Crop</strong>\r\n        </div>\r\n        <!-- form to add or update crop -->\r\n        <form role=\"form\" (ngSubmit)=\"save()\" #addCropForm=\"ngForm\">\r\n        <div class=\"card-block\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-name\">Crop Name</label>\r\n                            <input autofocus type=\"text\" id=\"name\" name=\"name\" class=\"form-control\" placeholder=\"\" #name=\"ngModel\" [(ngModel)]=\"crop.name\" pattern=\"[a-zA-Z][a-zA-Z0-9!@#$%^&*()\\s]*\" required>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"name.errors?.required && name.touched\" class=\"text-danger\">\r\n                                    Crop name is required.\r\n                                </small>\r\n                                <small *ngIf=\"name.errors?.pattern && name.touched\" class=\"text-danger\">\r\n                                    Crop name is required.\r\n                                </small>                                                          \r\n                            </div>    \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"seller\">Seller</label>\r\n                            <select id=\"seller\" name=\"seller\" class=\"form-control\" size=\"1\" [(ngModel)]=\"crop.sellerID\">\r\n                                <option value=\"\">Please select</option>                                \r\n                                <option *ngFor=\"let obj of sellers\" value=\"{{obj.id}}\">\r\n                                    {{obj.username}}\r\n                                </option>       \r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                    \r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-category\">Category</label>\r\n                            <select id=\"nfcategory\" name=\"nfcategory\" class=\"form-control\" size=\"1\" (change)=\"setVarieties( cat )\" #nfcategory=\"ngModel\" [(ngModel)]=\"crop.categoryID\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option *ngFor=\"let cat of category\" value=\"{{cat.id}}\">{{cat.name}}</option>\r\n                            </select>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"nfcategory.errors?.required && nfcategory.touched\" class=\"text-danger\">\r\n                                    Category is required.\r\n                                </small>                                                          \r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">Variety</label>\r\n                            <select id=\"variety\" name=\"variety\" class=\"form-control\" [(ngModel)]=\"crop.variety\" size=\"1\">\r\n                                <option value=\"\">Please select</option>\r\n                                <option *ngFor=\"let variety of varieties\" [value]=\"variety\">\r\n                                    {{variety}}\r\n                                </option>                                  \r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"address\">Address</label>\r\n                            <input type=\"text\" id=\"address\" name=\"address\" #address=\"ngModel\"  class=\"form-control\" [(ngModel)]=\"crop.address\" placeholder=\"\" required />\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"address.errors?.required && address.touched\" class=\"text-danger\">\r\n                                    Address is required.\r\n                                </small>                                                          \r\n                            </div> \r\n                        </div>                                    \r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-city\">City/Village</label>\r\n                            <input type=\"text\" id=\"nf-city\" name=\"city\" #city=\"ngModel\" class=\"form-control\" [(ngModel)]=\"crop.city\" placeholder=\"\" required>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"city.errors?.required && city.touched\" class=\"text-danger\">\r\n                                    City is required.\r\n                                </small>                                                          \r\n                            </div> \r\n                        </div>\r\n                    </div> \r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"state\">State</label>\r\n                            <select id=\"state\" name=\"state\" (change)=\"setDistrict();\"  [(ngModel)]=\"crop.state\" placeholder=\"\" required class=\"form-control\" size=\"1\" #state=\"ngModel\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option *ngFor=\"let state of states\" [value]=\"state.stateName\">\r\n                                    {{state.stateName}}\r\n                                </option>                                       \r\n                            </select>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"state.errors?.required && state.touched\" class=\"text-danger\">\r\n                                    State is required.\r\n                                </small>                                                        \r\n                            </div> \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"district\">District</label>\r\n                            <select id=\"district\" name=\"district\"  [(ngModel)]=\"crop.district\" placeholder=\"\" required class=\"form-control\" size=\"1\" #district=\"ngModel\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option *ngFor=\"let district of districts\" [value]=\"district.districtName\">\r\n                                    {{district.districtName}}\r\n                                </option>                                       \r\n                            </select>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"district.errors?.required && district.touched\" class=\"text-danger\">\r\n                                    District is required.\r\n                                </small>                                                        \r\n                            </div> \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-pincode\">Pin Code </label>\r\n                            <input type=\"number\" id=\"nf-pincode\" name=\"pincode\" #pincode=\"ngModel\" class=\"form-control\" [(ngModel)]=\"crop.pincode\" min=\"1\" max=\"999999\" placeholder=\"\" required>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"pincode.errors?.required && pincode.touched\" class=\"text-danger\">\r\n                                    Pin Code is required.\r\n                                </small>                                \r\n                                <small *ngIf=\"pincode.errors?.min && pincode.touched\" class=\"text-danger\">\r\n                                    Minimum value should be 1.\r\n                                </small>                                \r\n                                <small *ngIf=\"pincode.errors?.max && pincode.touched\" class=\"text-danger\">\r\n                                    Maximum 6 digit allow.\r\n                                </small>                                                          \r\n                            </div> \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                         <label for=\"nf-qty\">Quantity</label>\r\n                          <div class=\"flex\">\r\n                              <input type=\"number\" id=\"quantity\" name=\"quantity\" class=\"form-control\" aria-label=\"Text input with dropdown button\" #quantity=\"ngModel\" [(ngModel)]=\"crop.quantity\" min=\"1\" max=\"9999999999999998\" placeholder=\"\" required>\r\n                               <div class=\"input-group-btn\">\r\n                                  <select id=\"select4\" name=\"select4\" class=\"btn btn-secondary dropdown-toggle\" [(ngModel)]=\"crop.quantityUnit\" required>\r\n                                    <option value=\"Kg\">Kg</option>\r\n                                    <option value=\"Quintal\">Quintal</option>\r\n                                    <option value=\"Tonnes\">Tonnes</option>\r\n                                    <option value=\"Count\">Count</option>\r\n                                    <option value=\"Dozen\">Dozen</option>\r\n                                 </select>\r\n                              </div>\r\n                            </div>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"quantity.errors?.required && quantity.touched\" class=\"text-danger\">\r\n                                    Quantity is required.\r\n                                </small>\r\n                                <small *ngIf=\"quantity.errors?.min && quantity.touched\" class=\"text-danger\">\r\n                                    Minimum quantity should be 1.\r\n                                </small>                                                          \r\n                                <small *ngIf=\"quantity.errors?.max && quantity.touched\" class=\"text-danger\">\r\n                                    Maximum quantity is allow upto 16 digit.\r\n                                </small> \r\n                            </div>                       \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-price\">Offer Price</label>\r\n                            <div class=\"relative\">\r\n                            <div class=\"icnposition\"><i class=\"fa fa-rupee\"></i></div>\r\n                            <input type=\"number\" id=\"nfprice\" name=\"nfprice\" class=\"form-control pleft25\" #nfprice=\"ngModel\" [(ngModel)]=\"crop.price\" placeholder=\"\" required=\"\" min=\"1\" max=\"9999999999999998\">\r\n                            </div>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"nfprice.errors?.required && nfprice.touched\" class=\"text-danger\">\r\n                                    Offer Price is required.\r\n                                </small>\r\n                                <small *ngIf=\"nfprice.errors?.min && nfprice.touched\" class=\"text-danger\">\r\n                                    Minimum offer price should be 1.\r\n                                </small>                                                          \r\n                                <small *ngIf=\"nfprice.errors?.max && nfprice.touched\" class=\"text-danger\">\r\n                                    Maximum offer price is allow upto 16 digit.\r\n                                </small>                                                           \r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-grade\">Quality</label>\r\n                            <form class=\"grade\">\r\n                                <div class=\"btn-group\" data-toggle=\"\">\r\n                                   <label class=\"btn btn-default\" [ngClass]=\"{'active': crop.grade == 'A+'}\">\r\n                                          <input name=\"grade\" value=\"A+\" type=\"radio\" [(ngModel)]=\"crop.grade\" >A+\r\n                                    </label>\r\n                                    <label class=\"btn btn-default\" [ngClass]=\"{'active': crop.grade == 'A'}\">\r\n                                         <input name=\"grade\" value=\"A\" type=\"radio\" [(ngModel)]=\"crop.grade\">A\r\n                                    </label>\r\n                                    <label class=\"btn btn-default\" [ngClass]=\"{'active': crop.grade == 'B'}\">\r\n                                       <input name=\"grade\" value=\"B\" type=\"radio\" [(ngModel)]=\"crop.grade\">B\r\n                                    </label>\r\n                                    <label class=\"btn btn-default\" [ngClass]=\"{'active': crop.grade == 'C'}\">\r\n                                        <input name=\"grade\" value=\"C\" type=\"radio\" [(ngModel)]=\"crop.grade\">C\r\n                                    </label>\r\n                                    <label class=\"btn btn-default\" [ngClass]=\"{'active': crop.grade == 'D'}\">\r\n                                        <input name=\"grade\" value=\"D\" type=\"radio\" [(ngModel)]=\"crop.grade\">D\r\n                                    </label>\r\n                                </div>\r\n                            </form>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"availablefrom\">Available From (dd/mm/yyyy)</label>\r\n                            <div class=\"input-group form-control\">\r\n                                <ng2-datepicker name=\"date\" [options]=\"options\" id=\"nfavailibility\" name=\"nfavailibility\" [(ngModel)]=\"crop.availableFrom\"></ng2-datepicker>\r\n                             </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                         <label for=\"nf-qty\">Availibile Period</label>\r\n                          <div class=\"flex\">\r\n                              <input type=\"number\" id=\"availablePeriod\" name=\"availablePeriod\" class=\"form-control\" aria-label=\"Text input with dropdown button\" #availablePeriod=\"ngModel\" [(ngModel)]=\"crop.availablePeriod\" min=\"1\" max=\"9999999999999998\" placeholder=\"\">\r\n                               <div class=\"input-group-btn\">\r\n                                  <select id=\"select5\" name=\"select5\" class=\"btn btn-secondary dropdown-toggle\" [(ngModel)]=\"crop.availableUnit\">\r\n                                    <option value=\"Days\">Days</option>\r\n                                    <option value=\"Month\">Month</option>\r\n                                    <option value=\"Year\">Year</option>\r\n                                 </select>\r\n                              </div>\r\n                            </div>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"availablePeriod.errors?.required && availablePeriod.touched\" class=\"text-danger\">\r\n                                    Availibility Period is required.\r\n                                </small>\r\n                                <small *ngIf=\"availablePeriod.errors?.min && availablePeriod.touched\" class=\"text-danger\">\r\n                                    Minimum 1 Day is required.\r\n                                </small>                                                          \r\n                                <small *ngIf=\"availablePeriod.errors?.max && availablePeriod.touched\" class=\"text-danger\">\r\n                                    Maximum digit allow upto 16.\r\n                                </small> \r\n                            </div>                       \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row p10\">\r\n                    <div class=\"col-sm-6\">\r\n                       <div class=\"form-group has-required\">\r\n                            <label for=\"nf-supplyAbility\">Supply Ability</label>\r\n                            <div class=\"radiobuttons_top\">\r\n                            <div class=\"form-group pull-left\">\r\n                                <div class=\"radio_button\">\r\n                                    <input type=\"radio\"  name=\"supplyAbility\" class=\"\" id=\"nf-rentslell\" value=\"Yes\"  [(ngModel)]=\"crop.supplyAbility\" checked required>\r\n                                    <label for=\"nf-rentslell\">Yes</label>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group pull-left\">\r\n                                <div class=\"radio_button\">                     \r\n                                    <input type=\"radio\" name=\"supplyAbility\" class=\"\" id=\"supplyAbility\" value=\"No\"  [(ngModel)]=\"crop.supplyAbility\" (change)=\"crop.supplyArea = '';crop.supplyRange='';\" required>\r\n                                    <label for=\"supplyAbility\">No</label>\r\n                                </div>\r\n                            </div>\r\n                            </div>\r\n                        </div>                    \r\n                    </div>\r\n                    <div class=\"col-sm-6 col-md-3\">\r\n                        <div class=\"form-group\" [ngClass]=\"{'has-required': crop.supplyAbility == 'Yes'}\">\r\n                            <label for=\"nf-supplyarea\">Supply Area</label>\r\n                            <select id=\"nfsupplyarea\" name=\"nfsupplyarea\" class=\"form-control disable\" #nfsupplyarea=\"ngModel\" [(ngModel)]=\"crop.supplyArea\" size=\"1\" [disabled]=\"crop.supplyAbility == 'No'\" required>\r\n                                <option value=\"\">Please select</option>\r\n                                <option value=\"Within State\">Within State</option>\r\n                                <option value=\"Anywhere\">Anywhere</option>\r\n                            </select>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"nfsupplyarea.errors?.required && nfsupplyarea.touched\" class=\"text-danger\">\r\n                                    Supply Area is required.\r\n                                </small>                                                          \r\n                            </div> \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6 col-md-3\">\r\n                         <div class=\"form-group\" [ngClass]=\"{'has-required': crop.supplyAbility == 'Yes'}\">\r\n                            <label for=\"kmrange\">Supply Range (km)</label>\r\n                            <input type=\"number\" id=\"nfkmrange\" name=\"nfkmrange\" class=\"form-control\" [(ngModel)]=\"crop.supplyRange\" placeholder=\"\"  #nfkmrange=\"ngModel\" [disabled]=\"crop.supplyAbility == 'No'\" min=\"1\" max=\"9999999999999998\" required>\r\n                            <div class=\"error-block\">\r\n                                <small *ngIf=\"nfkmrange.errors?.required && nfkmrange.touched\" class=\"text-danger\">\r\n                                    Supply Range is required.\r\n                                </small>\r\n                                <small *ngIf=\"nfkmrange.errors?.min && nfkmrange.touched\" class=\"text-danger\">\r\n                                    Minimum Range should be 1 km.\r\n                                </small>                                                          \r\n                                <small *ngIf=\"nfkmrange.errors?.max && nfkmrange.touched\" class=\"text-danger\">\r\n                                    Maximum Range is allow upto 16 digit.\r\n                                </small>                                                           \r\n                            </div> \r\n                       </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group has-required\">\r\n                            <label for=\"nf-paymentTerms\">Payment Preference</label>\r\n                           <form class=\"grade\">\r\n                                <div class=\"btn-group\">\r\n                                    <label class=\"btn btn-default\" [ngClass]=\"{'active': crop.paymentPreference == 'COD'}\">\r\n                                        <input name=\"payment_mode\" value=\"COD\" type=\"radio\" [(ngModel)]=\"crop.paymentPreference\">COD\r\n                                    </label>\r\n                                    <label class=\"btn btn-default\" [ngClass]=\"{'active': crop.paymentPreference == 'Cheque'}\">\r\n                                        <input name=\"payment_mode\" value=\"Cheque\" type=\"radio\" [(ngModel)]=\"crop.paymentPreference\">Cheque\r\n                                    </label>\r\n                                    <label class=\"btn btn-default\" [ngClass]=\"{'active': crop.paymentPreference == 'Net Banking'}\">\r\n                                        <input name=\"payment_mode\" value=\"Net Banking\" type=\"radio\" [(ngModel)]=\"crop.paymentPreference\">Net Banking\r\n                                    </label>\r\n                                </div>\r\n                            </form>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-image\">Image</label>\r\n                            <input type=\"file\" name=\"file-7[]\" id=\"file-7\" class=\"inputfile inputfile-6\" data-multiple-caption=\"{count} files selected\" multiple />\r\n                            <label for=\"file-7\"><span></span> <strong><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"17\" viewBox=\"0 0 20 17\"><path d=\"M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z\"/></svg> Upload image</strong></label>\r\n                            <i class=\"fa fa-plus addimage\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                       <div class=\"form-group has-required\">\r\n                            <label for=\"nf-verified\">Verified</label>\r\n                            <div class=\"radiobuttons_top\">\r\n                            <div class=\"form-group pull-left\">\r\n                                <div class=\"radio_button\">\r\n                                    <input type=\"radio\"  name=\"verified\" class=\"\" id=\"nf-verified\" value=\"Yes\"  [(ngModel)]=\"crop.verified\" checked required>\r\n                                    <label for=\"nf-verified\">Yes</label>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group pull-left\">\r\n                                <div class=\"radio_button\">                     \r\n                                    <input type=\"radio\" name=\"verified\" class=\"\" id=\"verified\" value=\"No\"  [(ngModel)]=\"crop.verified\" required>\r\n                                    <label for=\"verified\">No</label>\r\n                                </div>\r\n                            </div>\r\n                            </div>\r\n                        </div>                    \r\n                    </div>\r\n                    <div class=\"col-sm-6 \">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-description\">Description</label>\r\n                            <textarea type=\"text\" id=\"description\" name=\"description\" class=\"form-control\" [(ngModel)]=\"crop.description\" placeholder=\"\" rows=\"4\"></textarea>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-terms\">Terms & Conditions</label>\r\n                            <textarea type=\"text\" id=\"nfterms\" name=\"nfterms\" class=\"form-control\" [(ngModel)]=\"crop.terms\" placeholder=\"\" rows=\"4\"></textarea> \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"card-footer\">\r\n                    <button type=\"reset\" class=\"btn btn-secondary whiteclr\" [routerLink]=\"['/crops/list']\"> Cancel</button>\r\n                    <button type=\"submit\" class=\"pull-right btn btn-primary orangeclr\" [disabled]=\"!addCropForm.valid\"  [class.disabled]=\"isClickedOnce\"  (click)=\"isClickedOnce = true\">{{cropID ? 'Update' : 'Save'}}</button>\r\n                </div>\r\n          </form>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"land-wrapper\">\n    \n    <div class=\"card\">\n        <div class=\"card-header\">\n            <strong>{{action}} Land</strong>\n        </div>\n                    <form role=\"form\" (ngSubmit)=\"submitLand()\" #addlandForm=\"ngForm\">\n\n        <div class=\"card-block\">\n                \n               <div *ngIf=\"showMessage\" class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\"  (click)=\"closeMessage()\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                    <strong>Success</strong> Land Added Successfully.\n                </div>\n                \n                <div class=\"row\">\n                  \n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group  has-required\">\n                            <label for=\"seller\">Owner name</label>\n                            <select id=\"seller\" name=\"seller\" class=\"form-control\" size=\"1\" [(ngModel)]=\"land.sellerId\" >\n                                <option value=\"\">Please select</option>                                \n                                <option *ngFor=\"let obj of sellers\" value=\"{{obj.id}}\">\n                                    {{obj.username}}\n                                </option>      \n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\">\n                       <div class=\"form-group  radiobuttons_top44\">\n                            <div class=\"form-group pull-left\">\n                                <div class=\"radio_button\">\n                                    <input type=\"radio\"  name=\"rentSell\" class=\"\" id=\"nf-rentslell\" value=\"Lease\"  [(ngModel)]=\"land.rentSell\" checked required>\n                                    <label for=\"nf-rentslell\">Lease</label>\n                                </div>\n                            </div>\n                           \n                            <div class=\"form-group pull-left\">\n                                <div class=\"radio_button\">                     \n                                    <input type=\"radio\" name=\"rentSell\" class=\"\" id=\"rentSell\" value=\"Sell\" (click)=\"land.avail_date={};land.periods=''\" [(ngModel)]=\"land.rentSell\" required>\n                                    <label for=\"rentSell\">Sell</label>\n                                </div>\n                            </div>\n                        </div>                    \n                    </div>\n                </div>\n                <div class=\"row\"  >\n                    <div class=\"col-sm-6\">\n                       <div class=\"form-group\">\n                           <label for=\"avail_date\">Available Date</label>\n                             <div class=\"input-group form-control\" [ngClass]=\"{'form-control': land.rentSell != 'Sell'}\">\n                              \n                              <ng2-datepicker placeholder=\"DD/MM/YYYY\" name=\"date\" [options]=\"options\" id=\"nfavail_date\" name=\"nfavail_date\" [(ngModel)]=\"land.avail_date\"  *ngIf=\"land.rentSell != 'Sell'\"></ng2-datepicker>\n                                <input type=\"number\" id=\"avail_date\" name=\"avail_date\" class=\"form-control nopointer\" placeholder=\"\" style=\"pointer-events: none;\" *ngIf=\"land.rentSell == 'Sell'\" [disabled]=\"land.rentSell == 'Sell'\"  />\n                            </div>\n                       </div>\n                   </div>\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                                <label for=\"periods\">Periods</label>\n                         <div class=\"flex\">\n                            <input type=\"number\"  id=\"periods\" [disabled]=\"land.rentSell == 'Sell'\" name=\"periods\" class=\"form-control pleft25\" [(ngModel)]=\"land.periods\" >\n                          <div class=\"input-group-btn\">\n                              <select id=\"select3\"  [disabled]=\"land.rentSell == 'Sell'\" name=\"select3\" class=\"disable btn btn-secondary dropdown-toggle\"  [(ngModel)]=\"land.periodsunit\" size=\"1\">\n                                <!-- <option value=\"\">-Units-</option> -->\n                                <option value=\"Day\">Day</option>\n                                <option value=\"Week\">Week</option>\n                                <option value=\"Month\">Month</option>\n                                <option value=\"Year\">Year</option>\n                            </select>\n                         </div>\n                        </div> \n\n                    \n                        </div>\n\n                       </div>\n                </div>\n\n                <div class=\"row\">\n\n                     <!-- <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"nf-category\">Category</label>\n                            <select id=\"nfcategory\" name=\"nfcategory\" class=\"form-control\" #nfcategory=\"ngModel\" size=\"1\" [(ngModel)]=\"land.categoryId\" required>\n                                <option value=\"\">Please select</option>\n                                <option *ngFor=\"let cat of category\" value=\"{{cat.id}}\">{{cat.name}}</option>\n                            </select>\n                            <div class=\"error-block\">\n                                <small *ngIf=\"nfcategory.errors?.required && nfcategory.touched\" class=\"text-danger\">\n                                    Category is required.\n                                </small>                                                          \n                            </div>\n                        </div>\n                    </div> -->\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group  has-required\">\n                            <label for=\"nf-variety\">Address</label>\n                            <input type=\"text\" id=\"nflocation\" name=\"nflocation\" #nflocation=\"ngModel\" class=\"form-control\" [(ngModel)]=\"land.location\"  pattern=\"[a-zA-Z][a-zA-Z0-9!@#$%^&*()\\s]*\" required>\n                           <div class=\"error-block\">\n                                <small *ngIf=\"nflocation.errors?.required && nflocation.touched\" class=\"text-danger\">\n                                    Address is required.\n                                </small>\n                                <small *ngIf=\"nflocation.errors?.pattern && nflocation.touched\" class=\"text-danger\">\n                                    Address is required.\n                                </small> \n                            </div>\n                        </div>\n                    </div>\n\n                     <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"nf-city\">City/Village</label>\n                            <input type=\"text\" id=\"city\" name=\"city\" #city=\"ngModel\" class=\"form-control\" [(ngModel)]=\"land.city\" placeholder=\"\"  pattern=\"[a-zA-Z][a-zA-Z0-9!@#$%^&*()\\s]*\" required>\n                            <div class=\"error-block\">\n                                <small *ngIf=\"city.errors?.required && city.touched\" class=\"text-danger\">\n                                    City is required.\n                                </small>   \n                                <small *ngIf=\"city.errors?.pattern && city.touched\" class=\"text-danger\">\n                                    City/Village is required.\n                                </small>                                                        \n                            </div> \n                        </div>\n                    </div>\n\n                </div>\n                <div class=\"row\">\n                   \n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"state\">State</label>\n                            <select id=\"state\" name=\"state\" (change)=\"setDistrict()\"  [(ngModel)]=\"land.state\" placeholder=\"\" required class=\"form-control\" size=\"1\" #state=\"ngModel\" required>\n                                <option value=\"\">Select State</option>\n                                <option *ngFor=\"let state of states\" [value]=\"state.stateName\">\n                                    {{state.stateName}}\n                                </option>                                       \n                            </select>\n                            <div class=\"error-block\">\n                                <small *ngIf=\"state.errors?.required && state.touched\" class=\"text-danger\">\n                                    State is required.\n                                </small>                                                        \n                            </div> \n                        </div>\n                    </div>\n                     <div class=\"col-sm-6\">\n                        <div class=\"form-group has-required\">\n                            <label for=\"district\">District</label>\n                            <select id=\"district\" name=\"district\"  [(ngModel)]=\"land.district\" placeholder=\"\" required class=\"form-control\" size=\"1\" #district=\"ngModel\" required>\n                                <option value=\"\">Select District</option>\n                                <option *ngFor=\"let district of districts\" [value]=\"district.districtName\">\n                                    {{district.districtName}}\n                                </option>                                       \n                            </select>\n                            <div class=\"error-block\">\n                                <small *ngIf=\"district.errors?.required && district.touched\" class=\"text-danger\">\n                                    District is required.\n                                </small>                                                        \n                            </div> \n                        </div>\n                    </div>\n\n                </div>\n                <div class=\"row\">\n               \n\n                  <div class=\"col-sm-6\">\n                    <div class=\"form-group has-required\">\n                        <label for=\"nf-password\">Khasra no</label>\n                        <input type=\"number\" id=\"nfkhasra\" name=\"nfkhasra\" #nfkhasra=\"ngModel\" class=\"form-control\" [(ngModel)]=\"land.khasra_no\" required maxlength=\"20\">\n                        <div class=\"error-block\">\n                                <small *ngIf=\"nfkhasra.errors?.required && nfkhasra.touched\" class=\"text-danger\">\n                                    khasra is required.\n                                </small>\n                                <small *ngIf=\"nfkhasra.errors?.min && nfkhasra.touched\" class=\"text-danger\">\n                                    Minimum khasra should be 1.\n                                </small>                                                          \n                                <small *ngIf=\"nfkhasra.errors?.max && nfkhasra.touched\" class=\"text-danger\">\n                                    Maximum khasra is allow upto 16 digit.\n                                </small>                                                           \n                         </div>\n                    </div>\n                </div>\n                 <div class=\"col-sm-6\">\n                   <div class=\"form-group has-required\">\n                    <label for=\"nf-qty\">Area</label>\n                     <div class=\"flex\">\n                     \n                         <input type=\"text\" id=\"nfarea\" name=\"nfarea\"  class=\"form-control\" aria-label=\"Text input with dropdown button\" [(ngModel)]=\"land.area\"  required #nfarea=\"ngModel\">\n                        \n                          <div class=\"input-group-btn\">\n                              <select id=\"select2\" name=\"select2\" class=\"btn btn-secondary dropdown-toggle\"  [(ngModel)]=\"land.unit\" size=\"1\" required>\n                                <!-- <option value=\"\">-Units-</option> -->\n                                <option value=\"Ft\">Sq.Ft</option>\n                                <option value=\"Yards\">Sq. Yards</option>\n                                <option value=\"Meter\">Sq. Meter</option>\n                            </select>\n                         </div>\n                         \n                       </div>  \n                        <div class=\"error-block\">\n                                <small *ngIf=\"nfarea.errors?.required && nfarea.touched\" class=\"text-danger\">\n                                    Area is required.\n                                </small>\n                                <small *ngIf=\"nfarea.errors?.min && nfarea.touched\" class=\"text-danger\">\n                                    Minimum offer area should be 1.\n                                </small>                                                          \n                                <small *ngIf=\"nfarea.errors?.max && nfarea.touched\" class=\"text-danger\">\n                                    Maximum offer area is allow upto 16 digit.\n                                </small>                                                         \n                            </div>                    \n                   </div>\n                   </div>\n\n                  \n                </div>\n                 \n\n                 <div class=\"row\">  \n                     \n                   \n                    <div class=\"col-sm-6\">\n                    <div class=\"form-group has-required\">\n                            <label for=\"nf-price\">Expected price </label>\n                            <div class=\"flex\">\n                                <div class=\"icnposition\"><i class=\"fa fa-rupee\"></i></div>\n                                <input maxlength=\"10\" #nfexpected_price=\"ngModel\"  type=\"number\" id=\"nfexpected_price\" name=\"nfexpected_price\" class=\"form-control pleft25\" [(ngModel)]=\"land.expected_price\" required>\n                               \n                                <div class=\"input-group-btn\">\n                              <!-- <select id=\"select3\" [disabled]=\"land.rentSell == 'Sell'\" name=\"select3\" class=\"btn btn-secondary dropdown-toggle\"  [(ngModel)]=\"land.priceunit\" size=\"1\" required> -->\n                              <select id=\"select3\" name=\"select3\" class=\"btn btn-secondary dropdown-toggle\"  [(ngModel)]=\"land.priceunit\" size=\"1\" >\n                                <!-- <option value=\"\">-Units-</option> -->\n                                <option value=\"Day\">Per Day</option>\n                                <option value=\"Week\">Per Week</option>\n                                <option value=\"Month\">Per Month</option>\n                                <option value=\"Year\">Per Year</option>\n                            </select>\n                         </div>\n                            </div>  \n                             <div class=\"error-block\">\n                                <small *ngIf=\"nfexpected_price.errors?.required && nfexpected_price.touched\" class=\"text-danger\">\n                                    Expected price is required.\n                                </small>\n                                <small *ngIf=\"nfexpected_price.errors?.min && nfexpected_price.touched\" class=\"text-danger\">\n                                    Minimum Expected price should be 1.\n                                </small>                                                          \n                                <small *ngIf=\"nfexpected_price.errors?.max && nfexpected_price.touched\" class=\"text-danger\">\n                                    Maximum Expected price is allow upto 16 digit.\n                                </small>                                                           \n                            </div>\n\n                            \n\n                        </div>\n                    </div>\n                    \n                </div>\n                 \n                  <div class=\"row\">\n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"nf-description\">Description</label>\n                            <textarea type=\"text\" id=\"nf-description\" name=\"nf-description\" class=\"form-control\" [(ngModel)]=\"land.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                \n                \n                    <div class=\"col-sm-6\">\n                        <div class=\"form-group\">\n                            <label for=\"nf-termsConditions\">Terms & Conditions</label>\n                            <textarea type=\"text\" id=\"nf-termsConditions\" name=\"nf-termsConditions\" class=\"form-control\" [(ngModel)]=\"land.term_condition\" rows=\"4\" ></textarea>\n                        </div>\n                    </div>\n                </div>\n                \n          \n        </div>\n\n        <div class=\"card-footer\">\n                    <button type=\"reset\" class=\"btn btn-secondary whiteclr\" [routerLink]=\"['/land/list']\"> Cancel</button>\n                    <button type=\"submit\" class=\"pull-right btn btn-primary orangeclr\" [disabled]=\"!addlandForm.valid\">{{Id ? 'Update' : 'Save'}}</button>\n                    \n                </div>\n                </form>  \n    </div> <!-- .card -->\n</div> <!-- .inputs-wrapper -->"
 
 /***/ }),
-/* 1434 */
+/* 1444 */
 /***/ (function(module, exports) {
 
-module.exports = "    <!-- Loader div -->\n<div *ngIf=\"isLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div> \n</div>\n<!-- <div class=\"crop-wrapper animated fadeIn\">       -->\n<div class=\"crop-wrapper\">      \n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n            <!-- Page loading section -->\n            <div class=\"aligncenter_loader\" *ngIf=\"isPageLoading\">\n                <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \n            </div>\n             <ngx-flash-messages></ngx-flash-messages>\n            <!--Page loading section ends  -->\n            <div class=\"card\" *ngIf=\"!isPageLoading\">\n                <div class=\"card-header\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-3 col-12\">\n                            <form action=\"#\" class=\"ng-untouched ng-pristine ng-valid\" method=\"get\">\n                                <div class=\"flex\">\n                                    <input class=\"form-control\" name=\"search\" (keyup)=\"search($event)\" [(ngModel)]=\"searchTerm\" placeholder=\"Search\" type=\"text\">\n                                    <span class=\"input-group-btn\">\n                                    <button class=\"btn btn-flat\" id=\"search-btn\" (click)=\"search($event, 'button')\" name=\"search\" type=\"submit\"><i class=\"fa fa-search\"></i> </button>\n                                    </span>\n                                </div>\n                            </form>\n                        </div>\n                        <div class=\"col-sm-9 col-12 text-right linehght\"> \n                            <button type=\"button\" class=\"btn btn-success btnadd\" [routerLink]=\"['/crops/add']\">Add Crop</button>\n                            <div class=\"icns\">\n                                <a><img src=\"assets/img/pdf.png\" style=\"cursor:pointer;\" (click)=\"downloadPDF()\" alt=\"pdf\"></a>\n                                <a (click)=\"downloadCSV()\" style=\"cursor:pointer;\"><img src=\"assets/img/xls.png\" alt=\"pdf\"></a>\n                            </div>\n                        </div>\n                    </div> <!-- .row -->\n                </div><!-- .card-header -->\n                \n                <div class=\"card-block\">    \n                    <div class=\"table-responsive\">                                    \n                    <!-- <table class=\"table table-bordered table-striped table-condensed\" [mfData]=\"data\" #mf=\"mfDataTable\"\n                               [mfRowsOnPage]=\"rowsOnPage\" [(mfSortBy)]=\"sortBy\" [(mfSortOrder)]=\"sortOrder\"> -->\n                    <table class=\"table table-striped\" [mfData]=\"data\" \n                        #mf=\"mfDataTable\" \n                        [mfRowsOnPage]=\"rowsOnPage\"\n                        [(mfSortBy)]=\"sortBy\" \n                        [(mfSortOrder)]=\"sortOrder\" \n                        [mfActivePage]=\"activePage\" \n                        (mfOnPageChange)=\"onPageChange($event)\"\n                        [mfIsServerPagination]=\"true\" \n                        [(mfAmountOfRows)]=\"itemsTotal\"\n                        (mfSortOrderChange)=\"onSortOrder($event)\">                                 \n                        <thead>\n                            <tr>\n\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"name\">Crop Name\n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'name'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'name'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">Category</th>\n                                <th width=\"10%\">\n                                    <mfDefaultSorter by=\"price\">Offer Price\n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'price'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'price'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"10%\">Qty.\n                                    <!-- <mfDefaultSorter by=\"quantity\">Qty. \n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'quantity'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'quantity'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter> -->\n                                </th>\n                                <th width=\"12%\">Highest Bid</th>\n                                <th width=\"8%\">\n                                    <mfDefaultSorter by=\"district\">District \n                                        <i *ngIf=\"sortOrder == 'asc' && sortBy == 'district'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                        <i *ngIf=\"sortOrder == 'desc' && sortBy == 'district'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"14%\">Available From</th>\n                                <th width=\"20%\">Seller</th>\n                                <th width=\"10%\">Actions</th>\n                            </tr>\n                        </thead>                        \n                        <tbody>\n                            <!-- <tr *ngIf='errMessage'>\n                                <td colspan=\"7\">{{errMessage}}</td>\n                            </tr> -->\n                            <tr *ngIf=\"itemsTotal == 0\">\n                                <td colspan=\"9\">No record to display.</td>\n                            </tr> \n                            <tr *ngFor=\"let crop of mf.data\">    \n                                <td data-label=\"Crop Name\"><a href=\"javascript:void(0);\" (click)=\"viewCrop(crop.id)\">{{crop.name}}</a></td>\n                                <td data-label=\"Category\">{{crop.category?.name}}</td>\n                                <td data-label=\"Offer Price\"><p><i class=\"fa fa-rupee\"></i> {{crop.price}}</td>\n                                <td data-label=\"Qty.\">{{crop.quantity}} {{crop.quantityUnit}}</td>\n                                <td data-label=\"Highest Bid\">-</td>\n                                <td data-label=\"District\">{{crop.district}}</td>\n                                <td data-label=\"Available From\">{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf=\"!crop.availableFrom?.momentObj\">-</span></td>\n                                <td data-label=\"Seller\">{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : '-'}} {{crop.seller ? crop.seller?.state ? '(' + crop.seller?.state + ')' : '' : ''}}</td>\n                                <td data-label=\"Actions\">                                    \n                                    <button (click)=\"editCrop(crop.id)\" class=\"btn btn-success\" title=\"Edit\" style=\"padding:1px 4px\"><i class=\"fa fa-pencil\"></i></button>\n                                    <button  (click)=\"removeCrop(crop.id)\" class=\"btn btn-danger orange\" title=\"Delete\" style=\"padding: 1px 4px\"><i class=\"fa fa-trash\"></i></button>                                    \n                                </td>\n                            </tr>\n                        </tbody>\n                        <tfoot>\n                            <tr>\n                                <td colspan=\"9\">\n                                    <div class=\"pagination-section\" *ngIf=\"itemsTotal > 0\">\n                                        <div class=\"row-on-page\">\n                                            <label class=\"label-control\">Show</label>\n                                            &nbsp;\n                                            <select class=\"input-sm\" name=\"itemsOnPage\"  [(ngModel)]=\"itemsOnPage\"  (change)=\"onRowsChange()\">\n                                                <option [ngValue]=\"5\">5</option>\n                                                <option [ngValue]=\"10\">10</option>\n                                                <option [ngValue]=\"25\">25</option>\n                                                <option [ngValue]=\"50\">50</option>\n                                                <option [ngValue]=\"100\">100</option>\n                                            </select>\n                                            &nbsp;\n                                            <label class=\"label-control\">entries</label>\n                                                &nbsp; &nbsp;\n                                            <span>Showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>\n                                            </div>\n                                            <div class=\"text-right\">\n                                                <mfBootstrapPaginator></mfBootstrapPaginator>   \n                                            </div>\n                                        <div style=\"clear: both;\"></div>\n                                    </div>  \n                                </td>    \n                            </tr>                            \n                        </tfoot>\n                    </table> \n                    </div>                            \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+module.exports = "<!-- Loader div -->\n<div *ngIf=\"isLoading\" class=\"overlayloader\">\n    <div class=\"loader\"></div>\n</div>\n\n\n<!-- <div class=\"land-wrapper animated fadeIn\">       -->\n<div class=\"land-wrapper\">      \n  \n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n        <!-- loading section -->\n            <div class=\"aligncenter_loader\" *ngIf=\"isPageLoading\">\n                <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \n            </div>\n            <!-- section ends  -->\n            <div class=\"card\" *ngIf=\"!isPageLoading\">\n\n                 <div class=\"card-header\">\n                    <div class=\"row\">\n                        <div class=\"col-sm-3 col-12\">\n                            <form action=\"#\" class=\"ng-untouched ng-pristine ng-valid\" method=\"get\">\n                            <div class=\"flex\">\n                                <!-- <input class=\"form-control\" name=\"search\" (keyup)=\"search()\" [(ngModel)]=\"searchTerm\" placeholder=\"Search\" type=\"text\"> -->\n                                <input class=\"form-control\" name=\"search\" [(ngModel)]=\"searchTerm\"   placeholder=\"Search\" type=\"text\">\n                                <span class=\"input-group-btn\">\n                                <button class=\"btn btn-flat\" id=\"search-btn\" (click)=\"search($event, 'button')\" name=\"search\" type=\"submit\"><i class=\"fa fa-search\"></i> </button>\n                                </span>\n                            </div>\n                            </form>\n                        </div>\n                        <div class=\"col-sm-9 col-12 text-right linehght\">\n                            <button type=\"button\" class=\"btn btn-success btnadd\" [routerLink]=\"['/land/add']\">Add Land</button>\n                            <div class=\"icns\">\n                              <a><img src=\"assets/img/pdf.png\" (click)=\"downloadPDF()\" style=\"cursor: pointer;\"></a>\n                              <a (click)=\"downloadCSV()\" style=\"cursor:pointer;\"><img src=\"assets/img/xls.png\"></a>\n                            </div>\n                        </div>\n                    </div> <!-- .row -->\n                </div><!-- .card-header -->\n\n               \n                <div class=\"card-block\">\n                <div class=\"table-responsive\">\n                    <table class=\"table table-bordered table-striped table-condensed\" [mfData]=\"data\" \n                    #mf=\"mfDataTable\" \n                        [mfRowsOnPage]=\"rowsOnPage\"\n                        [(mfSortBy)]=\"sortBy\" \n                        [(mfSortOrder)]=\"sortOrder\" \n                        [mfActivePage]=\"activePage\" \n                        (mfOnPageChange)=\"onPageChange($event)\"\n                        [mfIsServerPagination]=\"true\" \n                        [(mfAmountOfRows)]=\"itemsTotal\"\n                        (mfSortOrderChange)=\"onSortOrder($event)\" >\n                        <thead>\n                            <tr>\n                                <th width=\"30%\">Owner Name\n                                <!-- <mfDefaultSorter by=\"name\">Owner Name\n                                 <i *ngIf=\"sortOrder == 'asc' && sortBy == 'user.firstName'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                 <i *ngIf=\"sortOrder == 'desc' && sortBy == 'user.firstName'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                </mfDefaultSorter>  -->\n                                </th>\n                                <!-- <th width=\"20%\">\n                                    <mfDefaultSorter by=\"location\">Location\n                                     <i *ngIf=\"sortOrder == 'asc' && sortBy == 'location'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                     <i *ngIf=\"sortOrder == 'desc' && sortBy == 'location'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th> -->\n                                <th width=\"20%\">\n                                    <mfDefaultSorter by=\"area\">District\n                                     <i *ngIf=\"sortOrder == 'asc'  && sortBy == 'district'\" class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                     <i *ngIf=\"sortOrder == 'desc'  && sortBy == 'district'\" class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"20%\">\n                                    <mfDefaultSorter by=\"rentSell\">Land For\n                                     <i *ngIf=\"sortOrder == 'asc' && sortBy == 'rentSell'\"  class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                     <i *ngIf=\"sortOrder == 'desc' && sortBy == 'rentSell'\"  class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                <th width=\"20%\">                                     \n                                     <mfDefaultSorter by=\"area\">Area\n                                         <i *ngIf=\"sortOrder == 'asc' && sortBy == 'area'\"  class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                         <i *ngIf=\"sortOrder == 'desc' && sortBy == 'area'\"  class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n\n                                </th> \n                                <th width=\"15%\">\n                                    <mfDefaultSorter by=\"expected_price\">Expected Price\n                                    <i *ngIf=\"sortOrder == 'asc'  && sortBy == 'expected_price'\"  class=\"fa fa-sort-asc\" aria-hidden=\"true\"></i>\n                                    <i *ngIf=\"sortOrder == 'desc'  && sortBy == 'expected_price'\"  class=\"fa fa-sort-desc\" aria-hidden=\"true\"></i>\n                                    </mfDefaultSorter>\n                                </th>\n                                \n                                <th width=\"10%\">Actions</th>\n                            </tr>\n                        </thead>                        \n                        <tbody>\n                           <tr *ngIf=\"itemsTotal == 0\">\n                                <td colspan=\"6\">No record to display</td>\n                            </tr>  \n                            <tr *ngFor=\"let land of mf.data\">                        \n                            \n                                <td data-label=\"Owner Name\"><a href=\"javascript:void(0);\" (click)=\"viewLand(land.id)\">{{land.user?.firstName}} {{land.user?.lastName}}</a></td>\n                                <!-- <td>{{land.location}}</td> -->\n                                <td data-label=\"District\">{{land.district}}</td>\n                                <td data-label=\"Land For\">{{land.rentSell}}</td>\n                                <td>{{land.area}} {{land.unit}}</td>\n                                <td data-label=\"Expected Price\"><i class=\"fa fa-rupee\"></i>{{land.expected_price}} / {{land.priceunit}}</td>\n                                \n\n                                <td data-label=\"Actions\">                                    \n                                    <button (click)=\"sendUpdateLand(land.id)\" class=\"btn btn-success\" title=\"Edit\" style=\"padding:1px 4px\"><i class=\"fa fa-pencil\"></i></button>\n                                    <button  (click)=\"removeLand(land.id)\" class=\"btn btn-danger orange\" title=\"Delete\" style=\"padding: 1px 4px\"><i class=\"fa fa-trash\"></i></button>                                    \n                                </td>\n                            </tr>\n                        </tbody>\n                        <tfoot>\n                            <tr>\n                                <td colspan=\"6\">\n                                    <div class=\"pagination-section\" *ngIf=\"itemsTotal > 0\">\n                                        <div class=\"row-on-page\">\n                                                <label class=\"label-control\">Show</label>\n                                                &nbsp;\n                                                <select class=\"input-sm\" name=\"itemsOnPage\"  [(ngModel)]=\"itemsOnPage\"  (change)=\"onRowsChange()\">\n                                                    <option [ngValue]=\"5\">5</option>\n                                                    <option [ngValue]=\"10\">10</option>\n                                                    <option [ngValue]=\"25\">25</option>\n                                                    <option [ngValue]=\"50\">50</option>\n                                                    <option [ngValue]=\"100\">100</option>\n                                                </select>\n                                                &nbsp;\n                                                <label class=\"label-control\">entries</label>\n                                                &nbsp; &nbsp;\n                                            <span>Showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>\n                                            </div>\n                                            <div class=\"text-right\">\n                                                <mfBootstrapPaginator></mfBootstrapPaginator>   \n                                            </div>\n                                        <div style=\"clear: both;\"></div>\n                                    </div>  \n                                </td>    \n                            </tr>                            \n                        </tfoot>\n                    </table>  \n                    </div>                           \n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
 
 /***/ }),
-/* 1435 */
+/* 1445 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <!-- loading section -->\r\n    <div class=\"aligncenter_loader\" *ngIf=\"isLoading\">\r\n        <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \r\n    </div>\r\n    <!-- section ends  -->\r\n    <div class=\"card\"  *ngIf=\"!isLoading\">\r\n        <div class=\"card-header\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6 col-12\">\r\n                   <strong>View Crop</strong>           \r\n                </div>\r\n                <div class=\"col-sm-6 col-12 text-right linehght\">\r\n                   <button type=\"button\" class=\"btn btn-secondary\" [routerLink]=\"['/crops/list']\">Back</button>  \r\n\r\n                    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"editCrop(crop.id)\">Edit Crop</button> \r\n                                             &nbsp;\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"card-block viewmode\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-name\">Crop Name</label>\r\n\t\t\t\t\t\t\t<p>{{crop.name}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-password\">Seller</label>\r\n\t\t\t\t\t\t\t<p>{{crop.seller ? crop.seller?.first_name ? crop.seller?.first_name + ' ' + crop.seller?.last_name : crop.seller?.username : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">Category</label>\r\n\t\t\t\t\t\t\t<p>{{crop.category?.name}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">Variety</label>\r\n                            <p>{{crop.variety ? crop.variety :'-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">Address</label>\r\n                            <p>{{crop.address}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">City</label>\r\n                            <p>{{crop.city}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">State</label>\r\n                            <p>{{crop.state}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">District</label>\r\n                            <p>{{crop.district}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-variety\">Pin Code</label>\r\n                            <p>{{crop.pincode}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-price\">Quantity</label>\r\n                            <p>{{crop.quantity}} {{crop.quantityUnit}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-price\">Offer Price</label>\r\n                            <p><i class=\"fa fa-rupee\"></i> {{crop.price}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-grade\">Quality</label>\r\n                            <p>{{crop.grade ? crop.grade : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-size\">Available From</label>\r\n\t\t\t\t\t\t\t<p>{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf=\"!crop.availableFrom?.momentObj\">-</span></p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-availibility\">Availibility Period</label>\r\n                            <p>{{crop.availablePeriod ? crop.availablePeriod : '-'}} {{crop.availablePeriod ? crop.availableUnit : ''}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-supplyAbility\">Supply Ability</label>\r\n\t\t\t\t\t\t\t<p>{{crop.supplyAbility}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-3\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-packSize\">Supply Area</label>\r\n                            <p>{{crop.supplyArea ? crop.supplyArea : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-3\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-packSize\">Supply Range (km)</label>\r\n                            <p>{{crop.supplyRange ? crop.supplyRange : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-qty\">Payment Preference</label>\r\n\t\t\t\t\t\t\t<p>{{crop.paymentPreference}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-averageLeadTime\">Verified</label>\r\n                            <p>{{crop.verified}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-image\">Image</label>\r\n                            <p><i class=\"fa fa-file-image-o\"></i> {{crop.image}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n        </div>\r\n    </div>   \r\n</div>\r\n"
+module.exports = "\r\n<div class=\"input-wrapper\">    \r\n \r\n\r\n<!-- loading section -->\r\n    <div class=\"aligncenter_loader\" *ngIf=\"isLoading\">\r\n        <div class=\"is-loading\"><i class=\"page-loader\"></i></div>        \r\n    </div>\r\n    <!-- section ends  -->\r\n\r\n    <div class=\"card\" *ngIf=\"!isLoading\">\r\n     <div class=\"card-header\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-6 col-12\">\r\n                   <strong>View Land</strong>           \r\n                </div>\r\n                <div class=\"col-sm-6 col-12 text-right linehght\">\r\n                   <button type=\"button\" class=\"btn btn-secondary\" [routerLink]=\"['/land/list']\">Back</button>  \r\n\r\n                   <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"updateLand(land.id)\">Edit Land</button>            \r\n                 &nbsp;\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        \r\n        <div class=\"card-block\">\r\n            <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-name\">Owner Name</label>\r\n                            <p>{{land.user?.firstName ? land.user?.firstName : '-' }} {{land.user?.lastName ? land.user?.lastName : '-' }}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-rentsell\">Land For</label>\r\n                            <p>{{land.rentSell}}</p>\r\n                        </div>\r\n                    </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-location\">Available Date</label>\r\n                            <p>{{land.avail_date?.momentObj | date:'dd/MM/yyyy'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-area\">Periods</label>\r\n                            <p>{{land.periods ? land.periods : \"-\"}} / {{land.periods ? land.periodsunit : \"\"}}</p>\r\n                        </div>\r\n                    </div>\r\n            </div>\r\n\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-location\">Address</label>\r\n                            <p>{{land.location ? land.location : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-district\">District</label>\r\n                            <p>{{land.district ? land.district : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                   \r\n                </div>\r\n                 <div class=\"row\">\r\n                    \r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-state\">State</label>\r\n                            <p>{{land.state ? land.state : \"\" }}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-area\">Area</label>\r\n                            <p>{{land.area}} Sq. {{land.unit}}</p>\r\n                        </div>\r\n                    </div>\r\n                    \r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-khasrano\">Khasra no</label>\r\n                            <p>{{land.khasra_no ? land.khasra_no : '-'}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-expectedprice\">Expected Price</label>\r\n                            <p><i class=\"fa fa-rupee\"></i> {{land.expected_price}} {{land.priceunit ? '/':''}} {{land.priceunit}} </p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-description\">Description</label>\r\n                            <p>{{land.description}}</p>\r\n                        </div>\r\n                    </div>\r\n                    <!-- <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"nf-termsConditions\">Terms & Conditions</label>\r\n                            <p>{{land.term_condition}}</p>\r\n                        </div>\r\n                    </div> -->\r\n                </div>              \r\n        </div>\r\n    </div> <!-- .card -->\r\n</div> <!-- .land-wrapper -->"
 
 /***/ })
 ]));

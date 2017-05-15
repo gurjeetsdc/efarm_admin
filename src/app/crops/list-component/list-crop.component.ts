@@ -86,6 +86,7 @@ export class ListCropComponent implements OnInit {
                 if( ! (this.itemsTotal >= start) ){
                    this.activePage = this.activePage -1
                 }
+                this._cookieService.put('cropAlert', 'Deleted successfully.');
                 /* reload page. */
                 this.getCrops();
             },err => {
