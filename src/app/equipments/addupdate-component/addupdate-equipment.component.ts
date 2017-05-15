@@ -19,6 +19,7 @@ export class AddUpdateEquipmentComponent {
                             category_id: '',
                             category: '',
                             companyManufacturer: '',
+                            companyManufacturer_id: '',
                             model: '',
                             modelyear: '',                            
                             rentSell: 'rent',
@@ -151,6 +152,7 @@ export class AddUpdateEquipmentComponent {
                             category_id: '',
                             category: '',
                             companyManufacturer: '',
+                            companyManufacturer_id: '',
                             model: '',
                             modelyear: '',                            
                             rentSell: 'rent',
@@ -212,8 +214,9 @@ export class AddUpdateEquipmentComponent {
     }
 
     addEquipment() {
-        this.equipment.category = this.equipment.category_id;
-        this.equipment.user     = this.equipment.user_id;
+        this.equipment.category            = this.equipment.category_id;
+        this.equipment.user                = this.equipment.user_id;
+        this.equipment.companyManufacturer = this.equipment.companyManufacturer_id;
 
 
         this._equipmentService.postEquipment(this.equipment).subscribe(res => {
@@ -235,6 +238,7 @@ export class AddUpdateEquipmentComponent {
         
         this.equipment.category = this.equipment.category_id;
         this.equipment.user     = this.equipment.user_id;
+        this.equipment.companyManufacturer = this.equipment.companyManufacturer_id;
 
         this._equipmentService.putEquipment(this.equipment).subscribe(res => {
             this.response    = res;

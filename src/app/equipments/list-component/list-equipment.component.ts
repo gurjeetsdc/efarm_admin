@@ -277,7 +277,7 @@ export class ListEquipmentComponent implements OnInit {
             filteredData.push(temp);
         }       
 
-        let fileName = "EquipmentReport-"+Math.floor(Date.now() / 1000); 
+        let fileName = "EquipmentReport-"+Math.floor(Date.now() / 1000)+".pdf"; 
 
         var doc = new jsPDF();    
         // doc.setFontSize(10);
