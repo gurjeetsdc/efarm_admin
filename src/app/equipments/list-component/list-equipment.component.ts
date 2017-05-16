@@ -12,6 +12,8 @@ import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { FlashMessagesService } from 'ngx-flash-messages';
 import { CookieService } from 'ngx-cookie';
 
+import { CommanService } from '../../shared/services/comman.service';
+
 declare let jsPDF; 
 
 @Component({
@@ -43,7 +45,13 @@ export class ListEquipmentComponent implements OnInit {
     public errMessage            = "";
 
    
-    public constructor( private activatedRouter: ActivatedRoute, private _router: Router, private _equipmentService: EquipmentService, private _flashMessagesService: FlashMessagesService, private _cookieService: CookieService) { 
+    public constructor( 
+        private activatedRouter: ActivatedRoute, 
+        private _router: Router, 
+        private _equipmentService: EquipmentService, 
+        private _flashMessagesService: FlashMessagesService, 
+        private _cookieService: CookieService,
+        private _commanService: CommanService ) { 
         
     }   
 
@@ -154,12 +162,12 @@ export class ListEquipmentComponent implements OnInit {
                 this.itemsTotal = res.data.total;
                 this.showAlert();
             } else {
-                this.checkAccessToken(res.error);    
+                this._commanService.checkAccessToken(res.error);    
             }    
             
         }, 
         err => {
-              this.checkAccessToken( err );
+              this._commanService.checkAccessToken(err);    
               this.isLoading     = false;
               this.isPageLoading = false;
         });

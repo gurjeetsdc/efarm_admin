@@ -21,6 +21,9 @@ import { DatePickerModule } from 'ng2-datepicker';
 import { GoogleplaceDirective } from '../shared/directives/googleplaces/googleplaces.directive';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 
+import { SharedModule } from '../shared/shared.module';
+
+
 @NgModule({
     imports: [
         EquipmentsRoutingModule,
@@ -28,7 +31,8 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
         NG2DataTableModule,
         CustomFormsModule,
         DatePickerModule,
-        FlashMessagesModule
+        FlashMessagesModule,
+        SharedModule
     ],
     declarations: [
         ListEquipmentComponent,
