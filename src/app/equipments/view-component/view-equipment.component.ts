@@ -21,7 +21,7 @@ export class ViewEquipmentComponent {
         
         this.equipmentID = _activatedRouter.snapshot.params['id'];
         if( this.equipmentID ) {
-            this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { 
+            this._equipmentService.get(this.equipmentID).subscribe( res => { 
                 this.isLoading = false;
                 if( res.success  ){
                     this.equipment = res.data;  

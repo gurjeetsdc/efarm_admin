@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NG2DataTableModule } from "angular2-datatable-pagination";
 import { InputService } from './services/input.service';
-import { CommanService } from '../shared/services/comman.service';
+import { SharedModule } from '../shared/shared.module';
 import { ListInputComponent } from './list-component/list-input.component';
 import { AddUpdateInputComponent } from './addupdate-component/addupdate-input.component';
 import { ViewInputComponent } from './view-component/view-input.component';
@@ -17,11 +17,11 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
   	 CommonModule,
      NG2DataTableModule,
      CustomFormsModule,
-     FlashMessagesModule
+     FlashMessagesModule,
+     SharedModule
   ],
   providers: [
-    InputService,
-    CommanService
+    InputService
   ],
   declarations: [
   	ListInputComponent,

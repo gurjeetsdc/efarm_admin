@@ -79,7 +79,7 @@ export class AddUpdateEquipmentComponent {
         this.equipmentID = _activateRouter.snapshot.params['id'];        
         
         if( this.equipmentID ) {
-            this._equipmentService.getEquipment(this.equipmentID).subscribe( res => { 
+            this._equipmentService.get(this.equipmentID).subscribe( res => { 
                         this.isLoading = false;
                         if(res.success) {
                             this.equipment = res.data; 
@@ -219,7 +219,7 @@ export class AddUpdateEquipmentComponent {
         this.equipment.companyManufacturer = this.equipment.companyManufacturer_id;
 
 
-        this._equipmentService.postEquipment(this.equipment).subscribe(res => {
+        this._equipmentService.add(this.equipment).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
             // this.equipment   = {};
@@ -240,7 +240,7 @@ export class AddUpdateEquipmentComponent {
         this.equipment.user     = this.equipment.user_id;
         this.equipment.companyManufacturer = this.equipment.companyManufacturer_id;
 
-        this._equipmentService.putEquipment(this.equipment).subscribe(res => {
+        this._equipmentService.update(this.equipment).subscribe(res => {
             this.response    = res;
             this.showMessage = true;
             

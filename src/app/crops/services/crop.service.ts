@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-import { CookieService } from 'ngx-cookie';
+import { CommanService } from '../../shared/services/comman.service';
 import tsConstants = require('./../../tsconstant');
 @Injectable()
 export class CropService {
 
     private _host = tsConstants.HOST;
     private _accessToken = '';
-    constructor(private _http: Http, private _cookieService: CookieService) { }
+
+    constructor(
+        private _http: Http,
+        private _commanService: CommanService ) { 
+    }
 
     /*Use to fetch all crops*/
   	getAllCrops(rowsOnPage, activePage, sortTrem , search = '') {
 
         let headers         = new Headers();
-        this._accessToken   = this.getAccessToken();
+        this._accessToken   = this._commanService.getAccessToken();
         
         let url = this._host +'/crops?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search;
 
@@ -25,7 +29,7 @@ export class CropService {
     add(crop) {
 
         let headers         = new Headers();
-        this._accessToken   = this.getAccessToken();
+        this._accessToken   = this._commanService.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
         return this._http.post(this._host +'/crops', crop, { headers: headers }).map((res:Response) => res.json())
@@ -35,7 +39,7 @@ export class CropService {
     get(cropID) {
         
         let headers         = new Headers();
-        this._accessToken   = this.getAccessToken();
+        this._accessToken   = this._commanService.getAccessToken();
     
         headers.append('Authorization', this._accessToken);
         return this._http.get(this._host +'/crops/'+ cropID, { headers: headers }).map((res:Response) => res.json())
@@ -45,7 +49,7 @@ export class CropService {
     update(crop) {
 
         let headers         = new Headers();
-        this._accessToken   = this.getAccessToken();
+        this._accessToken   = this._commanService.getAccessToken();
 
         headers.append('Authorization', this._accessToken);
         return this._http.put(this._host +'/crops/'+ crop.id, crop, { headers: headers }).map((res:Response) => res.json())
@@ -55,7 +59,7 @@ export class CropService {
     delete( cropID ) {
         
         let headers         = new Headers();
-        this._accessToken   = this.getAccessToken();
+        this._accessToken   = this._commanService.getAccessToken();
         
         headers.append('Authorization', this._accessToken );
         return this._http.delete(this._host +'/crops/'+ cropID,  { headers: headers }).map((res:Response) => res.json());
@@ -65,7 +69,7 @@ export class CropService {
     getAllCategories() {
           
         let headers         = new Headers();
-        this._accessToken   = this.getAccessToken();
+        this._accessToken   = this._commanService.getAccessToken();
 
         headers.append('Authorization', this._accessToken );
         return this._http.get(this._host +'/category?type=crops&sort=name', { headers: headers }).map((res:Response) => res.json());
@@ -75,7 +79,7 @@ export class CropService {
     getAllUsers() {
           
         let headers         = new Headers();
-        this._accessToken   = this.getAccessToken();
+        this._accessToken   = this._commanService.getAccessToken();
 
         headers.append('Authorization', this._accessToken );
         return this._http.get(this._host +'/user?roles=U', { headers: headers }).map((res:Response) => res.json());
@@ -84,14 +88,10 @@ export class CropService {
     /*Use to fetch all States*/
     getStates() {
         let headers = new Headers();        
-        this._accessToken   = this.getAccessToken();
+        this._accessToken   = this._commanService.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
         return this._http.get(this._host +'/states?sort=stateName', { headers: headers }).map((res:Response) => res.json())
     }
 
-    getAccessToken(): string {
-        let token           = this._cookieService.get('token');
-        return 'Bearer ' + token;
-    }
 }

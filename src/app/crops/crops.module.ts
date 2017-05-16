@@ -10,6 +10,7 @@ import { CropService } from './services/crop.service';
 import { CustomFormsModule } from 'ng2-validation';
 import { DatePickerModule } from 'ng2-datepicker';
 import { FlashMessagesModule } from 'ngx-flash-messages';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
      // DataTableModule,
      CustomFormsModule,
      DatePickerModule, 
-     FlashMessagesModule    
+     FlashMessagesModule,
+     SharedModule    
   ],
   providers: [
   	CropService
