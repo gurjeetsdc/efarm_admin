@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { InputService } from '../services/input.service';
+import { CommanService } from '../../shared/services/comman.service';
 import { CookieService } from 'ngx-cookie';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+import { FlashMessagesService } from 'ngx-flash-messages';
 
-
+declare let jsPDF; 
 
 @Component({
   selector: 'app-inputs',
   templateUrl: './list-input.component.html',
-  styleUrls: ['./list-input.component.scss'],
-  providers: [InputService]
+  styleUrls: ['./list-input.component.scss']
 })
 export class ListInputComponent implements OnInit {
 
@@ -30,7 +32,12 @@ export class ListInputComponent implements OnInit {
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
 
-    public constructor(private _router: Router, private _inputService: InputService, private _cookieService: CookieService ) { 
+    public constructor(
+        private _router: Router,
+        private _inputService: InputService,
+        private _cookieService: CookieService,
+        private _flashMessagesService: FlashMessagesService,
+        private _commanService: CommanService ) { 
         
     }
 
@@ -62,12 +69,12 @@ export class ListInputComponent implements OnInit {
         return a.city.length;
     }
 
-    viewInput (inputID) {
+    viewInput(inputID) {
        let route = '/inputs/list/'+inputID;
        this._router.navigate([route]);       
     }
 
-    editInput( inputID ) {     
+    editInput(inputID) {     
        let route = '/inputs/edit/'+inputID;
         this._router.navigate([route]);       
     }
@@ -85,11 +92,11 @@ export class ListInputComponent implements OnInit {
                 if( ! (this.itemsTotal >= start) ){
                    this.activePage = this.activePage -1
                 }
+                this._cookieService.put('inputAlert', 'Deleted successfully.');
                 /* reload page. */
                 this.getInputs();     
             },err => {
                 this.isLoading = false;
-                this.checkAccessToken(err);
             });  
         }
     } 
@@ -109,30 +116,22 @@ export class ListInputComponent implements OnInit {
         return arr;
     }
 
-    /*This function is use to remove user session if Access token expired. */
-    checkAccessToken( err ): void {
-        let status     = err.status;
-        let statusText = err.statusText;
-
-        if( (status == 401 && statusText == 'Unauthorized')) {
-            this._cookieService.removeAll();
-            this._router.navigate(['/login', {data: true}]);
-        }else {
-            console.log('Something unexpected happened, please try again later.');
-        }        
-    }
-
     /*Get all Users */
     getInputs(): void {
         this._inputService.getAllInputs( this.rowsOnPage, this.activePage, this.sortTrem,  this.searchTerm ).subscribe(res => {
-            this.data          = res.data.inputs;
-            this.itemsTotal    = res.data.total;
             this.isLoading     = false;
             this.isPageLoading = false;
+            if(res.success) {
+                this.data          = res.data.inputs;
+                this.itemsTotal    = res.data.total;
+                this.showAlert();
+            } else {
+                this._commanService.checkAccessToken(res.error);
+            }
         },err => {
-            this.checkAccessToken(err);
             this.isLoading     = false;
             this.isPageLoading = false;
+            this._commanService.checkAccessToken(err);
        });             
     }    
 
@@ -157,19 +156,117 @@ export class ListInputComponent implements OnInit {
     }
 
     public search( event, element = 'input' ) {
-        
-        if( element == 'input' ){
+        if( element == 'input' ) {
             if(event.keyCode == 13 || this.searchTerm == '') {
+                this.searchTerm = this.searchTerm.trim();
                 this.isLoading  = true;
+                this.getInputs(); 
                 this.activePage = 1;
                 this.getInputs(); 
             }
         }else{
-            
+            this.searchTerm = this.searchTerm.trim();
             this.isLoading  = true;
+            this.getInputs(); 
             this.activePage = 1;
             this.getInputs(); 
         }
+    }
+
+    downloadCSV(): void {
+        let i;
+        let filteredData = [];
+        
+        let header = {
+            name:"Name",
+            category:'Category',
+            manufacturer:"Manufacturer",
+            price:'Price',
+            seller:'Seller'
+        }
+
+        filteredData.push(header);
+
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let seller = this.data[i].user ? this.data[i].user.email : '-';
+            let temp = {
+                name: this.data[i].name,
+                category: this.data[i].category.name,
+                price: this.data[i].price,
+                manufacturer: this.data[i].manufacturer.name,
+                seller: seller
+            };
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "InputsReport-"+Math.floor(Date.now() / 1000); 
+        new Angular2Csv( filteredData, fileName);
+    }
+
+    downloadPDF() {
+        
+        let i;
+        let filteredData = [];
+
+        let header = [
+            "Name",
+            "Category",
+            "Manufacturer",
+            "Price",
+            "Seller"
+        ]   
+
+        for ( i = 0; i < this.data.length ; i++ ) { 
+            let temp = [
+                this.data[i].name,                
+                this.data[i].category.name,
+                this.data[i].manufacturer.name,
+                this.data[i].price,
+                this.data[i].user ?this.data[i].user.email : '-'
+            ];
+
+            filteredData.push(temp);
+        }       
+
+        let fileName = "InputsReport-"+Math.floor(Date.now() / 1000); 
+
+        var doc = new jsPDF();    
+
+        doc.autoTable(header, filteredData,  {
+            theme: 'grid',
+            headerStyles: {fillColor: 0},
+            startY: 10, // false (indicates margin top value) or a number 
+            margin: {horizontal: 5}, // a number, array or object 
+            pageBreak: 'auto', // 'auto', 'avoid' or 'always' 
+            tableWidth: 'wrap', // 'auto', 'wrap' or a number,  
+            tableHeight: '1', // 'auto', 'wrap' or a number,  
+            showHeader: 'everyPage',
+            tableLineColor: 200, // number, array (see color section below) 
+            tableLineWidth: 0,
+            fontSize: 10,
+            overflow : 'linebreak',
+            columnWidth : 'auto',
+            cellPadding : 2,       
+            cellSpacing : 0,       
+            valign : 'top',
+            lineHeight: 15, 
+
+        });
+
+        doc.save(fileName);
+    }
+
+    showAlert(): void {
+
+        let alertMessage = this._cookieService.get('inputAlert');
+        if( alertMessage ) {
+            this._flashMessagesService.show( alertMessage, {
+                classes: ['alert', 'alert-success'],
+                timeout: 3000,
+            });
+            this._cookieService.remove('inputAlert');
+        }    
     } 
 
 }
