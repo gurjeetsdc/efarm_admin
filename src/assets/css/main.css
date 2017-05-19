@@ -748,7 +748,7 @@
  .brdr_btm {
      border-bottom: 1px solid #cecece;
  }
- 
+  
  .btnadd {
      display: inline-block !important;
      position: relative;
@@ -757,6 +757,47 @@
  .card-header input[type="text"] {
      border-radius: 4px 0 0 4px !important;
      color: #666;
+ }
+
+.role .card-header input[type="text"] {
+     border-radius: 4px !important;
+     color: #666;
+ }
+
+.role .card-block .table > tbody td:nth-child(2) {
+     background:#dff0d8;
+     border:1px solid #d6e9c6;
+  	 text-align: center;
+	 vertical-align: middle;
+}
+.role .card-block .table > tbody td:nth-child(3) {
+     background:#fcf8e3;
+     border:1px solid #faebcc;
+	 text-align: center;
+	 vertical-align: middle;
+}
+
+.role .card-block .table > tbody td:nth-child(4) {
+     background-color:#d9edf7;
+     border-color:#bce8f1;
+	 text-align: center;
+	 vertical-align: middle;
+}
+
+.role .card-block .table > tbody td:nth-child(5) {
+     background:#f2dede;
+     border:1px solid #ebccd1;
+	 text-align: center;
+	 vertical-align: middle;
+}
+
+.role .card-block .table > tbody td:first-child {
+	font-weight: 600;
+}
+.role .card-block .table > tbody td {
+     background:#fff; 
+	border: 1px solid #dedede;
+	vertical-align: middle;
  }
  
  .card-header #search-btn {
@@ -1390,6 +1431,28 @@
      margin-top: 4px;
      transition: .2s;
  }
+
+.custome-check.role label{
+    color: #444;
+	margin-bottom: 0;
+}
+
+ .custome-check.role input[type="checkbox"]+label:before,
+ .custome-check.role input[type="checkbox"]:not(.filled-in)+label:after {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 15px;
+     height: 15px;
+     z-index: 0;
+     border: 2px solid #969696;
+     border-radius: 2px;
+     -webkit-border-radius: 2px;
+     -moz-border-radius: 2px;
+     margin-top: 4px;
+     transition: .2s;
+ }
  
  .custome-check.loginpage input[type="checkbox"]:focus+label:before {
      border: 2px solid #7FCF94;
@@ -1462,6 +1525,23 @@
      transform-origin: 100% 100%;
  }
  
+ .custome-check.role input[type="checkbox"]:checked+label:before {
+     top: -4px;
+     left: -5px;
+     width: 12px;
+     height: 22px;
+     border-top: 2px solid transparent;
+     border-left: 2px solid transparent;
+     border-right: 2px solid #4dbd74;
+     border-bottom: 2px solid #4dbd74;
+     -webkit-transform: rotate(40deg);
+     transform: rotate(40deg);
+     -webkit-backface-visibility: hidden;
+     backface-visibility: hidden;
+     -webkit-transform-origin: 100% 100%;
+     transform-origin: 100% 100%;
+ }
+
  .custome-check input[type="checkbox"]:not(.filled-in)+label:after {
      border: 0;
      -webkit-transform: scale(0);
