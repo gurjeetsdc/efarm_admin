@@ -1,7 +1,7 @@
 <div>
     <div *ngIf="isLoading" class="overlayloader">
         <div class="loader"></div>
-    </div> 
+    </div>
     <!-- loading section -->
     <div class="aligncenter_loader" *ngIf="isPageLoading">
         <div class="is-loading"><i class="page-loader"></i></div>        
