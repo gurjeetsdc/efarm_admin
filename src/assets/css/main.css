@@ -917,6 +917,11 @@
  .card-block .input-group-btn {
     min-width: auto;
 }
+
+.sidebar-fixed .sidebar .sidebar-nav {
+   overflow-y: scroll;
+   overflow-x: hidden;
+}
  
  .sidebar-hidden .sidebar .nav .nav-item .nav-link span,
  .sidebar-hidden .sidebar .nav .nav-item .nav-link small {
@@ -2460,3 +2465,49 @@ thead.custom th{
      }
  }
  /* media queries responsive */
+
+.chip{
+     display: inline-block;
+}
+
+.chip .chip{
+    background-color: #eceff1;
+    border-radius: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    display: inline-block;
+    font-size: 13px;
+    line-height: 30px;
+    margin-bottom: 0;
+    margin-right: 11px;
+    padding: 0 12px;
+}
+
+.block > .chip{
+     margin-right: 0;
+     margin-bottom: 10px;
+}
+
+.relative i.addimage {
+    padding-left: 4px;
+    padding-top: 14px;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    width: 2%;
+    cursor: pointer;;
+}
+
+.wdthset{
+     width: 97% !important;
+}
+
+.chip i.close{
+     float: right;
+    font-size: 14px;
+    line-height: 32px;
+    padding-left: 8px;
+}
+
+.block{
+     padding-top: 10px;
+}
