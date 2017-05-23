@@ -69,7 +69,7 @@ export class AddUpdateUserComponent {
                     this._cookieService.put('userAlert', 'Added successfully.');
                     this._router.navigate(['/users/list']);
                 } else {
-                    console.log("errrrrrrrrrrrrrr",res)
+                     window.scrollTo(0, 0);
                     this.errMessage = res.error.message;
                     this.showAlert();
                 }

@@ -11,26 +11,44 @@ export class AddUpdateRoleComponent {
 	public role = {
         name:'',
         description:'',
-        crops:{
-            view:false,
-            addEditDelete:false
-        },
-        inputs:{
-            view:false,
-            addEditDelete:false
-        },
-        equipments:{
-            view:false,
-            addEditDelete:false
-        },
-        lands:{
-            view:false,
-            addEditDelete:false
-        },
-        users:{
-            view:false,
-            addEditDelete:false
-        },      
+        permission:{
+            crops:{
+                view:false,
+                addEditDelete:false
+            },
+            inputs:{
+                view:false,
+                addEditDelete:false
+            },
+            equipments:{
+                view:false,
+                addEditDelete:false
+            },
+            lands:{
+                view:false,
+                addEditDelete:false
+            },
+            users:{
+                view:false,
+                addEditDelete:false
+            },
+            category:{
+                view:false,
+                addEditDelete:false
+            },
+            manufacturer:{
+                view:false,
+                addEditDelete:false
+            },
+            adminUsers:{
+                view:false,
+                addEditDelete:false
+            },
+            adminRoles:{
+                view:false,
+                addEditDelete:false
+            }      
+        }, 
         isDeleted:false
     };
 
@@ -67,7 +85,6 @@ export class AddUpdateRoleComponent {
     save() {
         this.isLoading = true;
         if(this.roleID) {
-            console.log("yesssssss",this.role)
             this._roleService.update(this.role).subscribe(res => {
                 this.isLoading = false;
                 this._cookieService.put('roleAlert', 'Updated successfully.');
@@ -87,11 +104,8 @@ export class AddUpdateRoleComponent {
     }
 
     autoUpdateRole(key) {
-        if(!this.role[key].view && this.role[key].addEditDelete) {
-            console.log("yesss going to change");
-            this.role[key].addEditDelete = false
-        } else {
-            console.log("not going to chagne");
+        if(!this.role.permission[key].view && this.role.permission[key].addEditDelete) {
+            this.role.permission[key].addEditDelete = false
         }
     }
 

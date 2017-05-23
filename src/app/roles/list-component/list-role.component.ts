@@ -121,10 +121,8 @@ export class ListRoleComponent implements OnInit {
             this.isLoading     = false;
             this.isPageLoading = false;
             if(res.success) {
-                this.data = res.data;
-                this.itemsTotal    = res.data.length;
-                // this.data          = res.data.roles;
-                // this.itemsTotal    = res.data.total;
+                this.data          = res.data.roles;
+                this.itemsTotal    = res.data.total;
                 this.showAlert();
             } else {
                 this._commanService.checkAccessToken(res.error);   

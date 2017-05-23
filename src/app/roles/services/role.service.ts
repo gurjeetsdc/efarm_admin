@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { CommanService } from '../../shared/services/comman.service';
 import tsConstants = require('./../../tsconstant');
+
 @Injectable()
 export class RoleService {
 
@@ -19,10 +20,10 @@ export class RoleService {
         let headers         = new Headers();
         this._accessToken   = this._commanService.getAccessToken();
         
-        // let url = this._host +'/roles?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search;
+        let url = this._host +'/permission?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search;
 
         headers.append('Authorization', this._accessToken);
-		return this._http.get(this._host +'/roles', { headers: headers }).map((res:Response) => res.json())
+		return this._http.get(url, { headers: headers }).map((res:Response) => res.json())
     }
 
     /*Use to add new role*/
@@ -32,7 +33,7 @@ export class RoleService {
         this._accessToken   = this._commanService.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
-        return this._http.post(this._host +'/roles', role, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this._host +'/permission', role, { headers: headers }).map((res:Response) => res.json())
     }
 
     /*Use to get role with role id*/
@@ -42,17 +43,17 @@ export class RoleService {
         this._accessToken   = this._commanService.getAccessToken();
     
         headers.append('Authorization', this._accessToken);
-        return this._http.get(this._host +'/roles/'+ roleID, { headers: headers }).map((res:Response) => res.json())
+        return this._http.get(this._host +'/permission/'+ roleID, { headers: headers }).map((res:Response) => res.json())
     }
 
     /*Use to update role*/
     update(role) {
-console.log("roleeeeeeeeeee",role)
+
         let headers         = new Headers();
         this._accessToken   = this._commanService.getAccessToken();
 
         headers.append('Authorization', this._accessToken);
-        return this._http.put(this._host +'/roles/'+ role.id, role, { headers: headers }).map((res:Response) => res.json())
+        return this._http.put(this._host +'/permission/'+ role.id, role, { headers: headers }).map((res:Response) => res.json())
     }
 
     /*Use to Delete role with role id */
@@ -62,7 +63,7 @@ console.log("roleeeeeeeeeee",role)
         this._accessToken   = this._commanService.getAccessToken();
         
         headers.append('Authorization', this._accessToken );
-        return this._http.delete(this._host +'/roles/'+ roleID,  { headers: headers }).map((res:Response) => res.json());
+        return this._http.delete(this._host +'/permission/'+ roleID,  { headers: headers }).map((res:Response) => res.json());
     }
 
 }

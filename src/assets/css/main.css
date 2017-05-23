@@ -2093,6 +2093,13 @@
  }
  /* radio button custom */
  
+thead.custom{
+     background: #eee;
+}
+thead.custom th{
+     border:0 !important;
+}
+
  /* media queries responsive */
  
  @media (min-width:1300px) {

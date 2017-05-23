@@ -100,21 +100,6 @@ export class ListManufacturerComponent implements OnInit {
             });             
         }
     } 
-  
-    /*Function use to remove deleted manufacturer from list*/  
-    removeByAttr(arr, attr, value){
-        let i = arr.length;
-        while(i--){
-           if( arr[i] 
-               && arr[i].hasOwnProperty(attr) 
-               && (arguments.length > 2 && arr[i][attr] === value ) ){ 
-
-               arr.splice(i,1);
-
-           }
-        }
-        return arr;
-    } 
 
     /*Get all manufacturer*/
     getManufacturer(): void {   
@@ -122,10 +107,8 @@ export class ListManufacturerComponent implements OnInit {
             this.isLoading     = false;
             this.isPageLoading = false;
             if(res.success) {
-                this.data          = res.data;
-                this.itemsTotal    = res.data.length;
-                // this.data          = res.data.manufacturer;
-                // this.itemsTotal    = res.data.total;
+                this.data          = res.data.manufacturers;
+                this.itemsTotal    = res.data.total;
                 this.showAlert();
             } else {
                 this._commanService.checkAccessToken(res.error);

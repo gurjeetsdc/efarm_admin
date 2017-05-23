@@ -18,19 +18,15 @@
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                                 <div class="flex">
-                                    <input class="form-control" name="search" (keyup)="search($event)" [(ngModel)]="searchTerm" style="cursor: not-allowed;" placeholder="Search" type="text">
+                                    <input class="form-control" name="search" (keyup)="search($event)" [(ngModel)]="searchTerm" placeholder="Search" type="text">
                                     <span class="input-group-btn">
-                                    <button class="btn btn-flat" id="search-btn" (click)="search($event, 'button')" style="cursor: not-allowed;" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                    <button class="btn btn-flat" id="search-btn" (click)="search($event, 'button')" name="search" type="submit"><i class="fa fa-search"></i> </button>
                                     </span>
                                 </div>
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght"> 
                             <button type="button" class="btn btn-success btnadd" [routerLink]="['/manufacturer/add']">Add Manufacturer</button>
-                            <!-- <div class="icns">
-                                <a><img src="assets/img/pdf.png" style="cursor:pointer;" (click)="downloadPDF()" alt="pdf"></a>
-                                <a (click)="downloadCSV()" style="cursor:pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
-                            </div> -->
                         </div>
                     </div> <!-- .row -->
                 </div><!-- .card-header -->
@@ -46,14 +42,25 @@
                         (mfOnPageChange)="onPageChange($event)"
                         [mfIsServerPagination]="true" 
                         [(mfAmountOfRows)]="itemsTotal"
-                        (mfSortOrderChange)="onSortOrder($event)">                                 
+                        (mfSortOrderChange)="onSortOrder($event)"> 
                         <thead>
                             <tr>
-
                                 <th width="10%">
-                                    <mfDefaultSorter by="name">Manufacturer Name
+                                    <mfDefaultSorter by="name">Name
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'name'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                         <i *ngIf="sortOrder == 'desc' && sortBy == 'name'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="10%">
+                                    <mfDefaultSorter by="email">Email
+                                        <i *ngIf="sortOrder == 'asc' && sortBy == 'email'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'email'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                    </mfDefaultSorter>
+                                </th>
+                                <th width="10%">
+                                    <mfDefaultSorter by="mobile">Mobile
+                                        <i *ngIf="sortOrder == 'asc' && sortBy == 'mobile'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                        <i *ngIf="sortOrder == 'desc' && sortBy == 'mobile'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                     </mfDefaultSorter>
                                 </th>
                                 <th width="10%">Actions</th>
@@ -61,10 +68,12 @@
                         </thead>                        
                         <tbody>
                             <tr *ngIf="itemsTotal == 0">
-                                <td colspan="9">No record to display.</td>
+                                <td colspan="4">No record to display.</td>
                             </tr> 
                             <tr *ngFor="let manufacturer of mf.data">    
-                                <td data-label="Manufacturer Name"><a href="javascript:void(0);" (click)="viewManufacturer(manufacturer.id)">{{manufacturer.name}}</a></td>
+                                <td data-label="Name"><a href="javascript:void(0);" (click)="viewManufacturer(manufacturer.id)">{{manufacturer.name}}</a></td>
+                                <td data-label="Email">{{manufacturer.email ? manufacturer.email : '-'}}</td>
+                                <td data-label="Mobile">{{manufacturer.mobile ? manufacturer.mobile : '-'}}</td>
                                 <td data-label="Actions">                                    
                                     <button (click)="editManufacturer(manufacturer.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                     <button  (click)="removeManufacturer(manufacturer.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
@@ -73,7 +82,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="9">
+                                <td colspan="4">
                                     <div class="pagination-section" *ngIf="itemsTotal > 0">
                                         <div class="row-on-page">
                                             <label class="label-control">Show</label>

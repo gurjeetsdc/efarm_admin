@@ -18,9 +18,9 @@
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
                                 <div class="flex">
-                                    <input class="form-control" style="cursor: not-allowed;" name="search" (keyup)="search($event)" [(ngModel)]="searchTerm" placeholder="Search" type="text">
+                                    <input class="form-control" name="search" (keyup)="search($event)" [(ngModel)]="searchTerm" placeholder="Search" type="text">
                                     <span class="input-group-btn">
-                                    <button class="btn btn-flat" style="cursor: not-allowed;" id="search-btn" (click)="search($event, 'button')" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                    <button class="btn btn-flat" id="search-btn" (click)="search($event, 'button')" name="search" type="submit"><i class="fa fa-search"></i> </button>
                                     </span>
                                 </div>
                             </form>
@@ -53,7 +53,7 @@
                                 </tr>
                                 <tr *ngFor="let role of mf.data">
                                     <td data-label="Role Name"><a href="javascript:void(0);" (click)="viewRole(role.id)">{{role.name}}</a></td>
-                                    <td data-label="Category">{{role.totalUser}}</td>
+                                    <td data-label="Category">{{role.totalUsers}}</td>
                                     <td data-label="Actions">
                                         <button (click)="editRole(role.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                         <button (click)="removeRole(role.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>

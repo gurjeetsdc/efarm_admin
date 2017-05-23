@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { CommanService } from '../../shared/services/comman.service';
 import tsConstants = require('./../../tsconstant');
+
 @Injectable()
 export class ManufacturerService {
 
@@ -19,8 +20,7 @@ export class ManufacturerService {
         let headers         = new Headers();
         this._accessToken   = this._commanService.getAccessToken();
         
-        // let url = this._host +'/manufacturer?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search;
-        let url = this._host +'/manufacturer?sort=name';
+        let url = this._host +'/manufacturer?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search;
 
         headers.append('Authorization', this._accessToken);
 		return this._http.get(url, { headers: headers }).map((res:Response) => res.json())
