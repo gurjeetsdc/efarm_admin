@@ -15,7 +15,7 @@ export class CategoryService {
     }
 
     /*Use to fetch all Inputs*/
-  	getAllCatg(rowsOnPage, activePage, sortTrem , search = '') {
+  	getAllCategory(rowsOnPage, activePage, sortTrem , search = '') {
 
   		let headers         = new Headers();        
         this._accessToken   = this._commanService.getAccessToken();
@@ -27,13 +27,13 @@ export class CategoryService {
     }
 
     /*Use to add new Input*/
-    add(catg) {
+    add(category) {
 
         let headers         = new Headers();        
         this._accessToken   = this._commanService.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
-        return this._http.post(this._host +'/category', catg, { headers: headers }).map((res:Response) => res.json())
+        return this._http.post(this._host +'/category', category, { headers: headers }).map((res:Response) => res.json())
     }
     
     /*Use to get input with input id*/
@@ -47,13 +47,13 @@ export class CategoryService {
     }
 
     /*Use to update input*/
-    update(catg) {
+    update(category) {
         
         let headers         = new Headers();
         this._accessToken   = this._commanService.getAccessToken();
         
         headers.append('Authorization', this._accessToken);
-        return this._http.put(this._host +'/category/'+ catg.id, catg, { headers: headers }).map((res:Response) => res.json())
+        return this._http.put(this._host +'/category/'+ category.id, category, { headers: headers }).map((res:Response) => res.json())
     }
 
 

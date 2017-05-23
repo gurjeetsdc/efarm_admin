@@ -16,11 +16,11 @@ export class AddUpdateCategoryComponent {
 
     public isLoading       = false;
     public isPageLoading   = true;
-    public ID: any;
+    public categoryID: any;
     public oBj = {vname: ''};
     public response:any;
     public type;
-    public errMsg = '';
+    public errMessage = '';
     
 
     constructor(
@@ -31,10 +31,10 @@ export class AddUpdateCategoryComponent {
         private _commanService: CommanService,
         private changeDetectorRef: ChangeDetectorRef ) {
 
-        this.ID = _activateRouter.snapshot.params['id'];        
+        this.categoryID = _activateRouter.snapshot.params['id'];        
 
-        if( this.ID ) {
-            this._catgService.get(this.ID).subscribe( res => {
+        if( this.categoryID ) {
+            this._catgService.get(this.categoryID).subscribe( res => {
                 this.isPageLoading = false;
                 if(res.success) {
                     this.category = res.data;
@@ -50,14 +50,14 @@ export class AddUpdateCategoryComponent {
         }
     }
 
-    /*If ID exist then will update existing input otherwise will add new input*/
+    /*If categoryID exist then will update existing category otherwise will add new category*/
     save() {
         this.isLoading = true;
-        if(this.ID) {
+        if(this.categoryID) {
             this._catgService.update(this.category).subscribe(res => {
                 this.response          = res;
                 this.isLoading         = false;
-                this._cookieService.put('inputAlert', 'Updated successfully.');
+                this._cookieService.put('categoryAlert', 'Updated successfully.');
                 this._router.navigate(['/category/list']);
             },err => {
                 this.isLoading = false;
@@ -66,7 +66,7 @@ export class AddUpdateCategoryComponent {
             this._catgService.add(this.category).subscribe(res => {
                 this.response          = res;
                 this.isLoading         = false;
-                this._cookieService.put('inputAlert', 'Added successfully.');
+                this._cookieService.put('categoryAlert', 'Added successfully.');
                 this._router.navigate(['/category/list']);
             },err => {
                 this.isLoading = false;
@@ -77,21 +77,21 @@ export class AddUpdateCategoryComponent {
 
     addEelement(){
      if(!this.oBj.vname){
-         this.errMsg = "Variety is required." ;
+         this.errMessage = "Variety is required." ;
          return false;
      }
         let index = this.category.variety.indexOf(this.oBj.vname);
 
         if(index >=0 ) {
             
-           this.errMsg = "Already exists." ;
+           this.errMessage = "Already exists." ;
            return false;            
 
                 } else {
 
                     this.category.variety.push(this.oBj.vname);
                     this.oBj.vname = "";
-                    this.errMsg = "" ;
+                    this.errMessage = "" ;
                     return true;
 
                 }

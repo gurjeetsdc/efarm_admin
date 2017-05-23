@@ -1,15 +1,15 @@
-<div class="input-wrapper">
+<div class="category-wrapper">
     <div *ngIf="isLoading" class="overlayloader">
         <div class="loader"></div>
     </div>
     <!-- loading section -->
     <div class="aligncenter_loader" *ngIf="isPageLoading">
-        <div class="is-loading"><i class="page-loader"></i></div>        
+        <div class="is-loading"><i class="page-loader"></i></div>
     </div>
     <!-- loading section ends  -->
     <div class="card" *ngIf="!isPageLoading">
         <div class="card-header">
-            <strong>{{inputID ? 'Edit' : 'Add'}} Category</strong>
+            <strong>{{categoryID ? 'Edit' : 'Add'}} Category</strong>
         </div>
         <form role="form" (ngSubmit)="save()" #addCatgForm="ngForm">
             <div class="card-block">
@@ -24,62 +24,55 @@
                                 </small>
                                 <small *ngIf="name.errors?.pattern && name.touched" class="text-danger">
                                     Name is required.
-                                </small>                                                          
+                                </small>
                             </div>
                         </div>
                     </div>
-                     <div class="col-sm-6">
+                    <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-type">Type</label>
-                            <select id="type" name="type" class="form-control" size="1" #type="ngModel" [(ngModel)]="category.type" required>
+                            <select [disabled]="categoryId" id="type" name="type" class="form-control" size="1" #type="ngModel" [(ngModel)]="category.type" required>
                                 <option value="">Please select</option>
                                 <option value="crops">Crops</option>
                                 <option value="equipments">Equipments</option>
                                 <option value="inputs">Inputs</option>
                             </select>
-                             <div class="error-block">
+                            <div class="error-block">
                                 <small *ngIf="type.errors?.required && type.touched" class="text-danger">
                                     Type is required.
-                                </small>                                                          
+                                </small>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                      
-                      <div class="form-group relative">
+                        <div class="form-group relative">
                             <label for="nf-name">Variety</label>
-                        <input type="text" id="vname" name="vname" #vname="ngModel" class="form-control wdthset" [(ngModel)]="oBj.vname" >
-                        <div class="error-block">
-                                <small *ngIf="errMsg" class="text-danger vname-valid">
-                                   {{errMsg}}
-                                </small>                                                          
-                        </div>
-                        <i (click)="addEelement()" title="Add More" class="fa fa-plus addimage"></i>
-                        
+                            <input type="text" id="vname" name="vname" #vname="ngModel" (ngModelChange)="errMessage='';" class="form-control wdthset" [(ngModel)]="oBj.vname">
+                            <div class="error-block">
+                                <small *ngIf="errMessage" class="text-danger vname-valid">
+                                   {{errMessage}}
+                                </small>
+                            </div>
+                            <i (click)="addEelement()" title="Add Variety" class="fa fa-plus addimage"></i>
                             <div class="block">
-                            <div class="chip" *ngFor="let rcd of category.variety; let i=index"  >
-                                <div class="chip">{{rcd}}
-                                <i class="close fa fa-times" (click)="removeEelement(i)" ></i>
+                                <div class="chip" *ngFor="let rcd of category.variety; let i=index">
+                                    <div class="chip">{{rcd}}
+                                        <i class="close fa fa-times" (click)="removeEelement(i)"></i>
+                                    </div>
+                                </div>
                             </div>
-                            </div>
-                                
-                      </div>
-
+                        </div>
                     </div>
-                    </div>
-                    
                 </div>
-               
-               
             </div>
             <div class="card-footer">
                 <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/category/list']"> Cancel</button>
-                <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addCatgForm.valid">{{Id ? 'Update' : 'Save'}}</button>
+                <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addCatgForm.valid">{{categoryID ? 'Update' : 'Save'}}</button>
             </div>
         </form>
     </div>
     <!-- .card -->
 </div>
-<!-- .inputs-wrapper -->
+<!-- .category-wrapper -->
