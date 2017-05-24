@@ -31,6 +31,9 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
 import { LoginComponent } from './auth/login/login.component';
 import { CustomFormsModule } from 'ng2-validation';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
+
+import { EqualValidator } from './auth/change-password/equal-validator.directive';
 
 @NgModule({
   imports: [
@@ -54,7 +57,9 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
     LoginComponent,
-    ForgotPasswordComponent    
+    ForgotPasswordComponent,
+    ChangePasswordComponent,
+    EqualValidator 
   ],
   providers: [
     {
