@@ -764,6 +764,18 @@
      color: #666;
  }
 
+.role input[type="checkbox"] {
+     position: relative;
+     top: 2px;
+}
+
+.role label {
+   padding-left: 4px;
+   margin-bottom: 0;
+   vertical-align: top;
+}
+
+type
 .role .card-block .table > tbody td:nth-child(2) {
      background:#dff0d8;
      border:1px solid #d6e9c6;
