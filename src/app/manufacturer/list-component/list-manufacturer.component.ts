@@ -80,26 +80,26 @@ export class ListManufacturerComponent implements OnInit {
     }
 
      /* Function use to remove Manufacturer with manufacturer id*/
-    removeManufacturer(manufacturerID) {
-        if(confirm("Do you want to delete?")) {
-            this.isLoading = true;
-            this._manufacturerService.delete(manufacturerID).subscribe(res => {
-                this.response  = res;
-                this.isLoading = false;  
-                let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
-                this.itemsTotal = this.itemsTotal - 1;
+    // removeManufacturer(manufacturerID) {
+    //     if(confirm("Do you want to delete?")) {
+    //         this.isLoading = true;
+    //         this._manufacturerService.delete(manufacturerID).subscribe(res => {
+    //             this.response  = res;
+    //             this.isLoading = false;  
+    //             let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
+    //             this.itemsTotal = this.itemsTotal - 1;
                 
-                if( ! (this.itemsTotal >= start) ){
-                   this.activePage = this.activePage -1
-                }
-                this._cookieService.put('manufacturerAlert', 'Deleted successfully.');
-                /* reload page. */
-                this.getManufacturer();
-            },err => {
-                this.isLoading = false;
-            });             
-        }
-    } 
+    //             if( ! (this.itemsTotal >= start) ){
+    //                this.activePage = this.activePage -1
+    //             }
+    //             this._cookieService.put('manufacturerAlert', 'Deleted successfully.');
+    //             /* reload page. */
+    //             this.getManufacturer();
+    //         },err => {
+    //             this.isLoading = false;
+    //         });             
+    //     }
+    // } 
 
     /*Get all manufacturer*/
     getManufacturer(): void {   

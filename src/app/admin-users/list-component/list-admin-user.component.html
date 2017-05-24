@@ -26,7 +26,7 @@
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght">
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/users/add']">Add User</button>
+                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/admin-users/add']">Add User</button>
                             <div class="icns">
                                 <a (click)="downloadPDF()" style="cursor:pointer;"><img src="assets/img/pdf.png" alt="pdf"></a>
                                 <a (click)="downloadCSV()" style="cursor:pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
@@ -51,11 +51,12 @@
                             <thead>
                                 <tr>
                                     <th width="15%">
-                                        <mfDefaultSorter by="firstName">Name
+                                        <mfDefaultSorter by="firstName">User
                                             <i *ngIf="sortOrder == 'asc'  && sortBy == 'firstName'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                             <i *ngIf="sortOrder == 'desc'  && sortBy == 'firstName'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                         </mfDefaultSorter>
                                     </th>
+                                    <th width="15%">Role</th>
                                     <th width="15%">
                                         <mfDefaultSorter by="email">Email
                                             <i *ngIf="sortOrder == 'asc'  && sortBy == 'email'" class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -69,17 +70,17 @@
                                         </mfDefaultSorter>
                                     </th>
                                     <th width="15%">
-                                        <mfDefaultSorter by="state">State
+                                        <mfDefaultSorter by="state">Market
                                             <i *ngIf="sortOrder == 'asc'  && sortBy == 'state'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                             <i *ngIf="sortOrder == 'desc'  && sortBy == 'state'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                         </mfDefaultSorter>
                                     </th>
-                                    <th width="15%">
+                                    <!-- <th width="15%">
                                         <mfDefaultSorter by="createdAt">Registered On
                                             <i *ngIf="sortOrder == 'asc'  && sortBy == 'createdAt'" class="fa fa-sort-asc" aria-hidden="true"></i>
                                             <i *ngIf="sortOrder == 'desc'  && sortBy == 'createdAt'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                         </mfDefaultSorter>
-                                    </th>
+                                    </th> -->
                                     <th width="10%">Actions</th>
                                 </tr>
                             </thead>
@@ -89,10 +90,11 @@
                                 </tr> 
                                 <tr *ngFor="let user of mf.data">
                                     <td data-label="Name"><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.firstName}} {{user.lastName}}</a></td>
+                                    <td data-label="Role">{{user.roleId?.name}}</td>
                                     <td data-label="Email">{{user.email}}</td>
-                                    <td data-label="Mobile">{{user.mobile ? user.mobile : '-'}}</td>
+                                    <td data-label="Mobile">{{user.mobile}}</td>
                                     <td data-label="District">{{user.state ? user.state : '-'}}</td>
-                                    <td data-label="Registered On">{{user.createdAt | date: 'dd/MM/yyyy'}}</td>
+                                    <!-- <td data-label="Registered On">{{user.createdAt | date: 'dd/MM/yyyy'}}</td> -->
                                     <td data-label="Actions">
                                         <button (click)="editUser(user.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
                                         <button (click)="removeUser(user.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>

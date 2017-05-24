@@ -2102,7 +2102,8 @@ thead.custom{
      background: #eee;
 }
 thead.custom th{
-     border:0 !important;
+     border: 1px solid #ddd;
+    border-bottom: 0 !important;
 }
 
  /* media queries responsive */
