@@ -102,7 +102,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="state">State</label>
-                            <select id="state" name="state" (change)="setDistrict();"  [(ngModel)]="user.state" placeholder=""  class="form-control" size="1">
+                            <select id="state" name="state" (change)="setDistrict();user.district='';"  [(ngModel)]="user.state" placeholder=""  class="form-control" size="1">
                                 <option value="">Please select</option>
                                 <option *ngFor="let state of states" [value]="state.stateName">
                                     {{state.stateName}}
@@ -113,7 +113,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="district">District</label>
-                            <select id="district" name="district"  [(ngModel)]="user.district" placeholder=""  class="form-control" size="1">
+                            <select id="district" name="district" [disabled]='!user.state' [(ngModel)]="user.district" placeholder=""  class="form-control disable" size="1">
                                 <option value="">Please select</option>
                                 <option *ngFor="let district of districts" [value]="district.districtName">
                                     {{district.districtName}}

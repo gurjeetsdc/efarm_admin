@@ -20,7 +20,7 @@ export class ManufacturerService {
         let headers         = new Headers();
         this._accessToken   = this._commanService.getAccessToken();
         
-        let url = this._host +'/manufacturer?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search;
+        let url = this._host +'/allmanufacturer?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search;
 
         headers.append('Authorization', this._accessToken);
 		return this._http.get(url, { headers: headers }).map((res:Response) => res.json())
