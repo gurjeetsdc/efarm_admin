@@ -9,6 +9,7 @@ import { TabsModule } from 'ng2-bootstrap/tabs';
 import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
 
 import { CookieModule } from 'ngx-cookie';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
 import { ActiveRouteGuard } from './auth/services/activate-route-guard';
 import { DeactiveRouteGuard } from './auth/services/deactivate-route-guard';
@@ -44,7 +45,8 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
     CookieModule.forRoot(),    
     HttpModule,
     CustomFormsModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    BootstrapModalModule
   ],
   declarations: [
     AppComponent,
