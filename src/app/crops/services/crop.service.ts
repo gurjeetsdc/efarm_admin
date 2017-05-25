@@ -94,4 +94,14 @@ export class CropService {
         return this._http.get(this._host +'/states?sort=stateName', { headers: headers }).map((res:Response) => res.json())
     }
 
+    /*Use to add new image*/
+    uploadImage(image) {
+
+        let headers         = new Headers();
+        this._accessToken   = this._commanService.getAccessToken();
+        
+        headers.append('Authorization', this._accessToken);
+        return this._http.post(this._host +'/upload', image, { headers: headers }).map((res:Response) => res.json())
+    }
+
 }

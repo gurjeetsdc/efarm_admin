@@ -5,6 +5,8 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { CookieService } from 'ngx-cookie';
 import { PromptComponent } from '../../modals/prompt.component';
 import { DialogService } from "ng2-bootstrap-modal";
+import { ImageResult, ResizeOptions } from 'ng2-imageupload';
+
 @Component({
   templateUrl: 'addupdate-crop.component.html'
 })
@@ -84,6 +86,30 @@ export class AddUpdateCropComponent {
         
         this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});
 
+    }
+
+    src: string = "";
+    resizeOptions: ResizeOptions = {
+        resizeMaxHeight: 1024,
+        resizeMaxWidth: 1024
+    };
+ 
+    selected(imageResult: ImageResult) {
+        let image = {
+            data:imageResult.dataURL,
+            type:'crop'
+        }
+        console.log("Upload Image",image)
+        // this.src = imageResult.resized
+            // && imageResult.resized.dataURL
+            // || imageResult.dataURL;
+        if(image) {
+            this._cropService.uploadImage(image).subscribe( res => { 
+                console.log("image path",res);
+            },err => {
+                console.log("error",err)
+            });
+        }
     }
 
     // Show add category Prompt
