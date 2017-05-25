@@ -9,7 +9,7 @@
     <!-- loading section ends  -->
     <div class="card" *ngIf="!isPageLoading">
         <div class="card-header">
-            <strong>{{manufactureID ? 'Edit' : 'Add'}} Manufacturer</strong>
+            <strong>{{manufacturerID ? 'Edit' : 'Add'}} Manufacturer</strong>
         </div>
         <!-- form to add or update Manufacturer -->
         <form role="form" (ngSubmit)="save()" #addManufactureForm="ngForm">
@@ -67,7 +67,7 @@
 
         <div class="card-footer">
                     <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/manufacturer/list']"> Cancel</button>
-                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addManufactureForm.valid">{{manufactureID ? 'Update' : 'Save'}}</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addManufactureForm.valid">{{manufacturerID ? 'Update' : 'Save'}}</button>
                 </div>
           </form>
     </div>

@@ -3,50 +3,52 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
-import { ListManufacturerComponent } from './list-component/list-manufacturer.component';
-import { AddUpdateManufacturerComponent } from './addupdate-component/addupdate-manufacturer.component';
-import { ViewManufacturerComponent } from './view-component/view-manufacturer.component';
+import { ListAdminUserComponent } from './list-component/list-admin-user.component';
+import { AddUpdateAdminUserComponent } from './addupdate-component/addupdate-admin-user.component';
+import { ViewAdminUserComponent } from './view-component/view-admin-user.component';
 import { HttpModule } from '@angular/http';
+import { AdminUserService } from './services/admin-user.service';
+
 const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Manufacturer'
+      title: 'Admin Users'
     },
     children: [
       {
         path: '',
-        component: ListManufacturerComponent,
+        component: ListAdminUserComponent,
         data: {
           title: 'List'
         }
       },
       {
         path: 'list',
-        component: ListManufacturerComponent,
+        component: ListAdminUserComponent,
         data: {
           title: 'List'
         }
       },
       {
         path: 'add',
-        component: AddUpdateManufacturerComponent,
+        component: AddUpdateAdminUserComponent,
         data: {
-          title: 'Add Manufacturer'
+          title: 'Add Admin User'
         }
       },
       {
         path: 'list/:id',
-        component: ViewManufacturerComponent,
+        component: ViewAdminUserComponent,
         data: {
           title: 'View'
         }
       },
       {
         path: 'edit/:id',
-        component: AddUpdateManufacturerComponent,
+        component: AddUpdateAdminUserComponent,
         data: {
-          title: 'Edit Manufacturer'
+          title: 'Edit Admin User'
         }
       }
     ]
@@ -61,6 +63,9 @@ const routes: Routes = [
     PaginationModule,
     HttpModule
   ],
+  providers: [
+    AdminUserService
+  ],
   exports: [
     RouterModule,
     FormsModule,
@@ -68,4 +73,4 @@ const routes: Routes = [
     PaginationModule
   ]
 })
-export class ManufacturerRoutingModule {}
+export class AdminUsersRoutingModule {}

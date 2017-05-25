@@ -80,26 +80,26 @@ export class ListCategoryComponent implements OnInit {
     }
 
     /* Function use to remove Crop with crop id */ 
-    remove( ID ) {
-        if(confirm("Do you want to delete?")) {
-            this.isLoading = true;
-            this._categoryService.delete(ID).subscribe(res => {
-                this.response  = res;
-                this.isLoading = false;  
-                let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
-                this.itemsTotal = this.itemsTotal - 1;
+    // remove( ID ) {
+    //     if(confirm("Do you want to delete?")) {
+    //         this.isLoading = true;
+    //         this._categoryService.delete(ID).subscribe(res => {
+    //             this.response  = res;
+    //             this.isLoading = false;  
+    //             let start       = (this.activePage * this.rowsOnPage - this.rowsOnPage + 1);
+    //             this.itemsTotal = this.itemsTotal - 1;
                 
-                if( ! (this.itemsTotal >= start) ){
-                   this.activePage = this.activePage -1
-                }
-                this._cookieService.put('categoryAlert', 'Deleted successfully.');
-                /* reload page. */
-                this.getCategory();     
-            },err => {
-                this.isLoading = false;
-            });  
-        }
-    } 
+    //             if( ! (this.itemsTotal >= start) ){
+    //                this.activePage = this.activePage -1
+    //             }
+    //             this._cookieService.put('categoryAlert', 'Deleted successfully.');
+    //             /* reload page. */
+    //             this.getCategory();     
+    //         },err => {
+    //             this.isLoading = false;
+    //         });  
+    //     }
+    // } 
 
     /*Get all Users */
     getCategory(): void {

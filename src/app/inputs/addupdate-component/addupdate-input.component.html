@@ -158,7 +158,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="state">State</label>
-                            <select id="state" name="state" (change)="setDistrict();"  [(ngModel)]="input.state" placeholder="" required class="form-control" size="1" #state="ngModel" required>
+                            <select id="state" name="state" (change)="setDistrict();input.district=''"  [(ngModel)]="input.state" placeholder="" required class="form-control" size="1" #state="ngModel" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let state of states" [value]="state.stateName">
                                     {{state.stateName}}
@@ -174,7 +174,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="district">District</label>
-                            <select id="district" name="district"  [(ngModel)]="input.district" placeholder="" required class="form-control" size="1" #district="ngModel" required>
+                            <select id="district" name="district" [disabled]="!input.state" [(ngModel)]="input.district" placeholder="" required class="form-control disable" size="1" #district="ngModel" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let district of districts" [value]="district.districtName">
                                     {{district.districtName}}
