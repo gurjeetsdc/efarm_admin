@@ -3,7 +3,8 @@ import { CropService } from '../services/crop.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { CookieService } from 'ngx-cookie';
-
+import { PromptComponent } from '../../modals/prompt.component';
+import { DialogService } from "ng2-bootstrap-modal";
 @Component({
   templateUrl: 'addupdate-crop.component.html'
 })
@@ -25,6 +26,7 @@ export class AddUpdateCropComponent {
         district:''
     };
 
+    
     public isLoading       = false;
     public isPageLoading   = true;
     public category        = [];
@@ -36,8 +38,15 @@ export class AddUpdateCropComponent {
     public varieties: any;
     public states: any;
     public districts: any;
+    public promptMessage:string = '';
     
-    constructor(private _router : Router,private _activateRouter: ActivatedRoute, private _cropService: CropService, private _cookieService: CookieService, private changeDetectorRef: ChangeDetectorRef ) { 
+   constructor( private dialogService:DialogService, 
+                private _router : Router,
+                private _activateRouter: ActivatedRoute, 
+                private _cropService: CropService, 
+                private _cookieService: CookieService, 
+                private changeDetectorRef: ChangeDetectorRef ) { 
+
         this.cropID = _activateRouter.snapshot.params['id'];        
         
         if( this.cropID ) {
@@ -75,6 +84,30 @@ export class AddUpdateCropComponent {
         
         this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});
 
+    }
+
+    // Show add category Prompt
+    showPrompt() {
+        this.dialogService.addDialog(PromptComponent, {
+          title:'Add Category',
+          type: 'crops',
+      }).subscribe((res)=>{
+            //We get dialog result
+            //this.promptMessage = res;
+            
+            if( res ){
+                let response = res;
+                /*console.log(this.category);
+                console.log(response);*/
+                this.category.push(response);
+                this.setCategoryInSelectBox(response);
+            }
+
+        });
+    }
+    setCategoryInSelectBox(response){
+        this.crop.categoryID =  response.id;
+        this.setVarieties();
     }
 
      /*If cropID exist then will update existing crop otherwise will add new crop*/

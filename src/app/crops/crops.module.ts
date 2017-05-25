@@ -11,17 +11,23 @@ import { CustomFormsModule } from 'ng2-validation';
 import { DatePickerModule } from 'ng2-datepicker';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { SharedModule } from '../shared/shared.module';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { PromptComponent } from '../modals/prompt.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   imports: [
   	CropsRoutingModule,
-  	 CommonModule,
-     NG2DataTableModule,
-     // DataTableModule,
-     CustomFormsModule,
-     DatePickerModule, 
-     FlashMessagesModule,
-     SharedModule    
+  	CommonModule,
+    NG2DataTableModule,
+    //DataTableModule,
+    CustomFormsModule,
+    DatePickerModule, 
+    FlashMessagesModule,
+    SharedModule,
+    BootstrapModalModule,
+    FormsModule
   ],
   providers: [
   	CropService
@@ -29,7 +35,12 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
   	ListCropComponent,
   	AddUpdateCropComponent,
-  	ViewCropComponent
-  ]
+  	ViewCropComponent,
+    PromptComponent
+  ],
+  //Don't forget add component to entryComponents section
+  entryComponents: [
+    PromptComponent
+  ],
 })
 export class CropsModule { }

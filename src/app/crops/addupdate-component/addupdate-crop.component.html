@@ -44,12 +44,14 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group has-required">
+                        <div class="form-group has-required relative">
                             <label for="nf-category">Category</label>
-                            <select id="nfcategory" name="nfcategory" class="form-control" size="1" (change)="setVarieties( cat )" #nfcategory="ngModel" [(ngModel)]="crop.categoryID" required>
+                            <select id="nfcategory" name="nfcategory" class="form-control wdthset" size="1" (change)="setVarieties( cat )" #nfcategory="ngModel" [(ngModel)]="crop.categoryID" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let cat of category" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
+                             <i (click)="showPrompt()" title="Add Category" class="fa fa-plus addimage"></i>
+    
                             <div class="error-block">
                                 <small *ngIf="nfcategory.errors?.required && nfcategory.touched" class="text-danger">
                                     Category is required.
