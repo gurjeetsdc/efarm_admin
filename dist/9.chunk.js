@@ -1,6 +1,6 @@
 webpackJsonp([9,15],{
 
-/***/ 1099:
+/***/ 1384:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13,10 +13,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var ng2_charts_1 = __webpack_require__(685);
+var ng2_charts_1 = __webpack_require__(717);
 // import { DropdownModule } from 'ng2-bootstrap/dropdown';
-var dashboard_component_1 = __webpack_require__(1424);
-var dashboard_routing_module_1 = __webpack_require__(1446);
+var dashboard_component_1 = __webpack_require__(1431);
+var dashboard_routing_module_1 = __webpack_require__(1454);
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -32,11 +32,11 @@ DashboardModule = __decorate([
     })
 ], DashboardModule);
 exports.DashboardModule = DashboardModule;
-//# sourceMappingURL=/home/nishantk/Documents/Official/Projects/efarm_admin/src/dashboard.module.js.map
+//# sourceMappingURL=/var/www/node_projects/angular2/efarm_admin/src/dashboard.module.js.map
 
 /***/ }),
 
-/***/ 1424:
+/***/ 1431:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -490,15 +490,15 @@ var DashboardComponent = (function () {
 }());
 DashboardComponent = __decorate([
     core_1.Component({
-        template: __webpack_require__(1472)
+        template: __webpack_require__(1480)
     })
 ], DashboardComponent);
 exports.DashboardComponent = DashboardComponent;
-//# sourceMappingURL=/home/nishantk/Documents/Official/Projects/efarm_admin/src/dashboard.component.js.map
+//# sourceMappingURL=/var/www/node_projects/angular2/efarm_admin/src/dashboard.component.js.map
 
 /***/ }),
 
-/***/ 1446:
+/***/ 1454:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -511,8 +511,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var router_1 = __webpack_require__(65);
-var dashboard_component_1 = __webpack_require__(1424);
+var router_1 = __webpack_require__(75);
+var dashboard_component_1 = __webpack_require__(1431);
 var routes = [
     {
         path: '',
@@ -534,11 +534,11 @@ DashboardRoutingModule = __decorate([
     })
 ], DashboardRoutingModule);
 exports.DashboardRoutingModule = DashboardRoutingModule;
-//# sourceMappingURL=/home/nishantk/Documents/Official/Projects/efarm_admin/src/dashboard-routing.module.js.map
+//# sourceMappingURL=/var/www/node_projects/angular2/efarm_admin/src/dashboard-routing.module.js.map
 
 /***/ }),
 
-/***/ 1472:
+/***/ 1480:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"content-wrapper\"> \r\n\r\n</div>"
