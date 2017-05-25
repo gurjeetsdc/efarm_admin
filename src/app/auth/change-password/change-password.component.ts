@@ -25,21 +25,10 @@ export class ChangePasswordComponent implements OnInit {
 
 	ngOnInit() {
         this.isPageLoading = true;
-
         this._changePasswordService.getcurrentuser().subscribe(res => {
             this.isPageLoading = false;
             this.currentUser  = res;
-            
-            if(res) {
-               
-                // this.user_id       = this.currentUser.id;         
-            } else {
-                this.errMessage     = res.error;
-            }
-        },err => {       
-            this.isPageLoading = false;
-            //this.errMessage    = "No such user exist";    
-        });
+            });
 	}
 
 	submit() {
@@ -47,26 +36,17 @@ export class ChangePasswordComponent implements OnInit {
         this.errMessage        = '';        
 		this._changePasswordService.changePassword( this.currentUser.id, this.password, this.newPassword, this.confirmPassword).subscribe(res => {
             this.isPageLoading = false;
-            if(res)
-            {
-            this.successMessage = "Password has been changed"; 
-            this._router.navigate(['/login']); 
-            console.log(res);
-            }
-            else
-            {
-            this.errMessage  = "wrong old password";    
-            }
-           /* if(res.success) {
-                this.successMessage = "Password has been changed"; 
+            if(res.success) {
+                this.successMessage = res.message; 
+                this._router.navigate(['/login']); 
                   
             } else {
                 this.errMessage     = res.error.message;
-                this._router.navigate(['/login']);   
-            }*/
+                  
+            }
         },err => {       
             this.isPageLoading = false;
-            //this.errMessage    = "res.error.message";    
+            
         });
 	}
    }
