@@ -1180,7 +1180,7 @@
  
  .datepicker-container .datepicker-input-container .datepicker-input {
      position: absolute;
-     z-index: 9999;
+     z-index: 0;
      left: 0;
      border: 0 !important;
      top: 9px;
@@ -2532,6 +2532,21 @@ thead.custom th{
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1040;
+    z-index: 9999;
     background-color: rgba(0,0,0, 0.5);
+}
+
+.modal-content {
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border: 0;
+}
+
+.modal-content .relative i.addimage {
+     top: 34px;
+}
+
+.modal-body{
+     padding:0 !important;
 }
