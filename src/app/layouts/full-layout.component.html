@@ -50,7 +50,7 @@
 		  <i class="fa fa-ellipsis-v"></i> 
       </a>
       <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="JavaScript:Void(0);" style="cursor: not-allowed;"><i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item" (click)="layout('profile')" routerLinkActive="active" [routerLink]="['/profile/myprofile']" ><i class="fa fa-user"></i> Profile</a>
         <a class="dropdown-item" href="JavaScript:Void(0);" style="cursor: not-allowed;"><i class="fa fa-wrench"></i> Setting</a>
         <div class="divider"></div>
         <a class="dropdown-item" (click)="logout()" href="#"><i class="fa fa-lock"></i> Logout</a>

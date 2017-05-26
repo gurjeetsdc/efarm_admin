@@ -1,0 +1,44 @@
+<!-- Loader div -->
+<div>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+    <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                   <strong>My Profile</strong>           
+                </div>
+            </div>
+      </div>  
+        <div class="card-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <p>{{currentUser.firstName}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label >Last Name</label>
+                            <p>{{currentUser.lastName}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label >Email</label>
+                            <p>{{currentUser.email}}</p>
+                        </div>
+                    </div>
+                
+                </div>
+                 <div class="card-footer">
+                    <button type="button" class="pull-right btn btn-primary orangeclr"  [routerLink]="['/profile/changepassword']"> Change Password</button>
+                </div>
+                
+        </div>
+   </div>
