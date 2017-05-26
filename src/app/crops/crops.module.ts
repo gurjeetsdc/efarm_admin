@@ -12,7 +12,7 @@ import { DatePickerModule } from 'ng2-datepicker';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { SharedModule } from '../shared/shared.module';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
-import { PromptComponent } from '../modals/prompt.component';
+import { PromptCropCategoryComponent } from '../modals/promptCropCategory.component';
 import { FormsModule } from '@angular/forms';
 
 
@@ -36,11 +36,11 @@ import { FormsModule } from '@angular/forms';
   	ListCropComponent,
   	AddUpdateCropComponent,
   	ViewCropComponent,
-    PromptComponent
+    PromptCropCategoryComponent
   ],
   //Don't forget add component to entryComponents section
   entryComponents: [
-    PromptComponent
+    PromptCropCategoryComponent
   ],
 })
 export class CropsModule { }

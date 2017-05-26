@@ -56,14 +56,15 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group  has-required">
+                        <div class="form-group  has-required relative">
                             <label for="nf-password">Company/Manufacturer</label>
-                            <select id="Manufacturer" name="Manufacturer" class="form-control" size="1" #Manufacturer="ngModel" [(ngModel)]="input.manufacturerID" required>
+                            <select id="Manufacturer" name="Manufacturer" class="form-control wdthset" size="1" #Manufacturer="ngModel" [(ngModel)]="input.manufacturerID" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let mf of manufacturers" [ngValue]="mf.id">
                                     {{mf.name}}
                                 </option>
                             </select>
+                            <i (click)="showPrompt()" title="Add Manufacturer" class="fa fa-plus addimage"></i>
                             <div class="error-block">
                                 <small *ngIf="Manufacturer.errors?.required && Manufacturer.touched" class="text-danger">
                                     Company/Manufacturer is required.

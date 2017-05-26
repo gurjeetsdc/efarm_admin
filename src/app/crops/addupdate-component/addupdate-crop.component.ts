@@ -3,7 +3,7 @@ import { CropService } from '../services/crop.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { CookieService } from 'ngx-cookie';
-import { PromptComponent } from '../../modals/prompt.component';
+import { PromptCropCategoryComponent } from '../../modals/promptCropCategory.component';
 import { DialogService } from "ng2-bootstrap-modal";
 @Component({
   templateUrl: 'addupdate-crop.component.html'
@@ -88,13 +88,11 @@ export class AddUpdateCropComponent {
 
     // Show add category Prompt
     showPrompt() {
-        this.dialogService.addDialog(PromptComponent, {
+        this.dialogService.addDialog(PromptCropCategoryComponent, {
           title:'Add Category',
           type: 'crops',
       }).subscribe((res)=>{
-            //We get dialog result
-            //this.promptMessage = res;
-            
+            //We get dialog result            
             if( res ){
                 let response = res;
                 /*console.log(this.category);

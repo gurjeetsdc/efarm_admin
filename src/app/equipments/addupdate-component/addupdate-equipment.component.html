@@ -204,23 +204,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">                    
+                <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group has-required">
-                            <label for="category">Category</label>                            
-                            <select id="category" name="category_id"  (change)="setVarieties( cat )" class="form-control" size="1" #category_id="ngModel" [(ngModel)]="equipment.category_id" required>
+                        <div class="form-group has-required relative">
+                            <label for="category">Category</label>
+                            <select id="category" name="category_id"  (change)="setVarieties( cat )" class="form-control wdthset" size="1" #category_id="ngModel" [(ngModel)]="equipment.category_id" required>
                                 <option value="">Please select</option>                                
                                 <option *ngFor="let cat of category" [value]="cat.id">
                                     {{cat.name}}
                                 </option>       
                             </select>
+                            <i (click)="showCategoryPrompt()" title="Add Category" class="fa fa-plus addimage"></i>
                               
                             <div class="error-block">
                                 <small *ngIf="category_id.errors?.required && category_id.touched" class="text-danger">
                                     Category is required.
                                 </small>                                                          
-                            </div>      
-                            
+                            </div>    
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -237,14 +237,15 @@
                 </div>
                   <div class="row">                                      
                     <div class="col-sm-6">
-                        <div class="form-group  has-required">
+                        <div class="form-group  has-required relative">
                             <label for="companyManufacturer">Company/Manufacturer</label>
-                            <select id="companyManufacturer" name="companyManufacturer" class="form-control" size="1" #companyManufacturer_id="ngModel" [(ngModel)]="equipment.companyManufacturer_id" required>
+                            <select id="companyManufacturer" name="companyManufacturer" class="form-control wdthset" size="1" #companyManufacturer_id="ngModel" [(ngModel)]="equipment.companyManufacturer_id" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let mf of manufacturers" [ngValue]="mf.id">
                                     {{mf.name}}
                                 </option>
                             </select>
+                             <i (click)="showManufacturerPrompt()" title="Add Manufacturer" class="fa fa-plus addimage"></i>
                             <div class="error-block">
                                 <small *ngIf="companyManufacturer_id.errors?.required && companyManufacturer_id.touched" class="text-danger">
                                     Company/Manufacturer is required.

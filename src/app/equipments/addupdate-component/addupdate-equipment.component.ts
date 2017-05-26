@@ -2,9 +2,9 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
-
-// import { FormGroup, FormBuilder ,Validators } from '@angular/forms';
-
+import { PromptEquipmentCategoryComponent } from '../../modals/promptEquipmentCategory.component';
+import { PromptEquipmentManufacturerComponent } from '../../modals/promptEquipmentManufacturer.component';
+import { DialogService } from "ng2-bootstrap-modal";
 
 import { EquipmentService } from '../services/equipment.service';
 import { CookieService } from 'ngx-cookie';
@@ -72,9 +72,15 @@ export class AddUpdateEquipmentComponent {
     private states: any;
     private districts: any;
     
-    constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _equipmentService: EquipmentService,  private changeDetectorRef: ChangeDetectorRef, private _cookieService: CookieService) {
+    constructor(
+        private dialogService:DialogService,
+        private _router : Router,
+        private _activateRouter: ActivatedRoute,
+        private _equipmentService: EquipmentService,
+        private changeDetectorRef: ChangeDetectorRef,
+        private _cookieService: CookieService) {
         
-        this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});                
+        this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});
 
         this.equipmentID = _activateRouter.snapshot.params['id'];        
         
@@ -135,6 +141,47 @@ export class AddUpdateEquipmentComponent {
             this.years.push(this.currentYear - i);
         }
     }
+
+    // Show add category Prompt
+    showCategoryPrompt() {
+        this.dialogService.addDialog(PromptEquipmentCategoryComponent, {
+          title:'Add Category',
+          type: 'equipments',
+      }).subscribe((res)=>{
+            //We get dialog result
+            if( res ){
+                let response = res;   
+                this.category.push(response);
+                this.setCategoryInSelectBox(response);
+            }
+        });
+    }
+    setCategoryInSelectBox(response){
+        this.equipment.category_id =  response.id;
+        this.setVarieties();
+    }
+
+
+        // Show add PromptEquipmentManufacturerComponent Prompt
+    showManufacturerPrompt() {
+        this.dialogService.addDialog(PromptEquipmentManufacturerComponent, {
+          title:'Add Manufacturer',
+          type: 'equipments',
+      }).subscribe((res)=>{
+            //We get dialog result            
+            if( res ){
+                let response = res;
+                this.manufacturers.push(response);
+                this.setInputManufacturer(response);
+            }
+
+        });
+    }
+    setInputManufacturer(argu){
+        this.equipment.companyManufacturer_id = argu.id;
+    }
+
+
 
     submitEquipment() {
         this.isLoading = true;

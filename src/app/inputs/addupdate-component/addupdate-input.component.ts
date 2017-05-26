@@ -3,7 +3,8 @@ import { InputService } from '../services/input.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { CommanService } from '../../shared/services/comman.service';
-
+import { PromptInputManufacturerComponent } from '../../modals/promptInputManufacturer.component';
+import { DialogService } from "ng2-bootstrap-modal";
 @Component({
   templateUrl: 'addupdate-input.component.html'
 })
@@ -33,6 +34,7 @@ export class AddUpdateInputComponent {
 
     constructor(
         private _router : Router,
+        private dialogService:DialogService, 
         private _activateRouter: ActivatedRoute, 
         private _inputService: InputService, 
         private _cookieService: CookieService,
@@ -83,6 +85,27 @@ export class AddUpdateInputComponent {
         } else {
             this.isPageLoading = false;
         }
+    }
+
+
+
+    // Show add PromptInputManufacturerComponent Prompt
+    showPrompt() {
+        this.dialogService.addDialog(PromptInputManufacturerComponent, {
+          title:'Add Manufacturer',
+          type: 'inputs',
+      }).subscribe((res)=>{
+            //We get dialog result            
+            if( res ){
+                let response = res;
+                this.manufacturers.push(response);
+                this.setInputManufacturer(response);
+            }
+
+        });
+    }
+    setInputManufacturer(argu){
+        this.input.manufacturerID = argu.id;
     }
 
     /*If inputID exist then will update existing input otherwise will add new input*/

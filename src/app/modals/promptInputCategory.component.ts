@@ -14,7 +14,7 @@ export interface PromptModel {
   providers:[CategoryService]
 })
 
-export class PromptComponent extends DialogComponent<PromptModel, string> implements PromptModel {
+export class PromptInputCategoryComponent extends DialogComponent<PromptModel, string> implements PromptModel {
   title: string;
   type: string;
   message: string = '';

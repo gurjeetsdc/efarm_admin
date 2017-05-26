@@ -10,15 +10,18 @@ import { InputsRoutingModule } from './inputs-routing.module';
 import { CustomFormsModule } from 'ng2-validation';
 import { DatePickerModule } from 'ng2-datepicker';
 import { FlashMessagesModule } from 'ngx-flash-messages';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { PromptInputManufacturerComponent } from '../modals/promptInputManufacturer.component';
 
 @NgModule({
   imports: [
   	InputsRoutingModule,
-  	 CommonModule,
-     NG2DataTableModule,
-     CustomFormsModule,
-     FlashMessagesModule,
-     SharedModule
+  	CommonModule,
+    NG2DataTableModule,
+    CustomFormsModule,
+    FlashMessagesModule,
+    SharedModule,
+    BootstrapModalModule
   ],
   providers: [
     InputService
@@ -26,7 +29,12 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
   declarations: [
   	ListInputComponent,
   	AddUpdateInputComponent,
-  	ViewInputComponent
+  	ViewInputComponent,
+    PromptInputManufacturerComponent
+  ],
+  //Don't forget add component to entryComponents section
+  entryComponents: [
+    PromptInputManufacturerComponent
   ]
 })
 export class InputsModule { }

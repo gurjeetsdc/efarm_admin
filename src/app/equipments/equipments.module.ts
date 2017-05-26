@@ -23,7 +23,9 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
 
 import { SharedModule } from '../shared/shared.module';
 
-
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { PromptEquipmentCategoryComponent } from '../modals/promptEquipmentCategory.component';
+import { PromptEquipmentManufacturerComponent } from '../modals/promptEquipmentManufacturer.component';
 @NgModule({
     imports: [
         EquipmentsRoutingModule,
@@ -32,13 +34,21 @@ import { SharedModule } from '../shared/shared.module';
         CustomFormsModule,
         DatePickerModule,
         FlashMessagesModule,
+        BootstrapModalModule,
         SharedModule
     ],
     declarations: [
         ListEquipmentComponent,
         AddUpdateEquipmentComponent,
         ViewEquipmentComponent,
-        GoogleplaceDirective           
-    ]
+        GoogleplaceDirective,
+        PromptEquipmentCategoryComponent,
+        PromptEquipmentManufacturerComponent
+    ],
+  //Don't forget add component to entryComponents section
+  entryComponents: [
+    PromptEquipmentCategoryComponent,
+    PromptEquipmentManufacturerComponent
+  ],
 })
 export class EquipmentsModule { }
