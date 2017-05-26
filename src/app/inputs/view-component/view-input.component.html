@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Seller</label>
+                        <label>Channel Partner</label>
                         <p>{{input.user?.email ? input.user?.email : '-'}}</p>
                     </div>
                 </div>
@@ -41,86 +41,72 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Company/Manufacturer</label>
-                        <p>{{input.manufacturer?.name}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="nf-color">Unit</label>
-                        <p>{{input.units}}</p>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
                         <label for="nf-variety">Variety</label>
-                        <p>{{input.variety}}</p>
+                        <p>{{input.variety ? input.variety : '-'}}</p>
                     </div>
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Company/Manufacturer</label>
+                        <p>{{input.manufacturer?.name ? input.manufacturer?.name : '-'}}</p>
+                    </div>
+                </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-price">Price</label>
-                        <p><i class="fa fa-rupee"></i> {{input.price}}</p>
+                        <p><i class="fa fa-rupee"></i> {{input.price}}/{{input.priceUnit}}</p>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-grade">Quantity</label>
                         <p>{{input.quantity ? input.quantity : '-'}}</p>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-variety">Address</label>
                         <p>{{input.address}}</p>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-variety">City</label>
                         <p>{{input.city}}</p>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-variety">State</label>
                         <p>{{input.state}}</p>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-variety">District</label>
                         <p>{{input.district}}</p>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nf-variety">Pin Code</label>
                         <p>{{input.pincode}}</p>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="nf-termsConditions">Additional information</label>
-                        <p>{{input.additionalInformation ? input.additionalInformation : '-'}}</p>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="nf-termsConditions">Terms & Conditions</label>
-                        <p>{{input.terms ? input.terms : '-'}}</p>
+                        <label for="nf-termsConditions">Additional information</label>
+                        <p>{{input.additionalInformation ? input.additionalInformation : '-'}}</p>
                     </div>
                 </div>
             </div>
