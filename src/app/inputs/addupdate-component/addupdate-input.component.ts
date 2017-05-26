@@ -3,6 +3,7 @@ import { InputService } from '../services/input.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { CommanService } from '../../shared/services/comman.service';
+import { PromptInputCategoryComponent } from '../../modals/promptInputCategory.component';
 import { PromptInputManufacturerComponent } from '../../modals/promptInputManufacturer.component';
 import { DialogService } from "ng2-bootstrap-modal";
 @Component({
@@ -87,6 +88,25 @@ export class AddUpdateInputComponent {
         }
     }
 
+        // Show add category Prompt
+    showCategoryPrompt() {
+        this.dialogService.addDialog(PromptInputCategoryComponent, {
+          title:'Add Category',
+          type: 'inputs',
+      }).subscribe((res)=>{
+            //We get dialog result
+            if( res ){
+                let response = res;   
+                this.categories.push(response);
+                this.setCategoryInSelectBox(response);
+            }
+        });
+    }
+    setCategoryInSelectBox(response){
+        
+        this.input.categoryID = response.id;
+        this.setVarieties();
+    }
 
 
     // Show add PromptInputManufacturerComponent Prompt

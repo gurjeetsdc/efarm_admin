@@ -21,8 +21,6 @@ export class PromptInputManufacturerComponent extends DialogComponent<PromptMode
   mobileErrors: string = '';
   manufacturer: any = {
         name:'',
-        email:'',
-        mobile:'',
         description:''
     };
 
@@ -33,21 +31,13 @@ export class PromptInputManufacturerComponent extends DialogComponent<PromptMode
   }
 
   apply() {
-    var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var mobRegex = /^(\+91-|\+91|0)?\d{10}$/;
+   
     /*console.log(this.manufacturer);*/
      if(this.manufacturer.name == ''){
          this.nameErrors = 'Name is required.';
          return false;
      }
-     else if( this.manufacturer.email == '' && !emailRegex.test(this.manufacturer.email) ){
-         this.emailErrors = 'Email is not valid.';
-         return false;
-     }
-     else if( this.manufacturer.mobile == '' && !mobRegex.test(this.manufacturer.mobile) ){
-         this.mobileErrors = 'Mobile is Required';   
-         return false;
-     }
+     
 
     this._manufacturerService.add(this.manufacturer).subscribe(res => {
       

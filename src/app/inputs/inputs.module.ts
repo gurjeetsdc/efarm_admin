@@ -11,6 +11,7 @@ import { CustomFormsModule } from 'ng2-validation';
 import { DatePickerModule } from 'ng2-datepicker';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { PromptInputCategoryComponent } from '../modals/promptInputCategory.component';
 import { PromptInputManufacturerComponent } from '../modals/promptInputManufacturer.component';
 
 @NgModule({
@@ -30,10 +31,12 @@ import { PromptInputManufacturerComponent } from '../modals/promptInputManufactu
   	ListInputComponent,
   	AddUpdateInputComponent,
   	ViewInputComponent,
+    PromptInputCategoryComponent,
     PromptInputManufacturerComponent
   ],
   //Don't forget add component to entryComponents section
   entryComponents: [
+    PromptInputCategoryComponent,
     PromptInputManufacturerComponent
   ]
 })
