@@ -15,7 +15,7 @@
             <div class="card-block">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group  has-required">
+                        <div class="form-group has-required">
                             <label for="nf-name">Name</label>
                             <input autofocus="" type="text" id="name" name="name" class="form-control" #name="ngModel" [(ngModel)]="input.name" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
                             <div class="error-block">
@@ -23,20 +23,25 @@
                                     Name is required.
                                 </small>
                                 <small *ngIf="name.errors?.pattern && name.touched" class="text-danger">
-                                    Name is required.
+                                    Invalid input.
                                 </small>                                                          
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="seller">Seller</label>
-                            <select id="seller" name="seller" class="form-control" size="1" [(ngModel)]="input.sellerID">
+                        <div class="form-group has-required">
+                            <label for="seller">Channel Partner</label>
+                            <select id="seller" name="seller" class="form-control" size="1" #seller="ngModel" [(ngModel)]="input.sellerID" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let obj of sellers" value="{{obj.id}}">
                                     {{obj.username}}
                                 </option>
                             </select>
+                            <div class="error-block">
+                                <small *ngIf="seller.errors?.required && seller.touched" class="text-danger">
+                                    Channel Partner is required.
+                                </small>              
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,7 +49,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-category">Category</label>
-                            <select id="category1" name="category1" class="form-control" size="1" #category1="ngModel" [(ngModel)]="input.categoryID" required>
+                            <select id="category1" name="category1" class="form-control" size="1" (change)="setVarieties( cat )" #category1="ngModel" [(ngModel)]="input.categoryID" required>
                                 <option value="">Please select</option>
                                 <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
@@ -56,82 +61,73 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group  has-required relative">
+                        <div class="form-group">
+                            <label for="nf-variety">Variety</label>
+                            <select id="variety" name="variety" class="form-control" [(ngModel)]="input.variety" size="1">
+                                <option value="">Please select</option>
+                                <option *ngFor="let variety of varieties" [value]="variety">
+                                    {{variety}}
+                                </option>                                  
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group relative">
                             <label for="nf-password">Company/Manufacturer</label>
-                            <select id="Manufacturer" name="Manufacturer" class="form-control wdthset" size="1" #Manufacturer="ngModel" [(ngModel)]="input.manufacturerID" required>
+                            <select id="Manufacturer" name="Manufacturer" class="form-control wdthset" size="1" [(ngModel)]="input.manufacturerID">
                                 <option value="">Please select</option>
                                 <option *ngFor="let mf of manufacturers" [ngValue]="mf.id">
                                     {{mf.name}}
                                 </option>
                             </select>
                             <i (click)="showPrompt()" title="Add Manufacturer" class="fa fa-plus addimage"></i>
-                            <div class="error-block">
+                            <!-- <div class="error-block">
                                 <small *ngIf="Manufacturer.errors?.required && Manufacturer.touched" class="text-danger">
                                     Company/Manufacturer is required.
-                                </small>                                                          
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group has-required">
-                            <label for="nf-unit">Unit</label>
-                            <select size="1" id="units" name="units" class="form-control" #units="ngModel" [(ngModel)]="input.units" required>
-                                <option value="">Please select</option>
-                                <option value="Bags">Bags</option>
-                                <option value="Litres">Litres</option>
-                                <option value="Packets">Packets</option>
-                                <option value="Pieces">Pieces</option>
-                                <option value="Tons">Tons</option>
-                            </select>
-                            <div class="error-block">
-                                <small *ngIf="units.errors?.required && units.touched" class="text-danger">
-                                    Unit is required.
-                                </small>                                                          
-                            </div>
+                                </small>  
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group has-required">
-                            <label for="nf-variety">Variety</label>
-                            <select id="select1" name="select1" class="form-control" #variety="ngModel" [(ngModel)]="input.variety" size="1" required>
-                                <option value="">Please select</option>
-                                <option value="Variety 1">Variety 1</option>
-                                <option value="Variety 2">Variety 2</option>
-                                <option value="Variety 3">Variety 3</option>
-                            </select>
-                            <div class="error-block">
-                                <small *ngIf="variety.errors?.required && variety.touched" class="text-danger">
-                                    Variety is required.
-                                </small>                                                          
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group has-required">
-                            <label for="nf-price">Price </label>
-                            <div class="flex">
-                                <div class="icnposition"><i class="fa fa-rupee"></i></div>
-                                <input type="number" id="price" name="price" class="form-control  pleft25" #price="ngModel" [(ngModel)]="input.price" required>
+                         <label for="nf-price">Price</label>
+                          <div class="flex">
+                          <div class="icnposition"><i class="fa fa-rupee"></i></div>
+                              <input type="number" id="price" name="price" class="form-control pleft25" aria-label="Text input with dropdown button" #price="ngModel" [(ngModel)]="input.price" min="1" max="9999999999999998" placeholder="" required>
+                               <div class="input-group-btn">
+                                  <select id="select4" name="select4" class="btn btn-secondary dropdown-toggle" [(ngModel)]="input.priceUnit" required>
+                                    <option value="grams">grams</option>
+                                    <option value="Kgs">Kgs</option>
+                                    <option value="Quintal">Quintal</option>
+                                    <option value="Tonne">Tonne</option>
+                                    <option value="Count">Count</option>
+                                    <option value="Dozen">Dozen</option>
+                                 </select>
+                              </div>
                             </div>
                             <div class="error-block">
                                 <small *ngIf="price.errors?.required && price.touched" class="text-danger">
                                     Price is required.
+                                </small>
+                                <small *ngIf="price.errors?.min && price.touched" class="text-danger">
+                                    Minimum price should be 1.
                                 </small>                                                          
-                            </div>
+                                <small *ngIf="price.errors?.max && price.touched" class="text-danger">
+                                    Maximum price is allow upto 16 digit.
+                                </small> 
+                            </div>                       
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-quantity">Quantity</label>
                             <input type="number" id="quantity" name="quantity" class="form-control" [(ngModel)]="input.quantity">
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="address">Address</label>
@@ -143,6 +139,8 @@
                             </div> 
                         </div>                                    
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-city">City/Village</label>
@@ -154,8 +152,6 @@
                             </div> 
                         </div>
                     </div> 
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="state">State</label>
@@ -172,6 +168,8 @@
                             </div> 
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="district">District</label>
@@ -188,8 +186,6 @@
                             </div> 
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-pincode">Pin Code </label>
@@ -202,19 +198,19 @@
                                     Minimum value should be 1.
                                 </small>                                
                                 <small *ngIf="pincode.errors?.max && pincode.touched" class="text-danger">
-                                    maximum 6 digit allow.
+                                    Maximum 6 digit allow.
                                 </small>                                                          
                             </div> 
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-additionalInformation">Additional information</label>
                             <textarea type="text" id="nf-additionalInformation" name="nf-additionalInformation" class="form-control" [(ngModel)]="input.additionalInformation" rows="4"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-terms">Terms & Conditions</label>

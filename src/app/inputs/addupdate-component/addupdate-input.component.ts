@@ -13,11 +13,11 @@ export class AddUpdateInputComponent {
         categoryID:'',
         manufacturerID:'',
         sellerID:'',
-        units:'',
         variety:'',
         terms:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod",
         district:'',
-        state:''
+        state:'',
+        priceUnit:'grams'
     };
     
     public isLoading       = false;
