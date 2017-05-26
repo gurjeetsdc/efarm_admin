@@ -21,8 +21,6 @@ export class PromptEquipmentManufacturerComponent extends DialogComponent<Prompt
   mobileErrors: string = '';
   manufacturer: any = {
         name:'',
-        email:'',
-        mobile:'',
         description:''
     };
 

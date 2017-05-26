@@ -85,8 +85,8 @@ export class AddUpdateCategoryComponent {
         if(index >=0 ) {
             
            this.errMessage = "Already exists." ;
-           return false;            
-
+           return false;
+           
                 } else {
 
                     this.category.variety.push(this.oBj.vname);
@@ -94,8 +94,7 @@ export class AddUpdateCategoryComponent {
                     this.errMessage = "" ;
                     return true;
 
-                }
-      
+                }      
     }
 
     removeEelement(index){

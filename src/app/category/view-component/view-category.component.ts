@@ -11,7 +11,7 @@ import { CommanService } from '../../shared/services/comman.service';
 export class ViewCategoryComponent {
 
 	public ID             = '';
-	public category               = {};
+	public category               = {type:'' };
     public isLoading:boolean   = true;
 
     constructor(
@@ -28,6 +28,8 @@ export class ViewCategoryComponent {
                 this.isLoading = false;
                 if(res.success) {
                     this.category     = res.data;
+                    /*console.log(res.data.type);
+                    this.category.type = this.firstUpper(this.category.type);*/
                 } else {
                     this._commanService.checkAccessToken(res.error);
                 }
@@ -44,4 +46,5 @@ export class ViewCategoryComponent {
         this._router.navigate([route]);       
     }   
    
+
 }
