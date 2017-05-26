@@ -58,15 +58,20 @@
                                     </th>
                                     <th width="20%">Channel Partner</th>
                                     <th width="20%">Manufacturer</th>
-                                    <th width="20%">District</th>
-                                    <th width="20%">City</th>
-                                    <th width="20%">Category - Variety</th>
                                     <th width="20%">
-                                        <mfDefaultSorter by="price">Price
-                                            <i *ngIf="sortOrder == 'asc' && sortBy == 'price'" class="fa fa-sort-asc" aria-hidden="true"></i>
-                                            <i *ngIf="sortOrder == 'desc' && sortBy == 'price'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        <mfDefaultSorter by="district">District
+                                            <i *ngIf="sortOrder == 'asc' && sortBy == 'district'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc' && sortBy == 'district'" class="fa fa-sort-desc" aria-hidden="true"></i>
                                         </mfDefaultSorter>
                                     </th>
+                                    <th width="20%">
+                                        <mfDefaultSorter by="city">City
+                                            <i *ngIf="sortOrder == 'asc' && sortBy == 'city'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc' && sortBy == 'city'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        </mfDefaultSorter>
+                                    </th>
+                                    <th width="20%">Category - Variety</th>
+                                    <th width="20%">Price</th>
                                     <th width="10%">Actions</th>
                                 </tr>
                             </thead>
