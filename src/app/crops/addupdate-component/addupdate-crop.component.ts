@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie';
 import { PromptComponent } from '../../modals/prompt.component';
 import { DialogService } from "ng2-bootstrap-modal";
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
+import tsConstants = require('./../../tsconstant');
 
 @Component({
   templateUrl: 'addupdate-crop.component.html'
@@ -41,6 +42,16 @@ export class AddUpdateCropComponent {
     public states: any;
     public districts: any;
     public promptMessage:string = '';
+
+    private _host = tsConstants.HOST;
+    public images = [
+        '03352265-89d9-42cd-b8b7-ade6eeb3ce48-1495804328588.jpeg',
+        '03352265-89d9-42cd-b8b7-ade6eeb3ce48-1495804328588.jpeg',
+        '03352265-89d9-42cd-b8b7-ade6eeb3ce48-1495804328588.jpeg',
+        '03352265-89d9-42cd-b8b7-ade6eeb3ce48-1495804328588.jpeg',
+        '03352265-89d9-42cd-b8b7-ade6eeb3ce48-1495804328588.jpeg'
+    ];
+
     
    constructor( private dialogService:DialogService, 
                 private _router : Router,
@@ -97,7 +108,7 @@ export class AddUpdateCropComponent {
     selected(imageResult: ImageResult) {
         let image = {
             data:imageResult.dataURL,
-            type:'crop'
+            type:'crops'
         }
         console.log("Upload Image",image)
         // this.src = imageResult.resized
