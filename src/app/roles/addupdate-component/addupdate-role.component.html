@@ -162,23 +162,6 @@
                             </tr>
                             <tr>
                                 <td width="40%" data-label="Crops">
-                                    Admin users
-                                </td>
-                                <td width="20%" data-label="View">
-                                    <div class="role">
-                                        <input id="adminUsersview" name="adminUsersview" [(ngModel)]="role.permission.adminUsers.view" (change)="autoUpdateRole('adminUsers')" type="checkbox">
-                                        <label for="adminUsersview">View</label>
-                                    </div>
-                                </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
-                                    <div class="role">
-                                        <input id="adminUsersAddEditDelete" name="adminUsersAddEditDelete" [(ngModel)]="role.permission.adminUsers.addEditDelete" [disabled]="!role.permission.adminUsers.view" type="checkbox">
-                                        <label for="adminUsersAddEditDelete">Add/Edit/Delete</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="40%" data-label="Crops">
                                     Roles
                                 </td>
                                 <td width="20%" data-label="View">
@@ -194,6 +177,24 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td width="40%" data-label="Crops">
+                                    Admin users
+                                </td>
+                                <td width="20%" data-label="View">
+                                    <div class="role">
+                                        <input id="adminUsersview" name="adminUsersview" [(ngModel)]="role.permission.adminUsers.view" (change)="autoUpdateRole('adminUsers')" type="checkbox">
+                                        <label for="adminUsersview">View</label>
+                                    </div>
+                                </td>
+                                <td width="20%" data-label="Add/Edit/Delete">
+                                    <div class="role">
+                                        <input id="adminUsersAddEditDelete" name="adminUsersAddEditDelete" [(ngModel)]="role.permission.adminUsers.addEditDelete" [disabled]="!role.permission.adminUsers.view" type="checkbox">
+                                        <label for="adminUsersAddEditDelete">Add/Edit/Delete</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
