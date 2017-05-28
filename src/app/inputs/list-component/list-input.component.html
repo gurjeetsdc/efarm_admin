@@ -50,6 +50,7 @@
                             (mfSortOrderChange)="onSortOrder($event)">
                             <thead>
                                 <tr>
+                                    <th width="10%">Image</th>
                                     <th width="30%">
                                         <mfDefaultSorter by="name">Input Name
                                             <i *ngIf="sortOrder == 'asc' && sortBy == 'name'" class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -80,6 +81,12 @@
                                     <td colspan="8">No record to display.</td>
                                 </tr>
                                 <tr *ngFor="let input of mf.data">
+                                    <td data-label="Image">
+                                    {{!input.images || !input.images[0] ? '-' : ''}}
+                                        <div class="thumbnail" *ngIf="input.images && input.images[0]">
+                                            <img src="{{_host}}/images/inputs/{{input.images[0]}}">
+                                        </div>
+                                    </td>
                                     <td data-label="Name"><a href="javascript:void(0);" (click)="viewInput(input.id)">{{input.name}}</a></td>
                                     <td data-label="Channel Partner">{{input.user?.email ? input.user?.email : '-'}}</td>
                                     <td data-label="Manufacturer">{{input.manufacturer?.name ?  input.manufacturer?.name : '-'}}</td>

@@ -7,7 +7,7 @@ import {DataTableModule} from "angular2-datatable";
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { CookieService } from 'ngx-cookie';
 import { FlashMessagesService } from 'ngx-flash-messages';
-
+import tsConstants = require('./../../tsconstant');
 
 declare let jsPDF; 
 
@@ -18,6 +18,8 @@ declare let jsPDF;
 })
 export class ListLandComponent implements OnInit {
 
+    private _host = tsConstants.HOST;
+    
     test: any = [];
     public data                = [];
     public totalRecords        = 0;

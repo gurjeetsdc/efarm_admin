@@ -14,7 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { PromptCropCategoryComponent } from '../modals/promptCropCategory.component';
 import { FormsModule } from '@angular/forms';
-
+import { ImageUploadModule } from 'ng2-imageupload';
 
 @NgModule({
   imports: [
@@ -27,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     FlashMessagesModule,
     SharedModule,
     BootstrapModalModule,
-    FormsModule
+    FormsModule,
+    ImageUploadModule
   ],
   providers: [
   	CropService

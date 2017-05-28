@@ -13,6 +13,7 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { PromptInputCategoryComponent } from '../modals/promptInputCategory.component';
 import { PromptInputManufacturerComponent } from '../modals/promptInputManufacturer.component';
+import { ImageUploadModule } from 'ng2-imageupload';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { PromptInputManufacturerComponent } from '../modals/promptInputManufactu
     CustomFormsModule,
     FlashMessagesModule,
     SharedModule,
-    BootstrapModalModule
+    BootstrapModalModule,
+    ImageUploadModule
   ],
   providers: [
     InputService

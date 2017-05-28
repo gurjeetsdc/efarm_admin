@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { LandService } from '../services/land.service';
 import {Router, ActivatedRoute} from '@angular/router';
+import tsConstants = require('./../../tsconstant');
+
 @Component({
   templateUrl: 'view-land.component.html',
   providers: [LandService]
 })
 export class ViewLandComponent {
+
+  private _host = tsConstants.HOST;
   private Id = '';
   private land = {};
 

@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { LandService } from '../services/land.service';
+import { CommanService } from '../../shared/services/comman.service';
 import { Router, ActivatedRoute  } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { CookieService } from 'ngx-cookie';
+import { ImageResult, ResizeOptions } from 'ng2-imageupload';
+import tsConstants = require('./../../tsconstant');
 
 @Component({
   templateUrl: 'add-land.component.html',
@@ -10,6 +13,11 @@ import { CookieService } from 'ngx-cookie';
 
 })
 export class AddLandComponent {
+    
+    @ViewChild('myInput')
+    myInputVariable: any;
+    private _host = tsConstants.HOST;
+
 	private land = {
         rentSell: 'Lease',
         unit:'Ft',
@@ -23,7 +31,8 @@ export class AddLandComponent {
         periodsunit:'Day',
         verified: 'No',
         priceunit:'Day',
-        term_condition:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
+        term_condition:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod",
+        images:[]
     };
     private sellers = [];
     private category = [];
@@ -41,7 +50,12 @@ export class AddLandComponent {
     private showMessage:boolean = false;
     private action:string = 'Add';
     
-    constructor(private _router : Router,  private _activateRouter: ActivatedRoute, private _landService: LandService, private _cookieService: CookieService) {
+    constructor(
+        private _router : Router,  
+        private _activateRouter: ActivatedRoute, 
+        private _landService: LandService,
+        private _commanService: CommanService, 
+        private _cookieService: CookieService) {
 
         this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});                
         
@@ -154,10 +168,24 @@ export class AddLandComponent {
         }      
     }
 
+    uploadImage(imageResult: ImageResult) {
+        let object = {
+            data:imageResult.dataURL,
+            type:'lands'
+        }
+        this.myInputVariable.nativeElement.value = "";
+        this.isLoading = true;
+        this._commanService.uploadImage(object).subscribe( res => {
+            this.isLoading = false;
+            if(res.success) {
+                this.land.images.push(res.data.fullPath);
+            }
+        },err => { this.isLoading = false; });
+    }
 
-
-
-
-
+    removeImage(image) {
+        let index = this.land.images.indexOf(image);
+        if(index > -1) this.land.images.splice(index,1);
+    }
 
 }

@@ -55,6 +55,7 @@
                         (mfSortOrderChange)="onSortOrder($event)" >      
                         <thead>
                             <tr>
+                                <th width="10%">Image</th>
                                 <th width="20%">
                                     <mfDefaultSorter by="name" >Name 
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'name'" class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -103,9 +104,15 @@
                         </thead>                        
                         <tbody>  
                             <tr *ngIf="itemsTotal == 0">
-                                <td colspan="8">No record to display</td>
+                                <td colspan="9">No record to display</td>
                             </tr>                        
-                            <tr *ngFor="let equipment of mf.data">                        
+                            <tr *ngFor="let equipment of mf.data">
+                                <td data-label="Image">
+                                    {{!equipment.images || !equipment.images[0] ? '-' : ''}}
+                                    <div class="thumbnail" *ngIf="equipment.images && equipment.images[0]">
+                                        <img src="{{_host}}/images/equipments/{{equipment.images[0]}}">
+                                    </div>
+                                </td>                        
                                 <td data-label="Name"><a href="javascript:void(0);" (click)="viewEquipment(equipment.id)">{{equipment.name}}</a></td>
                                 <td data-label="Supplier">{{equipment.user?.email ? equipment.user?.email : '-'}}</td>                                
                                 <td data-label="District">{{equipment.district ? equipment.district : '-' }}</td>
@@ -121,7 +128,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="8">
+                                <td colspan="9">
                                     <div class="pagination-section" *ngIf="itemsTotal > 0">
                                         <div class="row-on-page">
                                                 <label class="label-control">Show</label>

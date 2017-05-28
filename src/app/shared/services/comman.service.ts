@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
 import { CookieService } from 'ngx-cookie';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import tsConstants = require('./../../tsconstant');
 
 @Injectable()
 export class CommanService {
 
+    private _host = tsConstants.HOST;
+    private _accessToken = '';
+
   	constructor(  
-        private _router: Router, 
+        private _http: Http, 
+        private _router: Router,
         private _cookieService: CookieService ) { 
     }
 
@@ -27,5 +33,15 @@ export class CommanService {
     getAccessToken(): string {
         let token           = this._cookieService.get('token');
         return 'Bearer ' + token;
+    }
+
+    /*Use to add new image*/
+    uploadImage(object) {
+
+        let headers         = new Headers();
+        this._accessToken   = this.getAccessToken();
+        
+        headers.append('Authorization', this._accessToken);
+        return this._http.post(this._host +'/upload', object, { headers: headers }).map((res:Response) => res.json())
     }
 }

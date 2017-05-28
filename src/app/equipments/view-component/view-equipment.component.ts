@@ -3,13 +3,14 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 import { EquipmentService } from '../services/equipment.service';
 import { CookieService } from 'ngx-cookie';
-
+import tsConstants = require('./../../tsconstant');
 
 @Component({
   templateUrl: 'view-equipment.component.html'
 })
 export class ViewEquipmentComponent {
 
+    private _host = tsConstants.HOST;
     private equipmentID    = '';
     private equipment      = {};
     private copy_equipment = {};

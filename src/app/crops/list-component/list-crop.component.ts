@@ -4,6 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { FlashMessagesService } from 'ngx-flash-messages';
+import tsConstants = require('./../../tsconstant');
 
 declare let jsPDF; 
 
@@ -13,6 +14,8 @@ declare let jsPDF;
   styleUrls: ['./list-crop.component.scss']
 })
 export class ListCropComponent implements OnInit {
+    
+    private _host = tsConstants.HOST;
 
     public data                  = [];
     public totalRecords          = 0;

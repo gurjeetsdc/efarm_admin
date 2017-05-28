@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CropService } from '../services/crop.service';
 import { CookieService } from 'ngx-cookie';
+import tsConstants = require('./../../tsconstant');
 
 @Component({
   templateUrl: 'view-crop.component.html'
 })
 export class ViewCropComponent {
 
+    private _host = tsConstants.HOST;
 	private cropID      = '';
 	private crop        = {};
     private isLoading   = true;

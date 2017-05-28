@@ -13,6 +13,7 @@ import { FlashMessagesService } from 'ngx-flash-messages';
 import { CookieService } from 'ngx-cookie';
 
 import { CommanService } from '../../shared/services/comman.service';
+import tsConstants = require('./../../tsconstant');
 
 declare let jsPDF; 
 
@@ -24,6 +25,7 @@ declare let jsPDF;
 })
 export class ListEquipmentComponent implements OnInit {
 
+    private _host = tsConstants.HOST;
  
     public data         = [];
     public totalRecords = 0;
