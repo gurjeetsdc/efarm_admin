@@ -13,6 +13,8 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
 import { SharedModule } from '../shared/shared.module';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { PromptCropCategoryComponent } from '../modals/promptCropCategory.component';
+import { ViewImageComponent } from '../modals/view-image/viewImage.component';
+import { DialogService } from "ng2-bootstrap-modal";
 import { FormsModule } from '@angular/forms';
 import { ImageUploadModule } from 'ng2-imageupload';
 
@@ -37,11 +39,13 @@ import { ImageUploadModule } from 'ng2-imageupload';
   	ListCropComponent,
   	AddUpdateCropComponent,
   	ViewCropComponent,
-    PromptCropCategoryComponent
+    PromptCropCategoryComponent,
+    ViewImageComponent
   ],
   //Don't forget add component to entryComponents section
   entryComponents: [
-    PromptCropCategoryComponent
+    PromptCropCategoryComponent,
+    ViewImageComponent
   ],
 })
 export class CropsModule { }
