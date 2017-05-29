@@ -10,6 +10,8 @@ import { AddLandComponent } from './addupdate-component/add-land.component';
 import { ViewLandComponent } from './view-component/view-land.component';
 import { LandRoutingModule } from './land-routing.module';
 import { FlashMessagesModule } from 'ngx-flash-messages';
+import { SharedModule } from '../shared/shared.module';
+import { ImageUploadModule } from 'ng2-imageupload';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
     NG2DataTableModule,
     CustomFormsModule,
     DatePickerModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    SharedModule,
+    ImageUploadModule
   ],
   providers: [
     LandService

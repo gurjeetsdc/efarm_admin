@@ -51,7 +51,7 @@
                         (mfSortOrderChange)="onSortOrder($event)">                                 
                         <thead>
                             <tr>
-
+                                <th width="10%">Image</th>
                                 <th width="10%">
                                     <mfDefaultSorter by="name">Crop Name
                                         <i *ngIf="sortOrder == 'asc' && sortBy == 'name'" class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -88,9 +88,15 @@
                                 <td colspan="7">{{errMessage}}</td>
                             </tr> -->
                             <tr *ngIf="itemsTotal == 0">
-                                <td colspan="9">No record to display.</td>
+                                <td colspan="10">No record to display.</td>
                             </tr> 
-                            <tr *ngFor="let crop of mf.data">    
+                            <tr *ngFor="let crop of mf.data">
+                                <td data-label="Image">
+                                    {{!crop.images || !crop.images[0] ? '-' : ''}}
+                                    <div class="thumbnail" *ngIf="crop.images && crop.images[0]">
+                                        <img src="{{_host}}/images/crops/{{crop.images[0]}}">
+                                    </div>
+                                </td>    
                                 <td data-label="Crop Name"><a href="javascript:void(0);" (click)="viewCrop(crop.id)">{{crop.name}}</a></td>
                                 <td data-label="Category">{{crop.category?.name}}</td>
                                 <td data-label="Offer Price"><p><i class="fa fa-rupee"></i> {{crop.price}}</td>
@@ -107,7 +113,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="9">
+                                <td colspan="10">
                                     <div class="pagination-section" *ngIf="itemsTotal > 0">
                                         <div class="row-on-page">
                                             <label class="label-control">Show</label>

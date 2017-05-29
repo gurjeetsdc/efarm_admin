@@ -18,7 +18,7 @@
                     <div class="col-sm-6">
                         <div class="form-group has-required">
                             <label for="nf-name">Role Name</label>
-                            <input autofocus type="text" id="name" name="name" class="form-control" placeholder="" #name="ngModel" [(ngModel)]="role.name" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <input autofocus type="text" id="name" name="name" class="form-control" placeholder="" #name="ngModel" [(ngModel)]="role.name" maxlength="50" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
                             <div class="error-block">
                                 <small *ngIf="name.errors?.required && name.touched" class="text-danger">
                                     Role name is required.
@@ -139,7 +139,7 @@
                                 <td width="20%" data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <input id="categoryAddEditDelete" name="categoryAddEditDelete" [(ngModel)]="role.permission.category.addEditDelete" [disabled]="!role.permission.category.view" type="checkbox">
-                                        <label for="categoryAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="categoryAddEditDelete">Add/Edit</label>
                                     </div>
                                 </td>
                             </tr>
@@ -156,7 +156,24 @@
                                 <td width="20%" data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <input id="manufacturerAddEditDelete" name="manufacturerAddEditDelete" [(ngModel)]="role.permission.manufacturer.addEditDelete" [disabled]="!role.permission.manufacturer.view" type="checkbox">
-                                        <label for="manufacturerAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="manufacturerAddEditDelete">Add/Edit</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="40%" data-label="Crops">
+                                    Roles
+                                </td>
+                                <td width="20%" data-label="View">
+                                    <div class="role">
+                                        <input id="adminRolesview" name="adminRolesview" [(ngModel)]="role.permission.adminRoles.view" (change)="autoUpdateRole('adminRoles')" type="checkbox">
+                                        <label for="adminRolesview">View</label>
+                                    </div>
+                                </td>
+                                <td width="20%" data-label="Add/Edit/Delete">
+                                    <div class="role">
+                                        <input id="adminRolesAddEditDelete" name="adminRolesAddEditDelete" [(ngModel)]="role.permission.adminRoles.addEditDelete" [disabled]="!role.permission.adminRoles.view" type="checkbox">
+                                        <label for="adminRolesAddEditDelete">Add/Edit/Delete</label>
                                     </div>
                                 </td>
                             </tr>
@@ -177,23 +194,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td width="40%" data-label="Crops">
-                                    Admin Roles
-                                </td>
-                                <td width="20%" data-label="View">
-                                    <div class="role">
-                                        <input id="adminRolesview" name="adminRolesview" [(ngModel)]="role.permission.adminRoles.view" (change)="autoUpdateRole('adminRoles')" type="checkbox">
-                                        <label for="adminRolesview">View</label>
-                                    </div>
-                                </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
-                                    <div class="role">
-                                        <input id="adminRolesAddEditDelete" name="adminRolesAddEditDelete" [(ngModel)]="role.permission.adminRoles.addEditDelete" [disabled]="!role.permission.adminRoles.view" type="checkbox">
-                                        <label for="adminRolesAddEditDelete">Add/Edit/Delete</label>
-                                    </div>
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>

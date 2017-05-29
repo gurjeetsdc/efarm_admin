@@ -3,6 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { InputService } from '../services/input.service';
 import { CookieService } from 'ngx-cookie';
 import { CommanService } from '../../shared/services/comman.service';
+import tsConstants = require('./../../tsconstant');
 
 @Component({
   templateUrl: 'view-input.component.html',
@@ -10,6 +11,8 @@ import { CommanService } from '../../shared/services/comman.service';
 })
 export class ViewInputComponent {
 
+    private _host = tsConstants.HOST;
+    
 	public inputID             = '';
 	public input               = {};
     public isLoading:boolean   = true;

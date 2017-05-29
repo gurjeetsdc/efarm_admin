@@ -161,7 +161,11 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-image">Image</label>
-                            <p><i class="fa fa-file-image-o"></i> {{crop.image}}</p>
+                            <!-- <p *ngIf="!crop.images || !crop.images[0]"><i class="fa fa-file-image-o"></i></p> -->
+                        </div>
+                        {{!crop.images || !crop.images[0] ? '-' : ''}}
+                        <div class="thumbnail" *ngFor="let image of crop.images" (click)="viewImage(_host+'/images/crops/'+image)" style="cursor: pointer;">
+                            <img src="{{_host}}/images/crops/{{image}}">
                         </div>
                     </div>
                 </div>

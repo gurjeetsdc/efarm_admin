@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { InputService } from '../services/input.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
@@ -6,10 +6,18 @@ import { CommanService } from '../../shared/services/comman.service';
 import { PromptInputCategoryComponent } from '../../modals/promptInputCategory.component';
 import { PromptInputManufacturerComponent } from '../../modals/promptInputManufacturer.component';
 import { DialogService } from "ng2-bootstrap-modal";
+import { ImageResult, ResizeOptions } from 'ng2-imageupload';
+import tsConstants = require('./../../tsconstant');
+
 @Component({
   templateUrl: 'addupdate-input.component.html'
 })
 export class AddUpdateInputComponent {
+
+    @ViewChild('myInput')
+    myInputVariable: any;
+    private _host = tsConstants.HOST;
+
     public input     = {
         categoryID:'',
         manufacturerID:'',
@@ -18,7 +26,8 @@ export class AddUpdateInputComponent {
         terms:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod",
         district:'',
         state:'',
-        priceUnit:'grams'
+        priceUnit:'grams',
+        images:[]
     };
     
     public isLoading       = false;
@@ -193,6 +202,26 @@ export class AddUpdateInputComponent {
         }
         
         this.changeDetectorRef.detectChanges();
+    }
+
+    uploadImage(imageResult: ImageResult) {
+        let object = {
+            data:imageResult.dataURL,
+            type:'inputs'
+        }
+        this.myInputVariable.nativeElement.value = "";
+        this.isLoading = true;
+        this._commanService.uploadImage(object).subscribe( res => {
+            this.isLoading = false;
+            if(res.success) {
+                this.input.images.push(res.data.fullPath);
+            }
+        },err => { this.isLoading = false; });
+    }
+
+    removeImage(image) {
+        let index = this.input.images.indexOf(image);
+        if(index > -1) this.input.images.splice(index,1);
     }
 
 }

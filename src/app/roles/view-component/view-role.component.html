@@ -28,7 +28,11 @@
                 </div>
             </div>
             <div>
-                    <table class="table table-striped">
+                    <table class="table table-striped" *ngIf="role.permission.crops.view || role.permission.inputs.view || 
+                        role.permission.equipments.view ||  
+                        role.permission.lands.view ||  
+                        role.permission.users.view || 
+                        role.permission.category.view ||  role.permission.manufacturer.view ||  role.permission.adminUsers.view ||  role.permission.adminRoles.view">
                         <thead class="custom">
                             <th>
                                 Modules
@@ -48,10 +52,10 @@
                                         <label for="cropview">View</label>
                                     </div>
                                 </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
+                                <td width="20%" *ngIf="role.permission.crops.addEditDelete" data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <!-- <input id="cropAddEditDelete" name="cropAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.crops.addEditDelete" type="checkbox"> -->
-                                        <label *ngIf="role.permission.crops.addEditDelete" for="cropAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="cropAddEditDelete">Add/Edit/Delete</label>
                                     </div>
                                 </td>
                             </tr>
@@ -65,10 +69,10 @@
                                         <label for="inputview">View</label>
                                     </div>
                                 </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
+                                <td width="20%" *ngIf="role.permission.inputs.addEditDelete" data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <!-- <input id="inputAddEditDelete" name="inputAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.inputs.addEditDelete" [disabled]="!role.permission.inputs.view" type="checkbox"> -->
-                                        <label *ngIf="role.permission.inputs.addEditDelete" for="inputAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="inputAddEditDelete">Add/Edit/Delete</label>
                                     </div>
                                 </td>
                             </tr>
@@ -82,10 +86,10 @@
                                         <label for="equipmentview">View</label>
                                     </div>
                                 </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
+                                <td width="20%" *ngIf="role.permission.equipments.addEditDelete" data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <!-- <input id="equipmentAddEditDelete" name="equipmentAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.equipments.addEditDelete" [disabled]="!role.permission.equipments.view" type="checkbox"> -->
-                                        <label *ngIf="role.permission.equipments.addEditDelete" for="equipmentAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="equipmentAddEditDelete">Add/Edit/Delete</label>
                                     </div>
                                 </td>
                             </tr>
@@ -99,10 +103,10 @@
                                         <label for="landview">View</label>
                                     </div>
                                 </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
+                                <td width="20%" *ngIf="role.permission.lands.addEditDelete" data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <!-- <input id="landAddEditDelete" name="landAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.lands.addEditDelete" [disabled]="!role.permission.lands.view" type="checkbox"> -->
-                                        <label *ngIf="role.permission.lands.addEditDelete" for="landAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="landAddEditDelete">Add/Edit/Delete</label>
                                     </div>
                                 </td>
                             </tr>
@@ -116,10 +120,10 @@
                                         <label for="userview">View</label>
                                     </div>
                                 </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
+                                <td width="20%" *ngIf="role.permission.users.addEditDelete" data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <!-- <input id="userAddEditDelete" name="userAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.users.addEditDelete" [disabled]="!role.permission.users.view" type="checkbox"> -->
-                                        <label *ngIf="role.permission.users.addEditDelete" for="userAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="userAddEditDelete">Add/Edit/Delete</label>
                                     </div>
                                 </td>
                             </tr>
@@ -133,10 +137,10 @@
                                         <label for="categoryview">View</label>
                                     </div>
                                 </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
+                                <td width="20%" *ngIf="role.permission.category.addEditDelete" data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <!-- <input id="categoryAddEditDelete" name="categoryAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.category.addEditDelete" [disabled]="!role.permission.category.view" type="checkbox"> -->
-                                        <label *ngIf="role.permission.category.addEditDelete" for="categoryAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="categoryAddEditDelete">Add/Edit</label>
                                     </div>
                                 </td>
                             </tr>
@@ -150,10 +154,27 @@
                                         <label for="manufacturerview">View</label>
                                     </div>
                                 </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
+                                <td width="20%" *ngIf="role.permission.manufacturer.addEditDelete"  data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <!-- <input id="manufacturerAddEditDelete" name="manufacturerAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.manufacturer.addEditDelete" [disabled]="!role.permission.manufacturer.view" type="checkbox"> -->
-                                        <label *ngIf="role.permission.manufacturer.addEditDelete" for="manufacturerAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="manufacturerAddEditDelete">Add/Edit</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="role.permission.adminRoles.view">
+                                <td width="40%" data-label="Crops">
+                                    Roles
+                                </td>
+                                <td width="20%" data-label="View">
+                                    <div class="role">
+                                        <!-- <input id="adminRolesview" name="adminRolesview" [disabled]='true' [(ngModel)]="role.permission.adminRoles.view" (change)="autoUpdateRole('adminRoles')" type="checkbox"> -->
+                                        <label for="adminRolesview">View</label>
+                                    </div>
+                                </td>
+                                <td width="20%" *ngIf="role.permission.adminRoles.addEditDelete" data-label="Add/Edit/Delete">
+                                    <div class="role">
+                                        <!-- <input id="adminRolesAddEditDelete" name="adminRolesAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.adminRoles.addEditDelete" [disabled]="!role.permission.adminRoles.view" type="checkbox"> -->
+                                        <label for="adminRolesAddEditDelete">Add/Edit/Delete</label>
                                     </div>
                                 </td>
                             </tr>
@@ -167,27 +188,10 @@
                                         <label for="adminUsersview">View</label>
                                     </div>
                                 </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
+                                <td width="20%" *ngIf="role.permission.adminUsers.addEditDelete" data-label="Add/Edit/Delete">
                                     <div class="role">
                                         <!-- <input id="adminUsersAddEditDelete" name="adminUsersAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.adminUsers.addEditDelete" [disabled]="!role.permission.adminUsers.view" type="checkbox"> -->
-                                        <label *ngIf="role.permission.adminUsers.addEditDelete" for="adminUsersAddEditDelete">Add/Edit/Delete</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr *ngIf="role.permission.adminRoles.view">
-                                <td width="40%" data-label="Crops">
-                                    Admin Roles
-                                </td>
-                                <td width="20%" data-label="View">
-                                    <div class="role">
-                                        <!-- <input id="adminRolesview" name="adminRolesview" [disabled]='true' [(ngModel)]="role.permission.adminRoles.view" (change)="autoUpdateRole('adminRoles')" type="checkbox"> -->
-                                        <label for="adminRolesview">View</label>
-                                    </div>
-                                </td>
-                                <td width="20%" data-label="Add/Edit/Delete">
-                                    <div class="role">
-                                        <!-- <input id="adminRolesAddEditDelete" name="adminRolesAddEditDelete" [disabled]='true' [(ngModel)]="role.permission.adminRoles.addEditDelete" [disabled]="!role.permission.adminRoles.view" type="checkbox"> -->
-                                        <label *ngIf="role.permission.adminRoles.addEditDelete" for="adminRolesAddEditDelete">Add/Edit/Delete</label>
+                                        <label for="adminUsersAddEditDelete">Add/Edit/Delete</label>
                                     </div>
                                 </td>
                             </tr>

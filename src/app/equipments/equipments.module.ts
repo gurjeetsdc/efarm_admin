@@ -24,6 +24,7 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
 import { SharedModule } from '../shared/shared.module';
 
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { ImageUploadModule } from 'ng2-imageupload';
 import { PromptEquipmentCategoryComponent } from '../modals/promptEquipmentCategory.component';
 import { PromptEquipmentManufacturerComponent } from '../modals/promptEquipmentManufacturer.component';
 @NgModule({
@@ -35,7 +36,8 @@ import { PromptEquipmentManufacturerComponent } from '../modals/promptEquipmentM
         DatePickerModule,
         FlashMessagesModule,
         BootstrapModalModule,
-        SharedModule
+        SharedModule,
+        ImageUploadModule
     ],
     declarations: [
         ListEquipmentComponent,

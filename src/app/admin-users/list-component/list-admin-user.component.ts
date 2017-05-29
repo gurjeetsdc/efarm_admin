@@ -167,22 +167,19 @@ export class ListAdminUserComponent implements OnInit {
             role:"Role",
             Email:'Email',
             mobile:'Mobile',
-            state:'Market',
-            registeredOn:'Registered On'
+            state:'Market'
         }
 
         filteredData.push(header);
 
         for ( i = 0; i < this.data.length ; i++ ) { 
             let date = new Date(this.data[i].createdAt);
-            let registeredOn = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
             let temp = {
                 name: this.data[i].firstName + ' ' + this.data[i].lastName,
                 role: this.data[i].roleId ? this.data[i].roleId.name : '-',
                 email: this.data[i].email ? this.data[i].email : '-',
                 mobile: this.data[i].mobile ? this.data[i].mobile :'-',
-                state: this.data[i].state ? this.data[i].state : '-',
-                registeredOn: registeredOn
+                state: this.data[i].state ? this.data[i].state : '-'
             };
 
             filteredData.push(temp);

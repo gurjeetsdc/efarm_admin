@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-12">
                             <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
-                            <div class="flex">
+                             <div class="flex">
                                 <!-- <input class="form-control" name="search" (keyup)="search()" [(ngModel)]="searchTerm" placeholder="Search" type="text"> -->
                                 <input class="form-control" name="search" [(ngModel)]="searchTerm"   placeholder="Search" type="text">
                                 <span class="input-group-btn">
@@ -55,6 +55,7 @@
                         (mfSortOrderChange)="onSortOrder($event)" >
                         <thead>
                             <tr>
+                                <th width="10%">Image</th>
                                 <th width="30%">Owner Name
                                 <!-- <mfDefaultSorter by="name">Owner Name
                                  <i *ngIf="sortOrder == 'asc' && sortBy == 'user.firstName'" class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -101,7 +102,12 @@
                                 <td colspan="6">No record to display.</td>
                             </tr>  
                             <tr *ngFor="let land of mf.data">                        
-                            
+                                <td data-label="Image">
+                                    {{!land.images || !land.images[0] ? '-' : ''}}
+                                        <div class="thumbnail" *ngIf="land.images && land.images[0]">
+                                            <img src="{{_host}}/images/lands/{{land.images[0]}}">
+                                        </div>
+                                    </td>
                                 <td data-label="Owner Name"><a href="javascript:void(0);" (click)="viewLand(land.id)">{{land.user?.firstName}} {{land.user?.lastName}}</a></td>
                                 <!-- <td>{{land.location}}</td> -->
                                 <td data-label="District">{{land.district}}</td>

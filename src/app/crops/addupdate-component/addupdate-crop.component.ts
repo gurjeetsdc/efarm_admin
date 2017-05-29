@@ -1,14 +1,22 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CropService } from '../services/crop.service';
+import { CommanService } from '../../shared/services/comman.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { CookieService } from 'ngx-cookie';
 import { PromptCropCategoryComponent } from '../../modals/promptCropCategory.component';
 import { DialogService } from "ng2-bootstrap-modal";
+import { ImageResult, ResizeOptions } from 'ng2-imageupload';
+import tsConstants = require('./../../tsconstant');
+
 @Component({
   templateUrl: 'addupdate-crop.component.html'
 })
 export class AddUpdateCropComponent {
+    @ViewChild('myInput')
+    myInputVariable: any;
+    private _host = tsConstants.HOST;
+
 	public crop = {
         terms:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod",
         category:'',
@@ -23,7 +31,8 @@ export class AddUpdateCropComponent {
         availableUnit : 'Days',
         verified: 'No',
         state:'',
-        district:''
+        district:'',
+        images:[]
     };
 
     
@@ -44,7 +53,8 @@ export class AddUpdateCropComponent {
                 private _router : Router,
                 private _activateRouter: ActivatedRoute, 
                 private _cropService: CropService, 
-                private _cookieService: CookieService, 
+                private _cookieService: CookieService,
+                private _commanService: CommanService, 
                 private changeDetectorRef: ChangeDetectorRef ) { 
 
         this.cropID = _activateRouter.snapshot.params['id'];        
@@ -57,7 +67,7 @@ export class AddUpdateCropComponent {
                     this.crop.categoryID = res.data.category.id;
                     if(res.data.seller && res.data.seller.id )this.crop.sellerID = res.data.seller.id;
                 } else {
-                    this.checkAccessToken(res.error);
+                    this._commanService.checkAccessToken(res.error);
                 }
             },err => {
                 this.isPageLoading = false;
@@ -173,14 +183,23 @@ export class AddUpdateCropComponent {
         this.changeDetectorRef.detectChanges();
     }
 
-    /*This function is use to remove user session if Access token expired. */
-    checkAccessToken( err ): void {
-        let code    = err.code;
-        let message = err.message;
+    uploadImage(imageResult: ImageResult) {
+        let object = {
+            data:imageResult.dataURL,
+            type:'crops'
+        }
+        this.myInputVariable.nativeElement.value = "";
+        this.isLoading = true;
+        this._commanService.uploadImage(object).subscribe( res => {
+            this.isLoading = false;
+            if(res.success) {
+                this.crop.images.push(res.data.fullPath);
+            }
+        },err => { this.isLoading = false; });
+    }
 
-        if( (code == 401 && message == "authorization")) {
-            this._cookieService.removeAll();
-            this._router.navigate(['/login', {data: true}]);
-        }       
+    removeImage(image) {
+        let index = this.crop.images.indexOf(image);
+        if(index > -1) this.crop.images.splice(index,1);
     }
 }

@@ -198,15 +198,11 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nf-image">Image</label>
-                            <p><i class="fa fa-file-image-o"></i></p>
-                        </div>                        
-                    </div>
-
-                    <div class="col-sm-6">
-                         <div class="form-group radiobuttons_top ">
-                            <!-- <label for="termsConditions">Terms & Conditions</label>
-                            <p>{{equipment.termsConditions ? equipment.termsConditions : '-'}}</p> -->                            
-                        </div> 
+                        </div>
+                        {{!equipment.images || !equipment.images[0] ? '-' : ''}}
+                        <div class="thumbnail" *ngFor="let image of equipment.images">
+                            <img src="{{_host}}/images/equipments/{{image}}">
+                        </div>
                     </div>
                 </div>                                      
             </form>
