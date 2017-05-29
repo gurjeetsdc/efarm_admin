@@ -66,7 +66,7 @@ export class AddLandComponent {
                  this.isLoading = false;
               if(res.success) {
                 this.land = res.data; 
-                this.action = 'Update'
+                this.action = 'Edit'
                 this.land.sellerId = res.data.user.id;
                 this.land.categoryId = res.data.categoryId;
 
@@ -84,7 +84,7 @@ export class AddLandComponent {
 
         this._landService.getStates().subscribe( res => { 
             this.states = res.data;   
-            if( this.action == 'Update' ){                
+            if( this.action == 'Edit' ){                
                 this.setDistrict();
             }           
         }, 
@@ -102,7 +102,7 @@ export class AddLandComponent {
 
     submitLand() {
         this.isLoading = true;
-        if( this.action == 'Update' ) {
+        if( this.action == 'Edit' ) {
             this.updateLand();            
         }else {
            this.addLand();
@@ -137,7 +137,7 @@ export class AddLandComponent {
     setDistrict( ): void {  
         /* reset values. */
         this.districts         = null;
-        if( this.action !== 'Update' ){
+        if( this.action !== 'Edit' ){
             this.land.district = null;
             this.land.district = '';
         }    

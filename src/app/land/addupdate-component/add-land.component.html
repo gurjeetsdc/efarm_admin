@@ -62,7 +62,8 @@
                                 <label for="periods">Availability Period</label>
                          <div class="flex">
                             <input type="number"  id="periods" [disabled]="land.rentSell == 'Sell'" name="periods" class="form-control" [(ngModel)]="land.periods" >
-                          <div class="input-group-btn">
+                          
+                          <div *ngIf="land.rentSell != 'Sell'" class="input-group-btn">
                               <select id="select3"  [disabled]="land.rentSell == 'Sell'" name="select3" class="disable btn btn-secondary dropdown-toggle"  [(ngModel)]="land.periodsunit" size="1">
                                 <!-- <option value="">-Units-</option> -->
                                 <option value="Day">Day</option>
@@ -225,7 +226,7 @@
                                 <div class="icnposition"><i class="fa fa-rupee"></i></div>
                                 <input maxlength="10" #nfexpected_price="ngModel"  type="number" id="nfexpected_price" name="nfexpected_price" class="form-control pleft25" [(ngModel)]="land.expected_price" required>
                                
-                                <div class="input-group-btn">
+                                <div *ngIf="land.rentSell == 'Sell'" class="input-group-btn">
                               <!-- <select id="select3" [disabled]="land.rentSell == 'Sell'" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" required> -->
                               <select id="select3" name="select3" class="btn btn-secondary dropdown-toggle"  [(ngModel)]="land.priceunit" size="1" >
                                 <!-- <option value="">-Units-</option> -->

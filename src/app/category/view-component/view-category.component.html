@@ -38,6 +38,7 @@
                     <div class="form-group">
                         <label for="nf-name">Variety</label>
                         <div class="block">
+                        <span *ngIf="category.variety.length <= 0 ">-</span>
                         <div class="chip" *ngFor="let rcd of category.variety; let i=index"  >
                                 <div class="chip">{{rcd}}</div>
                     </div>

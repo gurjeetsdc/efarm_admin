@@ -3,6 +3,7 @@ import { CategoryService } from '../services/category.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { CommanService } from '../../shared/services/comman.service';
+import { FlashMessagesService } from 'ngx-flash-messages';
 
 @Component({
   templateUrl: 'addupdate-category.component.html'
@@ -27,6 +28,7 @@ export class AddUpdateCategoryComponent {
         private _router : Router,
         private _activateRouter: ActivatedRoute, 
         private _catgService: CategoryService, 
+        private _flashMessagesService: FlashMessagesService, 
         private _cookieService: CookieService,
         private _commanService: CommanService,
         private changeDetectorRef: ChangeDetectorRef ) {
@@ -52,6 +54,7 @@ export class AddUpdateCategoryComponent {
 
     /*If categoryID exist then will update existing category otherwise will add new category*/
     save() {
+
         this.isLoading = true;
         if(this.categoryID) {
             this._catgService.update(this.category).subscribe(res => {
@@ -69,6 +72,18 @@ export class AddUpdateCategoryComponent {
                 this._cookieService.put('categoryAlert', 'Added successfully.');
                 this._router.navigate(['/category/list']);
             },err => {
+                this.showDangerAlert();
+                    console.log("Server Error!");
+                   console.log(JSON.parse(err._body));
+                
+                   var errBody = JSON.parse(err._body);
+                    if(errBody.invalidAttributes.name){
+                      let dangerErrors = "Category name already exists.";
+                      //errBody.invalidAttributes.name[0].message
+                      this._cookieService.put('categoryExistAlert', dangerErrors);
+                    }
+
+                
                 this.isLoading = false;
             });
             
@@ -101,6 +116,17 @@ export class AddUpdateCategoryComponent {
         this.category.variety.splice(index,1);
     }
 
+    showDangerAlert(): void {
+
+        let alertMessage = this._cookieService.get('categoryExistAlert');
+        if( alertMessage ) {
+            this._flashMessagesService.show( alertMessage, {
+                classes: ['alert', 'alert-danger'],
+                timeout: 3000,
+            });
+            this._cookieService.remove('categoryExistAlert');
+        }    
+    }
 
 
 
