@@ -32,13 +32,17 @@ export class ListAdminUserComponent implements OnInit {
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
     public roles                 = 'A';
-   
+    public addEditDelete = false;
+    
     public constructor(
         private _router: Router, 
         private _adminUserService: AdminUserService, 
         private _cookieService: CookieService,
         private _commanService: CommanService, 
         private _flashMessagesService: FlashMessagesService ) { 
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['adminUsers']['addEditDelete']) this.addEditDelete = true;
         
     }
 

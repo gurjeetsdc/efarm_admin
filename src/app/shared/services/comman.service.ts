@@ -35,6 +35,12 @@ export class CommanService {
         return 'Bearer ' + token;
     }
 
+    /*This function is use to get Roles from cookie. */
+    getActions(): object {
+        let actions         = this._cookieService.getObject('actions');
+        return actions;
+    }
+
     /*Use to add new image*/
     uploadImage(object) {
 

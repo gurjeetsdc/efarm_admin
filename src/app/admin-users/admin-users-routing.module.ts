@@ -8,6 +8,7 @@ import { AddUpdateAdminUserComponent } from './addupdate-component/addupdate-adm
 import { ViewAdminUserComponent } from './view-component/view-admin-user.component';
 import { HttpModule } from '@angular/http';
 import { AdminUserService } from './services/admin-user.service';
+import { ChildRouteGuard } from '../auth/services/child-route-guard';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       {
         path: '',
         component: ListAdminUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -26,6 +28,7 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListAdminUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -33,6 +36,7 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddUpdateAdminUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Add Admin User'
         }
@@ -40,6 +44,7 @@ const routes: Routes = [
       {
         path: 'list/:id',
         component: ViewAdminUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'View'
         }
@@ -47,6 +52,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: AddUpdateAdminUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Edit Admin User'
         }

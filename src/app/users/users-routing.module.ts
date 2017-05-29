@@ -6,6 +6,7 @@ import { PaginationModule } from 'ng2-bootstrap';
 import { ListUserComponent } from './list-component/list-user.component';
 import { AddUpdateUserComponent } from './addupdate-component/addupdate-user.component';
 import { ViewUserComponent } from './view-component/view-user.component';
+import { ChildRouteGuard } from '../auth/services/child-route-guard';
 import { HttpModule } from '@angular/http';
 import { UserService } from './services/user.service';
 
@@ -19,6 +20,7 @@ const routes: Routes = [
       {
         path: '',
         component: ListUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -26,6 +28,7 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -33,6 +36,7 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddUpdateUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Add User'
         }
@@ -40,6 +44,7 @@ const routes: Routes = [
       {
         path: 'list/:id',
         component: ViewUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'View'
         }
@@ -47,6 +52,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: AddUpdateUserComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Edit User'
         }

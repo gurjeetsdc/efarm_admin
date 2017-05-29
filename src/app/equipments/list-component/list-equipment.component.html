@@ -30,7 +30,7 @@
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght">
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/equipments/add']">Add Equipment</button>
+                            <button *ngIf="addEditDelete" type="button" class="btn btn-success btnadd" [routerLink]="['/equipments/add']">Add Equipment</button>
                             <div class="icns">
                                 <a><img src="assets/img/pdf.png" (click)="downloadPDF()" style="cursor: pointer;" alt="pdf"></a>
                                 <a (click)="downloadCSV()" style="cursor: pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
@@ -121,8 +121,8 @@
                                 <td data-label="Qty">{{equipment.quantity ? equipment.quantity : '-' }}</td>
                                 <td data-label="Price"><i class="fa fa-rupee"></i>{{equipment.rate}}<span *ngIf="equipment.rentSell == 'rent'">/{{equipment.price_unit}}</span></td>
                                 <td data-label="Actions">                                    
-                                    <button (click)="sendUpdateEquipment(equipment.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
-                                    <button  (click)="removeEquipment(equipment.id)" class="btn btn-danger orange" title="Delete" style="padding:1px 4px"><i class="fa fa-trash"></i></button>                                    
+                                    <button [disabled]="!addEditDelete" (click)="sendUpdateEquipment(equipment.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                    <button [disabled]="!addEditDelete"  (click)="removeEquipment(equipment.id)" class="btn btn-danger orange" title="Delete" style="padding:1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
                             </tr>
                         </tbody>

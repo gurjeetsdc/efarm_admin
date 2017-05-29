@@ -5,10 +5,10 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
 import { ListInputComponent } from './list-component/list-input.component';
 import { AddUpdateInputComponent } from './addupdate-component/addupdate-input.component';
-
 import { ViewInputComponent } from './view-component/view-input.component';
-
+import { ChildRouteGuard } from '../auth/services/child-route-guard';
 import { HttpModule } from '@angular/http';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +19,7 @@ const routes: Routes = [
      {
         path: '',
         component: ListInputComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -26,6 +27,7 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListInputComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -33,6 +35,7 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddUpdateInputComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Add Input'
         }
@@ -40,6 +43,7 @@ const routes: Routes = [
       {
         path: 'list/:id',
         component: ViewInputComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'View'
         }
@@ -47,6 +51,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: AddUpdateInputComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Edit Input'
         }

@@ -17,6 +17,7 @@ export class ViewCropComponent {
 	public cropID      = '';
 	public crop        = {};
     public isLoading   = true;
+    public addEditDelete:boolean = false;
 
     constructor(
         private _router: Router, 
@@ -24,6 +25,9 @@ export class ViewCropComponent {
         private _cropService: CropService,
         private _commanService: CommanService,
         private _dialogService: DialogService ) { 
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['crops']['addEditDelete']) this.addEditDelete = true;
 
       	this.cropID = _route.snapshot.params['id'];
   	    this._cropService.get(this.cropID).subscribe(res => {

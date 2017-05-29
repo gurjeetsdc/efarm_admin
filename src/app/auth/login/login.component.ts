@@ -42,20 +42,45 @@ export class LoginComponent implements OnInit {
         this.errMessage        = '';        
 
 		this._loginService.login(this.user).subscribe(res => {
-            if(this.rememberMe) {
-                localStorage.setItem("remember",this.user["username"]);
-            } else {
-                 localStorage.removeItem('remember');
-            }
+
             this.isPageLoading = false;
-            let token          = res.access_token;            
-            /* Setup Cookie */
-            this._cookieService.put('token', token );
-            this._router.navigate(['/dashboard']);           
+            let token          = res.access_token;
+            let actions;
+            
+            if( res.role_id && res.role_id['permission'] ) {
+
+                actions         = res.role_id['permission'];
+                actions['type'] = res.roles            
+                /* Setup Cookie */
+                this._cookieService.put('token', token );
+                this._cookieService.putObject('actions', actions );
+                if(this.rememberMe) {
+                    localStorage.setItem("remember",this.user["username"]);
+                } else {
+                     localStorage.removeItem('remember');
+                }
+                this._router.navigate(['/dashboard']);           
+            } else if(res.roles == 'SA') {
+                actions = {
+                        type:res.roles
+                }
+                /* Setup Cookie */
+                this._cookieService.put('token', token );
+                this._cookieService.putObject('actions', actions );
+                if(this.rememberMe) {
+                    localStorage.setItem("remember",this.user["username"]);
+                } else {
+                     localStorage.removeItem('remember');
+                }
+                this._router.navigate(['/dashboard']);           
+            } else {
+                this.errMessage    = "You are not authorized please contact markit admin.";
+            }
 
         },err => {       
             this.isPageLoading = false;
             this.errMessage    = "Email or Password is not correct.";
         });
+
 	}
 }

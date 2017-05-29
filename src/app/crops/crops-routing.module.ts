@@ -7,6 +7,8 @@ import { ListCropComponent } from './list-component/list-crop.component';
 import { AddUpdateCropComponent } from './addupdate-component/addupdate-crop.component';
 import { ViewCropComponent } from './view-component/view-crop.component';
 import { HttpModule } from '@angular/http';
+import { ChildRouteGuard } from '../auth/services/child-route-guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -17,6 +19,7 @@ const routes: Routes = [
       {
         path: '',
         component: ListCropComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -24,6 +27,7 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListCropComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -31,6 +35,7 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddUpdateCropComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Add Crop'
         }
@@ -38,6 +43,7 @@ const routes: Routes = [
       {
         path: 'list/:id',
         component: ViewCropComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'View'
         }
@@ -45,6 +51,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: AddUpdateCropComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Edit Crop'
         }

@@ -31,6 +31,7 @@ export class ListCategoryComponent implements OnInit {
     public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
+    public addEditDelete:boolean = false;
 
     public constructor(
         private _router: Router,
@@ -38,6 +39,9 @@ export class ListCategoryComponent implements OnInit {
         private _cookieService: CookieService,
         private _flashMessagesService: FlashMessagesService,
         private _commanService: CommanService ) { 
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['category']['addEditDelete']) this.addEditDelete = true;
         
     }
 

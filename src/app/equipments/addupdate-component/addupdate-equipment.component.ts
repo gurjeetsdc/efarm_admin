@@ -303,7 +303,7 @@ export class AddUpdateEquipmentComponent {
     uploadImage(imageResult: ImageResult) {
         let object = {
             data:imageResult.dataURL,
-            type:'crops'
+            type:'equipments'
         }
         this.myInputVariable.nativeElement.value = "";
         // this.isLoading = true;

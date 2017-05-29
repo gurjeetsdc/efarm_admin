@@ -13,6 +13,7 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
 import { ActiveRouteGuard } from './auth/services/activate-route-guard';
 import { DeactiveRouteGuard } from './auth/services/deactivate-route-guard';
+import { ChildRouteGuard } from './auth/services/child-route-guard';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
@@ -64,7 +65,8 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
       useClass: HashLocationStrategy
     },
     ActiveRouteGuard,
-    DeactiveRouteGuard
+    DeactiveRouteGuard,
+    ChildRouteGuard
   ],
   bootstrap: [ 
     AppComponent
