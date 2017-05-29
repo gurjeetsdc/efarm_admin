@@ -6,7 +6,9 @@ import { PaginationModule } from 'ng2-bootstrap';
 import { ListManufacturerComponent } from './list-component/list-manufacturer.component';
 import { AddUpdateManufacturerComponent } from './addupdate-component/addupdate-manufacturer.component';
 import { ViewManufacturerComponent } from './view-component/view-manufacturer.component';
+import { ChildRouteGuard } from '../auth/services/child-route-guard';
 import { HttpModule } from '@angular/http';
+
 const routes: Routes = [
   {
     path: '',
@@ -17,6 +19,7 @@ const routes: Routes = [
       {
         path: '',
         component: ListManufacturerComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -24,6 +27,7 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListManufacturerComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -31,6 +35,7 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddUpdateManufacturerComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Add Manufacturer'
         }
@@ -38,6 +43,7 @@ const routes: Routes = [
       {
         path: 'list/:id',
         component: ViewManufacturerComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'View'
         }
@@ -45,6 +51,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: AddUpdateManufacturerComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Edit Manufacturer'
         }

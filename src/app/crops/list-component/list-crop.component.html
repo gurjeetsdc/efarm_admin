@@ -26,7 +26,7 @@
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght"> 
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/crops/add']">Add Crop</button>
+                            <button *ngIf="addEditDelete" type="button" class="btn btn-success btnadd" [routerLink]="['/crops/add']">Add Crop</button>
                             <div class="icns">
                                 <a><img src="assets/img/pdf.png" style="cursor:pointer;" (click)="downloadPDF()" alt="pdf"></a>
                                 <a (click)="downloadCSV()" style="cursor:pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
@@ -106,8 +106,8 @@
                                 <td data-label="Available From">{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf="!crop.availableFrom?.momentObj">-</span></td>
                                 <td data-label="Seller">{{crop.seller ? crop.seller?.firstName ? crop.seller?.firstName + ' ' + crop.seller?.lastName : crop.seller?.email : '-'}} {{crop.seller ? crop.seller?.state ? '(' + crop.seller?.state + ')' : '' : ''}}</td>
                                 <td data-label="Actions">                                    
-                                    <button (click)="editCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
-                                    <button  (click)="removeCrop(crop.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
+                                    <button [disabled]="!addEditDelete" (click)="editCrop(crop.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                    <button [disabled]="!addEditDelete" (click)="removeCrop(crop.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
                             </tr>
                         </tbody>

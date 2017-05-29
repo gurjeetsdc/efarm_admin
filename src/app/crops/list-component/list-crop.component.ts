@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CropService } from '../services/crop.service';
+import { CommanService } from '../../shared/services/comman.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
@@ -33,9 +34,18 @@ export class ListCropComponent implements OnInit {
     public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
-
-    public constructor(private _router: Router, private _cropService: CropService, private _cookieService: CookieService, private _flashMessagesService: FlashMessagesService ) { 
+    public addEditDelete:boolean = false;
+    
+    public constructor(
+        private _router: Router, 
+        private _cropService: CropService,
+        private _commanService: CommanService, 
+        private _cookieService: CookieService, 
+        private _flashMessagesService: FlashMessagesService ) { 
         
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['crops']['addEditDelete']) this.addEditDelete = true;
+
     }
 
     ngOnInit(): void {
@@ -112,19 +122,7 @@ export class ListCropComponent implements OnInit {
         }
         return arr;
     } 
-
-    /*This function is use to remove user session if Access token expired. */
-    checkAccessToken( err ): void {
-        let code    = err.code;
-        let message = err.message;
-
-        if( (code == 401 && message == "authorization")) {
-            this._cookieService.removeAll();
-            this._router.navigate(['/login', {data: true}]);
-        }else {
-            console.log('Something unexpected happened, please try again later.');
-        }        
-    }
+ 
 
     /*Get all Crops*/
     getCrops(): void {   
@@ -136,7 +134,7 @@ export class ListCropComponent implements OnInit {
                 this.itemsTotal    = res.data.total;
                 this.showAlert();
             } else {
-                this.checkAccessToken(res.error);    
+                this._commanService.checkAccessToken(res.error);   
             }
         },err => {
             this.isLoading     = false;

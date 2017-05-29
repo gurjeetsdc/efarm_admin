@@ -6,8 +6,9 @@ import { PaginationModule } from 'ng2-bootstrap';
 import { ListCategoryComponent } from './list-component/list-category.component';
 import { AddUpdateCategoryComponent } from './addupdate-component/addupdate-category.component';
 import { ViewCategoryComponent } from './view-component/view-category.component';
-
+import { ChildRouteGuard } from '../auth/services/child-route-guard';
 import { HttpModule } from '@angular/http';
+
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +19,7 @@ const routes: Routes = [
      {
         path: '',
         component: ListCategoryComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -25,6 +27,7 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListCategoryComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -32,6 +35,7 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddUpdateCategoryComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Add Category'
         }
@@ -39,6 +43,7 @@ const routes: Routes = [
       {
         path: 'list/:id',
         component: ViewCategoryComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'View'
         }
@@ -46,6 +51,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: AddUpdateCategoryComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Edit Category'
         }

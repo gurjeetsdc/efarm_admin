@@ -5,7 +5,7 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ng2-bootstrap';
 import { ListLandComponent } from './list-component/list-land.component';
 import { AddLandComponent } from './addupdate-component/add-land.component';
-
+import { ChildRouteGuard } from '../auth/services/child-route-guard';
 import { ViewLandComponent } from './view-component/view-land.component';
 import { HttpModule } from '@angular/http';
 const routes: Routes = [
@@ -18,6 +18,7 @@ const routes: Routes = [
       {
         path: '',
         component: ListLandComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -25,6 +26,7 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListLandComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -32,6 +34,7 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddLandComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Add Land'
         }
@@ -39,6 +42,7 @@ const routes: Routes = [
       {
         path: 'list/:id',
         component: ViewLandComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'View'
         }
@@ -46,6 +50,7 @@ const routes: Routes = [
       {
         path: 'update/:id',
         component: AddLandComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Edit Land'
         }

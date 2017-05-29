@@ -770,7 +770,7 @@
 }
 
 .role label {
-   padding-left: 4px;
+   /*padding-left: 4px;*/
    margin-bottom: 0;
    vertical-align: top;
 }
@@ -2534,6 +2534,7 @@ thead.custom th{
     left: 0;
     z-index: 9999;
     background-color: rgba(0,0,0, 0.5);
+    overflow: scroll !important;
 }
 
 .modal-content {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
 import { EquipmentService } from '../services/equipment.service';
+import { CommanService } from '../../shared/services/comman.service';
 import { CookieService } from 'ngx-cookie';
 import tsConstants = require('./../../tsconstant');
 
@@ -17,9 +18,17 @@ export class ViewEquipmentComponent {
     private edit           = false;
 
     private isLoading:boolean = true;
+    private addEditDelete:boolean = false;
 
-    constructor(private _router: Router, private _activatedRouter: ActivatedRoute, private _equipmentService: EquipmentService, private _cookieService: CookieService) {     	
+    constructor(
+        private _router: Router, 
+        private _activatedRouter: ActivatedRoute, 
+        private _equipmentService: EquipmentService, 
+        private _cookieService: CookieService,
+        private _commanService: CommanService ) {     	
         
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['category']['addEditDelete']) this.addEditDelete = true;
         this.equipmentID = _activatedRouter.snapshot.params['id'];
         if( this.equipmentID ) {
             this._equipmentService.get(this.equipmentID).subscribe( res => { 
@@ -27,11 +36,11 @@ export class ViewEquipmentComponent {
                 if( res.success  ){
                     this.equipment = res.data;  
                 }else{
-                    this.checkAccessToken( res.error );    
+                    this._commanService.checkAccessToken(res.error);    
                 }
             }, 
             err => {
-                this.checkAccessToken( err );
+                this.isLoading = false;
             });
         }    
     }
@@ -41,15 +50,4 @@ export class ViewEquipmentComponent {
         this._router.navigate([route]);       
     }   
 
-   checkAccessToken( err ): void {
-        let code    = err.code;
-        let message = err.message;
-
-        if( (code == 401 && message == "authorization")) {
-            this._cookieService.removeAll();
-            this._router.navigate(['/login', {data: true}]);
-        }else {
-            
-        }      
-    }
 }

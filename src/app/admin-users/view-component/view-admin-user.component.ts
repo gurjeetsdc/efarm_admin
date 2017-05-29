@@ -11,13 +11,18 @@ export class ViewAdminUserComponent {
 	public userID = '';
 	public user = {};
     public isLoading = true;
+    public addEditDelete = false;
 
     constructor(
         private _route: ActivatedRoute, 
         private _router : Router,
         private _adminUserService: AdminUserService, 
         private _cookieService: CookieService,
-        private _commanService: CommanService ) { 
+        private _commanService: CommanService ) {
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['adminUsers']['addEditDelete']) this.addEditDelete = true;
+
         this.userID = _route.snapshot.params['id'];
   	    this._adminUserService.get(this.userID).subscribe(res => {
             this.isLoading = false;

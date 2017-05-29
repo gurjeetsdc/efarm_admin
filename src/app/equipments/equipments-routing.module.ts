@@ -12,7 +12,7 @@ import { ViewEquipmentComponent } from './view-component/view-equipment.componen
 import { AddUpdateEquipmentComponent } from './addupdate-component/addupdate-equipment.component';
 
 import { EquipmentService } from './services/equipment.service';
-
+import { ChildRouteGuard } from '../auth/services/child-route-guard';
 
 const routes: Routes = [
   {
@@ -24,6 +24,7 @@ const routes: Routes = [
       {
         path: '',
         component: ListEquipmentComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -31,6 +32,7 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListEquipmentComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'List'
         }
@@ -38,20 +40,23 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddUpdateEquipmentComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Add Equipment'
         }
       },
       {
-            path: 'list/:id',
-            component: ViewEquipmentComponent,
-            data: {
-              title: 'View'
-            }
+        path: 'list/:id',
+        component: ViewEquipmentComponent,
+        canActivate: [ChildRouteGuard],
+        data: {
+          title: 'View'
+        }
       },
       {
         path: 'edit/:id',
         component: AddUpdateEquipmentComponent,
+        canActivate: [ChildRouteGuard],
         data: {
           title: 'Edit Equipment'
         }

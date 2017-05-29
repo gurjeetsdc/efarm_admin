@@ -10,9 +10,10 @@ import { CommanService } from '../../shared/services/comman.service';
 })
 export class ViewCategoryComponent {
 
-	public ID             = '';
-	public category               = {type:'' };
+	public ID                  = '';
+	public category            = {type:'' };
     public isLoading:boolean   = true;
+    public addEditDelete:boolean   = false;
 
     constructor(
         private _router: Router, 
@@ -20,6 +21,9 @@ export class ViewCategoryComponent {
         private _categoryService: CategoryService, 
         private _cookieService: CookieService,
         private _commanService: CommanService ) {
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['category']['addEditDelete']) this.addEditDelete = true;
 
   	    this.ID =  _activatedRouter.snapshot.params['id'];
   	

@@ -44,8 +44,8 @@ export class ListEquipmentComponent implements OnInit {
     public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
+    private addEditDelete:boolean = false;
     public errMessage            = "";
-
    
     public constructor( 
         private activatedRouter: ActivatedRoute, 
@@ -55,6 +55,9 @@ export class ListEquipmentComponent implements OnInit {
         private _cookieService: CookieService,
         private _commanService: CommanService ) { 
         
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['category']['addEditDelete']) this.addEditDelete = true;
+    
     }   
 
     ngOnInit(): void {
@@ -139,18 +142,6 @@ export class ListEquipmentComponent implements OnInit {
         }
         return arr;
     }  
-
-    checkAccessToken( err ): void {
-        let code    = err.code;
-        let message = err.message;
-
-        if( (code == 401 && message == "authorization")) {
-            this._cookieService.removeAll();
-            this._router.navigate(['/login', {data: true}]);
-        }else {
-            
-        }      
-    }
 
     /*get all equipments*/
     getEquipments() {   
