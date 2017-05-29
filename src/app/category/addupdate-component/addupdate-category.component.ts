@@ -24,6 +24,7 @@ export class AddUpdateCategoryComponent {
     public errMessage = '';
     
 
+
     constructor(
         private _router : Router,
         private _activateRouter: ActivatedRoute, 
@@ -50,7 +51,14 @@ export class AddUpdateCategoryComponent {
         } else {
             this.isPageLoading = false;
         }
+
+
     }
+
+      ngOnInit(): void {
+
+          this.showDangerAlert();
+      }
 
     /*If categoryID exist then will update existing category otherwise will add new category*/
     save() {
@@ -72,22 +80,22 @@ export class AddUpdateCategoryComponent {
                 this._cookieService.put('categoryAlert', 'Added successfully.');
                 this._router.navigate(['/category/list']);
             },err => {
-                this.showDangerAlert();
-                    console.log("Server Error!");
-                   console.log(JSON.parse(err._body));
+                //    console.log("Server Error!");
+                //   console.log(JSON.parse(err._body));
                 
                    var errBody = JSON.parse(err._body);
+
                     if(errBody.invalidAttributes.name){
                       let dangerErrors = "Category name already exists.";
                       //errBody.invalidAttributes.name[0].message
                       this._cookieService.put('categoryExistAlert', dangerErrors);
                     }
 
-                
+                this.showDangerAlert();
                 this.isLoading = false;
             });
             
-        }   
+        }
     }
 
     addEelement(){

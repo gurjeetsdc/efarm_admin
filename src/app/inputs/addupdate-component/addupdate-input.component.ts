@@ -30,7 +30,7 @@ export class AddUpdateInputComponent {
         priceUnit:'grams',
         images:[]
     };
-    
+   
     public isLoading       = false;
     public isPageLoading   = true;
     public inputID: any;
@@ -38,6 +38,7 @@ export class AddUpdateInputComponent {
     public categories = [];
     public manufacturers = [];
     public sellers = [];
+    private action:string = 'Add';
 
     public varieties: any;
     public states: any;
@@ -69,13 +70,17 @@ export class AddUpdateInputComponent {
         /*Use to get all input categories*/
         this._inputService.getAllCategories().subscribe( res => {
             this.categories = res.data; 
-            if( this.inputID ) this.setVarieties();
+             if( this.action == 'Edit' ){                
+                this.setVarieties();                
+            }
         }, err => {});
 
         /*Use to get all states*/
         this._inputService.getStates().subscribe( res => { 
             this.states = res.data;   
-            if( this.inputID ) this.setDistrict();
+            if( this.action == 'Edit' ){                
+                this.setDistrict();
+            }   
         },err => {});
 
         if( this.inputID ) {
@@ -83,6 +88,7 @@ export class AddUpdateInputComponent {
                 this.isPageLoading = false;
                 if(res.success) {
                     this.input = res.data;
+                    this.action = 'Edit';
                     if(res.data.manufacturer && res.data.manufacturer.id) this.input.manufacturerID = res.data.manufacturer.id;
                     if(res.data.user && res.data.user.id ) this.input.sellerID = res.data.user.id;
                     if(res.data.category && res.data.category.id )this.input.categoryID = res.data.category.id;
@@ -141,19 +147,31 @@ export class AddUpdateInputComponent {
     /*If inputID exist then will update existing input otherwise will add new input*/
     save() {
         this.isLoading = true;
-        if(this.inputID) {
-            this.input["manufacturer"] = this.input["manufacturerID"];
-            this.input["category"]     = this.input["categoryID"];
-            if(this.input["sellerID"]) this.input["user"] = this.input["sellerID"];
-            this._inputService.update(this.input).subscribe(res => {
-                this.response          = res;
-                this.isLoading         = false;
-                this._cookieService.put('inputAlert', 'Updated successfully.');
-                this._router.navigate(['/inputs/list']);
-            },err => {
-                this.isLoading = false;
-            })
-        } else {
+
+        if( this.action == 'Edit' ) {
+            this.editInput();            
+        }else {
+           this.addInput();
+        }
+    }
+
+
+clearInput() {
+    this.input     = {
+        categoryID:'',
+        manufacturerID:'',
+        sellerID:'',
+        variety:'',
+        terms:"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod",
+        district:'',
+        state:'',
+        priceUnit:'grams',
+        images:[]
+    };
+}    
+
+
+    addInput() {
             this.input["manufacturer"] = this.input["manufacturerID"];
             this.input["category"]     = this.input["categoryID"];
             if(this.input["sellerID"]) this.input["user"] = this.input["sellerID"];
@@ -161,22 +179,59 @@ export class AddUpdateInputComponent {
                 this.response          = res;
                 this.isLoading         = false;
                 this._cookieService.put('inputAlert', 'Added successfully.');
+                this.clearInput();
                 this._router.navigate(['/inputs/list']);
             },err => {
                 this.isLoading = false;
             });
-            
-        }   
     }
 
+
+    editInput() {
+        
+        this.input["manufacturer"] = this.input["manufacturerID"];
+            this.input["category"]     = this.input["categoryID"];
+            if(this.input["sellerID"]) this.input["user"] = this.input["sellerID"];
+            this._inputService.update(this.input).subscribe(res => {
+                this.response          = res;
+                this.isLoading         = false;
+                this._cookieService.put('inputAlert', 'Updated successfully.');
+                this.clearInput();      
+                this._router.navigate(['/inputs/list']);
+            },err => {
+                this.isLoading = false;
+            })
+
+    } 
+
+
+
     /*Use to set variety get from selected on category*/
-    setVarieties( ): void {  
-        /* reset values. */
+    /*setVarieties( ): void {  
+       
         this.varieties         = null;
         if( !this.inputID ){
             this.input.variety = null;
             this.input.variety = '';
         }
+       
+        let categoryID = this.input.category_id;        
+        if( categoryID ){
+            this.categories.filter(obj => obj.id == categoryID).map( obj => this.varieties = obj.variety)
+        }
+        
+        this.changeDetectorRef.detectChanges();
+    }*/
+
+    setVarieties( ): void {  
+        /* reset values. */
+        this.varieties         = null;
+        if( this.action !== 'Edit' ){
+            this.input.variety = null;
+            this.input.variety = '';
+        }
+        console.log("category:", this.input.categoryID);
+        
         /* Initialize category. */
         let categoryID = this.input.categoryID;        
         if( categoryID ){
@@ -185,6 +240,7 @@ export class AddUpdateInputComponent {
         
         this.changeDetectorRef.detectChanges();
     }
+
 
     /*Use to set district based on state name*/
     setDistrict( ): void {  

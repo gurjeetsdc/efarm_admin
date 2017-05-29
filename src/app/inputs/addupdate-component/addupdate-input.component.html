@@ -9,7 +9,7 @@
     <!-- loading section ends  -->
     <div class="card" *ngIf="!isPageLoading">
         <div class="card-header">
-            <strong>{{inputID ? 'Edit' : 'Add'}} Input</strong>
+            <strong>{{action}} Input</strong>
         </div>
         <form role="form" (ngSubmit)="save()" #addInputsForm="ngForm">
             <div class="card-block">
