@@ -3,6 +3,8 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { InputService } from '../services/input.service';
 import { CookieService } from 'ngx-cookie';
 import { CommanService } from '../../shared/services/comman.service';
+import { ViewInputImageComponent } from '../../modals/view-image/viewInputImage.component';
+import { DialogService } from "ng2-bootstrap-modal";
 import tsConstants = require('./../../tsconstant');
 
 @Component({
@@ -22,7 +24,8 @@ export class ViewInputComponent {
         private _activatedRouter: ActivatedRoute,  
         private _inputService: InputService, 
         private _cookieService: CookieService,
-        private _commanService: CommanService ) {
+        private _commanService: CommanService,
+        private _dialogService: DialogService ) {
 
   	    this.inputID =  _activatedRouter.snapshot.params['id'];
   	
@@ -45,6 +48,13 @@ export class ViewInputComponent {
    editInput( ID ) {        
         let route = '/inputs/edit/'+ID;
         this._router.navigate([route]);       
+    }
+
+    // Use to View Image Prompt
+    viewImage(imageUrl) {
+        this._dialogService.addDialog(ViewInputImageComponent, {
+          imageUrl:imageUrl
+        }).subscribe((res)=>{ });
     }   
    
 }

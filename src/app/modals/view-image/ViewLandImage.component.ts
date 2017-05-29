@@ -10,7 +10,7 @@ export interface PromptModel {
   templateUrl: 'viewImage.component.html'
 })
 
-export class ViewImageComponent extends DialogComponent<PromptModel, string> implements PromptModel {
+export class ViewLandImageComponent extends DialogComponent<PromptModel, string> implements PromptModel {
   imageUrl: string;
   
   constructor(

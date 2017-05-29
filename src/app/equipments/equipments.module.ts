@@ -27,6 +27,8 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { ImageUploadModule } from 'ng2-imageupload';
 import { PromptEquipmentCategoryComponent } from '../modals/promptEquipmentCategory.component';
 import { PromptEquipmentManufacturerComponent } from '../modals/promptEquipmentManufacturer.component';
+import { ViewEquipmentImageComponent } from '../modals/view-image/ViewEquipmentImage.component';
+
 @NgModule({
     imports: [
         EquipmentsRoutingModule,
@@ -45,12 +47,14 @@ import { PromptEquipmentManufacturerComponent } from '../modals/promptEquipmentM
         ViewEquipmentComponent,
         GoogleplaceDirective,
         PromptEquipmentCategoryComponent,
-        PromptEquipmentManufacturerComponent
+        PromptEquipmentManufacturerComponent,
+        ViewEquipmentImageComponent
     ],
   //Don't forget add component to entryComponents section
   entryComponents: [
     PromptEquipmentCategoryComponent,
-    PromptEquipmentManufacturerComponent
+    PromptEquipmentManufacturerComponent,
+    ViewEquipmentImageComponent
   ],
 })
 export class EquipmentsModule { }

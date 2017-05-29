@@ -5,6 +5,8 @@ import { Router, ActivatedRoute  } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { CookieService } from 'ngx-cookie';
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
+import { ViewLandImageComponent } from '../../modals/view-image/ViewLandImage.component';
+import { DialogService } from "ng2-bootstrap-modal";
 import tsConstants = require('./../../tsconstant');
 
 @Component({
@@ -55,7 +57,8 @@ export class AddLandComponent {
         private _activateRouter: ActivatedRoute, 
         private _landService: LandService,
         private _commanService: CommanService, 
-        private _cookieService: CookieService) {
+        private _cookieService: CookieService,
+        private _dialogService:DialogService ) {
 
         this.options = new DatePickerOptions({ format: 'DD/MM/YYYY', autoApply: true});                
         
@@ -188,4 +191,10 @@ export class AddLandComponent {
         if(index > -1) this.land.images.splice(index,1);
     }
 
+    // Use to View Image Prompt
+    viewImage(imageUrl) {
+        this._dialogService.addDialog(ViewLandImageComponent, {
+          imageUrl:imageUrl
+        }).subscribe((res)=>{ });
+    }
 }

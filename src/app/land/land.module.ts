@@ -12,6 +12,8 @@ import { LandRoutingModule } from './land-routing.module';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { SharedModule } from '../shared/shared.module';
 import { ImageUploadModule } from 'ng2-imageupload';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { ViewLandImageComponent } from '../modals/view-image/ViewLandImage.component';
 
 @NgModule({
   imports: [
@@ -22,7 +24,8 @@ import { ImageUploadModule } from 'ng2-imageupload';
     DatePickerModule,
     FlashMessagesModule,
     SharedModule,
-    ImageUploadModule
+    ImageUploadModule,
+    BootstrapModalModule
   ],
   providers: [
     LandService
@@ -30,7 +33,11 @@ import { ImageUploadModule } from 'ng2-imageupload';
   declarations: [
   	ListLandComponent,
   	AddLandComponent,
-  	ViewLandComponent
-  ]
+  	ViewLandComponent,
+    ViewLandImageComponent
+  ],
+  entryComponents: [
+    ViewLandImageComponent
+  ],
 })
 export class LandModule { }

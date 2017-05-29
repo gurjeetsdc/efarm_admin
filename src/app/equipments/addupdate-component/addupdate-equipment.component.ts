@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { PromptEquipmentCategoryComponent } from '../../modals/promptEquipmentCategory.component';
 import { PromptEquipmentManufacturerComponent } from '../../modals/promptEquipmentManufacturer.component';
+import { ViewEquipmentImageComponent } from '../../modals/view-image/ViewEquipmentImage.component';
 import { DialogService } from "ng2-bootstrap-modal";
 
 import { EquipmentService } from '../services/equipment.service';
@@ -80,7 +81,7 @@ export class AddUpdateEquipmentComponent {
     private districts: any;
     
     constructor(
-        private dialogService:DialogService,
+        private _dialogService:DialogService,
         private _router : Router,
         private _activateRouter: ActivatedRoute,
         private _equipmentService: EquipmentService,
@@ -142,7 +143,7 @@ export class AddUpdateEquipmentComponent {
 
     // Show add category Prompt
     showCategoryPrompt() {
-        this.dialogService.addDialog(PromptEquipmentCategoryComponent, {
+        this._dialogService.addDialog(PromptEquipmentCategoryComponent, {
           title:'Add Category',
           type: 'equipments',
       }).subscribe((res)=>{
@@ -162,7 +163,7 @@ export class AddUpdateEquipmentComponent {
 
         // Show add PromptEquipmentManufacturerComponent Prompt
     showManufacturerPrompt() {
-        this.dialogService.addDialog(PromptEquipmentManufacturerComponent, {
+        this._dialogService.addDialog(PromptEquipmentManufacturerComponent, {
           title:'Add Manufacturer',
           type: 'equipments',
       }).subscribe((res)=>{
@@ -320,5 +321,11 @@ export class AddUpdateEquipmentComponent {
         if(index > -1) this.equipment.images.splice(index,1);
     }
 
+    // Use to View Image Prompt
+    viewImage(imageUrl) {
+        this._dialogService.addDialog(ViewEquipmentImageComponent, {
+          imageUrl:imageUrl
+        }).subscribe((res)=>{ });
+    }
 }
 

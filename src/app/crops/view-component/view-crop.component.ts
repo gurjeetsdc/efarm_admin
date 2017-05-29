@@ -4,7 +4,7 @@ import { CropService } from '../services/crop.service';
 import { CommanService } from '../../shared/services/comman.service';
 import { CookieService } from 'ngx-cookie';
 import { DialogService } from "ng2-bootstrap-modal";
-import { ViewImageComponent } from '../../modals/view-image/viewImage.component';
+import { ViewCropImageComponent } from '../../modals/view-image/viewCropImage.component';
 import tsConstants = require('./../../tsconstant');
 
 @Component({
@@ -50,7 +50,7 @@ export class ViewCropComponent {
 
     // Use to View Image Prompt
     viewImage(imageUrl) {
-        this._dialogService.addDialog(ViewImageComponent, {
+        this._dialogService.addDialog(ViewCropImageComponent, {
           imageUrl:imageUrl
       }).subscribe((res)=>{ });
     }

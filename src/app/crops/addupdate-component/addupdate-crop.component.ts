@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { CookieService } from 'ngx-cookie';
 import { PromptCropCategoryComponent } from '../../modals/promptCropCategory.component';
+import { ViewCropImageComponent } from '../../modals/view-image/viewCropImage.component';
 import { DialogService } from "ng2-bootstrap-modal";
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
 import tsConstants = require('./../../tsconstant');
@@ -49,7 +50,7 @@ export class AddUpdateCropComponent {
     public districts: any;
     public promptMessage:string = '';
     
-   constructor( private dialogService:DialogService, 
+   constructor( private _dialogService:DialogService, 
                 private _router : Router,
                 private _activateRouter: ActivatedRoute, 
                 private _cropService: CropService, 
@@ -98,7 +99,7 @@ export class AddUpdateCropComponent {
 
     // Show add category Prompt
     showPrompt() {
-        this.dialogService.addDialog(PromptCropCategoryComponent, {
+        this._dialogService.addDialog(PromptCropCategoryComponent, {
           title:'Add Category',
           type: 'crops',
       }).subscribe((res)=>{
@@ -201,5 +202,12 @@ export class AddUpdateCropComponent {
     removeImage(image) {
         let index = this.crop.images.indexOf(image);
         if(index > -1) this.crop.images.splice(index,1);
+    }
+
+    // Use to View Image Prompt
+    viewImage(imageUrl) {
+        this._dialogService.addDialog(ViewCropImageComponent, {
+          imageUrl:imageUrl
+        }).subscribe((res)=>{ });
     }
 }
