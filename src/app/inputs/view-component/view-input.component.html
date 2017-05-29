@@ -114,7 +114,7 @@
                         <label for="nf-image">Image</label>
                     </div>
                     {{!input.images || !input.images[0] ? '-' : ''}}
-                    <div class="thumbnail" *ngFor="let image of input.images">
+                    <div class="thumbnail pointer-custom" *ngFor="let image of input.images" (click)="viewImage(_host+'/images/inputs/'+image)">
                         <img src="{{_host}}/images/inputs/{{image}}">
                     </div>
                 </div>

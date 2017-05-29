@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie';
 import { CommanService } from '../../shared/services/comman.service';
 import { PromptInputCategoryComponent } from '../../modals/promptInputCategory.component';
 import { PromptInputManufacturerComponent } from '../../modals/promptInputManufacturer.component';
+import { ViewInputImageComponent } from '../../modals/view-image/viewInputImage.component';
 import { DialogService } from "ng2-bootstrap-modal";
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
 import tsConstants = require('./../../tsconstant');
@@ -44,7 +45,7 @@ export class AddUpdateInputComponent {
 
     constructor(
         private _router : Router,
-        private dialogService:DialogService, 
+        private _dialogService:DialogService, 
         private _activateRouter: ActivatedRoute, 
         private _inputService: InputService, 
         private _cookieService: CookieService,
@@ -99,7 +100,7 @@ export class AddUpdateInputComponent {
 
         // Show add category Prompt
     showCategoryPrompt() {
-        this.dialogService.addDialog(PromptInputCategoryComponent, {
+        this._dialogService.addDialog(PromptInputCategoryComponent, {
           title:'Add Category',
           type: 'inputs',
       }).subscribe((res)=>{
@@ -120,7 +121,7 @@ export class AddUpdateInputComponent {
 
     // Show add PromptInputManufacturerComponent Prompt
     showPrompt() {
-        this.dialogService.addDialog(PromptInputManufacturerComponent, {
+        this._dialogService.addDialog(PromptInputManufacturerComponent, {
           title:'Add Manufacturer',
           type: 'inputs',
       }).subscribe((res)=>{
@@ -222,6 +223,13 @@ export class AddUpdateInputComponent {
     removeImage(image) {
         let index = this.input.images.indexOf(image);
         if(index > -1) this.input.images.splice(index,1);
+    }
+
+    // Use to View Image Prompt
+    viewImage(imageUrl) {
+        this._dialogService.addDialog(ViewInputImageComponent, {
+          imageUrl:imageUrl
+        }).subscribe((res)=>{ });
     }
 
 }

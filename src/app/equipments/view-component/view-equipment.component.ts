@@ -4,6 +4,8 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { EquipmentService } from '../services/equipment.service';
 import { CommanService } from '../../shared/services/comman.service';
 import { CookieService } from 'ngx-cookie';
+import { ViewEquipmentImageComponent } from '../../modals/view-image/ViewEquipmentImage.component';
+import { DialogService } from "ng2-bootstrap-modal";
 import tsConstants = require('./../../tsconstant');
 
 @Component({
@@ -25,7 +27,8 @@ export class ViewEquipmentComponent {
         private _activatedRouter: ActivatedRoute, 
         private _equipmentService: EquipmentService, 
         private _cookieService: CookieService,
-        private _commanService: CommanService ) {     	
+        private _commanService: CommanService,
+        private _dialogService: DialogService ) {     	
         
         let actions = this._commanService.getActions();
         if(actions["type"] == 'SA' || actions['category']['addEditDelete']) this.addEditDelete = true;
@@ -50,4 +53,10 @@ export class ViewEquipmentComponent {
         this._router.navigate([route]);       
     }   
 
+    // Use to View Image Prompt
+    viewImage(imageUrl) {
+        this._dialogService.addDialog(ViewEquipmentImageComponent, {
+          imageUrl:imageUrl
+        }).subscribe((res)=>{ });
+    }
 }

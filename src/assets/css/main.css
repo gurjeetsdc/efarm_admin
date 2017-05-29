@@ -2575,3 +2575,11 @@ thead.custom th{
    opacity: 1;
    font-size: 16px;
 }
+
+.not-allowed-custom {
+  cursor: not-allowed;
+}
+
+.pointer-custom {
+  cursor: pointer;
+}
