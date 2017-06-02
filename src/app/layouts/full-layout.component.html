@@ -67,12 +67,12 @@
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Logistic Partners"> <i class="icon-logistic-partner"></i> <span>Logistic Partners</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Channel Partners"> <i class="icon-channel-partner"></i> <span>Channel Partners</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Orders"> <i class="icon-order"></i> <span>Orders</span> </a> </li>
-        <li class="nav-item"> <a (click)="layout('category')" [ngClass]="{'active': active == 'category'}" class="nav-link" title="Category"> <i class="fa fa-list-alt"></i> <span>Category</span></a> </li>
-        <li class="nav-item"> <a (click)="layout('manufacturer')" [ngClass]="{'active': active == 'manufacturer'}" class="nav-link" title="Manufacturer"> <i class="fa fa-building"></i> <span>Manufacturer</span></a> </li>
+        <li class="nav-item" [ngClass]="{'not-allowed-custom':!access.category}"> <a (click)="layout('category')" [ngClass]="{'active': active == 'category'}" class="nav-link" title="Category"> <i class="fa fa-list-alt"></i> <span>Category</span></a> </li>
+        <li class="nav-item" [ngClass]="{'not-allowed-custom':!access.manufacturer}"> <a (click)="layout('manufacturer')" [ngClass]="{'active': active == 'manufacturer'}" class="nav-link" title="Manufacturer"> <i class="fa fa-building"></i> <span>Manufacturer</span></a> </li>
         
-        <li class="nav-item"> <a (click)="layout('roles')" [ngClass]="{'active': active == 'roles'}" class="nav-link" title="Roles"> <i class="fa fa-list-ul"></i> <span>Roles</span> </a> </li>
+        <li class="nav-item" [ngClass]="{'not-allowed-custom':!access.adminRoles}"> <a (click)="layout('roles')" [ngClass]="{'active': active == 'roles'}" class="nav-link" title="Roles"> <i class="fa fa-list-ul"></i> <span>Roles</span> </a> </li>
         
-        <li class="nav-item"> <a (click)="layout('admin-users')" [ngClass]="{'active': active == 'admin-users'}" class="nav-link" title="Admin Users"> <i class="icon-user"></i> <span>Admin Users</span> </a> </li>
+        <li class="nav-item" [ngClass]="{'not-allowed-custom':!access.adminUsers}"> <a (click)="layout('admin-users')" [ngClass]="{'active': active == 'admin-users'}" class="nav-link" title="Admin Users"> <i class="icon-user"></i> <span>Admin Users</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Settings"> <i class="icon-settings"></i> <span>Settings</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="SMS"> <i class="icon-sms"></i> <span>SMS</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Email"> <i class="fa fa-envelope-o"></i> <span>Email</span> </a> </li>
