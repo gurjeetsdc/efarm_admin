@@ -31,7 +31,7 @@
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght">
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/land/add']">Add Land</button>
+                            <button *ngIf="addEditDelete" type="button" class="btn btn-success btnadd" [routerLink]="['/land/add']">Add Land</button>
                             <div class="icns">
                               <a><img src="assets/img/pdf.png" (click)="downloadPDF()" style="cursor: pointer;"></a>
                               <a (click)="downloadCSV()" style="cursor:pointer;"><img src="assets/img/xls.png"></a>
@@ -99,7 +99,7 @@
                         </thead>                        
                         <tbody>
                            <tr *ngIf="itemsTotal == 0">
-                                <td colspan="6">No record to display.</td>
+                                <td colspan="7">No record to display.</td>
                             </tr>  
                             <tr *ngFor="let land of mf.data">                        
                                 <td data-label="Image">
@@ -117,14 +117,14 @@
                                 
 
                                 <td data-label="Actions">                                    
-                                    <button (click)="sendUpdateLand(land.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
-                                    <button  (click)="removeLand(land.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
+                                    <button [disabled]="!addEditDelete" (click)="sendUpdateLand(land.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                    <button [disabled]="!addEditDelete" (click)="removeLand(land.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>                                    
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="6">
+                                <td colspan="7">
                                     <div class="pagination-section" *ngIf="itemsTotal > 0">
                                         <div class="row-on-page">
                                                 <label class="label-control">Show</label>

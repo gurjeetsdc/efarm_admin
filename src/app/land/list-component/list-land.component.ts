@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PaginationInstance} from 'ng2-pagination';
 import { LandService } from '../services/land.service';
+import { CommanService } from '../../shared/services/comman.service';
 import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 import {Http} from "@angular/http";
 import {DataTableModule} from "angular2-datatable";
@@ -39,11 +40,21 @@ export class ListLandComponent implements OnInit {
     public selectedDocument = [];
     public errMessage = '';
     public isPageLoading:boolean = true;
+    public addEditDelete:boolean = false;
 
 
-    public constructor( private activatedRouter: ActivatedRoute,private _router: Router, private _landService: LandService, private _cookieService: CookieService,  private _flashMessagesService: FlashMessagesService) { 
+    public constructor(
+        private _router: Router, 
+        private _landService: LandService, 
+        private _cookieService: CookieService,  
+        private _flashMessagesService: FlashMessagesService,
+        private _commanService: CommanService ) { 
         
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['lands']['addEditDelete']) this.addEditDelete = true;
+    
     }
+
     ngOnInit(): void {
 
       this._router.events.subscribe((evt) => {
@@ -125,18 +136,6 @@ export class ListLandComponent implements OnInit {
         return arr;
     } 
 
-
-       /*This function is use to remove user session if Access token expired. */
-    checkAccessToken( err ): void {
-        let code    = err.code;
-        let message = err.message;
-
-        if( (code == 401 && message == "authorization")) {
-            this._cookieService.removeAll();
-            this._router.navigate(['/login', {data: true}]);
-        }       
-    }
-
     /*get all getLands*/
     getLands() {
         this._landService.landlist( this.rowsOnPage, this.activePage, this.sortTerm, this.searchTerm ).subscribe(res => {
@@ -150,11 +149,11 @@ export class ListLandComponent implements OnInit {
                this.showAlert();
             
             } else {
-                this.checkAccessToken(res.error);    
+                this._commanService.checkAccessToken(res.error);    
             }        
         }, 
         err => {
-              this.checkAccessToken( err );
+              this._commanService.checkAccessToken(err);
               this.isLoading     = false;
               this.isPageLoading = false;
         });

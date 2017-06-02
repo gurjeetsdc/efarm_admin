@@ -15,9 +15,10 @@ export class ViewInputComponent {
 
     private _host = tsConstants.HOST;
     
-	public inputID             = '';
-	public input               = {};
-    public isLoading:boolean   = true;
+	public inputID                 = '';
+	public input                   = {};
+    public isLoading:boolean       = true;
+    public addEditDelete:boolean   = false;
 
     constructor(
         private _router: Router, 
@@ -26,6 +27,9 @@ export class ViewInputComponent {
         private _cookieService: CookieService,
         private _commanService: CommanService,
         private _dialogService: DialogService ) {
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['inputs']['addEditDelete']) this.addEditDelete = true;
 
   	    this.inputID =  _activatedRouter.snapshot.params['id'];
   	

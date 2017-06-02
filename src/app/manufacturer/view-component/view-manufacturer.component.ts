@@ -9,12 +9,18 @@ export class ViewManufacturerComponent {
 
 	private manufacturerID      = '';
 	private manufacturer        = {};
-    private isLoading   = true;
+    private isLoading           = true;
+    private addEditDelete       = false;
+
     constructor(
         private _router: Router, 
         private _route: ActivatedRoute,
         private _manufacturerService: ManufacturerService, 
         private _commanService: CommanService ) { 
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['manufacturer']['addEditDelete']) this.addEditDelete = true;
+
       	this.manufacturerID = _route.snapshot.params['id'];
   	    this._manufacturerService.get(this.manufacturerID).subscribe(res => {
             this.isLoading = false;

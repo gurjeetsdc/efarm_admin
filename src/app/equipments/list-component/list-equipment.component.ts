@@ -56,7 +56,7 @@ export class ListEquipmentComponent implements OnInit {
         private _commanService: CommanService ) { 
         
         let actions = this._commanService.getActions();
-        if(actions["type"] == 'SA' || actions['category']['addEditDelete']) this.addEditDelete = true;
+        if(actions["type"] == 'SA' || actions['equipments']['addEditDelete']) this.addEditDelete = true;
     
     }   
 

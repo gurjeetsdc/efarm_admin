@@ -34,6 +34,7 @@ export class ListInputComponent implements OnInit {
     public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
+    public addEditDelete:boolean = false;
 
     public constructor(
         private _router: Router,
@@ -41,6 +42,9 @@ export class ListInputComponent implements OnInit {
         private _cookieService: CookieService,
         private _flashMessagesService: FlashMessagesService,
         private _commanService: CommanService ) { 
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['inputs']['addEditDelete']) this.addEditDelete = true;
         
     }
 

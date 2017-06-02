@@ -26,7 +26,7 @@
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght">
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/inputs/add']">Add Input</button>
+                            <button *ngIf="addEditDelete" type="button" class="btn btn-success btnadd" [routerLink]="['/inputs/add']">Add Input</button>
                             <div class="icns">
                                 <a><img src="assets/img/pdf.png" style="cursor:pointer;" (click)="downloadPDF()" alt="pdf"></a>
                                 <a (click)="downloadCSV()" style="cursor:pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
@@ -78,7 +78,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngIf="itemsTotal == 0">
-                                    <td colspan="8">No record to display.</td>
+                                    <td colspan="9">No record to display.</td>
                                 </tr>
                                 <tr *ngFor="let input of mf.data">
                                     <td data-label="Image">
@@ -95,14 +95,14 @@
                                     <td data-label="Category - Variety">{{input.category?.name}} {{input.variety ? '-' + input.variety : ''}}</td>
                                     <td data-label="Price"><i class="fa fa-rupee"></i> {{input.price}}</td>
                                     <td data-label="Actions">
-                                        <button (click)="editInput(input.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
-                                        <button (click)="removeInput(input.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>
+                                        <button [disabled]="!addEditDelete"(click)="editInput(input.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                        <button [disabled]="!addEditDelete"(click)="removeInput(input.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="8">
+                                    <td colspan="9">
                                         <div class="pagination-section" *ngIf="itemsTotal > 0">
                                             <div class="row-on-page">
                                                 <label class="label-control">Show</label>

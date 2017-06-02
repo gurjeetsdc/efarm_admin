@@ -26,7 +26,7 @@
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght">
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/roles/add']">Add Role</button>
+                            <button *ngIf="addEditDelete" type="button" class="btn btn-success btnadd" [routerLink]="['/roles/add']">Add Role</button>
                         </div>
                     </div>
                     <!-- .row -->
@@ -55,8 +55,8 @@
                                     <td data-label="Role Name"><a href="javascript:void(0);" (click)="viewRole(role.id)">{{role.name}}</a></td>
                                     <td data-label="Category">{{role.totalUsers}}</td>
                                     <td data-label="Actions">
-                                        <button (click)="editRole(role.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
-                                        <button [disabled]="role.totalUsers >= 1" (click)="removeRole(role.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>
+                                        <button [disabled]="!addEditDelete" (click)="editRole(role.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                        <button [disabled]="(role.totalUsers >= 1)" *ngIf="addEditDelete" (click)="removeRole(role.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             </tbody>

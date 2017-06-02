@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LandService } from '../services/land.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewLandImageComponent } from '../../modals/view-image/ViewLandImage.component';
+import { CommanService } from '../../shared/services/comman.service';
 import { DialogService } from "ng2-bootstrap-modal";
 import tsConstants = require('./../../tsconstant');
 
@@ -11,24 +12,33 @@ import tsConstants = require('./../../tsconstant');
 })
 export class ViewLandComponent {
 
-    private _host = tsConstants.HOST;
-    private Id = '';
-    private land = {};
+    private _host                  = tsConstants.HOST;
+    private Id                     = '';
+    private land                   = {};
 
-    private edit = false;
-    public isLoading:boolean   = true;
+    public isLoading:boolean       = true;
+    public addEditDelete:boolean   = false;
+
     constructor(
         private _router: Router, 
         private _activatedRouter: ActivatedRoute,  
         private _landService: LandService,
-        private _dialogService:DialogService ) { 
-    
+        private _dialogService:DialogService,
+        private _commanService: CommanService ) { 
+        
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['lands']['addEditDelete']) this.addEditDelete = true;
+
         this.Id =  _activatedRouter.snapshot.params['id'];
     
         if( this.Id ) {
             this._landService.getLand(this.Id).subscribe( res => {
-                this.land = res.data;
                 this.isLoading = false;
+                if(res.success) {
+                    this.land  = res.data;
+                } else {
+                    this._commanService.checkAccessToken(res.error);
+                }
             }, err => {
                 this.isLoading = false;                
             });

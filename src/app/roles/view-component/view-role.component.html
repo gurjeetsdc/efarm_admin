@@ -13,7 +13,7 @@
                 <div class="col-sm-6 col-12 text-right linehght">
                    <button type="button" class="btn btn-secondary" [routerLink]="['/roles/list']">Back</button>  
 
-                    <button type="button" class="btn btn-success pull-right" (click)="editRole(role.id)">Edit Role</button> 
+                    <button *ngIf="addEditDelete" type="button" class="btn btn-success pull-right" (click)="editRole(role.id)">Edit Role</button> 
                                              &nbsp;
                 </div>
             </div>

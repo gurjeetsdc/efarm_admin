@@ -29,6 +29,7 @@ export class ListRoleComponent implements OnInit {
     public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
+    public addEditDelete:boolean = false;
 
     public constructor(
         private _router: Router, 
@@ -37,6 +38,8 @@ export class ListRoleComponent implements OnInit {
         private _commanService: CommanService, 
         private _flashMessagesService: FlashMessagesService ) { 
         
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['adminRoles']['addEditDelete']) this.addEditDelete = true;
     }
 
     ngOnInit(): void {

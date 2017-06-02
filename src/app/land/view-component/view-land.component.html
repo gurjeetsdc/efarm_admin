@@ -17,7 +17,7 @@
                 <div class="col-sm-6 col-12 text-right linehght">
                    <button type="button" class="btn btn-secondary" [routerLink]="['/land/list']">Back</button>  
 
-                   <button type="button" class="btn btn-success pull-right" (click)="updateLand(land.id)">Edit Land</button>            
+                   <button *ngIf="addEditDelete" type="button" class="btn btn-success pull-right" (click)="updateLand(land.id)">Edit Land</button>            
                  &nbsp;
                 </div>
             </div>

@@ -9,15 +9,20 @@ import { CommanService } from '../../shared/services/comman.service';
 })
 export class ViewRoleComponent {
 
-	private roleID      = '';
-	private role        = {};
-    private isLoading   = true;
+	private roleID          = '';
+	private role            = {};
+    private isLoading       = true;
+    private addEditDelete   = false;
     constructor(
         private _router: Router, 
         private _route: ActivatedRoute,
         private _roleService: RoleService, 
         private _cookieService: CookieService,
         private _commanService: CommanService ) { 
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['adminRoles']['addEditDelete']) this.addEditDelete = true;
+
       	this.roleID = _route.snapshot.params['id'];
   	    this._roleService.get(this.roleID).subscribe(res => {
             this.isLoading = false;

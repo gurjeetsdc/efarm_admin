@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { CommanService } from '../../shared/services/comman.service';
 import { CookieService } from 'ngx-cookie';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import { FlashMessagesService } from 'ngx-flash-messages';
@@ -30,10 +31,18 @@ export class ListUserComponent implements OnInit {
     public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
+    public addEditDelete:boolean = false;
     public roles                 = 'U';
    
-    public constructor(private _router: Router, private _userService: UserService, private _cookieService: CookieService, private _flashMessagesService: FlashMessagesService ) { 
+    public constructor(
+        private _router: Router, 
+        private _userService: UserService, 
+        private _cookieService: CookieService,
+         private _commanService: CommanService, 
+        private _flashMessagesService: FlashMessagesService ) { 
         
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['users']['addEditDelete']) this.addEditDelete = true;
     }
 
     ngOnInit(): void {

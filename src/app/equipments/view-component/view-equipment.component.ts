@@ -31,7 +31,7 @@ export class ViewEquipmentComponent {
         private _dialogService: DialogService ) {     	
         
         let actions = this._commanService.getActions();
-        if(actions["type"] == 'SA' || actions['category']['addEditDelete']) this.addEditDelete = true;
+        if(actions["type"] == 'SA' || actions['equipments']['addEditDelete']) this.addEditDelete = true;
         this.equipmentID = _activatedRouter.snapshot.params['id'];
         if( this.equipmentID ) {
             this._equipmentService.get(this.equipmentID).subscribe( res => { 

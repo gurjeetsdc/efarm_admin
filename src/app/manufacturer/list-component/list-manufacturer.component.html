@@ -26,7 +26,7 @@
                             </form>
                         </div>
                         <div class="col-sm-9 col-12 text-right linehght"> 
-                            <button type="button" class="btn btn-success btnadd" [routerLink]="['/manufacturer/add']">Add Manufacturer</button>
+                            <button *ngIf="addEditDelete" type="button" class="btn btn-success btnadd" [routerLink]="['/manufacturer/add']">Add Manufacturer</button>
                         </div>
                     </div> <!-- .row -->
                 </div><!-- .card-header -->
@@ -75,8 +75,8 @@
                                 <td data-label="Email">{{manufacturer.email ? manufacturer.email : '-'}}</td>
                                 <td data-label="Mobile">{{manufacturer.mobile ? manufacturer.mobile : '-'}}</td>
                                 <td data-label="Actions">                                    
-                                    <button (click)="editManufacturer(manufacturer.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
-                                    <!-- <button  (click)="removeManufacturer(manufacturer.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button> -->
+                                    <button [disabled]="!addEditDelete" (click)="editManufacturer(manufacturer.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                    <!-- <button [disabled]="!addEditDelete"  (click)="removeManufacturer(manufacturer.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button> -->
                                 </td>
                             </tr>
                         </tbody>

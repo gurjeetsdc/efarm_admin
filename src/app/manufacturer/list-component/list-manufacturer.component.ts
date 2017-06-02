@@ -31,6 +31,7 @@ export class ListManufacturerComponent implements OnInit {
     public response:any;
     public isLoading:boolean     = false;
     public isPageLoading:boolean = true;
+    public addEditDelete:boolean = false;
 
     public constructor(
         private _router: Router, 
@@ -38,6 +39,9 @@ export class ListManufacturerComponent implements OnInit {
         private _commanService: CommanService, 
         private _manufacturerService: ManufacturerService, 
         private _flashMessagesService: FlashMessagesService ) { 
+
+        let actions = this._commanService.getActions();
+        if(actions["type"] == 'SA' || actions['manufacturer']['addEditDelete']) this.addEditDelete = true;
         
     }
 
