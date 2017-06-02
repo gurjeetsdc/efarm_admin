@@ -2577,7 +2577,7 @@ thead.custom th{
 }
 
 .not-allowed-custom {
-  cursor: not-allowed;
+  cursor: not-allowed !important;
 }
 
 .pointer-custom {

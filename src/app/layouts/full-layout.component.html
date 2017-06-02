@@ -67,12 +67,12 @@
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Logistic Partners"> <i class="icon-logistic-partner"></i> <span>Logistic Partners</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Channel Partners"> <i class="icon-channel-partner"></i> <span>Channel Partners</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Orders"> <i class="icon-order"></i> <span>Orders</span> </a> </li>
-        <li class="nav-item"> <a (click)="layout('manufacturer')" routerLinkActive="active" [routerLink]="['/category/list']" class="nav-link" href="javascript:void(0)" title="Category"> <i class="fa fa-list-alt"></i> <span>Category</span></a> </li>
-        <li class="nav-item"> <a (click)="layout('manufacturer')" routerLinkActive="active" [routerLink]="['/manufacturer/list']" class="nav-link" title="Manufacturer"> <i class="fa fa-building"></i> <span>Manufacturer</span></a> </li>
+        <li class="nav-item"> <a (click)="layout('category')" [ngClass]="{'active': active == 'category'}" class="nav-link" title="Category"> <i class="fa fa-list-alt"></i> <span>Category</span></a> </li>
+        <li class="nav-item"> <a (click)="layout('manufacturer')" [ngClass]="{'active': active == 'manufacturer'}" class="nav-link" title="Manufacturer"> <i class="fa fa-building"></i> <span>Manufacturer</span></a> </li>
         
-        <li class="nav-item"> <a (click)="layout('roles')" routerLinkActive="active" [routerLink]="['/roles/list']" class="nav-link" title="Roles"> <i class="fa fa-list-ul"></i> <span>Roles</span> </a> </li>
+        <li class="nav-item"> <a (click)="layout('roles')" [ngClass]="{'active': active == 'roles'}" class="nav-link" title="Roles"> <i class="fa fa-list-ul"></i> <span>Roles</span> </a> </li>
         
-        <li class="nav-item"> <a (click)="layout('adminUsers')" routerLinkActive="active" [routerLink]="['/admin-users/list']" class="nav-link" title="Admin Users"> <i class="icon-user"></i> <span>Admin Users</span> </a> </li>
+        <li class="nav-item"> <a (click)="layout('admin-users')" [ngClass]="{'active': active == 'admin-users'}" class="nav-link" title="Admin Users"> <i class="icon-user"></i> <span>Admin Users</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Settings"> <i class="icon-settings"></i> <span>Settings</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="SMS"> <i class="icon-sms"></i> <span>SMS</span> </a> </li>
         <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Email"> <i class="fa fa-envelope-o"></i> <span>Email</span> </a> </li>
@@ -92,8 +92,8 @@
             <div class="row">
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-green" (click)="layout('crops')" [ngClass]="{'active': active == 'crops'}" [routerLink]="['/crops/list']">
-                        <div class="inner" title="Crops">
+                    <div class="small-box bg-green" (click)="layout('crops')" [ngClass]="{'active': active == 'crops'}" >
+                        <div class="inner" title="Crops" [ngClass]="{'not-allowed-custom':!access.crops}">
                           <p>Crops</p>
                         </div>
                         <div class="icon">                           
@@ -104,8 +104,8 @@
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-aqua" (click)="layout('inputs')" [ngClass]="{'active': active == 'inputs'}" [routerLink]="['/inputs/list']">
-                        <div class="inner" title="Inputs">
+                    <div class="small-box bg-aqua" (click)="layout('inputs')" [ngClass]="{'active': active == 'inputs'}" >
+                        <div class="inner" title="Inputs" [ngClass]="{'not-allowed-custom':!access.inputs}">
                             <p>Inputs</p>
                         </div>
                         <div class="icon">
@@ -116,8 +116,8 @@
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-red" (click)="layout('equipments')" [ngClass]="{'active': active == 'equipments'}" [routerLink]="['/equipments/list']">
-                        <div class="inner" title="Equipments">
+                    <div class="small-box bg-red" (click)="layout('equipments')" [ngClass]="{'active': active == 'equipments'}" >
+                        <div class="inner" title="Equipments" [ngClass]="{'not-allowed-custom':!access.equipments}">
                             <p>Equipments</p>
                         </div>
                         <div class="icon">
@@ -128,8 +128,8 @@
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6"> 
                     <!-- small box -->
-                    <div class="small-box bg-yellow" (click)="layout('land')" [ngClass]="{'active': active == 'land'}" [routerLink]="['/land/list']">
-                        <div class="inner" title="Lands">
+                    <div class="small-box bg-yellow" (click)="layout('land')" [ngClass]="{'active': active == 'land'}" >
+                        <div class="inner" title="Lands" [ngClass]="{'not-allowed-custom':!access.lands}">
                           <p>Lands</p>
                         </div>
                         <div class="icon">
@@ -155,8 +155,8 @@
 
                 <!-- col -->
                 <div class="col-lg-2 col-md-4 col-6">
-                    <div class="small-box bg-teal" (click)="layout('users')" [ngClass]="{'active': active == 'users'}" [routerLink]="['/users/list']">
-                        <div class="inner" title="Users">
+                    <div class="small-box bg-teal" (click)="layout('users');" [ngClass]="{'active': active == 'users'}">
+                        <div class="inner" title="Users" [ngClass]="{'not-allowed-custom':!access.users}">
                             <p>Users</p>
                         </div>
                         <div class="icon">
