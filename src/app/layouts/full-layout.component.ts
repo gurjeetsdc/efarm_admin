@@ -32,7 +32,6 @@ export class FullLayoutComponent implements OnInit {
     private _commanService: CommanService ) { 
         
         this.active = this._route.snapshot["_urlSegment"].segments[0].path;
-          console.log('active',this.active);  
         let actions = this._commanService.getActions();
         if(actions["type"] == 'SA') {
             this.access = {
@@ -46,7 +45,6 @@ export class FullLayoutComponent implements OnInit {
                 adminRoles:true,
                 adminUsers:true
             }
-            console.log("SA",this.access)
         } else {
             this.access = {
                 crops:actions['crops'].view,
@@ -59,7 +57,6 @@ export class FullLayoutComponent implements OnInit {
                 adminRoles:actions['adminRoles'].view,
                 adminUsers:actions['adminUsers'].view
             }
-            console.log("not SA",this.access);
         }
   }
 
