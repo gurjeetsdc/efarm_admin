@@ -966,7 +966,7 @@
      background: #3fa14c;
      border-bottom: 1px solid #69c675;
      border-left: 2px solid #50b75e;
-     /*cursor: not-allowed;*/
+     cursor: pointer;
  }
  
  ul.navbar-nav.width {
